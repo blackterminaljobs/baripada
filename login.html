@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071426">
+<title>BlackTerminal | Staff Portal</title>
+
+<style>
+:root{
+  --navy:#071426;
+  --blue:#086ee1;
+  --blue2:#18a0ff;
+  --text:#142033;
+  --muted:#718096;
+  --line:#dce4ef;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 8% 8%,rgba(24,160,255,.18),transparent 27%),
+    radial-gradient(circle at 92% 90%,rgba(75,55,220,.16),transparent 30%),
+    linear-gradient(135deg,#06111f,#0b1e39 52%,#071426);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+}
+
+/* MAIN CARD */
+
+.page{
+  width:min(1120px,100%);
+  min-height:680px;
+  background:#fff;
+  border-radius:30px;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:1.03fr .97fr;
+  box-shadow:0 30px 90px rgba(0,0,0,.34);
+}
+
+/* LEFT SIDE */
+
+.left{
+  position:relative;
+  padding:48px 55px;
+  color:#fff;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      145deg,
+      #061120 0%,
+      #0b2850 58%,
+      #0878e8 130%
+    );
+}
+
+.left:before,
+.left:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.left:before{
+  width:430px;
+  height:430px;
+  right:-240px;
+  top:-190px;
+}
+
+.left:after{
+  width:360px;
+  height:360px;
+  left:-250px;
+  bottom:-190px;
+}
+
+/* LOGO */
+
+.logo{
+  position:relative;
+  z-index:2;
+  font-size:39px;
+  font-weight:900;
+  letter-spacing:-2.4px;
+}
+
+.logo b{
+  color:#1684ff;
+}
+
+.institute{
+  font-size:12px;
+  letter-spacing:4.4px;
+  font-weight:800;
+  margin-top:5px;
+  color:#d9eaff;
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  z-index:2;
+  margin-top:83px;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  background:rgba(24,160,255,.13);
+  border:1px solid rgba(24,160,255,.35);
+  padding:8px 13px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.2px;
+}
+
+.hero h1{
+  font-size:49px;
+  line-height:1.03;
+  letter-spacing:-2px;
+  margin:20px 0 16px;
+}
+
+.hero h1 span{
+  color:#36a4ff;
+}
+
+.hero p{
+  max-width:475px;
+  color:#d7e7fb;
+  line-height:1.75;
+  font-size:15px;
+}
+
+/* FEATURE CARDS */
+
+.cards{
+  position:relative;
+  z-index:2;
+  margin-top:38px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.card{
+  padding:16px;
+  border-radius:17px;
+  background:rgba(255,255,255,.075);
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter:blur(5px);
+}
+
+.card strong{
+  display:block;
+  font-size:13px;
+  margin-bottom:5px;
+}
+
+.card small{
+  color:#bfd4ee;
+  line-height:1.45;
+}
+
+.footer-left{
+  position:absolute;
+  z-index:2;
+  bottom:27px;
+  font-size:11px;
+  color:#a9c1de;
+}
+
+/* RIGHT SIDE */
+
+.right{
+  padding:42px 54px;
+  display:flex;
+  align-items:center;
+  background:#fff;
+}
+
+.form{
+  width:100%;
+  max-width:430px;
+  margin:auto;
+}
+
+.topline{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.secure{
+  font-size:11px;
+  font-weight:800;
+  color:#168047;
+  background:#eaf8f0;
+  padding:7px 10px;
+  border-radius:999px;
+}
+
+.role-label{
+  font-size:12px;
+  color:#778397;
+  font-weight:700;
+}
+
+h2{
+  font-size:34px;
+  letter-spacing:-1px;
+  margin:0 0 8px;
+}
+
+.subtitle{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.55;
+  margin:0 0 28px;
+}
+
+label{
+  display:block;
+  font-size:12px;
+  font-weight:850;
+  margin:17px 0 8px;
+}
+
+input,
+select{
+  width:100%;
+  height:51px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:0 15px;
+  font-size:14px;
+  outline:none;
+  background:#fff;
+  color:var(--text);
+  transition:.2s;
+}
+
+input:focus,
+select:focus{
+  border-color:#1988ed;
+  box-shadow:0 0 0 4px rgba(25,136,237,.10);
+}
+
+/* PASSWORD */
+
+.field{
+  position:relative;
+}
+
+.password input{
+  padding-right:50px;
+}
+
+.eye{
+  position:absolute;
+  right:7px;
+  top:7px;
+  width:37px;
+  height:37px;
+  border:0;
+  border-radius:10px;
+  background:#f2f6fb;
+  color:#526176;
+  cursor:pointer;
+  font-size:16px;
+}
+
+/* ROW */
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:15px;
+}
+
+.remember{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  color:#5f6b7d;
+  cursor:pointer;
+}
+
+.remember input{
+  width:15px;
+  height:15px;
+  margin:0;
+  accent-color:var(--blue);
+}
+
+.forgot{
+  border:0;
+  background:none;
+  color:#086ee1;
+  font-weight:800;
+  font-size:12px;
+  cursor:pointer;
+  padding:0;
+}
+
+/* LOGIN BUTTON */
+
+.signin{
+  width:100%;
+  height:53px;
+  margin-top:25px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(135deg,#0878e8,#1556d8);
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 12px 28px rgba(8,120,232,.23);
+  transition:.2s;
+}
+
+.signin:hover{
+  transform:translateY(-1px);
+}
+
+.signin:disabled{
+  opacity:.7;
+  cursor:wait;
+}
+
+/* MESSAGE */
+
+.message{
+  display:none;
+  margin-top:14px;
+  padding:11px 13px;
+  border-radius:11px;
+  font-size:12px;
+  line-height:1.45;
+}
+
+.message.show{
+  display:block;
+}
+
+.message.error{
+  background:#fff1f1;
+  color:#b42318;
+  border:1px solid #ffd2d2;
+}
+
+.message.success{
+  background:#effbf4;
+  color:#18733c;
+  border:1px solid #ccefd9;
+}
+
+/* HELP */
+
+.divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:26px 0 18px;
+  color:#a1aab8;
+  font-size:11px;
+}
+
+.divider:before,
+.divider:after{
+  content:"";
+  height:1px;
+  background:#e7ebf1;
+  flex:1;
+}
+
+.help{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.help button{
+  height:43px;
+  border:1px solid #e2e8f0;
+  background:#fff;
+  border-radius:11px;
+  color:#465367;
+  font-size:12px;
+  font-weight:750;
+  cursor:pointer;
+}
+
+.help button:hover{
+  background:#f7faff;
+  border-color:#b9d9fa;
+  color:#086ee1;
+}
+
+.copyright{
+  text-align:center;
+  color:#a0a9b7;
+  font-size:10px;
+  margin-top:23px;
+}
+
+/* MODAL */
+
+.modal-backdrop{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(4,12,25,.65);
+  z-index:20;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:min(430px,100%);
+  background:#fff;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+.modal h3{
+  margin:0 0 7px;
+  font-size:22px;
+}
+
+.modal p{
+  font-size:13px;
+  color:#687487;
+  line-height:1.55;
+}
+
+.modal input{
+  margin-top:10px;
+}
+
+.modal-actions{
+  display:flex;
+  gap:10px;
+  margin-top:16px;
+}
+
+.modal-actions button{
+  height:44px;
+  border-radius:11px;
+  padding:0 16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.cancel{
+  border:1px solid #dce4ef;
+  background:#fff;
+  color:#516074;
+}
+
+.send{
+  border:0;
+  background:#086ee1;
+  color:#fff;
+  flex:1;
+}
+
+/* MOBILE */
+
+@media(max-width:820px){
+
+  body{
+    padding:0;
+  }
+
+  .page{
+    grid-template-columns:1fr;
+    border-radius:0;
+    min-height:100vh;
+  }
+
+  .left{
+    padding:32px 25px;
+  }
+
+  .hero{
+    margin-top:48px;
+  }
+
+  .hero h1{
+    font-size:39px;
+  }
+
+  .cards{
+    margin-bottom:45px;
+  }
+
+  .footer-left{
+    position:static;
+    margin-top:35px;
+  }
+
+  .right{
+    padding:36px 25px 45px;
+  }
+}
+
+@media(max-width:430px){
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .left{
+    padding:27px 20px;
+  }
+
+  .logo{
+    font-size:32px;
+  }
+
+  .hero h1{
+    font-size:35px;
+  }
+
+  .right{
+    padding:32px 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+<!-- LEFT BRAND SECTION -->
+
+<section class="left">
+
+  <div class="logo">
+    Black<b>Terminal</b>
+  </div>
+
+  <div class="institute">
+    COMPUTER INSTITUTE · BARIPADA
+  </div>
+
+  <div class="hero">
+
+    <div class="eyebrow">
+      🔐 SECURE STAFF PORTAL
+    </div>
+
+    <h1>
+      Run your institute<br>
+      <span>smarter.</span>
+    </h1>
+
+    <p>
+      A single workspace for student coordination,
+      admissions, fees, attendance, communication
+      and everyday institute operations.
+    </p>
+
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <strong>👨‍🎓 Students</strong>
+      <small>
+        Profiles, courses, batches and records.
+      </small>
+    </div>
+
+    <div class="card">
+      <strong>💰 Fees</strong>
+      <small>
+        Payments, dues and receipts.
+      </small>
+    </div>
+
+    <div class="card">
+      <strong>📅 Attendance</strong>
+      <small>
+        Classes and attendance tracking.
+      </small>
+    </div>
+
+    <div class="card">
+      <strong>📢 Communication</strong>
+      <small>
+        Notices and student updates.
+      </small>
+    </div>
+
+  </div>
+
+  <div class="footer-left">
+    BlackTerminal Computer Institute · Baripada
+  </div>
+
+</section>
+
+
+<!-- LOGIN SECTION -->
+
+<section class="right">
+
+<form class="form" id="loginForm">
+
+  <div class="topline">
+
+    <span class="role-label">
+      Staff Management Portal
+    </span>
+
+    <span class="secure">
+      ● Secure Login
+    </span>
+
+  </div>
+
+  <h2>
+    Welcome back
+  </h2>
+
+  <p class="subtitle">
+    Sign in with your staff credentials
+    to access the management portal.
+  </p>
+
+
+  <!-- ROLE -->
+
+  <label for="role">
+    Login as
+  </label>
+
+  <select id="role">
+
+    <option value="staff">
+      Student Coordinator / Staff
+    </option>
+
+    <option value="admin">
+      Institute Admin
+    </option>
+
+    <option value="faculty">
+      Faculty
+    </option>
+
+  </select>
+
+
+  <!-- STAFF ID -->
+
+  <label for="identity">
+    Email or Staff ID
+  </label>
+
+  <input
+    id="identity"
+    type="text"
+    autocomplete="username"
+    placeholder="e.g. BTSTAFF001 or email@example.com"
+  >
+
+
+  <!-- PASSWORD -->
+
+  <label for="password">
+    Password
+  </label>
+
+  <div class="field password">
+
+    <input
+      id="password"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Enter your password"
+    >
+
+    <button
+      class="eye"
+      id="togglePassword"
+      type="button"
+      aria-label="Show password"
+    >
+      👁
+    </button>
+
+  </div>
+
+
+  <!-- OPTIONS -->
+
+  <div class="row">
+
+    <label class="remember">
+
+      <input
+        id="remember"
+        type="checkbox"
+      >
+
+      Remember me
+
+    </label>
+
+    <button
+      class="forgot"
+      id="forgotBtn"
+      type="button"
+    >
+      Forgot password?
+    </button>
+
+  </div>
+
+
+  <!-- LOGIN -->
+
+  <button
+    class="signin"
+    id="signinBtn"
+    type="submit"
+  >
+    Sign In →
+  </button>
+
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- HELP -->
+
+  <div class="divider">
+    Need help?
+  </div>
+
+  <div class="help">
+
+    <button
+      type="button"
+      id="contactBtn"
+    >
+      Contact Admin
+    </button>
+
+    <button
+      type="button"
+      id="securityBtn"
+    >
+      Login Security
+    </button>
+
+  </div>
+
+
+  <div class="copyright">
+    © 2026 BlackTerminal Computer Institute, Baripada
+  </div>
+
+</form>
+
+</section>
+
+</main>
+
+
+<!-- MODAL -->
+
+<div
+  class="modal-backdrop"
+  id="modalBackdrop"
+>
+
+  <div class="modal">
+
+    <h3 id="modalTitle">
+      Reset password
+    </h3>
+
+    <p id="modalText">
+      Enter your registered email address.
+    </p>
+
+    <input
+      id="modalInput"
+      type="email"
+      placeholder="Enter registered email"
+    >
+
+    <div class="modal-actions">
+
+      <button
+        class="cancel"
+        type="button"
+        id="cancelModal"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="send"
+        type="button"
+        id="modalAction"
+      >
+        Continue
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ELEMENTS */
+
+const form =
+  document.getElementById("loginForm");
+
+const identity =
+  document.getElementById("identity");
+
+const password =
+  document.getElementById("password");
+
+const message =
+  document.getElementById("message");
+
+const signinBtn =
+  document.getElementById("signinBtn");
+
+const remember =
+  document.getElementById("remember");
+
+
+/* MESSAGE */
+
+function showMessage(text,type="error"){
+
+  message.textContent=text;
+
+  message.className=
+    "message show "+type;
+
+}
+
+function clearMessage(){
+
+  message.className="message";
+
+  message.textContent="";
+
+}
+
+
+/* SHOW / HIDE PASSWORD */
+
+document
+.getElementById("togglePassword")
+.addEventListener("click",()=>{
+
+  const hidden =
+    password.type==="password";
+
+  password.type =
+    hidden ? "text" : "password";
+
+  document
+    .getElementById("togglePassword")
+    .textContent =
+      hidden ? "🙈" : "👁";
+
+});
+
+
+/* REMEMBER STAFF ID */
+
+const saved =
+  localStorage.getItem(
+    "bt_staff_identity"
+  );
+
+if(saved){
+
+  identity.value=saved;
+
+  remember.checked=true;
+
+}
+
+
+/* LOGIN */
+
+form.addEventListener("submit",(e)=>{
+
+  e.preventDefault();
+
+  clearMessage();
+
+
+  if(!identity.value.trim()){
+
+    showMessage(
+      "Please enter your Email or Staff ID."
+    );
+
+    identity.focus();
+
+    return;
+
+  }
+
+
+  if(password.value.length < 6){
+
+    showMessage(
+      "Password must contain at least 6 characters."
+    );
+
+    password.focus();
+
+    return;
+
+  }
+
+
+  if(remember.checked){
+
+    localStorage.setItem(
+      "bt_staff_identity",
+      identity.value.trim()
+    );
+
+  }else{
+
+    localStorage.removeItem(
+      "bt_staff_identity"
+    );
+
+  }
+
+
+  signinBtn.disabled=true;
+
+  signinBtn.innerHTML=
+    "Checking credentials…";
+
+
+  /*
+    Firebase Authentication
+    will be connected here.
+  */
+
+  setTimeout(()=>{
+
+    signinBtn.disabled=false;
+
+    signinBtn.innerHTML=
+      "Sign In →";
+
+    showMessage(
+      "Login UI is ready. Connect Firebase Authentication to enable real sign-in.",
+      "success"
+    );
+
+  },700);
+
+});
+
+
+/* MODAL */
+
+const backdrop =
+  document.getElementById(
+    "modalBackdrop"
+  );
+
+const modalTitle =
+  document.getElementById(
+    "modalTitle"
+  );
+
+const modalText =
+  document.getElementById(
+    "modalText"
+  );
+
+const modalInput =
+  document.getElementById(
+    "modalInput"
+  );
+
+const modalAction =
+  document.getElementById(
+    "modalAction"
+  );
+
+
+function openModal(
+  title,
+  text,
+  placeholder,
+  action
+){
+
+  modalTitle.textContent=title;
+
+  modalText.textContent=text;
+
+  modalInput.placeholder=placeholder;
+
+  modalInput.value="";
+
+  modalAction.textContent=action;
+
+  backdrop.classList.add("show");
+
+  modalInput.focus();
+
+}
+
+
+function closeModal(){
+
+  backdrop.classList.remove(
+    "show"
+  );
+
+}
+
+
+/* FORGOT PASSWORD */
+
+document
+.getElementById("forgotBtn")
+.addEventListener("click",()=>{
+
+  openModal(
+    "Reset password",
+    "Enter your registered email. Firebase password reset will be connected here.",
+    "Registered email",
+    "Send Reset Link"
+  );
+
+});
+
+
+/* CONTACT ADMIN */
+
+document
+.getElementById("contactBtn")
+.addEventListener("click",()=>{
+
+  openModal(
+    "Contact Admin",
+    "Enter a short message for the institute admin.",
+    "Your message",
+    "Send Request"
+  );
+
+});
+
+
+/* SECURITY */
+
+document
+.getElementById("securityBtn")
+.addEventListener("click",()=>{
+
+  openModal(
+    "Login Security",
+    "Never share your password. Admin controls role permissions and account access.",
+    "",
+    "Close"
+  );
+
+  modalInput.style.display="none";
+
+});
+
+
+/* MODAL ACTION */
+
+modalAction.addEventListener(
+  "click",
+  ()=>{
+
+    if(
+      modalTitle.textContent===
+      "Login Security"
+    ){
+
+      modalInput.style.display=
+        "block";
+
+      closeModal();
+
+      return;
+
+    }
+
+
+    if(!modalInput.value.trim()){
+
+      modalInput.focus();
+
+      return;
+
+    }
+
+
+    modalInput.style.display=
+      "block";
+
+    closeModal();
+
+    showMessage(
+      "Request saved in the demo interface. Backend connection will be added next.",
+      "success"
+    );
+
+  }
+);
+
+
+/* CANCEL */
+
+document
+.getElementById("cancelModal")
+.addEventListener(
+  "click",
+  ()=>{
+
+    modalInput.style.display=
+      "block";
+
+    closeModal();
+
+  }
+);
+
+
+/* CLOSE OUTSIDE */
+
+backdrop.addEventListener(
+  "click",
+  (e)=>{
+
+    if(e.target===backdrop){
+
+      modalInput.style.display=
+        "block";
+
+      closeModal();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>

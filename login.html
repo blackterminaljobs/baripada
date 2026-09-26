@@ -36,8 +36,6 @@ body{
   padding:22px;
 }
 
-/* MAIN CARD */
-
 .page{
   width:min(1120px,100%);
   min-height:680px;
@@ -48,8 +46,6 @@ body{
   grid-template-columns:1.03fr .97fr;
   box-shadow:0 30px 90px rgba(0,0,0,.34);
 }
-
-/* LEFT SIDE */
 
 .left{
   position:relative;
@@ -87,8 +83,6 @@ body{
   bottom:-190px;
 }
 
-/* LOGO */
-
 .logo{
   position:relative;
   z-index:2;
@@ -108,8 +102,6 @@ body{
   margin-top:5px;
   color:#d9eaff;
 }
-
-/* HERO */
 
 .hero{
   position:relative;
@@ -148,8 +140,6 @@ body{
   font-size:15px;
 }
 
-/* FEATURE CARDS */
-
 .cards{
   position:relative;
   z-index:2;
@@ -185,8 +175,6 @@ body{
   font-size:11px;
   color:#a9c1de;
 }
-
-/* RIGHT SIDE */
 
 .right{
   padding:42px 54px;
@@ -263,8 +251,6 @@ select:focus{
   box-shadow:0 0 0 4px rgba(25,136,237,.10);
 }
 
-/* PASSWORD */
-
 .field{
   position:relative;
 }
@@ -286,8 +272,6 @@ select:focus{
   cursor:pointer;
   font-size:16px;
 }
-
-/* ROW */
 
 .row{
   display:flex;
@@ -322,8 +306,6 @@ select:focus{
   padding:0;
 }
 
-/* LOGIN BUTTON */
-
 .signin{
   width:100%;
   height:53px;
@@ -346,9 +328,8 @@ select:focus{
 .signin:disabled{
   opacity:.7;
   cursor:wait;
+  transform:none;
 }
-
-/* MESSAGE */
 
 .message{
   display:none;
@@ -374,8 +355,6 @@ select:focus{
   color:#18733c;
   border:1px solid #ccefd9;
 }
-
-/* HELP */
 
 .divider{
   display:flex;
@@ -423,8 +402,6 @@ select:focus{
   font-size:10px;
   margin-top:23px;
 }
-
-/* MODAL */
 
 .modal-backdrop{
   display:none;
@@ -490,8 +467,6 @@ select:focus{
   color:#fff;
   flex:1;
 }
-
-/* MOBILE */
 
 @media(max-width:820px){
 
@@ -559,8 +534,6 @@ select:focus{
 <body>
 
 <main class="page">
-
-<!-- LEFT BRAND SECTION -->
 
 <section class="left">
 
@@ -630,8 +603,6 @@ select:focus{
 </section>
 
 
-<!-- LOGIN SECTION -->
-
 <section class="right">
 
 <form class="form" id="loginForm">
@@ -658,8 +629,6 @@ select:focus{
   </p>
 
 
-  <!-- ROLE -->
-
   <label for="role">
     Login as
   </label>
@@ -681,8 +650,6 @@ select:focus{
   </select>
 
 
-  <!-- STAFF ID -->
-
   <label for="identity">
     Email or Staff ID
   </label>
@@ -692,10 +659,9 @@ select:focus{
     type="text"
     autocomplete="username"
     placeholder="e.g. BTSTAFF001 or email@example.com"
+    required
   >
 
-
-  <!-- PASSWORD -->
 
   <label for="password">
     Password
@@ -708,6 +674,7 @@ select:focus{
       type="password"
       autocomplete="current-password"
       placeholder="Enter your password"
+      required
     >
 
     <button
@@ -721,8 +688,6 @@ select:focus{
 
   </div>
 
-
-  <!-- OPTIONS -->
 
   <div class="row">
 
@@ -748,8 +713,6 @@ select:focus{
   </div>
 
 
-  <!-- LOGIN -->
-
   <button
     class="signin"
     id="signinBtn"
@@ -764,8 +727,6 @@ select:focus{
     id="message"
   ></div>
 
-
-  <!-- HELP -->
 
   <div class="divider">
     Need help?
@@ -800,8 +761,6 @@ select:focus{
 
 </main>
 
-
-<!-- MODAL -->
 
 <div
   class="modal-backdrop"
@@ -849,9 +808,55 @@ select:focus{
 </div>
 
 
-<script>
+<!-- FIREBASE LOGIN -->
 
-/* ELEMENTS */
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+import {
+  firebaseConfig
+} from "./firebaseconfig.js";
+
+
+/* ==============================
+   FIREBASE INITIALIZATION
+============================== */
+
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
+
+
+/* ==============================
+   ELEMENTS
+============================== */
 
 const form =
   document.getElementById("loginForm");
@@ -862,57 +867,121 @@ const identity =
 const password =
   document.getElementById("password");
 
+const role =
+  document.getElementById("role");
+
+const remember =
+  document.getElementById("remember");
+
 const message =
   document.getElementById("message");
 
 const signinBtn =
   document.getElementById("signinBtn");
 
-const remember =
-  document.getElementById("remember");
 
+/* ==============================
+   MESSAGE
+============================== */
 
-/* MESSAGE */
+function showMessage(
+  text,
+  type="error"
+){
 
-function showMessage(text,type="error"){
+  message.textContent = text;
 
-  message.textContent=text;
-
-  message.className=
-    "message show "+type;
+  message.className =
+    "message show " + type;
 
 }
 
 function clearMessage(){
 
-  message.className="message";
+  message.textContent = "";
 
-  message.textContent="";
+  message.className =
+    "message";
 
 }
 
 
-/* SHOW / HIDE PASSWORD */
+/* ==============================
+   FIREBASE ERROR MESSAGE
+============================== */
+
+function firebaseError(error){
+
+  console.error(error);
+
+  const code =
+    error?.code || "";
+
+  switch(code){
+
+    case "auth/invalid-credential":
+      return "Incorrect email/staff ID or password.";
+
+    case "auth/invalid-login-credentials":
+      return "Incorrect email/staff ID or password.";
+
+    case "auth/user-not-found":
+      return "No account found with these credentials.";
+
+    case "auth/wrong-password":
+      return "Incorrect password.";
+
+    case "auth/invalid-email":
+      return "Please enter a valid email address.";
+
+    case "auth/too-many-requests":
+      return "Too many login attempts. Please try again later.";
+
+    case "auth/user-disabled":
+      return "This Firebase account has been disabled.";
+
+    case "auth/network-request-failed":
+      return "Network error. Please check your internet connection.";
+
+    case "permission-denied":
+      return "Firestore permission denied. Check Firebase Security Rules.";
+
+    default:
+      return error?.message ||
+        "Unable to sign in. Please try again.";
+  }
+
+}
+
+
+/* ==============================
+   PASSWORD VISIBILITY
+============================== */
 
 document
 .getElementById("togglePassword")
-.addEventListener("click",()=>{
+.addEventListener(
+  "click",
+  ()=>{
 
-  const hidden =
-    password.type==="password";
+    const hidden =
+      password.type === "password";
 
-  password.type =
-    hidden ? "text" : "password";
+    password.type =
+      hidden ? "text" : "password";
 
-  document
-    .getElementById("togglePassword")
-    .textContent =
-      hidden ? "🙈" : "👁";
+    document
+      .getElementById("togglePassword")
+      .textContent =
+        hidden ? "🙈" : "👁";
 
-});
+  }
+);
 
 
-/* REMEMBER STAFF ID */
+/* ==============================
+   REMEMBER LOGIN ID
+============================== */
 
 const saved =
   localStorage.getItem(
@@ -921,93 +990,460 @@ const saved =
 
 if(saved){
 
-  identity.value=saved;
+  identity.value =
+    saved;
 
-  remember.checked=true;
+  remember.checked =
+    true;
 
 }
 
 
-/* LOGIN */
+/* ==============================
+   FIND STAFF BY STAFF ID
+============================== */
 
-form.addEventListener("submit",(e)=>{
+async function findStaffById(staffId){
 
-  e.preventDefault();
-
-  clearMessage();
-
-
-  if(!identity.value.trim()){
-
-    showMessage(
-      "Please enter your Email or Staff ID."
+  const q =
+    query(
+      collection(db,"staff"),
+      where("staffId","==",staffId)
     );
 
-    identity.focus();
+  const snapshot =
+    await getDocs(q);
 
-    return;
+  if(snapshot.empty){
+
+    return null;
 
   }
 
+  const doc =
+    snapshot.docs[0];
 
-  if(password.value.length < 6){
+  return {
+    id:doc.id,
+    ...doc.data()
+  };
 
-    showMessage(
-      "Password must contain at least 6 characters."
+}
+
+
+/* ==============================
+   FIND STAFF BY EMAIL
+============================== */
+
+async function findStaffByEmail(email){
+
+  const q =
+    query(
+      collection(db,"staff"),
+      where("email","==",email)
     );
 
-    password.focus();
+  const snapshot =
+    await getDocs(q);
 
-    return;
+  if(snapshot.empty){
+
+    return null;
 
   }
 
+  const doc =
+    snapshot.docs[0];
 
-  if(remember.checked){
+  return {
+    id:doc.id,
+    ...doc.data()
+  };
 
-    localStorage.setItem(
-      "bt_staff_identity",
-      identity.value.trim()
-    );
+}
 
-  }else{
 
-    localStorage.removeItem(
-      "bt_staff_identity"
+/* ==============================
+   CHECK ROLE
+============================== */
+
+function roleMatches(
+  selectedRole,
+  databaseRole
+){
+
+  if(!databaseRole){
+    return false;
+  }
+
+  const r =
+    String(databaseRole)
+      .toLowerCase()
+      .trim();
+
+  if(
+    selectedRole === "staff"
+  ){
+
+    return (
+      r === "staff" ||
+      r === "student coordinator" ||
+      r === "student_coordinator"
     );
 
   }
 
+  if(
+    selectedRole === "admin"
+  ){
 
-  signinBtn.disabled=true;
+    return r === "admin";
 
-  signinBtn.innerHTML=
-    "Checking credentials…";
+  }
 
+  if(
+    selectedRole === "faculty"
+  ){
 
-  /*
-    Firebase Authentication
-    will be connected here.
-  */
+    return r === "faculty";
 
-  setTimeout(()=>{
+  }
 
-    signinBtn.disabled=false;
+  return false;
 
-    signinBtn.innerHTML=
-      "Sign In →";
-
-    showMessage(
-      "Login UI is ready. Connect Firebase Authentication to enable real sign-in.",
-      "success"
-    );
-
-  },700);
-
-});
+}
 
 
-/* MODAL */
+/* ==============================
+   LOGIN
+============================== */
+
+form.addEventListener(
+  "submit",
+  async (e)=>{
+
+    e.preventDefault();
+
+    clearMessage();
+
+    const entered =
+      identity.value
+        .trim();
+
+    const pass =
+      password.value;
+
+    const selectedRole =
+      role.value;
+
+
+    if(!entered){
+
+      showMessage(
+        "Please enter your Email or Staff ID."
+      );
+
+      identity.focus();
+
+      return;
+
+    }
+
+
+    if(pass.length < 6){
+
+      showMessage(
+        "Password must contain at least 6 characters."
+      );
+
+      password.focus();
+
+      return;
+
+    }
+
+
+    signinBtn.disabled =
+      true;
+
+    signinBtn.innerHTML =
+      "Checking credentials…";
+
+
+    try{
+
+      let email =
+        entered;
+
+      let staffRecord =
+        null;
+
+
+      /* ==========================
+         STAFF ID LOGIN
+      ========================== */
+
+      if(!entered.includes("@")){
+
+        signinBtn.innerHTML =
+          "Finding Staff ID…";
+
+        staffRecord =
+          await findStaffById(
+            entered
+          );
+
+        if(!staffRecord){
+
+          throw new Error(
+            "Staff ID not found."
+          );
+
+        }
+
+        email =
+          String(
+            staffRecord.email || ""
+          ).trim();
+
+        if(!email){
+
+          throw new Error(
+            "This staff account does not have a registered email."
+          );
+
+        }
+
+      }
+
+
+      /* ==========================
+         EMAIL LOGIN
+      ========================== */
+
+      if(
+        entered.includes("@") &&
+        !staffRecord
+      ){
+
+        staffRecord =
+          await findStaffByEmail(
+            entered
+          );
+
+      }
+
+
+      /* ==========================
+         ROLE CHECK BEFORE LOGIN
+      ========================== */
+
+      if(
+        staffRecord &&
+        staffRecord.role &&
+        !roleMatches(
+          selectedRole,
+          staffRecord.role
+        )
+      ){
+
+        throw new Error(
+          "Selected login role does not match this account."
+        );
+
+      }
+
+
+      /* ==========================
+         STATUS CHECK
+      ========================== */
+
+      if(
+        staffRecord &&
+        staffRecord.status
+      ){
+
+        const status =
+          String(
+            staffRecord.status
+          ).toLowerCase();
+
+        if(
+          status === "inactive" ||
+          status === "disabled" ||
+          status === "blocked"
+        ){
+
+          throw new Error(
+            "This staff account is inactive. Please contact Admin."
+          );
+
+        }
+
+      }
+
+
+      /* ==========================
+         FIREBASE PERSISTENCE
+      ========================== */
+
+      await setPersistence(
+        auth,
+        remember.checked
+          ? browserLocalPersistence
+          : browserSessionPersistence
+      );
+
+
+      signinBtn.innerHTML =
+        "Signing in…";
+
+
+      /* ==========================
+         FIREBASE AUTH
+      ========================== */
+
+      const credential =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          pass
+        );
+
+
+      const user =
+        credential.user;
+
+
+      /* ==========================
+         SAVE ID
+      ========================== */
+
+      if(remember.checked){
+
+        localStorage.setItem(
+          "bt_staff_identity",
+          entered
+        );
+
+      }else{
+
+        localStorage.removeItem(
+          "bt_staff_identity"
+        );
+
+      }
+
+
+      /* ==========================
+         SESSION DATA
+      ========================== */
+
+      sessionStorage.setItem(
+        "bt_user_uid",
+        user.uid
+      );
+
+      sessionStorage.setItem(
+        "bt_user_email",
+        user.email || email
+      );
+
+      sessionStorage.setItem(
+        "bt_user_role",
+        selectedRole
+      );
+
+
+      if(staffRecord){
+
+        sessionStorage.setItem(
+          "bt_staff_id",
+          staffRecord.staffId || ""
+        );
+
+        sessionStorage.setItem(
+          "bt_staff_name",
+          staffRecord.name ||
+          staffRecord.fullName ||
+          ""
+        );
+
+      }
+
+
+      showMessage(
+        "Login successful. Opening dashboard…",
+        "success"
+      );
+
+
+      signinBtn.innerHTML =
+        "Success ✓";
+
+
+      /* ==========================
+         GO TO DASHBOARD
+      ========================== */
+
+      setTimeout(()=>{
+
+        window.location.href =
+          "dashboard.html";
+
+      },700);
+
+
+    }catch(error){
+
+      console.error(
+        "Login error:",
+        error
+      );
+
+
+      let errorText =
+        error?.message ||
+        firebaseError(error);
+
+
+      /*
+        Custom errors should remain readable.
+      */
+
+      if(
+        errorText.includes(
+          "FirebaseError"
+        )
+      ){
+
+        errorText =
+          firebaseError(error);
+
+      }
+
+
+      showMessage(
+        errorText,
+        "error"
+      );
+
+
+      signinBtn.disabled =
+        false;
+
+      signinBtn.innerHTML =
+        "Sign In →";
+
+    }
+
+  }
+);
+
+
+/* ==============================
+   MODAL
+============================== */
 
 const backdrop =
   document.getElementById(
@@ -1039,22 +1475,41 @@ function openModal(
   title,
   text,
   placeholder,
-  action
+  action,
+  inputType="text"
 ){
 
-  modalTitle.textContent=title;
+  modalTitle.textContent =
+    title;
 
-  modalText.textContent=text;
+  modalText.textContent =
+    text;
 
-  modalInput.placeholder=placeholder;
+  modalInput.placeholder =
+    placeholder;
 
-  modalInput.value="";
+  modalInput.value =
+    "";
 
-  modalAction.textContent=action;
+  modalInput.type =
+    inputType;
 
-  backdrop.classList.add("show");
+  modalAction.textContent =
+    action;
 
-  modalInput.focus();
+  modalInput.style.display =
+    "block";
+
+  backdrop.classList.add(
+    "show"
+  );
+
+  setTimeout(
+    ()=>{
+      modalInput.focus();
+    },
+    100
+  );
 
 }
 
@@ -1068,68 +1523,96 @@ function closeModal(){
 }
 
 
-/* FORGOT PASSWORD */
+/* ==============================
+   FORGOT PASSWORD
+============================== */
 
 document
 .getElementById("forgotBtn")
-.addEventListener("click",()=>{
-
-  openModal(
-    "Reset password",
-    "Enter your registered email. Firebase password reset will be connected here.",
-    "Registered email",
-    "Send Reset Link"
-  );
-
-});
-
-
-/* CONTACT ADMIN */
-
-document
-.getElementById("contactBtn")
-.addEventListener("click",()=>{
-
-  openModal(
-    "Contact Admin",
-    "Enter a short message for the institute admin.",
-    "Your message",
-    "Send Request"
-  );
-
-});
-
-
-/* SECURITY */
-
-document
-.getElementById("securityBtn")
-.addEventListener("click",()=>{
-
-  openModal(
-    "Login Security",
-    "Never share your password. Admin controls role permissions and account access.",
-    "",
-    "Close"
-  );
-
-  modalInput.style.display="none";
-
-});
-
-
-/* MODAL ACTION */
-
-modalAction.addEventListener(
+.addEventListener(
   "click",
   ()=>{
 
+    openModal(
+      "Reset password",
+      "Enter your registered Firebase email. We will send a password reset link.",
+      "Registered email",
+      "Send Reset Link",
+      "email"
+    );
+
+  }
+);
+
+
+/* ==============================
+   CONTACT ADMIN
+============================== */
+
+document
+.getElementById("contactBtn")
+.addEventListener(
+  "click",
+  ()=>{
+
+    openModal(
+      "Contact Admin",
+      "Enter your message. Your request will be saved for the institute admin.",
+      "Your message",
+      "Send Request",
+      "text"
+    );
+
+  }
+);
+
+
+/* ==============================
+   SECURITY
+============================== */
+
+document
+.getElementById("securityBtn")
+.addEventListener(
+  "click",
+  ()=>{
+
+    modalTitle.textContent =
+      "Login Security";
+
+    modalText.textContent =
+      "Never share your password. Firebase Authentication handles your password securely. Admin controls account roles and access.";
+
+    modalInput.style.display =
+      "none";
+
+    modalAction.textContent =
+      "Close";
+
+    backdrop.classList.add(
+      "show"
+    );
+
+  }
+);
+
+
+/* ==============================
+   MODAL ACTION
+============================== */
+
+modalAction.addEventListener(
+  "click",
+  async ()=>{
+
+    /* SECURITY */
+
     if(
-      modalTitle.textContent===
+      modalTitle.textContent ===
       "Login Security"
     ){
 
-      modalInput.style.display=
+      modalInput.style.display =
         "block";
 
       closeModal();
@@ -1139,30 +1622,157 @@ modalAction.addEventListener(
     }
 
 
-    if(!modalInput.value.trim()){
+    const value =
+      modalInput.value.trim();
 
-      modalInput.focus();
+
+    /* RESET PASSWORD */
+
+    if(
+      modalTitle.textContent ===
+      "Reset password"
+    ){
+
+      if(!value){
+
+        modalInput.focus();
+
+        return;
+
+      }
+
+
+      try{
+
+        modalAction.disabled =
+          true;
+
+        modalAction.textContent =
+          "Sending…";
+
+
+        await sendPasswordResetEmail(
+          auth,
+          value
+        );
+
+
+        closeModal();
+
+
+        showMessage(
+          "Password reset link has been sent to your email.",
+          "success"
+        );
+
+
+      }catch(error){
+
+        showMessage(
+          firebaseError(error),
+          "error"
+        );
+
+      }finally{
+
+        modalAction.disabled =
+          false;
+
+        modalAction.textContent =
+          "Send Reset Link";
+
+      }
 
       return;
 
     }
 
 
-    modalInput.style.display=
-      "block";
+    /* CONTACT ADMIN */
 
-    closeModal();
+    if(
+      modalTitle.textContent ===
+      "Contact Admin"
+    ){
 
-    showMessage(
-      "Request saved in the demo interface. Backend connection will be added next.",
-      "success"
-    );
+      if(!value){
+
+        modalInput.focus();
+
+        return;
+
+      }
+
+
+      try{
+
+        modalAction.disabled =
+          true;
+
+        modalAction.textContent =
+          "Sending…";
+
+
+        await addDoc(
+          collection(
+            db,
+            "supportRequests"
+          ),
+          {
+            message:value,
+
+            identity:
+              identity.value.trim(),
+
+            role:
+              role.value,
+
+            createdAt:
+              serverTimestamp(),
+
+            status:
+              "pending"
+          }
+        );
+
+
+        closeModal();
+
+
+        showMessage(
+          "Your request has been sent to Admin.",
+          "success"
+        );
+
+
+      }catch(error){
+
+        console.error(error);
+
+        showMessage(
+          "Unable to send request. Please contact Admin directly.",
+          "error"
+        );
+
+      }finally{
+
+        modalAction.disabled =
+          false;
+
+        modalAction.textContent =
+          "Send Request";
+
+      }
+
+    }
 
   }
 );
 
 
-/* CANCEL */
+/* ==============================
+   CANCEL
+============================== */
 
 document
 .getElementById("cancelModal")
@@ -1170,7 +1780,7 @@ document
   "click",
   ()=>{
 
-    modalInput.style.display=
+    modalInput.style.display =
       "block";
 
     closeModal();
@@ -1179,15 +1789,42 @@ document
 );
 
 
-/* CLOSE OUTSIDE */
+/* ==============================
+   CLOSE OUTSIDE
+============================== */
 
 backdrop.addEventListener(
   "click",
   (e)=>{
 
-    if(e.target===backdrop){
+    if(
+      e.target === backdrop
+    ){
 
-      modalInput.style.display=
+      modalInput.style.display =
+        "block";
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* ==============================
+   ESCAPE KEY
+============================== */
+
+document.addEventListener(
+  "keydown",
+  (e)=>{
+
+    if(
+      e.key === "Escape"
+    ){
+
+      modalInput.style.display =
         "block";
 
       closeModal();

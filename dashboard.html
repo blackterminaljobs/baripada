@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071426">
@@ -8,11 +9,6 @@
 <title>BlackTerminal | Management Dashboard</title>
 
 <style>
-
-/* =========================================================
-   BLACKTERMINAL MANAGEMENT DASHBOARD
-   Single File: HTML + CSS + JavaScript
-========================================================= */
 
 :root{
     --primary:#086ee1;
@@ -45,11 +41,6 @@
     --shadow:0 5px 20px rgba(20,50,90,.05);
 }
 
-
-/* =========================================================
-   RESET
-========================================================= */
-
 *{
     margin:0;
     padding:0;
@@ -81,11 +72,6 @@ select{
 button{
     cursor:pointer;
 }
-
-
-/* =========================================================
-   APP
-========================================================= */
 
 .app{
     min-height:100vh;
@@ -124,9 +110,6 @@ button{
     overflow-y:auto;
 }
 
-
-/* LOGO */
-
 .logo{
     padding:0 13px;
 
@@ -152,9 +135,6 @@ button{
 
     color:#8fa8c5;
 }
-
-
-/* NAV */
 
 .nav-title{
     padding:15px 13px 8px;
@@ -202,13 +182,11 @@ button{
 
 .nav-btn:hover{
     background:#102e53;
-
     color:#fff;
 }
 
 .nav-btn.active{
     background:#12365f;
-
     color:#fff;
 
     box-shadow:
@@ -217,9 +195,7 @@ button{
 
 .nav-icon{
     width:25px;
-
     text-align:center;
-
     font-size:16px;
 }
 
@@ -244,9 +220,7 @@ button{
 
 .user-mini{
     display:flex;
-
     align-items:center;
-
     gap:10px;
 }
 
@@ -269,7 +243,6 @@ button{
     color:white;
 
     font-size:12px;
-
     font-weight:900;
 }
 
@@ -327,9 +300,6 @@ button{
     z-index:50;
 }
 
-
-/* MOBILE MENU */
-
 .menu-btn{
     display:none;
 
@@ -344,9 +314,6 @@ button{
 
     font-size:18px;
 }
-
-
-/* SEARCH */
 
 .search-box{
     width:min(400px,45vw);
@@ -376,18 +343,13 @@ button{
     width:100%;
 
     border:0;
-
     outline:0;
 
     background:transparent;
 
     font-size:12px;
-
     color:var(--text);
 }
-
-
-/* TOP ACTIONS */
 
 .top-actions{
     display:flex;
@@ -428,9 +390,6 @@ button{
     border:1px solid white;
 }
 
-
-/* TOP PROFILE */
-
 .top-profile{
     display:flex;
 
@@ -447,7 +406,6 @@ button{
 
 .top-profile-info b{
     display:block;
-
     font-size:11px;
 }
 
@@ -469,9 +427,6 @@ button{
 .content{
     padding:28px;
 }
-
-
-/* PAGE HEADER */
 
 .page-header{
     display:flex;
@@ -517,7 +472,7 @@ button{
 
 
 /* =========================================================
-   STAT CARDS
+   STATS
 ========================================================= */
 
 .stats-grid{
@@ -639,7 +594,7 @@ button{
 
 
 /* =========================================================
-   MAIN GRID
+   GRID
 ========================================================= */
 
 .dashboard-grid{
@@ -683,7 +638,6 @@ button{
 
 .panel-title{
     font-size:15px;
-
     font-weight:850;
 }
 
@@ -741,28 +695,12 @@ button{
     font-size:16px;
 }
 
-.activity-item:nth-child(2)
-.activity-icon{
-    background:#edf9f2;
-}
-
-.activity-item:nth-child(3)
-.activity-icon{
-    background:#fff5e7;
-}
-
-.activity-item:nth-child(4)
-.activity-icon{
-    background:#f1edff;
-}
-
 .activity-info{
     flex:1;
 }
 
 .activity-info b{
     display:block;
-
     font-size:12px;
 }
 
@@ -786,12 +724,34 @@ button{
 
 
 /* =========================================================
-   CLASS SCHEDULE
+   EMPTY
+========================================================= */
+
+.empty{
+    text-align:center;
+
+    padding:25px 10px;
+
+    color:#9aa6b7;
+
+    font-size:11px;
+}
+
+.empty-icon{
+    font-size:25px;
+
+    margin-bottom:7px;
+
+    opacity:.7;
+}
+
+
+/* =========================================================
+   CLASSES
 ========================================================= */
 
 .class-list{
     display:grid;
-
     gap:10px;
 }
 
@@ -838,7 +798,6 @@ button{
 
 .class-info b{
     display:block;
-
     font-size:11px;
 }
 
@@ -876,7 +835,7 @@ button{
 
 
 /* =========================================================
-   QUICK ACTIONS
+   QUICK
 ========================================================= */
 
 .quick-grid{
@@ -1000,9 +959,13 @@ button{
         );
 }
 
+.progress-bar.absent{
+    background:#f09a2f;
+}
+
 
 /* =========================================================
-   NOTICES
+   NOTICE
 ========================================================= */
 
 .notice{
@@ -1037,7 +1000,7 @@ button{
 
 
 /* =========================================================
-   TASKS
+   TASK
 ========================================================= */
 
 .task{
@@ -1073,7 +1036,6 @@ button{
 
 .task-info b{
     display:block;
-
     font-size:11px;
 }
 
@@ -1103,7 +1065,7 @@ button{
 
 
 /* =========================================================
-   RECENT ADMISSIONS TABLE
+   TABLE
 ========================================================= */
 
 .table-wrapper{
@@ -1242,8 +1204,43 @@ td{
 
 .toast.show{
     transform:translateY(0);
-
     opacity:1;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading{
+    text-align:center;
+
+    padding:25px;
+
+    color:#7d899b;
+
+    font-size:11px;
+}
+
+.spinner{
+    width:24px;
+    height:24px;
+
+    border:3px solid #e3ebf5;
+
+    border-top-color:#086ee1;
+
+    border-radius:50%;
+
+    margin:0 auto 10px;
+
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 
@@ -1264,7 +1261,6 @@ td{
 
 }
 
-
 @media(max-width:800px){
 
     .sidebar{
@@ -1277,7 +1273,6 @@ td{
 
     .main{
         margin-left:0;
-
         width:100%;
     }
 
@@ -1302,7 +1297,6 @@ td{
     }
 
 }
-
 
 @media(max-width:600px){
 
@@ -1330,7 +1324,6 @@ td{
 
 }
 
-
 @media(max-width:430px){
 
     .stats-grid{
@@ -1355,11 +1348,6 @@ td{
 
 }
 
-
-/* =========================================================
-   PRINT
-========================================================= */
-
 @media print{
 
     .sidebar,
@@ -1371,7 +1359,6 @@ td{
 
     .main{
         margin:0;
-
         width:100%;
     }
 
@@ -1382,18 +1369,17 @@ td{
 }
 
 </style>
+
 </head>
 
-
 <body>
-
 
 <div class="app">
 
 
-<!-- ======================================================
+<!-- =====================================================
      SIDEBAR
-====================================================== -->
+===================================================== -->
 
 <aside class="sidebar" id="sidebar">
 
@@ -1408,141 +1394,122 @@ td{
 
     <nav>
 
-
-        <!-- MAIN -->
-
         <div class="nav-title">
             Main
         </div>
 
-
         <button
             class="nav-btn active"
-            onclick="navigate('Dashboard')"
+            onclick="navigate('dashboard.html',this)"
         >
             <span class="nav-icon">📊</span>
             Dashboard
         </button>
 
-
         <button
             class="nav-btn"
-            onclick="navigate('Students')"
+            onclick="navigate('students.html',this)"
         >
             <span class="nav-icon">👨‍🎓</span>
             Students
         </button>
 
-
         <button
             class="nav-btn"
-            onclick="navigate('Admissions')"
+            onclick="navigate('admissions.html',this)"
         >
             <span class="nav-icon">📝</span>
             Admissions
         </button>
 
-
         <button
             class="nav-btn"
-            onclick="navigate('Fees & Payments')"
+            onclick="navigate('fees.html',this)"
         >
             <span class="nav-icon">💰</span>
             Fees & Payments
         </button>
 
 
-
-        <!-- INSTITUTE -->
-
         <div class="nav-title">
             Institute
         </div>
 
-
         <button
             class="nav-btn"
-            onclick="navigate('Classes & Attendance')"
+            onclick="navigate('attendance.html',this)"
         >
             <span class="nav-icon">📅</span>
             Classes & Attendance
         </button>
 
-
         <button
             class="nav-btn"
-            onclick="navigate('Communication')"
+            onclick="navigate('communication.html',this)"
         >
             <span class="nav-icon">📢</span>
             Communication
         </button>
 
-
         <button
             class="nav-btn"
-            onclick="navigate('Tasks')"
+            onclick="navigate('tasks.html',this)"
         >
             <span class="nav-icon">📋</span>
             Tasks
         </button>
 
-
         <button
             class="nav-btn"
-            onclick="navigate('Documents')"
+            onclick="navigate('documents.html',this)"
         >
             <span class="nav-icon">📄</span>
             Documents
         </button>
 
 
-
-        <!-- ANALYTICS -->
-
         <div class="nav-title">
             Analytics
         </div>
 
-
         <button
             class="nav-btn"
-            onclick="navigate('Reports')"
+            onclick="navigate('reports.html',this)"
         >
             <span class="nav-icon">📈</span>
             Reports
         </button>
 
-
         <button
             class="nav-btn"
-            onclick="navigate('Settings')"
+            onclick="navigate('settings.html',this)"
         >
             <span class="nav-icon">⚙️</span>
             Settings
         </button>
 
-
     </nav>
 
-
-    <!-- STAFF -->
 
     <div class="sidebar-user">
 
         <div class="user-mini">
 
-            <div class="avatar">
-                SA
+            <div
+                class="avatar"
+                id="sideAvatar"
+            >
+                BT
             </div>
 
             <div>
 
-                <b>
-                    Student Assistant
+                <b id="sideName">
+                    Loading...
                 </b>
 
-                <small>
-                    Staff Account • Online
+                <small id="sideRole">
+                    Checking account...
                 </small>
 
             </div>
@@ -1551,14 +1518,8 @@ td{
 
     </div>
 
-
 </aside>
 
-
-
-<!-- ======================================================
-     OVERLAY
-====================================================== -->
 
 <div
     class="overlay"
@@ -1566,20 +1527,14 @@ td{
 ></div>
 
 
-
-<!-- ======================================================
+<!-- =====================================================
      MAIN
-====================================================== -->
+===================================================== -->
 
 <main class="main">
 
 
-<!-- ======================================================
-     TOPBAR
-====================================================== -->
-
 <header class="topbar">
-
 
     <button
         class="menu-btn"
@@ -1591,9 +1546,7 @@ td{
 
     <div class="search-box">
 
-        <span>
-            🔍
-        </span>
+        <span>🔍</span>
 
         <input
             type="text"
@@ -1606,18 +1559,16 @@ td{
 
     <div class="top-actions">
 
-
         <button
             class="top-icon"
-            onclick="showToast('You have 3 new notifications')"
+            onclick="showToast('Notifications will appear here')"
         >
-
             🔔
-
-            <span class="notification-dot"></span>
-
+            <span
+                class="notification-dot"
+                id="notificationDot"
+            ></span>
         </button>
-
 
         <button
             class="top-icon"
@@ -1629,47 +1580,45 @@ td{
 
         <div class="top-profile">
 
-            <div class="avatar">
-                SA
+            <div
+                class="avatar"
+                id="topAvatar"
+            >
+                BT
             </div>
 
             <div class="top-profile-info">
 
-                <b>
-                    Student Assistant
+                <b id="topName">
+                    Loading...
                 </b>
 
-                <small>
-                    Admin Assistant
+                <small id="topRole">
+                    Loading...
                 </small>
 
             </div>
 
         </div>
 
-
     </div>
-
 
 </header>
 
 
-
-<!-- ======================================================
-     CONTENT
-====================================================== -->
-
 <section class="content">
 
 
-<!-- PAGE HEADER -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <div class="page-header">
 
     <div>
 
-        <h1>
-            Good evening, Student Assistant 👋
+        <h1 id="welcomeTitle">
+            Welcome 👋
         </h1>
 
         <p>
@@ -1682,21 +1631,17 @@ td{
     <div
         class="current-date"
         id="currentDate"
-    >
-    </div>
+    ></div>
 
 </div>
 
 
-
-<!-- ======================================================
+<!-- =====================================================
      STATISTICS
-====================================================== -->
+===================================================== -->
 
 <div class="stats-grid">
 
-
-    <!-- STUDENTS -->
 
     <div class="stat-card">
 
@@ -1712,19 +1657,22 @@ td{
 
         </div>
 
-        <div class="stat-number">
-            128
+        <div
+            class="stat-number"
+            id="totalStudents"
+        >
+            —
         </div>
 
-        <div class="stat-footer positive">
-            ↑ 6 this month
+        <div
+            class="stat-footer positive"
+            id="studentsFooter"
+        >
+            Firestore data
         </div>
 
     </div>
 
-
-
-    <!-- ADMISSIONS -->
 
     <div class="stat-card">
 
@@ -1740,19 +1688,22 @@ td{
 
         </div>
 
-        <div class="stat-number">
-            06
+        <div
+            class="stat-number"
+            id="newAdmissions"
+        >
+            —
         </div>
 
-        <div class="stat-footer positive">
-            ↑ 2 from yesterday
+        <div
+            class="stat-footer positive"
+            id="admissionFooter"
+        >
+            Today
         </div>
 
     </div>
 
-
-
-    <!-- COLLECTION -->
 
     <div class="stat-card">
 
@@ -1768,19 +1719,21 @@ td{
 
         </div>
 
-        <div class="stat-number">
-            ₹4,500
+        <div
+            class="stat-number"
+            id="todayCollection"
+        >
+            ₹0
         </div>
 
-        <div class="stat-footer positive">
-            ↑ 18% this week
+        <div
+            class="stat-footer positive"
+        >
+            Payments received today
         </div>
 
     </div>
 
-
-
-    <!-- PENDING FEES -->
 
     <div class="stat-card">
 
@@ -1796,19 +1749,21 @@ td{
 
         </div>
 
-        <div class="stat-number">
-            18
+        <div
+            class="stat-number"
+            id="pendingFees"
+        >
+            —
         </div>
 
-        <div class="stat-footer warning">
-            Needs attention
+        <div
+            class="stat-footer warning"
+        >
+            Students with dues
         </div>
 
     </div>
 
-
-
-    <!-- CLASSES -->
 
     <div class="stat-card">
 
@@ -1824,36 +1779,38 @@ td{
 
         </div>
 
-        <div class="stat-number">
-            05
+        <div
+            class="stat-number"
+            id="todayClasses"
+        >
+            —
         </div>
 
-        <div class="stat-footer positive">
-            03 completed
+        <div
+            class="stat-footer positive"
+            id="classFooter"
+        >
+            Scheduled today
         </div>
 
     </div>
 
-
 </div>
 
 
-
-<!-- ======================================================
-     DASHBOARD GRID
-====================================================== -->
+<!-- =====================================================
+     GRID
+===================================================== -->
 
 <div class="dashboard-grid">
 
 
-<!-- ======================================================
-     LEFT COLUMN
-====================================================== -->
-
 <div>
 
 
-<!-- TODAY ACTIVITY -->
+<!-- =====================================================
+     ACTIVITY
+===================================================== -->
 
 <div class="panel">
 
@@ -1865,127 +1822,34 @@ td{
 
         <button
             class="panel-action"
-            onclick="showToast('Activity page will open here')"
+            onclick="showToast('Activity is loaded from Firestore')"
         >
-            View all
+            Live data
         </button>
 
     </div>
 
+    <div
+        class="activity"
+        id="activityList"
+    >
 
-    <div class="activity">
+        <div class="loading">
 
+            <div class="spinner"></div>
 
-        <div class="activity-item">
-
-            <div class="activity-icon">
-                📝
-            </div>
-
-            <div class="activity-info">
-
-                <b>
-                    New admission added
-                </b>
-
-                <p>
-                    Rahul Das joined PGDCA • Admission ID BT2026-128
-                </p>
-
-            </div>
-
-            <div class="activity-time">
-                10 min ago
-            </div>
+            Loading activity...
 
         </div>
-
-
-
-        <div class="activity-item">
-
-            <div class="activity-icon">
-                💰
-            </div>
-
-            <div class="activity-info">
-
-                <b>
-                    Fee payment received
-                </b>
-
-                <p>
-                    Priya Singh paid ₹2,000 via UPI
-                </p>
-
-            </div>
-
-            <div class="activity-time">
-                42 min ago
-            </div>
-
-        </div>
-
-
-
-        <div class="activity-item">
-
-            <div class="activity-icon">
-                📅
-            </div>
-
-            <div class="activity-info">
-
-                <b>
-                    Attendance updated
-                </b>
-
-                <p>
-                    PGDCA Morning Batch • 18/20 present
-                </p>
-
-            </div>
-
-            <div class="activity-time">
-                1 hr ago
-            </div>
-
-        </div>
-
-
-
-        <div class="activity-item">
-
-            <div class="activity-icon">
-                📢
-            </div>
-
-            <div class="activity-info">
-
-                <b>
-                    Notice published
-                </b>
-
-                <p>
-                    Monthly fee reminder sent to students
-                </p>
-
-            </div>
-
-            <div class="activity-time">
-                2 hrs ago
-            </div>
-
-        </div>
-
 
     </div>
 
 </div>
 
 
-
-<!-- TODAY'S CLASSES -->
+<!-- =====================================================
+     CLASSES
+===================================================== -->
 
 <div class="panel">
 
@@ -1997,143 +1861,34 @@ td{
 
         <button
             class="panel-action"
-            onclick="navigate('Classes & Attendance')"
+            onclick="navigate('attendance.html')"
         >
             View schedule
         </button>
 
     </div>
 
+    <div
+        class="class-list"
+        id="classList"
+    >
 
-    <div class="class-list">
+        <div class="loading">
 
+            <div class="spinner"></div>
 
-        <div class="class-item">
-
-            <div class="class-left">
-
-                <div class="class-icon">
-                    💻
-                </div>
-
-                <div class="class-info">
-
-                    <b>
-                        PGDCA • Morning
-                    </b>
-
-                    <small>
-                        07:00 AM – 08:00 AM · Room 1
-                    </small>
-
-                </div>
-
-            </div>
-
-            <span class="status">
-                Completed
-            </span>
+            Loading classes...
 
         </div>
-
-
-
-        <div class="class-item">
-
-            <div class="class-left">
-
-                <div class="class-icon">
-                    🐍
-                </div>
-
-                <div class="class-info">
-
-                    <b>
-                        Python Programming
-                    </b>
-
-                    <small>
-                        08:00 AM – 09:00 AM · Room 2
-                    </small>
-
-                </div>
-
-            </div>
-
-            <span class="status">
-                Completed
-            </span>
-
-        </div>
-
-
-
-        <div class="class-item">
-
-            <div class="class-left">
-
-                <div class="class-icon">
-                    📊
-                </div>
-
-                <div class="class-info">
-
-                    <b>
-                        Tally
-                    </b>
-
-                    <small>
-                        03:00 PM – 04:00 PM · Room 1
-                    </small>
-
-                </div>
-
-            </div>
-
-            <span class="status upcoming">
-                Upcoming
-            </span>
-
-        </div>
-
-
-
-        <div class="class-item">
-
-            <div class="class-left">
-
-                <div class="class-icon">
-                    ☕
-                </div>
-
-                <div class="class-info">
-
-                    <b>
-                        Java
-                    </b>
-
-                    <small>
-                        04:00 PM – 05:00 PM · Room 2
-                    </small>
-
-                </div>
-
-            </div>
-
-            <span class="status upcoming">
-                Upcoming
-            </span>
-
-        </div>
-
 
     </div>
 
 </div>
 
 
-
-<!-- RECENT ADMISSIONS -->
+<!-- =====================================================
+     RECENT ADMISSIONS
+===================================================== -->
 
 <div class="panel">
 
@@ -2145,7 +1900,7 @@ td{
 
         <button
             class="panel-action"
-            onclick="navigate('Admissions')"
+            onclick="navigate('admissions.html')"
         >
             View all
         </button>
@@ -2161,143 +1916,29 @@ td{
 
                 <tr>
 
-                    <th>
-                        Student
-                    </th>
-
-                    <th>
-                        Course
-                    </th>
-
-                    <th>
-                        Batch
-                    </th>
-
-                    <th>
-                        Date
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Batch</th>
+                    <th>Date</th>
+                    <th>Status</th>
 
                 </tr>
 
             </thead>
 
-
-            <tbody>
+            <tbody id="admissionTable">
 
                 <tr>
 
-                    <td>
+                    <td colspan="5">
 
-                        <div class="student-cell">
-
-                            <div class="student-avatar">
-                                RD
-                            </div>
-
-                            Rahul Das
-
+                        <div class="loading">
+                            Loading admissions...
                         </div>
 
                     </td>
 
-                    <td>
-                        PGDCA
-                    </td>
-
-                    <td>
-                        Morning
-                    </td>
-
-                    <td>
-                        26 Sep
-                    </td>
-
-                    <td>
-                        <span class="badge">
-                            Active
-                        </span>
-                    </td>
-
                 </tr>
-
-
-                <tr>
-
-                    <td>
-
-                        <div class="student-cell">
-
-                            <div class="student-avatar">
-                                PS
-                            </div>
-
-                            Priya Singh
-
-                        </div>
-
-                    </td>
-
-                    <td>
-                        Python
-                    </td>
-
-                    <td>
-                        Evening
-                    </td>
-
-                    <td>
-                        26 Sep
-                    </td>
-
-                    <td>
-                        <span class="badge">
-                            Active
-                        </span>
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-
-                        <div class="student-cell">
-
-                            <div class="student-avatar">
-                                AS
-                            </div>
-
-                            Amit Sahu
-
-                        </div>
-
-                    </td>
-
-                    <td>
-                        Tally
-                    </td>
-
-                    <td>
-                        Morning
-                    </td>
-
-                    <td>
-                        25 Sep
-                    </td>
-
-                    <td>
-                        <span class="badge">
-                            Active
-                        </span>
-                    </td>
-
-                </tr>
-
 
             </tbody>
 
@@ -2311,10 +1952,9 @@ td{
 </div>
 
 
-
-<!-- ======================================================
-     RIGHT COLUMN
-====================================================== -->
+<!-- =====================================================
+     RIGHT
+===================================================== -->
 
 <div>
 
@@ -2334,10 +1974,9 @@ td{
 
     <div class="quick-grid">
 
-
         <button
             class="quick-btn"
-            onclick="navigate('Students')"
+            onclick="navigate('students.html')"
         >
 
             <div class="quick-icon">
@@ -2351,7 +1990,7 @@ td{
 
         <button
             class="quick-btn"
-            onclick="navigate('Admissions')"
+            onclick="navigate('admissions.html')"
         >
 
             <div class="quick-icon">
@@ -2365,7 +2004,7 @@ td{
 
         <button
             class="quick-btn"
-            onclick="navigate('Fees & Payments')"
+            onclick="navigate('fees.html')"
         >
 
             <div class="quick-icon">
@@ -2379,7 +2018,7 @@ td{
 
         <button
             class="quick-btn"
-            onclick="navigate('Communication')"
+            onclick="navigate('communication.html')"
         >
 
             <div class="quick-icon">
@@ -2390,14 +2029,14 @@ td{
 
         </button>
 
-
     </div>
 
 </div>
 
 
-
-<!-- ATTENDANCE -->
+<!-- =====================================================
+     ATTENDANCE
+===================================================== -->
 
 <div class="panel">
 
@@ -2412,12 +2051,12 @@ td{
 
     <div class="attendance-number">
 
-        <strong>
-            110 / 128
+        <strong id="attendanceMain">
+            —
         </strong>
 
-        <span>
-            86%
+        <span id="attendancePercent">
+            —
         </span>
 
     </div>
@@ -2431,8 +2070,8 @@ td{
                 Present
             </span>
 
-            <span>
-                110 Students
+            <span id="presentText">
+                —
             </span>
 
         </div>
@@ -2441,7 +2080,8 @@ td{
 
             <div
                 class="progress-bar"
-                style="width:86%"
+                id="presentBar"
+                style="width:0%"
             ></div>
 
         </div>
@@ -2457,8 +2097,8 @@ td{
                 Absent
             </span>
 
-            <span>
-                18 Students
+            <span id="absentText">
+                —
             </span>
 
         </div>
@@ -2466,23 +2106,21 @@ td{
         <div class="progress">
 
             <div
-                class="progress-bar"
-                style="
-                    width:14%;
-                    background:#f09a2f;
-                "
+                class="progress-bar absent"
+                id="absentBar"
+                style="width:0%"
             ></div>
 
         </div>
 
     </div>
 
-
 </div>
 
 
-
-<!-- NOTICES -->
+<!-- =====================================================
+     NOTICES
+===================================================== -->
 
 <div class="panel">
 
@@ -2494,7 +2132,7 @@ td{
 
         <button
             class="panel-action"
-            onclick="navigate('Communication')"
+            onclick="navigate('communication.html')"
         >
             Manage
         </button>
@@ -2502,39 +2140,20 @@ td{
     </div>
 
 
-    <div class="notice">
+    <div id="noticeList">
 
-        <b>
-            Monthly Fee Reminder
-        </b>
-
-        <p>
-            Students with pending fees should
-            complete payment before the due date.
-        </p>
+        <div class="loading">
+            Loading notices...
+        </div>
 
     </div>
-
-
-    <div class="notice">
-
-        <b>
-            Staff Meeting
-        </b>
-
-        <p>
-            Monthly staff meeting scheduled
-            for Saturday at 5:00 PM.
-        </p>
-
-    </div>
-
 
 </div>
 
 
-
-<!-- TASKS -->
+<!-- =====================================================
+     TASKS
+===================================================== -->
 
 <div class="panel">
 
@@ -2545,224 +2164,724 @@ td{
         </h3>
 
         <span
+            id="pendingTaskCount"
             style="
                 font-size:10px;
                 color:#dc3f3f;
                 font-weight:850;
             "
         >
-            3 pending
+            —
         </span>
 
     </div>
 
 
-    <div class="task">
+    <div id="taskList">
 
-        <button
-            class="task-check"
-            onclick="completeTask(this)"
-        >
-        </button>
-
-        <div class="task-info">
-
-            <b>
-                Call pending-fee students
-            </b>
-
-            <small>
-                8 students
-            </small>
-
-        </div>
-
-        <span class="priority">
-            HIGH
-        </span>
-
-    </div>
-
-
-    <div class="task">
-
-        <button
-            class="task-check"
-            onclick="completeTask(this)"
-        >
-        </button>
-
-        <div class="task-info">
-
-            <b>
-                Verify admission documents
-            </b>
-
-            <small>
-                3 applications
-            </small>
-
+        <div class="loading">
+            Loading tasks...
         </div>
 
     </div>
-
-
-    <div class="task">
-
-        <button
-            class="task-check"
-            onclick="completeTask(this)"
-        >
-        </button>
-
-        <div class="task-info">
-
-            <b>
-                Update attendance
-            </b>
-
-            <small>
-                Today's pending batches
-            </small>
-
-        </div>
-
-    </div>
-
 
 </div>
 
 
 </div>
 
-
 </div>
-
 
 </section>
 
-
 </main>
-
 
 </div>
 
-
-
-<!-- ======================================================
-     TOAST
-====================================================== -->
 
 <div
     class="toast"
     id="toast"
->
-</div>
+></div>
 
 
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
 
-<script>
+<script type="module">
 
-/* =========================================================
-   DATE
-========================================================= */
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-function updateDate(){
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-    const dateElement =
-        document.getElementById("currentDate");
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-    const today =
-        new Date();
+import {
+    firebaseConfig
+} from "./firebaseconfig.js";
 
-    dateElement.textContent =
-        today.toLocaleDateString(
-            "en-IN",
-            {
-                weekday:"short",
-                day:"2-digit",
-                month:"short",
-                year:"numeric"
-            }
-        );
+
+/* =====================================================
+   FIREBASE INITIALIZATION
+===================================================== */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
+
+let students = [];
+let admissions = [];
+let payments = [];
+let attendance = [];
+let classesData = [];
+let notices = [];
+let tasks = [];
+let activities = [];
+
+
+/* =====================================================
+   DATE HELPERS
+===================================================== */
+
+function todayKey(){
+
+    const d = new Date();
+
+    const y =
+        d.getFullYear();
+
+    const m =
+        String(
+            d.getMonth()+1
+        ).padStart(2,"0");
+
+    const day =
+        String(
+            d.getDate()
+        ).padStart(2,"0");
+
+    return `${y}-${m}-${day}`;
+
 }
 
-updateDate();
 
+function dateFromValue(value){
 
+    if(!value){
+        return null;
+    }
 
-/* =========================================================
-   MOBILE SIDEBAR
-========================================================= */
+    try{
 
-const sidebar =
-    document.getElementById("sidebar");
+        if(
+            typeof value.toDate ===
+            "function"
+        ){
 
-const overlay =
-    document.getElementById("overlay");
+            return value.toDate();
 
-const menuBtn =
-    document.getElementById("menuBtn");
+        }
 
+        if(
+            value.seconds
+        ){
 
-menuBtn.addEventListener(
-    "click",
-    function(){
+            return new Date(
+                value.seconds * 1000
+            );
 
-        sidebar.classList.toggle("open");
+        }
 
-        overlay.classList.toggle("show");
+        if(
+            typeof value === "string"
+        ){
+
+            const d =
+                new Date(value);
+
+            if(
+                !isNaN(d.getTime())
+            ){
+
+                return d;
+
+            }
+
+        }
+
+        if(
+            value instanceof Date
+        ){
+
+            return value;
+
+        }
+
+    }catch(error){
+
+        console.warn(
+            "Date conversion failed",
+            error
+        );
 
     }
-);
+
+    return null;
+
+}
 
 
-overlay.addEventListener(
-    "click",
-    function(){
+function isToday(value){
 
-        sidebar.classList.remove("open");
+    const d =
+        dateFromValue(value);
 
-        overlay.classList.remove("show");
+    if(!d){
+        return false;
+    }
+
+    return (
+        d.getFullYear() ===
+            new Date().getFullYear()
+        &&
+        d.getMonth() ===
+            new Date().getMonth()
+        &&
+        d.getDate() ===
+            new Date().getDate()
+    );
+
+}
+
+
+function formatDate(value){
+
+    const d =
+        dateFromValue(value);
+
+    if(!d){
+        return "—";
+    }
+
+    return d.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+function formatTime(value){
+
+    const d =
+        dateFromValue(value);
+
+    if(!d){
+        return "";
+    }
+
+    return d.toLocaleTimeString(
+        "en-IN",
+        {
+            hour:"numeric",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+function money(value){
+
+    const n =
+        Number(value || 0);
+
+    return "₹" +
+        n.toLocaleString(
+            "en-IN",
+            {
+                maximumFractionDigits:0
+            }
+        );
+
+}
+
+
+/* =====================================================
+   INITIALS
+===================================================== */
+
+function initials(name){
+
+    if(!name){
+        return "BT";
+    }
+
+    const parts =
+        String(name)
+            .trim()
+            .split(/\s+/);
+
+    if(parts.length === 1){
+
+        return parts[0]
+            .substring(0,2)
+            .toUpperCase();
 
     }
-);
+
+    return (
+        parts[0][0] +
+        parts[parts.length-1][0]
+    ).toUpperCase();
+
+}
 
 
+/* =====================================================
+   GREETING
+===================================================== */
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+function greeting(){
 
-function navigate(page){
+    const hour =
+        new Date().getHours();
 
-    showToast(
-        page + " page selected"
+    if(hour < 12){
+        return "Good morning";
+    }
+
+    if(hour < 17){
+        return "Good afternoon";
+    }
+
+    return "Good evening";
+
+}
+
+
+/* =====================================================
+   CURRENT DATE
+===================================================== */
+
+document
+    .getElementById("currentDate")
+    .textContent =
+    new Date().toLocaleDateString(
+        "en-IN",
+        {
+            weekday:"short",
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
     );
 
 
-    const buttons =
-        document.querySelectorAll(
-            ".nav-btn"
+/* =====================================================
+   AUTH GUARD
+===================================================== */
+
+onAuthStateChanged(
+    auth,
+    async user => {
+
+        if(!user){
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        const name =
+            sessionStorage.getItem(
+                "bt_staff_name"
+            )
+            ||
+            user.displayName
+            ||
+            user.email
+            ||
+            "User";
+
+
+        const role =
+            sessionStorage.getItem(
+                "bt_user_role"
+            )
+            ||
+            "Staff";
+
+
+        document
+            .getElementById("welcomeTitle")
+            .textContent =
+            greeting() +
+            ", " +
+            name +
+            " 👋";
+
+
+        document
+            .getElementById("topName")
+            .textContent =
+            name;
+
+
+        document
+            .getElementById("sideName")
+            .textContent =
+            name;
+
+
+        document
+            .getElementById("topRole")
+            .textContent =
+            formatRole(role);
+
+
+        document
+            .getElementById("sideRole")
+            .textContent =
+            formatRole(role) +
+            " • Online";
+
+
+        document
+            .getElementById("topAvatar")
+            .textContent =
+            initials(name);
+
+
+        document
+            .getElementById("sideAvatar")
+            .textContent =
+            initials(name);
+
+
+        await loadDashboard();
+
+    }
+);
+
+
+/* =====================================================
+   ROLE FORMAT
+===================================================== */
+
+function formatRole(role){
+
+    if(!role){
+        return "Staff";
+    }
+
+    if(role === "staff"){
+        return "Student Coordinator";
+    }
+
+    if(role === "admin"){
+        return "Institute Admin";
+    }
+
+    if(role === "faculty"){
+        return "Faculty";
+    }
+
+    return role;
+
+}
+
+
+/* =====================================================
+   LOAD COLLECTION
+===================================================== */
+
+async function loadCollection(
+    collectionName
+){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    collectionName
+                )
+            );
+
+        return snapshot.docs.map(
+            doc => ({
+                id:doc.id,
+                ...doc.data()
+            })
+        );
+
+    }catch(error){
+
+        console.error(
+            collectionName,
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD DASHBOARD
+===================================================== */
+
+async function loadDashboard(){
+
+    try{
+
+        /*
+          We intentionally do NOT create
+          fallback/demo data.
+        */
+
+        const results =
+            await Promise.all([
+
+                loadCollection("students"),
+
+                loadCollection("admissions"),
+
+                loadCollection("payments"),
+
+                loadCollection("attendance"),
+
+                loadCollection("classes"),
+
+                loadCollection("announcements"),
+
+                loadCollection("tasks"),
+
+                loadCollection("activity")
+
+            ]);
+
+
+        students =
+            results[0];
+
+        admissions =
+            results[1];
+
+        payments =
+            results[2];
+
+        attendance =
+            results[3];
+
+        classesData =
+            results[4];
+
+        notices =
+            results[5];
+
+        tasks =
+            results[6];
+
+        activities =
+            results[7];
+
+
+        renderStatistics();
+
+        renderActivity();
+
+        renderClasses();
+
+        renderAdmissions();
+
+        renderAttendance();
+
+        renderNotices();
+
+        renderTasks();
+
+
+    }catch(error){
+
+        console.error(
+            "Dashboard loading error:",
+            error
+        );
+
+        showToast(
+            "Unable to load some Firestore data."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+function renderStatistics(){
+
+    /* STUDENTS */
+
+    const activeStudents =
+        students.filter(
+            s =>
+                !s.status ||
+                String(s.status)
+                    .toLowerCase()
+                    !== "inactive"
+        );
+
+    document
+        .getElementById(
+            "totalStudents"
+        )
+        .textContent =
+        activeStudents.length;
+
+
+    document
+        .getElementById(
+            "studentsFooter"
+        )
+        .textContent =
+        students.length +
+        " records in Firestore";
+
+
+    /* ADMISSIONS */
+
+    const todayAdmissions =
+        admissions.filter(
+            a =>
+                isToday(
+                    a.admissionDate ||
+                    a.date ||
+                    a.createdAt
+                )
         );
 
 
-    buttons.forEach(
-        function(button){
+    document
+        .getElementById(
+            "newAdmissions"
+        )
+        .textContent =
+        todayAdmissions.length;
 
-            button.classList.remove(
-                "active"
-            );
+
+    document
+        .getElementById(
+            "admissionFooter"
+        )
+        .textContent =
+        "Today";
+
+
+    /* PAYMENTS */
+
+    const todayPayments =
+        payments.filter(
+            p =>
+                isToday(
+                    p.paymentDate ||
+                    p.date ||
+                    p.createdAt
+                )
+        );
+
+
+    const collectionToday =
+        todayPayments.reduce(
+            (sum,p) =>
+                sum +
+                Number(
+                    p.amount ||
+                    p.paidAmount ||
+                    p.paymentAmount ||
+                    0
+                ),
+            0
+        );
+
+
+    document
+        .getElementById(
+            "todayCollection"
+        )
+        .textContent =
+        money(collectionToday);
+
+
+    /* PENDING FEES */
+
+    let pendingCount = 0;
+
+    students.forEach(
+        student => {
+
+            const total =
+                Number(
+                    student.totalFees ||
+                    student.courseFees ||
+                    student.fees ||
+                    0
+                );
+
+            const paid =
+                Number(
+                    student.paidAmount ||
+                    student.paidFees ||
+                    student.amountPaid ||
+                    0
+                );
 
             if(
-                button.textContent
-                    .trim()
-                    .includes(page)
+                total > paid
             ){
 
-                button.classList.add(
-                    "active"
-                );
+                pendingCount++;
 
             }
 
@@ -2770,35 +2889,918 @@ function navigate(page){
     );
 
 
-    if(
-        window.innerWidth <= 800
-    ){
+    document
+        .getElementById(
+            "pendingFees"
+        )
+        .textContent =
+        pendingCount;
 
-        sidebar.classList.remove(
-            "open"
+
+    /* CLASSES */
+
+    const todayClasses =
+        classesData.filter(
+            c =>
+                isToday(
+                    c.date ||
+                    c.classDate ||
+                    c.createdAt
+                )
         );
 
-        overlay.classList.remove(
-            "show"
-        );
 
-    }
+    document
+        .getElementById(
+            "todayClasses"
+        )
+        .textContent =
+        todayClasses.length;
+
+
+    document
+        .getElementById(
+            "classFooter"
+        )
+        .textContent =
+        "Scheduled today";
 
 }
 
 
+/* =====================================================
+   ACTIVITY
+===================================================== */
 
-/* =========================================================
+function renderActivity(){
+
+    const container =
+        document.getElementById(
+            "activityList"
+        );
+
+
+    const todayActivities =
+        activities
+            .filter(
+                a =>
+                    isToday(
+                        a.createdAt ||
+                        a.date ||
+                        a.timestamp
+                    )
+            )
+            .sort(
+                (a,b) => {
+
+                    const da =
+                        dateFromValue(
+                            a.createdAt ||
+                            a.date ||
+                            a.timestamp
+                        ) || new Date(0);
+
+                    const db =
+                        dateFromValue(
+                            b.createdAt ||
+                            b.date ||
+                            b.timestamp
+                        ) || new Date(0);
+
+                    return db - da;
+
+                }
+            )
+            .slice(0,6);
+
+
+    if(
+        todayActivities.length === 0
+    ){
+
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">📭</div>
+                No activity recorded today.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        todayActivities.map(
+            item => {
+
+                const icon =
+                    item.icon ||
+                    "📌";
+
+                const title =
+                    item.title ||
+                    item.action ||
+                    "Activity";
+
+                const description =
+                    item.description ||
+                    item.message ||
+                    "";
+
+                const date =
+                    item.createdAt ||
+                    item.date ||
+                    item.timestamp;
+
+                return `
+                    <div class="activity-item">
+
+                        <div class="activity-icon">
+                            ${escapeHTML(icon)}
+                        </div>
+
+                        <div class="activity-info">
+
+                            <b>
+                                ${escapeHTML(title)}
+                            </b>
+
+                            <p>
+                                ${escapeHTML(description)}
+                            </p>
+
+                        </div>
+
+                        <div class="activity-time">
+                            ${escapeHTML(
+                                formatTime(date)
+                            )}
+                        </div>
+
+                    </div>
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   CLASSES
+===================================================== */
+
+function renderClasses(){
+
+    const container =
+        document.getElementById(
+            "classList"
+        );
+
+
+    const today =
+        classesData
+            .filter(
+                c =>
+                    isToday(
+                        c.date ||
+                        c.classDate ||
+                        c.createdAt
+                    )
+            )
+            .sort(
+                (a,b) => {
+
+                    const ta =
+                        String(
+                            a.startTime ||
+                            a.time ||
+                            ""
+                        );
+
+                    const tb =
+                        String(
+                            b.startTime ||
+                            b.time ||
+                            ""
+                        );
+
+                    return ta.localeCompare(tb);
+
+                }
+            );
+
+
+    if(today.length === 0){
+
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">📅</div>
+                No classes scheduled for today.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        today.map(
+            c => {
+
+                const title =
+                    c.title ||
+                    c.course ||
+                    c.className ||
+                    "Class";
+
+                const batch =
+                    c.batch ||
+                    "";
+
+                const start =
+                    c.startTime ||
+                    c.from ||
+                    "";
+
+                const end =
+                    c.endTime ||
+                    c.to ||
+                    "";
+
+                const room =
+                    c.room ||
+                    c.roomNumber ||
+                    "";
+
+                const status =
+                    String(
+                        c.status ||
+                        "Upcoming"
+                    );
+
+
+                const completed =
+                    status
+                        .toLowerCase()
+                        .includes(
+                            "complete"
+                        );
+
+
+                return `
+                    <div class="class-item">
+
+                        <div class="class-left">
+
+                            <div class="class-icon">
+                                💻
+                            </div>
+
+                            <div class="class-info">
+
+                                <b>
+                                    ${escapeHTML(title)}
+                                    ${
+                                        batch
+                                        ? " • " +
+                                          escapeHTML(batch)
+                                        : ""
+                                    }
+                                </b>
+
+                                <small>
+                                    ${
+                                        escapeHTML(
+                                            start
+                                        )
+                                    }
+                                    ${
+                                        end
+                                        ? " – " +
+                                          escapeHTML(end)
+                                        : ""
+                                    }
+                                    ${
+                                        room
+                                        ? " · " +
+                                          escapeHTML(room)
+                                        : ""
+                                    }
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <span
+                            class="status ${
+                                completed
+                                ? ""
+                                : "upcoming"
+                            }"
+                        >
+                            ${escapeHTML(status)}
+                        </span>
+
+                    </div>
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   ADMISSIONS
+===================================================== */
+
+function renderAdmissions(){
+
+    const tbody =
+        document.getElementById(
+            "admissionTable"
+        );
+
+
+    const recent =
+        [...admissions]
+            .sort(
+                (a,b) => {
+
+                    const da =
+                        dateFromValue(
+                            a.admissionDate ||
+                            a.date ||
+                            a.createdAt
+                        ) || new Date(0);
+
+                    const db =
+                        dateFromValue(
+                            b.admissionDate ||
+                            b.date ||
+                            b.createdAt
+                        ) || new Date(0);
+
+                    return db - da;
+
+                }
+            )
+            .slice(0,6);
+
+
+    if(recent.length === 0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    <div class="empty">
+                        <div class="empty-icon">📝</div>
+                        No admissions found.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        recent.map(
+            admission => {
+
+                const name =
+                    admission.fullName ||
+                    admission.studentName ||
+                    admission.name ||
+                    "Unknown";
+
+
+                const course =
+                    admission.course ||
+                    admission.courseName ||
+                    "—";
+
+
+                const batch =
+                    admission.batch ||
+                    "—";
+
+
+                const date =
+                    admission.admissionDate ||
+                    admission.date ||
+                    admission.createdAt;
+
+
+                const status =
+                    admission.status ||
+                    admission.admissionStatus ||
+                    "Active";
+
+
+                return `
+                    <tr>
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    ${escapeHTML(
+                                        initials(name)
+                                    )}
+                                </div>
+
+                                ${escapeHTML(name)}
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            ${escapeHTML(course)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(batch)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                formatDate(date)
+                            )}
+                        </td>
+
+                        <td>
+
+                            <span class="badge">
+                                ${escapeHTML(status)}
+                            </span>
+
+                        </td>
+
+                    </tr>
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   ATTENDANCE
+===================================================== */
+
+function renderAttendance(){
+
+    const today =
+        attendance.filter(
+            a =>
+                isToday(
+                    a.date ||
+                    a.attendanceDate ||
+                    a.createdAt
+                )
+        );
+
+
+    let present = 0;
+    let absent = 0;
+
+
+    today.forEach(
+        item => {
+
+            const status =
+                String(
+                    item.status ||
+                    ""
+                ).toLowerCase();
+
+
+            if(
+                status === "present" ||
+                item.present === true
+            ){
+
+                present++;
+
+            }else if(
+                status === "absent" ||
+                item.present === false
+            ){
+
+                absent++;
+
+            }
+
+        }
+    );
+
+
+    const total =
+        present + absent;
+
+
+    const percent =
+        total
+        ? Math.round(
+            (present / total) * 100
+          )
+        : 0;
+
+
+    document
+        .getElementById(
+            "attendanceMain"
+        )
+        .textContent =
+        `${present} / ${total}`;
+
+
+    document
+        .getElementById(
+            "attendancePercent"
+        )
+        .textContent =
+        total
+        ? percent + "%"
+        : "No data";
+
+
+    document
+        .getElementById(
+            "presentText"
+        )
+        .textContent =
+        present +
+        " Students";
+
+
+    document
+        .getElementById(
+            "absentText"
+        )
+        .textContent =
+        absent +
+        " Students";
+
+
+    document
+        .getElementById(
+            "presentBar"
+        )
+        .style.width =
+        percent + "%";
+
+
+    document
+        .getElementById(
+            "absentBar"
+        )
+        .style.width =
+        (
+            total
+            ? Math.round(
+                (absent / total) * 100
+              )
+            : 0
+        ) + "%";
+
+}
+
+
+/* =====================================================
+   NOTICES
+===================================================== */
+
+function renderNotices(){
+
+    const container =
+        document.getElementById(
+            "noticeList"
+        );
+
+
+    const activeNotices =
+        [...notices]
+            .filter(
+                n =>
+                    n.status !==
+                    "deleted"
+            )
+            .sort(
+                (a,b) => {
+
+                    const da =
+                        dateFromValue(
+                            a.createdAt ||
+                            a.date
+                        ) || new Date(0);
+
+                    const db =
+                        dateFromValue(
+                            b.createdAt ||
+                            b.date
+                        ) || new Date(0);
+
+                    return db - da;
+
+                }
+            )
+            .slice(0,4);
+
+
+    if(activeNotices.length === 0){
+
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">📢</div>
+                No active notices.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        activeNotices.map(
+            notice => {
+
+                const title =
+                    notice.title ||
+                    notice.heading ||
+                    "Notice";
+
+
+                const message =
+                    notice.message ||
+                    notice.description ||
+                    "";
+
+
+                return `
+                    <div class="notice">
+
+                        <b>
+                            ${escapeHTML(title)}
+                        </b>
+
+                        <p>
+                            ${escapeHTML(message)}
+                        </p>
+
+                    </div>
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   TASKS
+===================================================== */
+
+function renderTasks(){
+
+    const container =
+        document.getElementById(
+            "taskList"
+        );
+
+
+    const pending =
+        [...tasks]
+            .filter(
+                t => {
+
+                    const status =
+                        String(
+                            t.status ||
+                            ""
+                        ).toLowerCase();
+
+                    return (
+                        status !== "completed" &&
+                        status !== "done"
+                    );
+
+                }
+            )
+            .slice(0,6);
+
+
+    document
+        .getElementById(
+            "pendingTaskCount"
+        )
+        .textContent =
+        pending.length +
+        " pending";
+
+
+    if(pending.length === 0){
+
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">✅</div>
+                No pending tasks.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        pending.map(
+            task => {
+
+                const title =
+                    task.title ||
+                    task.name ||
+                    "Task";
+
+
+                const description =
+                    task.description ||
+                    task.details ||
+                    "";
+
+
+                const priority =
+                    String(
+                        task.priority ||
+                        ""
+                    ).toUpperCase();
+
+
+                return `
+                    <div class="task">
+
+                        <button
+                            class="task-check"
+                            onclick="completeTask(this)"
+                        ></button>
+
+                        <div class="task-info">
+
+                            <b>
+                                ${escapeHTML(title)}
+                            </b>
+
+                            <small>
+                                ${escapeHTML(description)}
+                            </small>
+
+                        </div>
+
+                        ${
+                            priority
+                            ? `
+                                <span class="priority">
+                                    ${escapeHTML(priority)}
+                                </span>
+                            `
+                            : ""
+                        }
+
+                    </div>
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   COMPLETE TASK UI
+===================================================== */
+
+window.completeTask =
+function(button){
+
+    const task =
+        button.parentElement;
+
+
+    task.style.opacity =
+        "0.5";
+
+
+    button.style.background =
+        "#15945b";
+
+
+    button.style.borderColor =
+        "#15945b";
+
+
+    button.innerHTML =
+        "✓";
+
+
+    showToast(
+        "Task marked as completed locally. Save from Tasks page."
+    );
+
+};
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+window.navigate =
+function(page,button){
+
+    if(
+        button
+    ){
+
+        document
+            .querySelectorAll(
+                ".nav-btn"
+            )
+            .forEach(
+                btn =>
+                    btn.classList.remove(
+                        "active"
+                    )
+            );
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    window.location.href =
+        page;
+
+};
+
+
+/* =====================================================
    TOAST
-========================================================= */
+===================================================== */
 
 let toastTimer;
 
-
-function showToast(text){
+window.showToast =
+function(text){
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
 
 
     toast.textContent =
@@ -2817,55 +3819,68 @@ function showToast(text){
 
     toastTimer =
         setTimeout(
-            function(){
-
+            ()=>{
                 toast.classList.remove(
                     "show"
                 );
-
             },
-            2500
+            2800
         );
 
-}
+};
 
 
+/* =====================================================
+   MOBILE MENU
+===================================================== */
 
-/* =========================================================
-   TASK COMPLETE
-========================================================= */
-
-function completeTask(button){
-
-    const task =
-        button.parentElement;
-
-
-    task.style.opacity =
-        "0.5";
-
-
-    button.style.background =
-        "#15945b";
-
-    button.style.borderColor =
-        "#15945b";
-
-    button.innerHTML =
-        "✓";
-
-
-    showToast(
-        "Task marked as completed"
+const sidebar =
+    document.getElementById(
+        "sidebar"
     );
 
-}
+const overlay =
+    document.getElementById(
+        "overlay"
+    );
+
+const menuBtn =
+    document.getElementById(
+        "menuBtn"
+    );
 
 
+menuBtn.addEventListener(
+    "click",
+    ()=>{
+        sidebar.classList.toggle(
+            "open"
+        );
 
-/* =========================================================
+        overlay.classList.toggle(
+            "show"
+        );
+    }
+);
+
+
+overlay.addEventListener(
+    "click",
+    ()=>{
+        sidebar.classList.remove(
+            "open"
+        );
+
+        overlay.classList.remove(
+            "show"
+        );
+    }
+);
+
+
+/* =====================================================
    SEARCH
-========================================================= */
+===================================================== */
 
 const searchInput =
     document.getElementById(
@@ -2877,64 +3892,157 @@ searchInput.addEventListener(
     "input",
     function(){
 
-        const query =
+        const search =
             this.value
                 .toLowerCase()
                 .trim();
 
 
-        const rows =
-            document.querySelectorAll(
-                "tbody tr"
+        if(!search){
+
+            renderAdmissions();
+
+            return;
+
+        }
+
+
+        const filtered =
+            admissions.filter(
+                admission => {
+
+                    const text =
+                        JSON.stringify(
+                            admission
+                        )
+                        .toLowerCase();
+
+                    return text.includes(
+                        search
+                    );
+
+                }
+            )
+            .slice(0,10);
+
+
+        const tbody =
+            document.getElementById(
+                "admissionTable"
             );
 
 
-        rows.forEach(
-            function(row){
+        if(filtered.length === 0){
 
-                const text =
-                    row.textContent
-                        .toLowerCase();
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="5">
+                        <div class="empty">
+                            No matching record found.
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
 
 
-                if(
-                    text.includes(query)
-                ){
+        tbody.innerHTML =
+            filtered.map(
+                admission => {
 
-                    row.style.display =
-                        "";
+                    const name =
+                        admission.fullName ||
+                        admission.studentName ||
+                        admission.name ||
+                        "Unknown";
 
-                }else{
+                    const course =
+                        admission.course ||
+                        admission.courseName ||
+                        "—";
 
-                    row.style.display =
-                        "none";
+                    const batch =
+                        admission.batch ||
+                        "—";
+
+                    const date =
+                        admission.admissionDate ||
+                        admission.date ||
+                        admission.createdAt;
+
+                    const status =
+                        admission.status ||
+                        admission.admissionStatus ||
+                        "Active";
+
+
+                    return `
+                        <tr>
+
+                            <td>
+
+                                <div class="student-cell">
+
+                                    <div class="student-avatar">
+                                        ${escapeHTML(
+                                            initials(name)
+                                        )}
+                                    </div>
+
+                                    ${escapeHTML(name)}
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                ${escapeHTML(course)}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(batch)}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    formatDate(date)
+                                )}
+                            </td>
+
+                            <td>
+
+                                <span class="badge">
+                                    ${escapeHTML(status)}
+                                </span>
+
+                            </td>
+
+                        </tr>
+                    `;
 
                 }
-
-            }
-        );
+            ).join("");
 
     }
 );
 
 
-/* =========================================================
-   KEYBOARD SHORTCUT
-========================================================= */
+/* =====================================================
+   KEYBOARD SEARCH
+===================================================== */
 
 document.addEventListener(
     "keydown",
-    function(event){
-
-        /*
-          Ctrl + K
-          Focus search
-        */
+    event => {
 
         if(
-            (event.ctrlKey ||
-             event.metaKey)
-            &&
+            (
+                event.ctrlKey ||
+                event.metaKey
+            ) &&
             event.key.toLowerCase()
             === "k"
         ){
@@ -2949,7 +4057,6 @@ document.addEventListener(
 );
 
 </script>
-
 
 </body>
 </html>

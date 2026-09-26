@@ -1,0 +1,3590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlackTerminal - Reports & Analytics</title>
+
+<style>
+:root{
+    --navy:#071426;
+    --navy2:#0d1e34;
+    --blue:#086ee1;
+    --blue2:#18a0ff;
+    --bg:#f4f7fb;
+    --white:#ffffff;
+    --text:#172236;
+    --muted:#738096;
+    --line:#e3e9f1;
+    --green:#16a34a;
+    --orange:#f59e0b;
+    --red:#dc2626;
+    --purple:#7c3aed;
+    --cyan:#0891b2;
+    --shadow:0 8px 25px rgba(18,38,63,.07);
+    --radius:16px;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+button,input,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:255px;
+    background:var(--navy);
+    color:#fff;
+    z-index:1000;
+    overflow-y:auto;
+}
+
+.brand{
+    height:72px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 20px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.brand-logo{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#18a0ff,#086ee1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:16px;
+}
+
+.brand h2{
+    font-size:17px;
+    line-height:1.1;
+}
+
+.brand span{
+    display:block;
+    color:#8fa2bb;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.nav{
+    padding:18px 12px;
+}
+
+.nav-title{
+    color:#6f8199;
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    padding:10px 12px;
+}
+
+.nav a{
+    text-decoration:none;
+    color:#aebdd0;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 13px;
+    border-radius:10px;
+    margin-bottom:4px;
+    font-size:13px;
+    transition:.2s;
+}
+
+.nav a:hover{
+    background:rgba(255,255,255,.06);
+    color:#fff;
+}
+
+.nav a.active{
+    background:linear-gradient(90deg,#086ee1,#0d83ee);
+    color:#fff;
+    box-shadow:0 6px 15px rgba(8,110,225,.25);
+}
+
+.nav-icon{
+    width:20px;
+    text-align:center;
+    font-size:16px;
+}
+
+.main{
+    margin-left:255px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+.top-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.menu-btn{
+    display:none;
+    width:40px;
+    height:40px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:10px;
+}
+
+.search-box{
+    width:310px;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    height:42px;
+    border:1px solid var(--line);
+    border-radius:11px;
+    padding:0 15px 0 40px;
+    outline:none;
+    background:#f8fafc;
+}
+
+.search-box span{
+    position:absolute;
+    left:14px;
+    top:11px;
+    color:#8a97a9;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:10px;
+    position:relative;
+}
+
+.badge-dot{
+    position:absolute;
+    width:7px;
+    height:7px;
+    background:#ef4444;
+    border-radius:50%;
+    top:8px;
+    right:8px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-left:7px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#086ee1,#18a0ff);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    font-size:13px;
+}
+
+.profile-info strong{
+    display:block;
+    font-size:12px;
+}
+
+.profile-info span{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.content{
+    padding:25px 28px 40px;
+}
+
+.page-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:22px;
+}
+
+.page-head h1{
+    font-size:25px;
+    margin-bottom:6px;
+}
+
+.page-head p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.head-actions{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    height:40px;
+    padding:0 15px;
+    font-size:12px;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+}
+
+.btn-primary{
+    background:var(--blue);
+    color:#fff;
+}
+
+.btn-primary:hover{
+    background:#075fc2;
+}
+
+.btn-light{
+    background:#fff;
+    color:var(--text);
+    border:1px solid var(--line);
+}
+
+.btn-green{
+    background:var(--green);
+    color:#fff;
+}
+
+.btn-danger{
+    background:var(--red);
+    color:#fff;
+}
+
+.filters{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px;
+    box-shadow:var(--shadow);
+    margin-bottom:20px;
+}
+
+.filter-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr 1fr auto;
+    gap:12px;
+    align-items:end;
+}
+
+.field label{
+    display:block;
+    font-size:11px;
+    font-weight:700;
+    color:#536174;
+    margin-bottom:6px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    height:40px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:0 11px;
+    outline:none;
+    background:#fff;
+    color:var(--text);
+    font-size:12px;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:var(--blue);
+}
+
+.filter-actions{
+    display:flex;
+    gap:7px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:17px;
+    box-shadow:var(--shadow);
+}
+
+.stat-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.stat-icon{
+    width:39px;
+    height:39px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+}
+
+.i-blue{background:#e8f2ff;color:#086ee1}
+.i-green{background:#eaf8ef;color:#16a34a}
+.i-orange{background:#fff5df;color:#d97706}
+.i-purple{background:#f2eaff;color:#7c3aed}
+.i-cyan{background:#e5f9fc;color:#0891b2}
+
+.stat small{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.stat h2{
+    font-size:23px;
+    margin-top:3px;
+}
+
+.stat .change{
+    font-size:10px;
+    margin-top:7px;
+    color:var(--muted);
+}
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:18px;
+    margin-bottom:18px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+}
+
+.card-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:17px 18px;
+    border-bottom:1px solid var(--line);
+}
+
+.card-head h3{
+    font-size:14px;
+}
+
+.card-head span{
+    font-size:11px;
+    color:var(--muted);
+}
+
+.card-body{
+    padding:18px;
+}
+
+.chart-box{
+    height:270px;
+    position:relative;
+}
+
+canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+.chart-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:12px;
+}
+
+.legend{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.legend-dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+}
+
+.report-tabs{
+    display:flex;
+    gap:6px;
+    overflow:auto;
+    background:#fff;
+    border:1px solid var(--line);
+    padding:7px;
+    border-radius:13px;
+    margin-bottom:18px;
+}
+
+.report-tab{
+    border:0;
+    background:transparent;
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--muted);
+    white-space:nowrap;
+}
+
+.report-tab.active{
+    background:#eaf3ff;
+    color:var(--blue);
+}
+
+.report-section{
+    display:none;
+}
+
+.report-section.active{
+    display:block;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:760px;
+}
+
+th{
+    background:#f8fafc;
+    color:#657286;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    text-align:left;
+    padding:12px 13px;
+    border-bottom:1px solid var(--line);
+}
+
+td{
+    padding:12px 13px;
+    border-bottom:1px solid #edf1f5;
+    font-size:11px;
+    vertical-align:middle;
+}
+
+tr:hover td{
+    background:#fbfdff;
+}
+
+.student-cell{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.mini-avatar{
+    width:32px;
+    height:32px;
+    border-radius:9px;
+    background:#eaf2ff;
+    color:var(--blue);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:800;
+}
+
+.student-cell strong{
+    display:block;
+    font-size:11px;
+}
+
+.student-cell span{
+    display:block;
+    font-size:9px;
+    color:var(--muted);
+    margin-top:2px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:9px;
+    font-weight:800;
+}
+
+.status.green{
+    background:#eaf8ef;
+    color:#15803d;
+}
+
+.status.orange{
+    background:#fff5df;
+    color:#b45309;
+}
+
+.status.red{
+    background:#ffeded;
+    color:#b91c1c;
+}
+
+.status.blue{
+    background:#eaf2ff;
+    color:#075fc2;
+}
+
+.course-bars{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.course-row{
+    display:grid;
+    grid-template-columns:130px 1fr 45px;
+    align-items:center;
+    gap:10px;
+}
+
+.course-name{
+    font-size:11px;
+    font-weight:700;
+}
+
+.bar{
+    height:9px;
+    background:#edf2f7;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.bar span{
+    display:block;
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(90deg,#086ee1,#18a0ff);
+}
+
+.course-count{
+    font-size:10px;
+    color:var(--muted);
+    text-align:right;
+}
+
+.kpi-list{
+    display:grid;
+    gap:11px;
+}
+
+.kpi{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+}
+
+.kpi-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.kpi-icon{
+    width:32px;
+    height:32px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.kpi strong{
+    font-size:12px;
+}
+
+.kpi small{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    margin-top:2px;
+}
+
+.kpi-value{
+    font-size:13px;
+    font-weight:800;
+}
+
+.report-card{
+    margin-bottom:18px;
+}
+
+.empty{
+    padding:45px 20px;
+    text-align:center;
+    color:var(--muted);
+}
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.pagination{
+    display:flex;
+    justify-content:flex-end;
+    gap:5px;
+    padding:14px;
+}
+
+.page-btn{
+    width:32px;
+    height:30px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:7px;
+    font-size:11px;
+}
+
+.page-btn.active{
+    background:var(--blue);
+    color:#fff;
+    border-color:var(--blue);
+}
+
+.toast{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    background:#111c2d;
+    color:#fff;
+    padding:12px 16px;
+    border-radius:10px;
+    font-size:12px;
+    opacity:0;
+    transform:translateY(15px);
+    pointer-events:none;
+    transition:.25s;
+    z-index:5000;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(3,12,25,.5);
+    z-index:1500;
+}
+
+.overlay.show{
+    display:block;
+}
+
+.mobile-sidebar{
+    display:none;
+}
+
+@media(max-width:1100px){
+    .stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .filter-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:800px){
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .search-box{
+        width:220px;
+    }
+
+    .content{
+        padding:18px 15px 30px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .profile-info{
+        display:none;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .page-head{
+        flex-direction:column;
+    }
+
+    .head-actions{
+        width:100%;
+    }
+
+    .head-actions .btn{
+        flex:1;
+    }
+
+    .search-box{
+        display:none;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat{
+        padding:13px;
+    }
+
+    .stat h2{
+        font-size:20px;
+    }
+
+    .filter-grid{
+        grid-template-columns:1fr;
+    }
+
+    .filter-actions{
+        width:100%;
+    }
+
+    .filter-actions .btn{
+        flex:1;
+    }
+
+    .course-row{
+        grid-template-columns:95px 1fr 35px;
+    }
+}
+
+@media(max-width:400px){
+    .stats{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+        <div class="brand-logo">BT</div>
+        <div>
+            <h2>BlackTerminal</h2>
+            <span>Computer Institute</span>
+        </div>
+    </div>
+
+    <nav class="nav">
+
+        <div class="nav-title">Main</div>
+
+        <a href="#" onclick="navigate('Dashboard')">
+            <span class="nav-icon">⌂</span>
+            Dashboard
+        </a>
+
+        <a href="#" onclick="navigate('Students')">
+            <span class="nav-icon">👨‍🎓</span>
+            Students
+        </a>
+
+        <a href="#" onclick="navigate('Admissions')">
+            <span class="nav-icon">📝</span>
+            Admissions
+        </a>
+
+        <a href="#" onclick="navigate('Fees & Payments')">
+            <span class="nav-icon">₹</span>
+            Fees & Payments
+        </a>
+
+        <a href="#" onclick="navigate('Classes & Attendance')">
+            <span class="nav-icon">📅</span>
+            Classes & Attendance
+        </a>
+
+        <div class="nav-title">Management</div>
+
+        <a href="#" onclick="navigate('Communication')">
+            <span class="nav-icon">💬</span>
+            Communication
+        </a>
+
+        <a href="#" onclick="navigate('Tasks')">
+            <span class="nav-icon">✓</span>
+            Tasks
+        </a>
+
+        <a href="#" onclick="navigate('Documents')">
+            <span class="nav-icon">📁</span>
+            Documents
+        </a>
+
+        <a href="#" class="active">
+            <span class="nav-icon">📊</span>
+            Reports & Analytics
+        </a>
+
+        <a href="#" onclick="navigate('Settings')">
+            <span class="nav-icon">⚙</span>
+            Settings
+        </a>
+
+    </nav>
+</aside>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+        <div class="top-left">
+
+            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
+            <div class="search-box">
+                <span>⌕</span>
+                <input
+                    type="text"
+                    id="globalSearch"
+                    placeholder="Search reports..."
+                    oninput="globalSearch()"
+                >
+            </div>
+
+        </div>
+
+        <div class="top-actions">
+
+            <button class="icon-btn" onclick="showToast('No new notifications')">
+                🔔
+                <span class="badge-dot"></span>
+            </button>
+
+            <button class="icon-btn" onclick="showToast('Help Center coming soon')">
+                ?
+            </button>
+
+            <div class="profile">
+                <div class="avatar">AD</div>
+                <div class="profile-info">
+                    <strong>Admin</strong>
+                    <span>Administrator</span>
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- CONTENT -->
+    <section class="content">
+
+        <div class="page-head">
+
+            <div>
+                <h1>Reports & Analytics</h1>
+                <p>BlackTerminal Institute performance, student, fees and attendance analysis.</p>
+            </div>
+
+            <div class="head-actions">
+                <button class="btn btn-light" onclick="printReport()">🖨 Print</button>
+                <button class="btn btn-light" onclick="exportCurrentReport()">⇩ Export CSV</button>
+                <button class="btn btn-primary" onclick="refreshReports()">↻ Refresh</button>
+            </div>
+
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters">
+
+            <div class="filter-grid">
+
+                <div class="field">
+                    <label>Search</label>
+                    <input
+                        type="text"
+                        id="reportSearch"
+                        placeholder="Student / ID / Course..."
+                        oninput="renderAll()"
+                    >
+                </div>
+
+                <div class="field">
+                    <label>From Date</label>
+                    <input type="date" id="fromDate" onchange="renderAll()">
+                </div>
+
+                <div class="field">
+                    <label>To Date</label>
+                    <input type="date" id="toDate" onchange="renderAll()">
+                </div>
+
+                <div class="field">
+                    <label>Course</label>
+                    <select id="courseFilter" onchange="renderAll()">
+                        <option value="">All Courses</option>
+                        <option>PGDCA</option>
+                        <option>Advanced PGDCA</option>
+                        <option>C Language</option>
+                        <option>Java</option>
+                        <option>Python</option>
+                        <option>Tally</option>
+                        <option>Spoken English</option>
+                        <option>Ethical Hacking</option>
+                        <option>OS-CIT</option>
+                    </select>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply</button>
+                    <button class="btn btn-light" onclick="resetFilters()">Reset</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- STATS -->
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-top">
+                    <div class="stat-icon i-blue">👨‍🎓</div>
+                    <small>Students</small>
+                </div>
+                <h2 id="totalStudents">0</h2>
+                <div class="change">Total registered students</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-top">
+                    <div class="stat-icon i-green">📝</div>
+                    <small>Admissions</small>
+                </div>
+                <h2 id="totalAdmissions">0</h2>
+                <div class="change">Admission applications</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-top">
+                    <div class="stat-icon i-orange">₹</div>
+                    <small>Collection</small>
+                </div>
+                <h2 id="totalCollection">₹0</h2>
+                <div class="change">Recorded payments</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-top">
+                    <div class="stat-icon i-purple">📅</div>
+                    <small>Attendance</small>
+                </div>
+                <h2 id="attendanceRate">0%</h2>
+                <div class="change">Overall attendance</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-top">
+                    <div class="stat-icon i-cyan">🎓</div>
+                    <small>Certificates</small>
+                </div>
+                <h2 id="certificatesIssued">0</h2>
+                <div class="change">Certificates issued</div>
+            </div>
+
+        </div>
+
+        <!-- MAIN CHARTS -->
+        <div class="dashboard-grid">
+
+            <div class="card">
+
+                <div class="card-head">
+                    <h3>Monthly Admission & Collection</h3>
+                    <span>Current year</span>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="chart-box">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+
+                    <div class="chart-legend">
+                        <div class="legend">
+                            <span class="legend-dot" style="background:#086ee1"></span>
+                            Admissions
+                        </div>
+
+                        <div class="legend">
+                            <span class="legend-dot" style="background:#16a34a"></span>
+                            Collection
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <div class="card-head">
+                    <h3>Institute KPI</h3>
+                    <span>Overview</span>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="kpi-list">
+
+                        <div class="kpi">
+                            <div class="kpi-left">
+                                <div class="kpi-icon i-blue">👨‍🎓</div>
+                                <div>
+                                    <strong>Active Students</strong>
+                                    <small>Currently enrolled</small>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="activeStudents">0</div>
+                        </div>
+
+                        <div class="kpi">
+                            <div class="kpi-left">
+                                <div class="kpi-icon i-green">✓</div>
+                                <div>
+                                    <strong>Approved Admissions</strong>
+                                    <small>Approved applications</small>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="approvedAdmissions">0</div>
+                        </div>
+
+                        <div class="kpi">
+                            <div class="kpi-left">
+                                <div class="kpi-icon i-orange">₹</div>
+                                <div>
+                                    <strong>Pending Fees</strong>
+                                    <small>Total outstanding</small>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="pendingFees">₹0</div>
+                        </div>
+
+                        <div class="kpi">
+                            <div class="kpi-left">
+                                <div class="kpi-icon i-purple">📜</div>
+                                <div>
+                                    <strong>Certificates</strong>
+                                    <small>Total issued</small>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpiCertificates">0</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TABS -->
+        <div class="report-tabs">
+
+            <button class="report-tab active" onclick="showTab('overview',this)">
+                Overview
+            </button>
+
+            <button class="report-tab" onclick="showTab('students',this)">
+                Student Report
+            </button>
+
+            <button class="report-tab" onclick="showTab('fees',this)">
+                Fees Report
+            </button>
+
+            <button class="report-tab" onclick="showTab('attendance',this)">
+                Attendance Report
+            </button>
+
+            <button class="report-tab" onclick="showTab('admissions',this)">
+                Admission Report
+            </button>
+
+            <button class="report-tab" onclick="showTab('courses',this)">
+                Course Report
+            </button>
+
+        </div>
+
+        <!-- OVERVIEW -->
+        <section class="report-section active" id="overview">
+
+            <div class="dashboard-grid">
+
+                <div class="card report-card">
+
+                    <div class="card-head">
+                        <h3>Course-wise Students</h3>
+                        <span>Enrollment distribution</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="course-bars" id="courseBars"></div>
+                    </div>
+
+                </div>
+
+                <div class="card report-card">
+
+                    <div class="card-head">
+                        <h3>Payment Status</h3>
+                        <span>Fee collection</span>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="kpi-list">
+
+                            <div class="kpi">
+                                <div class="kpi-left">
+                                    <div class="kpi-icon i-green">✓</div>
+                                    <div>
+                                        <strong>Fully Paid</strong>
+                                        <small>Students without due</small>
+                                    </div>
+                                </div>
+                                <div class="kpi-value" id="fullyPaidCount">0</div>
+                            </div>
+
+                            <div class="kpi">
+                                <div class="kpi-left">
+                                    <div class="kpi-icon i-orange">◐</div>
+                                    <div>
+                                        <strong>Partial</strong>
+                                        <small>Students with balance</small>
+                                    </div>
+                                </div>
+                                <div class="kpi-value" id="partialPaidCount">0</div>
+                            </div>
+
+                            <div class="kpi">
+                                <div class="kpi-left">
+                                    <div class="kpi-icon i-red">!</div>
+                                    <div>
+                                        <strong>No Payment</strong>
+                                        <small>Pending payment</small>
+                                    </div>
+                                </div>
+                                <div class="kpi-value" id="noPaymentCount">0</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card report-card">
+
+                <div class="card-head">
+                    <h3>Recent Student Activity</h3>
+                    <span id="overviewCount">0 records</span>
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Admission Date</th>
+                                <th>Fees</th>
+                                <th>Paid</th>
+                                <th>Balance</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="overviewTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- STUDENTS -->
+        <section class="report-section" id="students">
+
+            <div class="card report-card">
+
+                <div class="card-head">
+                    <h3>Student Detailed Report</h3>
+                    <span id="studentReportCount">0 students</span>
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Batch</th>
+                                <th>Admission</th>
+                                <th>Total Fees</th>
+                                <th>Paid</th>
+                                <th>Due</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="studentReportTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FEES -->
+        <section class="report-section" id="fees">
+
+            <div class="stats">
+
+                <div class="stat">
+                    <div class="stat-top">
+                        <div class="stat-icon i-green">₹</div>
+                        <small>Total Paid</small>
+                    </div>
+                    <h2 id="feesPaid">₹0</h2>
+                    <div class="change">Collected amount</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-top">
+                        <div class="stat-icon i-orange">₹</div>
+                        <small>Total Due</small>
+                    </div>
+                    <h2 id="feesDue">₹0</h2>
+                    <div class="change">Outstanding balance</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-top">
+                        <div class="stat-icon i-blue">↕</div>
+                        <small>Transactions</small>
+                    </div>
+                    <h2 id="paymentTransactions">0</h2>
+                    <div class="change">Payment records</div>
+                </div>
+
+            </div>
+
+            <div class="card report-card">
+
+                <div class="card-head">
+                    <h3>Fee Collection Report</h3>
+                    <span>Student-wise</span>
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Total Fees</th>
+                                <th>Total Paid</th>
+                                <th>Due</th>
+                                <th>Payment %</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="feesReportTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ATTENDANCE -->
+        <section class="report-section" id="attendance">
+
+            <div class="stats">
+
+                <div class="stat">
+                    <div class="stat-top">
+                        <div class="stat-icon i-green">✓</div>
+                        <small>Present</small>
+                    </div>
+                    <h2 id="presentCount">0</h2>
+                    <div class="change">Attendance present</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-top">
+                        <div class="stat-icon i-red">✕</div>
+                        <small>Absent</small>
+                    </div>
+                    <h2 id="absentCount">0</h2>
+                    <div class="change">Attendance absent</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-top">
+                        <div class="stat-icon i-orange">◐</div>
+                        <small>Late</small>
+                    </div>
+                    <h2 id="lateCount">0</h2>
+                    <div class="change">Late attendance</div>
+                </div>
+
+            </div>
+
+            <div class="card report-card">
+
+                <div class="card-head">
+                    <h3>Student Attendance Report</h3>
+                    <span>Attendance percentage</span>
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Total Classes</th>
+                                <th>Present</th>
+                                <th>Absent</th>
+                                <th>Late</th>
+                                <th>Attendance %</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="attendanceReportTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ADMISSIONS -->
+        <section class="report-section" id="admissions">
+
+            <div class="card report-card">
+
+                <div class="card-head">
+                    <h3>Admission Analysis</h3>
+                    <span>Application status</span>
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Admission ID</th>
+                                <th>Applicant</th>
+                                <th>Course</th>
+                                <th>Date</th>
+                                <th>Fees</th>
+                                <th>Paid</th>
+                                <th>Status</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="admissionReportTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- COURSES -->
+        <section class="report-section" id="courses">
+
+            <div class="card report-card">
+
+                <div class="card-head">
+                    <h3>Course Performance Report</h3>
+                    <span>Course-wise analysis</span>
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th>Students</th>
+                                <th>Active</th>
+                                <th>Total Fees</th>
+                                <th>Collected</th>
+                                <th>Due</th>
+                                <th>Collection %</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="courseReportTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* =========================================================
+   BLACKTERMINAL REPORTS & ANALYTICS
+   LocalStorage Based
+========================================================= */
+
+const STORAGE = {
+    students: "blackterminal_students",
+    admissions: "blackterminal_admissions",
+    payments: "blackterminal_payments",
+    attendance: "blackterminal_attendance",
+    classes: "blackterminal_classes",
+    certificates: "blackterminal_certificates"
+};
+
+/* ------------------------------
+   DEMO DATA
+------------------------------ */
+
+const demoStudents = [
+    {
+        id:"BT2026-001",
+        name:"Rahul Das",
+        mobile:"9876543210",
+        course:"PGDCA",
+        batch:"Morning 7-8",
+        totalFees:6000,
+        paid:4000,
+        admissionDate:"2026-09-02",
+        status:"Active"
+    },
+    {
+        id:"BT2026-002",
+        name:"Priya Singh",
+        mobile:"9876543211",
+        course:"Python",
+        batch:"Morning 8-9",
+        totalFees:6000,
+        paid:6000,
+        admissionDate:"2026-09-04",
+        status:"Active"
+    },
+    {
+        id:"BT2026-003",
+        name:"Amit Sahu",
+        mobile:"9876543212",
+        course:"Java",
+        batch:"Evening 3-4",
+        totalFees:5000,
+        paid:2500,
+        admissionDate:"2026-09-05",
+        status:"Active"
+    },
+    {
+        id:"BT2026-004",
+        name:"Suman Behera",
+        mobile:"9876543213",
+        course:"Tally",
+        batch:"Morning 7-8",
+        totalFees:4000,
+        paid:4000,
+        admissionDate:"2026-09-07",
+        status:"Active"
+    },
+    {
+        id:"BT2026-005",
+        name:"Anita Mohanty",
+        mobile:"9876543214",
+        course:"Advanced PGDCA",
+        batch:"Morning 8-9",
+        totalFees:6500,
+        paid:3000,
+        admissionDate:"2026-09-08",
+        status:"Active"
+    },
+    {
+        id:"BT2026-006",
+        name:"Rakesh Nayak",
+        mobile:"9876543215",
+        course:"C Language",
+        batch:"Evening 3-4",
+        totalFees:4000,
+        paid:0,
+        admissionDate:"2026-09-10",
+        status:"Active"
+    },
+    {
+        id:"BT2026-007",
+        name:"Neha Das",
+        mobile:"9876543216",
+        course:"Spoken English",
+        batch:"Morning 7-8",
+        totalFees:1200,
+        paid:1200,
+        admissionDate:"2026-09-11",
+        status:"Completed"
+    },
+    {
+        id:"BT2026-008",
+        name:"Bikram Patra",
+        mobile:"9876543217",
+        course:"PGDCA",
+        batch:"Evening 3-4",
+        totalFees:6000,
+        paid:3000,
+        admissionDate:"2026-09-13",
+        status:"Active"
+    }
+];
+
+const demoAdmissions = [
+    {
+        id:"ADM2026-001",
+        name:"Rahul Das",
+        course:"PGDCA",
+        admissionDate:"2026-09-02",
+        totalFees:6000,
+        paid:4000,
+        status:"Approved",
+        source:"Walk-in"
+    },
+    {
+        id:"ADM2026-002",
+        name:"Priya Singh",
+        course:"Python",
+        admissionDate:"2026-09-04",
+        totalFees:6000,
+        paid:6000,
+        status:"Approved",
+        source:"WhatsApp"
+    },
+    {
+        id:"ADM2026-003",
+        name:"Amit Sahu",
+        course:"Java",
+        admissionDate:"2026-09-05",
+        totalFees:5000,
+        paid:2500,
+        status:"Approved",
+        source:"Reference"
+    },
+    {
+        id:"ADM2026-004",
+        name:"Suman Behera",
+        course:"Tally",
+        admissionDate:"2026-09-07",
+        totalFees:4000,
+        paid:4000,
+        status:"Approved",
+        source:"Walk-in"
+    },
+    {
+        id:"ADM2026-005",
+        name:"Anita Mohanty",
+        course:"Advanced PGDCA",
+        admissionDate:"2026-09-08",
+        totalFees:6500,
+        paid:3000,
+        status:"Pending",
+        source:"Instagram"
+    },
+    {
+        id:"ADM2026-006",
+        name:"Rakesh Nayak",
+        course:"C Language",
+        admissionDate:"2026-09-10",
+        totalFees:4000,
+        paid:0,
+        status:"Pending",
+        source:"Facebook"
+    }
+];
+
+const demoPayments = [
+    {
+        id:"PAY2026-001",
+        receiptNo:"BT-RCP-2026-001",
+        studentId:"BT2026-001",
+        studentName:"Rahul Das",
+        course:"PGDCA",
+        totalFees:6000,
+        amount:2000,
+        paymentDate:"2026-09-02",
+        mode:"Cash"
+    },
+    {
+        id:"PAY2026-002",
+        receiptNo:"BT-RCP-2026-002",
+        studentId:"BT2026-001",
+        studentName:"Rahul Das",
+        course:"PGDCA",
+        totalFees:6000,
+        amount:2000,
+        paymentDate:"2026-09-15",
+        mode:"UPI"
+    },
+    {
+        id:"PAY2026-003",
+        receiptNo:"BT-RCP-2026-003",
+        studentId:"BT2026-002",
+        studentName:"Priya Singh",
+        course:"Python",
+        totalFees:6000,
+        amount:6000,
+        paymentDate:"2026-09-04",
+        mode:"UPI"
+    },
+    {
+        id:"PAY2026-004",
+        receiptNo:"BT-RCP-2026-004",
+        studentId:"BT2026-003",
+        studentName:"Amit Sahu",
+        course:"Java",
+        totalFees:5000,
+        amount:2500,
+        paymentDate:"2026-09-05",
+        mode:"Cash"
+    },
+    {
+        id:"PAY2026-005",
+        receiptNo:"BT-RCP-2026-005",
+        studentId:"BT2026-004",
+        studentName:"Suman Behera",
+        course:"Tally",
+        totalFees:4000,
+        amount:4000,
+        paymentDate:"2026-09-07",
+        mode:"UPI"
+    },
+    {
+        id:"PAY2026-006",
+        receiptNo:"BT-RCP-2026-006",
+        studentId:"BT2026-005",
+        studentName:"Anita Mohanty",
+        course:"Advanced PGDCA",
+        totalFees:6500,
+        amount:3000,
+        paymentDate:"2026-09-08",
+        mode:"Card"
+    }
+];
+
+const demoAttendance = [
+    {studentId:"BT2026-001",studentName:"Rahul Das",course:"PGDCA",status:"Present",date:"2026-09-22"},
+    {studentId:"BT2026-001",studentName:"Rahul Das",course:"PGDCA",status:"Present",date:"2026-09-23"},
+    {studentId:"BT2026-001",studentName:"Rahul Das",course:"PGDCA",status:"Absent",date:"2026-09-24"},
+    {studentId:"BT2026-002",studentName:"Priya Singh",course:"Python",status:"Present",date:"2026-09-22"},
+    {studentId:"BT2026-002",studentName:"Priya Singh",course:"Python",status:"Present",date:"2026-09-23"},
+    {studentId:"BT2026-002",studentName:"Priya Singh",course:"Python",status:"Late",date:"2026-09-24"},
+    {studentId:"BT2026-003",studentName:"Amit Sahu",course:"Java",status:"Present",date:"2026-09-22"},
+    {studentId:"BT2026-003",studentName:"Amit Sahu",course:"Java",status:"Absent",date:"2026-09-23"},
+    {studentId:"BT2026-004",studentName:"Suman Behera",course:"Tally",status:"Present",date:"2026-09-22"},
+    {studentId:"BT2026-004",studentName:"Suman Behera",course:"Tally",status:"Present",date:"2026-09-23"},
+    {studentId:"BT2026-005",studentName:"Anita Mohanty",course:"Advanced PGDCA",status:"Present",date:"2026-09-22"},
+    {studentId:"BT2026-005",studentName:"Anita Mohanty",course:"Advanced PGDCA",status:"Absent",date:"2026-09-23"},
+    {studentId:"BT2026-006",studentName:"Rakesh Nayak",course:"C Language",status:"Present",date:"2026-09-22"},
+    {studentId:"BT2026-006",studentName:"Rakesh Nayak",course:"C Language",status:"Present",date:"2026-09-23"}
+];
+
+/* ------------------------------
+   STORAGE HELPERS
+------------------------------ */
+
+function getData(key,fallback=[]){
+
+    try{
+
+        const data = localStorage.getItem(key);
+
+        if(data){
+            const parsed = JSON.parse(data);
+
+            if(Array.isArray(parsed)){
+                return parsed;
+            }
+        }
+
+    }catch(error){
+        console.error(error);
+    }
+
+    return fallback;
+}
+
+function getStudents(){
+    return getData(STORAGE.students,demoStudents);
+}
+
+function getAdmissions(){
+    return getData(STORAGE.admissions,demoAdmissions);
+}
+
+function getPayments(){
+    return getData(STORAGE.payments,demoPayments);
+}
+
+function getAttendance(){
+    return getData(STORAGE.attendance,demoAttendance);
+}
+
+function getCertificates(){
+    return getData(STORAGE.certificates,[]);
+}
+
+/* ------------------------------
+   HELPERS
+------------------------------ */
+
+function money(value){
+    return "₹" + Number(value || 0).toLocaleString("en-IN");
+}
+
+function initials(name){
+    return String(name || "")
+        .split(" ")
+        .map(x => x[0])
+        .join("")
+        .substring(0,2)
+        .toUpperCase();
+}
+
+function formatDate(date){
+
+    if(!date) return "-";
+
+    const d = new Date(date);
+
+    if(isNaN(d.getTime())) return date;
+
+    return d.toLocaleDateString("en-IN",{
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+    });
+}
+
+function getDue(student){
+
+    const total = Number(student.totalFees || 0);
+
+    let paid = Number(student.paid || 0);
+
+    const payments = getPayments().filter(p =>
+        String(p.studentId || "") === String(student.id || "")
+    );
+
+    if(payments.length){
+
+        paid = payments.reduce((sum,p) =>
+            sum + Number(p.amount || p.paidNow || 0),0
+        );
+
+    }
+
+    return Math.max(0,total-paid);
+}
+
+function getPaid(student){
+
+    const payments = getPayments().filter(p =>
+        String(p.studentId || "") === String(student.id || "")
+    );
+
+    if(payments.length){
+
+        return payments.reduce((sum,p) =>
+            sum + Number(p.amount || p.paidNow || 0),0
+        );
+
+    }
+
+    return Number(student.paid || 0);
+}
+
+function statusClass(status){
+
+    const s = String(status || "").toLowerCase();
+
+    if(
+        s.includes("active") ||
+        s.includes("approved") ||
+        s.includes("paid") ||
+        s.includes("present") ||
+        s.includes("completed")
+    ){
+        return "green";
+    }
+
+    if(
+        s.includes("pending") ||
+        s.includes("partial") ||
+        s.includes("late")
+    ){
+        return "orange";
+    }
+
+    if(
+        s.includes("absent") ||
+        s.includes("rejected") ||
+        s.includes("cancel")
+    ){
+        return "red";
+    }
+
+    return "blue";
+}
+
+function filterByDate(date){
+
+    const from = document.getElementById("fromDate").value;
+    const to = document.getElementById("toDate").value;
+
+    if(!date) return true;
+
+    if(from && date < from) return false;
+
+    if(to && date > to) return false;
+
+    return true;
+}
+
+function matchesSearch(item){
+
+    const q = document.getElementById("reportSearch").value
+        .trim()
+        .toLowerCase();
+
+    if(!q) return true;
+
+    const text = JSON.stringify(item).toLowerCase();
+
+    return text.includes(q);
+}
+
+function matchesCourse(item){
+
+    const course = document.getElementById("courseFilter").value;
+
+    if(!course) return true;
+
+    return String(item.course || "")
+        .toLowerCase() === course.toLowerCase();
+}
+
+function filteredStudents(){
+
+    return getStudents().filter(s =>
+        matchesSearch(s) &&
+        matchesCourse(s) &&
+        filterByDate(s.admissionDate)
+    );
+}
+
+function filteredAdmissions(){
+
+    return getAdmissions().filter(a =>
+        matchesSearch(a) &&
+        matchesCourse(a) &&
+        filterByDate(a.admissionDate)
+    );
+}
+
+function filteredPayments(){
+
+    return getPayments().filter(p =>
+        matchesSearch(p) &&
+        matchesCourse(p) &&
+        filterByDate(p.paymentDate)
+    );
+}
+
+function filteredAttendance(){
+
+    return getAttendance().filter(a =>
+        matchesSearch(a) &&
+        matchesCourse(a) &&
+        filterByDate(a.date)
+    );
+}
+
+/* ------------------------------
+   MAIN REPORT
+------------------------------ */
+
+function renderStats(){
+
+    const students = filteredStudents();
+    const admissions = filteredAdmissions();
+    const payments = filteredPayments();
+    const attendance = filteredAttendance();
+    const certificates = getCertificates();
+
+    document.getElementById("totalStudents").textContent =
+        students.length;
+
+    document.getElementById("totalAdmissions").textContent =
+        admissions.length;
+
+    const collection = payments.reduce(
+        (sum,p)=>sum + Number(p.amount || p.paidNow || 0),
+        0
+    );
+
+    document.getElementById("totalCollection").textContent =
+        money(collection);
+
+    const present = attendance.filter(a =>
+        String(a.status).toLowerCase() === "present"
+    ).length;
+
+    const attendanceTotal = attendance.length;
+
+    const rate = attendanceTotal
+        ? Math.round((present / attendanceTotal) * 100)
+        : 0;
+
+    document.getElementById("attendanceRate").textContent =
+        rate + "%";
+
+    document.getElementById("certificatesIssued").textContent =
+        certificates.length;
+
+    document.getElementById("kpiCertificates").textContent =
+        certificates.length;
+
+    const active = students.filter(s =>
+        String(s.status).toLowerCase() === "active"
+    ).length;
+
+    document.getElementById("activeStudents").textContent =
+        active;
+
+    const approved = admissions.filter(a =>
+        String(a.status).toLowerCase() === "approved"
+    ).length;
+
+    document.getElementById("approvedAdmissions").textContent =
+        approved;
+
+    let totalDue = 0;
+
+    students.forEach(s=>{
+        totalDue += getDue(s);
+    });
+
+    document.getElementById("pendingFees").textContent =
+        money(totalDue);
+
+    const fullyPaid = students.filter(s =>
+        getDue(s) <= 0
+    ).length;
+
+    const partial = students.filter(s =>
+        getPaid(s) > 0 && getDue(s) > 0
+    ).length;
+
+    const noPayment = students.filter(s =>
+        getPaid(s) <= 0
+    ).length;
+
+    document.getElementById("fullyPaidCount").textContent =
+        fullyPaid;
+
+    document.getElementById("partialPaidCount").textContent =
+        partial;
+
+    document.getElementById("noPaymentCount").textContent =
+        noPayment;
+}
+
+/* ------------------------------
+   OVERVIEW
+------------------------------ */
+
+function renderOverview(){
+
+    const students = filteredStudents();
+
+    const recent = [...students]
+        .sort((a,b)=>
+            String(b.admissionDate || "")
+            .localeCompare(String(a.admissionDate || ""))
+        )
+        .slice(0,10);
+
+    const tbody = document.getElementById("overviewTable");
+
+    document.getElementById("overviewCount").textContent =
+        students.length + " records";
+
+    if(!recent.length){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="7">
+                    <div class="empty">
+                        <div class="empty-icon">📊</div>
+                        No student data available
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    tbody.innerHTML = recent.map(s=>{
+
+        const total = Number(s.totalFees || 0);
+        const paid = getPaid(s);
+        const due = Math.max(0,total-paid);
+
+        let status = "Paid";
+
+        if(due > 0 && paid > 0){
+            status = "Partial";
+        }
+
+        if(paid <= 0){
+            status = "Pending";
+        }
+
+        return `
+            <tr>
+
+                <td>
+                    <div class="student-cell">
+                        <div class="mini-avatar">
+                            ${initials(s.name)}
+                        </div>
+
+                        <div>
+                            <strong>${escapeHtml(s.name)}</strong>
+                            <span>${escapeHtml(s.id)}</span>
+                        </div>
+                    </div>
+                </td>
+
+                <td>${escapeHtml(s.course || "-")}</td>
+
+                <td>${formatDate(s.admissionDate)}</td>
+
+                <td>${money(total)}</td>
+
+                <td>${money(paid)}</td>
+
+                <td>${money(due)}</td>
+
+                <td>
+                    <span class="status ${statusClass(status)}">
+                        ${status}
+                    </span>
+                </td>
+
+            </tr>
+        `;
+
+    }).join("");
+}
+
+/* ------------------------------
+   COURSE BARS
+------------------------------ */
+
+function renderCourseBars(){
+
+    const students = filteredStudents();
+
+    const counts = {};
+
+    students.forEach(s=>{
+        const course = s.course || "Other";
+
+        counts[course] = (counts[course] || 0) + 1;
+    });
+
+    const sorted = Object.entries(counts)
+        .sort((a,b)=>b[1]-a[1]);
+
+    const max = sorted.length
+        ? sorted[0][1]
+        : 1;
+
+    const box = document.getElementById("courseBars");
+
+    if(!sorted.length){
+
+        box.innerHTML = `
+            <div class="empty">
+                No course data available
+            </div>
+        `;
+
+        return;
+    }
+
+    box.innerHTML = sorted.map(([course,count])=>{
+
+        const percent = Math.round((count/max)*100);
+
+        return `
+            <div class="course-row">
+
+                <div class="course-name">
+                    ${escapeHtml(course)}
+                </div>
+
+                <div class="bar">
+                    <span style="width:${percent}%"></span>
+                </div>
+
+                <div class="course-count">
+                    ${count}
+                </div>
+
+            </div>
+        `;
+
+    }).join("");
+}
+
+/* ------------------------------
+   STUDENT REPORT
+------------------------------ */
+
+function renderStudentReport(){
+
+    const students = filteredStudents();
+
+    document.getElementById("studentReportCount").textContent =
+        students.length + " students";
+
+    const tbody = document.getElementById("studentReportTable");
+
+    if(!students.length){
+
+        tbody.innerHTML = emptyRow(8,"No student records found");
+
+        return;
+    }
+
+    tbody.innerHTML = students.map(s=>{
+
+        const total = Number(s.totalFees || 0);
+        const paid = getPaid(s);
+        const due = Math.max(0,total-paid);
+
+        return `
+            <tr>
+
+                <td>
+                    <div class="student-cell">
+
+                        <div class="mini-avatar">
+                            ${initials(s.name)}
+                        </div>
+
+                        <div>
+                            <strong>${escapeHtml(s.name)}</strong>
+                            <span>${escapeHtml(s.id)}</span>
+                        </div>
+
+                    </div>
+                </td>
+
+                <td>${escapeHtml(s.course || "-")}</td>
+
+                <td>${escapeHtml(s.batch || "-")}</td>
+
+                <td>${formatDate(s.admissionDate)}</td>
+
+                <td>${money(total)}</td>
+
+                <td>${money(paid)}</td>
+
+                <td>${money(due)}</td>
+
+                <td>
+                    <span class="status ${statusClass(s.status)}">
+                        ${escapeHtml(s.status || "Active")}
+                    </span>
+                </td>
+
+            </tr>
+        `;
+
+    }).join("");
+}
+
+/* ------------------------------
+   FEES REPORT
+------------------------------ */
+
+function renderFeesReport(){
+
+    const students = filteredStudents();
+    const payments = filteredPayments();
+
+    const totalPaid = payments.reduce(
+        (sum,p)=>sum + Number(p.amount || p.paidNow || 0),
+        0
+    );
+
+    let totalFees = 0;
+    let totalDue = 0;
+
+    students.forEach(s=>{
+        totalFees += Number(s.totalFees || 0);
+        totalDue += getDue(s);
+    });
+
+    document.getElementById("feesPaid").textContent =
+        money(totalPaid);
+
+    document.getElementById("feesDue").textContent =
+        money(totalDue);
+
+    document.getElementById("paymentTransactions").textContent =
+        payments.length;
+
+    const tbody = document.getElementById("feesReportTable");
+
+    if(!students.length){
+
+        tbody.innerHTML = emptyRow(7,"No fee records found");
+
+        return;
+    }
+
+    tbody.innerHTML = students.map(s=>{
+
+        const total = Number(s.totalFees || 0);
+        const paid = getPaid(s);
+        const due = Math.max(0,total-paid);
+
+        const percent = total
+            ? Math.min(100,Math.round((paid/total)*100))
+            : 0;
+
+        let status = "Pending";
+
+        if(due <= 0){
+            status = "Paid";
+        }else if(paid > 0){
+            status = "Partial";
+        }
+
+        return `
+            <tr>
+
+                <td>
+                    <div class="student-cell">
+
+                        <div class="mini-avatar">
+                            ${initials(s.name)}
+                        </div>
+
+                        <div>
+                            <strong>${escapeHtml(s.name)}</strong>
+                            <span>${escapeHtml(s.id)}</span>
+                        </div>
+
+                    </div>
+                </td>
+
+                <td>${escapeHtml(s.course || "-")}</td>
+
+                <td>${money(total)}</td>
+
+                <td>${money(paid)}</td>
+
+                <td>${money(due)}</td>
+
+                <td>${percent}%</td>
+
+                <td>
+                    <span class="status ${statusClass(status)}">
+                        ${status}
+                    </span>
+                </td>
+
+            </tr>
+        `;
+
+    }).join("");
+}
+
+/* ------------------------------
+   ATTENDANCE REPORT
+------------------------------ */
+
+function renderAttendanceReport(){
+
+    const attendance = filteredAttendance();
+
+    let present = 0;
+    let absent = 0;
+    let late = 0;
+
+    attendance.forEach(a=>{
+
+        const status = String(a.status || "").toLowerCase();
+
+        if(status === "present") present++;
+        if(status === "absent") absent++;
+        if(status === "late") late++;
+
+    });
+
+    document.getElementById("presentCount").textContent =
+        present;
+
+    document.getElementById("absentCount").textContent =
+        absent;
+
+    document.getElementById("lateCount").textContent =
+        late;
+
+    const map = {};
+
+    attendance.forEach(a=>{
+
+        const id = a.studentId || a.studentName;
+
+        if(!map[id]){
+
+            map[id] = {
+                id:a.studentId || "",
+                name:a.studentName || "Unknown",
+                course:a.course || "",
+                total:0,
+                present:0,
+                absent:0,
+                late:0
+            };
+
+        }
+
+        map[id].total++;
+
+        const status = String(a.status || "").toLowerCase();
+
+        if(status === "present") map[id].present++;
+        if(status === "absent") map[id].absent++;
+        if(status === "late") map[id].late++;
+
+    });
+
+    const tbody = document.getElementById("attendanceReportTable");
+
+    const rows = Object.values(map);
+
+    if(!rows.length){
+
+        tbody.innerHTML = emptyRow(7,"No attendance records found");
+
+        return;
+    }
+
+    tbody.innerHTML = rows.map(r=>{
+
+        const percent = r.total
+            ? Math.round((r.present/r.total)*100)
+            : 0;
+
+        return `
+            <tr>
+
+                <td>
+                    <div class="student-cell">
+
+                        <div class="mini-avatar">
+                            ${initials(r.name)}
+                        </div>
+
+                        <div>
+                            <strong>${escapeHtml(r.name)}</strong>
+                            <span>${escapeHtml(r.id)}</span>
+                        </div>
+
+                    </div>
+                </td>
+
+                <td>${escapeHtml(r.course || "-")}</td>
+
+                <td>${r.total}</td>
+
+                <td>${r.present}</td>
+
+                <td>${r.absent}</td>
+
+                <td>${r.late}</td>
+
+                <td>
+                    <span class="status ${
+                        percent >= 75
+                        ? "green"
+                        : percent >= 60
+                        ? "orange"
+                        : "red"
+                    }">
+                        ${percent}%
+                    </span>
+                </td>
+
+            </tr>
+        `;
+
+    }).join("");
+}
+
+/* ------------------------------
+   ADMISSION REPORT
+------------------------------ */
+
+function renderAdmissionReport(){
+
+    const admissions = filteredAdmissions();
+
+    const tbody = document.getElementById("admissionReportTable");
+
+    if(!admissions.length){
+
+        tbody.innerHTML = emptyRow(8,"No admission records found");
+
+        return;
+    }
+
+    tbody.innerHTML = admissions.map(a=>{
+
+        return `
+            <tr>
+
+                <td>
+                    <strong>${escapeHtml(a.id || "-")}</strong>
+                </td>
+
+                <td>
+                    <div class="student-cell">
+
+                        <div class="mini-avatar">
+                            ${initials(a.name)}
+                        </div>
+
+                        <div>
+                            <strong>${escapeHtml(a.name)}</strong>
+                        </div>
+
+                    </div>
+                </td>
+
+                <td>${escapeHtml(a.course || "-")}</td>
+
+                <td>${formatDate(a.admissionDate)}</td>
+
+                <td>${money(a.totalFees)}</td>
+
+                <td>${money(a.paid)}</td>
+
+                <td>
+                    <span class="status ${statusClass(a.status)}">
+                        ${escapeHtml(a.status || "Pending")}
+                    </span>
+                </td>
+
+                <td>${escapeHtml(a.source || "-")}</td>
+
+            </tr>
+        `;
+
+    }).join("");
+}
+
+/* ------------------------------
+   COURSE REPORT
+------------------------------ */
+
+function renderCourseReport(){
+
+    const students = filteredStudents();
+
+    const courses = {};
+
+    students.forEach(s=>{
+
+        const course = s.course || "Other";
+
+        if(!courses[course]){
+
+            courses[course] = {
+                students:0,
+                active:0,
+                fees:0,
+                paid:0,
+                due:0
+            };
+
+        }
+
+        courses[course].students++;
+
+        if(String(s.status).toLowerCase() === "active"){
+            courses[course].active++;
+        }
+
+        courses[course].fees += Number(s.totalFees || 0);
+        courses[course].paid += getPaid(s);
+        courses[course].due += getDue(s);
+
+    });
+
+    const tbody = document.getElementById("courseReportTable");
+
+    const rows = Object.entries(courses);
+
+    if(!rows.length){
+
+        tbody.innerHTML = emptyRow(7,"No course data found");
+
+        return;
+    }
+
+    tbody.innerHTML = rows.map(([course,r])=>{
+
+        const percent = r.fees
+            ? Math.round((r.paid/r.fees)*100)
+            : 0;
+
+        return `
+            <tr>
+
+                <td>
+                    <strong>${escapeHtml(course)}</strong>
+                </td>
+
+                <td>${r.students}</td>
+
+                <td>${r.active}</td>
+
+                <td>${money(r.fees)}</td>
+
+                <td>${money(r.paid)}</td>
+
+                <td>${money(r.due)}</td>
+
+                <td>
+                    <span class="status ${
+                        percent >= 75
+                        ? "green"
+                        : percent >= 40
+                        ? "orange"
+                        : "red"
+                    }">
+                        ${percent}%
+                    </span>
+                </td>
+
+            </tr>
+        `;
+
+    }).join("");
+}
+
+/* ------------------------------
+   MONTHLY CHART
+------------------------------ */
+
+function drawMonthlyChart(){
+
+    const canvas = document.getElementById("monthlyChart");
+
+    if(!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    const rect = canvas.getBoundingClientRect();
+
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    ctx.scale(dpr,dpr);
+
+    const width = rect.width;
+    const height = rect.height;
+
+    ctx.clearRect(0,0,width,height);
+
+    const months = [
+        "Jan","Feb","Mar","Apr","May","Jun",
+        "Jul","Aug","Sep","Oct","Nov","Dec"
+    ];
+
+    const currentYear = new Date().getFullYear();
+
+    const admissions = new Array(12).fill(0);
+    const collections = new Array(12).fill(0);
+
+    getAdmissions().forEach(a=>{
+
+        if(!a.admissionDate) return;
+
+        const date = new Date(a.admissionDate);
+
+        if(date.getFullYear() === currentYear){
+
+            admissions[date.getMonth()]++;
+        }
+
+    });
+
+    getPayments().forEach(p=>{
+
+        if(!p.paymentDate) return;
+
+        const date = new Date(p.paymentDate);
+
+        if(date.getFullYear() === currentYear){
+
+            collections[date.getMonth()] +=
+                Number(p.amount || p.paidNow || 0);
+        }
+
+    });
+
+    const maxAdmission = Math.max(...admissions,1);
+
+    const maxCollection = Math.max(...collections,1);
+
+    const left = 40;
+    const right = 20;
+    const top = 20;
+    const bottom = 35;
+
+    const chartW = width-left-right;
+    const chartH = height-top-bottom;
+
+    /* grid */
+
+    ctx.strokeStyle = "#e9eef4";
+    ctx.lineWidth = 1;
+
+    for(let i=0;i<5;i++){
+
+        const y = top + chartH*(i/4);
+
+        ctx.beginPath();
+        ctx.moveTo(left,y);
+        ctx.lineTo(width-right,y);
+        ctx.stroke();
+
+    }
+
+    /* admission bars */
+
+    const groupWidth = chartW / 12;
+
+    admissions.forEach((value,index)=>{
+
+        const barHeight =
+            (value/maxAdmission)*(chartH-10);
+
+        const x =
+            left + groupWidth*index + groupWidth*.25;
+
+        const y =
+            top + chartH - barHeight;
+
+        ctx.fillStyle = "#086ee1";
+
+        ctx.fillRect(
+            x,
+            y,
+            groupWidth*.22,
+            barHeight
+        );
+
+    });
+
+    /* collection line */
+
+    ctx.strokeStyle = "#16a34a";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+
+    collections.forEach((value,index)=>{
+
+        const x =
+            left + groupWidth*index + groupWidth*.5;
+
+        const y =
+            top + chartH -
+            (value/maxCollection)*(chartH-10);
+
+        if(index === 0){
+            ctx.moveTo(x,y);
+        }else{
+            ctx.lineTo(x,y);
+        }
+
+    });
+
+    ctx.stroke();
+
+    /* points */
+
+    collections.forEach((value,index)=>{
+
+        const x =
+            left + groupWidth*index + groupWidth*.5;
+
+        const y =
+            top + chartH -
+            (value/maxCollection)*(chartH-10);
+
+        ctx.fillStyle = "#16a34a";
+
+        ctx.beginPath();
+        ctx.arc(x,y,4,0,Math.PI*2);
+        ctx.fill();
+
+    });
+
+    /* labels */
+
+    ctx.fillStyle = "#7b8798";
+    ctx.font = "10px Arial";
+    ctx.textAlign = "center";
+
+    months.forEach((month,index)=>{
+
+        const x =
+            left + groupWidth*index + groupWidth*.5;
+
+        ctx.fillText(
+            month,
+            x,
+            height-12
+        );
+
+    });
+
+}
+
+/* ------------------------------
+   TABS
+------------------------------ */
+
+function showTab(tab,button){
+
+    document.querySelectorAll(".report-section")
+        .forEach(section=>{
+            section.classList.remove("active");
+        });
+
+    document.getElementById(tab)
+        .classList.add("active");
+
+    document.querySelectorAll(".report-tab")
+        .forEach(btn=>{
+            btn.classList.remove("active");
+        });
+
+    button.classList.add("active");
+
+    setTimeout(drawMonthlyChart,100);
+}
+
+/* ------------------------------
+   RENDER ALL
+------------------------------ */
+
+function renderAll(){
+
+    renderStats();
+    renderOverview();
+    renderCourseBars();
+    renderStudentReport();
+    renderFeesReport();
+    renderAttendanceReport();
+    renderAdmissionReport();
+    renderCourseReport();
+
+    drawMonthlyChart();
+}
+
+/* ------------------------------
+   FILTERS
+------------------------------ */
+
+function applyFilters(){
+
+    renderAll();
+
+    showToast("Report filters applied");
+}
+
+function resetFilters(){
+
+    document.getElementById("reportSearch").value = "";
+    document.getElementById("fromDate").value = "";
+    document.getElementById("toDate").value = "";
+    document.getElementById("courseFilter").value = "";
+
+    renderAll();
+
+    showToast("Filters reset");
+}
+
+/* ------------------------------
+   REFRESH
+------------------------------ */
+
+function refreshReports(){
+
+    renderAll();
+
+    showToast("Reports refreshed");
+}
+
+/* ------------------------------
+   CSV EXPORT
+------------------------------ */
+
+function exportCurrentReport(){
+
+    const active =
+        document.querySelector(".report-section.active");
+
+    if(!active){
+
+        exportStudentCSV();
+
+        return;
+    }
+
+    const id = active.id;
+
+    if(id === "students"){
+        exportStudentCSV();
+    }
+    else if(id === "fees"){
+        exportFeesCSV();
+    }
+    else if(id === "attendance"){
+        exportAttendanceCSV();
+    }
+    else if(id === "admissions"){
+        exportAdmissionCSV();
+    }
+    else if(id === "courses"){
+        exportCourseCSV();
+    }
+    else{
+        exportStudentCSV();
+    }
+
+}
+
+function downloadCSV(filename,rows){
+
+    if(!rows.length){
+
+        showToast("No data available for export");
+
+        return;
+    }
+
+    const csv = rows.map(row=>
+        row.map(value=>{
+            const str = String(value ?? "");
+
+            return `"${str.replace(/"/g,'""')}"`;
+        }).join(",")
+    ).join("\n");
+
+    const blob = new Blob(
+        [csv],
+        {type:"text/csv;charset=utf-8;"}
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = filename;
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    URL.revokeObjectURL(url);
+
+    showToast("CSV exported successfully");
+}
+
+function exportStudentCSV(){
+
+    const students = filteredStudents();
+
+    const rows = [
+        [
+            "Student ID",
+            "Student Name",
+            "Course",
+            "Batch",
+            "Admission Date",
+            "Total Fees",
+            "Paid",
+            "Due",
+            "Status"
+        ]
+    ];
+
+    students.forEach(s=>{
+
+        rows.push([
+            s.id,
+            s.name,
+            s.course,
+            s.batch,
+            s.admissionDate,
+            s.totalFees,
+            getPaid(s),
+            getDue(s),
+            s.status
+        ]);
+
+    });
+
+    downloadCSV(
+        "BlackTerminal_Student_Report.csv",
+        rows
+    );
+}
+
+function exportFeesCSV(){
+
+    const students = filteredStudents();
+
+    const rows = [
+        [
+            "Student ID",
+            "Student Name",
+            "Course",
+            "Total Fees",
+            "Paid",
+            "Due",
+            "Payment %"
+        ]
+    ];
+
+    students.forEach(s=>{
+
+        const total = Number(s.totalFees || 0);
+        const paid = getPaid(s);
+        const due = getDue(s);
+        const percent = total
+            ? Math.round((paid/total)*100)
+            : 0;
+
+        rows.push([
+            s.id,
+            s.name,
+            s.course,
+            total,
+            paid,
+            due,
+            percent + "%"
+        ]);
+
+    });
+
+    downloadCSV(
+        "BlackTerminal_Fees_Report.csv",
+        rows
+    );
+}
+
+function exportAttendanceCSV(){
+
+    const attendance = filteredAttendance();
+
+    const rows = [
+        [
+            "Student ID",
+            "Student Name",
+            "Course",
+            "Date",
+            "Status"
+        ]
+    ];
+
+    attendance.forEach(a=>{
+
+        rows.push([
+            a.studentId,
+            a.studentName,
+            a.course,
+            a.date,
+            a.status
+        ]);
+
+    });
+
+    downloadCSV(
+        "BlackTerminal_Attendance_Report.csv",
+        rows
+    );
+}
+
+function exportAdmissionCSV(){
+
+    const admissions = filteredAdmissions();
+
+    const rows = [
+        [
+            "Admission ID",
+            "Applicant",
+            "Course",
+            "Date",
+            "Total Fees",
+            "Paid",
+            "Status",
+            "Source"
+        ]
+    ];
+
+    admissions.forEach(a=>{
+
+        rows.push([
+            a.id,
+            a.name,
+            a.course,
+            a.admissionDate,
+            a.totalFees,
+            a.paid,
+            a.status,
+            a.source
+        ]);
+
+    });
+
+    downloadCSV(
+        "BlackTerminal_Admission_Report.csv",
+        rows
+    );
+}
+
+function exportCourseCSV(){
+
+    const students = filteredStudents();
+
+    const courses = {};
+
+    students.forEach(s=>{
+
+        const course = s.course || "Other";
+
+        if(!courses[course]){
+
+            courses[course] = {
+                students:0,
+                active:0,
+                fees:0,
+                paid:0,
+                due:0
+            };
+
+        }
+
+        courses[course].students++;
+        courses[course].fees += Number(s.totalFees || 0);
+        courses[course].paid += getPaid(s);
+        courses[course].due += getDue(s);
+
+        if(String(s.status).toLowerCase() === "active"){
+            courses[course].active++;
+        }
+
+    });
+
+    const rows = [
+        [
+            "Course",
+            "Students",
+            "Active",
+            "Total Fees",
+            "Collected",
+            "Due",
+            "Collection %"
+        ]
+    ];
+
+    Object.entries(courses).forEach(([course,r])=>{
+
+        const percent = r.fees
+            ? Math.round((r.paid/r.fees)*100)
+            : 0;
+
+        rows.push([
+            course,
+            r.students,
+            r.active,
+            r.fees,
+            r.paid,
+            r.due,
+            percent + "%"
+        ]);
+
+    });
+
+    downloadCSV(
+        "BlackTerminal_Course_Report.csv",
+        rows
+    );
+}
+
+/* ------------------------------
+   PRINT
+------------------------------ */
+
+function printReport(){
+
+    const active =
+        document.querySelector(".report-section.active");
+
+    const title =
+        active
+        ? active.id
+        : "overview";
+
+    const printWindow = window.open(
+        "",
+        "_blank",
+        "width=1100,height=800"
+    );
+
+    const content =
+        active
+        ? active.innerHTML
+        : document.querySelector(".content").innerHTML;
+
+    printWindow.document.write(`
+
+        <!DOCTYPE html>
+
+        <html>
+
+        <head>
+
+            <title>
+                BlackTerminal - ${title} Report
+            </title>
+
+            <style>
+
+                body{
+                    font-family:Arial,sans-serif;
+                    padding:30px;
+                    color:#172236;
+                }
+
+                h1{
+                    margin-bottom:5px;
+                }
+
+                .print-head{
+                    border-bottom:2px solid #086ee1;
+                    padding-bottom:15px;
+                    margin-bottom:20px;
+                }
+
+                table{
+                    width:100%;
+                    border-collapse:collapse;
+                    margin-top:20px;
+                }
+
+                th{
+                    background:#f0f4f8;
+                    text-align:left;
+                }
+
+                th,td{
+                    border:1px solid #dce3eb;
+                    padding:9px;
+                    font-size:11px;
+                }
+
+                .card{
+                    border:1px solid #ddd;
+                    margin-bottom:15px;
+                    padding:15px;
+                }
+
+                .stats{
+                    display:flex;
+                    gap:10px;
+                    margin-bottom:20px;
+                }
+
+                .stat{
+                    flex:1;
+                    border:1px solid #ddd;
+                    padding:10px;
+                }
+
+                .status{
+                    padding:3px 7px;
+                    border-radius:10px;
+                }
+
+                .empty{
+                    padding:20px;
+                }
+
+                @media print{
+                    body{
+                        padding:15px;
+                    }
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+
+            <div class="print-head">
+
+                <h1>
+                    BlackTerminal Computer Institute
+                </h1>
+
+                <p>
+                    Reports & Analytics — ${title}
+                </p>
+
+                <small>
+                    Generated on ${new Date().toLocaleString("en-IN")}
+                </small>
+
+            </div>
+
+            ${content}
+
+        </body>
+
+        </html>
+
+    `);
+
+    printWindow.document.close();
+
+    setTimeout(()=>{
+        printWindow.focus();
+        printWindow.print();
+    },500);
+}
+
+/* ------------------------------
+   SEARCH
+------------------------------ */
+
+function globalSearch(){
+
+    const value =
+        document.getElementById("globalSearch").value
+        .trim();
+
+    if(value){
+
+        document.getElementById("reportSearch").value =
+            value;
+
+        renderAll();
+    }
+
+}
+
+/* ------------------------------
+   NAVIGATION
+------------------------------ */
+
+function navigate(page){
+
+    showToast(
+        page + " page navigation can be connected here"
+    );
+
+}
+
+/* ------------------------------
+   SIDEBAR
+------------------------------ */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+    document
+        .getElementById("overlay")
+        .classList.toggle("show");
+
+}
+
+function closeSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+    document
+        .getElementById("overlay")
+        .classList.remove("show");
+
+}
+
+/* ------------------------------
+   TOAST
+------------------------------ */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(()=>{
+        toast.classList.remove("show");
+    },2500);
+}
+
+/* ------------------------------
+   EMPTY TABLE
+------------------------------ */
+
+function emptyRow(cols,message){
+
+    return `
+        <tr>
+            <td colspan="${cols}">
+                <div class="empty">
+                    <div class="empty-icon">📊</div>
+                    ${message}
+                </div>
+            </td>
+        </tr>
+    `;
+}
+
+/* ------------------------------
+   ESCAPE HTML
+------------------------------ */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+/* ------------------------------
+   WINDOW RESIZE
+------------------------------ */
+
+window.addEventListener(
+    "resize",
+    drawMonthlyChart
+);
+
+/* ------------------------------
+   INITIAL LOAD
+------------------------------ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
+        renderAll();
+    }
+);
+
+</script>
+
+</body>
+</html>

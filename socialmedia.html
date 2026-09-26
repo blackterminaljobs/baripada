@@ -1,0 +1,4760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlackTerminal - Promotion & Social Media</title>
+
+<style>
+:root{
+    --navy:#071426;
+    --navy2:#0c1d35;
+    --blue:#086ee1;
+    --blue2:#18a0ff;
+    --bg:#f4f7fb;
+    --white:#ffffff;
+    --text:#172236;
+    --muted:#738096;
+    --line:#e3e9f1;
+    --green:#16a673;
+    --orange:#f59e0b;
+    --red:#ef4444;
+    --purple:#7c3aed;
+    --pink:#ec4899;
+    --shadow:0 8px 25px rgba(20,40,80,.07);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:255px;
+    background:linear-gradient(180deg,var(--navy),#0b1d35);
+    color:white;
+    z-index:1000;
+    overflow-y:auto;
+}
+
+.brand{
+    height:72px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 22px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.brand-logo{
+    width:40px;
+    height:40px;
+    border-radius:11px;
+    background:linear-gradient(135deg,#0878ed,#19b5ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:15px;
+    box-shadow:0 5px 15px rgba(0,150,255,.25);
+}
+
+.brand-text{
+    font-size:17px;
+    font-weight:800;
+    letter-spacing:.2px;
+}
+
+.brand-sub{
+    font-size:10px;
+    color:#9fb0c8;
+    margin-top:2px;
+}
+
+.menu{
+    padding:18px 12px;
+}
+
+.menu-title{
+    color:#7286a4;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    padding:10px 12px;
+    font-weight:700;
+}
+
+.nav-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px 13px;
+    margin:3px 0;
+    color:#b8c6d9;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:13px;
+    transition:.2s;
+}
+
+.nav-item:hover{
+    background:rgba(255,255,255,.07);
+    color:#fff;
+}
+
+.nav-item.active{
+    background:linear-gradient(90deg,rgba(8,110,225,.95),rgba(24,160,255,.65));
+    color:#fff;
+    box-shadow:0 5px 15px rgba(0,120,255,.15);
+}
+
+.nav-icon{
+    width:22px;
+    text-align:center;
+    font-size:16px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+    margin-left:255px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+.top-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.mobile-menu{
+    display:none;
+    width:40px;
+    height:40px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:10px;
+    font-size:20px;
+}
+
+.search-box{
+    width:320px;
+    height:40px;
+    background:#f7f9fc;
+    border:1px solid var(--line);
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    padding:0 12px;
+    gap:8px;
+}
+
+.search-box input{
+    border:0;
+    outline:0;
+    background:transparent;
+    width:100%;
+    font-size:13px;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:10px;
+    font-size:17px;
+    position:relative;
+}
+
+.notification-dot{
+    position:absolute;
+    right:8px;
+    top:7px;
+    width:7px;
+    height:7px;
+    background:var(--red);
+    border-radius:50%;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-left:5px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    background:linear-gradient(135deg,#0a72df,#19a8ff);
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+}
+
+.profile-info strong{
+    display:block;
+    font-size:12px;
+}
+
+.profile-info span{
+    display:block;
+    font-size:10px;
+    color:var(--muted);
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+    padding:26px 28px 40px;
+}
+
+.page-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:23px;
+}
+
+.page-title{
+    font-size:25px;
+    font-weight:800;
+}
+
+.page-subtitle{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:6px;
+}
+
+.header-actions{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    padding:10px 15px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+}
+
+.btn-primary{
+    background:var(--blue);
+    color:#fff;
+}
+
+.btn-primary:hover{
+    background:#075fbe;
+}
+
+.btn-secondary{
+    background:#fff;
+    color:var(--text);
+    border:1px solid var(--line);
+}
+
+.btn-success{
+    background:var(--green);
+    color:#fff;
+}
+
+.btn-danger{
+    background:var(--red);
+    color:#fff;
+}
+
+.btn-purple{
+    background:var(--purple);
+    color:#fff;
+}
+
+.btn-sm{
+    padding:7px 10px;
+    font-size:11px;
+}
+
+/* ================= STATS ================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:18px;
+    box-shadow:var(--shadow);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:11px;
+    font-weight:600;
+}
+
+.stat-value{
+    font-size:25px;
+    font-weight:800;
+    margin-top:5px;
+}
+
+.stat-icon{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.blue-icon{
+    background:#e9f3ff;
+    color:var(--blue);
+}
+
+.green-icon{
+    background:#eafaf4;
+    color:var(--green);
+}
+
+.orange-icon{
+    background:#fff6e5;
+    color:var(--orange);
+}
+
+.purple-icon{
+    background:#f1ebff;
+    color:var(--purple);
+}
+
+/* ================= QUICK CARDS ================= */
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.quick-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:18px;
+    cursor:pointer;
+    transition:.2s;
+    box-shadow:var(--shadow);
+}
+
+.quick-card:hover{
+    transform:translateY(-2px);
+    border-color:#b8d9fa;
+}
+
+.quick-icon{
+    width:42px;
+    height:42px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:20px;
+    margin-bottom:12px;
+}
+
+.instagram{
+    background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af);
+}
+
+.facebook{
+    background:#1877f2;
+}
+
+.whatsapp{
+    background:#25d366;
+}
+
+.youtube{
+    background:#ff0000;
+}
+
+.quick-card strong{
+    font-size:14px;
+}
+
+.quick-card p{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+/* ================= TABS ================= */
+
+.tabs{
+    display:flex;
+    gap:4px;
+    background:#fff;
+    border:1px solid var(--line);
+    padding:5px;
+    border-radius:11px;
+    margin-bottom:18px;
+    overflow-x:auto;
+}
+
+.tab{
+    border:0;
+    background:transparent;
+    padding:10px 15px;
+    border-radius:8px;
+    color:var(--muted);
+    font-size:12px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.tab.active{
+    background:#eaf3ff;
+    color:var(--blue);
+}
+
+/* ================= PANEL ================= */
+
+.panel{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:15px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.panel-head{
+    padding:17px 19px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.panel-title{
+    font-size:14px;
+    font-weight:800;
+}
+
+.panel-body{
+    padding:20px;
+}
+
+/* ================= FORM ================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-label{
+    font-size:11px;
+    font-weight:700;
+    color:#43516a;
+}
+
+.form-control{
+    width:100%;
+    min-height:40px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:9px 11px;
+    outline:none;
+    font-size:12px;
+    color:var(--text);
+    background:#fff;
+}
+
+.form-control:focus{
+    border-color:#82bdf7;
+    box-shadow:0 0 0 3px rgba(8,110,225,.08);
+}
+
+textarea.form-control{
+    min-height:120px;
+    resize:vertical;
+}
+
+.platforms{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.platform-check{
+    position:relative;
+}
+
+.platform-check input{
+    display:none;
+}
+
+.platform-check label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 11px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.platform-check input:checked + label{
+    border-color:#8bc5fa;
+    background:#edf7ff;
+    color:var(--blue);
+}
+
+/* ================= PREVIEW ================= */
+
+.preview-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.preview-card{
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    background:#fff;
+}
+
+.preview-top{
+    padding:12px 14px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    border-bottom:1px solid #f0f2f5;
+}
+
+.preview-avatar{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#071426,#1c477b);
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:10px;
+    font-weight:800;
+}
+
+.preview-user strong{
+    display:block;
+    font-size:11px;
+}
+
+.preview-user span{
+    font-size:9px;
+    color:var(--muted);
+}
+
+.preview-image{
+    height:200px;
+    background:linear-gradient(135deg,#071426,#0b4381,#18a0ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.preview-image h2{
+    font-size:23px;
+    line-height:1.2;
+}
+
+.preview-content{
+    padding:13px;
+}
+
+.preview-content p{
+    font-size:11px;
+    line-height:1.6;
+    color:#49566a;
+}
+
+.preview-actions{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 13px;
+    border-top:1px solid #f0f2f5;
+    color:#718097;
+    font-size:11px;
+}
+
+/* ================= FILTERS ================= */
+
+.filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    padding:14px 18px;
+    border-bottom:1px solid var(--line);
+}
+
+.filter-control{
+    height:37px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:0 10px;
+    font-size:11px;
+    background:#fff;
+    outline:none;
+}
+
+.filter-search{
+    min-width:220px;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+th{
+    text-align:left;
+    padding:12px 15px;
+    background:#fafbfd;
+    color:#718097;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    white-space:nowrap;
+}
+
+td{
+    padding:13px 15px;
+    border-top:1px solid #edf0f4;
+    font-size:11px;
+    vertical-align:middle;
+}
+
+.student-cell{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.small-avatar{
+    width:32px;
+    height:32px;
+    border-radius:9px;
+    background:#eaf3ff;
+    color:var(--blue);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:800;
+}
+
+.student-cell strong{
+    display:block;
+    font-size:11px;
+}
+
+.student-cell span{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    margin-top:2px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:9px;
+    font-weight:800;
+}
+
+.badge-blue{
+    background:#eaf3ff;
+    color:#086ee1;
+}
+
+.badge-green{
+    background:#e8faf3;
+    color:#0d9766;
+}
+
+.badge-orange{
+    background:#fff5df;
+    color:#d48800;
+}
+
+.badge-red{
+    background:#ffeded;
+    color:#d93232;
+}
+
+.badge-purple{
+    background:#f1ebff;
+    color:#7040d8;
+}
+
+/* ================= CONTENT CARDS ================= */
+
+.template-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.template-card{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:15px;
+    background:#fff;
+}
+
+.template-card h4{
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.template-card p{
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.5;
+    min-height:50px;
+}
+
+.template-actions{
+    display:flex;
+    gap:6px;
+    margin-top:12px;
+}
+
+/* ================= CALENDAR ================= */
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.calendar-day-name{
+    padding:10px;
+    text-align:center;
+    font-size:10px;
+    font-weight:800;
+    background:#f8fafc;
+    color:var(--muted);
+    border-right:1px solid var(--line);
+}
+
+.calendar-cell{
+    min-height:105px;
+    border-top:1px solid var(--line);
+    border-right:1px solid var(--line);
+    padding:8px;
+    background:#fff;
+}
+
+.calendar-date{
+    font-size:10px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.calendar-event{
+    padding:5px 6px;
+    border-radius:5px;
+    font-size:9px;
+    margin-top:4px;
+    background:#eaf3ff;
+    color:#086ee1;
+    cursor:pointer;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+    text-align:center;
+    padding:45px 20px;
+    color:var(--muted);
+}
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.empty h3{
+    font-size:14px;
+    color:var(--text);
+    margin-bottom:5px;
+}
+
+.empty p{
+    font-size:11px;
+}
+
+/* ================= MODAL ================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(3,15,30,.55);
+    backdrop-filter:blur(3px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:min(720px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:17px;
+    box-shadow:0 25px 80px rgba(0,0,0,.25);
+}
+
+.modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:17px 20px;
+    border-bottom:1px solid var(--line);
+}
+
+.modal-title{
+    font-size:15px;
+    font-weight:800;
+}
+
+.modal-close{
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:8px;
+    background:#f2f5f9;
+    font-size:18px;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+.modal-footer{
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    padding:14px 20px;
+    border-top:1px solid var(--line);
+}
+
+/* ================= TOAST ================= */
+
+.toast-container{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:5000;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.toast{
+    background:#071426;
+    color:#fff;
+    padding:12px 15px;
+    border-radius:9px;
+    font-size:11px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+    animation:slideIn .25s ease;
+}
+
+@keyframes slideIn{
+    from{
+        transform:translateX(30px);
+        opacity:0;
+    }
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .template-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:850px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .search-box{
+        width:220px;
+    }
+
+    .profile-info{
+        display:none;
+    }
+
+    .content{
+        padding:20px 16px 30px;
+    }
+
+    .topbar{
+        padding:0 16px;
+    }
+
+    .page-head{
+        flex-direction:column;
+    }
+
+    .preview-wrap{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+}
+
+@media(max-width:600px){
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .quick-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:13px;
+    }
+
+    .stat-value{
+        font-size:20px;
+    }
+
+    .stat-icon{
+        width:37px;
+        height:37px;
+        font-size:16px;
+    }
+
+    .search-box{
+        display:none;
+    }
+
+    .top-actions{
+        gap:5px;
+    }
+
+    .page-title{
+        font-size:21px;
+    }
+
+    .template-grid{
+        grid-template-columns:1fr;
+    }
+
+    .calendar-grid{
+        min-width:700px;
+    }
+
+    .panel-body{
+        padding:14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+        <div class="brand-logo">BT</div>
+
+        <div>
+            <div class="brand-text">BlackTerminal</div>
+            <div class="brand-sub">Computer Institute</div>
+        </div>
+    </div>
+
+    <div class="menu">
+
+        <div class="menu-title">Main</div>
+
+        <a href="#" class="nav-item" data-page="Dashboard">
+            <span class="nav-icon">▦</span>
+            Dashboard
+        </a>
+
+        <a href="#" class="nav-item" data-page="Student Management">
+            <span class="nav-icon">👨‍🎓</span>
+            Students
+        </a>
+
+        <a href="#" class="nav-item" data-page="Admission Management">
+            <span class="nav-icon">📝</span>
+            Admissions
+        </a>
+
+        <a href="#" class="nav-item" data-page="Fees & Payments">
+            <span class="nav-icon">₹</span>
+            Fees & Payments
+        </a>
+
+        <a href="#" class="nav-item" data-page="Classes & Attendance">
+            <span class="nav-icon">📅</span>
+            Classes & Attendance
+        </a>
+
+        <a href="#" class="nav-item" data-page="Communication Center">
+            <span class="nav-icon">💬</span>
+            Communication
+        </a>
+
+        <div class="menu-title">Management</div>
+
+        <a href="#" class="nav-item active" data-page="Promotion / Social Media">
+            <span class="nav-icon">📣</span>
+            Promotion / Social Media
+        </a>
+
+        <a href="#" class="nav-item" data-page="Task Management">
+            <span class="nav-icon">✓</span>
+            Tasks
+        </a>
+
+        <a href="#" class="nav-item" data-page="Documents & Certificates">
+            <span class="nav-icon">📄</span>
+            Documents
+        </a>
+
+        <a href="#" class="nav-item" data-page="Reports & Analytics">
+            <span class="nav-icon">📊</span>
+            Reports
+        </a>
+
+        <a href="#" class="nav-item" data-page="Settings & Staff">
+            <span class="nav-icon">⚙</span>
+            Settings
+        </a>
+
+    </div>
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="top-left">
+
+            <button class="mobile-menu" id="mobileMenu">☰</button>
+
+            <div class="search-box">
+                <span>⌕</span>
+                <input
+                    type="text"
+                    id="globalSearch"
+                    placeholder="Search campaigns, posts..."
+                >
+            </div>
+
+        </div>
+
+        <div class="top-actions">
+
+            <button class="icon-btn" onclick="showToast('No new notifications')">
+                🔔
+                <span class="notification-dot"></span>
+            </button>
+
+            <button class="icon-btn" onclick="showToast('Promotion Help Center')">
+                ?
+            </button>
+
+            <div class="profile">
+
+                <div class="avatar">A</div>
+
+                <div class="profile-info">
+                    <strong>Admin</strong>
+                    <span>BlackTerminal</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <section class="content">
+
+        <div class="page-head">
+
+            <div>
+                <h1 class="page-title">
+                    Promotion / Social Media
+                </h1>
+
+                <p class="page-subtitle">
+                    Manage campaigns, social media posts, content and promotional activities.
+                </p>
+            </div>
+
+            <div class="header-actions">
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="exportCampaigns()"
+                >
+                    ↓ Export
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="openCampaignModal()"
+                >
+                    + New Campaign
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= STATS ================= -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div>
+                    <div class="stat-label">
+                        Active Campaigns
+                    </div>
+
+                    <div class="stat-value" id="activeCampaigns">
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-icon blue-icon">
+                    📣
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div>
+                    <div class="stat-label">
+                        Total Posts
+                    </div>
+
+                    <div class="stat-value" id="totalPosts">
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-icon purple-icon">
+                    📱
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div>
+                    <div class="stat-label">
+                        Scheduled Posts
+                    </div>
+
+                    <div class="stat-value" id="scheduledPosts">
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-icon orange-icon">
+                    🕒
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div>
+                    <div class="stat-label">
+                        Published Posts
+                    </div>
+
+                    <div class="stat-value" id="publishedPosts">
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-icon green-icon">
+                    ✓
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= QUICK SOCIAL MEDIA ================= -->
+
+        <div class="quick-grid">
+
+            <div
+                class="quick-card"
+                onclick="quickPlatform('Instagram')"
+            >
+                <div class="quick-icon instagram">
+                    ◎
+                </div>
+
+                <strong>Instagram</strong>
+
+                <p>
+                    Create posts, reels and promotional content.
+                </p>
+            </div>
+
+
+            <div
+                class="quick-card"
+                onclick="quickPlatform('Facebook')"
+            >
+                <div class="quick-icon facebook">
+                    f
+                </div>
+
+                <strong>Facebook</strong>
+
+                <p>
+                    Manage page posts and announcements.
+                </p>
+            </div>
+
+
+            <div
+                class="quick-card"
+                onclick="quickPlatform('WhatsApp')"
+            >
+                <div class="quick-icon whatsapp">
+                    ☎
+                </div>
+
+                <strong>WhatsApp</strong>
+
+                <p>
+                    Share offers and admission updates.
+                </p>
+            </div>
+
+
+            <div
+                class="quick-card"
+                onclick="quickPlatform('YouTube')"
+            >
+                <div class="quick-icon youtube">
+                    ▶
+                </div>
+
+                <strong>YouTube</strong>
+
+                <p>
+                    Manage video promotion and uploads.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- ================= TABS ================= -->
+
+        <div class="tabs">
+
+            <button
+                class="tab active"
+                data-tab="overview"
+            >
+                Overview
+            </button>
+
+            <button
+                class="tab"
+                data-tab="create"
+            >
+                Create Post
+            </button>
+
+            <button
+                class="tab"
+                data-tab="campaigns"
+            >
+                Campaigns
+            </button>
+
+            <button
+                class="tab"
+                data-tab="templates"
+            >
+                Templates
+            </button>
+
+            <button
+                class="tab"
+                data-tab="calendar"
+            >
+                Content Calendar
+            </button>
+
+            <button
+                class="tab"
+                data-tab="history"
+            >
+                Post History
+            </button>
+
+        </div>
+
+
+        <!-- =====================================================
+             OVERVIEW
+        ====================================================== -->
+
+        <div class="tab-content" id="overview">
+
+            <div class="preview-wrap">
+
+                <!-- Recent Posts -->
+
+                <div class="panel">
+
+                    <div class="panel-head">
+
+                        <div class="panel-title">
+                            Recent Posts
+                        </div>
+
+                        <button
+                            class="btn btn-secondary btn-sm"
+                            onclick="switchTab('history')"
+                        >
+                            View All
+                        </button>
+
+                    </div>
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Post</th>
+                                    <th>Platform</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="recentPostsTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Upcoming Posts -->
+
+                <div class="panel">
+
+                    <div class="panel-head">
+
+                        <div class="panel-title">
+                            Upcoming Scheduled Posts
+                        </div>
+
+                        <button
+                            class="btn btn-secondary btn-sm"
+                            onclick="switchTab('calendar')"
+                        >
+                            Calendar
+                        </button>
+
+                    </div>
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Content</th>
+                                    <th>Platform</th>
+                                    <th>Schedule</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="upcomingTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Performance -->
+
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div class="panel-title">
+                        Social Media Performance
+                    </div>
+
+                    <select
+                        class="filter-control"
+                        id="performancePeriod"
+                        onchange="showToast('Performance period changed')"
+                    >
+                        <option>Last 7 Days</option>
+                        <option>Last 30 Days</option>
+                        <option>This Month</option>
+                    </select>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="stats-grid">
+
+                        <div class="stat-card">
+                            <div>
+                                <div class="stat-label">
+                                    Reach
+                                </div>
+                                <div class="stat-value">
+                                    12.8K
+                                </div>
+                            </div>
+                            <div class="stat-icon blue-icon">
+                                👁
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div>
+                                <div class="stat-label">
+                                    Engagement
+                                </div>
+                                <div class="stat-value">
+                                    1.9K
+                                </div>
+                            </div>
+                            <div class="stat-icon purple-icon">
+                                ♥
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div>
+                                <div class="stat-label">
+                                    Leads
+                                </div>
+                                <div class="stat-value">
+                                    126
+                                </div>
+                            </div>
+                            <div class="stat-icon green-icon">
+                                👥
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div>
+                                <div class="stat-label">
+                                    Shares
+                                </div>
+                                <div class="stat-value">
+                                    342
+                                </div>
+                            </div>
+                            <div class="stat-icon orange-icon">
+                                ↗
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             CREATE POST
+        ====================================================== -->
+
+        <div
+            class="tab-content"
+            id="create"
+            style="display:none;"
+        >
+
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div>
+                        <div class="panel-title">
+                            Create Social Media Post
+                        </div>
+
+                        <div
+                            style="font-size:10px;color:var(--muted);margin-top:4px;"
+                        >
+                            Create and schedule promotional content.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Post Title
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="postTitle"
+                                placeholder="e.g. PGDCA Admission Open"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Campaign
+                            </label>
+
+                            <select
+                                class="form-control"
+                                id="postCampaign"
+                            >
+                                <option value="">
+                                    No Campaign
+                                </option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label class="form-label">
+                                Platforms
+                            </label>
+
+                            <div class="platforms">
+
+                                <div class="platform-check">
+                                    <input
+                                        type="checkbox"
+                                        id="pInstagram"
+                                        value="Instagram"
+                                    >
+                                    <label for="pInstagram">
+                                        ◎ Instagram
+                                    </label>
+                                </div>
+
+                                <div class="platform-check">
+                                    <input
+                                        type="checkbox"
+                                        id="pFacebook"
+                                        value="Facebook"
+                                    >
+                                    <label for="pFacebook">
+                                        f Facebook
+                                    </label>
+                                </div>
+
+                                <div class="platform-check">
+                                    <input
+                                        type="checkbox"
+                                        id="pWhatsApp"
+                                        value="WhatsApp"
+                                    >
+                                    <label for="pWhatsApp">
+                                        ☎ WhatsApp
+                                    </label>
+                                </div>
+
+                                <div class="platform-check">
+                                    <input
+                                        type="checkbox"
+                                        id="pYouTube"
+                                        value="YouTube"
+                                    >
+                                    <label for="pYouTube">
+                                        ▶ YouTube
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label class="form-label">
+                                Caption / Content
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="postCaption"
+                                placeholder="Write your promotional caption..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Hashtags
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="postHashtags"
+                                placeholder="#BlackTerminal #PGDCA #Baripada"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Post Type
+                            </label>
+
+                            <select
+                                class="form-control"
+                                id="postType"
+                            >
+                                <option>Image Post</option>
+                                <option>Video</option>
+                                <option>Reel</option>
+                                <option>Story</option>
+                                <option>Announcement</option>
+                                <option>Offer</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Schedule Date
+                            </label>
+
+                            <input
+                                type="date"
+                                class="form-control"
+                                id="postDate"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Schedule Time
+                            </label>
+
+                            <input
+                                type="time"
+                                class="form-control"
+                                id="postTime"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label class="form-label">
+                                Image / Video URL
+                            </label>
+
+                            <input
+                                type="url"
+                                class="form-control"
+                                id="postMedia"
+                                placeholder="https://..."
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px;"
+                    >
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="resetPostForm()"
+                        >
+                            Clear
+                        </button>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="savePost('draft')"
+                        >
+                            Save Draft
+                        </button>
+
+                        <button
+                            class="btn btn-success"
+                            onclick="savePost('scheduled')"
+                        >
+                            Schedule Post
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PREVIEW -->
+
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div class="panel-title">
+                        Live Preview
+                    </div>
+
+                    <button
+                        class="btn btn-secondary btn-sm"
+                        onclick="updatePreview()"
+                    >
+                        Refresh Preview
+                    </button>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="preview-wrap">
+
+                        <div class="preview-card">
+
+                            <div class="preview-top">
+
+                                <div class="preview-avatar">
+                                    BT
+                                </div>
+
+                                <div class="preview-user">
+                                    <strong>
+                                        BlackTerminal Computer Institute
+                                    </strong>
+
+                                    <span>
+                                        Baripada • Now
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="preview-image"
+                                id="previewImage"
+                            >
+                                <div>
+                                    <h2 id="previewTitle">
+                                        Your Post Preview
+                                    </h2>
+
+                                    <div
+                                        style="font-size:10px;margin-top:8px;opacity:.85;"
+                                    >
+                                        BlackTerminal Computer Institute
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="preview-content">
+
+                                <p id="previewCaption">
+                                    Your caption will appear here...
+                                </p>
+
+                            </div>
+
+                            <div class="preview-actions">
+
+                                <span>♥ Like</span>
+                                <span>💬 Comment</span>
+                                <span>↗ Share</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="panel" style="margin:0;box-shadow:none;">
+
+                            <div class="panel-head">
+                                <div class="panel-title">
+                                    Caption Helper
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+
+                                <p
+                                    style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:12px;"
+                                >
+                                    Select a content type to generate a sample
+                                    promotional caption.
+                                </p>
+
+                                <div
+                                    style="display:flex;flex-wrap:wrap;gap:7px;"
+                                >
+
+                                    <button
+                                        class="btn btn-secondary btn-sm"
+                                        onclick="generateCaption('Admission')"
+                                    >
+                                        Admission
+                                    </button>
+
+                                    <button
+                                        class="btn btn-secondary btn-sm"
+                                        onclick="generateCaption('Course')"
+                                    >
+                                        Course
+                                    </button>
+
+                                    <button
+                                        class="btn btn-secondary btn-sm"
+                                        onclick="generateCaption('Offer')"
+                                    >
+                                        Offer
+                                    </button>
+
+                                    <button
+                                        class="btn btn-secondary btn-sm"
+                                        onclick="generateCaption('Result')"
+                                    >
+                                        Result
+                                    </button>
+
+                                    <button
+                                        class="btn btn-secondary btn-sm"
+                                        onclick="generateCaption('Event')"
+                                    >
+                                        Event
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             CAMPAIGNS
+        ====================================================== -->
+
+        <div
+            class="tab-content"
+            id="campaigns"
+            style="display:none;"
+        >
+
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div class="panel-title">
+                        Promotion Campaigns
+                    </div>
+
+                    <button
+                        class="btn btn-primary btn-sm"
+                        onclick="openCampaignModal()"
+                    >
+                        + Create Campaign
+                    </button>
+
+                </div>
+
+                <div class="filters">
+
+                    <input
+                        class="filter-control filter-search"
+                        id="campaignSearch"
+                        placeholder="Search campaign..."
+                        oninput="renderCampaigns()"
+                    >
+
+                    <select
+                        class="filter-control"
+                        id="campaignStatusFilter"
+                        onchange="renderCampaigns()"
+                    >
+                        <option value="">All Status</option>
+                        <option>Active</option>
+                        <option>Draft</option>
+                        <option>Completed</option>
+                        <option>Paused</option>
+                    </select>
+
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Campaign</th>
+                                <th>Objective</th>
+                                <th>Platforms</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Budget</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="campaignTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             TEMPLATES
+        ====================================================== -->
+
+        <div
+            class="tab-content"
+            id="templates"
+            style="display:none;"
+        >
+
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div class="panel-title">
+                        Promotional Templates
+                    </div>
+
+                    <button
+                        class="btn btn-primary btn-sm"
+                        onclick="openTemplateModal()"
+                    >
+                        + New Template
+                    </button>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <div
+                        class="template-grid"
+                        id="templateGrid"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             CALENDAR
+        ====================================================== -->
+
+        <div
+            class="tab-content"
+            id="calendar"
+            style="display:none;"
+        >
+
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div>
+
+                        <div class="panel-title">
+                            Content Calendar
+                        </div>
+
+                        <div
+                            style="font-size:10px;color:var(--muted);margin-top:4px;"
+                            id="calendarMonthLabel"
+                        >
+                            Current Month
+                        </div>
+
+                    </div>
+
+                    <div style="display:flex;gap:7px;">
+
+                        <button
+                            class="btn btn-secondary btn-sm"
+                            onclick="changeMonth(-1)"
+                        >
+                            ←
+                        </button>
+
+                        <button
+                            class="btn btn-secondary btn-sm"
+                            onclick="changeMonth(0)"
+                        >
+                            Today
+                        </button>
+
+                        <button
+                            class="btn btn-secondary btn-sm"
+                            onclick="changeMonth(1)"
+                        >
+                            →
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="panel-body"
+                    style="overflow:auto;"
+                >
+
+                    <div class="calendar-grid">
+
+                        <div class="calendar-day-name">Sun</div>
+                        <div class="calendar-day-name">Mon</div>
+                        <div class="calendar-day-name">Tue</div>
+                        <div class="calendar-day-name">Wed</div>
+                        <div class="calendar-day-name">Thu</div>
+                        <div class="calendar-day-name">Fri</div>
+                        <div class="calendar-day-name">Sat</div>
+
+                        <div id="calendarCells"
+                             style="display:contents;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             HISTORY
+        ====================================================== -->
+
+        <div
+            class="tab-content"
+            id="history"
+            style="display:none;"
+        >
+
+            <div class="panel">
+
+                <div class="panel-head">
+
+                    <div class="panel-title">
+                        Post History
+                    </div>
+
+                    <div style="display:flex;gap:7px;">
+
+                        <button
+                            class="btn btn-secondary btn-sm"
+                            onclick="exportPosts()"
+                        >
+                            ↓ Export CSV
+                        </button>
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick="clearPosts()"
+                        >
+                            Clear
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="filters">
+
+                    <input
+                        class="filter-control filter-search"
+                        id="postSearch"
+                        placeholder="Search posts..."
+                        oninput="renderHistory()"
+                    >
+
+                    <select
+                        class="filter-control"
+                        id="historyPlatform"
+                        onchange="renderHistory()"
+                    >
+                        <option value="">All Platforms</option>
+                        <option>Instagram</option>
+                        <option>Facebook</option>
+                        <option>WhatsApp</option>
+                        <option>YouTube</option>
+                    </select>
+
+                    <select
+                        class="filter-control"
+                        id="historyStatus"
+                        onchange="renderHistory()"
+                    >
+                        <option value="">All Status</option>
+                        <option>Draft</option>
+                        <option>Scheduled</option>
+                        <option>Published</option>
+                    </select>
+
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Post</th>
+                                <th>Platform</th>
+                                <th>Type</th>
+                                <th>Schedule</th>
+                                <th>Campaign</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="historyTable"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     CAMPAIGN MODAL
+========================================================== -->
+
+<div
+    class="modal-overlay"
+    id="campaignModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <div class="modal-title">
+                Create Promotion Campaign
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeModal('campaignModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Campaign Name
+                    </label>
+
+                    <input
+                        class="form-control"
+                        id="campaignName"
+                        placeholder="e.g. PGDCA Admission 2026"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Objective
+                    </label>
+
+                    <select
+                        class="form-control"
+                        id="campaignObjective"
+                    >
+                        <option>Admissions</option>
+                        <option>Brand Awareness</option>
+                        <option>Course Promotion</option>
+                        <option>Lead Generation</option>
+                        <option>Event Promotion</option>
+                        <option>Offer / Discount</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label class="form-label">
+                        Platforms
+                    </label>
+
+                    <div class="platforms">
+
+                        <div class="platform-check">
+                            <input
+                                type="checkbox"
+                                id="cInstagram"
+                                value="Instagram"
+                            >
+                            <label for="cInstagram">
+                                ◎ Instagram
+                            </label>
+                        </div>
+
+                        <div class="platform-check">
+                            <input
+                                type="checkbox"
+                                id="cFacebook"
+                                value="Facebook"
+                            >
+                            <label for="cFacebook">
+                                f Facebook
+                            </label>
+                        </div>
+
+                        <div class="platform-check">
+                            <input
+                                type="checkbox"
+                                id="cWhatsApp"
+                                value="WhatsApp"
+                            >
+                            <label for="cWhatsApp">
+                                ☎ WhatsApp
+                            </label>
+                        </div>
+
+                        <div class="platform-check">
+                            <input
+                                type="checkbox"
+                                id="cYouTube"
+                                value="YouTube"
+                            >
+                            <label for="cYouTube">
+                                ▶ YouTube
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Start Date
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        id="campaignStart"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        End Date
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        id="campaignEnd"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Budget
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="campaignBudget"
+                        placeholder="₹ 0"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Status
+                    </label>
+
+                    <select
+                        class="form-control"
+                        id="campaignStatus"
+                    >
+                        <option>Draft</option>
+                        <option>Active</option>
+                        <option>Paused</option>
+                        <option>Completed</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label class="form-label">
+                        Campaign Notes
+                    </label>
+
+                    <textarea
+                        class="form-control"
+                        id="campaignNotes"
+                        placeholder="Write campaign details..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                onclick="closeModal('campaignModal')"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="btn btn-primary"
+                onclick="saveCampaign()"
+            >
+                Save Campaign
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE MODAL
+========================================================== -->
+
+<div
+    class="modal-overlay"
+    id="templateModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <div class="modal-title">
+                Create Post Template
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeModal('templateModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Template Name
+                    </label>
+
+                    <input
+                        class="form-control"
+                        id="templateName"
+                        placeholder="Template name"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="form-label">
+                        Category
+                    </label>
+
+                    <select
+                        class="form-control"
+                        id="templateCategory"
+                    >
+                        <option>Admission</option>
+                        <option>Course</option>
+                        <option>Offer</option>
+                        <option>Event</option>
+                        <option>Result</option>
+                        <option>Announcement</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label class="form-label">
+                        Template Content
+                    </label>
+
+                    <textarea
+                        class="form-control"
+                        id="templateContent"
+                        placeholder="Write reusable caption..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                onclick="closeModal('templateModal')"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="btn btn-primary"
+                onclick="saveTemplate()"
+            >
+                Save Template
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================== -->
+
+<div
+    class="toast-container"
+    id="toastContainer"
+></div>
+
+
+<script>
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const CAMPAIGN_KEY = "blackterminal_campaigns";
+const POSTS_KEY = "blackterminal_social_posts";
+const TEMPLATE_KEY = "blackterminal_social_templates";
+
+
+let campaigns =
+    JSON.parse(localStorage.getItem(CAMPAIGN_KEY) || "[]");
+
+let posts =
+    JSON.parse(localStorage.getItem(POSTS_KEY) || "[]");
+
+let templates =
+    JSON.parse(localStorage.getItem(TEMPLATE_KEY) || "[]");
+
+
+/* =========================================================
+   DEMO DATA
+========================================================= */
+
+if(campaigns.length === 0){
+
+    campaigns = [
+
+        {
+            id:"CMP2026-001",
+            name:"PGDCA Admission 2026",
+            objective:"Admissions",
+            platforms:["Instagram","Facebook","WhatsApp"],
+            start:"2026-09-01",
+            end:"2026-10-15",
+            budget:5000,
+            status:"Active",
+            notes:"Promote PGDCA admission."
+        },
+
+        {
+            id:"CMP2026-002",
+            name:"BlackTerminal Brand Promotion",
+            objective:"Brand Awareness",
+            platforms:["Instagram","Facebook","YouTube"],
+            start:"2026-09-10",
+            end:"2026-09-30",
+            budget:3000,
+            status:"Active",
+            notes:"Brand awareness campaign."
+        }
+
+    ];
+
+    saveCampaignStorage();
+}
+
+
+if(posts.length === 0){
+
+    posts = [
+
+        {
+            id:"POST2026-001",
+            title:"PGDCA Admission Open",
+            caption:"Admissions are now open at BlackTerminal Computer Institute. Start your computer education journey today!",
+            hashtags:"#BlackTerminal #PGDCA #Baripada #ComputerInstitute",
+            platforms:["Instagram","Facebook"],
+            type:"Image Post",
+            date:"2026-09-26",
+            time:"10:00",
+            campaign:"PGDCA Admission 2026",
+            status:"Scheduled",
+            media:""
+        },
+
+        {
+            id:"POST2026-002",
+            title:"Python Course Promotion",
+            caption:"Learn Python from basics to advanced level with practical training.",
+            hashtags:"#Python #Programming #BlackTerminal",
+            platforms:["Instagram","WhatsApp"],
+            type:"Reel",
+            date:"2026-09-24",
+            time:"18:00",
+            campaign:"BlackTerminal Brand Promotion",
+            status:"Published",
+            media:""
+        }
+
+    ];
+
+    savePostStorage();
+}
+
+
+if(templates.length === 0){
+
+    templates = [
+
+        {
+            id:"TPL001",
+            name:"Admission Open",
+            category:"Admission",
+            content:"🎓 Admissions Open at BlackTerminal Computer Institute!\nStart your career with professional computer courses.\n📍 Baripada\n📩 Contact us for admission details."
+        },
+
+        {
+            id:"TPL002",
+            name:"Course Promotion",
+            category:"Course",
+            content:"🚀 Upgrade your skills with BlackTerminal Computer Institute.\nJoin our professional computer courses and learn with practical training."
+        },
+
+        {
+            id:"TPL003",
+            name:"Limited Offer",
+            category:"Offer",
+            content:"🔥 Limited Seats Available!\nEnroll now at BlackTerminal Computer Institute and secure your seat."
+        },
+
+        {
+            id:"TPL004",
+            name:"Result / Achievement",
+            category:"Result",
+            content:"🎉 Congratulations to our students!\nYour hard work and dedication made this achievement possible."
+        },
+
+        {
+            id:"TPL005",
+            name:"Event Promotion",
+            category:"Event",
+            content:"📢 Special Event at BlackTerminal Computer Institute!\nStay connected with us for more updates."
+        },
+
+        {
+            id:"TPL006",
+            name:"Holiday Notice",
+            category:"Announcement",
+            content:"📢 Important Announcement\nBlackTerminal Computer Institute will remain closed on the mentioned date. Classes will resume as scheduled."
+        }
+
+    ];
+
+    saveTemplateStorage();
+}
+
+
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
+
+function saveCampaignStorage(){
+
+    localStorage.setItem(
+        CAMPAIGN_KEY,
+        JSON.stringify(campaigns)
+    );
+
+}
+
+function savePostStorage(){
+
+    localStorage.setItem(
+        POSTS_KEY,
+        JSON.stringify(posts)
+    );
+
+}
+
+function saveTemplateStorage(){
+
+    localStorage.setItem(
+        TEMPLATE_KEY,
+        JSON.stringify(templates)
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    renderAll();
+
+    setupTabs();
+
+    setupPreviewListeners();
+
+    setTodayDate();
+
+});
+
+
+function renderAll(){
+
+    updateStats();
+
+    renderRecentPosts();
+
+    renderUpcoming();
+
+    renderCampaigns();
+
+    renderTemplates();
+
+    renderHistory();
+
+    populateCampaignDropdown();
+
+    renderCalendar();
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+    const active =
+        campaigns.filter(c => c.status === "Active").length;
+
+    const scheduled =
+        posts.filter(p => p.status === "Scheduled").length;
+
+    const published =
+        posts.filter(p => p.status === "Published").length;
+
+    document.getElementById("activeCampaigns").textContent = active;
+
+    document.getElementById("totalPosts").textContent =
+        posts.length;
+
+    document.getElementById("scheduledPosts").textContent =
+        scheduled;
+
+    document.getElementById("publishedPosts").textContent =
+        published;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+function setupTabs(){
+
+    document.querySelectorAll(".tab").forEach(tab => {
+
+        tab.addEventListener("click",function(){
+
+            switchTab(this.dataset.tab);
+
+        });
+
+    });
+
+}
+
+
+function switchTab(tabName){
+
+    document.querySelectorAll(".tab").forEach(tab => {
+
+        tab.classList.toggle(
+            "active",
+            tab.dataset.tab === tabName
+        );
+
+    });
+
+
+    document.querySelectorAll(".tab-content").forEach(section => {
+
+        section.style.display = "none";
+
+    });
+
+
+    const target =
+        document.getElementById(tabName);
+
+    if(target){
+
+        target.style.display = "block";
+
+    }
+
+    if(tabName === "calendar"){
+        renderCalendar();
+    }
+
+}
+
+
+/* =========================================================
+   CREATE POST
+========================================================= */
+
+function savePost(status){
+
+    const title =
+        document.getElementById("postTitle").value.trim();
+
+    const caption =
+        document.getElementById("postCaption").value.trim();
+
+    const date =
+        document.getElementById("postDate").value;
+
+    const time =
+        document.getElementById("postTime").value;
+
+
+    if(!title){
+
+        showToast("Please enter post title.");
+
+        return;
+
+    }
+
+
+    if(!caption){
+
+        showToast("Please enter caption.");
+
+        return;
+
+    }
+
+
+    const platforms =
+        Array.from(
+            document.querySelectorAll(
+                '#create input[type="checkbox"]:checked'
+            )
+        ).map(input => input.value);
+
+
+    if(platforms.length === 0){
+
+        showToast("Select at least one platform.");
+
+        return;
+
+    }
+
+
+    const post = {
+
+        id:generateId("POST"),
+
+        title:title,
+
+        caption:caption,
+
+        hashtags:
+            document.getElementById("postHashtags").value.trim(),
+
+        platforms:platforms,
+
+        type:
+            document.getElementById("postType").value,
+
+        date:date || getToday(),
+
+        time:time || "10:00",
+
+        campaign:
+            document.getElementById("postCampaign").value,
+
+        status:status === "draft"
+            ? "Draft"
+            : "Scheduled",
+
+        media:
+            document.getElementById("postMedia").value.trim()
+
+    };
+
+
+    posts.unshift(post);
+
+    savePostStorage();
+
+    renderAll();
+
+    resetPostForm();
+
+    showToast(
+        status === "draft"
+            ? "Post saved as draft."
+            : "Post scheduled successfully."
+    );
+
+
+    switchTab("history");
+
+}
+
+
+/* =========================================================
+   RESET POST
+========================================================= */
+
+function resetPostForm(){
+
+    document.getElementById("postTitle").value = "";
+
+    document.getElementById("postCaption").value = "";
+
+    document.getElementById("postHashtags").value = "";
+
+    document.getElementById("postMedia").value = "";
+
+    document.getElementById("postDate").value = getToday();
+
+    document.getElementById("postTime").value = "";
+
+    document.getElementById("postCampaign").value = "";
+
+    document.querySelectorAll(
+        '#create input[type="checkbox"]'
+    ).forEach(x => x.checked = false);
+
+    updatePreview();
+
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function setupPreviewListeners(){
+
+    [
+        "postTitle",
+        "postCaption",
+        "postMedia"
+    ].forEach(id => {
+
+        const el =
+            document.getElementById(id);
+
+        if(el){
+
+            el.addEventListener(
+                "input",
+                updatePreview
+            );
+
+        }
+
+    });
+
+}
+
+
+function updatePreview(){
+
+    const title =
+        document.getElementById("postTitle").value.trim()
+        || "Your Post Preview";
+
+    const caption =
+        document.getElementById("postCaption").value.trim()
+        || "Your caption will appear here...";
+
+    const media =
+        document.getElementById("postMedia").value.trim();
+
+
+    document.getElementById("previewTitle").textContent =
+        title;
+
+    document.getElementById("previewCaption").textContent =
+        caption;
+
+
+    const image =
+        document.getElementById("previewImage");
+
+
+    if(media){
+
+        image.style.backgroundImage =
+            `url("${media}")`;
+
+        image.style.backgroundSize = "cover";
+
+        image.style.backgroundPosition = "center";
+
+    }else{
+
+        image.style.backgroundImage =
+            "linear-gradient(135deg,#071426,#0b4381,#18a0ff)";
+
+    }
+
+}
+
+
+/* =========================================================
+   CAPTION GENERATOR
+========================================================= */
+
+function generateCaption(type){
+
+    const captions = {
+
+        Admission:
+`🎓 ADMISSIONS OPEN at BlackTerminal Computer Institute!
+
+Build your skills. Build your career.
+
+Join professional computer courses with practical learning.
+
+📍 Baripada
+📩 Contact BlackTerminal for admission details.
+
+Limited seats available.`,
+
+        Course:
+`🚀 Upgrade your computer skills with BlackTerminal Computer Institute!
+
+Learn practical computer skills with structured courses and guidance.
+
+Start learning today!
+
+📍 Baripada`,
+
+        Offer:
+`🔥 SPECIAL OFFER!
+
+Limited seats available at BlackTerminal Computer Institute.
+
+Enroll now and start your learning journey.
+
+📍 Baripada
+📩 Contact us for details.`,
+
+        Result:
+`🎉 Congratulations to our students!
+
+Your dedication, consistency and hard work made this achievement possible.
+
+Keep learning. Keep growing.
+
+— BlackTerminal Computer Institute`,
+
+        Event:
+`📢 SPECIAL EVENT UPDATE!
+
+Something exciting is happening at BlackTerminal Computer Institute.
+
+Stay connected for more updates.
+
+📍 Baripada`
+
+    };
+
+
+    document.getElementById("postCaption").value =
+        captions[type] || "";
+
+    updatePreview();
+
+    showToast("Caption generated.");
+
+}
+
+
+/* =========================================================
+   CAMPAIGNS
+========================================================= */
+
+function openCampaignModal(){
+
+    document.getElementById("campaignModal")
+        .classList.add("show");
+
+}
+
+
+function saveCampaign(){
+
+    const name =
+        document.getElementById("campaignName")
+        .value.trim();
+
+    if(!name){
+
+        showToast("Enter campaign name.");
+
+        return;
+
+    }
+
+
+    const platforms =
+        Array.from(
+            document.querySelectorAll(
+                '#campaignModal input[type="checkbox"]:checked'
+            )
+        ).map(input => input.value);
+
+
+    if(platforms.length === 0){
+
+        showToast("Select at least one platform.");
+
+        return;
+
+    }
+
+
+    const campaign = {
+
+        id:generateId("CMP"),
+
+        name:name,
+
+        objective:
+            document.getElementById("campaignObjective").value,
+
+        platforms:platforms,
+
+        start:
+            document.getElementById("campaignStart").value
+            || getToday(),
+
+        end:
+            document.getElementById("campaignEnd").value
+            || getToday(),
+
+        budget:
+            Number(
+                document.getElementById("campaignBudget").value
+            ) || 0,
+
+        status:
+            document.getElementById("campaignStatus").value,
+
+        notes:
+            document.getElementById("campaignNotes").value.trim()
+
+    };
+
+
+    campaigns.unshift(campaign);
+
+    saveCampaignStorage();
+
+    renderAll();
+
+    closeModal("campaignModal");
+
+    clearCampaignForm();
+
+    showToast("Campaign created successfully.");
+
+}
+
+
+function clearCampaignForm(){
+
+    [
+        "campaignName",
+        "campaignStart",
+        "campaignEnd",
+        "campaignBudget",
+        "campaignNotes"
+    ].forEach(id => {
+
+        const el =
+            document.getElementById(id);
+
+        if(el) el.value = "";
+
+    });
+
+
+    document.querySelectorAll(
+        '#campaignModal input[type="checkbox"]'
+    ).forEach(x => x.checked = false);
+
+}
+
+
+/* =========================================================
+   RENDER CAMPAIGNS
+========================================================= */
+
+function renderCampaigns(){
+
+    const tbody =
+        document.getElementById("campaignTable");
+
+    const search =
+        (
+            document.getElementById("campaignSearch")
+            ?.value || ""
+        ).toLowerCase();
+
+    const status =
+        document.getElementById("campaignStatusFilter")
+        ?.value || "";
+
+
+    const filtered =
+        campaigns.filter(c => {
+
+            const matchSearch =
+                !search ||
+                c.name.toLowerCase().includes(search) ||
+                c.objective.toLowerCase().includes(search);
+
+            const matchStatus =
+                !status ||
+                c.status === status;
+
+            return matchSearch && matchStatus;
+
+        });
+
+
+    if(filtered.length === 0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="8">
+                    <div class="empty">
+                        <div class="empty-icon">📣</div>
+                        <h3>No campaigns found</h3>
+                        <p>Create your first promotion campaign.</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        filtered.map(c => `
+
+            <tr>
+
+                <td>
+                    <strong>${escapeHTML(c.name)}</strong>
+                    <div style="font-size:9px;color:var(--muted);margin-top:3px;">
+                        ${c.id}
+                    </div>
+                </td>
+
+                <td>
+                    ${escapeHTML(c.objective)}
+                </td>
+
+                <td>
+                    ${c.platforms
+                        .map(p =>
+                            `<span class="badge badge-blue">${escapeHTML(p)}</span>`
+                        )
+                        .join(" ")
+                    }
+                </td>
+
+                <td>
+                    ${formatDate(c.start)}
+                </td>
+
+                <td>
+                    ${formatDate(c.end)}
+                </td>
+
+                <td>
+                    ₹${Number(c.budget || 0).toLocaleString("en-IN")}
+                </td>
+
+                <td>
+                    ${statusBadge(c.status)}
+                </td>
+
+                <td>
+
+                    <div style="display:flex;gap:5px;">
+
+                        <button
+                            class="btn btn-secondary btn-sm"
+                            onclick="viewCampaign('${c.id}')"
+                        >
+                            View
+                        </button>
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick="deleteCampaign('${c.id}')"
+                        >
+                            Delete
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `).join("");
+
+}
+
+
+/* =========================================================
+   VIEW CAMPAIGN
+========================================================= */
+
+function viewCampaign(id){
+
+    const c =
+        campaigns.find(x => x.id === id);
+
+    if(!c) return;
+
+
+    alert(
+`Campaign: ${c.name}
+
+Objective: ${c.objective}
+
+Platforms: ${c.platforms.join(", ")}
+
+Start: ${formatDate(c.start)}
+
+End: ${formatDate(c.end)}
+
+Budget: ₹${Number(c.budget || 0).toLocaleString("en-IN")}
+
+Status: ${c.status}
+
+Notes:
+${c.notes || "No notes"}`
+    );
+
+}
+
+
+/* =========================================================
+   DELETE CAMPAIGN
+========================================================= */
+
+function deleteCampaign(id){
+
+    const c =
+        campaigns.find(x => x.id === id);
+
+    if(!c) return;
+
+
+    if(!confirm(
+        `Delete campaign "${c.name}"?`
+    )) return;
+
+
+    campaigns =
+        campaigns.filter(x => x.id !== id);
+
+    saveCampaignStorage();
+
+    renderAll();
+
+    showToast("Campaign deleted.");
+
+}
+
+
+/* =========================================================
+   CAMPAIGN DROPDOWN
+========================================================= */
+
+function populateCampaignDropdown(){
+
+    const select =
+        document.getElementById("postCampaign");
+
+    if(!select) return;
+
+
+    select.innerHTML =
+        `<option value="">No Campaign</option>` +
+        campaigns.map(c =>
+            `<option value="${escapeHTML(c.name)}">
+                ${escapeHTML(c.name)}
+            </option>`
+        ).join("");
+
+}
+
+
+/* =========================================================
+   TEMPLATES
+========================================================= */
+
+function renderTemplates(){
+
+    const grid =
+        document.getElementById("templateGrid");
+
+
+    if(templates.length === 0){
+
+        grid.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">📝</div>
+                <h3>No templates</h3>
+                <p>Create reusable social media templates.</p>
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        templates.map(t => `
+
+            <div class="template-card">
+
+                <div
+                    style="display:flex;justify-content:space-between;gap:8px;"
+                >
+
+                    <h4>
+                        ${escapeHTML(t.name)}
+                    </h4>
+
+                    <span class="badge badge-purple">
+                        ${escapeHTML(t.category)}
+                    </span>
+
+                </div>
+
+                <p>
+                    ${escapeHTML(t.content)}
+                </p>
+
+                <div class="template-actions">
+
+                    <button
+                        class="btn btn-primary btn-sm"
+                        onclick="useTemplate('${t.id}')"
+                    >
+                        Use Template
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        onclick="deleteTemplate('${t.id}')"
+                    >
+                        Delete
+                    </button>
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+function openTemplateModal(){
+
+    document.getElementById("templateModal")
+        .classList.add("show");
+
+}
+
+
+function saveTemplate(){
+
+    const name =
+        document.getElementById("templateName")
+        .value.trim();
+
+    const content =
+        document.getElementById("templateContent")
+        .value.trim();
+
+
+    if(!name || !content){
+
+        showToast("Enter template name and content.");
+
+        return;
+
+    }
+
+
+    templates.unshift({
+
+        id:generateId("TPL"),
+
+        name:name,
+
+        category:
+            document.getElementById("templateCategory").value,
+
+        content:content
+
+    });
+
+
+    saveTemplateStorage();
+
+    renderTemplates();
+
+    closeModal("templateModal");
+
+    document.getElementById("templateName").value = "";
+
+    document.getElementById("templateContent").value = "";
+
+    showToast("Template created.");
+
+}
+
+
+function useTemplate(id){
+
+    const template =
+        templates.find(t => t.id === id);
+
+    if(!template) return;
+
+
+    document.getElementById("postTitle").value =
+        template.name;
+
+    document.getElementById("postCaption").value =
+        template.content;
+
+
+    switchTab("create");
+
+    updatePreview();
+
+    showToast("Template loaded into Create Post.");
+
+}
+
+
+function deleteTemplate(id){
+
+    if(!confirm("Delete this template?")) return;
+
+
+    templates =
+        templates.filter(t => t.id !== id);
+
+    saveTemplateStorage();
+
+    renderTemplates();
+
+    showToast("Template deleted.");
+
+}
+
+
+/* =========================================================
+   RECENT POSTS
+========================================================= */
+
+function renderRecentPosts(){
+
+    const tbody =
+        document.getElementById("recentPostsTable");
+
+
+    const recent =
+        posts.slice(0,6);
+
+
+    if(recent.length === 0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    <div class="empty">
+                        No posts available.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        recent.map(p => `
+
+            <tr>
+
+                <td>
+                    <strong>
+                        ${escapeHTML(p.title)}
+                    </strong>
+                </td>
+
+                <td>
+                    ${p.platforms
+                        .map(x =>
+                            `<span class="badge badge-blue">${escapeHTML(x)}</span>`
+                        ).join(" ")
+                    }
+                </td>
+
+                <td>
+                    ${formatDate(p.date)}
+                </td>
+
+                <td>
+                    ${statusBadge(p.status)}
+                </td>
+
+            </tr>
+
+        `).join("");
+
+}
+
+
+/* =========================================================
+   UPCOMING
+========================================================= */
+
+function renderUpcoming(){
+
+    const tbody =
+        document.getElementById("upcomingTable");
+
+
+    const upcoming =
+        posts.filter(p => p.status === "Scheduled")
+             .slice(0,6);
+
+
+    if(upcoming.length === 0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    <div class="empty">
+                        <div class="empty-icon">🕒</div>
+                        <h3>No scheduled posts</h3>
+                        <p>Your upcoming posts will appear here.</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        upcoming.map(p => `
+
+            <tr>
+
+                <td>
+                    <strong>
+                        ${escapeHTML(p.title)}
+                    </strong>
+                </td>
+
+                <td>
+                    ${p.platforms
+                        .map(x =>
+                            `<span class="badge badge-purple">${escapeHTML(x)}</span>`
+                        ).join(" ")
+                    }
+                </td>
+
+                <td>
+                    ${formatDate(p.date)}
+                    <br>
+                    <span style="font-size:9px;color:var(--muted);">
+                        ${escapeHTML(p.time || "")}
+                    </span>
+                </td>
+
+                <td>
+                    <span class="badge badge-orange">
+                        Scheduled
+                    </span>
+                </td>
+
+            </tr>
+
+        `).join("");
+
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function renderHistory(){
+
+    const tbody =
+        document.getElementById("historyTable");
+
+    if(!tbody) return;
+
+
+    const search =
+        (
+            document.getElementById("postSearch")
+            ?.value || ""
+        ).toLowerCase();
+
+
+    const platform =
+        document.getElementById("historyPlatform")
+        ?.value || "";
+
+
+    const status =
+        document.getElementById("historyStatus")
+        ?.value || "";
+
+
+    const filtered =
+        posts.filter(p => {
+
+            const matchSearch =
+                !search ||
+                p.title.toLowerCase().includes(search) ||
+                p.caption.toLowerCase().includes(search);
+
+            const matchPlatform =
+                !platform ||
+                p.platforms.includes(platform);
+
+            const matchStatus =
+                !status ||
+                p.status === status;
+
+            return matchSearch &&
+                   matchPlatform &&
+                   matchStatus;
+
+        });
+
+
+    if(filtered.length === 0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="7">
+                    <div class="empty">
+                        <div class="empty-icon">📱</div>
+                        <h3>No posts found</h3>
+                        <p>Create a social media post to see it here.</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        filtered.map(p => `
+
+            <tr>
+
+                <td>
+
+                    <div class="student-cell">
+
+                        <div class="small-avatar">
+                            ${getInitials(p.title)}
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                ${escapeHTML(p.title)}
+                            </strong>
+
+                            <span>
+                                ${escapeHTML(p.id)}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+                <td>
+
+                    ${p.platforms.map(x =>
+                        `<span class="badge badge-blue">${escapeHTML(x)}</span>`
+                    ).join(" ")
+                    }
+
+                </td>
+
+                <td>
+                    ${escapeHTML(p.type)}
+                </td>
+
+                <td>
+                    ${formatDate(p.date)}
+                    <br>
+                    <span style="font-size:9px;color:var(--muted);">
+                        ${escapeHTML(p.time || "")}
+                    </span>
+                </td>
+
+                <td>
+                    ${escapeHTML(p.campaign || "—")}
+                </td>
+
+                <td>
+                    ${statusBadge(p.status)}
+                </td>
+
+                <td>
+
+                    <div style="display:flex;gap:5px;">
+
+                        <button
+                            class="btn btn-secondary btn-sm"
+                            onclick="viewPost('${p.id}')"
+                        >
+                            View
+                        </button>
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick="deletePost('${p.id}')"
+                        >
+                            Delete
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `).join("");
+
+}
+
+
+/* =========================================================
+   VIEW POST
+========================================================= */
+
+function viewPost(id){
+
+    const p =
+        posts.find(x => x.id === id);
+
+    if(!p) return;
+
+
+    alert(
+`Post: ${p.title}
+
+Platforms: ${p.platforms.join(", ")}
+
+Type: ${p.type}
+
+Date: ${formatDate(p.date)}
+
+Time: ${p.time || "—"}
+
+Status: ${p.status}
+
+Campaign: ${p.campaign || "None"}
+
+Caption:
+${p.caption}
+
+Hashtags:
+${p.hashtags || "None"}`
+    );
+
+}
+
+
+/* =========================================================
+   DELETE POST
+========================================================= */
+
+function deletePost(id){
+
+    const p =
+        posts.find(x => x.id === id);
+
+    if(!p) return;
+
+
+    if(!confirm(
+        `Delete "${p.title}"?`
+    )) return;
+
+
+    posts =
+        posts.filter(x => x.id !== id);
+
+    savePostStorage();
+
+    renderAll();
+
+    showToast("Post deleted.");
+
+}
+
+
+/* =========================================================
+   CLEAR POSTS
+========================================================= */
+
+function clearPosts(){
+
+    if(!confirm(
+        "Are you sure you want to clear all post history?"
+    )) return;
+
+
+    posts = [];
+
+    savePostStorage();
+
+    renderAll();
+
+    showToast("Post history cleared.");
+
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+let calendarDate = new Date();
+
+
+function renderCalendar(){
+
+    const container =
+        document.getElementById("calendarCells");
+
+    if(!container) return;
+
+
+    const year =
+        calendarDate.getFullYear();
+
+    const month =
+        calendarDate.getMonth();
+
+
+    document.getElementById(
+        "calendarMonthLabel"
+    ).textContent =
+        calendarDate.toLocaleDateString(
+            "en-IN",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        );
+
+
+    const firstDay =
+        new Date(year,month,1).getDay();
+
+    const daysInMonth =
+        new Date(year,month+1,0).getDate();
+
+
+    let html = "";
+
+
+    for(let i=0;i<firstDay;i++){
+
+        html += `
+            <div class="calendar-cell"></div>
+        `;
+
+    }
+
+
+    for(let day=1;day<=daysInMonth;day++){
+
+        const dateString =
+            `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+
+
+        const dayPosts =
+            posts.filter(
+                p => p.date === dateString
+            );
+
+
+        html += `
+
+            <div class="calendar-cell">
+
+                <div class="calendar-date">
+                    ${day}
+                </div>
+
+                ${
+                    dayPosts.map(p => `
+
+                        <div
+                            class="calendar-event"
+                            onclick="viewPost('${p.id}')"
+                            title="${escapeHTML(p.title)}"
+                        >
+                            ${escapeHTML(p.title)}
+                        </div>
+
+                    `).join("")
+                }
+
+            </div>
+        `;
+
+    }
+
+
+    container.innerHTML = html;
+
+}
+
+
+function changeMonth(direction){
+
+    if(direction === 0){
+
+        calendarDate = new Date();
+
+    }else{
+
+        calendarDate.setMonth(
+            calendarDate.getMonth() + direction
+        );
+
+    }
+
+    renderCalendar();
+
+}
+
+
+/* =========================================================
+   QUICK PLATFORM
+========================================================= */
+
+function quickPlatform(platform){
+
+    switchTab("create");
+
+
+    document.querySelectorAll(
+        '#create input[type="checkbox"]'
+    ).forEach(x => {
+
+        x.checked =
+            x.value === platform;
+
+    });
+
+
+    showToast(
+        platform + " selected for new post."
+    );
+
+}
+
+
+/* =========================================================
+   EXPORT CAMPAIGNS
+========================================================= */
+
+function exportCampaigns(){
+
+    if(campaigns.length === 0){
+
+        showToast("No campaigns to export.");
+
+        return;
+
+    }
+
+
+    const rows = [
+
+        [
+            "Campaign ID",
+            "Campaign Name",
+            "Objective",
+            "Platforms",
+            "Start Date",
+            "End Date",
+            "Budget",
+            "Status",
+            "Notes"
+        ],
+
+        ...campaigns.map(c => [
+
+            c.id,
+            c.name,
+            c.objective,
+            c.platforms.join(" | "),
+            c.start,
+            c.end,
+            c.budget,
+            c.status,
+            c.notes
+
+        ])
+
+    ];
+
+
+    downloadCSV(
+        rows,
+        "blackterminal_campaigns.csv"
+    );
+
+}
+
+
+/* =========================================================
+   EXPORT POSTS
+========================================================= */
+
+function exportPosts(){
+
+    if(posts.length === 0){
+
+        showToast("No posts to export.");
+
+        return;
+
+    }
+
+
+    const rows = [
+
+        [
+            "Post ID",
+            "Title",
+            "Platforms",
+            "Type",
+            "Date",
+            "Time",
+            "Campaign",
+            "Status",
+            "Caption",
+            "Hashtags"
+        ],
+
+        ...posts.map(p => [
+
+            p.id,
+            p.title,
+            p.platforms.join(" | "),
+            p.type,
+            p.date,
+            p.time,
+            p.campaign,
+            p.status,
+            p.caption,
+            p.hashtags
+
+        ])
+
+    ];
+
+
+    downloadCSV(
+        rows,
+        "blackterminal_social_posts.csv"
+    );
+
+}
+
+
+/* =========================================================
+   CSV DOWNLOAD
+========================================================= */
+
+function downloadCSV(rows,filename){
+
+    const csv =
+        rows.map(row =>
+            row.map(value =>
+                `"${String(value ?? "")
+                    .replace(/"/g,'""')}"`
+            ).join(",")
+        ).join("\n");
+
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type:"text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+
+    a.download = filename;
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    URL.revokeObjectURL(url);
+
+    showToast("CSV exported successfully.");
+
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+function closeModal(id){
+
+    document.getElementById(id)
+        ?.classList.remove("show");
+
+}
+
+
+document.querySelectorAll(".modal-overlay")
+.forEach(modal => {
+
+    modal.addEventListener("click",function(e){
+
+        if(e.target === modal){
+
+            modal.classList.remove("show");
+
+        }
+
+    });
+
+});
+
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key === "Escape"){
+
+        document.querySelectorAll(
+            ".modal-overlay.show"
+        ).forEach(m => {
+
+            m.classList.remove("show");
+
+        });
+
+    }
+
+});
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+document.querySelectorAll(".nav-item")
+.forEach(item => {
+
+    item.addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        document.querySelectorAll(".nav-item")
+        .forEach(x => x.classList.remove("active"));
+
+        this.classList.add("active");
+
+        const page =
+            this.dataset.page;
+
+        if(page !== "Promotion / Social Media"){
+
+            showToast(
+                page + " page navigation is ready."
+            );
+
+        }
+
+        document.getElementById("sidebar")
+            .classList.remove("open");
+
+    });
+
+});
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+document.getElementById("mobileMenu")
+?.addEventListener("click",function(){
+
+    document.getElementById("sidebar")
+        .classList.toggle("open");
+
+});
+
+
+/* =========================================================
+   GLOBAL SEARCH
+========================================================= */
+
+document.getElementById("globalSearch")
+?.addEventListener("input",function(){
+
+    const value =
+        this.value.trim();
+
+    if(value){
+
+        switchTab("history");
+
+        document.getElementById("postSearch")
+            .value = value;
+
+        renderHistory();
+
+    }
+
+});
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function generateId(prefix){
+
+    const year =
+        new Date().getFullYear();
+
+    const random =
+        Math.floor(
+            100 + Math.random() * 900
+        );
+
+    return `${prefix}${year}-${random}`;
+
+}
+
+
+function getToday(){
+
+    const d = new Date();
+
+    return `${d.getFullYear()}-${String(
+        d.getMonth()+1
+    ).padStart(2,"0")}-${String(
+        d.getDate()
+    ).padStart(2,"0")}`;
+
+}
+
+
+function setTodayDate(){
+
+    const date =
+        document.getElementById("postDate");
+
+    if(date){
+
+        date.value = getToday();
+
+    }
+
+}
+
+
+function formatDate(date){
+
+    if(!date) return "—";
+
+    const d =
+        new Date(date + "T00:00:00");
+
+    if(isNaN(d.getTime())) return date;
+
+    return d.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+function statusBadge(status){
+
+    const map = {
+
+        Active:"badge-green",
+
+        Draft:"badge-purple",
+
+        Scheduled:"badge-orange",
+
+        Published:"badge-green",
+
+        Completed:"badge-blue",
+
+        Paused:"badge-red"
+
+    };
+
+
+    return `
+        <span class="badge ${map[status] || "badge-blue"}">
+            ${escapeHTML(status)}
+        </span>
+    `;
+
+}
+
+
+function getInitials(text){
+
+    return String(text || "BT")
+        .split(" ")
+        .slice(0,2)
+        .map(x => x.charAt(0))
+        .join("")
+        .toUpperCase();
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message){
+
+    const container =
+        document.getElementById("toastContainer");
+
+
+    const toast =
+        document.createElement("div");
+
+    toast.className = "toast";
+
+    toast.textContent = message;
+
+
+    container.appendChild(toast);
+
+
+    setTimeout(() => {
+
+        toast.remove();
+
+    },3000);
+
+}
+
+
+/* =========================================================
+   INITIAL PREVIEW
+========================================================= */
+
+updatePreview();
+
+</script>
+
+</body>
+</html>

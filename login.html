@@ -1,1840 +1,3313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071426">
-<title>BlackTerminal | Staff Portal</title>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<meta
+    name="theme-color"
+    content="#071426"
+>
+
+<meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+>
+
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+>
+
+<title>BlackTerminal | Secure Staff Login</title>
+
 
 <style>
+
+/* =========================================================
+   BLACKTERMINAL LOGIN
+   MODERN MOBILE-FIRST VERSION
+========================================================= */
+
 :root{
-  --navy:#071426;
-  --blue:#086ee1;
-  --blue2:#18a0ff;
-  --text:#142033;
-  --muted:#718096;
-  --line:#dce4ef;
+
+    --navy:#071426;
+    --navy2:#0b2341;
+
+    --blue:#0878e8;
+    --blue2:#18a0ff;
+    --blue3:#1556d8;
+
+    --text:#142033;
+    --muted:#718096;
+
+    --line:#dce5f0;
+
+    --green:#168047;
+    --green-bg:#eaf8f0;
+
+    --red:#b42318;
+    --red-bg:#fff1f1;
+
+    --white:#ffffff;
+
+    --shadow:
+        0 25px 80px rgba(0,0,0,.25);
+
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+
+    margin:0;
+    padding:0;
+
+    box-sizing:border-box;
+
+    -webkit-tap-highlight-color:transparent;
+
 }
+
+
+html{
+
+    width:100%;
+
+    min-height:100%;
+
+}
+
 
 body{
-  min-height:100vh;
-  font-family:Inter,Segoe UI,Arial,sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 8% 8%,rgba(24,160,255,.18),transparent 27%),
-    radial-gradient(circle at 92% 90%,rgba(75,55,220,.16),transparent 30%),
-    linear-gradient(135deg,#06111f,#0b1e39 52%,#071426);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:22px;
+
+    width:100%;
+    min-height:100vh;
+    min-height:100dvh;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color:var(--text);
+
+    background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(24,160,255,.20),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(92,64,220,.18),
+            transparent 32%
+        ),
+
+        linear-gradient(
+            135deg,
+            #050e1a,
+            #0a1e37 55%,
+            #071426
+        );
+
+    overflow-x:hidden;
+
 }
 
-.page{
-  width:min(1120px,100%);
-  min-height:680px;
-  background:#fff;
-  border-radius:30px;
-  overflow:hidden;
-  display:grid;
-  grid-template-columns:1.03fr .97fr;
-  box-shadow:0 30px 90px rgba(0,0,0,.34);
+
+button,
+input,
+select{
+
+    font:inherit;
+
 }
 
-.left{
-  position:relative;
-  padding:48px 55px;
-  color:#fff;
-  overflow:hidden;
-  background:
-    linear-gradient(
-      145deg,
-      #061120 0%,
-      #0b2850 58%,
-      #0878e8 130%
-    );
+
+button{
+
+    cursor:pointer;
+
 }
 
-.left:before,
-.left:after{
-  content:"";
-  position:absolute;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.08);
-}
-
-.left:before{
-  width:430px;
-  height:430px;
-  right:-240px;
-  top:-190px;
-}
-
-.left:after{
-  width:360px;
-  height:360px;
-  left:-250px;
-  bottom:-190px;
-}
-
-.logo{
-  position:relative;
-  z-index:2;
-  font-size:39px;
-  font-weight:900;
-  letter-spacing:-2.4px;
-}
-
-.logo b{
-  color:#1684ff;
-}
-
-.institute{
-  font-size:12px;
-  letter-spacing:4.4px;
-  font-weight:800;
-  margin-top:5px;
-  color:#d9eaff;
-}
-
-.hero{
-  position:relative;
-  z-index:2;
-  margin-top:83px;
-}
-
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  background:rgba(24,160,255,.13);
-  border:1px solid rgba(24,160,255,.35);
-  padding:8px 13px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:1.2px;
-}
-
-.hero h1{
-  font-size:49px;
-  line-height:1.03;
-  letter-spacing:-2px;
-  margin:20px 0 16px;
-}
-
-.hero h1 span{
-  color:#36a4ff;
-}
-
-.hero p{
-  max-width:475px;
-  color:#d7e7fb;
-  line-height:1.75;
-  font-size:15px;
-}
-
-.cards{
-  position:relative;
-  z-index:2;
-  margin-top:38px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:13px;
-}
-
-.card{
-  padding:16px;
-  border-radius:17px;
-  background:rgba(255,255,255,.075);
-  border:1px solid rgba(255,255,255,.10);
-  backdrop-filter:blur(5px);
-}
-
-.card strong{
-  display:block;
-  font-size:13px;
-  margin-bottom:5px;
-}
-
-.card small{
-  color:#bfd4ee;
-  line-height:1.45;
-}
-
-.footer-left{
-  position:absolute;
-  z-index:2;
-  bottom:27px;
-  font-size:11px;
-  color:#a9c1de;
-}
-
-.right{
-  padding:42px 54px;
-  display:flex;
-  align-items:center;
-  background:#fff;
-}
-
-.form{
-  width:100%;
-  max-width:430px;
-  margin:auto;
-}
-
-.topline{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:22px;
-}
-
-.secure{
-  font-size:11px;
-  font-weight:800;
-  color:#168047;
-  background:#eaf8f0;
-  padding:7px 10px;
-  border-radius:999px;
-}
-
-.role-label{
-  font-size:12px;
-  color:#778397;
-  font-weight:700;
-}
-
-h2{
-  font-size:34px;
-  letter-spacing:-1px;
-  margin:0 0 8px;
-}
-
-.subtitle{
-  font-size:14px;
-  color:var(--muted);
-  line-height:1.55;
-  margin:0 0 28px;
-}
-
-label{
-  display:block;
-  font-size:12px;
-  font-weight:850;
-  margin:17px 0 8px;
-}
 
 input,
 select{
-  width:100%;
-  height:51px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  padding:0 15px;
-  font-size:14px;
-  outline:none;
-  background:#fff;
-  color:var(--text);
-  transition:.2s;
+
+    -webkit-appearance:none;
+    appearance:none;
+
 }
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+
+    width:min(1160px,100%);
+
+    min-height:700px;
+
+    margin:auto;
+
+    background:#fff;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+/* =========================================================
+   LEFT BRAND
+========================================================= */
+
+.left{
+
+    position:relative;
+
+    min-height:700px;
+
+    padding:
+        46px
+        50px;
+
+    color:white;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(24,160,255,.28),
+            transparent 28%
+        ),
+
+        linear-gradient(
+            145deg,
+            #061120,
+            #0a2850 62%,
+            #0878e8
+        );
+
+}
+
+
+.left::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border:1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:50%;
+
+    right:-280px;
+    top:-230px;
+
+}
+
+
+.left::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:400px;
+    height:400px;
+
+    border:1px solid
+        rgba(255,255,255,.07);
+
+    border-radius:50%;
+
+    left:-280px;
+    bottom:-220px;
+
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+.logo{
+
+    font-size:40px;
+
+    font-weight:950;
+
+    letter-spacing:-2.5px;
+
+}
+
+
+.logo span{
+
+    color:#168cff;
+
+}
+
+
+.institute{
+
+    margin-top:5px;
+
+    color:#cfe3fa;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:3.8px;
+
+}
+
+
+/* =========================================================
+   LEFT HERO
+========================================================= */
+
+.hero{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:95px;
+
+}
+
+
+.eyebrow{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:
+        8px
+        12px;
+
+    border-radius:999px;
+
+    background:
+        rgba(24,160,255,.13);
+
+    border:
+        1px solid
+        rgba(24,160,255,.35);
+
+    color:#d8ecff;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+}
+
+
+.hero h1{
+
+    margin-top:21px;
+
+    font-size:51px;
+
+    line-height:1.03;
+
+    letter-spacing:-2.5px;
+
+}
+
+
+.hero h1 span{
+
+    color:#39a7ff;
+
+}
+
+
+.hero p{
+
+    max-width:470px;
+
+    margin-top:18px;
+
+    color:#cfe0f4;
+
+    font-size:14px;
+
+    line-height:1.75;
+
+}
+
+
+/* =========================================================
+   FEATURE CARDS
+========================================================= */
+
+.features{
+
+    position:relative;
+
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:11px;
+
+    margin-top:38px;
+
+}
+
+
+.feature{
+
+    min-height:85px;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    backdrop-filter:
+        blur(8px);
+
+}
+
+
+.feature-icon{
+
+    font-size:18px;
+
+}
+
+
+.feature strong{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:11px;
+
+}
+
+
+.feature small{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#abc4df;
+
+    font-size:9px;
+
+    line-height:1.45;
+
+}
+
+
+.left-footer{
+
+    position:absolute;
+
+    z-index:2;
+
+    left:50px;
+
+    bottom:27px;
+
+    color:#9eb8d5;
+
+    font-size:10px;
+
+}
+
+
+/* =========================================================
+   RIGHT
+========================================================= */
+
+.right{
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:
+        45px
+        55px;
+
+    background:#fff;
+
+}
+
+
+.form{
+
+    width:100%;
+
+    max-width:430px;
+
+    margin:auto;
+
+}
+
+
+/* =========================================================
+   TOPLINE
+========================================================= */
+
+.topline{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:22px;
+
+}
+
+
+.role-label{
+
+    color:#718096;
+
+    font-size:12px;
+
+    font-weight:750;
+
+}
+
+
+.secure{
+
+    flex:none;
+
+    padding:
+        7px
+        10px;
+
+    border-radius:999px;
+
+    background:var(--green-bg);
+
+    color:var(--green);
+
+    font-size:10px;
+
+    font-weight:850;
+
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+h2{
+
+    font-size:35px;
+
+    line-height:1.1;
+
+    letter-spacing:-1.4px;
+
+}
+
+
+.subtitle{
+
+    margin-top:9px;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.6;
+
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group{
+
+    margin-top:21px;
+
+}
+
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#172236;
+
+    font-size:12px;
+
+    font-weight:850;
+
+}
+
+
+input,
+select{
+
+    width:100%;
+
+    height:52px;
+
+    padding:
+        0 15px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:14px;
+
+    outline:none;
+
+    background:#fff;
+
+    color:var(--text);
+
+    font-size:14px;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s,
+        background .2s;
+
+}
+
+
+input::placeholder{
+
+    color:#9aa6b6;
+
+}
+
 
 input:focus,
 select:focus{
-  border-color:#1988ed;
-  box-shadow:0 0 0 4px rgba(25,136,237,.10);
+
+    border-color:#1887ed;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(24,135,237,.10);
+
 }
 
-.field{
-  position:relative;
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.select-wrap{
+
+    position:relative;
+
 }
 
-.password input{
-  padding-right:50px;
+
+.select-wrap::after{
+
+    content:"⌄";
+
+    position:absolute;
+
+    right:17px;
+
+    top:50%;
+
+    transform:
+        translateY(-54%);
+
+    color:#65748a;
+
+    font-size:17px;
+
+    pointer-events:none;
+
 }
+
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+.password-wrap{
+
+    position:relative;
+
+}
+
+
+.password-wrap input{
+
+    padding-right:58px;
+
+}
+
 
 .eye{
-  position:absolute;
-  right:7px;
-  top:7px;
-  width:37px;
-  height:37px;
-  border:0;
-  border-radius:10px;
-  background:#f2f6fb;
-  color:#526176;
-  cursor:pointer;
-  font-size:16px;
+
+    position:absolute;
+
+    right:6px;
+    top:6px;
+
+    width:40px;
+    height:40px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:0;
+
+    border-radius:11px;
+
+    background:#f2f6fb;
+
+    color:#516074;
+
+    font-size:17px;
+
 }
 
-.row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:15px;
+
+.eye:active{
+
+    transform:scale(.94);
+
 }
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+.options{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-top:15px;
+
+}
+
 
 .remember{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:12px;
-  color:#5f6b7d;
-  cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin:0;
+
+    color:#667387;
+
+    font-size:12px;
+
+    font-weight:650;
+
 }
+
 
 .remember input{
-  width:15px;
-  height:15px;
-  margin:0;
-  accent-color:var(--blue);
+
+    width:17px;
+    height:17px;
+
+    padding:0;
+
+    accent-color:
+        var(--blue);
+
 }
+
 
 .forgot{
-  border:0;
-  background:none;
-  color:#086ee1;
-  font-weight:800;
-  font-size:12px;
-  cursor:pointer;
-  padding:0;
+
+    border:0;
+
+    background:transparent;
+
+    color:#086ee1;
+
+    font-size:12px;
+
+    font-weight:850;
+
+    white-space:nowrap;
+
 }
+
+
+/* =========================================================
+   SIGN IN
+========================================================= */
 
 .signin{
-  width:100%;
-  height:53px;
-  margin-top:25px;
-  border:0;
-  border-radius:14px;
-  background:linear-gradient(135deg,#0878e8,#1556d8);
-  color:#fff;
-  font-size:15px;
-  font-weight:900;
-  cursor:pointer;
-  box-shadow:0 12px 28px rgba(8,120,232,.23);
-  transition:.2s;
+
+    width:100%;
+
+    height:54px;
+
+    margin-top:25px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0878e8,
+            #1556d8
+        );
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 12px 30px
+        rgba(8,120,232,.23);
+
+    transition:
+        transform .2s,
+        opacity .2s;
+
 }
+
 
 .signin:hover{
-  transform:translateY(-1px);
+
+    transform:
+        translateY(-1px);
+
 }
+
+
+.signin:active{
+
+    transform:
+        translateY(1px);
+
+}
+
 
 .signin:disabled{
-  opacity:.7;
-  cursor:wait;
-  transform:none;
+
+    opacity:.65;
+
+    cursor:wait;
+
+    transform:none;
+
 }
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
 
 .message{
-  display:none;
-  margin-top:14px;
-  padding:11px 13px;
-  border-radius:11px;
-  font-size:12px;
-  line-height:1.45;
+
+    display:none;
+
+    margin-top:13px;
+
+    padding:
+        12px
+        13px;
+
+    border-radius:12px;
+
+    font-size:12px;
+
+    line-height:1.5;
+
 }
+
 
 .message.show{
-  display:block;
+
+    display:block;
+
 }
+
 
 .message.error{
-  background:#fff1f1;
-  color:#b42318;
-  border:1px solid #ffd2d2;
+
+    color:var(--red);
+
+    background:var(--red-bg);
+
+    border:
+        1px solid
+        #ffd0d0;
+
 }
+
 
 .message.success{
-  background:#effbf4;
-  color:#18733c;
-  border:1px solid #ccefd9;
+
+    color:#18733c;
+
+    background:#effbf4;
+
+    border:
+        1px solid
+        #ccefd9;
+
 }
+
+
+/* =========================================================
+   HELP
+========================================================= */
 
 .divider{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin:26px 0 18px;
-  color:#a1aab8;
-  font-size:11px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:
+        25px 0 16px;
+
+    color:#a0aaba;
+
+    font-size:11px;
+
 }
 
-.divider:before,
-.divider:after{
-  content:"";
-  height:1px;
-  background:#e7ebf1;
-  flex:1;
+
+.divider::before,
+.divider::after{
+
+    content:"";
+
+    height:1px;
+
+    flex:1;
+
+    background:#e7ebf1;
+
 }
+
 
 .help{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:10px;
+
 }
+
 
 .help button{
-  height:43px;
-  border:1px solid #e2e8f0;
-  background:#fff;
-  border-radius:11px;
-  color:#465367;
-  font-size:12px;
-  font-weight:750;
-  cursor:pointer;
+
+    min-height:44px;
+
+    border:
+        1px solid
+        #e1e7ef;
+
+    border-radius:12px;
+
+    background:#fff;
+
+    color:#4a586d;
+
+    font-size:11px;
+
+    font-weight:800;
+
 }
 
-.help button:hover{
-  background:#f7faff;
-  border-color:#b9d9fa;
-  color:#086ee1;
+
+.help button:active{
+
+    background:#f5f9ff;
+
 }
+
+
+/* =========================================================
+   COPYRIGHT
+========================================================= */
 
 .copyright{
-  text-align:center;
-  color:#a0a9b7;
-  font-size:10px;
-  margin-top:23px;
+
+    margin-top:21px;
+
+    text-align:center;
+
+    color:#a2acbb;
+
+    font-size:10px;
+
 }
+
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal-backdrop{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(4,12,25,.65);
-  z-index:20;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+        max(18px,env(safe-area-inset-top))
+        18px
+        max(18px,env(safe-area-inset-bottom));
+
+    background:
+        rgba(4,12,25,.68);
+
+    backdrop-filter:
+        blur(5px);
+
 }
+
 
 .modal-backdrop.show{
-  display:flex;
+
+    display:flex;
+
 }
+
 
 .modal{
-  width:min(430px,100%);
-  background:#fff;
-  border-radius:20px;
-  padding:28px;
-  box-shadow:0 25px 70px rgba(0,0,0,.35);
+
+    width:min(430px,100%);
+
+    max-height:
+        calc(100dvh - 36px);
+
+    overflow:auto;
+
+    padding:25px;
+
+    border-radius:22px;
+
+    background:#fff;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.35);
+
 }
+
 
 .modal h3{
-  margin:0 0 7px;
-  font-size:22px;
+
+    font-size:21px;
+
+    letter-spacing:-.5px;
+
 }
+
 
 .modal p{
-  font-size:13px;
-  color:#687487;
-  line-height:1.55;
+
+    margin-top:7px;
+
+    color:#687487;
+
+    font-size:13px;
+
+    line-height:1.55;
+
 }
+
 
 .modal input{
-  margin-top:10px;
+
+    margin-top:14px;
+
 }
+
 
 .modal-actions{
-  display:flex;
-  gap:10px;
-  margin-top:16px;
+
+    display:grid;
+
+    grid-template-columns:
+        auto
+        1fr;
+
+    gap:10px;
+
+    margin-top:16px;
+
 }
+
 
 .modal-actions button{
-  height:44px;
-  border-radius:11px;
-  padding:0 16px;
-  font-weight:800;
-  cursor:pointer;
+
+    min-height:45px;
+
+    padding:
+        0 16px;
+
+    border-radius:11px;
+
+    font-size:12px;
+
+    font-weight:850;
+
 }
+
 
 .cancel{
-  border:1px solid #dce4ef;
-  background:#fff;
-  color:#516074;
+
+    border:
+        1px solid
+        #dce4ef;
+
+    background:#fff;
+
+    color:#516074;
+
 }
+
 
 .send{
-  border:0;
-  background:#086ee1;
-  color:#fff;
-  flex:1;
+
+    border:0;
+
+    background:#086ee1;
+
+    color:#fff;
+
 }
 
-@media(max-width:820px){
 
-  body{
-    padding:0;
-  }
+/* =========================================================
+   TABLET
+========================================================= */
 
-  .page{
-    grid-template-columns:1fr;
-    border-radius:0;
-    min-height:100vh;
-  }
+@media(max-width:900px){
 
-  .left{
-    padding:32px 25px;
-  }
+    .page{
 
-  .hero{
-    margin-top:48px;
-  }
+        grid-template-columns:
+            1fr;
 
-  .hero h1{
-    font-size:39px;
-  }
+        width:min(560px,100%);
 
-  .cards{
-    margin-bottom:45px;
-  }
+        min-height:auto;
 
-  .footer-left{
-    position:static;
-    margin-top:35px;
-  }
+        border-radius:24px;
 
-  .right{
-    padding:36px 25px 45px;
-  }
+    }
+
+
+    .left{
+
+        min-height:auto;
+
+        padding:
+            30px
+            32px
+            32px;
+
+    }
+
+
+    .hero{
+
+        margin-top:45px;
+
+    }
+
+
+    .hero h1{
+
+        font-size:43px;
+
+    }
+
+
+    .features{
+
+        margin-top:27px;
+
+    }
+
+
+    .left-footer{
+
+        position:static;
+
+        margin-top:28px;
+
+    }
+
+
+    .right{
+
+        padding:
+            34px
+            32px
+            38px;
+
+    }
+
 }
 
-@media(max-width:430px){
 
-  .cards{
-    grid-template-columns:1fr;
-  }
+/* =========================================================
+   MOBILE
+========================================================= */
 
-  .left{
-    padding:27px 20px;
-  }
+@media(max-width:600px){
 
-  .logo{
-    font-size:32px;
-  }
+    body{
 
-  .hero h1{
-    font-size:35px;
-  }
+        display:block;
 
-  .right{
-    padding:32px 20px;
-  }
+        padding:0;
+
+        background:#f5f8fc;
+
+    }
+
+
+    .page{
+
+        width:100%;
+
+        min-height:100dvh;
+
+        border-radius:0;
+
+        box-shadow:none;
+
+        display:block;
+
+        background:#fff;
+
+    }
+
+
+    /* MOBILE BRAND */
+
+    .left{
+
+        padding:
+            calc(22px + env(safe-area-inset-top))
+            20px
+            24px;
+
+        min-height:auto;
+
+        border-radius:0 0 28px 28px;
+
+    }
+
+
+    .logo{
+
+        font-size:28px;
+
+        letter-spacing:-1.8px;
+
+    }
+
+
+    .institute{
+
+        font-size:8px;
+
+        letter-spacing:2.5px;
+
+    }
+
+
+    .hero{
+
+        margin-top:27px;
+
+    }
+
+
+    .eyebrow{
+
+        padding:
+            7px
+            10px;
+
+        font-size:9px;
+
+    }
+
+
+    .hero h1{
+
+        margin-top:14px;
+
+        font-size:35px;
+
+        line-height:1.04;
+
+        letter-spacing:-1.8px;
+
+    }
+
+
+    .hero p{
+
+        margin-top:11px;
+
+        font-size:12px;
+
+        line-height:1.6;
+
+        max-width:100%;
+
+    }
+
+
+    /* Hide large feature cards on phone */
+
+    .features{
+
+        display:none;
+
+    }
+
+
+    .left-footer{
+
+        display:none;
+
+    }
+
+
+    /* MOBILE FORM */
+
+    .right{
+
+        display:block;
+
+        padding:
+            25px
+            20px
+            calc(30px + env(safe-area-inset-bottom));
+
+    }
+
+
+    .form{
+
+        max-width:none;
+
+    }
+
+
+    .topline{
+
+        margin-bottom:19px;
+
+    }
+
+
+    .role-label{
+
+        font-size:11px;
+
+    }
+
+
+    .secure{
+
+        padding:
+            6px
+            9px;
+
+        font-size:9px;
+
+    }
+
+
+    h2{
+
+        font-size:30px;
+
+        letter-spacing:-1.2px;
+
+    }
+
+
+    .subtitle{
+
+        font-size:12px;
+
+        line-height:1.55;
+
+        margin-top:7px;
+
+    }
+
+
+    .form-group{
+
+        margin-top:18px;
+
+    }
+
+
+    label{
+
+        font-size:11px;
+
+        margin-bottom:7px;
+
+    }
+
+
+    input,
+    select{
+
+        height:54px;
+
+        border-radius:14px;
+
+        font-size:15px;
+
+    }
+
+
+    .eye{
+
+        width:42px;
+
+        height:42px;
+
+        top:6px;
+
+        right:6px;
+
+    }
+
+
+    .options{
+
+        margin-top:14px;
+
+    }
+
+
+    .remember{
+
+        font-size:11px;
+
+    }
+
+
+    .forgot{
+
+        font-size:11px;
+
+    }
+
+
+    .signin{
+
+        height:55px;
+
+        margin-top:23px;
+
+        border-radius:15px;
+
+        font-size:15px;
+
+    }
+
+
+    .help button{
+
+        min-height:46px;
+
+        font-size:11px;
+
+    }
+
+
+    .copyright{
+
+        margin-top:20px;
+
+        padding-bottom:5px;
+
+    }
+
 }
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(max-width:380px){
+
+    .left{
+
+        padding-left:17px;
+
+        padding-right:17px;
+
+    }
+
+
+    .right{
+
+        padding-left:17px;
+
+        padding-right:17px;
+
+    }
+
+
+    .hero h1{
+
+        font-size:31px;
+
+    }
+
+
+    h2{
+
+        font-size:27px;
+
+    }
+
+
+    .options{
+
+        gap:8px;
+
+    }
+
+
+    .help{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+/* =========================================================
+   LANDSCAPE MOBILE
+========================================================= */
+
+@media(
+    max-width:900px
+) and (
+    orientation:landscape
+){
+
+    .page{
+
+        width:100%;
+
+        max-width:none;
+
+    }
+
+
+    .left{
+
+        padding:25px 30px;
+
+    }
+
+
+    .hero{
+
+        margin-top:25px;
+
+    }
+
+
+    .features{
+
+        display:none;
+
+    }
+
+
+    .left-footer{
+
+        display:none;
+
+    }
+
+
+    .right{
+
+        padding:28px 30px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *{
+
+        scroll-behavior:auto !important;
+
+        transition:none !important;
+
+        animation:none !important;
+
+    }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <main class="page">
+
+
+<!-- =====================================================
+     BRAND SECTION
+===================================================== -->
 
 <section class="left">
 
-  <div class="logo">
-    Black<b>Terminal</b>
-  </div>
 
-  <div class="institute">
-    COMPUTER INSTITUTE · BARIPADA
-  </div>
+    <div class="brand">
 
-  <div class="hero">
+        <div class="logo">
+            Black<span>Terminal</span>
+        </div>
 
-    <div class="eyebrow">
-      🔐 SECURE STAFF PORTAL
+        <div class="institute">
+            COMPUTER INSTITUTE · BARIPADA
+        </div>
+
     </div>
 
-    <h1>
-      Run your institute<br>
-      <span>smarter.</span>
-    </h1>
 
-    <p>
-      A single workspace for student coordination,
-      admissions, fees, attendance, communication
-      and everyday institute operations.
-    </p>
+    <div class="hero">
 
-  </div>
+        <div class="eyebrow">
+            🔐 SECURE STAFF PORTAL
+        </div>
 
-  <div class="cards">
 
-    <div class="card">
-      <strong>👨‍🎓 Students</strong>
-      <small>
-        Profiles, courses, batches and records.
-      </small>
+        <h1>
+            Run your institute
+            <span>smarter.</span>
+        </h1>
+
+
+        <p>
+            One secure workspace for students,
+            admissions, fees, attendance,
+            communication and daily institute operations.
+        </p>
+
     </div>
 
-    <div class="card">
-      <strong>💰 Fees</strong>
-      <small>
-        Payments, dues and receipts.
-      </small>
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                👨‍🎓
+            </div>
+
+            <strong>
+                Students
+            </strong>
+
+            <small>
+                Profiles, courses and batches.
+            </small>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                💰
+            </div>
+
+            <strong>
+                Fees
+            </strong>
+
+            <small>
+                Payments and pending dues.
+            </small>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📅
+            </div>
+
+            <strong>
+                Attendance
+            </strong>
+
+            <small>
+                Classes and attendance tracking.
+            </small>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📢
+            </div>
+
+            <strong>
+                Communication
+            </strong>
+
+            <small>
+                Notices and student updates.
+            </small>
+
+        </div>
+
+
     </div>
 
-    <div class="card">
-      <strong>📅 Attendance</strong>
-      <small>
-        Classes and attendance tracking.
-      </small>
+
+    <div class="left-footer">
+        BlackTerminal Computer Institute · Baripada
     </div>
 
-    <div class="card">
-      <strong>📢 Communication</strong>
-      <small>
-        Notices and student updates.
-      </small>
-    </div>
-
-  </div>
-
-  <div class="footer-left">
-    BlackTerminal Computer Institute · Baripada
-  </div>
 
 </section>
 
+
+<!-- =====================================================
+     LOGIN SECTION
+===================================================== -->
 
 <section class="right">
 
-<form class="form" id="loginForm">
 
-  <div class="topline">
-
-    <span class="role-label">
-      Staff Management Portal
-    </span>
-
-    <span class="secure">
-      ● Secure Login
-    </span>
-
-  </div>
-
-  <h2>
-    Welcome back
-  </h2>
-
-  <p class="subtitle">
-    Sign in with your staff credentials
-    to access the management portal.
-  </p>
+<form
+    class="form"
+    id="loginForm"
+>
 
 
-  <label for="role">
-    Login as
-  </label>
-
-  <select id="role">
-
-    <option value="staff">
-      Student Coordinator / Staff
-    </option>
-
-    <option value="admin">
-      Institute Admin
-    </option>
-
-    <option value="faculty">
-      Faculty
-    </option>
-
-  </select>
+    <div class="topline">
 
 
-  <label for="identity">
-    Email or Staff ID
-  </label>
-
-  <input
-    id="identity"
-    type="text"
-    autocomplete="username"
-    placeholder="e.g. BTSTAFF001 or email@example.com"
-    required
-  >
+        <span class="role-label">
+            Staff Management Portal
+        </span>
 
 
-  <label for="password">
-    Password
-  </label>
+        <span class="secure">
+            ● Secure Login
+        </span>
 
-  <div class="field password">
 
-    <input
-      id="password"
-      type="password"
-      autocomplete="current-password"
-      placeholder="Enter your password"
-      required
-    >
+    </div>
+
+
+    <h2>
+        Welcome back
+    </h2>
+
+
+    <p class="subtitle">
+        Sign in with your staff credentials
+        to access the management portal.
+    </p>
+
+
+    <!-- ROLE -->
+
+    <div class="form-group">
+
+        <label for="role">
+            Login as
+        </label>
+
+
+        <div class="select-wrap">
+
+            <select id="role">
+
+                <option value="staff">
+                    Student Coordinator / Staff
+                </option>
+
+                <option value="admin">
+                    Institute Admin
+                </option>
+
+                <option value="faculty">
+                    Faculty
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- ID -->
+
+    <div class="form-group">
+
+        <label for="identity">
+            Email or Staff ID
+        </label>
+
+
+        <input
+            id="identity"
+            type="text"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            placeholder="Email or BTSTAFF001"
+            required
+        >
+
+    </div>
+
+
+    <!-- PASSWORD -->
+
+    <div class="form-group">
+
+        <label for="password">
+            Password
+        </label>
+
+
+        <div class="password-wrap">
+
+            <input
+                id="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Enter your password"
+                required
+            >
+
+
+            <button
+                class="eye"
+                id="togglePassword"
+                type="button"
+                aria-label="Show password"
+            >
+                👁
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- OPTIONS -->
+
+    <div class="options">
+
+
+        <label class="remember">
+
+            <input
+                id="remember"
+                type="checkbox"
+            >
+
+            <span>
+                Remember me
+            </span>
+
+        </label>
+
+
+        <button
+            class="forgot"
+            id="forgotBtn"
+            type="button"
+        >
+            Forgot password?
+        </button>
+
+
+    </div>
+
+
+    <!-- LOGIN -->
 
     <button
-      class="eye"
-      id="togglePassword"
-      type="button"
-      aria-label="Show password"
+        class="signin"
+        id="signinBtn"
+        type="submit"
     >
-      👁
+        Sign In →
     </button>
 
-  </div>
+
+    <!-- MESSAGE -->
+
+    <div
+        class="message"
+        id="message"
+    ></div>
 
 
-  <div class="row">
+    <!-- HELP -->
 
-    <label class="remember">
-
-      <input
-        id="remember"
-        type="checkbox"
-      >
-
-      Remember me
-
-    </label>
-
-    <button
-      class="forgot"
-      id="forgotBtn"
-      type="button"
-    >
-      Forgot password?
-    </button>
-
-  </div>
+    <div class="divider">
+        Need help?
+    </div>
 
 
-  <button
-    class="signin"
-    id="signinBtn"
-    type="submit"
-  >
-    Sign In →
-  </button>
+    <div class="help">
 
 
-  <div
-    class="message"
-    id="message"
-  ></div>
+        <button
+            type="button"
+            id="contactBtn"
+        >
+            Contact Admin
+        </button>
 
 
-  <div class="divider">
-    Need help?
-  </div>
-
-  <div class="help">
-
-    <button
-      type="button"
-      id="contactBtn"
-    >
-      Contact Admin
-    </button>
-
-    <button
-      type="button"
-      id="securityBtn"
-    >
-      Login Security
-    </button>
-
-  </div>
+        <button
+            type="button"
+            id="securityBtn"
+        >
+            Login Security
+        </button>
 
 
-  <div class="copyright">
-    © 2026 BlackTerminal Computer Institute, Baripada
-  </div>
+    </div>
+
+
+    <div class="copyright">
+        © 2026 BlackTerminal Computer Institute, Baripada
+    </div>
+
 
 </form>
 
+
 </section>
+
 
 </main>
 
 
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
 <div
-  class="modal-backdrop"
-  id="modalBackdrop"
+    class="modal-backdrop"
+    id="modalBackdrop"
 >
 
-  <div class="modal">
 
-    <h3 id="modalTitle">
-      Reset password
-    </h3>
-
-    <p id="modalText">
-      Enter your registered email address.
-    </p>
-
-    <input
-      id="modalInput"
-      type="email"
-      placeholder="Enter registered email"
+    <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
     >
 
-    <div class="modal-actions">
 
-      <button
-        class="cancel"
-        type="button"
-        id="cancelModal"
-      >
-        Cancel
-      </button>
+        <h3 id="modalTitle">
+            Reset password
+        </h3>
 
-      <button
-        class="send"
-        type="button"
-        id="modalAction"
-      >
-        Continue
-      </button>
+
+        <p id="modalText">
+            Enter your registered email address.
+        </p>
+
+
+        <input
+            id="modalInput"
+            type="email"
+            placeholder="Registered email"
+        >
+
+
+        <div class="modal-actions">
+
+
+            <button
+                class="cancel"
+                type="button"
+                id="cancelModal"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                class="send"
+                type="button"
+                id="modalAction"
+            >
+                Send Reset Link
+            </button>
+
+
+        </div>
+
 
     </div>
-
-  </div>
 
 </div>
 
 
-<!-- FIREBASE LOGIN -->
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
 
 <script type="module">
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+/* =====================================================
+   IMPORT FIREBASE
+===================================================== */
 
 import {
-  getAuth,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  setPersistence,
-  browserLocalPersistence,
-  browserSessionPersistence
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+    initializeApp
+
+} from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
 
 import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
-  addDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+    getAuth,
+
+    signInWithEmailAndPassword,
+
+    sendPasswordResetEmail,
+
+    setPersistence,
+
+    browserLocalPersistence,
+
+    browserSessionPersistence
+
+} from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
 
 import {
-  firebaseConfig
+
+    getFirestore,
+
+    collection,
+
+    query,
+
+    where,
+
+    getDocs,
+
+    addDoc,
+
+    serverTimestamp
+
+} from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+import {
+
+    firebaseConfig
+
 } from "./firebaseconfig.js";
 
 
-/* ==============================
-   FIREBASE INITIALIZATION
-============================== */
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
 const app =
-  initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
+
 
 const auth =
-  getAuth(app);
+    getAuth(app);
+
 
 const db =
-  getFirestore(app);
+    getFirestore(app);
 
 
-/* ==============================
+/* =====================================================
    ELEMENTS
-============================== */
+===================================================== */
 
 const form =
-  document.getElementById("loginForm");
+    document.getElementById("loginForm");
+
 
 const identity =
-  document.getElementById("identity");
+    document.getElementById("identity");
+
 
 const password =
-  document.getElementById("password");
+    document.getElementById("password");
+
 
 const role =
-  document.getElementById("role");
+    document.getElementById("role");
+
 
 const remember =
-  document.getElementById("remember");
+    document.getElementById("remember");
+
 
 const message =
-  document.getElementById("message");
+    document.getElementById("message");
+
 
 const signinBtn =
-  document.getElementById("signinBtn");
+    document.getElementById("signinBtn");
 
 
-/* ==============================
+/* =====================================================
    MESSAGE
-============================== */
+===================================================== */
 
 function showMessage(
-  text,
-  type="error"
+    text,
+    type="error"
 ){
 
-  message.textContent = text;
+    message.textContent =
+        text;
 
-  message.className =
-    "message show " + type;
+    message.className =
+        "message show " + type;
 
 }
+
 
 function clearMessage(){
 
-  message.textContent = "";
+    message.textContent =
+        "";
 
-  message.className =
-    "message";
+    message.className =
+        "message";
 
 }
 
 
-/* ==============================
-   FIREBASE ERROR MESSAGE
-============================== */
+/* =====================================================
+   FIREBASE ERROR
+===================================================== */
 
 function firebaseError(error){
 
-  console.error(error);
+    console.error(
+        "Firebase:",
+        error
+    );
 
-  const code =
-    error?.code || "";
 
-  switch(code){
+    const code =
+        error?.code || "";
 
-    case "auth/invalid-credential":
-      return "Incorrect email/staff ID or password.";
 
-    case "auth/invalid-login-credentials":
-      return "Incorrect email/staff ID or password.";
+    switch(code){
 
-    case "auth/user-not-found":
-      return "No account found with these credentials.";
+        case "auth/invalid-credential":
 
-    case "auth/wrong-password":
-      return "Incorrect password.";
+            return "Incorrect email/staff ID or password.";
 
-    case "auth/invalid-email":
-      return "Please enter a valid email address.";
 
-    case "auth/too-many-requests":
-      return "Too many login attempts. Please try again later.";
+        case "auth/invalid-login-credentials":
 
-    case "auth/user-disabled":
-      return "This Firebase account has been disabled.";
+            return "Incorrect email/staff ID or password.";
 
-    case "auth/network-request-failed":
-      return "Network error. Please check your internet connection.";
 
-    case "permission-denied":
-      return "Firestore permission denied. Check Firebase Security Rules.";
+        case "auth/user-not-found":
 
-    default:
-      return error?.message ||
-        "Unable to sign in. Please try again.";
-  }
+            return "No Firebase account found with this email.";
+
+
+        case "auth/wrong-password":
+
+            return "Incorrect password.";
+
+
+        case "auth/invalid-email":
+
+            return "Please enter a valid email address.";
+
+
+        case "auth/too-many-requests":
+
+            return "Too many login attempts. Please try again later.";
+
+
+        case "auth/user-disabled":
+
+            return "This Firebase account has been disabled.";
+
+
+        case "auth/network-request-failed":
+
+            return "Network error. Please check your internet connection.";
+
+
+        case "permission-denied":
+
+        case "firestore/permission-denied":
+
+            return "Firestore permission denied. Check Firebase Security Rules.";
+
+
+        default:
+
+            return error?.message ||
+                "Unable to sign in. Please try again.";
+
+    }
 
 }
 
 
-/* ==============================
-   PASSWORD VISIBILITY
-============================== */
+/* =====================================================
+   PASSWORD SHOW / HIDE
+===================================================== */
 
 document
-.getElementById("togglePassword")
-.addEventListener(
-  "click",
-  ()=>{
+    .getElementById("togglePassword")
+    .addEventListener(
+        "click",
+        ()=>{
 
-    const hidden =
-      password.type === "password";
-
-    password.type =
-      hidden ? "text" : "password";
-
-    document
-      .getElementById("togglePassword")
-      .textContent =
-        hidden ? "🙈" : "👁";
-
-  }
-);
+            const hidden =
+                password.type === "password";
 
 
-/* ==============================
-   REMEMBER LOGIN ID
-============================== */
+            password.type =
+                hidden
+                    ? "text"
+                    : "password";
+
+
+            document
+                .getElementById("togglePassword")
+                .textContent =
+                    hidden
+                        ? "🙈"
+                        : "👁";
+
+        }
+    );
+
+
+/* =====================================================
+   REMEMBER ID
+===================================================== */
 
 const saved =
-  localStorage.getItem(
-    "bt_staff_identity"
-  );
+    localStorage.getItem(
+        "bt_staff_identity"
+    );
+
 
 if(saved){
 
-  identity.value =
-    saved;
+    identity.value =
+        saved;
 
-  remember.checked =
-    true;
-
-}
-
-
-/* ==============================
-   FIND STAFF BY STAFF ID
-============================== */
-
-async function findStaffById(staffId){
-
-  const q =
-    query(
-      collection(db,"staff"),
-      where("staffId","==",staffId)
-    );
-
-  const snapshot =
-    await getDocs(q);
-
-  if(snapshot.empty){
-
-    return null;
-
-  }
-
-  const doc =
-    snapshot.docs[0];
-
-  return {
-    id:doc.id,
-    ...doc.data()
-  };
+    remember.checked =
+        true;
 
 }
 
 
-/* ==============================
-   FIND STAFF BY EMAIL
-============================== */
+/* =====================================================
+   FIND STAFF BY ID
+===================================================== */
 
-async function findStaffByEmail(email){
-
-  const q =
-    query(
-      collection(db,"staff"),
-      where("email","==",email)
-    );
-
-  const snapshot =
-    await getDocs(q);
-
-  if(snapshot.empty){
-
-    return null;
-
-  }
-
-  const doc =
-    snapshot.docs[0];
-
-  return {
-    id:doc.id,
-    ...doc.data()
-  };
-
-}
-
-
-/* ==============================
-   CHECK ROLE
-============================== */
-
-function roleMatches(
-  selectedRole,
-  databaseRole
+async function findStaffById(
+    staffId
 ){
 
-  if(!databaseRole){
-    return false;
-  }
+    const q =
+        query(
+            collection(
+                db,
+                "staff"
+            ),
 
-  const r =
-    String(databaseRole)
-      .toLowerCase()
-      .trim();
+            where(
+                "staffId",
+                "==",
+                staffId
+            )
+        );
 
-  if(
-    selectedRole === "staff"
-  ){
 
-    return (
-      r === "staff" ||
-      r === "student coordinator" ||
-      r === "student_coordinator"
-    );
+    const snapshot =
+        await getDocs(q);
 
-  }
 
-  if(
-    selectedRole === "admin"
-  ){
+    if(snapshot.empty){
 
-    return r === "admin";
+        return null;
 
-  }
+    }
 
-  if(
-    selectedRole === "faculty"
-  ){
 
-    return r === "faculty";
+    const doc =
+        snapshot.docs[0];
 
-  }
 
-  return false;
+    return {
+
+        id:doc.id,
+
+        ...doc.data()
+
+    };
 
 }
 
 
-/* ==============================
+/* =====================================================
+   FIND STAFF BY EMAIL
+===================================================== */
+
+async function findStaffByEmail(
+    email
+){
+
+    const q =
+        query(
+            collection(
+                db,
+                "staff"
+            ),
+
+            where(
+                "email",
+                "==",
+                email
+            )
+        );
+
+
+    const snapshot =
+        await getDocs(q);
+
+
+    if(snapshot.empty){
+
+        return null;
+
+    }
+
+
+    const doc =
+        snapshot.docs[0];
+
+
+    return {
+
+        id:doc.id,
+
+        ...doc.data()
+
+    };
+
+}
+
+
+/* =====================================================
+   ROLE CHECK
+===================================================== */
+
+function roleMatches(
+    selectedRole,
+    databaseRole
+){
+
+    if(!databaseRole){
+
+        return false;
+
+    }
+
+
+    const r =
+        String(databaseRole)
+            .toLowerCase()
+            .trim();
+
+
+    if(
+        selectedRole === "staff"
+    ){
+
+        return (
+
+            r === "staff" ||
+
+            r === "student coordinator" ||
+
+            r === "student_coordinator"
+
+        );
+
+    }
+
+
+    if(
+        selectedRole === "admin"
+    ){
+
+        return r === "admin";
+
+    }
+
+
+    if(
+        selectedRole === "faculty"
+    ){
+
+        return r === "faculty";
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =====================================================
    LOGIN
-============================== */
+===================================================== */
 
 form.addEventListener(
-  "submit",
-  async (e)=>{
+    "submit",
+    async (e)=>{
 
-    e.preventDefault();
-
-    clearMessage();
-
-    const entered =
-      identity.value
-        .trim();
-
-    const pass =
-      password.value;
-
-    const selectedRole =
-      role.value;
+        e.preventDefault();
 
 
-    if(!entered){
-
-      showMessage(
-        "Please enter your Email or Staff ID."
-      );
-
-      identity.focus();
-
-      return;
-
-    }
+        clearMessage();
 
 
-    if(pass.length < 6){
-
-      showMessage(
-        "Password must contain at least 6 characters."
-      );
-
-      password.focus();
-
-      return;
-
-    }
+        const entered =
+            identity.value
+                .trim();
 
 
-    signinBtn.disabled =
-      true;
-
-    signinBtn.innerHTML =
-      "Checking credentials…";
+        const pass =
+            password.value;
 
 
-    try{
-
-      let email =
-        entered;
-
-      let staffRecord =
-        null;
+        const selectedRole =
+            role.value;
 
 
-      /* ==========================
-         STAFF ID LOGIN
-      ========================== */
+        if(!entered){
 
-      if(!entered.includes("@")){
+            showMessage(
+                "Please enter your Email or Staff ID."
+            );
+
+            identity.focus();
+
+            return;
+
+        }
+
+
+        if(pass.length < 6){
+
+            showMessage(
+                "Password must contain at least 6 characters."
+            );
+
+            password.focus();
+
+            return;
+
+        }
+
+
+        signinBtn.disabled =
+            true;
+
 
         signinBtn.innerHTML =
-          "Finding Staff ID…";
+            "Checking credentials…";
 
-        staffRecord =
-          await findStaffById(
-            entered
-          );
 
-        if(!staffRecord){
+        try{
 
-          throw new Error(
-            "Staff ID not found."
-          );
+
+            let email =
+                entered;
+
+
+            let staffRecord =
+                null;
+
+
+            /* =================================================
+               STAFF ID LOGIN
+            ================================================= */
+
+            if(
+                !entered.includes("@")
+            ){
+
+                signinBtn.innerHTML =
+                    "Finding Staff ID…";
+
+
+                staffRecord =
+                    await findStaffById(
+                        entered
+                    );
+
+
+                if(!staffRecord){
+
+                    throw new Error(
+                        "Staff ID not found."
+                    );
+
+                }
+
+
+                email =
+                    String(
+                        staffRecord.email || ""
+                    ).trim();
+
+
+                if(!email){
+
+                    throw new Error(
+                        "This staff account does not have a registered email."
+                    );
+
+                }
+
+            }
+
+
+            /* =================================================
+               EMAIL LOGIN
+            ================================================= */
+
+            if(
+                entered.includes("@") &&
+                !staffRecord
+            ){
+
+                staffRecord =
+                    await findStaffByEmail(
+                        entered
+                    );
+
+            }
+
+
+            /* =================================================
+               ROLE CHECK
+            ================================================= */
+
+            if(
+                staffRecord &&
+                staffRecord.role &&
+                !roleMatches(
+                    selectedRole,
+                    staffRecord.role
+                )
+            ){
+
+                throw new Error(
+                    "Selected login role does not match this account."
+                );
+
+            }
+
+
+            /* =================================================
+               STATUS
+            ================================================= */
+
+            if(
+                staffRecord &&
+                staffRecord.status
+            ){
+
+                const status =
+                    String(
+                        staffRecord.status
+                    ).toLowerCase();
+
+
+                if(
+
+                    status === "inactive" ||
+
+                    status === "disabled" ||
+
+                    status === "blocked"
+
+                ){
+
+                    throw new Error(
+                        "This staff account is inactive. Please contact Admin."
+                    );
+
+                }
+
+            }
+
+
+            /* =================================================
+               PERSISTENCE
+            ================================================= */
+
+            await setPersistence(
+
+                auth,
+
+                remember.checked
+
+                    ? browserLocalPersistence
+
+                    : browserSessionPersistence
+
+            );
+
+
+            signinBtn.innerHTML =
+                "Signing in…";
+
+
+            /* =================================================
+               FIREBASE AUTH
+            ================================================= */
+
+            const credential =
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    pass
+                );
+
+
+            const user =
+                credential.user;
+
+
+            /* =================================================
+               REMEMBER ID
+            ================================================= */
+
+            if(
+                remember.checked
+            ){
+
+                localStorage.setItem(
+                    "bt_staff_identity",
+                    entered
+                );
+
+            }else{
+
+                localStorage.removeItem(
+                    "bt_staff_identity"
+                );
+
+            }
+
+
+            /* =================================================
+               SESSION
+            ================================================= */
+
+            sessionStorage.setItem(
+                "bt_user_uid",
+                user.uid
+            );
+
+
+            sessionStorage.setItem(
+                "bt_user_email",
+                user.email || email
+            );
+
+
+            sessionStorage.setItem(
+                "bt_user_role",
+                selectedRole
+            );
+
+
+            if(staffRecord){
+
+                sessionStorage.setItem(
+                    "bt_staff_id",
+                    staffRecord.staffId || ""
+                );
+
+
+                sessionStorage.setItem(
+                    "bt_staff_name",
+                    staffRecord.name ||
+                    staffRecord.fullName ||
+                    ""
+                );
+
+            }
+
+
+            /* =================================================
+               SUCCESS
+            ================================================= */
+
+            showMessage(
+                "Login successful. Opening dashboard…",
+                "success"
+            );
+
+
+            signinBtn.innerHTML =
+                "Success ✓";
+
+
+            setTimeout(
+                ()=>{
+
+                    window.location.href =
+                        "dashboard.html";
+
+                },
+                650
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "Login error:",
+                error
+            );
+
+
+            let errorText =
+                error?.message ||
+                firebaseError(error);
+
+
+            if(
+                errorText.includes(
+                    "FirebaseError"
+                )
+            ){
+
+                errorText =
+                    firebaseError(error);
+
+            }
+
+
+            showMessage(
+                errorText,
+                "error"
+            );
+
+
+            signinBtn.disabled =
+                false;
+
+
+            signinBtn.innerHTML =
+                "Sign In →";
 
         }
-
-        email =
-          String(
-            staffRecord.email || ""
-          ).trim();
-
-        if(!email){
-
-          throw new Error(
-            "This staff account does not have a registered email."
-          );
-
-        }
-
-      }
-
-
-      /* ==========================
-         EMAIL LOGIN
-      ========================== */
-
-      if(
-        entered.includes("@") &&
-        !staffRecord
-      ){
-
-        staffRecord =
-          await findStaffByEmail(
-            entered
-          );
-
-      }
-
-
-      /* ==========================
-         ROLE CHECK BEFORE LOGIN
-      ========================== */
-
-      if(
-        staffRecord &&
-        staffRecord.role &&
-        !roleMatches(
-          selectedRole,
-          staffRecord.role
-        )
-      ){
-
-        throw new Error(
-          "Selected login role does not match this account."
-        );
-
-      }
-
-
-      /* ==========================
-         STATUS CHECK
-      ========================== */
-
-      if(
-        staffRecord &&
-        staffRecord.status
-      ){
-
-        const status =
-          String(
-            staffRecord.status
-          ).toLowerCase();
-
-        if(
-          status === "inactive" ||
-          status === "disabled" ||
-          status === "blocked"
-        ){
-
-          throw new Error(
-            "This staff account is inactive. Please contact Admin."
-          );
-
-        }
-
-      }
-
-
-      /* ==========================
-         FIREBASE PERSISTENCE
-      ========================== */
-
-      await setPersistence(
-        auth,
-        remember.checked
-          ? browserLocalPersistence
-          : browserSessionPersistence
-      );
-
-
-      signinBtn.innerHTML =
-        "Signing in…";
-
-
-      /* ==========================
-         FIREBASE AUTH
-      ========================== */
-
-      const credential =
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          pass
-        );
-
-
-      const user =
-        credential.user;
-
-
-      /* ==========================
-         SAVE ID
-      ========================== */
-
-      if(remember.checked){
-
-        localStorage.setItem(
-          "bt_staff_identity",
-          entered
-        );
-
-      }else{
-
-        localStorage.removeItem(
-          "bt_staff_identity"
-        );
-
-      }
-
-
-      /* ==========================
-         SESSION DATA
-      ========================== */
-
-      sessionStorage.setItem(
-        "bt_user_uid",
-        user.uid
-      );
-
-      sessionStorage.setItem(
-        "bt_user_email",
-        user.email || email
-      );
-
-      sessionStorage.setItem(
-        "bt_user_role",
-        selectedRole
-      );
-
-
-      if(staffRecord){
-
-        sessionStorage.setItem(
-          "bt_staff_id",
-          staffRecord.staffId || ""
-        );
-
-        sessionStorage.setItem(
-          "bt_staff_name",
-          staffRecord.name ||
-          staffRecord.fullName ||
-          ""
-        );
-
-      }
-
-
-      showMessage(
-        "Login successful. Opening dashboard…",
-        "success"
-      );
-
-
-      signinBtn.innerHTML =
-        "Success ✓";
-
-
-      /* ==========================
-         GO TO DASHBOARD
-      ========================== */
-
-      setTimeout(()=>{
-
-        window.location.href =
-          "dashboard.html";
-
-      },700);
-
-
-    }catch(error){
-
-      console.error(
-        "Login error:",
-        error
-      );
-
-
-      let errorText =
-        error?.message ||
-        firebaseError(error);
-
-
-      /*
-        Custom errors should remain readable.
-      */
-
-      if(
-        errorText.includes(
-          "FirebaseError"
-        )
-      ){
-
-        errorText =
-          firebaseError(error);
-
-      }
-
-
-      showMessage(
-        errorText,
-        "error"
-      );
-
-
-      signinBtn.disabled =
-        false;
-
-      signinBtn.innerHTML =
-        "Sign In →";
 
     }
-
-  }
 );
 
 
-/* ==============================
+/* =====================================================
    MODAL
-============================== */
+===================================================== */
 
 const backdrop =
-  document.getElementById(
-    "modalBackdrop"
-  );
+    document.getElementById(
+        "modalBackdrop"
+    );
+
 
 const modalTitle =
-  document.getElementById(
-    "modalTitle"
-  );
+    document.getElementById(
+        "modalTitle"
+    );
+
 
 const modalText =
-  document.getElementById(
-    "modalText"
-  );
+    document.getElementById(
+        "modalText"
+    );
+
 
 const modalInput =
-  document.getElementById(
-    "modalInput"
-  );
+    document.getElementById(
+        "modalInput"
+    );
+
 
 const modalAction =
-  document.getElementById(
-    "modalAction"
-  );
+    document.getElementById(
+        "modalAction"
+    );
 
 
 function openModal(
-  title,
-  text,
-  placeholder,
-  action,
-  inputType="text"
+    title,
+    text,
+    placeholder,
+    action,
+    inputType="text"
 ){
 
-  modalTitle.textContent =
-    title;
+    modalTitle.textContent =
+        title;
 
-  modalText.textContent =
-    text;
 
-  modalInput.placeholder =
-    placeholder;
+    modalText.textContent =
+        text;
 
-  modalInput.value =
-    "";
 
-  modalInput.type =
-    inputType;
+    modalInput.placeholder =
+        placeholder;
 
-  modalAction.textContent =
-    action;
 
-  modalInput.style.display =
-    "block";
+    modalInput.value =
+        "";
 
-  backdrop.classList.add(
-    "show"
-  );
 
-  setTimeout(
-    ()=>{
-      modalInput.focus();
-    },
-    100
-  );
+    modalInput.type =
+        inputType;
+
+
+    modalInput.style.display =
+        "block";
+
+
+    modalAction.textContent =
+        action;
+
+
+    modalAction.disabled =
+        false;
+
+
+    backdrop.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        ()=>{
+            modalInput.focus();
+        },
+        100
+    );
 
 }
 
 
 function closeModal(){
 
-  backdrop.classList.remove(
-    "show"
-  );
+    backdrop.classList.remove(
+        "show"
+    );
 
 }
 
 
-/* ==============================
+/* =====================================================
    FORGOT PASSWORD
-============================== */
+===================================================== */
 
 document
-.getElementById("forgotBtn")
-.addEventListener(
-  "click",
-  ()=>{
+    .getElementById("forgotBtn")
+    .addEventListener(
+        "click",
+        ()=>{
 
-    openModal(
-      "Reset password",
-      "Enter your registered Firebase email. We will send a password reset link.",
-      "Registered email",
-      "Send Reset Link",
-      "email"
+            openModal(
+
+                "Reset password",
+
+                "Enter your registered Firebase email. We will send a password reset link.",
+
+                "Registered email",
+
+                "Send Reset Link",
+
+                "email"
+
+            );
+
+        }
     );
 
-  }
-);
 
-
-/* ==============================
+/* =====================================================
    CONTACT ADMIN
-============================== */
+===================================================== */
 
 document
-.getElementById("contactBtn")
-.addEventListener(
-  "click",
-  ()=>{
+    .getElementById("contactBtn")
+    .addEventListener(
+        "click",
+        ()=>{
 
-    openModal(
-      "Contact Admin",
-      "Enter your message. Your request will be saved for the institute admin.",
-      "Your message",
-      "Send Request",
-      "text"
+            openModal(
+
+                "Contact Admin",
+
+                "Enter your message. Your request will be saved for the institute admin.",
+
+                "Your message",
+
+                "Send Request",
+
+                "text"
+
+            );
+
+        }
     );
 
-  }
-);
 
-
-/* ==============================
+/* =====================================================
    SECURITY
-============================== */
+===================================================== */
 
 document
-.getElementById("securityBtn")
-.addEventListener(
-  "click",
-  ()=>{
+    .getElementById("securityBtn")
+    .addEventListener(
+        "click",
+        ()=>{
 
-    modalTitle.textContent =
-      "Login Security";
+            modalTitle.textContent =
+                "Login Security";
 
-    modalText.textContent =
-      "Never share your password. Firebase Authentication handles your password securely. Admin controls account roles and access.";
 
-    modalInput.style.display =
-      "none";
+            modalText.textContent =
+                "Never share your password. Firebase Authentication securely handles your password. Admin controls account roles and access.";
 
-    modalAction.textContent =
-      "Close";
 
-    backdrop.classList.add(
-      "show"
+            modalInput.style.display =
+                "none";
+
+
+            modalAction.textContent =
+                "Close";
+
+
+            modalAction.disabled =
+                false;
+
+
+            backdrop.classList.add(
+                "show"
+            );
+
+        }
     );
 
-  }
-);
 
-
-/* ==============================
+/* =====================================================
    MODAL ACTION
-============================== */
+===================================================== */
 
 modalAction.addEventListener(
-  "click",
-  async ()=>{
+    "click",
+    async ()=>{
 
-    /* SECURITY */
 
-    if(
-      modalTitle.textContent ===
-      "Login Security"
-    ){
+        /* SECURITY */
 
-      modalInput.style.display =
-        "block";
+        if(
+            modalTitle.textContent ===
+            "Login Security"
+        ){
 
-      closeModal();
+            closeModal();
 
-      return;
+            return;
+
+        }
+
+
+        const value =
+            modalInput.value.trim();
+
+
+        /* RESET */
+
+        if(
+            modalTitle.textContent ===
+            "Reset password"
+        ){
+
+            if(!value){
+
+                modalInput.focus();
+
+                return;
+
+            }
+
+
+            try{
+
+                modalAction.disabled =
+                    true;
+
+
+                modalAction.textContent =
+                    "Sending…";
+
+
+                await sendPasswordResetEmail(
+                    auth,
+                    value
+                );
+
+
+                closeModal();
+
+
+                showMessage(
+                    "Password reset link has been sent to your email.",
+                    "success"
+                );
+
+
+            }catch(error){
+
+                showMessage(
+                    firebaseError(error),
+                    "error"
+                );
+
+            }finally{
+
+                modalAction.disabled =
+                    false;
+
+
+                modalAction.textContent =
+                    "Send Reset Link";
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* CONTACT ADMIN */
+
+        if(
+            modalTitle.textContent ===
+            "Contact Admin"
+        ){
+
+            if(!value){
+
+                modalInput.focus();
+
+                return;
+
+            }
+
+
+            try{
+
+                modalAction.disabled =
+                    true;
+
+
+                modalAction.textContent =
+                    "Sending…";
+
+
+                await addDoc(
+
+                    collection(
+                        db,
+                        "supportRequests"
+                    ),
+
+                    {
+
+                        message:value,
+
+                        identity:
+                            identity.value.trim(),
+
+                        role:
+                            role.value,
+
+                        createdAt:
+                            serverTimestamp(),
+
+                        status:
+                            "pending"
+
+                    }
+
+                );
+
+
+                closeModal();
+
+
+                showMessage(
+                    "Your request has been sent to Admin.",
+                    "success"
+                );
+
+
+            }catch(error){
+
+                console.error(
+                    error
+                );
+
+
+                showMessage(
+                    "Unable to send request. Please contact Admin directly.",
+                    "error"
+                );
+
+
+            }finally{
+
+                modalAction.disabled =
+                    false;
+
+
+                modalAction.textContent =
+                    "Send Request";
+
+            }
+
+        }
 
     }
-
-
-    const value =
-      modalInput.value.trim();
-
-
-    /* RESET PASSWORD */
-
-    if(
-      modalTitle.textContent ===
-      "Reset password"
-    ){
-
-      if(!value){
-
-        modalInput.focus();
-
-        return;
-
-      }
-
-
-      try{
-
-        modalAction.disabled =
-          true;
-
-        modalAction.textContent =
-          "Sending…";
-
-
-        await sendPasswordResetEmail(
-          auth,
-          value
-        );
-
-
-        closeModal();
-
-
-        showMessage(
-          "Password reset link has been sent to your email.",
-          "success"
-        );
-
-
-      }catch(error){
-
-        showMessage(
-          firebaseError(error),
-          "error"
-        );
-
-      }finally{
-
-        modalAction.disabled =
-          false;
-
-        modalAction.textContent =
-          "Send Reset Link";
-
-      }
-
-      return;
-
-    }
-
-
-    /* CONTACT ADMIN */
-
-    if(
-      modalTitle.textContent ===
-      "Contact Admin"
-    ){
-
-      if(!value){
-
-        modalInput.focus();
-
-        return;
-
-      }
-
-
-      try{
-
-        modalAction.disabled =
-          true;
-
-        modalAction.textContent =
-          "Sending…";
-
-
-        await addDoc(
-          collection(
-            db,
-            "supportRequests"
-          ),
-          {
-            message:value,
-
-            identity:
-              identity.value.trim(),
-
-            role:
-              role.value,
-
-            createdAt:
-              serverTimestamp(),
-
-            status:
-              "pending"
-          }
-        );
-
-
-        closeModal();
-
-
-        showMessage(
-          "Your request has been sent to Admin.",
-          "success"
-        );
-
-
-      }catch(error){
-
-        console.error(error);
-
-        showMessage(
-          "Unable to send request. Please contact Admin directly.",
-          "error"
-        );
-
-      }finally{
-
-        modalAction.disabled =
-          false;
-
-        modalAction.textContent =
-          "Send Request";
-
-      }
-
-    }
-
-  }
 );
 
 
-/* ==============================
+/* =====================================================
    CANCEL
-============================== */
+===================================================== */
 
 document
-.getElementById("cancelModal")
-.addEventListener(
-  "click",
-  ()=>{
-
-    modalInput.style.display =
-      "block";
-
-    closeModal();
-
-  }
-);
+    .getElementById("cancelModal")
+    .addEventListener(
+        "click",
+        closeModal
+    );
 
 
-/* ==============================
-   CLOSE OUTSIDE
-============================== */
+/* =====================================================
+   OUTSIDE CLICK
+===================================================== */
 
 backdrop.addEventListener(
-  "click",
-  (e)=>{
+    "click",
+    (e)=>{
 
-    if(
-      e.target === backdrop
-    ){
+        if(
+            e.target === backdrop
+        ){
 
-      modalInput.style.display =
-        "block";
+            closeModal();
 
-      closeModal();
+        }
 
     }
-
-  }
 );
 
 
-/* ==============================
-   ESCAPE KEY
-============================== */
+/* =====================================================
+   ESC
+===================================================== */
 
 document.addEventListener(
-  "keydown",
-  (e)=>{
+    "keydown",
+    (e)=>{
 
-    if(
-      e.key === "Escape"
-    ){
+        if(
+            e.key === "Escape"
+        ){
 
-      modalInput.style.display =
-        "block";
+            closeModal();
 
-      closeModal();
+        }
 
     }
-
-  }
 );
 
+
 </script>
+
 
 </body>
 </html>

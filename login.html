@@ -18,7 +18,6 @@
       --white:#ffffff;
       --green:#3b8c5a;
       --red:#d63d3d;
-      --shadow:0 18px 50px rgba(25,55,100,.10);
     }
 
     *{
@@ -30,8 +29,17 @@
     body{
       min-height:100vh;
       background:
-        radial-gradient(circle at top right, rgba(47,111,228,.10), transparent 30%),
-        linear-gradient(180deg,#ffffff 0%,#f6f9fd 100%);
+        radial-gradient(
+          circle at top right,
+          rgba(47,111,228,.10),
+          transparent 30%
+        ),
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #f6f9fd 100%
+        );
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -39,6 +47,7 @@
         Roboto,
         Arial,
         sans-serif;
+
       color:var(--text);
     }
 
@@ -47,21 +56,29 @@
       max-width:760px;
       min-height:100vh;
       margin:auto;
+
       padding:
         max(32px, env(safe-area-inset-top))
         34px
         max(35px, env(safe-area-inset-bottom));
+
       display:flex;
       flex-direction:column;
     }
 
-    /* TOP */
+    /* =========================
+       TOP
+    ========================= */
+
     .top{
       display:flex;
       align-items:center;
       justify-content:space-between;
+
       margin-top:15px;
       margin-bottom:62px;
+
+      gap:15px;
     }
 
     .portal-name{
@@ -75,12 +92,16 @@
       display:flex;
       align-items:center;
       gap:9px;
+
       background:#edf8f1;
       color:var(--green);
+
       padding:13px 19px;
       border-radius:30px;
+
       font-size:17px;
       font-weight:700;
+
       white-space:nowrap;
     }
 
@@ -91,7 +112,10 @@
       background:#3b8c5a;
     }
 
-    /* HERO */
+    /* =========================
+       HERO
+    ========================= */
+
     .hero{
       margin-bottom:38px;
     }
@@ -100,18 +124,24 @@
       font-size:53px;
       line-height:1.08;
       letter-spacing:-2px;
+
       margin-bottom:18px;
+
       color:#162136;
     }
 
     .hero p{
       font-size:23px;
       line-height:1.55;
+
       color:#77849a;
       max-width:680px;
     }
 
-    /* FORM */
+    /* =========================
+       FORM
+    ========================= */
+
     .form-section{
       width:100%;
     }
@@ -122,9 +152,12 @@
 
     label{
       display:block;
+
       font-size:21px;
       font-weight:750;
+
       margin-bottom:13px;
+
       color:#172236;
     }
 
@@ -132,15 +165,20 @@
     select{
       width:100%;
       height:92px;
+
       border:2px solid var(--line);
       border-radius:25px;
+
       background:#fff;
       color:#182338;
+
       font-size:23px;
+
       padding:0 28px;
+
       outline:none;
+
       transition:.2s ease;
-      appearance:auto;
     }
 
     input::placeholder{
@@ -150,23 +188,34 @@
     input:focus,
     select:focus{
       border-color:#4b8ff0;
-      box-shadow:0 0 0 5px rgba(47,111,228,.10);
+
+      box-shadow:
+        0 0 0 5px rgba(47,111,228,.10);
     }
 
-    /* MOBILE */
+    /* =========================
+       MOBILE NUMBER
+    ========================= */
+
     .mobile-wrap{
       position:relative;
     }
 
     .mobile-prefix{
       position:absolute;
+
       left:26px;
       top:50%;
+
       transform:translateY(-50%);
+
       font-size:22px;
       font-weight:700;
+
       color:#4d5c72;
+
       z-index:2;
+
       pointer-events:none;
     }
 
@@ -174,60 +223,92 @@
       padding-left:78px;
     }
 
-    /* REMEMBER */
+    /* =========================
+       REMEMBER
+    ========================= */
+
     .remember-row{
       display:flex;
       align-items:center;
       justify-content:space-between;
+
       margin:3px 0 29px;
+
       gap:15px;
     }
 
     .remember{
       display:flex;
       align-items:center;
+
       gap:14px;
+
       font-size:19px;
       font-weight:700;
+
       color:#748096;
+
       cursor:pointer;
     }
 
     .remember input{
       width:31px;
       height:31px;
+
       margin:0;
       padding:0;
+
       accent-color:var(--blue);
     }
 
-    .forgot{
+    .help-link{
       font-size:18px;
       font-weight:750;
+
       color:#3474da;
+
       cursor:pointer;
+
       border:0;
       background:none;
     }
 
-    /* BUTTON */
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
     .login-btn{
       width:100%;
       height:108px;
+
       border:0;
       border-radius:27px;
-      background:linear-gradient(135deg,#3478e8,#245bd1);
+
+      background:
+        linear-gradient(
+          135deg,
+          #3478e8,
+          #245bd1
+        );
+
       color:#fff;
+
       font-size:29px;
       font-weight:800;
+
       cursor:pointer;
-      box-shadow:0 18px 35px rgba(47,111,228,.24);
+
+      box-shadow:
+        0 18px 35px rgba(47,111,228,.24);
+
       transition:.2s ease;
     }
 
     .login-btn:hover{
       transform:translateY(-1px);
-      box-shadow:0 21px 40px rgba(47,111,228,.30);
+
+      box-shadow:
+        0 21px 40px rgba(47,111,228,.30);
     }
 
     .login-btn:active{
@@ -239,32 +320,49 @@
       pointer-events:none;
     }
 
-    /* MESSAGE */
+    /* =========================
+       MESSAGE
+    ========================= */
+
     .message{
       display:none;
+
       margin-top:24px;
+
       padding:21px 25px;
+
       border-radius:20px;
+
       font-size:18px;
       line-height:1.5;
+
       font-weight:600;
     }
 
     .message.error{
       display:block;
+
       color:#c93434;
+
       background:#fff1f1;
+
       border:2px solid #ffd0d0;
     }
 
     .message.success{
       display:block;
+
       color:#287c4b;
+
       background:#effaf3;
+
       border:2px solid #cdebd8;
     }
 
-    /* HELP */
+    /* =========================
+       HELP
+    ========================= */
+
     .help{
       margin-top:58px;
     }
@@ -272,30 +370,44 @@
     .divider{
       display:flex;
       align-items:center;
+
       gap:22px;
+
       color:#a4afbf;
+
       font-size:19px;
+
       margin-bottom:30px;
     }
 
     .divider::before,
     .divider::after{
       content:"";
+
       height:2px;
+
       background:#e2e7ee;
+
       flex:1;
     }
 
     .help-btn{
       width:100%;
       height:80px;
+
       border-radius:22px;
+
       background:#fff;
+
       border:2px solid var(--line);
+
       color:#5c687d;
+
       font-size:20px;
       font-weight:750;
+
       margin-bottom:17px;
+
       cursor:pointer;
     }
 
@@ -303,26 +415,44 @@
       background:#f6f8fb;
     }
 
-    /* FOOTER */
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer{
       text-align:center;
+
       color:#a4afbf;
+
       font-size:17px;
+
       letter-spacing:.3px;
+
       margin-top:auto;
+
       padding-top:45px;
     }
 
-    /* MODAL */
+    /* =========================
+       MODAL
+    ========================= */
+
     .modal{
       position:fixed;
+
       inset:0;
+
       background:rgba(7,20,38,.45);
+
       backdrop-filter:blur(5px);
+
       display:none;
+
       align-items:center;
       justify-content:center;
+
       padding:25px;
+
       z-index:1000;
     }
 
@@ -333,37 +463,56 @@
     .modal-box{
       width:100%;
       max-width:500px;
+
       background:#fff;
+
       border-radius:25px;
+
       padding:30px;
-      box-shadow:0 25px 80px rgba(0,0,0,.18);
+
+      box-shadow:
+        0 25px 80px rgba(0,0,0,.18);
     }
 
     .modal-box h2{
       font-size:28px;
+
       margin-bottom:12px;
     }
 
     .modal-box p{
       color:#718096;
+
       font-size:17px;
+
       line-height:1.6;
+
       margin-bottom:24px;
     }
 
     .close-btn{
       width:100%;
       height:55px;
+
       border:0;
+
       border-radius:15px;
+
       background:#edf3fb;
+
       color:#31577f;
+
       font-size:17px;
+
       font-weight:700;
+
       cursor:pointer;
     }
 
-    /* RESPONSIVE */
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
     @media(max-width:600px){
 
       .page{
@@ -460,7 +609,10 @@
 
 <div class="page">
 
-  <!-- TOP -->
+  <!-- =========================
+       TOP
+  ========================== -->
+
   <div class="top">
 
     <div class="portal-name">
@@ -475,23 +627,33 @@
   </div>
 
 
-  <!-- HERO -->
+  <!-- =========================
+       HERO
+  ========================== -->
+
   <div class="hero">
 
-    <h1>Welcome back</h1>
+    <h1>
+      Welcome back
+    </h1>
 
     <p>
-      Enter your name and registered mobile number
-      to access the BlackTerminal management portal.
+      Enter your name and mobile number
+      to access the BlackTerminal staff portal.
     </p>
 
   </div>
 
 
-  <!-- LOGIN FORM -->
+  <!-- =========================
+       LOGIN FORM
+  ========================== -->
+
   <div class="form-section">
 
-    <!-- ROLE -->
+
+    <!-- LOGIN TYPE -->
+
     <div class="field">
 
       <label for="role">
@@ -500,16 +662,12 @@
 
       <select id="role">
 
-        <option value="admin">
-          Institute Admin
+        <option value="telecaller">
+          Telecaller
         </option>
 
         <option value="coordinator">
-          Student Coordinator / Staff
-        </option>
-
-        <option value="faculty">
-          Faculty
+          Student Coordinator
         </option>
 
       </select>
@@ -518,6 +676,7 @@
 
 
     <!-- NAME -->
+
     <div class="field">
 
       <label for="name">
@@ -535,6 +694,7 @@
 
 
     <!-- MOBILE -->
+
     <div class="field">
 
       <label for="mobile">
@@ -562,6 +722,7 @@
 
 
     <!-- REMEMBER -->
+
     <div class="remember-row">
 
       <label class="remember">
@@ -580,16 +741,17 @@
 
       <button
         type="button"
-        class="forgot"
-        onclick="showForgot()"
+        class="help-link"
+        onclick="showHelp()"
       >
-        Forgot access?
+        Need help?
       </button>
 
     </div>
 
 
-    <!-- LOGIN -->
+    <!-- LOGIN BUTTON -->
+
     <button
       type="button"
       class="login-btn"
@@ -601,6 +763,7 @@
 
 
     <!-- MESSAGE -->
+
     <div
       id="message"
       class="message"
@@ -609,7 +772,10 @@
   </div>
 
 
-  <!-- HELP -->
+  <!-- =========================
+       HELP
+  ========================== -->
+
   <div class="help">
 
     <div class="divider">
@@ -627,13 +793,16 @@
       class="help-btn"
       onclick="showSecurity()"
     >
-      Login Security
+      Login Information
     </button>
 
   </div>
 
 
-  <!-- FOOTER -->
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
   <footer>
     © 2026 BlackTerminal Computer Institute, Baripada
   </footer>
@@ -641,7 +810,10 @@
 </div>
 
 
-<!-- MODAL -->
+<!-- =========================
+     MODAL
+========================== -->
+
 <div
   class="modal"
   id="modal"
@@ -673,110 +845,149 @@
 <script>
 
   /*
-   ============================================================
-   BLACKTERMINAL SIMPLE LOGIN
-   ============================================================
+  ============================================================
+  BLACKTERMINAL STAFF LOGIN
+  ============================================================
 
-   Firebase Authentication is NOT used here.
+  Login Types:
 
-   Login information:
-   - Name
-   - Mobile Number
-   - Selected Role
+  1. Telecaller
+     → telecaller.html
 
-   Session is stored in sessionStorage.
-   Remember Me stores basic login information in localStorage.
+  2. Student Coordinator
+     → coordinator.html
 
-   ============================================================
+  Firebase Authentication:
+  NOT USED
+
+  Login:
+  Name + Mobile Number
+
+  ============================================================
   */
 
 
-  const nameInput = document.getElementById("name");
-  const mobileInput = document.getElementById("mobile");
-  const roleInput = document.getElementById("role");
-  const rememberInput = document.getElementById("remember");
+  const nameInput =
+    document.getElementById("name");
 
-  const loginBtn = document.getElementById("loginBtn");
-  const messageBox = document.getElementById("message");
+  const mobileInput =
+    document.getElementById("mobile");
 
+  const roleInput =
+    document.getElementById("role");
 
-  /* ============================================================
-     MOBILE NUMBER
-     ============================================================ */
+  const rememberInput =
+    document.getElementById("remember");
 
-  mobileInput.addEventListener("input", function(){
+  const loginBtn =
+    document.getElementById("loginBtn");
 
-    this.value = this.value
-      .replace(/\D/g,"")
-      .slice(0,10);
-
-  });
+  const messageBox =
+    document.getElementById("message");
 
 
   /* ============================================================
-     NAME
-     ============================================================ */
+     MOBILE INPUT
+  ============================================================ */
 
-  nameInput.addEventListener("input", function(){
+  mobileInput.addEventListener(
+    "input",
+    function(){
 
-    this.value = this.value
-      .replace(/\s+/g," ")
-      .slice(0,60);
+      this.value =
+        this.value
+          .replace(/\D/g,"")
+          .slice(0,10);
 
-  });
+    }
+  );
 
 
   /* ============================================================
-     LOAD REMEMBERED USER
-     ============================================================ */
+     NAME INPUT
+  ============================================================ */
 
-  window.addEventListener("DOMContentLoaded", function(){
+  nameInput.addEventListener(
+    "input",
+    function(){
 
-    try{
+      this.value =
+        this.value
+          .replace(/\s+/g," ")
+          .slice(0,60);
 
-      const saved =
-        JSON.parse(
-          localStorage.getItem("bt_simple_login")
+    }
+  );
+
+
+  /* ============================================================
+     LOAD REMEMBERED LOGIN
+  ============================================================ */
+
+  window.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+      try{
+
+        const saved =
+          JSON.parse(
+            localStorage.getItem(
+              "bt_staff_login"
+            )
+          );
+
+        if(saved){
+
+          nameInput.value =
+            saved.name || "";
+
+          mobileInput.value =
+            saved.mobile || "";
+
+          roleInput.value =
+            saved.role || "telecaller";
+
+          rememberInput.checked =
+            true;
+
+        }
+
+      }
+      catch(error){
+
+        console.log(
+          "No saved login found."
         );
-
-      if(saved){
-
-        nameInput.value = saved.name || "";
-        mobileInput.value = saved.mobile || "";
-        roleInput.value = saved.role || "admin";
-
-        rememberInput.checked = true;
 
       }
 
-    }catch(error){
-
-      console.log("No saved login information.");
-
     }
-
-  });
+  );
 
 
   /* ============================================================
      LOGIN
-     ============================================================ */
+  ============================================================ */
 
   function loginUser(){
 
     clearMessage();
 
+
     const name =
       nameInput.value.trim();
 
+
     const mobile =
       mobileInput.value.trim();
+
 
     const role =
       roleInput.value;
 
 
-    /* NAME VALIDATION */
+    /* NAME */
 
     if(name.length < 2){
 
@@ -792,12 +1003,12 @@
     }
 
 
-    /* MOBILE VALIDATION */
+    /* MOBILE */
 
     if(!/^[6-9][0-9]{9}$/.test(mobile)){
 
       showMessage(
-        "Please enter a valid 10-digit Indian mobile number.",
+        "Please enter a valid 10-digit mobile number.",
         "error"
       );
 
@@ -810,130 +1021,148 @@
 
     /* LOADING */
 
-    loginBtn.classList.add("loading");
-    loginBtn.innerHTML = "Signing in...";
+    loginBtn.classList.add(
+      "loading"
+    );
+
+    loginBtn.innerHTML =
+      "Signing in...";
 
 
-    /*
-      Small delay gives a smooth login experience.
-      No Firebase request is made.
-    */
+    setTimeout(
+      function(){
 
-    setTimeout(function(){
+        /*
+        ========================================
+        SAVE SESSION
+        ========================================
+        */
 
-      const session = {
-
-        name: name,
-
-        mobile: mobile,
-
-        role: role,
-
-        loginTime: new Date().toISOString(),
-
-        loggedIn: true
-
-      };
+        const loginTime =
+          new Date().toISOString();
 
 
-      /* SESSION */
-
-      sessionStorage.setItem(
-        "bt_logged_in",
-        "true"
-      );
-
-      sessionStorage.setItem(
-        "bt_user_name",
-        name
-      );
-
-      sessionStorage.setItem(
-        "bt_user_mobile",
-        mobile
-      );
-
-      sessionStorage.setItem(
-        "bt_user_role",
-        role
-      );
-
-      sessionStorage.setItem(
-        "bt_login_time",
-        session.loginTime
-      );
-
-
-      /* REMEMBER ME */
-
-      if(rememberInput.checked){
-
-        localStorage.setItem(
-          "bt_simple_login",
-          JSON.stringify({
-
-            name:name,
-            mobile:mobile,
-            role:role
-
-          })
+        sessionStorage.setItem(
+          "bt_logged_in",
+          "true"
         );
 
-      }else{
 
-        localStorage.removeItem(
-          "bt_simple_login"
+        sessionStorage.setItem(
+          "bt_user_name",
+          name
         );
 
-      }
+
+        sessionStorage.setItem(
+          "bt_user_mobile",
+          mobile
+        );
 
 
-      showMessage(
-        "Login successful. Opening your portal...",
-        "success"
-      );
+        sessionStorage.setItem(
+          "bt_user_role",
+          role
+        );
 
 
-      /* REDIRECT */
+        sessionStorage.setItem(
+          "bt_login_time",
+          loginTime
+        );
 
-      setTimeout(function(){
 
-        if(role === "admin"){
+        /*
+        ========================================
+        REMEMBER LOGIN
+        ========================================
+        */
 
-          window.location.href =
-            "dashboard.html";
+        if(rememberInput.checked){
+
+          localStorage.setItem(
+            "bt_staff_login",
+
+            JSON.stringify({
+
+              name:name,
+
+              mobile:mobile,
+
+              role:role
+
+            })
+
+          );
+
+        }
+        else{
+
+          localStorage.removeItem(
+            "bt_staff_login"
+          );
 
         }
 
-        else if(role === "coordinator"){
 
-          window.location.href =
-            "coordinator.html";
+        /*
+        ========================================
+        SUCCESS
+        ========================================
+        */
 
-        }
-
-        else if(role === "faculty"){
-
-          window.location.href =
-            "faculty.html";
-
-        }
-
-      },700);
+        showMessage(
+          "Login successful. Opening your portal...",
+          "success"
+        );
 
 
-    },500);
+        /*
+        ========================================
+        REDIRECT
+        ========================================
+        */
+
+        setTimeout(
+          function(){
+
+            if(role === "telecaller"){
+
+              window.location.href =
+                "telecaller.html";
+
+            }
+
+            else if(role === "coordinator"){
+
+              window.location.href =
+                "coordinator.html";
+
+            }
+
+          },
+          700
+        );
+
+
+      },
+      500
+    );
 
   }
 
 
   /* ============================================================
      MESSAGE
-     ============================================================ */
+  ============================================================ */
 
-  function showMessage(text,type){
+  function showMessage(
+    text,
+    type
+  ){
 
-    messageBox.textContent = text;
+    messageBox.textContent =
+      text;
 
     messageBox.className =
       "message " + type;
@@ -943,7 +1172,8 @@
 
   function clearMessage(){
 
-    messageBox.textContent = "";
+    messageBox.textContent =
+      "";
 
     messageBox.className =
       "message";
@@ -953,38 +1183,49 @@
 
   /* ============================================================
      CONTACT ADMIN
-     ============================================================ */
+  ============================================================ */
 
   function contactAdmin(){
+
+    /*
+      CHANGE THIS NUMBER TO YOUR
+      ACTUAL BLACKTERMINAL ADMIN
+      WHATSAPP NUMBER.
+    */
 
     const adminNumber =
       "919999999999";
 
+
     const text =
       "Hello BlackTerminal Admin, I need help with staff portal login.";
 
+
     window.open(
+
       "https://wa.me/" +
       adminNumber +
       "?text=" +
       encodeURIComponent(text),
+
       "_blank"
+
     );
 
   }
 
 
   /* ============================================================
-     FORGOT ACCESS
-     ============================================================ */
+     HELP
+  ============================================================ */
 
-  function showForgot(){
+  function showHelp(){
 
     showModal(
 
-      "Forgot Access?",
+      "Need Help?",
 
-      "Please contact the Institute Admin to confirm your registered name and mobile number and get access to the portal."
+      "Select your role, enter your registered name and 10-digit mobile number, then press Sign In. Telecaller will open the Telecaller Portal and Student Coordinator will open the Coordinator Portal."
 
     );
 
@@ -992,16 +1233,16 @@
 
 
   /* ============================================================
-     SECURITY
-     ============================================================ */
+     LOGIN INFORMATION
+  ============================================================ */
 
   function showSecurity(){
 
     showModal(
 
-      "Login Security",
+      "Login Information",
 
-      "This is a simple internal portal login using name and mobile number. No Firebase password authentication is used. For a production-level secure system, Firebase Authentication or another secure authentication service should be enabled."
+      "This portal uses a simple Name + Mobile Number login. Firebase Authentication is not required for this login page. Your selected role is stored in the current browser session."
 
     );
 
@@ -1010,33 +1251,46 @@
 
   /* ============================================================
      MODAL
-     ============================================================ */
+  ============================================================ */
 
-  function showModal(title,text){
+  function showModal(
+    title,
+    text
+  ){
 
-    document.getElementById("modalTitle")
-      .textContent = title;
+    document.getElementById(
+      "modalTitle"
+    ).textContent = title;
 
-    document.getElementById("modalText")
-      .textContent = text;
 
-    document.getElementById("modal")
-      .classList.add("show");
+    document.getElementById(
+      "modalText"
+    ).textContent = text;
+
+
+    document.getElementById(
+      "modal"
+    ).classList.add("show");
 
   }
 
 
   function closeModal(){
 
-    document.getElementById("modal")
-      .classList.remove("show");
+    document.getElementById(
+      "modal"
+    ).classList.remove("show");
 
   }
 
 
-  function closeModalOutside(event){
+  function closeModalOutside(
+    event
+  ){
 
-    if(event.target.id === "modal"){
+    if(
+      event.target.id === "modal"
+    ){
 
       closeModal();
 
@@ -1046,8 +1300,8 @@
 
 
   /* ============================================================
-     ENTER KEY LOGIN
-     ============================================================ */
+     ENTER KEY
+  ============================================================ */
 
   document.addEventListener(
     "keydown",
@@ -1059,6 +1313,7 @@
 
       }
 
+
       if(event.key === "Escape"){
 
         closeModal();
@@ -1067,7 +1322,6 @@
 
     }
   );
-
 
 </script>
 

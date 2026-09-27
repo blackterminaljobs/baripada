@@ -27,7 +27,6 @@
     --purple:#7c3aed;
 
     --shadow:0 10px 30px rgba(7,20,38,.08);
-
     --radius:16px;
 }
 
@@ -54,10 +53,7 @@ button{
     cursor:pointer;
 }
 
-
-/* =====================================================
-   SIDEBAR
-===================================================== */
+/* ================= SIDEBAR ================= */
 
 .sidebar{
     width:255px;
@@ -84,17 +80,10 @@ button{
     width:43px;
     height:43px;
     border-radius:12px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
-    background:linear-gradient(
-        135deg,
-        var(--blue),
-        var(--blue2)
-    );
-
+    background:linear-gradient(135deg,var(--blue),var(--blue2));
     font-weight:800;
     font-size:18px;
 }
@@ -125,17 +114,11 @@ button{
     display:flex;
     align-items:center;
     gap:12px;
-
     color:#b9c7d8;
-
     text-decoration:none;
-
     padding:12px 13px;
-
     border-radius:11px;
-
     margin-bottom:5px;
-
     font-size:14px;
 }
 
@@ -156,32 +139,21 @@ button{
 
 .logout-btn{
     position:absolute;
-
     bottom:20px;
     left:16px;
     right:16px;
-
     border:1px solid rgba(255,255,255,.1);
-
     background:rgba(255,255,255,.04);
-
     color:#fff;
-
     padding:11px;
-
     border-radius:10px;
-
-    cursor:pointer;
 }
 
 .logout-btn:hover{
     background:rgba(255,255,255,.09);
 }
 
-
-/* =====================================================
-   MAIN
-===================================================== */
+/* ================= MAIN ================= */
 
 .main{
     margin-left:255px;
@@ -190,37 +162,23 @@ button{
 
 .topbar{
     height:72px;
-
     background:#fff;
-
     border-bottom:1px solid var(--line);
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     padding:0 28px;
-
     position:sticky;
-
     top:0;
-
     z-index:500;
 }
 
 .mobile-menu{
     display:none;
-
     border:0;
-
     background:#eef4fb;
-
     padding:9px 11px;
-
     border-radius:9px;
-
     font-size:18px;
 }
 
@@ -243,22 +201,12 @@ button{
 .avatar{
     width:39px;
     height:39px;
-
     border-radius:50%;
-
-    background:linear-gradient(
-        135deg,
-        var(--blue),
-        var(--blue2)
-    );
-
+    background:linear-gradient(135deg,var(--blue),var(--blue2));
     color:#fff;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     font-weight:700;
 }
 
@@ -275,28 +223,18 @@ button{
 
 .content{
     padding:28px;
-
     max-width:1600px;
-
     margin:auto;
 }
 
-
-/* =====================================================
-   MESSAGE
-===================================================== */
+/* ================= MESSAGE ================= */
 
 .system-message{
     display:none;
-
     margin-bottom:18px;
-
     padding:13px 15px;
-
     border-radius:11px;
-
     font-size:13px;
-
     line-height:1.5;
 }
 
@@ -322,39 +260,26 @@ button{
     color:#1d4ed8;
 }
 
-
-/* =====================================================
-   STATS
-===================================================== */
+/* ================= STATS ================= */
 
 .stats{
     display:grid;
-
-    grid-template-columns:
-        repeat(5,1fr);
-
+    grid-template-columns:repeat(5,1fr);
     gap:17px;
-
     margin-bottom:22px;
 }
 
 .stat{
     background:#fff;
-
     border:1px solid var(--line);
-
     border-radius:var(--radius);
-
     padding:19px;
-
     box-shadow:var(--shadow);
 }
 
 .stat-top{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 }
 
@@ -365,27 +290,19 @@ button{
 
 .stat-value{
     font-size:27px;
-
     font-weight:800;
-
     margin-top:7px;
 }
 
 .stat-icon{
     width:42px;
     height:42px;
-
     border-radius:12px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     background:#eaf4ff;
-
     color:var(--blue);
-
     font-size:18px;
 }
 
@@ -399,73 +316,136 @@ button{
     color:var(--orange);
 }
 
+/* ================= SALARY ================= */
 
-/* =====================================================
-   FILTER
-===================================================== */
+.salary-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    margin-bottom:22px;
+    overflow:hidden;
+}
+
+.salary-header{
+    padding:19px 22px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.salary-header h2{
+    font-size:17px;
+}
+
+.salary-header p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
+}
+
+.salary-month{
+    padding:7px 11px;
+    background:#eef6ff;
+    color:var(--blue);
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.salary-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    padding:18px;
+}
+
+.salary-item{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:15px;
+    background:#fbfdff;
+}
+
+.salary-item.total{
+    background:linear-gradient(135deg,#071426,#0d2745);
+    color:#fff;
+    border-color:#071426;
+}
+
+.salary-label{
+    font-size:11px;
+    color:var(--muted);
+}
+
+.salary-item.total .salary-label{
+    color:#a9bdd4;
+}
+
+.salary-amount{
+    font-size:22px;
+    font-weight:800;
+    margin-top:6px;
+}
+
+.salary-description{
+    margin-top:5px;
+    font-size:10px;
+    color:#64748b;
+}
+
+.salary-item.total .salary-description{
+    color:#a9bdd4;
+}
+
+.salary-note{
+    padding:0 18px 18px;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.5;
+}
+
+/* ================= FILTER ================= */
 
 .filter-card{
     background:#fff;
-
     border:1px solid var(--line);
-
     border-radius:var(--radius);
-
     box-shadow:var(--shadow);
-
     padding:18px;
-
     margin-bottom:18px;
 }
 
 .filter-grid{
     display:grid;
-
-    grid-template-columns:
-        minmax(230px,2fr)
-        1fr
-        1fr
-        1fr
-        auto;
-
+    grid-template-columns:minmax(230px,2fr) 1fr 1fr 1fr auto;
     gap:11px;
 }
 
 .filter-input,
 .filter-select{
     width:100%;
-
     border:1px solid #dbe3ec;
-
     border-radius:10px;
-
     padding:11px 12px;
-
     background:#fff;
-
     outline:none;
 }
 
 .filter-input:focus,
 .filter-select:focus{
     border-color:var(--blue);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(8,110,225,.08);
+    box-shadow:0 0 0 3px rgba(8,110,225,.08);
 }
 
 .refresh-btn{
     border:0;
-
     background:#eef6ff;
-
     color:var(--blue);
-
     padding:0 15px;
-
     border-radius:10px;
-
     font-weight:700;
 }
 
@@ -473,34 +453,22 @@ button{
     background:#dceeff;
 }
 
-
-/* =====================================================
-   TABLE
-===================================================== */
+/* ================= TABLE ================= */
 
 .table-card{
     background:#fff;
-
     border:1px solid var(--line);
-
     border-radius:var(--radius);
-
     box-shadow:var(--shadow);
-
     overflow:hidden;
 }
 
 .table-header{
     padding:20px 22px;
-
     border-bottom:1px solid var(--line);
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
 }
 
@@ -510,50 +478,35 @@ button{
 
 .table-header p{
     color:var(--muted);
-
     font-size:12px;
-
     margin-top:3px;
 }
 
 .live-status{
     display:flex;
-
     align-items:center;
-
     gap:7px;
-
     color:var(--green);
-
     font-size:11px;
-
     font-weight:700;
 }
 
 .live-dot{
     width:8px;
     height:8px;
-
     background:#22c55e;
-
     border-radius:50%;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(34,197,94,.12);
+    box-shadow:0 0 0 4px rgba(34,197,94,.12);
 }
 
 .table-wrap{
     width:100%;
-
     overflow-x:auto;
 }
 
 table{
     width:100%;
-
     border-collapse:collapse;
-
     min-width:1050px;
 }
 
@@ -563,29 +516,19 @@ thead{
 
 th{
     text-align:left;
-
     font-size:11px;
-
     text-transform:uppercase;
-
     letter-spacing:.4px;
-
     color:#738096;
-
     padding:13px 15px;
-
     border-bottom:1px solid var(--line);
-
     white-space:nowrap;
 }
 
 td{
     padding:15px;
-
     border-bottom:1px solid #edf1f5;
-
     font-size:12px;
-
     vertical-align:middle;
 }
 
@@ -595,43 +538,31 @@ tbody tr:hover{
 
 .student-cell{
     display:flex;
-
     align-items:center;
-
     gap:10px;
 }
 
 .student-avatar{
     width:35px;
     height:35px;
-
     border-radius:10px;
-
     background:#eaf4ff;
-
     color:var(--blue);
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     font-weight:800;
-
     flex-shrink:0;
 }
 
 .student-name{
     font-weight:800;
-
     font-size:13px;
 }
 
 .student-mobile{
     color:var(--muted);
-
     font-size:11px;
-
     margin-top:3px;
 }
 
@@ -641,17 +572,11 @@ tbody tr:hover{
 
 .source-badge{
     display:inline-block;
-
     padding:5px 8px;
-
     border-radius:7px;
-
     background:#f1f5f9;
-
     color:#475569;
-
     font-size:10px;
-
     font-weight:700;
 }
 
@@ -661,30 +586,19 @@ tbody tr:hover{
 
 .date-text{
     color:#64748b;
-
     font-size:11px;
-
     white-space:nowrap;
 }
 
-
-/* =====================================================
-   STATUS
-===================================================== */
+/* ================= STATUS ================= */
 
 .status-select{
     border:0;
-
     padding:7px 9px;
-
     border-radius:8px;
-
     font-size:10px;
-
     font-weight:800;
-
     outline:none;
-
     cursor:pointer;
 }
 
@@ -708,6 +622,11 @@ tbody tr:hover{
     color:#6d28d9;
 }
 
+.status-select.visited{
+    background:#fff7ed;
+    color:#c2410c;
+}
+
 .status-select.converted{
     background:#ecfdf3;
     color:#15803d;
@@ -718,34 +637,23 @@ tbody tr:hover{
     color:#b91c1c;
 }
 
-
-/* =====================================================
-   ACTIONS
-===================================================== */
+/* ================= ACTIONS ================= */
 
 .actions{
     display:flex;
-
     gap:6px;
-
     align-items:center;
 }
 
 .action-btn{
     width:31px;
     height:31px;
-
     border:1px solid var(--line);
-
     background:#fff;
-
     border-radius:8px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     font-size:13px;
 }
 
@@ -769,64 +677,41 @@ tbody tr:hover{
     color:var(--red);
 }
 
-
-/* =====================================================
-   LOADING
-===================================================== */
+/* ================= LOADING ================= */
 
 .table-state{
     padding:55px 20px;
-
     text-align:center;
-
     color:var(--muted);
-
     font-size:13px;
 }
 
 .spinner{
     width:27px;
     height:27px;
-
     border:3px solid #e4edf7;
-
     border-top-color:var(--blue);
-
     border-radius:50%;
-
     animation:spin .8s linear infinite;
-
     margin:0 auto 12px;
 }
 
 @keyframes spin{
-
     to{
         transform:rotate(360deg);
     }
-
 }
 
-
-/* =====================================================
-   MODAL
-===================================================== */
+/* ================= MODAL ================= */
 
 .modal{
     display:none;
-
     position:fixed;
-
     inset:0;
-
     background:rgba(7,20,38,.58);
-
     z-index:2000;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
 }
 
@@ -836,31 +721,19 @@ tbody tr:hover{
 
 .modal-box{
     width:100%;
-
     max-width:620px;
-
     max-height:90vh;
-
     overflow:auto;
-
     background:#fff;
-
     border-radius:18px;
-
-    box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.25);
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
 .modal-header{
     padding:19px 21px;
-
     border-bottom:1px solid var(--line);
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 }
 
@@ -870,12 +743,9 @@ tbody tr:hover{
 
 .close-btn{
     border:0;
-
     background:#f1f5f9;
-
     width:34px;
     height:34px;
-
     border-radius:9px;
 }
 
@@ -885,19 +755,14 @@ tbody tr:hover{
 
 .detail-grid{
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:14px;
 }
 
 .detail{
     background:#f8fafc;
-
     border:1px solid #edf1f5;
-
     border-radius:11px;
-
     padding:12px;
 }
 
@@ -907,106 +772,68 @@ tbody tr:hover{
 
 .detail-label{
     color:var(--muted);
-
     font-size:10px;
-
     text-transform:uppercase;
-
     letter-spacing:.5px;
-
     margin-bottom:5px;
 }
 
 .detail-value{
     font-size:13px;
-
     font-weight:700;
-
     word-break:break-word;
 }
 
 .modal-actions{
     display:flex;
-
     gap:9px;
-
     margin-top:18px;
 }
 
 .modal-action{
     flex:1;
-
     padding:11px;
-
     border-radius:10px;
-
     border:1px solid var(--line);
-
     background:#fff;
-
     font-weight:700;
-
     font-size:12px;
 }
 
 .modal-action.primary{
     background:var(--blue);
-
     color:#fff;
-
     border-color:var(--blue);
 }
 
 .modal-action.green{
     background:#16a34a;
-
     color:#fff;
-
     border-color:#16a34a;
 }
 
-
-/* =====================================================
-   TOAST
-===================================================== */
+/* ================= TOAST ================= */
 
 .toast{
     position:fixed;
-
     right:22px;
-
     bottom:22px;
-
     z-index:3000;
-
     background:#071426;
-
     color:#fff;
-
     padding:13px 16px;
-
     border-radius:11px;
-
-    box-shadow:
-        0 12px 30px
-        rgba(0,0,0,.18);
-
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
     font-size:12px;
-
     transform:translateY(20px);
-
     opacity:0;
-
     pointer-events:none;
-
     transition:.25s;
-
     max-width:340px;
 }
 
 .toast.show{
     transform:translateY(0);
-
     opacity:1;
 }
 
@@ -1018,33 +845,28 @@ tbody tr:hover{
     border-left:4px solid var(--red);
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
+/* ================= MOBILE ================= */
 
 .overlay{
     display:none;
-
     position:fixed;
-
     inset:0;
-
     background:rgba(0,0,0,.4);
-
     z-index:900;
 }
 
 @media(max-width:1200px){
 
     .stats{
-        grid-template-columns:
-            repeat(3,1fr);
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .salary-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .filter-grid{
-        grid-template-columns:
-            1fr 1fr 1fr;
+        grid-template-columns:1fr 1fr 1fr;
     }
 
     .refresh-btn{
@@ -1088,8 +910,11 @@ tbody tr:hover{
     }
 
     .stats{
-        grid-template-columns:
-            1fr 1fr;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .salary-grid{
+        grid-template-columns:1fr 1fr;
     }
 
     .filter-grid{
@@ -1126,6 +951,10 @@ tbody tr:hover{
         grid-template-columns:1fr;
     }
 
+    .salary-grid{
+        grid-template-columns:1fr;
+    }
+
     .table-header{
         align-items:flex-start;
         flex-direction:column;
@@ -1140,21 +969,13 @@ tbody tr:hover{
 </style>
 </head>
 
-
 <body>
-
 
 <div class="app">
 
+<!-- ================= SIDEBAR ================= -->
 
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
-
-<aside
-    class="sidebar"
-    id="sidebar"
->
+<aside class="sidebar" id="sidebar">
 
     <div class="brand">
 
@@ -1164,18 +985,13 @@ tbody tr:hover{
 
         <div class="brand-text">
 
-            <strong>
-                BlackTerminal
-            </strong>
+            <strong>BlackTerminal</strong>
 
-            <span>
-                Computer Institute
-            </span>
+            <span>Computer Institute</span>
 
         </div>
 
     </div>
-
 
     <nav class="nav">
 
@@ -1183,11 +999,7 @@ tbody tr:hover{
             Telecaller
         </div>
 
-
-        <a
-            href="#"
-            class="nav-item active"
-        >
+        <a href="#" class="nav-item active">
 
             <span class="nav-icon">
                 📊
@@ -1201,48 +1013,29 @@ tbody tr:hover{
 
     </nav>
 
-
-    <button
-        class="logout-btn"
-        id="logoutBtn"
-    >
+    <button class="logout-btn" id="logoutBtn">
         🚪 Logout
     </button>
 
 </aside>
 
+<div class="overlay" id="overlay"></div>
 
-<div
-    class="overlay"
-    id="overlay"
-></div>
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<!-- ================= MAIN ================= -->
 
 <main class="main">
 
-
 <header class="topbar">
 
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:12px;
+    ">
 
-    <div
-        style="
-            display:flex;
-            align-items:center;
-            gap:12px;
-        "
-    >
-
-        <button
-            class="mobile-menu"
-            id="mobileMenu"
-        >
+        <button class="mobile-menu" id="mobileMenu">
             ☰
         </button>
-
 
         <div class="page-title">
 
@@ -1258,16 +1051,11 @@ tbody tr:hover{
 
     </div>
 
-
     <div class="user-box">
 
-        <div
-            class="avatar"
-            id="avatar"
-        >
+        <div class="avatar" id="avatar">
             T
         </div>
-
 
         <div class="user-info">
 
@@ -1283,27 +1071,17 @@ tbody tr:hover{
 
     </div>
 
-
 </header>
-
 
 <section class="content">
 
-
 <!-- SYSTEM MESSAGE -->
 
-<div
-    class="system-message"
-    id="systemMessage"
-></div>
+<div class="system-message" id="systemMessage"></div>
 
-
-<!-- =====================================================
-     STATS
-===================================================== -->
+<!-- ================= STATS ================= -->
 
 <div class="stats">
-
 
     <div class="stat">
 
@@ -1315,10 +1093,7 @@ tbody tr:hover{
                     Total Inquiries
                 </div>
 
-                <div
-                    class="stat-value"
-                    id="totalCount"
-                >
+                <div class="stat-value" id="totalCount">
                     0
                 </div>
 
@@ -1332,7 +1107,6 @@ tbody tr:hover{
 
     </div>
 
-
     <div class="stat">
 
         <div class="stat-top">
@@ -1343,10 +1117,7 @@ tbody tr:hover{
                     Today
                 </div>
 
-                <div
-                    class="stat-value"
-                    id="todayCount"
-                >
+                <div class="stat-value" id="todayCount">
                     0
                 </div>
 
@@ -1360,7 +1131,6 @@ tbody tr:hover{
 
     </div>
 
-
     <div class="stat orange">
 
         <div class="stat-top">
@@ -1371,10 +1141,7 @@ tbody tr:hover{
                     New
                 </div>
 
-                <div
-                    class="stat-value"
-                    id="newCount"
-                >
+                <div class="stat-value" id="newCount">
                     0
                 </div>
 
@@ -1388,7 +1155,6 @@ tbody tr:hover{
 
     </div>
 
-
     <div class="stat orange">
 
         <div class="stat-top">
@@ -1399,10 +1165,7 @@ tbody tr:hover{
                     Pending
                 </div>
 
-                <div
-                    class="stat-value"
-                    id="pendingCount"
-                >
+                <div class="stat-value" id="pendingCount">
                     0
                 </div>
 
@@ -1416,7 +1179,6 @@ tbody tr:hover{
 
     </div>
 
-
     <div class="stat green">
 
         <div class="stat-top">
@@ -1427,10 +1189,7 @@ tbody tr:hover{
                     Converted
                 </div>
 
-                <div
-                    class="stat-value"
-                    id="convertedCount"
-                >
+                <div class="stat-value" id="convertedCount">
                     0
                 </div>
 
@@ -1444,18 +1203,112 @@ tbody tr:hover{
 
     </div>
 
+</div>
+
+<!-- ================= SALARY ================= -->
+
+<div class="salary-card">
+
+    <div class="salary-header">
+
+        <div>
+
+            <h2>
+                Current Month Salary
+            </h2>
+
+            <p>
+                Your estimated earnings based on Admin-controlled payment rules
+            </p>
+
+        </div>
+
+        <div class="salary-month" id="salaryMonth">
+            Current Month
+        </div>
+
+    </div>
+
+    <div class="salary-grid">
+
+        <div class="salary-item">
+
+            <div class="salary-label">
+                Base Salary
+            </div>
+
+            <div class="salary-amount" id="baseSalaryAmount">
+                ₹0
+            </div>
+
+            <div class="salary-description">
+                Monthly fixed salary
+            </div>
+
+        </div>
+
+        <div class="salary-item">
+
+            <div class="salary-label">
+                Visit Incentive
+            </div>
+
+            <div class="salary-amount" id="visitSalaryAmount">
+                ₹0
+            </div>
+
+            <div class="salary-description" id="visitSalaryDescription">
+                ₹0 × 0 visited students
+            </div>
+
+        </div>
+
+        <div class="salary-item">
+
+            <div class="salary-label">
+                Admission Incentive
+            </div>
+
+            <div class="salary-amount" id="admissionSalaryAmount">
+                ₹0
+            </div>
+
+            <div class="salary-description" id="admissionSalaryDescription">
+                ₹0 × 0 converted students
+            </div>
+
+        </div>
+
+        <div class="salary-item total">
+
+            <div class="salary-label">
+                Estimated Total Salary
+            </div>
+
+            <div class="salary-amount" id="totalSalaryAmount">
+                ₹0
+            </div>
+
+            <div class="salary-description">
+                Current month estimate
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="salary-note">
+        Salary is calculated using unique mobile numbers for the current month.
+        Inquiries alone do not generate incentive. Admin controls the payment rates.
+    </div>
 
 </div>
 
-
-<!-- =====================================================
-     FILTERS
-===================================================== -->
+<!-- ================= FILTERS ================= -->
 
 <div class="filter-card">
 
     <div class="filter-grid">
-
 
         <input
             type="search"
@@ -1463,7 +1316,6 @@ tbody tr:hover{
             class="filter-input"
             placeholder="🔍 Search student, mobile, coordinator..."
         >
-
 
         <select
             id="courseFilter"
@@ -1475,7 +1327,6 @@ tbody tr:hover{
             </option>
 
         </select>
-
 
         <select
             id="statusFilter"
@@ -1502,6 +1353,10 @@ tbody tr:hover{
                 Follow-up
             </option>
 
+            <option value="visited">
+                Visited
+            </option>
+
             <option value="converted">
                 Converted
             </option>
@@ -1511,7 +1366,6 @@ tbody tr:hover{
             </option>
 
         </select>
-
 
         <select
             id="coordinatorFilter"
@@ -1524,7 +1378,6 @@ tbody tr:hover{
 
         </select>
 
-
         <button
             class="refresh-btn"
             id="refreshBtn"
@@ -1532,18 +1385,13 @@ tbody tr:hover{
             🔄 Refresh
         </button>
 
-
     </div>
 
 </div>
 
-
-<!-- =====================================================
-     TABLE
-===================================================== -->
+<!-- ================= TABLE ================= -->
 
 <div class="table-card">
-
 
     <div class="table-header">
 
@@ -1559,7 +1407,6 @@ tbody tr:hover{
 
         </div>
 
-
         <div class="live-status">
 
             <span class="live-dot"></span>
@@ -1569,7 +1416,6 @@ tbody tr:hover{
         </div>
 
     </div>
-
 
     <div class="table-wrap">
 
@@ -1611,10 +1457,7 @@ tbody tr:hover{
 
             </thead>
 
-
-            <tbody
-                id="inquiryTableBody"
-            >
+            <tbody id="inquiryTableBody">
 
                 <tr>
 
@@ -1637,9 +1480,7 @@ tbody tr:hover{
 
     </div>
 
-
 </div>
-
 
 </section>
 
@@ -1647,15 +1488,9 @@ tbody tr:hover{
 
 </div>
 
+<!-- ================= MODAL ================= -->
 
-<!-- =====================================================
-     MODAL
-===================================================== -->
-
-<div
-    class="modal"
-    id="detailModal"
->
+<div class="modal" id="detailModal">
 
     <div class="modal-box">
 
@@ -1674,7 +1509,6 @@ tbody tr:hover{
 
         </div>
 
-
         <div
             class="modal-body"
             id="modalBody"
@@ -1684,44 +1518,48 @@ tbody tr:hover{
 
 </div>
 
-
 <!-- TOAST -->
 
-<div
-    class="toast"
-    id="toast"
-></div>
-
-
-<!-- =====================================================
-     FIRESTORE REST SCRIPT
-     NO FIREBASE AUTH
-===================================================== -->
+<div class="toast" id="toast"></div>
 
 <script>
-
 
 /*
 ==========================================================
 BLACKTERMINAL TELECALLER
+SALARY + INQUIRY MANAGEMENT
 ==========================================================
 
 NO FIREBASE AUTHENTICATION
 
-Uses the same Firestore REST API architecture
-as Coordinator.
+Firestore collections:
 
-Coordinator:
-POST -> studentInquiries
+studentInquiries
+paymentSettings
 
-Telecaller:
-GET  -> studentInquiries
-PATCH -> status
-DELETE -> inquiry
+Telecaller payment settings document:
+
+paymentSettings/telecaller
+
+Expected fields:
+
+baseSalary
+visitIncentive
+admissionIncentive
+updatedAt
+
+Salary formula:
+
+Base Salary
++
+Unique Visited Students × Visit Incentive
++
+Unique Converted Students × Admission Incentive
+
+Current month only.
 
 ==========================================================
 */
-
 
 /* ======================================================
    FIREBASE PROJECT
@@ -1730,15 +1568,32 @@ DELETE -> inquiry
 const FIREBASE_PROJECT_ID =
     "jobs-2f152";
 
-
 const FIREBASE_API_KEY =
-    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytd2b_M";
+    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_M";
 
-
-const FIRESTORE_URL =
+const FIRESTORE_BASE =
     "https://firestore.googleapis.com/v1/projects/" +
     FIREBASE_PROJECT_ID +
-    "/databases/(default)/documents/studentInquiries";
+    "/databases/(default)/documents";
+
+const FIRESTORE_URL =
+    FIRESTORE_BASE +
+    "/studentInquiries";
+
+const PAYMENT_SETTINGS_URL =
+    FIRESTORE_BASE +
+    "/paymentSettings/telecaller";
+
+
+/* ======================================================
+   DEFAULT SALARY SETTINGS
+====================================================== */
+
+let BASE_SALARY = 1000;
+
+let VISIT_INCENTIVE = 50;
+
+let ADMISSION_INCENTIVE = 50;
 
 
 /* ======================================================
@@ -1750,18 +1605,15 @@ const loggedIn =
         "bt_logged_in"
     );
 
-
 const userRole =
     sessionStorage.getItem(
         "bt_user_role"
     );
 
-
 const telecallerName =
     sessionStorage.getItem(
         "bt_user_name"
     ) || "Telecaller";
-
 
 const telecallerMobile =
     sessionStorage.getItem(
@@ -1790,42 +1642,35 @@ const tableBody =
         "inquiryTableBody"
     );
 
-
 const searchInput =
     document.getElementById(
         "searchInput"
     );
-
 
 const courseFilter =
     document.getElementById(
         "courseFilter"
     );
 
-
 const statusFilter =
     document.getElementById(
         "statusFilter"
     );
-
 
 const coordinatorFilter =
     document.getElementById(
         "coordinatorFilter"
     );
 
-
 const resultText =
     document.getElementById(
         "resultText"
     );
 
-
 const systemMessage =
     document.getElementById(
         "systemMessage"
     );
-
 
 const toast =
     document.getElementById(
@@ -1847,7 +1692,6 @@ document.getElementById(
 ).textContent =
     telecallerName;
 
-
 document.getElementById(
     "avatar"
 ).textContent =
@@ -1857,7 +1701,7 @@ document.getElementById(
 
 
 /* ======================================================
-   TIMEOUT FETCH
+   FETCH TIMEOUT
 ====================================================== */
 
 async function fetchWithTimeout(
@@ -1869,7 +1713,6 @@ async function fetchWithTimeout(
     const controller =
         new AbortController();
 
-
     const timer =
         setTimeout(
             ()=>{
@@ -1877,7 +1720,6 @@ async function fetchWithTimeout(
             },
             timeout
         );
-
 
     try{
 
@@ -1902,7 +1744,7 @@ async function fetchWithTimeout(
 
 
 /* ======================================================
-   ERROR MESSAGE
+   READ ERROR
 ====================================================== */
 
 async function readError(
@@ -1913,7 +1755,6 @@ async function readError(
 
         const data =
             await response.json();
-
 
         return (
             data?.error?.message ||
@@ -1952,7 +1793,6 @@ function showSystemMessage(
 
 }
 
-
 function hideSystemMessage(){
 
     systemMessage.className =
@@ -1980,11 +1820,9 @@ function showToast(
     toast.textContent =
         message;
 
-
     clearTimeout(
         toastTimer
     );
-
 
     toastTimer =
         setTimeout(
@@ -1999,7 +1837,7 @@ function showToast(
 
 
 /* ======================================================
-   ESCAPE
+   ESCAPE HTML
 ====================================================== */
 
 function escapeHtml(
@@ -2034,7 +1872,7 @@ function escapeHtml(
 
 
 /* ======================================================
-   FIRESTORE REST VALUE CONVERTER
+   FIRESTORE VALUE CONVERTER
 ====================================================== */
 
 function firestoreValue(
@@ -2047,7 +1885,6 @@ function firestoreValue(
 
     }
 
-
     if(
         field.stringValue !== undefined
     ){
@@ -2055,7 +1892,6 @@ function firestoreValue(
         return field.stringValue;
 
     }
-
 
     if(
         field.integerValue !== undefined
@@ -2067,7 +1903,6 @@ function firestoreValue(
 
     }
 
-
     if(
         field.doubleValue !== undefined
     ){
@@ -2078,7 +1913,6 @@ function firestoreValue(
 
     }
 
-
     if(
         field.booleanValue !== undefined
     ){
@@ -2086,7 +1920,6 @@ function firestoreValue(
         return field.booleanValue;
 
     }
-
 
     if(
         field.timestampValue !== undefined
@@ -2096,7 +1929,6 @@ function firestoreValue(
 
     }
 
-
     if(
         field.nullValue !== undefined
     ){
@@ -2105,14 +1937,13 @@ function firestoreValue(
 
     }
 
-
     return "";
 
 }
 
 
 /* ======================================================
-   FIRESTORE DOCUMENT CONVERTER
+   DOCUMENT CONVERTER
 ====================================================== */
 
 function convertDocument(
@@ -2121,7 +1952,6 @@ function convertDocument(
 
     const fields =
         document.fields || {};
-
 
     return {
 
@@ -2195,9 +2025,158 @@ function convertDocument(
         updatedAt:
             firestoreValue(
                 fields.updatedAt
+            ) || "",
+
+        telecallerName:
+            firestoreValue(
+                fields.telecallerName
+            ) || "",
+
+        telecallerMobile:
+            firestoreValue(
+                fields.telecallerMobile
             ) || ""
 
     };
+
+}
+
+
+/* ======================================================
+   LOAD PAYMENT SETTINGS
+====================================================== */
+
+async function loadPaymentSettings(){
+
+    try{
+
+        const url =
+            PAYMENT_SETTINGS_URL +
+            "?key=" +
+            encodeURIComponent(
+                FIREBASE_API_KEY
+            );
+
+        const response =
+            await fetchWithTimeout(
+                url,
+                {
+                    method:"GET"
+                },
+                10000
+            );
+
+        /*
+          If Admin has not created the document yet,
+          keep the default values.
+        */
+
+        if(
+            response.status === 404
+        ){
+
+            updateSalaryDisplay();
+
+            return;
+
+        }
+
+        if(!response.ok){
+
+            const error =
+                await readError(
+                    response
+                );
+
+            throw new Error(
+                "Payment settings error (" +
+                response.status +
+                "): " +
+                error
+            );
+
+        }
+
+        const data =
+            await response.json();
+
+        const fields =
+            data.fields || {};
+
+        const base =
+            firestoreValue(
+                fields.baseSalary
+            );
+
+        const visit =
+            firestoreValue(
+                fields.visitIncentive
+            );
+
+        const admission =
+            firestoreValue(
+                fields.admissionIncentive
+            );
+
+        if(
+            Number.isFinite(
+                Number(base)
+            )
+        ){
+
+            BASE_SALARY =
+                Math.max(
+                    0,
+                    Number(base)
+                );
+
+        }
+
+        if(
+            Number.isFinite(
+                Number(visit)
+            )
+        ){
+
+            VISIT_INCENTIVE =
+                Math.max(
+                    0,
+                    Number(visit)
+                );
+
+        }
+
+        if(
+            Number.isFinite(
+                Number(admission)
+            )
+        ){
+
+            ADMISSION_INCENTIVE =
+                Math.max(
+                    0,
+                    Number(admission)
+                );
+
+        }
+
+        updateSalaryDisplay();
+
+    }catch(error){
+
+        console.error(
+            "PAYMENT SETTINGS ERROR:",
+            error
+        );
+
+        /*
+          Do not stop the dashboard if
+          payment settings cannot be loaded.
+        */
+
+        updateSalaryDisplay();
+
+    }
 
 }
 
@@ -2212,7 +2191,6 @@ async function fetchAllInquiries(){
 
     let pageToken = "";
 
-
     do{
 
         let url =
@@ -2222,7 +2200,6 @@ async function fetchAllInquiries(){
                 FIREBASE_API_KEY
             ) +
             "&pageSize=300";
-
 
         if(pageToken){
 
@@ -2234,7 +2211,6 @@ async function fetchAllInquiries(){
 
         }
 
-
         const response =
             await fetchWithTimeout(
                 url,
@@ -2244,14 +2220,12 @@ async function fetchAllInquiries(){
                 12000
             );
 
-
         if(!response.ok){
 
             const error =
                 await readError(
                     response
                 );
-
 
             throw new Error(
                 "Firestore Error (" +
@@ -2262,10 +2236,8 @@ async function fetchAllInquiries(){
 
         }
 
-
         const data =
             await response.json();
-
 
         if(
             Array.isArray(
@@ -2279,14 +2251,12 @@ async function fetchAllInquiries(){
 
         }
 
-
         pageToken =
             data.nextPageToken ||
             "";
 
     }
     while(pageToken);
-
 
     return allDocuments.map(
         convertDocument
@@ -2320,22 +2290,15 @@ async function loadInquiries(){
 
     `;
 
-
     showSystemMessage(
         "info",
         "⏳ Loading student inquiries from Firestore..."
     );
 
-
     try{
 
         allInquiries =
             await fetchAllInquiries();
-
-
-        /*
-          Newest first
-        */
 
         allInquiries.sort(
             (a,b)=>{
@@ -2345,21 +2308,17 @@ async function loadInquiries(){
                         a.createdAt || 0
                     ).getTime();
 
-
                 const db =
                     new Date(
                         b.createdAt || 0
                     ).getTime();
-
 
                 return db - da;
 
             }
         );
 
-
         hideSystemMessage();
-
 
         updateStats();
 
@@ -2367,6 +2326,7 @@ async function loadInquiries(){
 
         applyFilters();
 
+        updateSalaryDisplay();
 
         if(
             allInquiries.length > 0
@@ -2378,14 +2338,12 @@ async function loadInquiries(){
 
         }
 
-
     }catch(error){
 
         console.error(
             "LOAD INQUIRIES ERROR:",
             error
         );
-
 
         tableBody.innerHTML = `
 
@@ -2418,7 +2376,6 @@ async function loadInquiries(){
 
         `;
 
-
         showSystemMessage(
             "error",
             `
@@ -2442,20 +2399,6 @@ function getStatus(
     inquiry
 ){
 
-    /*
-      Coordinator creates:
-
-      status = "new"
-      telecallerStatus = "pending"
-
-      We want a NEW inquiry to appear as New.
-
-      Therefore:
-
-      If telecallerStatus is pending AND
-      status is new → New
-    */
-
     if(
         inquiry.status === "new" &&
         (
@@ -2467,7 +2410,6 @@ function getStatus(
         return "new";
 
     }
-
 
     return (
         inquiry.telecallerStatus ||
@@ -2496,13 +2438,14 @@ function statusText(
 
         "follow-up":"Follow-up",
 
+        visited:"Visited",
+
         converted:"Converted",
 
         "not-interested":
             "Not Interested"
 
     };
-
 
     return (
         map[status] ||
@@ -2526,10 +2469,8 @@ function formatDate(
 
     }
 
-
     const date =
         new Date(value);
-
 
     if(
         isNaN(
@@ -2540,7 +2481,6 @@ function formatDate(
         return "Recently";
 
     }
-
 
     return date.toLocaleString(
         "en-IN",
@@ -2570,14 +2510,11 @@ function isToday(
 
     }
 
-
     const date =
         new Date(value);
 
-
     const now =
         new Date();
-
 
     return (
 
@@ -2600,6 +2537,302 @@ function isToday(
 
 
 /* ======================================================
+   CURRENT MONTH
+====================================================== */
+
+function isCurrentMonth(
+    value
+){
+
+    if(!value){
+
+        return false;
+
+    }
+
+    const date =
+        new Date(value);
+
+    const now =
+        new Date();
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return false;
+
+    }
+
+    return (
+
+        date.getMonth() ===
+        now.getMonth()
+
+        &&
+
+        date.getFullYear() ===
+        now.getFullYear()
+
+    );
+
+}
+
+
+/* ======================================================
+   NORMALIZE MOBILE
+====================================================== */
+
+function normalizeMobile(
+    value
+){
+
+    let mobile =
+        String(
+            value || ""
+        )
+        .replace(
+            /\D/g,
+            ""
+        );
+
+    /*
+      Indian numbers:
+      9876543210
+      919876543210
+    */
+
+    if(
+        mobile.length > 10
+    ){
+
+        mobile =
+            mobile.slice(
+                -10
+            );
+
+    }
+
+    return mobile;
+
+}
+
+
+/* ======================================================
+   UNIQUE MOBILE COUNT
+====================================================== */
+
+function uniqueMobileCount(
+    inquiries
+){
+
+    const set =
+        new Set();
+
+    inquiries.forEach(
+        inquiry=>{
+
+            const mobile =
+                normalizeMobile(
+                    inquiry.mobile
+                );
+
+            if(mobile){
+
+                set.add(
+                    mobile
+                );
+
+            }
+
+        }
+    );
+
+    return set.size;
+
+}
+
+
+/* ======================================================
+   SALARY CALCULATION
+====================================================== */
+
+function calculateSalary(){
+
+    const currentMonth =
+        allInquiries.filter(
+            inquiry =>
+                isCurrentMonth(
+                    inquiry.createdAt
+                )
+        );
+
+    /*
+      Visited students
+
+      Only exact status "visited"
+      counts for visit incentive.
+    */
+
+    const visited =
+        currentMonth.filter(
+            inquiry =>
+                getStatus(
+                    inquiry
+                ) === "visited"
+        );
+
+    /*
+      Converted students
+
+      Only exact status "converted"
+      counts for admission incentive.
+    */
+
+    const converted =
+        currentMonth.filter(
+            inquiry =>
+                getStatus(
+                    inquiry
+                ) === "converted"
+        );
+
+    const uniqueVisited =
+        uniqueMobileCount(
+            visited
+        );
+
+    const uniqueConverted =
+        uniqueMobileCount(
+            converted
+        );
+
+    const visitPayment =
+        uniqueVisited *
+        VISIT_INCENTIVE;
+
+    const admissionPayment =
+        uniqueConverted *
+        ADMISSION_INCENTIVE;
+
+    const total =
+        BASE_SALARY +
+        visitPayment +
+        admissionPayment;
+
+    return {
+
+        base:
+            BASE_SALARY,
+
+        uniqueVisited,
+
+        uniqueConverted,
+
+        visitPayment,
+
+        admissionPayment,
+
+        total
+
+    };
+
+}
+
+
+/* ======================================================
+   CURRENCY
+====================================================== */
+
+function money(
+    value
+){
+
+    return "₹" +
+        Number(
+            value || 0
+        ).toLocaleString(
+            "en-IN"
+        );
+
+}
+
+
+/* ======================================================
+   UPDATE SALARY DISPLAY
+====================================================== */
+
+function updateSalaryDisplay(){
+
+    const salary =
+        calculateSalary();
+
+    document.getElementById(
+        "baseSalaryAmount"
+    ).textContent =
+        money(
+            salary.base
+        );
+
+    document.getElementById(
+        "visitSalaryAmount"
+    ).textContent =
+        money(
+            salary.visitPayment
+        );
+
+    document.getElementById(
+        "admissionSalaryAmount"
+    ).textContent =
+        money(
+            salary.admissionPayment
+        );
+
+    document.getElementById(
+        "totalSalaryAmount"
+    ).textContent =
+        money(
+            salary.total
+        );
+
+    document.getElementById(
+        "visitSalaryDescription"
+    ).textContent =
+        `${money(VISIT_INCENTIVE)} × ${salary.uniqueVisited} visited student${
+            salary.uniqueVisited === 1
+                ? ""
+                : "s"
+        }`;
+
+    document.getElementById(
+        "admissionSalaryDescription"
+    ).textContent =
+        `${money(ADMISSION_INCENTIVE)} × ${salary.uniqueConverted} converted student${
+            salary.uniqueConverted === 1
+                ? ""
+                : "s"
+        }`;
+
+    const now =
+        new Date();
+
+    document.getElementById(
+        "salaryMonth"
+    ).textContent =
+        now.toLocaleString(
+            "en-IN",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        );
+
+}
+
+
+/* ======================================================
    STATS
 ====================================================== */
 
@@ -2607,7 +2840,6 @@ function updateStats(){
 
     const total =
         allInquiries.length;
-
 
     const today =
         allInquiries.filter(
@@ -2617,14 +2849,12 @@ function updateStats(){
                 )
         ).length;
 
-
     const newCount =
         allInquiries.filter(
             item =>
                 getStatus(item) ===
                 "new"
         ).length;
-
 
     const pending =
         allInquiries.filter(
@@ -2633,7 +2863,6 @@ function updateStats(){
                 "pending"
         ).length;
 
-
     const converted =
         allInquiries.filter(
             item =>
@@ -2641,30 +2870,25 @@ function updateStats(){
                 "converted"
         ).length;
 
-
     document.getElementById(
         "totalCount"
     ).textContent =
         total;
-
 
     document.getElementById(
         "todayCount"
     ).textContent =
         today;
 
-
     document.getElementById(
         "newCount"
     ).textContent =
         newCount;
 
-
     document.getElementById(
         "pendingCount"
     ).textContent =
         pending;
-
 
     document.getElementById(
         "convertedCount"
@@ -2683,10 +2907,8 @@ function populateFilters(){
     const selectedCourse =
         courseFilter.value;
 
-
     const selectedCoordinator =
         coordinatorFilter.value;
-
 
     const courses =
         [
@@ -2701,7 +2923,6 @@ function populateFilters(){
         ]
         .sort();
 
-
     const coordinators =
         [
             ...new Set(
@@ -2715,13 +2936,11 @@ function populateFilters(){
         ]
         .sort();
 
-
     courseFilter.innerHTML = `
         <option value="">
             All Courses
         </option>
     `;
-
 
     courses.forEach(
         item=>{
@@ -2731,14 +2950,11 @@ function populateFilters(){
                     "option"
                 );
 
-
             option.value =
                 item;
 
-
             option.textContent =
                 item;
-
 
             courseFilter.appendChild(
                 option
@@ -2747,13 +2963,11 @@ function populateFilters(){
         }
     );
 
-
     coordinatorFilter.innerHTML = `
         <option value="">
             All Coordinators
         </option>
     `;
-
 
     coordinators.forEach(
         item=>{
@@ -2763,14 +2977,11 @@ function populateFilters(){
                     "option"
                 );
 
-
             option.value =
                 item;
 
-
             option.textContent =
                 item;
-
 
             coordinatorFilter.appendChild(
                 option
@@ -2778,7 +2989,6 @@ function populateFilters(){
 
         }
     );
-
 
     if(
         courses.includes(
@@ -2790,7 +3000,6 @@ function populateFilters(){
             selectedCourse;
 
     }
-
 
     if(
         coordinators.includes(
@@ -2817,18 +3026,14 @@ function applyFilters(){
             .trim()
             .toLowerCase();
 
-
     const course =
         courseFilter.value;
-
 
     const status =
         statusFilter.value;
 
-
     const coordinator =
         coordinatorFilter.value;
-
 
     const filtered =
         allInquiries.filter(
@@ -2840,13 +3045,11 @@ function applyFilters(){
                         ""
                     ).toLowerCase();
 
-
                 const mobile =
                     String(
                         inquiry.mobile ||
                         ""
                     ).toLowerCase();
-
 
                 const courseName =
                     String(
@@ -2854,13 +3057,11 @@ function applyFilters(){
                         ""
                     ).toLowerCase();
 
-
                 const coordinatorName =
                     String(
                         inquiry.coordinatorName ||
                         ""
                     ).toLowerCase();
-
 
                 const matchesSearch =
 
@@ -2882,24 +3083,20 @@ function applyFilters(){
                         search
                     );
 
-
                 const matchesCourse =
                     !course ||
                     inquiry.course ===
                         course;
-
 
                 const matchesCoordinator =
                     !coordinator ||
                     inquiry.coordinatorName ===
                         coordinator;
 
-
                 const matchesStatus =
                     !status ||
                     getStatus(inquiry) ===
                         status;
-
 
                 return (
                     matchesSearch &&
@@ -2910,7 +3107,6 @@ function applyFilters(){
 
             }
         );
-
 
     renderTable(
         filtered
@@ -2933,7 +3129,6 @@ function renderTable(
                 ? ""
                 : "ies"
         } found`;
-
 
     if(
         inquiries.length === 0
@@ -2966,7 +3161,6 @@ function renderTable(
 
     }
 
-
     tableBody.innerHTML =
         inquiries
             .map(
@@ -2978,7 +3172,7 @@ function renderTable(
 
 
 /* ======================================================
-   ROW
+   CREATE ROW
 ====================================================== */
 
 function createRow(
@@ -2989,23 +3183,19 @@ function createRow(
         inquiry.studentName ||
         "Unknown";
 
-
     const initial =
         name
             .charAt(0)
             .toUpperCase();
-
 
     const status =
         getStatus(
             inquiry
         );
 
-
     return `
 
         <tr>
-
 
             <td>
 
@@ -3019,7 +3209,6 @@ function createRow(
 
                     </div>
 
-
                     <div>
 
                         <div class="student-name">
@@ -3029,7 +3218,6 @@ function createRow(
                             )}
 
                         </div>
-
 
                         <div class="student-mobile">
 
@@ -3047,7 +3235,6 @@ function createRow(
 
             </td>
 
-
             <td>
 
                 <div class="course-name">
@@ -3060,7 +3247,6 @@ function createRow(
                 </div>
 
             </td>
-
 
             <td>
 
@@ -3075,7 +3261,6 @@ function createRow(
 
             </td>
 
-
             <td>
 
                 <div class="coordinator-name">
@@ -3088,7 +3273,6 @@ function createRow(
                 </div>
 
             </td>
-
 
             <td>
 
@@ -3103,7 +3287,6 @@ function createRow(
                 </div>
 
             </td>
-
 
             <td>
 
@@ -3142,6 +3325,13 @@ function createRow(
                     </option>
 
                     <option
+                        value="visited"
+                        ${status==="visited" ? "selected":""}
+                    >
+                        Visited
+                    </option>
+
+                    <option
                         value="converted"
                         ${status==="converted" ? "selected":""}
                     >
@@ -3159,11 +3349,9 @@ function createRow(
 
             </td>
 
-
             <td>
 
                 <div class="actions">
-
 
                     <button
                         class="action-btn call"
@@ -3174,7 +3362,6 @@ function createRow(
                         📞
                     </button>
 
-
                     <button
                         class="action-btn whatsapp"
                         title="WhatsApp"
@@ -3183,7 +3370,6 @@ function createRow(
                     >
                         💬
                     </button>
-
 
                     <button
                         class="action-btn view"
@@ -3194,7 +3380,6 @@ function createRow(
                         👁
                     </button>
 
-
                     <button
                         class="action-btn delete"
                         title="Delete"
@@ -3204,11 +3389,9 @@ function createRow(
                         🗑
                     </button>
 
-
                 </div>
 
             </td>
-
 
         </tr>
 
@@ -3230,21 +3413,17 @@ tableBody.addEventListener(
                 "[data-action]"
             );
 
-
         if(!button){
 
             return;
 
         }
 
-
         const action =
             button.dataset.action;
 
-
         const id =
             button.dataset.id;
-
 
         const inquiry =
             allInquiries.find(
@@ -3252,13 +3431,11 @@ tableBody.addEventListener(
                     item.id === id
             );
 
-
         if(!inquiry){
 
             return;
 
         }
-
 
         if(
             action === "call"
@@ -3274,7 +3451,6 @@ tableBody.addEventListener(
                     ""
                 );
 
-
             if(mobile){
 
                 window.location.href =
@@ -3284,7 +3460,6 @@ tableBody.addEventListener(
             }
 
         }
-
 
         else if(
             action === "whatsapp"
@@ -3296,7 +3471,6 @@ tableBody.addEventListener(
 
         }
 
-
         else if(
             action === "view"
         ){
@@ -3306,7 +3480,6 @@ tableBody.addEventListener(
             );
 
         }
-
 
         else if(
             action === "delete"
@@ -3335,21 +3508,17 @@ tableBody.addEventListener(
                 '[data-action="status"]'
             );
 
-
         if(!select){
 
             return;
 
         }
 
-
         const id =
             select.dataset.id;
 
-
         const status =
             select.value;
-
 
         await updateStatus(
             id,
@@ -3454,7 +3623,6 @@ async function updateStatus(
                     response
                 );
 
-
             throw new Error(
                 "Firestore Error (" +
                 response.status +
@@ -3464,10 +3632,6 @@ async function updateStatus(
 
         }
 
-
-        /*
-          Update local data immediately.
-        */
 
         const item =
             allInquiries.find(
@@ -3495,8 +3659,9 @@ async function updateStatus(
 
         updateStats();
 
-        applyFilters();
+        updateSalaryDisplay();
 
+        applyFilters();
 
         showToast(
             "Status updated successfully."
@@ -3510,17 +3675,11 @@ async function updateStatus(
             error
         );
 
-
         showToast(
             "Status update failed: " +
             error.message,
             "error"
         );
-
-
-        /*
-          Reload original data
-        */
 
         loadInquiries();
 
@@ -3547,13 +3706,11 @@ async function deleteInquiry(
             "?"
         );
 
-
     if(!ok){
 
         return;
 
     }
-
 
     try{
 
@@ -3568,7 +3725,6 @@ async function deleteInquiry(
                 FIREBASE_API_KEY
             );
 
-
         const response =
             await fetchWithTimeout(
                 url,
@@ -3578,14 +3734,12 @@ async function deleteInquiry(
                 12000
             );
 
-
         if(!response.ok){
 
             const error =
                 await readError(
                     response
                 );
-
 
             throw new Error(
                 "Firestore Error (" +
@@ -3596,7 +3750,6 @@ async function deleteInquiry(
 
         }
 
-
         allInquiries =
             allInquiries.filter(
                 item =>
@@ -3604,18 +3757,17 @@ async function deleteInquiry(
                     inquiry.id
             );
 
-
         updateStats();
+
+        updateSalaryDisplay();
 
         populateFilters();
 
         applyFilters();
 
-
         showToast(
             "Inquiry deleted."
         );
-
 
     }catch(error){
 
@@ -3623,7 +3775,6 @@ async function deleteInquiry(
             "DELETE ERROR:",
             error
         );
-
 
         showToast(
             "Delete failed: " +
@@ -3654,7 +3805,6 @@ function openWhatsApp(
             ""
         );
 
-
     if(
         mobile.length === 10
     ){
@@ -3664,7 +3814,6 @@ function openWhatsApp(
             mobile;
 
     }
-
 
     if(!mobile){
 
@@ -3677,13 +3826,11 @@ function openWhatsApp(
 
     }
 
-
     const message =
         `Hello ${inquiry.studentName || ""},\n\n` +
         `This is BlackTerminal Computer Institute, Baripada.\n\n` +
         `Regarding your inquiry for ${inquiry.course || "our course"}.\n\n` +
         `Please let us know how we can help you.`;
-
 
     const url =
         "https://wa.me/" +
@@ -3692,7 +3839,6 @@ function openWhatsApp(
         encodeURIComponent(
             message
         );
-
 
     window.open(
         url,
@@ -3715,13 +3861,11 @@ function openDetails(
             inquiry
         );
 
-
     document.getElementById(
         "modalBody"
     ).innerHTML = `
 
         <div class="detail-grid">
-
 
             <div class="detail">
 
@@ -3738,7 +3882,6 @@ function openDetails(
 
             </div>
 
-
             <div class="detail">
 
                 <div class="detail-label">
@@ -3753,7 +3896,6 @@ function openDetails(
                 </div>
 
             </div>
-
 
             <div class="detail">
 
@@ -3770,7 +3912,6 @@ function openDetails(
 
             </div>
 
-
             <div class="detail">
 
                 <div class="detail-label">
@@ -3786,7 +3927,6 @@ function openDetails(
 
             </div>
 
-
             <div class="detail">
 
                 <div class="detail-label">
@@ -3801,7 +3941,6 @@ function openDetails(
                 </div>
 
             </div>
-
 
             <div class="detail">
 
@@ -3819,7 +3958,6 @@ function openDetails(
 
             </div>
 
-
             <div class="detail">
 
                 <div class="detail-label">
@@ -3836,7 +3974,6 @@ function openDetails(
 
             </div>
 
-
             <div class="detail">
 
                 <div class="detail-label">
@@ -3851,7 +3988,6 @@ function openDetails(
                 </div>
 
             </div>
-
 
             <div class="detail full">
 
@@ -3868,7 +4004,6 @@ function openDetails(
 
             </div>
 
-
             <div class="detail full">
 
                 <div class="detail-label">
@@ -3884,12 +4019,9 @@ function openDetails(
 
             </div>
 
-
         </div>
 
-
         <div class="modal-actions">
-
 
             <button
                 class="modal-action green"
@@ -3898,7 +4030,6 @@ function openDetails(
                 💬 WhatsApp
             </button>
 
-
             <button
                 class="modal-action primary"
                 id="modalCall"
@@ -3906,11 +4037,9 @@ function openDetails(
                 📞 Call Student
             </button>
 
-
         </div>
 
     `;
-
 
     document
         .getElementById(
@@ -3919,7 +4048,6 @@ function openDetails(
         .classList.add(
             "show"
         );
-
 
     document
         .getElementById(
@@ -3931,7 +4059,6 @@ function openDetails(
                 inquiry
             );
         };
-
 
     document
         .getElementById(
@@ -3949,7 +4076,6 @@ function openDetails(
                     /\D/g,
                     ""
                 );
-
 
             if(mobile){
 
@@ -4020,18 +4146,15 @@ searchInput.addEventListener(
     applyFilters
 );
 
-
 courseFilter.addEventListener(
     "change",
     applyFilters
 );
 
-
 statusFilter.addEventListener(
     "change",
     applyFilters
 );
-
 
 coordinatorFilter.addEventListener(
     "change",
@@ -4051,7 +4174,10 @@ document
         "click",
         async()=>{
 
-            await loadInquiries();
+            await Promise.all([
+                loadInquiries(),
+                loadPaymentSettings()
+            ]);
 
         }
     );
@@ -4089,7 +4215,6 @@ document
                 "bt_login_time"
             );
 
-
             window.location.replace(
                 "login.html"
             );
@@ -4107,12 +4232,10 @@ const sidebar =
         "sidebar"
     );
 
-
 const overlay =
     document.getElementById(
         "overlay"
     );
-
 
 document
     .getElementById(
@@ -4133,7 +4256,6 @@ document
         }
     );
 
-
 overlay.addEventListener(
     "click",
     ()=>{
@@ -4151,10 +4273,26 @@ overlay.addEventListener(
 
 
 /* ======================================================
+   AUTO REFRESH PAYMENT SETTINGS
+====================================================== */
+
+setInterval(
+    loadPaymentSettings,
+    60000
+);
+
+
+/* ======================================================
    START
 ====================================================== */
 
-loadInquiries();
+(async function(){
+
+    await loadPaymentSettings();
+
+    await loadInquiries();
+
+})();
 
 
 console.log(

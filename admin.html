@@ -8,7 +8,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Coordinator Payment Control | BlackTerminal</title>
+<title>Staff Payment Control | BlackTerminal</title>
 
 <style>
 
@@ -176,10 +176,12 @@ body{
 
 .content{
     padding:28px;
+    max-width:1450px;
+    margin:auto;
 }
 
 /* =========================
-   HEADER BANNER
+   HERO
 ========================= */
 
 .hero{
@@ -226,7 +228,8 @@ body{
 .hero p{
     color:#c8cfdb;
     font-size:13px;
-    max-width:650px;
+    max-width:720px;
+    line-height:1.6;
 }
 
 /* =========================
@@ -264,26 +267,97 @@ body{
 }
 
 /* =========================
+   STAFF TABS
+========================= */
+
+.staff-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:25px;
+}
+
+.staff-tab{
+    background:#fff;
+    border:1px solid #e7ebf1;
+    border-radius:15px;
+    padding:18px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.staff-tab:hover{
+    border-color:#cfd7e3;
+}
+
+.staff-tab.active{
+    border-color:#111827;
+    box-shadow:0 6px 20px rgba(17,24,39,.07);
+}
+
+.staff-tab-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.staff-tab-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.staff-icon{
+    width:40px;
+    height:40px;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f0f3f8;
+    font-size:18px;
+}
+
+.staff-tab.active .staff-icon{
+    background:#111827;
+    color:#fff;
+}
+
+.staff-tab h3{
+    font-size:15px;
+}
+
+.staff-tab p{
+    margin-top:3px;
+    color:#8a94a6;
+    font-size:10px;
+}
+
+.tab-arrow{
+    color:#9aa3b2;
+    font-size:16px;
+}
+
+.staff-tab.active .tab-arrow{
+    color:#111827;
+}
+
+/* =========================
    SUMMARY
 ========================= */
 
 .summary{
     display:grid;
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:16px;
-
     margin-bottom:25px;
 }
 
 .summary-card{
     background:#fff;
-
     border:1px solid #e7ebf1;
-
     border-radius:15px;
-
     padding:20px;
 }
 
@@ -310,13 +384,9 @@ body{
 
 .card{
     background:#fff;
-
     border:1px solid #e7ebf1;
-
     border-radius:18px;
-
     padding:24px;
-
     margin-bottom:25px;
 }
 
@@ -324,8 +394,8 @@ body{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     margin-bottom:20px;
+    gap:15px;
 }
 
 .card-header h3{
@@ -344,22 +414,15 @@ body{
 
 .form-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:18px;
 }
 
 .form-group label{
     display:block;
-
     font-size:12px;
-
     font-weight:700;
-
     color:#4d586b;
-
     margin-bottom:8px;
 }
 
@@ -369,40 +432,26 @@ body{
 
 .currency{
     position:absolute;
-
     left:13px;
-
     top:50%;
-
-    transform:
-        translateY(-50%);
-
+    transform:translateY(-50%);
     color:#778194;
-
     font-weight:700;
-
     font-size:13px;
 }
 
 .form-group input{
     width:100%;
-
     border:1px solid #dce2ea;
-
     border-radius:10px;
-
     padding:13px 13px 13px 31px;
-
     font-size:14px;
-
     outline:none;
-
     transition:.2s;
 }
 
 .form-group input:focus{
     border-color:#111827;
-
     box-shadow:
         0 0 0 3px
         rgba(17,24,39,.06);
@@ -410,10 +459,9 @@ body{
 
 .help{
     margin-top:7px;
-
     font-size:10px;
-
     color:#98a1af;
+    line-height:1.5;
 }
 
 /* =========================
@@ -422,31 +470,22 @@ body{
 
 .button-row{
     display:flex;
-
     gap:10px;
-
     margin-top:22px;
 }
 
 .btn{
     border:0;
-
     border-radius:10px;
-
     padding:12px 20px;
-
     font-size:13px;
-
     font-weight:700;
-
     cursor:pointer;
-
     transition:.2s;
 }
 
 .btn-primary{
     background:#111827;
-
     color:#fff;
 }
 
@@ -456,7 +495,6 @@ body{
 
 .btn-secondary{
     background:#f0f2f6;
-
     color:#394457;
 }
 
@@ -466,7 +504,6 @@ body{
 
 .btn:disabled{
     opacity:.5;
-
     cursor:not-allowed;
 }
 
@@ -476,45 +513,31 @@ body{
 
 .rule-box{
     background:#f8f9fc;
-
     border:1px solid #e6eaf0;
-
     border-radius:14px;
-
     padding:18px;
-
     margin-top:20px;
 }
 
 .rule-title{
     font-size:13px;
-
     font-weight:800;
-
     margin-bottom:12px;
 }
 
 .rule-list{
     display:grid;
-
     gap:9px;
 }
 
 .rule-item{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     padding:10px 12px;
-
     background:#fff;
-
     border:1px solid #edf0f4;
-
     border-radius:9px;
-
     font-size:12px;
 }
 
@@ -532,17 +555,11 @@ body{
 
 .info-box{
     padding:16px;
-
     background:#eef5ff;
-
     border:1px solid #d7e5ff;
-
     color:#315b96;
-
     border-radius:12px;
-
     font-size:12px;
-
     line-height:1.7;
 }
 
@@ -552,11 +569,8 @@ body{
 
 .loading{
     text-align:center;
-
     padding:20px;
-
     color:#8b95a5;
-
     font-size:12px;
 }
 
@@ -566,11 +580,8 @@ body{
 
 .footer{
     text-align:center;
-
     padding:20px;
-
     color:#9aa3b2;
-
     font-size:11px;
 }
 
@@ -581,13 +592,11 @@ body{
 @media(max-width:1000px){
 
     .summary{
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
     .form-grid{
-        grid-template-columns:
-            1fr 1fr;
+        grid-template-columns:1fr 1fr;
     }
 
 }
@@ -595,15 +604,12 @@ body{
 @media(max-width:760px){
 
     .sidebar{
-        transform:
-            translateX(-100%);
-
+        transform:translateX(-100%);
         transition:.3s;
     }
 
     .sidebar.open{
-        transform:
-            translateX(0);
+        transform:translateX(0);
     }
 
     .main{
@@ -626,14 +632,16 @@ body{
         padding:17px;
     }
 
+    .staff-tabs{
+        grid-template-columns:1fr;
+    }
+
     .summary{
-        grid-template-columns:
-            1fr;
+        grid-template-columns:1fr;
     }
 
     .form-grid{
-        grid-template-columns:
-            1fr;
+        grid-template-columns:1fr;
     }
 
     .hero h2{
@@ -691,14 +699,14 @@ body{
         </a>
 
 
-        <a href="admin-coordinator-payment.html"
+        <a href="#"
            class="active">
 
             <span class="menu-icon">
                 💰
             </span>
 
-            Coordinator Payment
+            Staff Payment Control
 
         </a>
 
@@ -736,458 +744,541 @@ body{
 <main class="main">
 
 
-    <!-- TOPBAR -->
+<header class="topbar">
 
-    <header class="topbar">
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:15px;
+    ">
 
-        <div style="
-            display:flex;
-            align-items:center;
-            gap:15px;
-        ">
+        <div class="mobile-menu"
+             onclick="toggleSidebar()">
 
-            <div class="mobile-menu"
-                 onclick="toggleSidebar()">
-
-                ☰
-
-            </div>
-
-
-            <div class="top-title">
-
-                <h1>
-                    Coordinator Payment Control
-                </h1>
-
-                <p>
-                    Manage coordinator salary and incentive rates
-                </p>
-
-            </div>
+            ☰
 
         </div>
 
 
-        <div class="admin-profile">
+        <div class="top-title">
 
-            <div class="avatar">
-                A
-            </div>
-
-            <div class="profile-text">
-
-                <strong>
-                    Administrator
-                </strong>
-
-                <span>
-                    Admin
-                </span>
-
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <!-- CONTENT -->
-
-    <section class="content">
-
-
-        <!-- HERO -->
-
-        <div class="hero">
-
-            <h2>
-                Coordinator Payment Management
-            </h2>
+            <h1>
+                Staff Payment Control
+            </h1>
 
             <p>
-                Configure the monthly base salary, student visit incentive,
-                and admission incentive for coordinators. Changes saved here
-                will be used automatically by the Coordinator Panel.
+                Manage Coordinator and Telecaller salary and incentive rates
             </p>
 
         </div>
 
+    </div>
 
-        <!-- STATUS -->
 
-        <div class="status"
-             id="statusBox">
+    <div class="admin-profile">
+
+        <div class="avatar">
+            A
         </div>
 
+        <div class="profile-text">
 
-        <!-- CURRENT SUMMARY -->
+            <strong>
+                Administrator
+            </strong>
 
-        <div class="summary">
-
-
-            <div class="summary-card">
-
-                <div class="summary-label">
-                    CURRENT BASE SALARY
-                </div>
-
-                <div class="summary-value"
-                     id="summaryBase">
-
-                    ₹0
-
-                </div>
-
-                <div class="summary-sub">
-                    Monthly fixed salary
-                </div>
-
-            </div>
-
-
-            <div class="summary-card">
-
-                <div class="summary-label">
-                    CURRENT VISIT INCENTIVE
-                </div>
-
-                <div class="summary-value"
-                     id="summaryVisit">
-
-                    ₹0
-
-                </div>
-
-                <div class="summary-sub">
-                    Per unique visited student
-                </div>
-
-            </div>
-
-
-            <div class="summary-card">
-
-                <div class="summary-label">
-                    CURRENT ADMISSION INCENTIVE
-                </div>
-
-                <div class="summary-value"
-                     id="summaryAdmission">
-
-                    ₹0
-
-                </div>
-
-                <div class="summary-sub">
-                    Per unique admission
-                </div>
-
-            </div>
-
+            <span>
+                Admin
+            </span>
 
         </div>
 
+    </div>
 
-        <!-- PAYMENT SETTINGS -->
+</header>
 
-        <div class="card">
 
-            <div class="card-header">
+<section class="content">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<div class="hero">
+
+    <h2>
+        Staff Payment Management
+    </h2>
+
+    <p>
+        Configure salary and incentive rates separately for Coordinators
+        and Telecallers. Changes saved here are automatically used by
+        the respective staff panels.
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     STATUS
+===================================================== -->
+
+<div class="status"
+     id="statusBox">
+</div>
+
+
+<!-- =====================================================
+     STAFF TABS
+===================================================== -->
+
+<div class="staff-tabs">
+
+
+    <div class="staff-tab active"
+         id="coordinatorTab"
+         onclick="switchStaff('coordinator')">
+
+        <div class="staff-tab-top">
+
+            <div class="staff-tab-title">
+
+                <div class="staff-icon">
+                    👨‍💼
+                </div>
 
                 <div>
 
                     <h3>
-                        Payment Settings
+                        Coordinator
                     </h3>
 
                     <p>
-                        Update the active coordinator payment structure.
+                        Coordinator salary settings
                     </p>
 
                 </div>
 
-                <span style="
-                    font-size:11px;
-                    color:#8a94a6;
-                "
-                id="lastUpdated">
+            </div>
 
-                    Not loaded
+            <div class="tab-arrow">
+                →
+            </div>
 
+        </div>
+
+    </div>
+
+
+    <div class="staff-tab"
+         id="telecallerTab"
+         onclick="switchStaff('telecaller')">
+
+        <div class="staff-tab-top">
+
+            <div class="staff-tab-title">
+
+                <div class="staff-icon">
+                    📞
+                </div>
+
+                <div>
+
+                    <h3>
+                        Telecaller
+                    </h3>
+
+                    <p>
+                        Telecaller salary settings
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="tab-arrow">
+                →
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     SUMMARY
+===================================================== -->
+
+<div class="summary">
+
+
+    <div class="summary-card">
+
+        <div class="summary-label">
+            CURRENT BASE SALARY
+        </div>
+
+        <div class="summary-value"
+             id="summaryBase">
+
+            ₹0
+
+        </div>
+
+        <div class="summary-sub">
+            Monthly fixed salary
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-label">
+            CURRENT VISIT INCENTIVE
+        </div>
+
+        <div class="summary-value"
+             id="summaryVisit">
+
+            ₹0
+
+        </div>
+
+        <div class="summary-sub">
+            Per unique visited student
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-label">
+            CURRENT ADMISSION INCENTIVE
+        </div>
+
+        <div class="summary-value"
+             id="summaryAdmission">
+
+            ₹0
+
+        </div>
+
+        <div class="summary-sub">
+            Per unique converted student
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     PAYMENT SETTINGS
+===================================================== -->
+
+<div class="card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3 id="settingsTitle">
+                Coordinator Payment Settings
+            </h3>
+
+            <p id="settingsDescription">
+                Update the active Coordinator payment structure.
+            </p>
+
+        </div>
+
+        <span style="
+            font-size:11px;
+            color:#8a94a6;
+            text-align:right;
+        "
+        id="lastUpdated">
+
+            Not loaded
+
+        </span>
+
+    </div>
+
+
+    <form id="paymentForm">
+
+
+        <div class="form-grid">
+
+
+            <!-- BASE -->
+
+            <div class="form-group">
+
+                <label>
+                    Monthly Base Salary
+                </label>
+
+                <div class="input-wrap">
+
+                    <span class="currency">
+                        ₹
+                    </span>
+
+                    <input
+                        type="number"
+                        id="baseSalary"
+                        min="0"
+                        step="1"
+                        placeholder="1000"
+                        required
+                    >
+
+                </div>
+
+                <div class="help">
+                    Fixed monthly amount paid to the selected staff role.
+                </div>
+
+            </div>
+
+
+            <!-- VISIT -->
+
+            <div class="form-group">
+
+                <label>
+                    Visited Student Incentive
+                </label>
+
+                <div class="input-wrap">
+
+                    <span class="currency">
+                        ₹
+                    </span>
+
+                    <input
+                        type="number"
+                        id="visitIncentive"
+                        min="0"
+                        step="1"
+                        placeholder="50"
+                        required
+                    >
+
+                </div>
+
+                <div class="help">
+                    Amount paid for each unique student marked as Visited.
+                </div>
+
+            </div>
+
+
+            <!-- ADMISSION -->
+
+            <div class="form-group">
+
+                <label>
+                    Admission Incentive
+                </label>
+
+                <div class="input-wrap">
+
+                    <span class="currency">
+                        ₹
+                    </span>
+
+                    <input
+                        type="number"
+                        id="admissionIncentive"
+                        min="0"
+                        step="1"
+                        placeholder="50"
+                        required
+                    >
+
+                </div>
+
+                <div class="help">
+                    Amount paid for each unique student marked as Converted.
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+                id="saveBtn">
+
+                Save Payment Settings
+
+            </button>
+
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="loadCurrentStaffSettings()">
+
+                Reset / Reload
+
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+    <!-- PAYMENT RULE -->
+
+    <div class="rule-box">
+
+        <div class="rule-title">
+            Active Payment Structure
+        </div>
+
+
+        <div class="rule-list">
+
+
+            <div class="rule-item">
+
+                <span>
+                    Monthly Base Salary
                 </span>
 
-            </div>
-
-
-            <form id="paymentForm">
-
-
-                <div class="form-grid">
-
-
-                    <!-- BASE SALARY -->
-
-                    <div class="form-group">
-
-                        <label>
-                            Monthly Base Salary
-                        </label>
-
-                        <div class="input-wrap">
-
-                            <span class="currency">
-                                ₹
-                            </span>
-
-                            <input
-                                type="number"
-                                id="baseSalary"
-                                min="0"
-                                step="1"
-                                placeholder="1000"
-                                required
-                            >
-
-                        </div>
-
-                        <div class="help">
-                            Fixed monthly amount paid to the coordinator.
-                        </div>
-
-                    </div>
-
-
-                    <!-- VISIT -->
-
-                    <div class="form-group">
-
-                        <label>
-                            Visited Student Incentive
-                        </label>
-
-                        <div class="input-wrap">
-
-                            <span class="currency">
-                                ₹
-                            </span>
-
-                            <input
-                                type="number"
-                                id="visitIncentive"
-                                min="0"
-                                step="1"
-                                placeholder="50"
-                                required
-                            >
-
-                        </div>
-
-                        <div class="help">
-                            Amount paid for each unique student who visits the institute.
-                        </div>
-
-                    </div>
-
-
-                    <!-- ADMISSION -->
-
-                    <div class="form-group">
-
-                        <label>
-                            Admission Incentive
-                        </label>
-
-                        <div class="input-wrap">
-
-                            <span class="currency">
-                                ₹
-                            </span>
-
-                            <input
-                                type="number"
-                                id="admissionIncentive"
-                                min="0"
-                                step="1"
-                                placeholder="50"
-                                required
-                            >
-
-                        </div>
-
-                        <div class="help">
-                            Additional amount paid for each unique converted student.
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="button-row">
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                        id="saveBtn">
-
-                        Save Payment Settings
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        onclick="loadSettings()">
-
-                        Reset / Reload
-
-                    </button>
-
-                </div>
-
-
-            </form>
-
-
-            <!-- PAYMENT RULE -->
-
-            <div class="rule-box">
-
-                <div class="rule-title">
-                    Active Payment Structure
-                </div>
-
-
-                <div class="rule-list">
-
-
-                    <div class="rule-item">
-
-                        <span>
-                            Monthly Base Salary
-                        </span>
-
-                        <strong
-                            id="ruleBase">
-
-                            ₹0
-
-                        </strong>
-
-                    </div>
-
-
-                    <div class="rule-item">
-
-                        <span>
-                            Visited Student
-                        </span>
-
-                        <strong
-                            id="ruleVisit">
-
-                            ₹0
-
-                        </strong>
-
-                    </div>
-
-
-                    <div class="rule-item">
-
-                        <span>
-                            Admission / Converted Student
-                        </span>
-
-                        <strong
-                            id="ruleAdmission">
-
-                            ₹0
-
-                        </strong>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- INFORMATION -->
-
-        <div class="card">
-
-            <div class="card-header">
-
-                <div>
-
-                    <h3>
-                        How Coordinator Payment Works
-                    </h3>
-
-                    <p>
-                        Current payment calculation rules
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="info-box">
-
-                <strong>
-                    Payment calculation:
+                <strong id="ruleBase">
+                    ₹0
                 </strong>
 
-                <br><br>
+            </div>
 
-                Total Payable =
-                Base Salary
-                +
-                (Unique Visited Students × Visit Incentive)
-                +
-                (Unique Converted Students × Admission Incentive)
 
-                <br><br>
+            <div class="rule-item">
 
-                Raw inquiries do not generate incentive.
+                <span>
+                    Visited Student
+                </span>
 
-                <br>
-
-                Duplicate mobile numbers are not counted twice
-                for the same incentive category.
-
-                <br>
-
-                Payment is calculated for the current month
-                in the Coordinator Panel.
+                <strong id="ruleVisit">
+                    ₹0
+                </strong>
 
             </div>
 
+
+            <div class="rule-item">
+
+                <span>
+                    Admission / Converted Student
+                </span>
+
+                <strong id="ruleAdmission">
+                    ₹0
+                </strong>
+
+            </div>
+
+
         </div>
 
+    </div>
 
-        <div class="footer">
+</div>
 
-            © <span id="year"></span>
-            BlackTerminal Computer Institute · Admin Payment Control
+
+<!-- =====================================================
+     INFORMATION
+===================================================== -->
+
+<div class="card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3>
+                How Staff Payment Works
+            </h3>
+
+            <p>
+                Current payment calculation rules
+            </p>
 
         </div>
 
+    </div>
 
-    </section>
+
+    <div class="info-box">
+
+        <strong>
+            Payment calculation:
+        </strong>
+
+        <br><br>
+
+        Total Payable =
+        Base Salary
+        +
+        (Unique Visited Students × Visit Incentive)
+        +
+        (Unique Converted Students × Admission Incentive)
+
+        <br><br>
+
+        Raw inquiries do not generate incentive.
+
+        <br>
+
+        Duplicate mobile numbers are not counted twice
+        for the same incentive category.
+
+        <br>
+
+        Payment is calculated for the current month.
+
+        <br>
+
+        <strong>
+            Coordinator settings and Telecaller settings are stored separately.
+        </strong>
+
+    </div>
+
+</div>
+
+
+<div class="footer">
+
+    © <span id="year"></span>
+    BlackTerminal Computer Institute · Staff Payment Control
+
+</div>
+
+
+</section>
 
 </main>
 
 
-<script type="module">
+<script>
 
 
 /* =========================================================
@@ -1199,7 +1290,7 @@ const FIREBASE_PROJECT_ID =
 
 
 const FIREBASE_API_KEY =
-    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytd2b_m";
+    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
 
 
 const FIRESTORE_BASE =
@@ -1208,9 +1299,21 @@ const FIRESTORE_BASE =
     "/databases/(default)/documents";
 
 
-const PAYMENT_SETTINGS_URL =
-    FIRESTORE_BASE +
-    "/paymentSettings/coordinator";
+/* =========================================================
+   PAYMENT DOCUMENTS
+========================================================= */
+
+const PAYMENT_URLS = {
+
+    coordinator:
+        FIRESTORE_BASE +
+        "/paymentSettings/coordinator",
+
+    telecaller:
+        FIRESTORE_BASE +
+        "/paymentSettings/telecaller"
+
+};
 
 
 /* =========================================================
@@ -1225,6 +1328,14 @@ const DEFAULT_VISIT =
 
 const DEFAULT_ADMISSION =
     50;
+
+
+/* =========================================================
+   CURRENT ROLE
+========================================================= */
+
+let currentStaff =
+    "coordinator";
 
 
 /* =========================================================
@@ -1250,7 +1361,7 @@ const statusBox =
 
 
 /* =========================================================
-   CURRENCY FORMAT
+   FORMAT RUPEE
 ========================================================= */
 
 function formatRupee(
@@ -1281,7 +1392,6 @@ function documentToObject(
 
     const fields =
         doc.fields || {};
-
 
     const result = {};
 
@@ -1348,7 +1458,7 @@ function documentToObject(
 
 
 /* =========================================================
-   FIRESTORE VALUE
+   FIRESTORE INTEGER VALUE
 ========================================================= */
 
 function integerValue(
@@ -1356,17 +1466,21 @@ function integerValue(
 ){
 
     return {
+
         integerValue:
             String(
-                Number(value) || 0
+                Math.round(
+                    Number(value) || 0
+                )
             )
+
     };
 
 }
 
 
 /* =========================================================
-   STATUS MESSAGE
+   STATUS
 ========================================================= */
 
 function showStatus(
@@ -1380,6 +1494,51 @@ function showStatus(
     statusBox.className =
         "status show " +
         type;
+
+}
+
+
+/* =========================================================
+   ROLE NAME
+========================================================= */
+
+function getStaffName(){
+
+    return currentStaff ===
+        "coordinator"
+        ? "Coordinator"
+        : "Telecaller";
+
+}
+
+
+/* =========================================================
+   UPDATE ROLE TEXT
+========================================================= */
+
+function updateRoleText(){
+
+    const name =
+        getStaffName();
+
+
+    document
+        .getElementById(
+            "settingsTitle"
+        )
+        .textContent =
+        name +
+        " Payment Settings";
+
+
+    document
+        .getElementById(
+            "settingsDescription"
+        )
+        .textContent =
+        "Update the active " +
+        name +
+        " payment structure.";
 
 }
 
@@ -1497,14 +1656,73 @@ function updateUI(
 
 
 /* =========================================================
-   LOAD SETTINGS
+   SWITCH STAFF
 ========================================================= */
 
-window.loadSettings =
+window.switchStaff =
+async function(
+    staff
+){
+
+    if(
+        staff !== "coordinator" &&
+        staff !== "telecaller"
+    ){
+
+        return;
+
+    }
+
+
+    currentStaff =
+        staff;
+
+
+    document
+        .getElementById(
+            "coordinatorTab"
+        )
+        .classList.toggle(
+            "active",
+            staff ===
+                "coordinator"
+        );
+
+
+    document
+        .getElementById(
+            "telecallerTab"
+        )
+        .classList.toggle(
+            "active",
+            staff ===
+                "telecaller"
+        );
+
+
+    updateRoleText();
+
+
+    await loadCurrentStaffSettings();
+
+};
+
+
+/* =========================================================
+   LOAD CURRENT STAFF SETTINGS
+========================================================= */
+
+window.loadCurrentStaffSettings =
 async function(){
 
+    const staffName =
+        getStaffName();
+
+
     showStatus(
-        "Loading payment settings...",
+        "Loading " +
+        staffName +
+        " payment settings...",
         "info"
     );
 
@@ -1513,9 +1731,13 @@ async function(){
 
         const response =
             await fetch(
-                PAYMENT_SETTINGS_URL +
+                PAYMENT_URLS[
+                    currentStaff
+                ] +
                 "?key=" +
-                FIREBASE_API_KEY
+                encodeURIComponent(
+                    FIREBASE_API_KEY
+                )
             );
 
 
@@ -1525,7 +1747,9 @@ async function(){
         ){
 
             /*
-             * Document does not exist yet.
+             * Settings document does not exist.
+             * Show defaults without creating
+             * the document automatically.
              */
 
             const defaults = {
@@ -1556,7 +1780,8 @@ async function(){
 
 
             showStatus(
-                "Payment settings have not been created yet. Default values are shown.",
+                staffName +
+                " payment settings have not been created yet. Default values are shown.",
                 "info"
             );
 
@@ -1633,7 +1858,8 @@ async function(){
 
 
         showStatus(
-            "Current payment settings loaded successfully.",
+            staffName +
+            " payment settings loaded successfully.",
             "success"
         );
 
@@ -1647,7 +1873,9 @@ async function(){
 
 
         showStatus(
-            "Unable to load payment settings. Please check Firestore access.",
+            "Unable to load " +
+            staffName +
+            " payment settings. Please check Firestore access.",
             "error"
         );
 
@@ -1746,13 +1974,19 @@ paymentForm.addEventListener(
         }
 
 
+        const staffName =
+            getStaffName();
+
+
         /* =========================
            CONFIRM
         ========================= */
 
         const confirmed =
             confirm(
-                "Save these Coordinator payment settings?\n\n" +
+                "Save " +
+                staffName +
+                " payment settings?\n\n" +
 
                 "Base Salary: " +
                 formatRupee(base) +
@@ -1782,7 +2016,9 @@ paymentForm.addEventListener(
 
 
         showStatus(
-            "Saving payment settings...",
+            "Saving " +
+            staffName +
+            " payment settings...",
             "info"
         );
 
@@ -1823,17 +2059,15 @@ paymentForm.addEventListener(
 
         try{
 
-            /*
-             * PATCH creates the document
-             * if it does not exist and updates
-             * it if it already exists.
-             */
-
             const response =
                 await fetch(
-                    PAYMENT_SETTINGS_URL +
+                    PAYMENT_URLS[
+                        currentStaff
+                    ] +
                     "?key=" +
-                    FIREBASE_API_KEY,
+                    encodeURIComponent(
+                        FIREBASE_API_KEY
+                    ),
                     {
 
                         method:
@@ -1902,10 +2136,10 @@ paymentForm.addEventListener(
 
 
             showStatus(
-                "Payment settings saved successfully. The Coordinator Panel will use the new rates.",
+                staffName +
+                " payment settings saved successfully.",
                 "success"
             );
-
 
         }
 
@@ -1917,7 +2151,9 @@ paymentForm.addEventListener(
 
 
             showStatus(
-                "Unable to save payment settings. Please check Firestore rules.",
+                "Unable to save " +
+                staffName +
+                " payment settings. Please check Firestore rules.",
                 "error"
             );
 
@@ -1971,7 +2207,10 @@ document
    INITIAL LOAD
 ========================================================= */
 
-loadSettings();
+updateRoleText();
+
+loadCurrentStaffSettings();
+
 
 </script>
 

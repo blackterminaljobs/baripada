@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>BlackTerminal | Login</title>
 
 <style>
+
 :root{
   --navy:#071426;
   --navy2:#0d2039;
   --blue:#086ee1;
   --blue2:#18a0ff;
+
   --bg:#f4f7fb;
+  --white:#ffffff;
+
   --text:#172236;
   --muted:#738096;
+
   --line:#dfe6ef;
-  --green:#16a34a;
+
   --red:#dc2626;
+  --green:#16a34a;
 }
 
 *{
@@ -28,7 +39,12 @@
 
 body{
   min-height:100vh;
-  font-family:Inter,Arial,sans-serif;
+
+  font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
 
   background:
     radial-gradient(
@@ -44,68 +60,123 @@ body{
     var(--bg);
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   padding:20px;
 }
 
-.login-wrapper{
-  width:100%;
-  max-width:1050px;
 
-  min-height:650px;
+/* =====================================================
+   LOGIN CARD
+===================================================== */
+
+.login-wrapper{
+
+  width:100%;
+
+  max-width:980px;
+
+  min-height:590px;
 
   display:grid;
-  grid-template-columns:1fr 1fr;
 
-  background:#fff;
+  grid-template-columns:
+    1fr 1fr;
+
+  background:
+    var(--white);
 
   border-radius:24px;
+
   overflow:hidden;
 
   box-shadow:
     0 25px 70px
-    rgba(7,20,38,.16);
+    rgba(7,20,38,.15);
+
 }
 
-/* LEFT */
 
-.brand-side{
+/* =====================================================
+   LEFT SIDE
+===================================================== */
+
+.left-side{
+
   position:relative;
 
-  padding:55px 48px;
+  padding:50px 45px;
 
   color:#fff;
 
   background:
     radial-gradient(
-      circle at 20% 15%,
-      rgba(24,160,255,.3),
-      transparent 28%
+      circle at 15% 15%,
+      rgba(24,160,255,.28),
+      transparent 30%
     ),
     linear-gradient(
       145deg,
-      #071426,
-      #0d2039
+      var(--navy),
+      var(--navy2)
     );
 
   display:flex;
+
   flex-direction:column;
+
   justify-content:space-between;
+
+  overflow:hidden;
 }
+
+.left-side::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:320px;
+
+  height:320px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  right:-150px;
+
+  bottom:-150px;
+}
+
+
+/* BRAND */
 
 .brand{
+
   display:flex;
+
   align-items:center;
-  gap:13px;
+
+  gap:12px;
+
+  position:relative;
+
+  z-index:2;
 }
 
-.brand-logo{
-  width:52px;
-  height:52px;
+.logo{
 
-  border-radius:15px;
+  width:50px;
+
+  height:50px;
+
+  border-radius:14px;
 
   background:
     linear-gradient(
@@ -115,66 +186,114 @@ body{
     );
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
-  font-weight:900;
-  font-size:21px;
-}
-
-.brand-name strong{
-  display:block;
   font-size:20px;
+
+  font-weight:900;
+
+  box-shadow:
+    0 10px 25px
+    rgba(24,160,255,.25);
 }
 
-.brand-name span{
+.brand-text strong{
+
   display:block;
-  color:#8ea4bd;
-  font-size:11px;
-  margin-top:3px;
+
+  font-size:20px;
+
 }
+
+.brand-text span{
+
+  display:block;
+
+  color:#8ea4bd;
+
+  font-size:11px;
+
+  margin-top:3px;
+
+}
+
+
+/* HERO */
 
 .hero{
-  margin-top:70px;
+
+  position:relative;
+
+  z-index:2;
+
+  margin-top:55px;
 }
 
 .hero h1{
-  font-size:42px;
+
+  font-size:40px;
+
   line-height:1.12;
-  margin-bottom:16px;
+
+  margin-bottom:15px;
+
 }
 
 .hero h1 span{
+
   color:#31aaff;
+
 }
 
 .hero p{
+
+  max-width:390px;
+
   color:#aebed0;
-  font-size:14px;
+
+  font-size:13px;
+
   line-height:1.7;
-  max-width:410px;
+
 }
 
+
+/* FEATURES */
+
 .features{
-  margin-top:30px;
+
+  margin-top:28px;
 
   display:flex;
+
   flex-direction:column;
-  gap:13px;
+
+  gap:12px;
+
 }
 
 .feature{
+
   display:flex;
+
   align-items:center;
+
   gap:10px;
 
   color:#c6d3e0;
-  font-size:13px;
+
+  font-size:12px;
+
 }
 
 .feature-icon{
-  width:29px;
-  height:29px;
+
+  width:28px;
+
+  height:28px;
 
   border-radius:8px;
 
@@ -184,84 +303,147 @@ body{
   color:#31aaff;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
 }
+
+
+/* COPYRIGHT */
 
 .copyright{
-  color:#6f849c;
+
+  position:relative;
+
+  z-index:2;
+
+  color:#71869e;
+
   font-size:10px;
+
 }
 
-/* RIGHT */
 
-.form-side{
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.right-side{
+
   padding:45px;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
 }
 
-.login-form{
+.login-box{
+
   width:100%;
-  max-width:390px;
+
+  max-width:370px;
+
 }
+
+
+/* TITLE */
 
 .title{
+
   margin-bottom:25px;
+
 }
 
 .title h2{
+
   font-size:28px;
+
   margin-bottom:6px;
+
 }
 
 .title p{
+
   color:var(--muted);
+
   font-size:13px;
+
+  line-height:1.5;
+
 }
 
-/* MESSAGE */
+
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 .message{
+
   display:none;
 
   padding:12px 13px;
 
   border-radius:10px;
 
+  margin-bottom:17px;
+
   font-size:12px;
 
   line-height:1.5;
 
-  margin-bottom:17px;
 }
 
 .message.show{
+
   display:block;
+
 }
 
 .message.error{
+
   background:#fef2f2;
+
   color:#b91c1c;
-  border:1px solid #fecaca;
+
+  border:
+    1px solid
+    #fecaca;
+
 }
 
 .message.success{
+
   background:#ecfdf3;
+
   color:#15803d;
-  border:1px solid #bbf7d0;
+
+  border:
+    1px solid
+    #bbf7d0;
+
 }
 
-/* FORM */
+
+/* =====================================================
+   FORM
+===================================================== */
 
 .form-group{
+
   margin-bottom:17px;
+
 }
 
 label{
+
   display:block;
+
+  margin-bottom:7px;
 
   font-size:12px;
 
@@ -269,103 +451,57 @@ label{
 
   color:#344258;
 
-  margin-bottom:7px;
 }
 
 input,
 select{
+
   width:100%;
 
-  border:1px solid var(--line);
+  padding:13px 14px;
+
+  border:
+    1px solid
+    var(--line);
 
   border-radius:11px;
-
-  padding:13px 14px;
 
   background:#fff;
 
   color:var(--text);
 
   outline:none;
+
+  transition:.2s;
+
 }
 
 input:focus,
 select:focus{
-  border-color:var(--blue);
+
+  border-color:
+    var(--blue);
 
   box-shadow:
     0 0 0 3px
     rgba(8,110,225,.08);
+
 }
 
-.password-wrap{
-  position:relative;
-}
 
-.password-wrap input{
-  padding-right:50px;
-}
-
-.password-toggle{
-  position:absolute;
-
-  right:8px;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  border:0;
-  background:transparent;
-
-  width:36px;
-  height:36px;
-
-  border-radius:8px;
-}
-
-.options{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  margin-bottom:19px;
-}
-
-.remember{
-  display:flex;
-  align-items:center;
-  gap:7px;
-
-  color:var(--muted);
-  font-size:11px;
-
-  margin:0;
-}
-
-.remember input{
-  width:auto;
-}
-
-.forgot{
-  border:0;
-  background:transparent;
-
-  color:var(--blue);
-
-  font-size:11px;
-  font-weight:700;
-}
+/* =====================================================
+   LOGIN BUTTON
+===================================================== */
 
 .login-btn{
+
   width:100%;
+
+  padding:14px;
 
   border:0;
 
   border-radius:11px;
-
-  padding:14px;
-
-  color:#fff;
 
   background:
     linear-gradient(
@@ -374,50 +510,57 @@ select:focus{
       var(--blue2)
     );
 
+  color:#fff;
+
   font-size:14px;
+
   font-weight:800;
+
+  cursor:pointer;
 
   box-shadow:
     0 10px 22px
     rgba(8,110,225,.2);
+
+  transition:.2s;
+
+}
+
+.login-btn:hover{
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 13px 27px
+    rgba(8,110,225,.25);
+
 }
 
 .login-btn:disabled{
-  opacity:.65;
+
+  opacity:.6;
+
+  cursor:not-allowed;
+
+  transform:none;
+
 }
 
-.spinner{
-  display:inline-block;
 
-  width:14px;
-  height:14px;
+/* =====================================================
+   INFO
+===================================================== */
 
-  border:2px solid
-    rgba(255,255,255,.4);
+.info{
 
-  border-top-color:#fff;
-
-  border-radius:50%;
-
-  animation:spin .7s linear infinite;
-
-  vertical-align:-2px;
-
-  margin-right:7px;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-.security{
-  margin-top:19px;
+  margin-top:18px;
 
   padding-top:17px;
 
-  border-top:1px solid var(--line);
+  border-top:
+    1px solid
+    var(--line);
 
   text-align:center;
 
@@ -426,55 +569,111 @@ select:focus{
   font-size:10px;
 
   line-height:1.6;
+
 }
 
-@media(max-width:800px){
 
-  .login-wrapper{
-    grid-template-columns:1fr;
-    min-height:auto;
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:760px){
+
+  body{
+
+    padding:12px;
+
   }
 
-  .brand-side{
+  .login-wrapper{
+
+    grid-template-columns:1fr;
+
+    min-height:auto;
+
+    max-width:450px;
+
+  }
+
+  .left-side{
+
     padding:30px;
+
+    min-height:280px;
+
   }
 
   .hero{
+
     margin-top:35px;
+
   }
 
   .hero h1{
-    font-size:30px;
+
+    font-size:29px;
+
   }
 
   .features{
+
     display:none;
+
   }
 
-  .form-side{
-    padding:32px 25px;
+  .right-side{
+
+    padding:32px 24px 35px;
+
   }
+
 }
+
+@media(max-width:400px){
+
+  .left-side{
+
+    padding:25px;
+
+  }
+
+  .right-side{
+
+    padding:28px 19px 30px;
+
+  }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="login-wrapper">
 
-  <!-- LEFT -->
 
-  <section class="brand-side">
+  <!-- ===================================================
+       LEFT
+  ==================================================== -->
+
+  <section class="left-side">
+
 
     <div>
 
+
       <div class="brand">
 
-        <div class="brand-logo">
+        <div class="logo">
           BT
         </div>
 
-        <div class="brand-name">
+
+        <div class="brand-text">
 
           <strong>
             BlackTerminal
@@ -489,6 +688,7 @@ select:focus{
       </div>
 
 
+
       <div class="hero">
 
         <h1>
@@ -496,80 +696,119 @@ select:focus{
           <span>Back.</span>
         </h1>
 
+
         <p>
-          Manage student inquiries,
-          admissions and institute
-          operations from one secure
-          management system.
+
+          Student inquiry management
+          system for BlackTerminal
+          Computer Institute.
+
         </p>
 
 
         <div class="features">
 
-          <div class="feature">
-            <div class="feature-icon">✓</div>
-            Secure Firebase Login
-          </div>
 
           <div class="feature">
-            <div class="feature-icon">⚡</div>
-            Real-time Inquiry Management
+
+            <div class="feature-icon">
+              ✓
+            </div>
+
+            Simple Staff Login
+
           </div>
 
+
           <div class="feature">
-            <div class="feature-icon">👥</div>
-            Role Based Access
+
+            <div class="feature-icon">
+              📨
+            </div>
+
+            Inquiry Management
+
           </div>
+
+
+          <div class="feature">
+
+            <div class="feature-icon">
+              ⚡
+            </div>
+
+            Fast & Simple Workflow
+
+          </div>
+
 
         </div>
 
       </div>
 
+
     </div>
 
 
     <div class="copyright">
+
       © 2026 BlackTerminal Computer Institute · Baripada
+
     </div>
+
 
   </section>
 
 
-  <!-- RIGHT -->
 
-  <section class="form-side">
+  <!-- ===================================================
+       RIGHT
+  ==================================================== -->
 
-    <div class="login-form">
+  <section class="right-side">
+
+
+    <div class="login-box">
+
 
       <div class="title">
 
         <h2>
-          Sign In
+          Staff Login
         </h2>
 
         <p>
-          Enter your registered account
-          details to continue.
+          Login to continue to your workspace.
         </p>
 
       </div>
 
 
+
+      <!-- MESSAGE -->
+
       <div
-        class="message"
         id="messageBox"
+        class="message"
       ></div>
 
 
+
+      <!-- FORM -->
+
       <form id="loginForm">
+
 
         <!-- ROLE -->
 
         <div class="form-group">
 
-          <label>
+          <label for="role">
+
             Login As
+
           </label>
+
 
           <select
             id="role"
@@ -577,23 +816,15 @@ select:focus{
           >
 
             <option value="">
-              Select your role
-            </option>
-
-            <option value="admin">
-              Institute Admin
-            </option>
-
-            <option value="telecaller">
-              Telecaller
+              Select Role
             </option>
 
             <option value="coordinator">
               Student Coordinator
             </option>
 
-            <option value="faculty">
-              Faculty
+            <option value="telecaller">
+              Telecaller
             </option>
 
           </select>
@@ -601,396 +832,183 @@ select:focus{
         </div>
 
 
-        <!-- EMAIL -->
+
+        <!-- NAME -->
 
         <div class="form-group">
 
-          <label>
-            Email Address
+          <label for="name">
+
+            Your Name
+
           </label>
 
+
           <input
-            type="email"
-            id="email"
-            placeholder="Enter registered email"
-            autocomplete="username"
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            autocomplete="name"
             required
           >
 
         </div>
 
 
-        <!-- PASSWORD -->
+
+        <!-- MOBILE -->
 
         <div class="form-group">
 
-          <label>
-            Password
-          </label>
+          <label for="mobile">
 
-          <div class="password-wrap">
-
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter password"
-              autocomplete="current-password"
-              required
-            >
-
-            <button
-              type="button"
-              class="password-toggle"
-              id="passwordToggle"
-            >
-              👁
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- OPTIONS -->
-
-        <div class="options">
-
-          <label class="remember">
-
-            <input
-              type="checkbox"
-              id="rememberMe"
-            >
-
-            Remember email
+            Mobile Number
 
           </label>
 
 
-          <button
-            type="button"
-            class="forgot"
-            id="forgotBtn"
+          <input
+            type="tel"
+            id="mobile"
+            placeholder="Enter 10 digit mobile number"
+            maxlength="10"
+            inputmode="numeric"
+            autocomplete="tel"
+            required
           >
-            Forgot Password?
-          </button>
 
         </div>
 
+
+
+        <!-- LOGIN -->
 
         <button
           type="submit"
           class="login-btn"
           id="loginBtn"
         >
+
           Sign In
+
         </button>
+
 
       </form>
 
 
-      <div class="security">
 
-        🔒 <strong>Secure Login</strong><br>
+      <div class="info">
 
-        Firebase Authentication
-        protected staff access.
+        🔐 Staff access only<br>
+
+        Coordinator and Telecaller workspace
 
       </div>
 
+
     </div>
 
+
   </section>
+
 
 </div>
 
 
-<script type="module">
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+<script>
 
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  setPersistence,
-  browserLocalPersistence,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
-import {
-  firebaseConfig
-} from "./firebaseconfig.js";
-
-
-/* =========================
-   FIREBASE
-========================= */
-
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const db =
-  getFirestore(app);
-
-
-/* =========================
-   DOM
-========================= */
-
-const form =
-  document.getElementById("loginForm");
-
-const role =
-  document.getElementById("role");
-
-const email =
-  document.getElementById("email");
-
-const password =
-  document.getElementById("password");
-
-const remember =
-  document.getElementById("rememberMe");
-
-const loginBtn =
-  document.getElementById("loginBtn");
-
-const message =
-  document.getElementById("messageBox");
-
-
-/* =========================
-   SAVED EMAIL
-========================= */
-
-const savedEmail =
-  localStorage.getItem(
-    "bt_login_email"
+const loginForm =
+  document.getElementById(
+    "loginForm"
   );
 
-if(savedEmail){
+const role =
+  document.getElementById(
+    "role"
+  );
 
-  email.value =
-    savedEmail;
+const nameInput =
+  document.getElementById(
+    "name"
+  );
 
-  remember.checked =
-    true;
+const mobileInput =
+  document.getElementById(
+    "mobile"
+  );
 
-}
+const loginBtn =
+  document.getElementById(
+    "loginBtn"
+  );
+
+const messageBox =
+  document.getElementById(
+    "messageBox"
+  );
 
 
-/* =========================
+/* =====================================================
    MESSAGE
-========================= */
+===================================================== */
 
 function showMessage(
   type,
-  text
+  message
 ){
 
-  message.className =
+  messageBox.className =
     "message show " + type;
 
-  message.innerHTML =
-    text;
+  messageBox.innerHTML =
+    message;
 
 }
 
+
 function hideMessage(){
 
-  message.className =
+  messageBox.className =
     "message";
 
-  message.innerHTML =
+  messageBox.innerHTML =
     "";
 
 }
 
 
-/* =========================
-   NORMALIZE ROLE
-========================= */
+/* =====================================================
+   MOBILE INPUT
+===================================================== */
 
-function normalizeRole(value){
+mobileInput.addEventListener(
+  "input",
+  function(){
 
-  return String(value || "")
-    .trim()
-    .toLowerCase()
-    .replace(/_/g," ")
-    .replace(/-/g," ")
-    .replace(/\s+/g," ");
-
-}
-
-
-/* =========================
-   FIND STAFF
-========================= */
-
-async function findStaff(uid){
-
-  const q =
-    query(
-      collection(db,"staff"),
-      where("uid","==",uid)
-    );
-
-  const snap =
-    await getDocs(q);
-
-  if(snap.empty){
-
-    return null;
+    this.value =
+      this.value
+        .replace(/\D/g,"")
+        .slice(0,10);
 
   }
-
-  const d =
-    snap.docs[0];
-
-  return {
-    id:d.id,
-    ...d.data()
-  };
-
-}
+);
 
 
-/* =========================
-   ROLE MATCH
-========================= */
-
-function roleMatches(
-  selected,
-  actual
-){
-
-  const s =
-    normalizeRole(selected);
-
-  const a =
-    normalizeRole(actual);
-
-
-  if(s === "admin"){
-    return a === "admin";
-  }
-
-
-  if(s === "telecaller"){
-    return a === "telecaller";
-  }
-
-
-  if(s === "coordinator"){
-
-    return (
-      a === "staff" ||
-      a === "coordinator" ||
-      a === "student coordinator"
-    );
-
-  }
-
-
-  if(s === "faculty"){
-    return a === "faculty";
-  }
-
-
-  return false;
-
-}
-
-
-/* =========================
-   REDIRECT
-========================= */
-
-function redirect(role){
-
-  const r =
-    normalizeRole(role);
-
-
-  console.log(
-    "REDIRECT ROLE:",
-    r
-  );
-
-
-  if(r === "admin"){
-
-    window.location.replace(
-      "./admin.html"
-    );
-
-    return;
-
-  }
-
-
-  if(r === "telecaller"){
-
-    window.location.replace(
-      "./telecaller.html"
-    );
-
-    return;
-
-  }
-
-
-  if(
-    r === "staff" ||
-    r === "coordinator" ||
-    r === "student coordinator"
-  ){
-
-    window.location.replace(
-      "./coordinator.html"
-    );
-
-    return;
-
-  }
-
-
-  if(r === "faculty"){
-
-    window.location.replace(
-      "./faculty.html"
-    );
-
-    return;
-
-  }
-
-}
-
-
-/* =========================
+/* =====================================================
    LOGIN
-========================= */
+===================================================== */
 
-form.addEventListener(
+loginForm.addEventListener(
   "submit",
-  async(e)=>{
+  function(event){
 
-    e.preventDefault();
+    event.preventDefault();
 
     hideMessage();
 
@@ -998,14 +1016,16 @@ form.addEventListener(
     const selectedRole =
       role.value;
 
-    const userEmail =
-      email.value
-        .trim()
-        .toLowerCase();
+    const name =
+      nameInput.value
+        .trim();
 
-    const userPassword =
-      password.value;
+    const mobile =
+      mobileInput.value
+        .trim();
 
+
+    /* VALIDATION */
 
     if(!selectedRole){
 
@@ -1019,439 +1039,233 @@ form.addEventListener(
     }
 
 
-    if(!userEmail){
+    if(name.length < 2){
 
       showMessage(
         "error",
-        "❌ Please enter email."
+        "❌ Please enter your name."
       );
+
+      nameInput.focus();
 
       return;
 
     }
 
 
-    if(!userPassword){
+    if(
+      !/^[0-9]{10}$/.test(
+        mobile
+      )
+    ){
 
       showMessage(
         "error",
-        "❌ Please enter password."
+        "❌ Please enter a valid 10 digit mobile number."
       );
+
+      mobileInput.focus();
 
       return;
 
     }
 
+
+    /* BUTTON */
 
     loginBtn.disabled =
       true;
 
-    loginBtn.innerHTML =
+    loginBtn.textContent =
+      "Signing In...";
+
+
+    /*
+      SIMPLE SESSION
+
+      No Firebase Authentication.
+    */
+
+    sessionStorage.setItem(
+      "bt_logged_in",
+      "true"
+    );
+
+
+    sessionStorage.setItem(
+      "bt_user_name",
+      name
+    );
+
+
+    sessionStorage.setItem(
+      "bt_user_mobile",
+      mobile
+    );
+
+
+    sessionStorage.setItem(
+      "bt_user_role",
+      selectedRole
+    );
+
+
+    sessionStorage.setItem(
+      "bt_login_time",
+      new Date().toISOString()
+    );
+
+
+    /*
+      Also save name/mobile locally
+      for convenience.
+    */
+
+    localStorage.setItem(
+      "bt_last_name",
+      name
+    );
+
+
+    localStorage.setItem(
+      "bt_last_mobile",
+      mobile
+    );
+
+
+    /* SUCCESS */
+
+    showMessage(
+      "success",
       `
-        <span class="spinner"></span>
-        Signing In...
-      `;
+        ✅ Login Successful!<br>
+        Welcome <strong>${name}</strong>.
+        <br>
+        Opening your workspace...
+      `
+    );
 
 
-    try{
+    /*
+      REDIRECT
+    */
 
-      /*
-        THIS IS IMPORTANT.
+    setTimeout(
+      function(){
 
-        Firebase session will remain available
-        when coordinator.html opens.
-      */
+        if(
+          selectedRole ===
+          "coordinator"
+        ){
 
-      await setPersistence(
-        auth,
-        browserLocalPersistence
-      );
-
-
-      /*
-        Firebase Login
-      */
-
-      const result =
-        await signInWithEmailAndPassword(
-          auth,
-          userEmail,
-          userPassword
-        );
-
-
-      const firebaseUser =
-        result.user;
-
-
-      console.log(
-        "Firebase UID:",
-        firebaseUser.uid
-      );
-
-
-      /*
-        Find staff record
-      */
-
-      const staff =
-        await findStaff(
-          firebaseUser.uid
-        );
-
-
-      if(!staff){
-
-        await signOut(auth);
-
-        throw new Error(
-          "Firebase account is not connected with a BlackTerminal staff record."
-        );
-
-      }
-
-
-      console.log(
-        "STAFF RECORD:",
-        staff
-      );
-
-
-      /*
-        Check role
-      */
-
-      if(
-        !roleMatches(
-          selectedRole,
-          staff.role
-        )
-      ){
-
-        await signOut(auth);
-
-        throw new Error(
-          `Wrong role selected. This account is registered as "${staff.role}".`
-        );
-
-      }
-
-
-      /*
-        Status
-      */
-
-      const status =
-        normalizeRole(
-          staff.status
-        );
-
-
-      if(
-        status === "inactive" ||
-        status === "disabled" ||
-        status === "blocked" ||
-        status === "suspended"
-      ){
-
-        await signOut(auth);
-
-        throw new Error(
-          `Your staff account is "${staff.status}".`
-        );
-
-      }
-
-
-      /*
-        SAVE SESSION
-      */
-
-      const finalRole =
-        normalizeRole(
-          staff.role
-        );
-
-
-      sessionStorage.setItem(
-        "bt_user_uid",
-        firebaseUser.uid
-      );
-
-      sessionStorage.setItem(
-        "bt_user_email",
-        firebaseUser.email ||
-        userEmail
-      );
-
-      sessionStorage.setItem(
-        "bt_user_role",
-        finalRole
-      );
-
-      sessionStorage.setItem(
-        "bt_staff_id",
-        staff.staffId ||
-        staff.id ||
-        ""
-      );
-
-      sessionStorage.setItem(
-        "bt_staff_name",
-        staff.name ||
-        staff.fullName ||
-        "Staff"
-      );
-
-      sessionStorage.setItem(
-        "bt_user_name",
-        staff.name ||
-        staff.fullName ||
-        "Staff"
-      );
-
-      sessionStorage.setItem(
-        "bt_user_mobile",
-        staff.mobile ||
-        staff.phone ||
-        ""
-      );
-
-
-      if(remember.checked){
-
-        localStorage.setItem(
-          "bt_login_email",
-          userEmail
-        );
-
-      }else{
-
-        localStorage.removeItem(
-          "bt_login_email"
-        );
-
-      }
-
-
-      showMessage(
-        "success",
-        `
-          ✅ Login Successful!<br>
-          Welcome
-          <strong>
-            ${
-              staff.name ||
-              "Staff"
-            }
-          </strong>
-          <br>
-          Opening dashboard...
-        `
-      );
-
-
-      /*
-        Give Firebase a moment to persist
-        the authentication state.
-      */
-
-      setTimeout(
-        ()=>{
-
-          redirect(
-            staff.role
+          window.location.replace(
+            "coordinator.html"
           );
 
-        },
-        700
-      );
+          return;
+
+        }
 
 
-    }catch(error){
+        if(
+          selectedRole ===
+          "telecaller"
+        ){
 
-      console.error(
-        "LOGIN ERROR:",
-        error
-      );
+          window.location.replace(
+            "telecaller.html"
+          );
 
+          return;
 
-      let text =
-        error.message ||
-        "Login failed.";
+        }
 
-
-      if(
-        error.code ===
-        "auth/invalid-credential"
-      ){
-
-        text =
-          "Incorrect email or password.";
-
-      }
-
-
-      if(
-        error.code ===
-        "auth/user-not-found"
-      ){
-
-        text =
-          "Firebase account not found.";
-
-      }
-
-
-      if(
-        error.code ===
-        "auth/wrong-password"
-      ){
-
-        text =
-          "Incorrect password.";
-
-      }
-
-
-      if(
-        error.code ===
-        "auth/network-request-failed"
-      ){
-
-        text =
-          "Network error. Please check internet.";
-
-      }
-
-
-      showMessage(
-        "error",
-        "❌ " + text
-      );
-
-
-      loginBtn.disabled =
-        false;
-
-      loginBtn.innerHTML =
-        "Sign In";
-
-    }
+      },
+      500
+    );
 
   }
 );
 
 
-/* =========================
-   PASSWORD SHOW/HIDE
-========================= */
+/* =====================================================
+   AUTO FILL LAST USER
+===================================================== */
 
-document
-  .getElementById(
-    "passwordToggle"
-  )
-  .addEventListener(
-    "click",
-    ()=>{
+const lastName =
+  localStorage.getItem(
+    "bt_last_name"
+  );
 
-      if(
-        password.type ===
-        "password"
-      ){
-
-        password.type =
-          "text";
-
-        document
-          .getElementById(
-            "passwordToggle"
-          )
-          .textContent =
-          "🙈";
-
-      }else{
-
-        password.type =
-          "password";
-
-        document
-          .getElementById(
-            "passwordToggle"
-          )
-          .textContent =
-          "👁";
-
-      }
-
-    }
+const lastMobile =
+  localStorage.getItem(
+    "bt_last_mobile"
   );
 
 
-/* =========================
-   FORGOT PASSWORD
-========================= */
+if(lastName){
 
-document
-  .getElementById(
-    "forgotBtn"
-  )
-  .addEventListener(
-    "click",
-    async()=>{
+  nameInput.value =
+    lastName;
 
-      hideMessage();
+}
 
 
-      const mail =
-        email.value
-          .trim()
-          .toLowerCase();
+if(lastMobile){
+
+  mobileInput.value =
+    lastMobile;
+
+}
 
 
-      if(!mail){
+/* =====================================================
+   IF ALREADY LOGGED IN
+===================================================== */
 
-        showMessage(
-          "error",
-          "Please enter your email first."
-        );
-
-        return;
-
-      }
-
-
-      try{
-
-        await sendPasswordResetEmail(
-          auth,
-          mail
-        );
-
-
-        showMessage(
-          "success",
-          "✅ Password reset email sent."
-        );
-
-
-      }catch(error){
-
-        showMessage(
-          "error",
-          "❌ " +
-          (
-            error.message ||
-            "Unable to send reset email."
-          )
-        );
-
-      }
-
-    }
+const loggedIn =
+  sessionStorage.getItem(
+    "bt_logged_in"
   );
+
+const savedRole =
+  sessionStorage.getItem(
+    "bt_user_role"
+  );
+
+
+if(
+  loggedIn === "true" &&
+  savedRole
+){
+
+  if(
+    savedRole ===
+    "coordinator"
+  ){
+
+    window.location.replace(
+      "coordinator.html"
+    );
+
+  }
+
+
+  if(
+    savedRole ===
+    "telecaller"
+  ){
+
+    window.location.replace(
+      "telecaller.html"
+    );
+
+  }
+
+}
 
 </script>
+
 
 </body>
 </html>

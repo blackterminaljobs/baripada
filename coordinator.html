@@ -2,256 +2,166 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#086ee1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BlackTerminal - Coordinator</title>
+<title>Coordinator Panel | BlackTerminal</title>
 
 <style>
-:root{
-    --navy:#071426;
-    --blue:#086ee1;
-    --blue2:#18a0ff;
-    --bg:#f4f7fb;
-    --card:#ffffff;
-    --text:#172236;
-    --muted:#738096;
-    --line:#e3e9f1;
-    --green:#16a34a;
-    --orange:#f59e0b;
-    --red:#ef4444;
-    --shadow:0 10px 30px rgba(24,43,73,.08);
-}
-
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
 }
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
+    background:#f5f7fb;
+    color:#172033;
 }
-
-button,
-input,
-select,
-textarea{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-/* SIDEBAR */
 
 .sidebar{
     position:fixed;
     left:0;
     top:0;
-    bottom:0;
-    width:255px;
-    background:var(--navy);
+    width:250px;
+    height:100vh;
+    background:#101522;
     color:#fff;
-    padding:22px 16px;
+    padding:24px 16px;
     z-index:1000;
-    transition:.25s ease;
 }
 
-.brand{
+.logo{
     display:flex;
     align-items:center;
     gap:12px;
-    padding:8px 10px 25px;
+    padding:10px 8px 25px;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.brand-logo{
-    width:44px;
-    height:44px;
-    border-radius:13px;
-    background:linear-gradient(135deg,#086ee1,#18a0ff);
+.logo-box{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:#fff;
+    color:#101522;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:21px;
-    font-weight:800;
+    font-weight:900;
 }
 
-.brand-text strong{
-    display:block;
+.logo h2{
     font-size:17px;
 }
 
-.brand-text span{
+.logo small{
     display:block;
+    color:#8d98aa;
     font-size:11px;
-    color:#9eabc0;
-    margin-top:2px;
+    margin-top:3px;
 }
 
-.nav-title{
-    color:#6e7d96;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.2px;
-    padding:15px 12px 8px;
+.menu{
+    margin-top:25px;
 }
 
-.nav-item{
+.menu a{
     display:flex;
     align-items:center;
     gap:12px;
-    padding:12px 13px;
-    border-radius:11px;
-    color:#bdc8d9;
-    margin:4px 0;
+    color:#aeb7c7;
     text-decoration:none;
+    padding:13px 14px;
+    border-radius:10px;
+    margin-bottom:7px;
     font-size:14px;
+    transition:.2s;
 }
 
-.nav-item.active,
-.nav-item:hover{
-    background:rgba(255,255,255,.09);
+.menu a:hover,
+.menu a.active{
+    background:#1e2636;
     color:#fff;
 }
 
-.nav-icon{
-    width:22px;
+.menu-icon{
+    width:20px;
     text-align:center;
 }
 
-.sidebar-bottom{
-    position:absolute;
-    left:16px;
-    right:16px;
-    bottom:18px;
-}
-
-.user-mini{
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:13px;
-    padding:12px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.user-avatar-small{
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    background:#fff;
-    color:var(--blue);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-}
-
-.user-mini-info{
-    min-width:0;
-    flex:1;
-}
-
-.user-mini-info strong{
-    display:block;
-    font-size:13px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.user-mini-info span{
-    display:block;
-    font-size:11px;
-    color:#91a0b6;
-    margin-top:2px;
-}
-
-/* MAIN */
-
 .main{
-    margin-left:255px;
+    margin-left:250px;
     min-height:100vh;
 }
 
 .topbar{
     height:72px;
     background:#fff;
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid #e8ebf1;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 30px;
+    padding:0 28px;
     position:sticky;
     top:0;
-    z-index:500;
+    z-index:900;
 }
 
-.top-left{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.menu-btn{
-    display:none;
-    border:0;
-    background:#eef5ff;
-    color:var(--blue);
-    width:44px;
-    height:44px;
-    border-radius:12px;
-    font-size:23px;
-}
-
-.page-title h1{
+.top-title h1{
     font-size:20px;
 }
 
-.page-title p{
-    color:var(--muted);
+.top-title p{
+    color:#8a94a6;
     font-size:12px;
     margin-top:3px;
 }
 
-.top-user{
+.profile{
     display:flex;
     align-items:center;
     gap:10px;
 }
 
-.top-avatar{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#086ee1,#4d9df5);
+.avatar{
+    width:40px;
+    height:40px;
+    background:#111827;
     color:#fff;
+    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-weight:800;
-    font-size:18px;
+    font-weight:700;
+}
+
+.profile-info strong{
+    display:block;
+    font-size:13px;
+}
+
+.profile-info span{
+    color:#8a94a6;
+    font-size:11px;
+}
+
+.mobile-menu{
+    display:none;
+    font-size:24px;
+    cursor:pointer;
 }
 
 .content{
-    padding:28px 30px 50px;
-    max-width:1100px;
-    margin:auto;
+    padding:28px;
 }
 
-/* WELCOME */
-
 .welcome{
-    background:linear-gradient(135deg,#071426,#0d3d72);
+    background:linear-gradient(135deg,#111827,#273248);
     color:#fff;
-    border-radius:18px;
     padding:25px;
-    margin-bottom:22px;
+    border-radius:18px;
+    margin-bottom:25px;
     position:relative;
     overflow:hidden;
 }
@@ -259,104 +169,145 @@ button{
 .welcome:after{
     content:"";
     position:absolute;
-    width:180px;
-    height:180px;
+    width:220px;
+    height:220px;
     border-radius:50%;
-    background:rgba(24,160,255,.15);
-    right:-50px;
-    top:-60px;
+    border:35px solid rgba(255,255,255,.04);
+    right:-70px;
+    top:-90px;
 }
 
 .welcome h2{
-    font-size:23px;
+    font-size:24px;
     margin-bottom:7px;
-    position:relative;
-    z-index:2;
 }
 
 .welcome p{
-    color:#c4d4e8;
-    font-size:14px;
-    position:relative;
-    z-index:2;
-}
-
-/* STATS */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-    margin-bottom:22px;
-}
-
-.stat-card{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:18px;
-    box-shadow:var(--shadow);
-}
-
-.stat-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.stat-label{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.stat-icon{
-    width:38px;
-    height:38px;
-    border-radius:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#edf5ff;
-    color:var(--blue);
-    font-size:18px;
-}
-
-.stat-number{
-    font-size:26px;
-    font-weight:800;
-    margin-top:9px;
-}
-
-/* CARD */
-
-.card{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:18px;
-    box-shadow:var(--shadow);
-    margin-bottom:24px;
-    overflow:hidden;
-}
-
-.card-header{
-    padding:23px 26px;
-    border-bottom:1px solid var(--line);
-}
-
-.card-header h2{
-    font-size:21px;
-}
-
-.card-header p{
-    color:var(--muted);
-    margin-top:5px;
+    color:#c7cfdb;
     font-size:13px;
 }
 
-/* FORM */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:25px;
+}
 
-.form{
-    padding:26px;
+.stat{
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid #e9edf3;
+}
+
+.stat-label{
+    font-size:12px;
+    color:#8791a2;
+    margin-bottom:10px;
+}
+
+.stat-value{
+    font-size:26px;
+    font-weight:800;
+}
+
+.stat-sub{
+    font-size:11px;
+    color:#9aa3b2;
+    margin-top:5px;
+}
+
+.payment-box{
+    background:#fff;
+    border:1px solid #e9edf3;
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:25px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.section-title h3{
+    font-size:17px;
+}
+
+.section-title span{
+    font-size:11px;
+    color:#8a94a6;
+}
+
+.payment-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.pay-card{
+    background:#f8f9fc;
+    border:1px solid #edf0f5;
+    padding:18px;
+    border-radius:13px;
+}
+
+.pay-card .label{
+    font-size:11px;
+    color:#858fa0;
+    margin-bottom:8px;
+}
+
+.pay-card .value{
+    font-size:21px;
+    font-weight:800;
+}
+
+.pay-card .sub{
+    font-size:10px;
+    color:#969fad;
+    margin-top:6px;
+}
+
+.total-card{
+    background:#111827;
+    color:#fff;
+}
+
+.total-card .label,
+.total-card .sub{
+    color:#c7cfdb;
+}
+
+.payment-rule{
+    margin-top:15px;
+    padding:14px;
+    background:#fff8e6;
+    border:1px solid #f6df9b;
+    border-radius:12px;
+    font-size:12px;
+    color:#6e5513;
+    line-height:1.7;
+}
+
+.settings-status{
+    margin-top:12px;
+    padding:10px 12px;
+    border-radius:9px;
+    font-size:11px;
+    background:#eef6ff;
+    color:#2563eb;
+}
+
+.card{
+    background:#fff;
+    border:1px solid #e9edf3;
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:25px;
 }
 
 .form-grid{
@@ -366,295 +317,323 @@ button{
 }
 
 .form-group{
-    display:flex;
-    flex-direction:column;
+    margin-bottom:16px;
 }
 
-.form-group.full{
-    grid-column:1/-1;
-}
-
-label{
-    font-size:14px;
+.form-group label{
+    display:block;
+    font-size:12px;
     font-weight:700;
-    margin-bottom:9px;
-    color:#36445b;
+    margin-bottom:7px;
+    color:#4d586b;
 }
 
-.required{
-    color:#ef4444;
-}
-
-input,
-select,
-textarea{
+.form-group input,
+.form-group select,
+.form-group textarea{
     width:100%;
-    border:2px solid #dce4ef;
-    background:#fff;
-    border-radius:14px;
-    padding:15px 16px;
+    border:1px solid #dfe4ec;
+    border-radius:10px;
+    padding:12px 13px;
     outline:none;
-    color:#1d293d;
-    font-size:16px;
+    font-size:13px;
+    background:#fff;
     transition:.2s;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#73adf5;
-    box-shadow:0 0 0 4px rgba(8,110,225,.08);
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#111827;
+    box-shadow:0 0 0 3px rgba(17,24,39,.06);
 }
 
-textarea{
-    min-height:125px;
+.form-group textarea{
+    min-height:90px;
     resize:vertical;
 }
 
-.send-btn{
-    width:100%;
+.btn{
     border:0;
-    border-radius:14px;
-    padding:17px;
-    background:linear-gradient(135deg,#086ee1,#18a0ff);
-    color:#fff;
-    font-size:17px;
-    font-weight:800;
-    min-height:58px;
+    border-radius:10px;
+    padding:12px 18px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:700;
+    transition:.2s;
 }
 
-.send-btn:disabled{
-    opacity:.7;
+.btn-primary{
+    background:#111827;
+    color:#fff;
+}
+
+.btn-primary:hover{
+    background:#273248;
+}
+
+.btn:disabled{
+    opacity:.5;
     cursor:not-allowed;
 }
 
-/* MESSAGE */
-
-.message{
-    display:none;
-    margin:0 26px 22px;
-    padding:15px 16px;
-    border-radius:12px;
-    font-size:14px;
-    font-weight:600;
-    line-height:1.5;
-    white-space:pre-line;
+.search-box{
+    display:flex;
+    gap:10px;
+    margin-bottom:18px;
 }
 
-.message.success{
-    display:block;
-    background:#ecfdf3;
-    color:#087a35;
-    border:1px solid #bbf7d0;
+.search-box input,
+.search-box select{
+    border:1px solid #dfe4ec;
+    border-radius:10px;
+    padding:11px 13px;
+    background:#fff;
+    outline:none;
+    font-size:13px;
 }
 
-.message.error{
-    display:block;
-    background:#fff1f2;
-    color:#b42318;
-    border:1px solid #fecdd3;
+.search-box input{
+    flex:1;
 }
 
-/* RECENT */
+.inquiry-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
 
 .inquiry{
-    padding:22px 26px;
-    border-bottom:1px solid var(--line);
-}
-
-.inquiry:last-child{
-    border-bottom:0;
+    border:1px solid #e9edf3;
+    border-radius:13px;
+    padding:16px;
+    background:#fff;
 }
 
 .inquiry-top{
     display:flex;
     justify-content:space-between;
-    align-items:flex-start;
-    gap:12px;
+    gap:15px;
 }
 
-.inquiry-name{
-    font-size:17px;
+.student-name{
+    font-size:15px;
     font-weight:800;
 }
 
-.inquiry-course{
-    color:var(--muted);
+.mobile{
+    color:#687386;
+    font-size:12px;
     margin-top:4px;
-    font-size:14px;
 }
 
 .inquiry-meta{
     display:flex;
     flex-wrap:wrap;
-    gap:8px;
+    gap:7px;
     margin-top:12px;
-    color:#7d899c;
-    font-size:13px;
 }
 
 .badge{
-    padding:8px 12px;
-    border-radius:30px;
-    font-size:12px;
-    font-weight:800;
-    background:#fff7e5;
-    color:#b77908;
-    white-space:nowrap;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:700;
+    background:#f0f2f6;
+    color:#586276;
 }
 
-.badge.new{
-    background:#eaf3ff;
-    color:#086ee1;
+.badge-new{
+    background:#eef4ff;
+    color:#2563eb;
 }
 
-.badge.contacted{
-    background:#edfdf3;
-    color:#138a43;
+.badge-visited{
+    background:#fff5dc;
+    color:#a16207;
 }
 
-.badge.converted{
-    background:#eafbf0;
-    color:#12833e;
+.badge-converted{
+    background:#e9f9ef;
+    color:#16803d;
 }
 
-.badge.not-interested{
-    background:#fff0f1;
-    color:#c72d3b;
+.badge-follow{
+    background:#f4edff;
+    color:#7c3aed;
+}
+
+.inquiry-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px solid #f0f2f5;
+}
+
+.inquiry-date{
+    color:#929aaa;
+    font-size:10px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+}
+
+.action{
+    text-decoration:none;
+    border:1px solid #e0e5ec;
+    padding:7px 10px;
+    border-radius:8px;
+    color:#394457;
+    font-size:11px;
+    font-weight:700;
+    background:#fff;
+}
+
+.action:hover{
+    background:#f5f7fa;
 }
 
 .empty{
-    padding:45px 20px;
     text-align:center;
-    color:var(--muted);
+    padding:35px 15px;
+    color:#9aa3b2;
+    font-size:13px;
 }
 
-.empty-icon{
-    font-size:42px;
-    margin-bottom:10px;
+.alert{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    max-width:360px;
+    padding:14px 17px;
+    border-radius:12px;
+    background:#111827;
+    color:#fff;
+    font-size:13px;
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+    transform:translateY(130px);
+    opacity:0;
+    transition:.3s;
+    z-index:5000;
 }
 
-/* LOADER */
-
-.loader{
-    display:inline-block;
-    width:17px;
-    height:17px;
-    border:2px solid rgba(255,255,255,.4);
-    border-top-color:#fff;
-    border-radius:50%;
-    animation:spin .7s linear infinite;
-    vertical-align:-3px;
-    margin-right:7px;
+.alert.show{
+    transform:translateY(0);
+    opacity:1;
 }
 
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
+.alert.success{
+    background:#16803d;
+}
+
+.alert.error{
+    background:#c62828;
+}
+
+.loading{
+    text-align:center;
+    padding:25px;
+    color:#8b95a5;
+    font-size:13px;
+}
+
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#9aa3b2;
+    font-size:11px;
+}
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .payment-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 }
 
-/* MOBILE */
-
-.overlay{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.4);
-    z-index:900;
-}
-
-@media(max-width:850px){
+@media(max-width:760px){
 
     .sidebar{
         transform:translateX(-100%);
+        transition:.3s;
     }
 
     .sidebar.open{
         transform:translateX(0);
     }
 
-    .overlay.open{
-        display:block;
-    }
-
     .main{
         margin-left:0;
     }
 
-    .menu-btn{
+    .mobile-menu{
         display:block;
     }
 
-    .topbar{
-        padding:0 16px;
-    }
-
-    .top-user-name{
+    .profile-info{
         display:none;
     }
 
     .content{
-        padding:18px 14px 35px;
+        padding:17px;
     }
 
-    .stats{
-        grid-template-columns:1fr;
-        gap:12px;
+    .topbar{
+        padding:0 17px;
     }
 
     .form-grid{
         grid-template-columns:1fr;
+        gap:0;
     }
 
-    .form-group.full{
-        grid-column:auto;
+    .stats{
+        grid-template-columns:1fr 1fr;
     }
 
-    .form{
-        padding:20px;
+    .payment-grid{
+        grid-template-columns:1fr 1fr;
     }
 
-    .card-header{
-        padding:20px;
+    .welcome h2{
+        font-size:20px;
     }
 
-    .message{
-        margin-left:20px;
-        margin-right:20px;
+    .inquiry-top{
+        flex-direction:column;
     }
 
-    .inquiry{
-        padding:20px;
+    .inquiry-bottom{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .search-box{
+        flex-direction:column;
     }
 }
 
-@media(max-width:500px){
+@media(max-width:450px){
 
-    .page-title h1{
-        font-size:17px;
+    .stats{
+        grid-template-columns:1fr;
     }
 
-    .page-title p{
-        display:none;
+    .payment-grid{
+        grid-template-columns:1fr;
     }
 
-    .topbar{
-        height:65px;
-    }
-
-    .content{
-        padding-top:15px;
-    }
-
-    .card-header h2{
-        font-size:19px;
-    }
-
-    input,
-    select,
-    textarea{
-        font-size:16px;
+    .actions{
+        flex-wrap:wrap;
     }
 }
 </style>
@@ -662,102 +641,101 @@ textarea{
 
 <body>
 
-<div class="app">
-
 <!-- SIDEBAR -->
+
 <aside class="sidebar" id="sidebar">
 
-    <div class="brand">
+    <div class="logo">
 
-        <div class="brand-logo">
+        <div class="logo-box">
             BT
         </div>
 
-        <div class="brand-text">
-            <strong>BlackTerminal</strong>
-            <span>Computer Institute</span>
+        <div>
+            <h2>BlackTerminal</h2>
+            <small>Computer Institute</small>
         </div>
 
     </div>
 
-    <div class="nav-title">
-        Coordinator
-    </div>
+    <nav class="menu">
 
-    <a href="#" class="nav-item active">
-        <span class="nav-icon">📋</span>
-        <span>Send Inquiry</span>
-    </a>
+        <a href="coordinator.html" class="active">
+            <span class="menu-icon">🏠</span>
+            Dashboard
+        </a>
 
-    <a href="login.html" class="nav-item" id="logoutBtn">
-        <span class="nav-icon">🚪</span>
-        <span>Logout</span>
-    </a>
+        <a href="#newInquiry">
+            <span class="menu-icon">➕</span>
+            New Inquiry
+        </a>
 
-    <div class="sidebar-bottom">
+        <a href="#inquiries">
+            <span class="menu-icon">📋</span>
+            My Inquiries
+        </a>
 
-        <div class="user-mini">
+        <a href="#payment">
+            <span class="menu-icon">💰</span>
+            My Payment
+        </a>
 
-            <div class="user-avatar-small" id="sideAvatar">
-                A
-            </div>
+        <a href="javascript:void(0)" onclick="logout()">
+            <span class="menu-icon">🚪</span>
+            Logout
+        </a>
 
-            <div class="user-mini-info">
-                <strong id="sideName">
-                    Coordinator
-                </strong>
-
-                <span>
-                    Coordinator
-                </span>
-            </div>
-
-        </div>
-
-    </div>
+    </nav>
 
 </aside>
 
-<div class="overlay" id="overlay"></div>
-
 
 <!-- MAIN -->
+
 <main class="main">
+
+    <!-- TOPBAR -->
 
     <header class="topbar">
 
-        <div class="top-left">
+        <div style="display:flex;align-items:center;gap:15px;">
 
-            <button class="menu-btn" id="menuBtn">
+            <div class="mobile-menu"
+                 onclick="toggleSidebar()">
                 ☰
-            </button>
+            </div>
 
-            <div class="page-title">
+            <div class="top-title">
 
                 <h1>
                     Coordinator Panel
                 </h1>
 
                 <p>
-                    Send student inquiries to Telecaller
+                    Student inquiry and performance management
                 </p>
 
             </div>
 
         </div>
 
-        <div class="top-user">
 
-            <span
-                class="top-user-name"
-                id="topName">
-                Coordinator
-            </span>
+        <div class="profile">
 
-            <div
-                class="top-avatar"
-                id="topAvatar">
-                A
+            <div class="avatar" id="avatar">
+                C
+            </div>
+
+            <div class="profile-info">
+
+                <strong id="topName">
+                    Coordinator
+                </strong>
+
+                <span>
+                    Coordinator
+                </span>
+
             </div>
 
         </div>
@@ -767,92 +745,92 @@ textarea{
 
     <section class="content">
 
-
         <!-- WELCOME -->
+
         <div class="welcome">
 
-            <h2>
-                Hello,
-                <span id="welcomeName">
-                    Coordinator
-                </span>
-                👋
+            <h2 id="welcomeName">
+                Welcome, Coordinator 👋
             </h2>
 
             <p>
-                Student inquiry enter karke Telecaller ko instantly send karein.
+                Bring genuine students, track their progress and earn based on actual visits and admissions.
             </p>
 
         </div>
 
 
-        <!-- STATS -->
+        <!-- DASHBOARD STATS -->
+
         <div class="stats">
 
-            <div class="stat-card">
+            <div class="stat">
 
-                <div class="stat-top">
-
-                    <div class="stat-label">
-                        TOTAL INQUIRIES
-                    </div>
-
-                    <div class="stat-icon">
-                        📋
-                    </div>
-
+                <div class="stat-label">
+                    TOTAL INQUIRIES
                 </div>
 
-                <div
-                    class="stat-number"
-                    id="totalCount">
+                <div class="stat-value"
+                     id="totalInquiries">
                     0
+                </div>
+
+                <div class="stat-sub">
+                    Your submitted inquiries
                 </div>
 
             </div>
 
 
-            <div class="stat-card">
+            <div class="stat">
 
-                <div class="stat-top">
-
-                    <div class="stat-label">
-                        TODAY
-                    </div>
-
-                    <div class="stat-icon">
-                        📅
-                    </div>
-
+                <div class="stat-label">
+                    VISITED STUDENTS
                 </div>
 
-                <div
-                    class="stat-number"
-                    id="todayCount">
+                <div class="stat-value"
+                     id="visitedCount">
                     0
+                </div>
+
+                <div class="stat-sub">
+                    Genuine institute visits
                 </div>
 
             </div>
 
 
-            <div class="stat-card">
+            <div class="stat">
 
-                <div class="stat-top">
-
-                    <div class="stat-label">
-                        CONVERTED
-                    </div>
-
-                    <div class="stat-icon">
-                        ✅
-                    </div>
-
+                <div class="stat-label">
+                    ADMISSIONS
                 </div>
 
-                <div
-                    class="stat-number"
-                    id="convertedCount">
+                <div class="stat-value"
+                     id="convertedCount">
                     0
+                </div>
+
+                <div class="stat-sub">
+                    Converted students
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    CURRENT PAYABLE
+                </div>
+
+                <div class="stat-value"
+                     id="quickPayable">
+                    ₹0
+                </div>
+
+                <div class="stat-sub">
+                    Current month
                 </div>
 
             </div>
@@ -860,1419 +838,2230 @@ textarea{
         </div>
 
 
-        <!-- SEND FORM -->
-        <div class="card">
+        <!-- PAYMENT -->
 
-            <div class="card-header">
+        <div class="payment-box"
+             id="payment">
 
-                <h2>
-                    Send New Inquiry
-                </h2>
+            <div class="section-title">
 
-                <p>
-                    Student details enter karein aur Telecaller ko send karein.
-                </p>
+                <h3>
+                    💰 My Monthly Payment
+                </h3>
+
+                <span id="paymentMonth">
+                    Current Month
+                </span>
 
             </div>
 
 
-            <form
-                class="form"
-                id="inquiryForm">
+            <div class="payment-grid">
+
+                <div class="pay-card">
+
+                    <div class="label">
+                        BASE SALARY
+                    </div>
+
+                    <div class="value"
+                         id="baseSalary">
+                        ₹0
+                    </div>
+
+                    <div class="sub">
+                        Admin controlled
+                    </div>
+
+                </div>
+
+
+                <div class="pay-card">
+
+                    <div class="label">
+                        VISIT INCENTIVE
+                    </div>
+
+                    <div class="value"
+                         id="visitIncentive">
+                        ₹0
+                    </div>
+
+                    <div class="sub"
+                         id="visitText">
+                        0 × ₹0
+                    </div>
+
+                </div>
+
+
+                <div class="pay-card">
+
+                    <div class="label">
+                        ADMISSION INCENTIVE
+                    </div>
+
+                    <div class="value"
+                         id="admissionIncentive">
+                        ₹0
+                    </div>
+
+                    <div class="sub"
+                         id="admissionText">
+                        0 × ₹0
+                    </div>
+
+                </div>
+
+
+                <div class="pay-card total-card">
+
+                    <div class="label">
+                        TOTAL PAYABLE
+                    </div>
+
+                    <div class="value"
+                         id="totalPayable">
+                        ₹0
+                    </div>
+
+                    <div class="sub">
+                        Current month
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="payment-rule">
+
+                <strong>Payment Rule:</strong>
+
+                Raw inquiries do not generate incentive.
+
+                <br>
+
+                <strong>Visited Student:</strong>
+                <span id="ruleVisitAmount">
+                    ₹0
+                </span>
+
+                &nbsp; | &nbsp;
+
+                <strong>Admission:</strong>
+                <span id="ruleAdmissionAmount">
+                    ₹0
+                </span>
+
+                <br>
+
+                Base salary and incentive amounts are
+                <strong>controlled by the Admin Panel</strong>.
+
+                Duplicate mobile numbers are not counted twice
+                for the same incentive category.
+
+            </div>
+
+
+            <div class="settings-status"
+                 id="settingsStatus">
+
+                Loading payment settings from Admin...
+
+            </div>
+
+        </div>
+
+
+        <!-- NEW INQUIRY -->
+
+        <div class="card"
+             id="newInquiry">
+
+            <div class="section-title">
+
+                <h3>
+                    ➕ Add New Student Inquiry
+                </h3>
+
+                <span>
+                    Submit genuine student leads
+                </span>
+
+            </div>
+
+
+            <form id="inquiryForm">
 
                 <div class="form-grid">
 
+                    <div>
 
-                    <!-- STUDENT NAME -->
-                    <div class="form-group">
+                        <div class="form-group">
 
-                        <label>
-                            Student Name
-                            <span class="required">*</span>
-                        </label>
+                            <label>
+                                Student Name *
+                            </label>
 
-                        <input
-                            type="text"
-                            id="studentName"
-                            placeholder="Enter student name"
-                            required
-                        >
+                            <input
+                                type="text"
+                                id="studentName"
+                                placeholder="Enter student name"
+                                required
+                            >
 
-                    </div>
-
-
-                    <!-- MOBILE -->
-                    <div class="form-group">
-
-                        <label>
-                            Mobile Number
-                            <span class="required">*</span>
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="studentMobile"
-                            placeholder="10 digit mobile number"
-                            inputmode="numeric"
-                            maxlength="10"
-                            required
-                        >
-
-                    </div>
+                        </div>
 
 
-                    <!-- COURSE -->
-                    <div class="form-group">
+                        <div class="form-group">
 
-                        <label>
-                            Course
-                            <span class="required">*</span>
-                        </label>
+                            <label>
+                                Mobile Number *
+                            </label>
 
-                        <select
-                            id="course"
-                            required>
+                            <input
+                                type="tel"
+                                id="mobile"
+                                maxlength="10"
+                                inputmode="numeric"
+                                placeholder="10 digit mobile number"
+                                required
+                            >
 
-                            <option value="">
-                                Select Course
-                            </option>
+                        </div>
 
-                            <option value="PGDCA">
-                                PGDCA
-                            </option>
 
-                            <option value="Advanced PGDCA">
-                                Advanced PGDCA
-                            </option>
+                        <div class="form-group">
 
-                            <option value="C Language">
-                                C Language
-                            </option>
+                            <label>
+                                Course *
+                            </label>
 
-                            <option value="Java">
-                                Java
-                            </option>
+                            <select id="course"
+                                    required>
 
-                            <option value="Python">
-                                Python
-                            </option>
+                                <option value="">
+                                    Select Course
+                                </option>
 
-                            <option value="Tally">
-                                Tally
-                            </option>
+                                <option value="PGDCA">
+                                    PGDCA
+                                </option>
 
-                            <option value="Spoken English">
-                                Spoken English
-                            </option>
+                                <option value="Advanced PGDCA">
+                                    Advanced PGDCA
+                                </option>
 
-                            <option value="Ethical Hacking">
-                                Ethical Hacking
-                            </option>
+                                <option value="C Language">
+                                    C Language
+                                </option>
 
-                            <option value="OS-CIT">
-                                OS-CIT
-                            </option>
+                                <option value="Java">
+                                    Java
+                                </option>
 
-                            <option value="Other">
-                                Other
-                            </option>
+                                <option value="Python">
+                                    Python
+                                </option>
 
-                        </select>
+                                <option value="Tally">
+                                    Tally
+                                </option>
+
+                                <option value="Spoken English">
+                                    Spoken English
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
 
                     </div>
 
 
-                    <!-- SOURCE -->
-                    <div class="form-group">
+                    <div>
 
-                        <label>
-                            Source
-                        </label>
+                        <div class="form-group">
 
-                        <select id="source">
+                            <label>
+                                Lead Source
+                            </label>
 
-                            <option value="Walk-in">
-                                Walk-in
-                            </option>
+                            <select id="source">
 
-                            <option value="Phone Call">
-                                Phone Call
-                            </option>
+                                <option value="">
+                                    Select Source
+                                </option>
 
-                            <option value="WhatsApp">
-                                WhatsApp
-                            </option>
+                                <option value="Personal Contact">
+                                    Personal Contact
+                                </option>
 
-                            <option value="Facebook">
-                                Facebook
-                            </option>
+                                <option value="WhatsApp">
+                                    WhatsApp
+                                </option>
 
-                            <option value="Instagram">
-                                Instagram
-                            </option>
+                                <option value="Facebook">
+                                    Facebook
+                                </option>
 
-                            <option value="Reference">
-                                Reference
-                            </option>
+                                <option value="Instagram">
+                                    Instagram
+                                </option>
 
-                            <option value="Other">
-                                Other
-                            </option>
+                                <option value="Reference">
+                                    Student Reference
+                                </option>
 
-                        </select>
+                                <option value="Other">
+                                    Other
+                                </option>
 
-                    </div>
+                            </select>
 
-
-                    <!-- REMARK -->
-                    <div class="form-group full">
-
-                        <label>
-                            Remark
-                        </label>
-
-                        <textarea
-                            id="remark"
-                            placeholder="Enter any remark..."></textarea>
-
-                    </div>
+                        </div>
 
 
-                    <!-- SEND -->
-                    <div class="form-group full">
+                        <div class="form-group">
 
-                        <button
-                            type="submit"
-                            class="send-btn"
-                            id="sendBtn">
+                            <label>
+                                Remark
+                            </label>
 
-                            📤 Send Inquiry
+                            <textarea
+                                id="remark"
+                                placeholder="Student requirement, preferred course, timing, etc."
+                            ></textarea>
 
-                        </button>
+                        </div>
 
                     </div>
 
                 </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="submitBtn">
+
+                    Send Inquiry
+
+                </button>
 
             </form>
 
-
-            <div
-                id="messageBox"
-                class="message">
-            </div>
-
         </div>
 
 
-        <!-- RECENT -->
-        <div class="card">
+        <!-- MY INQUIRIES -->
 
-            <div class="card-header">
+        <div class="card"
+             id="inquiries">
 
-                <h2>
-                    My Recent Inquiries
-                </h2>
+            <div class="section-title">
 
-                <p>
-                    Latest inquiries sent by you
-                </p>
+                <h3>
+                    📋 My Recent Inquiries
+                </h3>
+
+                <span>
+                    Latest student leads
+                </span>
 
             </div>
 
-            <div id="recentList">
 
-                <div class="empty">
+            <div class="search-box">
 
-                    <div class="empty-icon">
-                        ⏳
-                    </div>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search student name or mobile..."
+                    oninput="renderInquiries()"
+                >
 
+
+                <select
+                    id="statusFilter"
+                    onchange="renderInquiries()">
+
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="new">
+                        New
+                    </option>
+
+                    <option value="contacted">
+                        Contacted
+                    </option>
+
+                    <option value="interested">
+                        Interested
+                    </option>
+
+                    <option value="visited">
+                        Visited
+                    </option>
+
+                    <option value="converted">
+                        Converted
+                    </option>
+
+                    <option value="closed">
+                        Closed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="inquiryList">
+
+                <div class="loading">
                     Loading inquiries...
-
                 </div>
 
             </div>
 
         </div>
 
+
+        <div class="footer">
+
+            © <span id="year"></span>
+            BlackTerminal Computer Institute · Coordinator Panel
+
+        </div>
 
     </section>
 
 </main>
 
+
+<!-- ALERT -->
+
+<div class="alert"
+     id="alert">
 </div>
 
 
-<script>
+<script type="module">
 
-/*
-=========================================================
-BLACKTERMINAL COORDINATOR
-DIRECT FIRESTORE REST API
-NO FIREBASE AUTH
-NO FIREBASE SDK
-NO addDoc()
-=========================================================
-*/
-
-
-/* =====================================================
-   FIREBASE PROJECT CONFIG
-===================================================== */
+/* =========================================================
+   FIREBASE CONFIGURATION
+========================================================= */
 
 const FIREBASE_PROJECT_ID =
     "jobs-2f152";
 
 const FIREBASE_API_KEY =
-    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytd2b_M";
+    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytd2b_m";
 
-const FIRESTORE_URL =
+
+const FIRESTORE_BASE =
     "https://firestore.googleapis.com/v1/projects/" +
     FIREBASE_PROJECT_ID +
-    "/databases/(default)/documents/studentInquiries";
+    "/databases/(default)/documents";
 
 
-/* =====================================================
-   SESSION
-===================================================== */
+const INQUIRY_URL =
+    FIRESTORE_BASE +
+    "/studentInquiries";
+
+
+/*
+   ADMIN PAYMENT SETTINGS
+
+   Collection:
+   paymentSettings
+
+   Document:
+   coordinator
+
+   Fields:
+
+   baseSalary
+   visitIncentive
+   admissionIncentive
+*/
+
+const PAYMENT_SETTINGS_URL =
+    FIRESTORE_BASE +
+    "/paymentSettings/coordinator";
+
+
+/* =========================================================
+   DEFAULT VALUES
+========================================================= */
+
+let BASE_SALARY = 1000;
+
+let VISIT_INCENTIVE = 50;
+
+let ADMISSION_INCENTIVE = 50;
+
+
+/* =========================================================
+   SESSION PROTECTION
+========================================================= */
 
 const loggedIn =
-    sessionStorage.getItem("bt_logged_in");
+    sessionStorage.getItem(
+        "bt_logged_in"
+    );
 
-const userRole =
-    sessionStorage.getItem("bt_user_role");
-
-const coordinatorName =
-    sessionStorage.getItem("bt_user_name") ||
-    "Coordinator";
-
-const coordinatorMobile =
-    sessionStorage.getItem("bt_user_mobile") ||
-    "";
+const role =
+    sessionStorage.getItem(
+        "bt_user_role"
+    );
 
 
 if(
     loggedIn !== "true" ||
-    userRole !== "coordinator"
+    role !== "coordinator"
 ){
 
-    window.location.replace("login.html");
+    window.location.href =
+        "index.html";
 
 }
 
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* =========================================================
+   COORDINATOR INFORMATION
+========================================================= */
 
-const form =
-    document.getElementById("inquiryForm");
-
-const studentName =
-    document.getElementById("studentName");
-
-const studentMobile =
-    document.getElementById("studentMobile");
-
-const course =
-    document.getElementById("course");
-
-const source =
-    document.getElementById("source");
-
-const remark =
-    document.getElementById("remark");
-
-const sendBtn =
-    document.getElementById("sendBtn");
-
-const messageBox =
-    document.getElementById("messageBox");
-
-const recentList =
-    document.getElementById("recentList");
-
-const totalCount =
-    document.getElementById("totalCount");
-
-const todayCount =
-    document.getElementById("todayCount");
-
-const convertedCount =
-    document.getElementById("convertedCount");
+const coordinatorName =
+    sessionStorage.getItem(
+        "bt_user_name"
+    ) ||
+    "Coordinator";
 
 
-/* =====================================================
-   USER DISPLAY
-===================================================== */
+const coordinatorMobile =
+    sessionStorage.getItem(
+        "bt_user_mobile"
+    ) ||
+    "";
 
-document.getElementById("welcomeName").textContent =
-    coordinatorName;
-
-document.getElementById("topName").textContent =
-    coordinatorName;
-
-document.getElementById("sideName").textContent =
-    coordinatorName;
-
-const initial =
-    coordinatorName
-    .trim()
-    .charAt(0)
-    .toUpperCase() || "A";
-
-document.getElementById("topAvatar").textContent =
-    initial;
-
-document.getElementById("sideAvatar").textContent =
-    initial;
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function showMessage(type,text){
-
-    messageBox.className =
-        "message " + type;
-
-    messageBox.textContent =
-        text;
-
-    messageBox.scrollIntoView({
-        behavior:"smooth",
-        block:"nearest"
-    });
-
-}
-
-
-function hideMessage(){
-
-    messageBox.className =
-        "message";
-
-    messageBox.textContent =
-        "";
-
-}
-
-
-/* =====================================================
-   MOBILE INPUT
-===================================================== */
-
-studentMobile.addEventListener(
-    "input",
-    function(){
-
-        this.value =
-            this.value
-            .replace(/\D/g,"")
-            .slice(0,10);
-
-    }
-);
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
 
 document
-.getElementById("logoutBtn")
-.addEventListener(
-    "click",
-    function(e){
-
-        e.preventDefault();
-
-        sessionStorage.removeItem("bt_logged_in");
-        sessionStorage.removeItem("bt_user_name");
-        sessionStorage.removeItem("bt_user_mobile");
-        sessionStorage.removeItem("bt_user_role");
-        sessionStorage.removeItem("bt_login_time");
-
-        window.location.replace("login.html");
-
-    }
-);
+    .getElementById("topName")
+    .textContent =
+    coordinatorName;
 
 
-/* =====================================================
-   FETCH WITH TIMEOUT
-===================================================== */
+document
+    .getElementById("welcomeName")
+    .textContent =
+    "Welcome, " +
+    coordinatorName +
+    " 👋";
 
-async function fetchWithTimeout(
-    url,
-    options = {},
-    timeout = 12000
+
+document
+    .getElementById("avatar")
+    .textContent =
+    coordinatorName
+        .trim()
+        .charAt(0)
+        .toUpperCase();
+
+
+document
+    .getElementById("year")
+    .textContent =
+    new Date().getFullYear();
+
+
+document
+    .getElementById("paymentMonth")
+    .textContent =
+    new Date().toLocaleString(
+        "en-IN",
+        {
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+
+/* =========================================================
+   APPLICATION STATE
+========================================================= */
+
+let inquiries = [];
+
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+function showAlert(
+    message,
+    type="success"
 ){
 
-    const controller =
-        new AbortController();
-
-    const timer =
-        setTimeout(
-            () => controller.abort(),
-            timeout
-        );
-
-    try{
-
-        const response =
-            await fetch(
-                url,
-                {
-                    ...options,
-                    signal:
-                        controller.signal
-                }
-            );
-
-        return response;
-
-    }finally{
-
-        clearTimeout(timer);
-
-    }
-
-}
-
-
-/* =====================================================
-   FIRESTORE ERROR READER
-===================================================== */
-
-async function getErrorMessage(response){
-
-    try{
-
-        const data =
-            await response.json();
-
-        if(
-            data &&
-            data.error &&
-            data.error.message
-        ){
-
-            return data.error.message;
-
-        }
-
-        return JSON.stringify(data);
-
-    }catch(e){
-
-        return (
-            "HTTP " +
-            response.status +
-            " " +
-            response.statusText
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   SEND INQUIRY
-===================================================== */
-
-form.addEventListener(
-    "submit",
-    async function(e){
-
-        e.preventDefault();
-
-        hideMessage();
-
-
-        const nameValue =
-            studentName.value.trim();
-
-        const mobileValue =
-            studentMobile.value.trim();
-
-        const courseValue =
-            course.value.trim();
-
-        const sourceValue =
-            source.value.trim() ||
-            "Coordinator";
-
-        const remarkValue =
-            remark.value.trim();
-
-
-        /* ---------------------------------------------
-           VALIDATION
-        --------------------------------------------- */
-
-        if(!nameValue){
-
-            showMessage(
-                "error",
-                "❌ Student name enter karein."
-            );
-
-            studentName.focus();
-
-            return;
-
-        }
-
-
-        if(
-            !/^[0-9]{10}$/.test(
-                mobileValue
-            )
-        ){
-
-            showMessage(
-                "error",
-                "❌ Valid 10 digit mobile number enter karein."
-            );
-
-            studentMobile.focus();
-
-            return;
-
-        }
-
-
-        if(!courseValue){
-
-            showMessage(
-                "error",
-                "❌ Course select karein."
-            );
-
-            course.focus();
-
-            return;
-
-        }
-
-
-        /* ---------------------------------------------
-           BUTTON LOADING
-        --------------------------------------------- */
-
-        sendBtn.disabled =
-            true;
-
-        sendBtn.innerHTML =
-            '<span class="loader"></span> Sending Inquiry...';
-
-
-        /* ---------------------------------------------
-           FIRESTORE REST DOCUMENT
-        --------------------------------------------- */
-
-        const firestoreDocument = {
-
-            fields: {
-
-                studentName: {
-                    stringValue:
-                        nameValue
-                },
-
-                mobile: {
-                    stringValue:
-                        mobileValue
-                },
-
-                course: {
-                    stringValue:
-                        courseValue
-                },
-
-                source: {
-                    stringValue:
-                        sourceValue
-                },
-
-                remark: {
-                    stringValue:
-                        remarkValue
-                },
-
-                coordinatorName: {
-                    stringValue:
-                        coordinatorName
-                },
-
-                coordinatorMobile: {
-                    stringValue:
-                        coordinatorMobile
-                },
-
-                status: {
-                    stringValue:
-                        "new"
-                },
-
-                telecallerStatus: {
-                    stringValue:
-                        "pending"
-                },
-
-                telecallerRemark: {
-                    stringValue:
-                        ""
-                },
-
-                followUpDate: {
-                    stringValue:
-                        ""
-                },
-
-                createdAt: {
-                    timestampValue:
-                        new Date().toISOString()
-                },
-
-                updatedAt: {
-                    timestampValue:
-                        new Date().toISOString()
-                }
-
-            }
-
-        };
-
-
-        console.log(
-            "Sending Firestore REST request..."
+    const alert =
+        document.getElementById(
+            "alert"
         );
 
 
-        try{
+    alert.textContent =
+        message;
 
-            /* -----------------------------------------
-               DIRECT FIRESTORE CREATE
-            ----------------------------------------- */
 
-            const response =
-                await fetchWithTimeout(
+    alert.className =
+        "alert show " +
+        type;
 
-                    FIRESTORE_URL +
-                    "?key=" +
-                    encodeURIComponent(
-                        FIREBASE_API_KEY
-                    ),
 
-                    {
-
-                        method:"POST",
-
-                        headers:{
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify(
-                                firestoreDocument
-                            )
-
-                    },
-
-                    12000
-
-                );
-
-
-            /* -----------------------------------------
-               ERROR
-            ----------------------------------------- */
-
-            if(!response.ok){
-
-                const errorText =
-                    await getErrorMessage(
-                        response
-                    );
-
-                console.error(
-                    "Firestore error:",
-                    response.status,
-                    errorText
-                );
-
-
-                throw new Error(
-                    "Firestore Error (" +
-                    response.status +
-                    "): " +
-                    errorText
-                );
-
-            }
-
-
-            /* -----------------------------------------
-               SUCCESS
-            ----------------------------------------- */
-
-            const result =
-                await response.json();
-
-            console.log(
-                "INQUIRY SAVED SUCCESSFULLY:",
-                result
-            );
-
-
-            let savedId =
-                "";
-
-            if(result.name){
-
-                savedId =
-                    result.name
-                    .split("/")
-                    .pop();
-
-            }
-
-
-            showMessage(
-                "success",
-                "✅ Inquiry Sent Successfully!\n\n" +
-                "Student inquiry Telecaller ko successfully bhej di gayi hai." +
-                (
-                    savedId
-                    ? "\n\nInquiry ID: " + savedId
-                    : ""
-                )
-            );
-
-
-            /* -----------------------------------------
-               RESET
-            ----------------------------------------- */
-
-            form.reset();
-
-            source.value =
-                "Walk-in";
-
-
-            /* -----------------------------------------
-               REFRESH RECENT
-            ----------------------------------------- */
-
-            loadRecentInquiries();
-
-
-        }catch(error){
-
-            console.error(
-                "SEND INQUIRY FAILED:",
-                error
-            );
-
-
-            let message =
-                error.message ||
-                "Unknown error";
-
-
-            if(
-                error.name ===
-                "AbortError"
-            ){
-
-                message =
-                    "Request timeout ho gaya.\n\n" +
-                    "Firestore server tak request nahi pahunch pa rahi hai. " +
-                    "Internet connection aur Firestore Rules check karein.";
-
-            }
-
-
-            showMessage(
-                "error",
-                "❌ Inquiry Send Failed\n\n" +
-                message
-            );
-
-
-        }finally{
-
-            /* -----------------------------------------
-               IMPORTANT:
-               BUTTON NEVER STAYS LOADING
-            ----------------------------------------- */
-
-            sendBtn.disabled =
-                false;
-
-            sendBtn.innerHTML =
-                "📤 Send Inquiry";
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   LOAD RECENT INQUIRIES
-===================================================== */
-
-async function loadRecentInquiries(){
-
-    recentList.innerHTML = `
-        <div class="empty">
-            <div class="empty-icon">⏳</div>
-            Loading inquiries...
-        </div>
-    `;
-
-
-    try{
-
-        const response =
-            await fetchWithTimeout(
-
-                FIRESTORE_URL +
-                "?key=" +
-                encodeURIComponent(
-                    FIREBASE_API_KEY
-                ),
-
-                {
-                    method:"GET"
-                },
-
-                12000
-
-            );
-
-
-        if(!response.ok){
-
-            const errorText =
-                await getErrorMessage(
-                    response
-                );
-
-            throw new Error(
-                "Firestore Error (" +
-                response.status +
-                "): " +
-                errorText
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        const documents =
-            data.documents || [];
-
-
-        /* -----------------------------------------
-           Convert Firestore REST format
-        ----------------------------------------- */
-
-        const inquiries =
-            documents
-            .map(
-                function(doc){
-
-                    const fields =
-                        doc.fields || {};
-
-                    return {
-
-                        id:
-                            doc.name
-                            ? doc.name
-                              .split("/")
-                              .pop()
-                            : "",
-
-                        studentName:
-                            fields.studentName
-                            ?.stringValue || "",
-
-                        mobile:
-                            fields.mobile
-                            ?.stringValue || "",
-
-                        course:
-                            fields.course
-                            ?.stringValue || "",
-
-                        source:
-                            fields.source
-                            ?.stringValue || "",
-
-                        remark:
-                            fields.remark
-                            ?.stringValue || "",
-
-                        coordinatorName:
-                            fields.coordinatorName
-                            ?.stringValue || "",
-
-                        coordinatorMobile:
-                            fields.coordinatorMobile
-                            ?.stringValue || "",
-
-                        status:
-                            fields.status
-                            ?.stringValue || "new",
-
-                        telecallerStatus:
-                            fields.telecallerStatus
-                            ?.stringValue || "pending",
-
-                        createdAt:
-                            fields.createdAt
-                            ?.timestampValue || ""
-
-                    };
-
-                }
-            );
-
-
-        /* -----------------------------------------
-           Only THIS coordinator
-        ----------------------------------------- */
-
-        const mine =
-            inquiries.filter(
-                function(item){
-
-                    return (
-                        item.coordinatorMobile ===
-                        coordinatorMobile
-                    );
-
-                }
-            );
-
-
-        /* -----------------------------------------
-           Newest first
-        ----------------------------------------- */
-
-        mine.sort(
-            function(a,b){
-
-                return (
-                    new Date(b.createdAt || 0) -
-                    new Date(a.createdAt || 0)
-                );
-
-            }
-        );
-
-
-        /* -----------------------------------------
-           Stats
-        ----------------------------------------- */
-
-        totalCount.textContent =
-            mine.length;
-
-
-        const today =
-            new Date();
-
-        const todayStart =
-            new Date(
-                today.getFullYear(),
-                today.getMonth(),
-                today.getDate()
-            );
-
-
-        let todayTotal =
-            0;
-
-        let convertedTotal =
-            0;
-
-
-        mine.forEach(
-            function(item){
-
-                const date =
-                    new Date(
-                        item.createdAt || 0
-                    );
-
-
-                if(
-                    date >= todayStart
-                ){
-
-                    todayTotal++;
-
-                }
-
-
-                if(
-                    item.status === "converted" ||
-                    item.telecallerStatus === "converted"
-                ){
-
-                    convertedTotal++;
-
-                }
-
-            }
-        );
-
-
-        todayCount.textContent =
-            todayTotal;
-
-        convertedCount.textContent =
-            convertedTotal;
-
-
-        /* -----------------------------------------
-           EMPTY
-        ----------------------------------------- */
-
-        if(mine.length === 0){
-
-            recentList.innerHTML = `
-                <div class="empty">
-
-                    <div class="empty-icon">
-                        📭
-                    </div>
-
-                    No inquiries sent yet.
-
-                </div>
-            `;
-
-            return;
-
-        }
-
-
-        /* -----------------------------------------
-           RENDER
-        ----------------------------------------- */
-
-        recentList.innerHTML =
-            mine
-            .slice(0,30)
-            .map(
-                function(item){
-
-                    return `
-                        <div class="inquiry">
-
-                            <div class="inquiry-top">
-
-                                <div>
-
-                                    <div class="inquiry-name">
-                                        ${escapeHTML(
-                                            item.studentName
-                                        )}
-                                    </div>
-
-                                    <div class="inquiry-course">
-                                        ${escapeHTML(
-                                            item.course
-                                        )}
-                                    </div>
-
-                                </div>
-
-                                <span class="badge ${badgeClass(
-                                    item.telecallerStatus
-                                )}">
-                                    ${formatStatus(
-                                        item.telecallerStatus
-                                    )}
-                                </span>
-
-                            </div>
-
-
-                            <div class="inquiry-meta">
-
-                                <span>
-                                    📱
-                                    ${escapeHTML(
-                                        item.mobile
-                                    )}
-                                </span>
-
-                                <span>•</span>
-
-                                <span>
-                                    ${formatTime(
-                                        item.createdAt
-                                    )}
-                                </span>
-
-                            </div>
-
-                        </div>
-                    `;
-
-                }
-            )
-            .join("");
-
-
-    }catch(error){
-
-        console.error(
-            "LOAD INQUIRIES ERROR:",
-            error
-        );
-
-
-        recentList.innerHTML = `
-            <div class="empty">
-
-                <div class="empty-icon">
-                    ⚠️
-                </div>
-
-                <strong>
-                    Unable to load inquiries
-                </strong>
-
-                <p style="margin-top:8px;font-size:12px;">
-                    ${escapeHTML(
-                        error.message
-                    )}
-                </p>
-
-            </div>
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-function formatStatus(status){
-
-    const map = {
-
-        new:"New",
-
-        pending:"Pending",
-
-        contacted:"Contacted",
-
-        "follow-up":"Follow-up",
-
-        converted:"Converted",
-
-        "not-interested":
-            "Not Interested"
-
-    };
-
-    return (
-        map[status] ||
-        status ||
-        "Pending"
+    setTimeout(
+        ()=>{
+            alert.className =
+                "alert";
+        },
+        3500
     );
 
 }
 
 
-function badgeClass(status){
+/* =========================================================
+   CURRENCY FORMAT
+========================================================= */
 
-    if(status === "new")
-        return "new";
+function formatRupee(
+    number
+){
 
-    if(status === "contacted")
-        return "contacted";
+    return new Intl.NumberFormat(
+        "en-IN",
+        {
+            style:"currency",
+            currency:"INR",
+            maximumFractionDigits:0
+        }
+    ).format(
+        Number(number) || 0
+    );
 
-    if(status === "converted")
-        return "converted";
+}
 
-    if(status === "not-interested")
-        return "not-interested";
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHtml(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   FIRESTORE VALUE CONVERTER
+========================================================= */
+
+function toFirestoreValue(
+    value
+){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return {
+            nullValue:null
+        };
+
+    }
+
+
+    if(
+        typeof value === "number"
+    ){
+
+        return {
+            integerValue:
+                String(value)
+        };
+
+    }
+
+
+    if(
+        typeof value === "boolean"
+    ){
+
+        return {
+            booleanValue:value
+        };
+
+    }
+
+
+    return {
+        stringValue:
+            String(value)
+    };
+
+}
+
+
+/* =========================================================
+   FIRESTORE DOCUMENT CONVERTER
+========================================================= */
+
+function documentToObject(
+    doc
+){
+
+    const fields =
+        doc.fields || {};
+
+
+    const obj = {
+
+        id:doc.name
+            ? doc.name
+                .split("/")
+                .pop()
+            : ""
+
+    };
+
+
+    Object.keys(fields)
+        .forEach(
+            key=>{
+
+                const field =
+                    fields[key];
+
+
+                if(
+                    field.stringValue !==
+                    undefined
+                ){
+
+                    obj[key] =
+                        field.stringValue;
+
+                }
+
+                else if(
+                    field.integerValue !==
+                    undefined
+                ){
+
+                    obj[key] =
+                        Number(
+                            field.integerValue
+                        );
+
+                }
+
+                else if(
+                    field.booleanValue !==
+                    undefined
+                ){
+
+                    obj[key] =
+                        field.booleanValue;
+
+                }
+
+                else if(
+                    field.timestampValue !==
+                    undefined
+                ){
+
+                    obj[key] =
+                        field.timestampValue;
+
+                }
+
+                else if(
+                    field.nullValue !==
+                    undefined
+                ){
+
+                    obj[key] =
+                        null;
+
+                }
+
+            }
+        );
+
+
+    return obj;
+
+}
+
+
+/* =========================================================
+   LOAD PAYMENT SETTINGS FROM ADMIN
+========================================================= */
+
+async function loadPaymentSettings(){
+
+    const statusBox =
+        document.getElementById(
+            "settingsStatus"
+        );
+
+
+    try{
+
+        const response =
+            await fetch(
+                PAYMENT_SETTINGS_URL +
+                "?key=" +
+                FIREBASE_API_KEY
+            );
+
+
+        if(
+            !response.ok
+        ){
+
+            statusBox.textContent =
+                "Admin payment settings not found. Default values are being used.";
+
+            statusBox.style.background =
+                "#fff8e6";
+
+            statusBox.style.color =
+                "#a16207";
+
+            updatePaymentLabels();
+
+            calculateDashboard();
+
+            return;
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const settings =
+            documentToObject(
+                data
+            );
+
+
+        if(
+            Number.isFinite(
+                Number(
+                    settings.baseSalary
+                )
+            )
+            &&
+            Number(
+                settings.baseSalary
+            ) >= 0
+        ){
+
+            BASE_SALARY =
+                Number(
+                    settings.baseSalary
+                );
+
+        }
+
+
+        if(
+            Number.isFinite(
+                Number(
+                    settings.visitIncentive
+                )
+            )
+            &&
+            Number(
+                settings.visitIncentive
+            ) >= 0
+        ){
+
+            VISIT_INCENTIVE =
+                Number(
+                    settings.visitIncentive
+                );
+
+        }
+
+
+        if(
+            Number.isFinite(
+                Number(
+                    settings.admissionIncentive
+                )
+            )
+            &&
+            Number(
+                settings.admissionIncentive
+            ) >= 0
+        ){
+
+            ADMISSION_INCENTIVE =
+                Number(
+                    settings.admissionIncentive
+                );
+
+        }
+
+
+        updatePaymentLabels();
+
+        calculateDashboard();
+
+
+        statusBox.textContent =
+            "✓ Payment settings loaded from Admin Panel.";
+
+        statusBox.style.background =
+            "#eaf8ef";
+
+        statusBox.style.color =
+            "#16803d";
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Payment settings error:",
+            error
+        );
+
+
+        statusBox.textContent =
+            "Unable to load Admin payment settings. Default values are being used.";
+
+        statusBox.style.background =
+            "#fff0f0";
+
+        statusBox.style.color =
+            "#c62828";
+
+
+        updatePaymentLabels();
+
+        calculateDashboard();
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE PAYMENT UI
+========================================================= */
+
+function updatePaymentLabels(){
+
+    document
+        .getElementById(
+            "baseSalary"
+        )
+        .textContent =
+        formatRupee(
+            BASE_SALARY
+        );
+
+
+    document
+        .getElementById(
+            "ruleVisitAmount"
+        )
+        .textContent =
+        formatRupee(
+            VISIT_INCENTIVE
+        );
+
+
+    document
+        .getElementById(
+            "ruleAdmissionAmount"
+        )
+        .textContent =
+        formatRupee(
+            ADMISSION_INCENTIVE
+        );
+
+}
+
+
+/* =========================================================
+   LOAD INQUIRIES
+========================================================= */
+
+async function loadInquiries(){
+
+    try{
+
+        const response =
+            await fetch(
+                INQUIRY_URL +
+                "?key=" +
+                FIREBASE_API_KEY
+            );
+
+
+        if(
+            !response.ok
+        ){
+
+            const errorText =
+                await response.text();
+
+            console.error(
+                errorText
+            );
+
+            throw new Error(
+                "Unable to load inquiries"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        inquiries =
+            (data.documents || [])
+            .map(
+                documentToObject
+            )
+            .filter(
+                item=>{
+
+                    const itemMobile =
+                        String(
+                            item.coordinatorMobile ||
+                            ""
+                        )
+                        .replace(
+                            /\D/g,
+                            ""
+                        );
+
+
+                    const currentMobile =
+                        String(
+                            coordinatorMobile
+                        )
+                        .replace(
+                            /\D/g,
+                            ""
+                        );
+
+
+                    return (
+                        itemMobile ===
+                        currentMobile
+                    );
+
+                }
+            );
+
+
+        inquiries.sort(
+            (a,b)=>
+                new Date(
+                    b.createdAt || 0
+                ) -
+                new Date(
+                    a.createdAt || 0
+                )
+        );
+
+
+        renderInquiries();
+
+        calculateDashboard();
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        document
+            .getElementById(
+                "inquiryList"
+            )
+            .innerHTML = `
+
+                <div class="empty">
+
+                    Unable to load inquiries.
+
+                    <br><br>
+
+                    Please check your Firestore connection and rules.
+
+                </div>
+
+            `;
+
+
+        showAlert(
+            "Unable to load inquiry data.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SUBMIT NEW INQUIRY
+========================================================= */
+
+document
+    .getElementById(
+        "inquiryForm"
+    )
+    .addEventListener(
+        "submit",
+        async function(event){
+
+            event.preventDefault();
+
+
+            const studentName =
+                document
+                    .getElementById(
+                        "studentName"
+                    )
+                    .value
+                    .trim();
+
+
+            const mobile =
+                document
+                    .getElementById(
+                        "mobile"
+                    )
+                    .value
+                    .replace(
+                        /\D/g,
+                        ""
+                    );
+
+
+            const course =
+                document
+                    .getElementById(
+                        "course"
+                    )
+                    .value;
+
+
+            const source =
+                document
+                    .getElementById(
+                        "source"
+                    )
+                    .value;
+
+
+            const remark =
+                document
+                    .getElementById(
+                        "remark"
+                    )
+                    .value
+                    .trim();
+
+
+            if(
+                !studentName
+            ){
+
+                showAlert(
+                    "Please enter the student name.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !/^[0-9]{10}$/.test(
+                    mobile
+                )
+            ){
+
+                showAlert(
+                    "Please enter a valid 10-digit mobile number.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !course
+            ){
+
+                showAlert(
+                    "Please select a course.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Prevent duplicate mobile
+             */
+
+            const duplicate =
+                inquiries.some(
+                    item=>{
+
+                        const existing =
+                            String(
+                                item.mobile ||
+                                ""
+                            )
+                            .replace(
+                                /\D/g,
+                                ""
+                            );
+
+
+                        return (
+                            existing ===
+                            mobile
+                        );
+
+                    }
+                );
+
+
+            if(
+                duplicate
+            ){
+
+                showAlert(
+                    "This mobile number already exists in your inquiry list.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const submitBtn =
+                document.getElementById(
+                    "submitBtn"
+                );
+
+
+            submitBtn.disabled =
+                true;
+
+            submitBtn.textContent =
+                "Saving...";
+
+
+            const now =
+                new Date()
+                    .toISOString();
+
+
+            const fields = {
+
+                studentName:
+                    toFirestoreValue(
+                        studentName
+                    ),
+
+                mobile:
+                    toFirestoreValue(
+                        mobile
+                    ),
+
+                course:
+                    toFirestoreValue(
+                        course
+                    ),
+
+                source:
+                    toFirestoreValue(
+                        source
+                    ),
+
+                remark:
+                    toFirestoreValue(
+                        remark
+                    ),
+
+                coordinatorName:
+                    toFirestoreValue(
+                        coordinatorName
+                    ),
+
+                coordinatorMobile:
+                    toFirestoreValue(
+                        coordinatorMobile
+                    ),
+
+                status:
+                    toFirestoreValue(
+                        "new"
+                    ),
+
+                telecallerStatus:
+                    toFirestoreValue(
+                        "pending"
+                    ),
+
+                telecallerRemark:
+                    toFirestoreValue(
+                        ""
+                    ),
+
+                followUpDate:
+                    toFirestoreValue(
+                        ""
+                    ),
+
+                createdAt:
+                    toFirestoreValue(
+                        now
+                    ),
+
+                updatedAt:
+                    toFirestoreValue(
+                        now
+                    )
+
+            };
+
+
+            try{
+
+                const response =
+                    await fetch(
+                        INQUIRY_URL +
+                        "?key=" +
+                        FIREBASE_API_KEY,
+                        {
+
+                            method:
+                                "POST",
+
+                            headers:{
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    fields
+                                })
+
+                        }
+                    );
+
+
+                if(
+                    !response.ok
+                ){
+
+                    const errorText =
+                        await response.text();
+
+                    console.error(
+                        errorText
+                    );
+
+                    throw new Error(
+                        "Save failed"
+                    );
+
+                }
+
+
+                showAlert(
+                    "Student inquiry submitted successfully.",
+                    "success"
+                );
+
+
+                document
+                    .getElementById(
+                        "inquiryForm"
+                    )
+                    .reset();
+
+
+                await loadInquiries();
+
+            }
+
+            catch(error){
+
+                console.error(
+                    error
+                );
+
+                showAlert(
+                    "Unable to save inquiry. Please check Firestore rules.",
+                    "error"
+                );
+
+            }
+
+            finally{
+
+                submitBtn.disabled =
+                    false;
+
+                submitBtn.textContent =
+                    "Send Inquiry";
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   CURRENT MONTH CHECK
+========================================================= */
+
+function isCurrentMonth(
+    dateString
+){
+
+    if(
+        !dateString
+    ){
+
+        return false;
+
+    }
+
+
+    const date =
+        new Date(
+            dateString
+        );
+
+
+    const now =
+        new Date();
+
+
+    return (
+
+        date.getFullYear() ===
+        now.getFullYear()
+
+        &&
+
+        date.getMonth() ===
+        now.getMonth()
+
+    );
+
+}
+
+
+/* =========================================================
+   UNIQUE MOBILE SET
+========================================================= */
+
+function uniqueMobileSet(
+    list
+){
+
+    const set =
+        new Set();
+
+
+    list.forEach(
+        item=>{
+
+            const mobile =
+                String(
+                    item.mobile ||
+                    ""
+                )
+                .replace(
+                    /\D/g,
+                    ""
+                );
+
+
+            if(
+                /^[0-9]{10}$/.test(
+                    mobile
+                )
+            ){
+
+                set.add(
+                    mobile
+                );
+
+            }
+
+        }
+    );
+
+
+    return set;
+
+}
+
+
+/* =========================================================
+   GET CURRENT STATUS
+========================================================= */
+
+function getStatus(
+    item
+){
+
+    return String(
+        item.status ||
+        item.telecallerStatus ||
+        "new"
+    )
+    .toLowerCase()
+    .trim();
+
+}
+
+
+/* =========================================================
+   PAYMENT CALCULATION
+========================================================= */
+
+function calculatePayment(){
+
+    const currentMonth =
+        inquiries.filter(
+            item =>
+                isCurrentMonth(
+                    item.createdAt
+                )
+        );
+
+
+    /*
+     * Visit incentive
+     */
+
+    const visited =
+        currentMonth.filter(
+            item =>
+                getStatus(item) ===
+                "visited"
+        );
+
+
+    /*
+     * Admission incentive
+     */
+
+    const converted =
+        currentMonth.filter(
+            item =>
+                getStatus(item) ===
+                "converted"
+        );
+
+
+    /*
+     * Remove duplicate numbers
+     */
+
+    const visitedSet =
+        uniqueMobileSet(
+            visited
+        );
+
+
+    const convertedSet =
+        uniqueMobileSet(
+            converted
+        );
+
+
+    const visitedCount =
+        visitedSet.size;
+
+
+    const convertedCount =
+        convertedSet.size;
+
+
+    /*
+     * Admin controlled rates
+     */
+
+    const visitAmount =
+        visitedCount *
+        VISIT_INCENTIVE;
+
+
+    const admissionAmount =
+        convertedCount *
+        ADMISSION_INCENTIVE;
+
+
+    const total =
+        BASE_SALARY +
+        visitAmount +
+        admissionAmount;
+
+
+    /*
+     * Update UI
+     */
+
+    document
+        .getElementById(
+            "baseSalary"
+        )
+        .textContent =
+        formatRupee(
+            BASE_SALARY
+        );
+
+
+    document
+        .getElementById(
+            "visitIncentive"
+        )
+        .textContent =
+        formatRupee(
+            visitAmount
+        );
+
+
+    document
+        .getElementById(
+            "admissionIncentive"
+        )
+        .textContent =
+        formatRupee(
+            admissionAmount
+        );
+
+
+    document
+        .getElementById(
+            "visitText"
+        )
+        .textContent =
+        visitedCount +
+        " × " +
+        formatRupee(
+            VISIT_INCENTIVE
+        );
+
+
+    document
+        .getElementById(
+            "admissionText"
+        )
+        .textContent =
+        convertedCount +
+        " × " +
+        formatRupee(
+            ADMISSION_INCENTIVE
+        );
+
+
+    document
+        .getElementById(
+            "totalPayable"
+        )
+        .textContent =
+        formatRupee(
+            total
+        );
+
+
+    document
+        .getElementById(
+            "quickPayable"
+        )
+        .textContent =
+        formatRupee(
+            total
+        );
+
+
+    document
+        .getElementById(
+            "visitedCount"
+        )
+        .textContent =
+        visitedCount;
+
+
+    document
+        .getElementById(
+            "convertedCount"
+        )
+        .textContent =
+        convertedCount;
+
+}
+
+
+/* =========================================================
+   DASHBOARD CALCULATION
+========================================================= */
+
+function calculateDashboard(){
+
+    document
+        .getElementById(
+            "totalInquiries"
+        )
+        .textContent =
+        inquiries.length;
+
+
+    calculatePayment();
+
+}
+
+
+/* =========================================================
+   STATUS LABEL
+========================================================= */
+
+function statusLabel(
+    status
+){
+
+    const labels = {
+
+        new:"New",
+
+        contacted:"Contacted",
+
+        interested:"Interested",
+
+        visited:"Visited",
+
+        converted:"Converted",
+
+        closed:"Closed",
+
+        pending:"Pending",
+
+        "follow-up":"Follow-up"
+
+    };
+
+
+    return (
+        labels[status] ||
+        status
+            .charAt(0)
+            .toUpperCase() +
+        status.slice(1)
+    );
+
+}
+
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
+
+function statusClass(
+    status
+){
+
+    if(
+        status ===
+        "converted"
+    ){
+
+        return "badge-converted";
+
+    }
+
+
+    if(
+        status ===
+        "visited"
+    ){
+
+        return "badge-visited";
+
+    }
+
+
+    if(
+        status ===
+        "follow-up"
+        ||
+        status ===
+        "interested"
+    ){
+
+        return "badge-follow";
+
+    }
+
+
+    if(
+        status ===
+        "new"
+    ){
+
+        return "badge-new";
+
+    }
+
 
     return "";
 
 }
 
 
-/* =====================================================
-   TIME
-===================================================== */
+/* =========================================================
+   RENDER INQUIRIES
+========================================================= */
 
-function formatTime(value){
+window.renderInquiries =
+function(){
 
-    if(!value){
+    const list =
+        document.getElementById(
+            "inquiryList"
+        );
 
-        return "Just now";
 
-    }
+    const search =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .trim()
+            .toLowerCase();
 
 
-    const date =
-        new Date(value);
+    const filter =
+        document
+            .getElementById(
+                "statusFilter"
+            )
+            .value;
+
+
+    const data =
+        inquiries.filter(
+            item=>{
+
+                const name =
+                    String(
+                        item.studentName ||
+                        ""
+                    )
+                    .toLowerCase();
+
+
+                const mobile =
+                    String(
+                        item.mobile ||
+                        ""
+                    );
+
+
+                const status =
+                    getStatus(
+                        item
+                    );
+
+
+                const searchMatch =
+                    !search
+                    ||
+                    name.includes(
+                        search
+                    )
+                    ||
+                    mobile.includes(
+                        search
+                    );
+
+
+                const statusMatch =
+                    filter === "all"
+                    ||
+                    status === filter;
+
+
+                return (
+                    searchMatch &&
+                    statusMatch
+                );
+
+            }
+        );
+
 
     if(
-        isNaN(date.getTime())
+        !data.length
     ){
 
-        return "Recently";
+        list.innerHTML = `
+
+            <div class="empty">
+                No inquiries found.
+            </div>
+
+        `;
+
+        return;
 
     }
 
 
-    const now =
-        new Date();
+    list.innerHTML =
+        data.map(
+            item=>{
 
-    const diff =
-        Math.floor(
-            (now - date) / 1000
+                const status =
+                    getStatus(
+                        item
+                    );
+
+
+                const created =
+                    item.createdAt
+                    ?
+                    new Date(
+                        item.createdAt
+                    )
+                    .toLocaleString(
+                        "en-IN",
+                        {
+                            day:"2-digit",
+                            month:"short",
+                            year:"numeric",
+                            hour:"2-digit",
+                            minute:"2-digit"
+                        }
+                    )
+                    :
+                    "—";
+
+
+                const mobile =
+                    String(
+                        item.mobile ||
+                        ""
+                    )
+                    .replace(
+                        /\D/g,
+                        ""
+                    );
+
+
+                return `
+
+                    <div class="inquiry">
+
+                        <div class="inquiry-top">
+
+                            <div>
+
+                                <div class="student-name">
+
+                                    ${escapeHtml(
+                                        item.studentName
+                                    )}
+
+                                </div>
+
+                                <div class="mobile">
+
+                                    📱
+                                    ${escapeHtml(
+                                        mobile
+                                    )}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="inquiry-meta">
+
+                            <span class="badge">
+
+                                ${escapeHtml(
+                                    item.course ||
+                                    "—"
+                                )}
+
+                            </span>
+
+
+                            <span class="badge">
+
+                                ${escapeHtml(
+                                    item.source ||
+                                    "Direct"
+                                )}
+
+                            </span>
+
+
+                            <span class="badge ${
+                                statusClass(
+                                    status
+                                )
+                            }">
+
+                                ${statusLabel(
+                                    status
+                                )}
+
+                            </span>
+
+                        </div>
+
+
+                        ${
+                            item.remark
+                            ?
+                            `
+
+                            <div style="
+                                margin-top:10px;
+                                font-size:11px;
+                                color:#707a8c;
+                            ">
+
+                                ${escapeHtml(
+                                    item.remark
+                                )}
+
+                            </div>
+
+                            `
+                            :
+                            ""
+                        }
+
+
+                        ${
+                            item.telecallerRemark
+                            ?
+                            `
+
+                            <div style="
+                                margin-top:8px;
+                                padding:9px;
+                                background:#f7f8fa;
+                                border-radius:8px;
+                                font-size:11px;
+                                color:#677185;
+                            ">
+
+                                <strong>
+                                    Telecaller:
+                                </strong>
+
+                                ${escapeHtml(
+                                    item.telecallerRemark
+                                )}
+
+                            </div>
+
+                            `
+                            :
+                            ""
+                        }
+
+
+                        <div class="inquiry-bottom">
+
+                            <div class="inquiry-date">
+
+                                Added:
+                                ${created}
+
+                            </div>
+
+
+                            <div class="actions">
+
+                                <a
+                                    class="action"
+                                    href="tel:${mobile}"
+                                >
+                                    📞 Call
+                                </a>
+
+
+                                <a
+                                    class="action"
+                                    href="https://wa.me/91${mobile}"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    💬 WhatsApp
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+};
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+window.toggleSidebar =
+function(){
+
+    document
+        .getElementById(
+            "sidebar"
+        )
+        .classList.toggle(
+            "open"
         );
 
-
-    if(diff < 60){
-
-        return "Just now";
-
-    }
+};
 
 
-    if(diff < 3600){
+/* =========================================================
+   LOGOUT
+========================================================= */
 
-        return (
-            Math.floor(
-                diff / 60
-            ) +
-            " min ago"
-        );
+window.logout =
+function(){
 
-    }
-
-
-    if(diff < 86400){
-
-        return (
-            Math.floor(
-                diff / 3600
-            ) +
-            " hr ago"
-        );
-
-    }
-
-
-    return date.toLocaleDateString(
-        "en-IN",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric"
-        }
+    sessionStorage.removeItem(
+        "bt_logged_in"
     );
 
-}
+    sessionStorage.removeItem(
+        "bt_user_name"
+    );
+
+    sessionStorage.removeItem(
+        "bt_user_mobile"
+    );
+
+    sessionStorage.removeItem(
+        "bt_user_role"
+    );
+
+    sessionStorage.removeItem(
+        "bt_login_time"
+    );
 
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
+    window.location.href =
+        "index.html";
 
-function escapeHTML(value){
-
-    return String(value || "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
+};
 
 
-/* =====================================================
-   MOBILE MENU
-===================================================== */
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-const menuBtn =
-    document.getElementById("menuBtn");
+loadPaymentSettings();
 
-const sidebar =
-    document.getElementById("sidebar");
-
-const overlay =
-    document.getElementById("overlay");
+loadInquiries();
 
 
-menuBtn.addEventListener(
-    "click",
-    function(){
+/*
+ * Check Admin payment settings every minute.
+ * This allows updated rates to appear
+ * without editing the Coordinator code.
+ */
 
-        sidebar.classList.add("open");
-
-        overlay.classList.add("open");
-
-    }
-);
-
-
-overlay.addEventListener(
-    "click",
-    function(){
-
-        sidebar.classList.remove("open");
-
-        overlay.classList.remove("open");
-
-    }
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-loadRecentInquiries();
-
-console.log(
-    "BlackTerminal Coordinator started."
-);
-
-console.log(
-    "Coordinator:",
-    coordinatorName
-);
-
-console.log(
-    "Mobile:",
-    coordinatorMobile
+setInterval(
+    loadPaymentSettings,
+    60000
 );
 
 </script>

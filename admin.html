@@ -2,40 +2,50 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#071426">
-<title>BlackTerminal | Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlackTerminal Admin Dashboard</title>
 
 <style>
 :root{
   --navy:#071426;
-  --navy2:#0c203b;
+  --navy2:#0c1d35;
   --blue:#086ee1;
   --blue2:#18a0ff;
   --bg:#f4f7fb;
   --white:#fff;
   --text:#172236;
-  --muted:#78869a;
+  --muted:#738096;
   --line:#e3e9f1;
-  --green:#219653;
-  --orange:#e88a19;
-  --red:#d63d3d;
-  --purple:#7357c8;
-  --shadow:0 10px 30px rgba(22,44,76,.07);
-  --shadow2:0 20px 55px rgba(22,44,76,.15);
+  --green:#16a34a;
+  --greenbg:#eaf8ef;
+  --orange:#f59e0b;
+  --orangebg:#fff7df;
+  --red:#dc2626;
+  --redbg:#fff0f0;
+  --purple:#7c3aed;
+  --purplebg:#f2edff;
+  --shadow:0 10px 30px rgba(15,35,65,.07);
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
-  min-height:100vh;
+  font-family:Inter,Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
-button,input,select{font-family:inherit}
-button{cursor:pointer}
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
 
 .sidebar{
   position:fixed;
@@ -43,145 +53,78 @@ button{cursor:pointer}
   top:0;
   bottom:0;
   width:255px;
-  background:linear-gradient(180deg,#071426,#0a1c34);
+  background:linear-gradient(180deg,#061325,#0a1c34);
   color:#fff;
   z-index:1000;
-  display:flex;
-  flex-direction:column;
-  transition:.3s ease;
-}
-
-.brand{
-  height:78px;
-  display:flex;
-  align-items:center;
-  padding:0 23px;
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.brand-logo{
-  width:43px;
-  height:43px;
-  border-radius:13px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,#086ee1,#18a0ff);
-  font-weight:900;
-  margin-right:12px;
-}
-
-.brand-text strong{
-  display:block;
-  font-size:17px;
-}
-
-.brand-text span{
-  display:block;
-  color:#8ea0ba;
-  font-size:11px;
-  margin-top:2px;
-}
-
-.sidebar-menu{
-  padding:20px 13px;
-  flex:1;
   overflow-y:auto;
 }
 
-.menu-label{
-  color:#687c98;
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:1.2px;
-  padding:0 12px;
-  margin-bottom:9px;
-}
-
-.menu-item{
-  width:100%;
-  min-height:47px;
-  border:0;
-  background:transparent;
-  color:#aebbd0;
-  border-radius:11px;
+.logo{
+  height:72px;
   display:flex;
   align-items:center;
   gap:12px;
-  padding:0 13px;
-  margin-bottom:5px;
-  font-size:13px;
-  font-weight:650;
-  text-align:left;
+  padding:0 22px;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.menu-item:hover,
-.menu-item.active{
-  background:rgba(30,120,230,.18);
-  color:#fff;
-}
-
-.menu-icon{
-  width:22px;
-  text-align:center;
+.logoIcon{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  font-weight:900;
   font-size:17px;
 }
 
-.menu-badge{
-  margin-left:auto;
-  min-width:23px;
-  height:23px;
-  padding:0 6px;
-  border-radius:20px;
-  background:#2878df;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:10px;
-  font-weight:800;
-}
-
-.sidebar-bottom{
-  padding:16px;
-  border-top:1px solid rgba(255,255,255,.08);
-}
-
-.admin-card{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:13px;
-  padding:13px;
-}
-
-.admin-user{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.avatar{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#176fe4,#24a0ff);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:850;
-}
-
-.admin-user strong{
+.logoText strong{
   display:block;
+  font-size:17px;
+  letter-spacing:.3px;
+}
+
+.logoText span{
+  font-size:11px;
+  color:#8ea3bd;
+}
+
+.nav{
+  padding:18px 12px;
+}
+
+.navTitle{
+  font-size:10px;
+  color:#667d98;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  padding:12px 12px 8px;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 13px;
+  margin-bottom:4px;
+  border-radius:10px;
+  color:#b8c6d8;
+  text-decoration:none;
   font-size:13px;
+  transition:.2s;
 }
 
-.admin-user span{
-  display:block;
-  color:#8fa1bb;
-  font-size:10px;
-  margin-top:2px;
+.nav a:hover,
+.nav a.active{
+  background:rgba(24,160,255,.13);
+  color:#fff;
+}
+
+.navIcon{
+  width:22px;
+  text-align:center;
+  font-size:16px;
 }
 
 .main{
@@ -190,127 +133,143 @@ button{cursor:pointer}
 }
 
 .topbar{
-  height:74px;
-  position:sticky;
-  top:0;
-  z-index:500;
-  background:rgba(255,255,255,.95);
-  backdrop-filter:blur(15px);
+  height:72px;
+  background:#fff;
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 30px;
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:500;
 }
 
-.top-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.mobile-menu{
-  display:none;
-  width:42px;
-  height:42px;
-  border:0;
-  border-radius:11px;
-  background:#edf3fb;
-  font-size:20px;
-}
-
-.page-title h1{
+.pageTitle{
   font-size:21px;
-  font-weight:850;
+  font-weight:800;
 }
 
-.page-title p{
-  color:#8995a7;
-  font-size:11px;
+.pageSubtitle{
+  font-size:12px;
+  color:var(--muted);
   margin-top:3px;
 }
 
-.top-right{
+.topRight{
   display:flex;
   align-items:center;
-  gap:11px;
+  gap:12px;
 }
 
-.admin-badge{
-  background:#edf3ff;
-  color:#246ac4;
+.live{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:11px;
+  color:var(--green);
+  font-weight:700;
+}
+
+.liveDot{
+  width:8px;
+  height:8px;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 0 4px rgba(22,163,74,.12);
+}
+
+.adminBadge{
+  display:flex;
+  align-items:center;
+  gap:8px;
   padding:8px 12px;
-  border-radius:30px;
-  font-size:10px;
-  font-weight:850;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fff;
+  font-size:12px;
+  font-weight:700;
+}
+
+.adminAvatar{
+  width:31px;
+  height:31px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  color:#fff;
+  font-weight:800;
+}
+
+.menuBtn{
+  display:none;
+  border:0;
+  background:var(--navy);
+  color:#fff;
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  font-size:20px;
 }
 
 .content{
-  padding:27px 30px 50px;
-  max-width:1900px;
-  margin:auto;
+  padding:25px 28px 40px;
 }
 
 .hero{
-  background:linear-gradient(135deg,#071426,#0c2b54 58%,#086ee1);
+  background:
+    radial-gradient(circle at 80% 20%,rgba(24,160,255,.27),transparent 35%),
+    linear-gradient(135deg,#071426,#0d315e);
   color:#fff;
-  border-radius:20px;
-  padding:26px 28px;
+  border-radius:18px;
+  padding:25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
   margin-bottom:22px;
-  position:relative;
   overflow:hidden;
-  box-shadow:0 18px 45px rgba(7,20,38,.14);
 }
 
-.hero:after{
-  content:"";
-  position:absolute;
-  width:280px;
-  height:280px;
-  right:-100px;
-  top:-120px;
-  border-radius:50%;
-  background:rgba(255,255,255,.07);
-}
-
-.hero-content{position:relative;z-index:2}
-
-.hero-small{
-  color:#9fc7ff;
-  font-size:10px;
-  font-weight:850;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:8px;
-}
-
-.hero h2{
-  font-size:25px;
+.hero h1{
+  font-size:27px;
   margin-bottom:7px;
 }
 
 .hero p{
-  color:#b9cbe0;
-  font-size:12px;
-  max-width:720px;
+  color:#b9cce1;
+  font-size:13px;
+  max-width:650px;
   line-height:1.6;
 }
 
-.hero-pills{
+.heroPills{
   display:flex;
-  flex-wrap:wrap;
   gap:8px;
+  flex-wrap:wrap;
   margin-top:16px;
 }
 
-.hero-pill{
+.pill{
   padding:7px 11px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.07);
   border-radius:30px;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.1);
-  color:#e9f3ff;
-  font-size:10px;
-  font-weight:750;
+  font-size:11px;
+  color:#dcecff;
+}
+
+.heroIcon{
+  width:90px;
+  height:90px;
+  border-radius:24px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:43px;
+  flex-shrink:0;
 }
 
 .stats{
@@ -323,1768 +282,1727 @@ button{cursor:pointer}
 .stat{
   background:#fff;
   border:1px solid var(--line);
-  border-radius:16px;
+  border-radius:15px;
   padding:17px;
   box-shadow:var(--shadow);
 }
 
-.stat-top{
+.statTop{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
-.stat-label{
-  color:#7c899d;
-  font-size:10px;
-  font-weight:750;
-}
-
-.stat-icon{
+.statIcon{
   width:35px;
   height:35px;
+  display:grid;
+  place-items:center;
   border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  background:#edf5ff;
+  color:var(--blue);
 }
 
-.i-blue{background:#eaf3ff;color:#176fdc}
-.i-orange{background:#fff3df;color:#d98217}
-.i-purple{background:#f0ecff;color:#6f55bf}
-.i-green{background:#eaf8f0;color:#23824a}
-.i-red{background:#fff0f0;color:#c13b3b}
-
-.stat-value{
-  font-size:26px;
-  font-weight:900;
+.statLabel{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:600;
 }
 
-.stat-sub{
-  color:#9aa5b5;
-  font-size:9px;
-  margin-top:4px;
+.statValue{
+  font-size:25px;
+  font-weight:850;
 }
 
-.section{
+.grid2{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:20px;
+}
+
+.card{
   background:#fff;
   border:1px solid var(--line);
-  border-radius:17px;
+  border-radius:16px;
   box-shadow:var(--shadow);
   margin-bottom:20px;
   overflow:hidden;
 }
 
-.section-head{
+.cardHeader{
   padding:18px 20px;
   border-bottom:1px solid var(--line);
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:12px;
 }
 
-.section-head h3{
-  font-size:16px;
-  font-weight:850;
+.cardTitle{
+  font-size:15px;
+  font-weight:800;
 }
 
-.section-head p{
-  color:#8995a7;
-  font-size:10px;
+.cardSub{
+  font-size:11px;
+  color:var(--muted);
   margin-top:3px;
 }
 
-.count{
-  padding:7px 12px;
-  background:#f2f5f9;
-  color:#6f7d91;
-  border-radius:30px;
-  font-size:10px;
-  font-weight:850;
+.cardBody{
+  padding:20px;
 }
 
-.toolbar{
-  padding:15px 20px;
-  background:#fbfcfe;
-  border-bottom:1px solid var(--line);
-}
-
-.toolbar-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr auto;
+.filters{
+  display:flex;
   gap:9px;
+  flex-wrap:wrap;
 }
 
-.inquiry-grid{
-  grid-template-columns:2fr 1fr 1fr 1fr auto;
+.input,
+.select{
+  border:1px solid var(--line);
+  background:#fff;
+  outline:none;
+  border-radius:9px;
+  padding:10px 11px;
+  font-size:12px;
+  color:var(--text);
+  min-height:39px;
+}
+
+.input:focus,
+.select:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(8,110,225,.08);
 }
 
 .search{
-  position:relative;
+  min-width:230px;
 }
 
-.search span{
-  position:absolute;
-  left:13px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#98a4b5;
-}
-
-.search input,
-.filter{
-  width:100%;
-  height:43px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  outline:none;
-  background:#fff;
-  font-size:11px;
-}
-
-.search input{
-  padding:0 12px 0 38px;
-}
-
-.filter{
-  padding:0 10px;
-  color:#344259;
-}
-
-.search input:focus,
-.filter:focus{
-  border-color:#78a9e7;
-}
-
-.refresh,
-.add-btn{
-  height:43px;
+.btn{
   border:0;
-  border-radius:10px;
-  padding:0 15px;
-  background:#eaf3ff;
-  color:#176acb;
-  font-size:11px;
-  font-weight:850;
-}
-
-.add-btn{
-  background:linear-gradient(135deg,#086ee1,#18a0ff);
-  color:#fff;
-}
-
-.staff-grid{
-  padding:20px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.staff-card{
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:16px;
-  transition:.2s;
-}
-
-.staff-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 12px 30px rgba(22,44,76,.08);
-}
-
-.staff-top{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
-.staff-avatar{
-  width:47px;
-  height:47px;
-  border-radius:14px;
-  display:flex;
+  border-radius:9px;
+  padding:10px 13px;
+  font-size:12px;
+  font-weight:700;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
+  gap:7px;
+}
+
+.btnPrimary{
+  background:var(--blue);
   color:#fff;
-  font-size:13px;
-  font-weight:900;
-  flex:none;
 }
 
-.staff-avatar.admin{background:linear-gradient(135deg,#663cc7,#8b6ce5)}
-.staff-avatar.coordinator{background:linear-gradient(135deg,#0875e1,#35a5ff)}
-.staff-avatar.telecaller{background:linear-gradient(135deg,#1b9b63,#4dc98a)}
-
-.staff-main{
-  min-width:0;
-  flex:1;
+.btnPrimary:hover{
+  background:#075fc4;
 }
 
-.staff-name{
-  font-size:14px;
-  font-weight:850;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+.btnLight{
+  background:#f2f6fb;
+  color:var(--text);
+  border:1px solid var(--line);
 }
 
-.staff-mobile{
-  color:#7d899c;
+.btnGreen{
+  background:var(--green);
+  color:#fff;
+}
+
+.btnRed{
+  background:var(--red);
+  color:#fff;
+}
+
+.btnSmall{
+  padding:7px 9px;
   font-size:10px;
-  margin-top:3px;
 }
 
-.role{
-  display:inline-flex;
-  margin-top:5px;
-  padding:4px 7px;
-  border-radius:6px;
-  font-size:8px;
-  font-weight:850;
-}
-
-.role-admin{background:#f0ecff;color:#6546b4}
-.role-coordinator{background:#edf5ff;color:#216cc1}
-.role-telecaller{background:#eaf8f0;color:#25804b}
-
-.staff-status{
-  padding:5px 8px;
-  border-radius:30px;
-  font-size:8px;
-  font-weight:850;
-}
-
-.active{background:#eaf8f0;color:#21804b}
-.inactive{background:#fff0f0;color:#b04a4a}
-
-.staff-meta{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:15px;
-}
-
-.meta{
-  background:#f8fafc;
-  border-radius:9px;
-  padding:9px;
-}
-
-.meta small{
-  color:#8b96a7;
-  display:block;
-  font-size:8px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.meta strong{
-  color:#35445b;
-  display:block;
-  font-size:11px;
-  margin-top:3px;
-}
-
-.staff-actions{
-  display:flex;
-  gap:6px;
-  margin-top:13px;
-}
-
-.staff-action{
-  flex:1;
-  height:34px;
-  border:0;
-  border-radius:8px;
-  font-size:9px;
-  font-weight:800;
-}
-
-.view-btn{background:#edf3ff;color:#286ed0}
-.toggle-btn{background:#fff4e5;color:#b86c12}
-.delete-btn{background:#fff0f0;color:#c33c3c}
-
-.table-scroll{
-  overflow-x:auto;
+.tableWrap{
+  overflow:auto;
 }
 
 table{
   width:100%;
-  min-width:1250px;
   border-collapse:collapse;
+  min-width:920px;
 }
 
-thead{background:#f8fafc}
-
 th{
-  text-align:left;
-  padding:13px 16px;
-  font-size:9px;
-  color:#8490a2;
-  font-weight:850;
+  background:#f8fafc;
+  color:#6d7c90;
+  font-size:10px;
   text-transform:uppercase;
-  letter-spacing:.7px;
+  letter-spacing:.6px;
+  padding:12px 13px;
+  text-align:left;
   border-bottom:1px solid var(--line);
 }
 
 td{
-  padding:14px 16px;
-  font-size:11px;
-  border-bottom:1px solid #edf0f4;
+  padding:13px;
+  border-bottom:1px solid #edf1f5;
+  font-size:12px;
   vertical-align:middle;
 }
 
-tr:last-child td{border-bottom:0}
-tr:hover{background:#fbfdff}
-
-.student-name{
-  font-size:12px;
-  font-weight:850;
+tr:hover td{
+  background:#fbfdff;
 }
 
-.student-mobile{
-  color:#7d899c;
-  font-size:9px;
-  margin-top:3px;
+.name{
+  font-weight:750;
 }
 
-.course{
-  display:inline-flex;
-  padding:6px 9px;
-  border-radius:7px;
-  background:#edf5ff;
-  color:#256bc3;
-  font-size:9px;
-  font-weight:850;
+.muted{
+  color:var(--muted);
 }
 
-.coord{
-  color:#56647a;
-  font-size:10px;
-  font-weight:650;
-}
-
-.tele{
-  color:#23804c;
-  font-size:10px;
-  font-weight:650;
-}
-
-.date{
-  color:#657287;
-  font-size:10px;
-  white-space:nowrap;
-}
-
-.status{
+.badge{
   display:inline-flex;
   align-items:center;
-  gap:5px;
-  padding:6px 9px;
-  border-radius:30px;
-  font-size:9px;
-  font-weight:850;
-  white-space:nowrap;
-}
-
-.dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-}
-
-.s-new{background:#fff4e5;color:#c76d14}
-.s-new .dot{background:#ed8a20}
-.s-pending{background:#fff5df;color:#986719}
-.s-pending .dot{background:#e3a02c}
-.s-contacted{background:#eaf3ff;color:#2465b1}
-.s-contacted .dot{background:#2878d8}
-.s-follow-up{background:#f1edff;color:#7353b9}
-.s-follow-up .dot{background:#7959c8}
-.s-converted{background:#eaf8f0;color:#237b48}
-.s-converted .dot{background:#31a05d}
-.s-not-interested{background:#fff0f0;color:#a63b3b}
-.s-not-interested .dot{background:#d84c4c}
-
-.actions{
-  display:flex;
-  gap:5px;
-}
-
-.action{
-  width:30px;
-  height:30px;
-  border:0;
-  border-radius:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-}
-
-.call{background:#eaf8f0;color:#25804b}
-.wa{background:#eaf8f0;color:#16834a}
-.view{background:#edf3ff;color:#286ed0}
-.change{background:#fff4e5;color:#b86c12}
-.del{background:#fff0f0;color:#c33c3c}
-
-.loading{
-  padding:55px;
-  text-align:center;
-}
-
-.spinner{
-  width:37px;
-  height:37px;
-  border:4px solid #e3ebf5;
-  border-top-color:#2877df;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-  margin:auto auto 13px;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-.loading p,
-.empty p{
-  color:#8793a5;
-  font-size:11px;
-}
-
-.empty{
-  padding:55px;
-  text-align:center;
-}
-
-.empty-icon{
-  width:60px;
-  height:60px;
-  border-radius:17px;
-  background:#edf3fb;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 14px;
-  font-size:26px;
-}
-
-.empty h3{
-  font-size:15px;
-  margin-bottom:5px;
-}
-
-.error{
-  display:none;
-  margin:14px 20px;
-  padding:12px 14px;
-  border-radius:10px;
-  background:#fff1f1;
-  border:1px solid #ffd2d2;
-  color:#bd3c3c;
-  font-size:10px;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(7,20,38,.55);
-  backdrop-filter:blur(4px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  z-index:2000;
-}
-
-.modal.show{display:flex}
-
-.modal-box{
-  width:100%;
-  max-width:600px;
-  max-height:calc(100vh - 40px);
-  overflow:auto;
-  background:#fff;
+  padding:5px 8px;
   border-radius:20px;
-  box-shadow:var(--shadow2);
-}
-
-.modal-head{
-  padding:19px 21px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-}
-
-.modal-head h3{
-  font-size:17px;
-  font-weight:850;
-}
-
-.modal-head p{
-  color:#8995a7;
   font-size:10px;
-  margin-top:3px;
+  font-weight:750;
 }
 
-.close{
-  width:34px;
-  height:34px;
-  border:0;
-  border-radius:9px;
-  background:#f1f4f8;
-  color:#657288;
-  font-size:18px;
+.badgeNew{
+  color:var(--blue);
+  background:#eaf4ff;
 }
 
-.modal-body{
-  padding:20px 21px;
+.badgePending{
+  color:#9a6700;
+  background:var(--orangebg);
 }
 
-.detail-grid{
+.badgeFollow{
+  color:var(--purple);
+  background:var(--purplebg);
+}
+
+.badgeConverted{
+  color:var(--green);
+  background:var(--greenbg);
+}
+
+.badgeClosed{
+  color:var(--red);
+  background:var(--redbg);
+}
+
+.badgeActive{
+  color:var(--green);
+  background:var(--greenbg);
+}
+
+.badgeInactive{
+  color:var(--red);
+  background:var(--redbg);
+}
+
+.staffGrid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px;
+}
+
+.staffCard{
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:14px;
+  background:#fff;
+}
+
+.staffHead{
+  display:flex;
+  align-items:center;
   gap:11px;
 }
 
-.detail{
-  padding:12px;
-  border-radius:10px;
-  background:#f8fafc;
-}
-
-.detail-label{
-  color:#8a96a8;
-  font-size:8px;
+.staffAvatar{
+  width:43px;
+  height:43px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  color:#fff;
   font-weight:850;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  margin-bottom:5px;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  flex-shrink:0;
 }
 
-.detail-value{
-  color:#26344a;
-  font-size:12px;
+.staffName{
+  font-weight:800;
+  font-size:13px;
+}
+
+.staffRole{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.staffInfo{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:13px;
+}
+
+.infoBox{
+  background:#f7f9fc;
+  padding:9px;
+  border-radius:8px;
+}
+
+.infoLabel{
+  color:var(--muted);
+  font-size:9px;
+  margin-bottom:3px;
+}
+
+.infoValue{
+  font-size:11px;
   font-weight:700;
   word-break:break-word;
 }
 
-.remark{
-  margin-top:12px;
-  padding:12px;
-  border-radius:10px;
-  background:#f8fafc;
-}
-
-.remark p{
-  color:#556278;
-  font-size:11px;
-  line-height:1.6;
-  margin-top:5px;
-}
-
-.modal-actions{
+.staffActions{
   display:flex;
-  gap:8px;
-  margin-top:17px;
+  gap:6px;
+  margin-top:12px;
 }
 
-.modal-btn{
-  flex:1;
-  height:43px;
-  border:0;
-  border-radius:10px;
-  font-size:11px;
+.empty{
+  padding:35px 15px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.loading{
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(2,12,26,.5);
+  z-index:1500;
+}
+
+.overlay.show{
+  display:block;
+}
+
+.drawer{
+  position:fixed;
+  right:0;
+  top:0;
+  bottom:0;
+  width:440px;
+  max-width:95vw;
+  background:#fff;
+  z-index:1600;
+  transform:translateX(110%);
+  transition:.25s;
+  box-shadow:-20px 0 60px rgba(0,0,0,.18);
+  overflow:auto;
+}
+
+.drawer.show{
+  transform:translateX(0);
+}
+
+.drawerHeader{
+  height:70px;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+
+.drawerTitle{
+  font-size:16px;
   font-weight:850;
 }
 
-.green-btn{background:#eaf8f0;color:#247d49}
-.orange-btn{background:#fff4e5;color:#b86c12}
-.blue-btn{background:#edf3ff;color:#286ed0}
-.red-btn{background:#fff0f0;color:#c33c3c}
-
-.status-options{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
+.closeBtn{
+  width:35px;
+  height:35px;
+  border:0;
+  border-radius:9px;
+  background:#f2f5f8;
+  font-size:18px;
 }
 
-.status-option{
-  min-height:47px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:#fff;
-  text-align:left;
-  padding:0 13px;
-  color:#46546a;
+.form{
+  padding:20px;
+}
+
+.field{
+  margin-bottom:14px;
+}
+
+.field label{
+  display:block;
   font-size:11px;
   font-weight:750;
-}
-
-.form-group{margin-bottom:13px}
-
-.form-label{
-  display:block;
-  color:#56647a;
-  font-size:10px;
-  font-weight:850;
   margin-bottom:6px;
 }
 
-.form-input{
+.field .input,
+.field .select,
+.field textarea{
   width:100%;
-  height:42px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:0 11px;
-  outline:none;
-  font-size:11px;
 }
 
-.form-input:focus{
-  border-color:#77a9e8;
-  box-shadow:0 0 0 3px rgba(8,110,225,.08);
+textarea{
+  resize:vertical;
+  min-height:90px;
 }
 
-.form-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:11px;
-}
-
-.primary{
-  width:100%;
-  height:43px;
-  border:0;
-  border-radius:10px;
-  background:linear-gradient(135deg,#086ee1,#18a0ff);
-  color:#fff;
-  font-size:11px;
-  font-weight:850;
-}
-
-.confirm-row{
+.formActions{
   display:flex;
-  gap:9px;
-}
-
-.confirm-row button{
-  flex:1;
-  height:43px;
-  border:0;
-  border-radius:10px;
-  font-size:11px;
-  font-weight:850;
-}
-
-.cancel{
-  background:#f1f4f8;
-  color:#5d6a7f;
-}
-
-.confirm-delete{
-  background:#fff0f0;
-  color:#c33c3c;
+  gap:8px;
+  margin-top:18px;
 }
 
 .toast{
   position:fixed;
-  right:22px;
-  bottom:22px;
-  min-width:260px;
-  max-width:420px;
-  background:#172236;
-  color:#fff;
-  padding:13px 16px;
-  border-radius:11px;
-  box-shadow:var(--shadow2);
-  font-size:11px;
-  font-weight:650;
-  display:none;
+  right:20px;
+  bottom:20px;
   z-index:3000;
+  min-width:280px;
+  max-width:390px;
+  background:#071426;
+  color:#fff;
+  padding:13px 15px;
+  border-radius:11px;
+  box-shadow:0 15px 40px rgba(0,0,0,.2);
+  transform:translateY(120px);
+  opacity:0;
+  transition:.25s;
+  font-size:12px;
 }
 
-.toast.show{display:block}
-
-@media(max-width:1350px){
-  .stats{grid-template-columns:repeat(3,1fr)}
-  .staff-grid{grid-template-columns:repeat(2,1fr)}
-  .inquiry-grid{grid-template-columns:2fr 1fr 1fr}
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
 }
 
-@media(max-width:1050px){
-  .toolbar-grid{grid-template-columns:1fr 1fr}
+.toast.success{
+  border-left:4px solid var(--green);
 }
 
-@media(max-width:800px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0}
-  .mobile-menu{display:block}
-  .topbar{padding:0 16px}
-  .content{padding:20px 16px 35px}
-  .page-title p{display:none}
+.toast.error{
+  border-left:4px solid var(--red);
 }
 
-@media(max-width:600px){
-  .stats{grid-template-columns:1fr 1fr;gap:9px}
-  .staff-grid{grid-template-columns:1fr;padding:13px}
-  .toolbar-grid,
-  .inquiry-grid{grid-template-columns:1fr}
-  .detail-grid{grid-template-columns:1fr}
-  .status-options{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  .admin-badge{display:none}
-  .hero h2{font-size:20px}
-  .toast{left:15px;right:15px;bottom:15px;min-width:0}
+.toast.info{
+  border-left:4px solid var(--blue);
+}
+
+.mobileClose{
+  display:none;
+}
+
+@media(max-width:1200px){
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .grid2{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:850px){
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .menuBtn{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 16px;
+  }
+
+  .topRight .live{
+    display:none;
+  }
+
+  .content{
+    padding:18px 14px 30px;
+  }
+
+  .hero{
+    padding:20px;
+  }
+
+  .heroIcon{
+    display:none;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .staffGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:550px){
+  .pageTitle{
+    font-size:17px;
+  }
+
+  .pageSubtitle{
+    display:none;
+  }
+
+  .adminBadge span{
+    display:none;
+  }
+
+  .hero h1{
+    font-size:22px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+  }
+
+  .stat{
+    padding:13px;
+  }
+
+  .statValue{
+    font-size:21px;
+  }
+
+  .filters > *{
+    width:100%;
+  }
+
+  .search{
+    min-width:0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= SIDEBAR ================= -->
-
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 
-  <div class="brand">
-    <div class="brand-logo">BT</div>
-
-    <div class="brand-text">
+  <div class="logo">
+    <div class="logoIcon">BT</div>
+    <div class="logoText">
       <strong>BlackTerminal</strong>
       <span>Computer Institute</span>
     </div>
   </div>
 
-  <div class="sidebar-menu">
+  <nav class="nav">
 
-    <div class="menu-label">Administration</div>
+    <div class="navTitle">Management</div>
 
-    <button class="menu-item active" onclick="go('top')">
-      <span class="menu-icon">📊</span>
-      <span>Admin Dashboard</span>
-      <span class="menu-badge" id="sideInquiry">0</span>
-    </button>
+    <a href="admin.html" class="active">
+      <span class="navIcon">📊</span>
+      Dashboard
+    </a>
 
-    <button class="menu-item" onclick="go('staffSection')">
-      <span class="menu-icon">👥</span>
-      <span>Staff Management</span>
-      <span class="menu-badge" id="sideStaff">0</span>
-    </button>
+    <a href="student.html">
+      <span class="navIcon">🎓</span>
+      Students
+    </a>
 
-    <button class="menu-item" onclick="showRole('coordinator')">
-      <span class="menu-icon">👤</span>
-      <span>Coordinators</span>
-    </button>
+    <a href="admission.html">
+      <span class="navIcon">📝</span>
+      Admissions
+    </a>
 
-    <button class="menu-item" onclick="showRole('telecaller')">
-      <span class="menu-icon">📞</span>
-      <span>Telecallers</span>
-    </button>
+    <a href="#">
+      <span class="navIcon">💳</span>
+      Fees & Payments
+    </a>
 
-    <button class="menu-item" onclick="go('inquirySection')">
-      <span class="menu-icon">☎</span>
-      <span>All Inquiries</span>
-    </button>
+    <a href="#">
+      <span class="navIcon">📅</span>
+      Attendance
+    </a>
 
-    <button class="menu-item" onclick="showSummary()">
-      <span class="menu-icon">📈</span>
-      <span>Status Summary</span>
-    </button>
+    <div class="navTitle">People</div>
 
-    <div class="menu-label" style="margin-top:24px">
-      Quick Actions
-    </div>
+    <a href="#staffSection">
+      <span class="navIcon">👥</span>
+      Staff
+    </a>
 
-    <button class="menu-item" onclick="refreshAll()">
-      <span class="menu-icon">↻</span>
-      <span>Refresh</span>
-    </button>
+    <a href="#telecallerSection">
+      <span class="navIcon">📞</span>
+      Telecallers
+    </a>
 
-    <button class="menu-item" onclick="openAddStaff()">
-      <span class="menu-icon">＋</span>
-      <span>Add Staff</span>
-    </button>
+    <a href="#coordinatorSection">
+      <span class="navIcon">🧑‍💼</span>
+      Coordinators
+    </a>
 
-  </div>
+    <div class="navTitle">Communication</div>
 
-  <div class="sidebar-bottom">
-    <div class="admin-card">
+    <a href="#">
+      <span class="navIcon">💬</span>
+      Communication
+    </a>
 
-      <div class="admin-user">
-        <div class="avatar" id="sideAvatar">AD</div>
+    <a href="#">
+      <span class="navIcon">📣</span>
+      Announcements
+    </a>
 
-        <div>
-          <strong>Administrator</strong>
-          <span>BlackTerminal Admin</span>
-        </div>
-      </div>
+    <div class="navTitle">Reports</div>
 
-    </div>
-  </div>
+    <a href="#">
+      <span class="navIcon">📈</span>
+      Reports
+    </a>
 
+    <a href="#">
+      <span class="navIcon">⚙️</span>
+      Settings
+    </a>
+
+  </nav>
 </aside>
 
+<div class="overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
 
-<!-- ================= MAIN ================= -->
-
+<!-- MAIN -->
 <main class="main">
 
-<header class="topbar">
+  <!-- TOPBAR -->
+  <header class="topbar">
 
-  <div class="top-left">
-
-    <button class="mobile-menu" onclick="toggleSidebar()">
-      ☰
-    </button>
-
-    <div class="page-title">
-      <h1>Admin Dashboard</h1>
-      <p>Complete Staff & Inquiry Management</p>
-    </div>
-
-  </div>
-
-  <div class="top-right">
-    <span class="admin-badge">ADMIN</span>
-    <div class="avatar">AD</div>
-  </div>
-
-</header>
-
-
-<section class="content" id="top">
-
-  <!-- HERO -->
-
-  <div class="hero">
-
-    <div class="hero-content">
-
-      <div class="hero-small">
-        BLACKTERMINAL ADMIN CONTROL
-      </div>
-
-      <h2>
-        Complete Institute Overview
-      </h2>
-
-      <p>
-        सभी Admin, Coordinator, Telecaller और Student Inquiry
-        data एक ही जगह से manage और monitor करें।
-      </p>
-
-      <div class="hero-pills">
-
-        <span class="hero-pill">👑 Admin</span>
-        <span class="hero-pill">👥 Coordinator</span>
-        <span class="hero-pill">📞 Telecaller</span>
-        <span class="hero-pill">☎ Student Inquiry</span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- STATS -->
-
-  <div class="stats">
-
-    <div class="stat">
-      <div class="stat-top">
-        <span class="stat-label">TOTAL INQUIRIES</span>
-        <span class="stat-icon i-blue">☎</span>
-      </div>
-      <div class="stat-value" id="total">0</div>
-      <div class="stat-sub">All student inquiries</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-top">
-        <span class="stat-label">TODAY</span>
-        <span class="stat-icon i-orange">◷</span>
-      </div>
-      <div class="stat-value" id="today">0</div>
-      <div class="stat-sub">Received today</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-top">
-        <span class="stat-label">PENDING</span>
-        <span class="stat-icon i-purple">!</span>
-      </div>
-      <div class="stat-value" id="pending">0</div>
-      <div class="stat-sub">Need action</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-top">
-        <span class="stat-label">CONVERTED</span>
-        <span class="stat-icon i-green">✓</span>
-      </div>
-      <div class="stat-value" id="converted">0</div>
-      <div class="stat-sub">Successful conversions</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-top">
-        <span class="stat-label">COORDINATORS</span>
-        <span class="stat-icon i-blue">👤</span>
-      </div>
-      <div class="stat-value" id="coordinatorCount">0</div>
-      <div class="stat-sub">Coordinator list</div>
-    </div>
-
-    <div class="stat">
-      <div class="stat-top">
-        <span class="stat-label">TELECALLERS</span>
-        <span class="stat-icon i-green">📞</span>
-      </div>
-      <div class="stat-value" id="telecallerCount">0</div>
-      <div class="stat-sub">Telecaller list</div>
-    </div>
-
-  </div>
-
-
-  <!-- ================= STAFF ================= -->
-
-  <section class="section" id="staffSection">
-
-    <div class="section-head">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="menuBtn" onclick="toggleMobileMenu()">☰</button>
 
       <div>
-        <h3>👥 Staff Management</h3>
-        <p>Admin, Coordinator और Telecaller सभी एक साथ</p>
+        <div class="pageTitle">Admin Dashboard</div>
+        <div class="pageSubtitle">
+          BlackTerminal Computer Institute • Baripada
+        </div>
+      </div>
+    </div>
+
+    <div class="topRight">
+
+      <div class="live">
+        <span class="liveDot"></span>
+        FIRESTORE LIVE
       </div>
 
-      <div class="count" id="staffCount">
-        0 staff
+      <div class="adminBadge">
+        <div class="adminAvatar">A</div>
+        <span>Administrator</span>
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <section class="content">
+
+    <!-- HERO -->
+    <div class="hero">
+
+      <div>
+        <h1>Admin Control Center</h1>
+
+        <p>
+          Monitor inquiries, coordinators, telecallers and staff
+          from one place. All important data is synced with Firestore.
+        </p>
+
+        <div class="heroPills">
+          <span class="pill">👥 Staff Management</span>
+          <span class="pill">📞 Telecaller List</span>
+          <span class="pill">🧑‍💼 Coordinator List</span>
+          <span class="pill">📊 Inquiry Monitoring</span>
+        </div>
+      </div>
+
+      <div class="heroIcon">
+        🛡️
       </div>
 
     </div>
 
 
-    <div class="toolbar">
+    <!-- STATS -->
+    <div class="stats">
 
-      <div class="toolbar-grid">
+      <div class="stat">
+        <div class="statTop">
+          <span class="statLabel">Total Inquiries</span>
+          <div class="statIcon">📥</div>
+        </div>
+        <div class="statValue" id="totalInquiries">0</div>
+      </div>
 
-        <div class="search">
-          <span>🔎</span>
-          <input
-            id="staffSearch"
-            type="search"
-            placeholder="Search staff name or mobile..."
-          >
+      <div class="stat">
+        <div class="statTop">
+          <span class="statLabel">Today</span>
+          <div class="statIcon">📅</div>
+        </div>
+        <div class="statValue" id="todayInquiries">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="statTop">
+          <span class="statLabel">Pending</span>
+          <div class="statIcon">⏳</div>
+        </div>
+        <div class="statValue" id="pendingInquiries">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="statTop">
+          <span class="statLabel">Converted</span>
+          <div class="statIcon">🎓</div>
+        </div>
+        <div class="statValue" id="convertedInquiries">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="statTop">
+          <span class="statLabel">Coordinators</span>
+          <div class="statIcon">🧑‍💼</div>
+        </div>
+        <div class="statValue" id="coordinatorCount">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="statTop">
+          <span class="statLabel">Telecallers</span>
+          <div class="statIcon">📞</div>
+        </div>
+        <div class="statValue" id="telecallerCount">0</div>
+      </div>
+
+    </div>
+
+
+    <!-- STAFF + TELECALLER -->
+    <div class="grid2">
+
+      <!-- STAFF -->
+      <section class="card" id="staffSection">
+
+        <div class="cardHeader">
+
+          <div>
+            <div class="cardTitle">Staff List</div>
+            <div class="cardSub">
+              All Coordinator and Telecaller records
+            </div>
+          </div>
+
+          <button class="btn btnPrimary" onclick="openStaffDrawer()">
+            ＋ Add Staff
+          </button>
+
         </div>
 
-        <select class="filter" id="staffRole">
-          <option value="all">All Roles</option>
-          <option value="admin">Admin</option>
-          <option value="coordinator">Coordinator</option>
-          <option value="telecaller">Telecaller</option>
-        </select>
+        <div class="cardBody">
 
-        <select class="filter" id="staffStatus">
-          <option value="all">All Status</option>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
+          <div class="filters" style="margin-bottom:15px;">
 
-        <button class="add-btn" onclick="openAddStaff()">
-          ＋ Add Staff
+            <input
+              class="input search"
+              id="staffSearch"
+              placeholder="Search name / mobile..."
+              oninput="renderStaff()"
+            >
+
+            <select
+              class="select"
+              id="staffRoleFilter"
+              onchange="renderStaff()"
+            >
+              <option value="">All Roles</option>
+              <option value="admin">Admin</option>
+              <option value="coordinator">Coordinator</option>
+              <option value="telecaller">Telecaller</option>
+            </select>
+
+            <select
+              class="select"
+              id="staffStatusFilter"
+              onchange="renderStaff()"
+            >
+              <option value="">All Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+
+          </div>
+
+          <div id="staffList" class="staffGrid">
+            <div class="loading">Loading staff...</div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- TELECALLER QUICK LIST -->
+      <section class="card" id="telecallerSection">
+
+        <div class="cardHeader">
+
+          <div>
+            <div class="cardTitle">📞 Telecaller List</div>
+            <div class="cardSub">
+              Direct Firestore + inquiry fallback
+            </div>
+          </div>
+
+          <button
+            class="btn btnLight"
+            onclick="scrollToStaff('telecaller')"
+          >
+            View All
+          </button>
+
+        </div>
+
+        <div class="cardBody">
+
+          <div id="telecallerQuickList">
+            <div class="loading">
+              Fetching Telecallers...
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- COORDINATOR QUICK LIST -->
+    <section class="card" id="coordinatorSection">
+
+      <div class="cardHeader">
+
+        <div>
+          <div class="cardTitle">🧑‍💼 Coordinator List</div>
+          <div class="cardSub">
+            All coordinators found in Staff and Inquiry records
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cardBody">
+
+        <div id="coordinatorQuickList">
+          <div class="loading">
+            Fetching Coordinators...
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- INQUIRIES -->
+    <section class="card">
+
+      <div class="cardHeader">
+
+        <div>
+          <div class="cardTitle">📥 All Student Inquiries</div>
+          <div class="cardSub">
+            Coordinator → Telecaller → Admission pipeline
+          </div>
+        </div>
+
+        <button class="btn btnLight" onclick="loadInquiriesOnce()">
+          🔄 Refresh
         </button>
 
       </div>
 
-    </div>
+      <div class="cardBody">
 
+        <div class="filters" style="margin-bottom:16px;">
 
-    <div class="error" id="staffError"></div>
-
-
-    <div class="loading" id="staffLoading">
-      <div class="spinner"></div>
-      <p>Loading staff...</p>
-    </div>
-
-
-    <div
-      class="staff-grid"
-      id="staffGrid"
-      style="display:none"
-    ></div>
-
-
-    <div
-      class="empty"
-      id="staffEmpty"
-      style="display:none"
-    >
-      <div class="empty-icon">👥</div>
-      <h3>No Staff Found</h3>
-      <p>No Admin, Coordinator or Telecaller found.</p>
-    </div>
-
-  </section>
-
-
-  <!-- ================= INQUIRIES ================= -->
-
-  <section class="section" id="inquirySection">
-
-    <div class="section-head">
-
-      <div>
-        <h3>☎ All Student Inquiries</h3>
-        <p>Coordinator → Telecaller → Admin monitoring</p>
-      </div>
-
-      <div class="count" id="resultCount">
-        0 inquiries
-      </div>
-
-    </div>
-
-
-    <div class="toolbar">
-
-      <div class="toolbar-grid inquiry-grid">
-
-        <div class="search">
-          <span>🔎</span>
           <input
-            id="search"
-            type="search"
-            placeholder="Search student, mobile, course, staff..."
+            class="input search"
+            id="inquirySearch"
+            placeholder="Search student / mobile / course..."
+            oninput="renderInquiries()"
           >
+
+          <select
+            class="select"
+            id="inquiryCourseFilter"
+            onchange="renderInquiries()"
+          >
+            <option value="">All Courses</option>
+          </select>
+
+          <select
+            class="select"
+            id="inquiryStatusFilter"
+            onchange="renderInquiries()"
+          >
+            <option value="">All Status</option>
+            <option value="new">New</option>
+            <option value="pending">Pending</option>
+            <option value="follow-up">Follow-up</option>
+            <option value="converted">Converted</option>
+            <option value="closed">Closed</option>
+          </select>
+
+          <select
+            class="select"
+            id="inquiryCoordinatorFilter"
+            onchange="renderInquiries()"
+          >
+            <option value="">All Coordinators</option>
+          </select>
+
+          <select
+            class="select"
+            id="inquiryTelecallerFilter"
+            onchange="renderInquiries()"
+          >
+            <option value="">All Telecallers</option>
+          </select>
+
         </div>
 
-        <select class="filter" id="course">
-          <option value="all">All Courses</option>
-        </select>
 
-        <select class="filter" id="status">
-          <option value="all">All Status</option>
-          <option value="new">New</option>
-          <option value="pending">Pending</option>
-          <option value="contacted">Contacted</option>
-          <option value="follow-up">Follow-up</option>
-          <option value="converted">Converted</option>
-          <option value="not-interested">Not Interested</option>
-        </select>
+        <div class="tableWrap">
 
-        <select class="filter" id="coordinator">
-          <option value="all">All Coordinators</option>
-        </select>
+          <table>
 
-        <button class="refresh" onclick="refreshAll()">
-          ↻ Refresh
-        </button>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Mobile</th>
+                <th>Course</th>
+                <th>Source</th>
+                <th>Coordinator</th>
+                <th>Telecaller</th>
+                <th>Status</th>
+                <th>Received</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="inquiryTable">
+
+              <tr>
+                <td colspan="9">
+                  <div class="loading">
+                    Loading inquiries...
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
 
       </div>
 
-    </div>
-
-
-    <div class="error" id="error"></div>
-
-
-    <div class="loading" id="loading">
-      <div class="spinner"></div>
-      <p>Loading inquiries...</p>
-    </div>
-
-
-    <div
-      class="table-scroll"
-      id="tableWrap"
-      style="display:none"
-    >
-
-      <table>
-
-        <thead>
-          <tr>
-            <th>Student</th>
-            <th>Course</th>
-            <th>Source</th>
-            <th>Coordinator</th>
-            <th>Telecaller</th>
-            <th>Received</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody id="tbody"></tbody>
-
-      </table>
-
-    </div>
-
-
-    <div
-      class="empty"
-      id="empty"
-      style="display:none"
-    >
-      <div class="empty-icon">☎</div>
-      <h3>No Inquiries Found</h3>
-      <p>No inquiry matches the current filters.</p>
-    </div>
+    </section>
 
   </section>
-
-</section>
 
 </main>
 
 
-<!-- ================= INQUIRY DETAILS ================= -->
+<!-- STAFF DRAWER -->
+<div class="overlay" id="drawerOverlay" onclick="closeStaffDrawer()"></div>
 
-<div class="modal" id="detailsModal">
+<aside class="drawer" id="staffDrawer">
 
-  <div class="modal-box">
+  <div class="drawerHeader">
 
-    <div class="modal-head">
-
-      <div>
-        <h3>Inquiry Details</h3>
-        <p>Complete student inquiry information</p>
-      </div>
-
-      <button class="close" onclick="closeModal('detailsModal')">
-        ×
-      </button>
-
+    <div class="drawerTitle">
+      Add Staff
     </div>
 
-    <div class="modal-body">
-
-      <div class="detail-grid" id="details"></div>
-
-      <div class="remark" id="remark" style="display:none">
-        <div class="detail-label">Remark</div>
-        <p id="remarkText"></p>
-      </div>
-
-      <div class="modal-actions">
-
-        <button class="modal-btn green-btn" id="callBtn">
-          ☎ Call
-        </button>
-
-        <button class="modal-btn green-btn" id="waBtn">
-          WhatsApp
-        </button>
-
-        <button class="modal-btn orange-btn" id="statusBtn">
-          Change Status
-        </button>
-
-      </div>
-
-    </div>
+    <button class="closeBtn" onclick="closeStaffDrawer()">
+      ×
+    </button>
 
   </div>
 
-</div>
+  <form class="form" onsubmit="saveStaff(event)">
+
+    <div class="field">
+
+      <label>Full Name</label>
+
+      <input
+        class="input"
+        id="staffName"
+        required
+        placeholder="Enter staff name"
+      >
+
+    </div>
 
 
-<!-- ================= STATUS ================= -->
+    <div class="field">
 
-<div class="modal" id="statusModal">
+      <label>Mobile Number</label>
 
-  <div class="modal-box">
+      <input
+        class="input"
+        id="staffMobile"
+        required
+        maxlength="10"
+        inputmode="numeric"
+        placeholder="10 digit mobile"
+      >
 
-    <div class="modal-head">
+    </div>
 
-      <div>
-        <h3>Change Status</h3>
-        <p id="statusStudent">Select inquiry status</p>
-      </div>
 
-      <button class="close" onclick="closeModal('statusModal')">
-        ×
+    <div class="field">
+
+      <label>Role</label>
+
+      <select class="select" id="staffRole" required>
+
+        <option value="">
+          Select Role
+        </option>
+
+        <option value="Coordinator">
+          Coordinator
+        </option>
+
+        <option value="Telecaller">
+          Telecaller
+        </option>
+
+        <option value="Admin">
+          Admin
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>Status</label>
+
+      <select class="select" id="staffStatus">
+
+        <option value="active">
+          Active
+        </option>
+
+        <option value="inactive">
+          Inactive
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>Remark</label>
+
+      <textarea
+        id="staffRemark"
+        placeholder="Optional remark..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="formActions">
+
+      <button
+        type="button"
+        class="btn btnLight"
+        onclick="closeStaffDrawer()"
+      >
+        Cancel
       </button>
 
-    </div>
-
-    <div class="modal-body">
-
-      <div class="status-options">
-
-        <button class="status-option" onclick="changeStatus('new')">
-          🟠 New
-        </button>
-
-        <button class="status-option" onclick="changeStatus('pending')">
-          🟡 Pending
-        </button>
-
-        <button class="status-option" onclick="changeStatus('contacted')">
-          🔵 Contacted
-        </button>
-
-        <button class="status-option" onclick="changeStatus('follow-up')">
-          🟣 Follow-up
-        </button>
-
-        <button class="status-option" onclick="changeStatus('converted')">
-          🟢 Converted
-        </button>
-
-        <button class="status-option" onclick="changeStatus('not-interested')">
-          🔴 Not Interested
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= STAFF DETAILS ================= -->
-
-<div class="modal" id="staffDetailsModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <div>
-        <h3>Staff Details</h3>
-        <p>Complete staff information</p>
-      </div>
-
-      <button class="close" onclick="closeModal('staffDetailsModal')">
-        ×
-      </button>
-
-    </div>
-
-    <div class="modal-body">
-
-      <div class="detail-grid" id="staffDetails"></div>
-
-      <div class="modal-actions">
-
-        <button class="modal-btn green-btn" id="staffCall">
-          ☎ Call
-        </button>
-
-        <button class="modal-btn orange-btn" id="staffToggle">
-          Change Status
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= ADD STAFF ================= -->
-
-<div class="modal" id="staffFormModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <div>
-        <h3>Add Staff</h3>
-        <p>Create Admin, Coordinator or Telecaller</p>
-      </div>
-
-      <button class="close" onclick="closeModal('staffFormModal')">
-        ×
-      </button>
-
-    </div>
-
-    <div class="modal-body">
-
-      <div class="form-group">
-        <label class="form-label">Full Name</label>
-
-        <input
-          class="form-input"
-          id="staffNameInput"
-          type="text"
-          placeholder="Enter staff name"
-        >
-      </div>
-
-
-      <div class="form-group">
-        <label class="form-label">Mobile Number</label>
-
-        <input
-          class="form-input"
-          id="staffMobileInput"
-          type="tel"
-          maxlength="10"
-          placeholder="10 digit mobile number"
-        >
-      </div>
-
-
-      <div class="form-row">
-
-        <div class="form-group">
-          <label class="form-label">Role</label>
-
-          <select class="form-input" id="staffRoleInput">
-
-            <option value="admin">Admin</option>
-            <option value="coordinator">Coordinator</option>
-            <option value="telecaller">Telecaller</option>
-
-          </select>
-        </div>
-
-
-        <div class="form-group">
-          <label class="form-label">Status</label>
-
-          <select class="form-input" id="staffStatusInput">
-
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-
-          </select>
-        </div>
-
-      </div>
-
-
-      <div class="form-group">
-        <label class="form-label">Note</label>
-
-        <input
-          class="form-input"
-          id="staffNoteInput"
-          type="text"
-          placeholder="Optional note"
-        >
-      </div>
-
-
-      <button class="primary" onclick="saveStaff()">
+      <button
+        type="submit"
+        class="btn btnPrimary"
+      >
         Save Staff
       </button>
 
     </div>
 
-  </div>
+  </form>
 
-</div>
+</aside>
 
 
-<!-- ================= DELETE ================= -->
+<!-- DETAILS DRAWER -->
+<aside class="drawer" id="detailsDrawer">
 
-<div class="modal" id="deleteModal">
+  <div class="drawerHeader">
 
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <div>
-        <h3>Confirm Delete</h3>
-        <p>This action cannot be undone.</p>
-      </div>
-
-      <button class="close" onclick="closeModal('deleteModal')">
-        ×
-      </button>
-
+    <div class="drawerTitle">
+      Details
     </div>
 
-    <div class="modal-body">
-
-      <p
-        id="deleteText"
-        style="font-size:12px;color:#637086;line-height:1.6;margin-bottom:18px"
-      ></p>
-
-      <div class="confirm-row">
-
-        <button
-          class="cancel"
-          onclick="closeModal('deleteModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="confirm-delete"
-          onclick="confirmDelete()"
-        >
-          Delete
-        </button>
-
-      </div>
-
-    </div>
+    <button class="closeBtn" onclick="closeDetails()">
+      ×
+    </button>
 
   </div>
 
-</div>
+  <div class="form" id="detailsContent"></div>
+
+</aside>
 
 
-<!-- ================= SUMMARY ================= -->
-
-<div class="modal" id="summaryModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <div>
-        <h3>Status Summary</h3>
-        <p>Current inquiry overview</p>
-      </div>
-
-      <button class="close" onclick="closeModal('summaryModal')">
-        ×
-      </button>
-
-    </div>
-
-    <div class="modal-body">
-
-      <div class="detail-grid" id="summary"></div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 
-<!-- ================= FIREBASE ================= -->
-
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
   getFirestore,
   collection,
-  onSnapshot,
   addDoc,
+  doc,
   updateDoc,
   deleteDoc,
-  doc,
+  onSnapshot,
   serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-import { firebaseConfig }
-from "./firebaseconfig.js";
+import { firebaseConfig } from "./firebaseconfig.js";
 
 
-/* =====================================================
+/* =========================================
    FIREBASE
-===================================================== */
+========================================= */
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
 
 
-/* =====================================================
-   DATA
-===================================================== */
+/* =========================================
+   STATE
+========================================= */
 
 let inquiries = [];
-let filteredInquiries = [];
 
-let staff = [];
-let filteredStaff = [];
+let staffRecords = [];
 
-let selectedInquiry = null;
-let selectedStaff = null;
-let deleteTarget = null;
-let deleteType = null;
+let unsubscribeInquiries = null;
 
-let inquiryUnsubscribe = null;
-let staffUnsubscribe = null;
+let unsubscribeStaff = null;
 
 
-/* =====================================================
-   DIRECT ADMIN ACCESS
-   NO LOGIN CHECK
-===================================================== */
+/* =========================================
+   HELPERS
+========================================= */
 
-loadInquiries();
-loadStaff();
+function safe(value){
+
+  if(value === undefined || value === null){
+    return "";
+  }
+
+  return String(value);
+
+}
 
 
-/* =====================================================
-   LOAD INQUIRIES
-===================================================== */
+function normalizeRole(role){
 
-function loadInquiries(){
+  const value = safe(role).trim().toLowerCase();
 
-  document.getElementById("loading").style.display="block";
-  document.getElementById("tableWrap").style.display="none";
-  document.getElementById("empty").style.display="none";
+  if(value.includes("tele")){
+    return "telecaller";
+  }
+
+  if(value.includes("coord")){
+    return "coordinator";
+  }
+
+  if(value.includes("admin")){
+    return "admin";
+  }
+
+  return value;
+
+}
+
+
+function cleanMobile(value){
+
+  return safe(value).replace(/\D/g,"");
+
+}
+
+
+function initials(name){
+
+  const text = safe(name).trim();
+
+  if(!text){
+    return "?";
+  }
+
+  const parts = text.split(/\s+/);
+
+  return (
+    (parts[0]?.[0] || "") +
+    (parts[1]?.[0] || "")
+  ).toUpperCase();
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
 
   try{
 
-    inquiryUnsubscribe = onSnapshot(
+    let date;
 
-      collection(db,"studentInquiries"),
+    if(
+      typeof value === "object" &&
+      value.seconds
+    ){
+
+      date = new Date(
+        Number(value.seconds) * 1000
+      );
+
+    }else{
+
+      date = new Date(value);
+
+    }
+
+    if(isNaN(date.getTime())){
+      return "—";
+    }
+
+    return date.toLocaleDateString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      }
+    );
+
+  }catch(e){
+
+    return "—";
+
+  }
+
+}
+
+
+function formatDateTime(value){
+
+  if(!value){
+    return "—";
+  }
+
+  try{
+
+    let date;
+
+    if(
+      typeof value === "object" &&
+      value.seconds
+    ){
+
+      date = new Date(
+        Number(value.seconds) * 1000
+      );
+
+    }else{
+
+      date = new Date(value);
+
+    }
+
+    if(isNaN(date.getTime())){
+      return "—";
+    }
+
+    return date.toLocaleString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric",
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+  }catch(e){
+
+    return "—";
+
+  }
+
+}
+
+
+function isToday(value){
+
+  if(!value){
+    return false;
+  }
+
+  try{
+
+    let date;
+
+    if(
+      typeof value === "object" &&
+      value.seconds
+    ){
+
+      date = new Date(
+        Number(value.seconds) * 1000
+      );
+
+    }else{
+
+      date = new Date(value);
+
+    }
+
+    const now = new Date();
+
+    return (
+      date.getDate() === now.getDate() &&
+      date.getMonth() === now.getMonth() &&
+      date.getFullYear() === now.getFullYear()
+    );
+
+  }catch(e){
+
+    return false;
+
+  }
+
+}
+
+
+function getTimestamp(item){
+
+  if(!item){
+    return 0;
+  }
+
+  const value = item.createdAt;
+
+  if(
+    typeof value === "object" &&
+    value?.seconds
+  ){
+
+    return Number(value.seconds) * 1000;
+
+  }
+
+  const time = new Date(value || 0).getTime();
+
+  return isNaN(time) ? 0 : time;
+
+}
+
+
+function escapeHtml(value){
+
+  return safe(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+function showToast(message,type="info"){
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.className =
+    "toast show " + type;
+
+  clearTimeout(window.__toastTimer);
+
+  window.__toastTimer = setTimeout(()=>{
+
+    toast.className = "toast";
+
+  },3500);
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+function getStatus(inquiry){
+
+  const status =
+    safe(inquiry.telecallerStatus || inquiry.status)
+      .trim()
+      .toLowerCase();
+
+  if(!status){
+    return "new";
+  }
+
+  return status;
+
+}
+
+
+function statusBadge(status){
+
+  const s = safe(status).toLowerCase();
+
+  let cls = "badgeNew";
+
+  if(s === "pending"){
+    cls = "badgePending";
+  }
+
+  if(
+    s === "follow-up" ||
+    s === "followup"
+  ){
+    cls = "badgeFollow";
+  }
+
+  if(s === "converted"){
+    cls = "badgeConverted";
+  }
+
+  if(s === "closed"){
+    cls = "badgeClosed";
+  }
+
+  return `
+    <span class="badge ${cls}">
+      ${escapeHtml(status || "new")}
+    </span>
+  `;
+
+}
+
+
+/* =========================================
+   LOAD STAFF
+========================================= */
+
+function subscribeStaff(){
+
+  try{
+
+    if(unsubscribeStaff){
+      unsubscribeStaff();
+    }
+
+    unsubscribeStaff = onSnapshot(
+      collection(db,"staff"),
 
       snapshot => {
 
-        inquiries=[];
+        staffRecords = [];
 
         snapshot.forEach(item => {
 
-          inquiries.push({
+          const data = item.data() || {};
+
+          staffRecords.push({
+
             id:item.id,
-            ...item.data()
+
+            ...data,
+
+            name:
+              data.name ||
+              data.fullName ||
+              data.staffName ||
+              "",
+
+            mobile:
+              data.mobile ||
+              data.phone ||
+              data.staffMobile ||
+              "",
+
+            role:
+              data.role ||
+              data.userRole ||
+              "",
+
+            status:
+              data.status ||
+              "active"
+
           });
 
         });
 
-        inquiries.sort((a,b)=>{
-          return timestamp(b.createdAt)-timestamp(a.createdAt);
-        });
 
-        buildFilters();
-        updateStats();
-        applyInquiryFilters();
+        /*
+         IMPORTANT:
+         Inquiry records are also used as fallback.
 
-        document.getElementById("loading").style.display="none";
+         This means if your Telecaller is not yet
+         present inside staff collection, but has
+         already handled an inquiry, Admin will still
+         show that Telecaller.
+        */
 
         mergeStaffFromInquiries();
+
+        renderStaff();
+
+        renderQuickPeople();
+
+        updatePeopleFilters();
+
+        updateStats();
 
       },
 
       error => {
 
-        console.error(error);
+        console.error(
+          "Staff listener error:",
+          error
+        );
 
-        document.getElementById("loading").style.display="none";
+        /*
+         Even if staff collection has permission
+         problem, we can still build the people list
+         from inquiry records.
+        */
 
-        showError(
-          "error",
-          "Firestore error: "+error.message
+        staffRecords = [];
+
+        mergeStaffFromInquiries();
+
+        renderStaff();
+
+        renderQuickPeople();
+
+        updatePeopleFilters();
+
+        updateStats();
+
+        showToast(
+          "Staff collection load failed. Inquiry data se list build ki gayi.",
+          "error"
         );
 
       }
-
     );
 
   }catch(error){
 
     console.error(error);
 
-    document.getElementById("loading").style.display="none";
-
-    showError(
-      "error",
-      "Unable to connect to Firestore."
-    );
-
   }
 
 }
 
 
-/* =====================================================
-   LOAD STAFF
-===================================================== */
-
-function loadStaff(){
-
-  document.getElementById("staffLoading").style.display="block";
-
-  try{
-
-    staffUnsubscribe = onSnapshot(
-
-      collection(db,"staff"),
-
-      snapshot => {
-
-        const databaseStaff=[];
-
-        snapshot.forEach(item=>{
-
-          databaseStaff.push({
-            id:item.id,
-            ...item.data(),
-            source:"staff"
-          });
-
-        });
-
-        staff=databaseStaff;
-
-        mergeStaffFromInquiries();
-
-      },
-
-      error=>{
-
-        console.warn(
-          "Staff collection unavailable:",
-          error
-        );
-
-        staff=[];
-
-        mergeStaffFromInquiries();
-
-      }
-
-    );
-
-  }catch(error){
-
-    staff=[];
-
-    mergeStaffFromInquiries();
-
-  }
-
-}
-
-
-/* =====================================================
-   MERGE COORDINATOR + TELECALLER
-===================================================== */
+/* =========================================
+   MERGE COORDINATOR + TELECALLER FROM INQUIRIES
+========================================= */
 
 function mergeStaffFromInquiries(){
 
-  const map=new Map();
+  const map = new Map();
 
 
-  staff.forEach(item=>{
+  /* Existing staff first */
 
-    const role=normalizeRole(item.role);
+  staffRecords.forEach(staff => {
 
-    const key=
-      role+"|"+
-      cleanMobile(item.mobile||"")+"|"+
-      String(item.name||"").toLowerCase();
+    const role = normalizeRole(staff.role);
 
-    map.set(key,{
-      ...item,
-      role,
-      source:"staff"
-    });
+    const mobile = cleanMobile(staff.mobile);
+
+    const name = safe(staff.name).trim();
+
+    if(!role || !name){
+      return;
+    }
+
+    const key =
+      role + "|" +
+      (mobile || name.toLowerCase());
+
+    map.set(
+      key,
+      {
+        ...staff,
+        role:
+          role.charAt(0).toUpperCase() +
+          role.slice(1),
+        mobile
+      }
+    );
 
   });
 
 
-  inquiries.forEach(item=>{
+  /* Coordinator from inquiries */
 
-    const coordinatorName=
-      String(item.coordinatorName||"").trim();
+  inquiries.forEach(inquiry => {
 
-    const coordinatorMobile=
-      cleanMobile(item.coordinatorMobile||"");
+    const coordinatorName =
+      safe(
+        inquiry.coordinatorName
+      ).trim();
 
+    const coordinatorMobile =
+      cleanMobile(
+        inquiry.coordinatorMobile
+      );
 
     if(coordinatorName){
 
-      const key=
-        "coordinator|"+
-        coordinatorMobile+"|"+
-        coordinatorName.toLowerCase();
+      const key =
+        "coordinator|" +
+        (
+          coordinatorMobile ||
+          coordinatorName.toLowerCase()
+        );
 
       if(!map.has(key)){
 
-        map.set(key,{
-
-          id:
-            "auto-coordinator-"+slug(coordinatorName),
-
-          name:
-            coordinatorName,
-
-          mobile:
-            coordinatorMobile,
-
-          role:
-            "coordinator",
-
-          status:
-            "active",
-
-          source:
-            "inquiry",
-
-          note:
-            "Automatically detected from inquiry"
-
-        });
+        map.set(
+          key,
+          {
+            id:"inquiry-coordinator-" + key,
+            name:coordinatorName,
+            mobile:coordinatorMobile,
+            role:"Coordinator",
+            status:"active",
+            source:"inquiry"
+          }
+        );
 
       }
 
     }
 
 
-    const telecallerName=
-      String(item.telecallerName||"").trim();
+    /* TELECALLER FROM INQUIRIES */
 
-    const telecallerMobile=
-      cleanMobile(item.telecallerMobile||"");
+    const telecallerName =
+      safe(
+        inquiry.telecallerName
+      ).trim();
+
+    const telecallerMobile =
+      cleanMobile(
+        inquiry.telecallerMobile
+      );
 
 
     if(telecallerName){
 
-      const key=
-        "telecaller|"+
-        telecallerMobile+"|"+
-        telecallerName.toLowerCase();
+      const key =
+        "telecaller|" +
+        (
+          telecallerMobile ||
+          telecallerName.toLowerCase()
+        );
+
 
       if(!map.has(key)){
 
-        map.set(key,{
-
-          id:
-            "auto-telecaller-"+slug(telecallerName),
-
-          name:
-            telecallerName,
-
-          mobile:
-            telecallerMobile,
-
-          role:
-            "telecaller",
-
-          status:
-            "active",
-
-          source:
-            "inquiry",
-
-          note:
-            "Automatically detected from inquiry"
-
-        });
+        map.set(
+          key,
+          {
+            id:"inquiry-telecaller-" + key,
+            name:telecallerName,
+            mobile:telecallerMobile,
+            role:"Telecaller",
+            status:"active",
+            source:"inquiry"
+          }
+        );
 
       }
 
@@ -2093,1259 +2011,1481 @@ function mergeStaffFromInquiries(){
   });
 
 
-  staff=Array.from(map.values());
-
-  staff.sort((a,b)=>
-    String(a.name||"").localeCompare(
-      String(b.name||"")
-    )
-  );
-
-
-  applyStaffFilters();
-  updateStaffStats();
-
-  document.getElementById("staffLoading").style.display="none";
+  staffRecords =
+    Array.from(map.values());
 
 }
 
 
-/* =====================================================
-   STAFF FILTER
-===================================================== */
+/* =========================================
+   LOAD INQUIRIES
+========================================= */
 
-function applyStaffFilters(){
+function subscribeInquiries(){
 
-  const search=
-    document.getElementById("staffSearch")
-      .value
-      .trim()
-      .toLowerCase();
+  try{
 
-  const role=
-    document.getElementById("staffRole").value;
+    if(unsubscribeInquiries){
+      unsubscribeInquiries();
+    }
 
-  const status=
-    document.getElementById("staffStatus").value;
+    unsubscribeInquiries = onSnapshot(
+      collection(db,"studentInquiries"),
 
+      snapshot => {
 
-  filteredStaff=staff.filter(item=>{
+        inquiries = [];
 
-    const name=
-      String(item.name||"").toLowerCase();
+        snapshot.forEach(item => {
 
-    const mobile=
-      String(item.mobile||"").toLowerCase();
+          inquiries.push({
 
-    const itemRole=
-      normalizeRole(item.role);
+            id:item.id,
 
-    const itemStatus=
-      normalizeStaffStatus(item.status);
+            ...item.data()
+
+          });
+
+        });
 
 
-    return (
+        inquiries.sort(
+          (a,b) =>
+            getTimestamp(b) -
+            getTimestamp(a)
+        );
 
-      (
+
+        /*
+         Very important:
+         Inquiry update hone ke baad staff list bhi
+         recalculate hoti hai.
+        */
+
+        mergeStaffFromInquiries();
+
+        updateStats();
+
+        updateCourseFilter();
+
+        updatePeopleFilters();
+
+        renderStaff();
+
+        renderQuickPeople();
+
+        renderInquiries();
+
+      },
+
+      error => {
+
+        console.error(
+          "Inquiry listener error:",
+          error
+        );
+
+        document.getElementById(
+          "inquiryTable"
+        ).innerHTML = `
+          <tr>
+            <td colspan="9">
+              <div class="empty">
+                ❌ Firestore inquiry data load nahi hua.<br><br>
+                ${escapeHtml(error.message)}
+              </div>
+            </td>
+          </tr>
+        `;
+
+        showToast(
+          "Inquiry data load nahi hua.",
+          "error"
+        );
+
+      }
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+function updateStats(){
+
+  const total =
+    inquiries.length;
+
+  const today =
+    inquiries.filter(
+      x => isToday(x.createdAt)
+    ).length;
+
+  const pending =
+    inquiries.filter(
+      x => {
+
+        const s = getStatus(x);
+
+        return (
+          s === "new" ||
+          s === "pending" ||
+          s === "follow-up" ||
+          s === "followup"
+        );
+
+      }
+    ).length;
+
+  const converted =
+    inquiries.filter(
+      x => getStatus(x) === "converted"
+    ).length;
+
+
+  const coordinators =
+    staffRecords.filter(
+      x => normalizeRole(x.role) === "coordinator"
+    ).length;
+
+  const telecallers =
+    staffRecords.filter(
+      x => normalizeRole(x.role) === "telecaller"
+    ).length;
+
+
+  document.getElementById(
+    "totalInquiries"
+  ).textContent = total;
+
+  document.getElementById(
+    "todayInquiries"
+  ).textContent = today;
+
+  document.getElementById(
+    "pendingInquiries"
+  ).textContent = pending;
+
+  document.getElementById(
+    "convertedInquiries"
+  ).textContent = converted;
+
+  document.getElementById(
+    "coordinatorCount"
+  ).textContent = coordinators;
+
+  document.getElementById(
+    "telecallerCount"
+  ).textContent = telecallers;
+
+}
+
+
+/* =========================================
+   STAFF RENDER
+========================================= */
+
+window.renderStaff = function(){
+
+  const container =
+    document.getElementById(
+      "staffList"
+    );
+
+  const search =
+    safe(
+      document.getElementById(
+        "staffSearch"
+      ).value
+    )
+    .toLowerCase()
+    .trim();
+
+  const roleFilter =
+    safe(
+      document.getElementById(
+        "staffRoleFilter"
+      ).value
+    )
+    .toLowerCase();
+
+  const statusFilter =
+    safe(
+      document.getElementById(
+        "staffStatusFilter"
+      ).value
+    )
+    .toLowerCase();
+
+
+  let list =
+    [...staffRecords];
+
+
+  list =
+    list.filter(staff => {
+
+      const role =
+        normalizeRole(staff.role);
+
+      const name =
+        safe(staff.name).toLowerCase();
+
+      const mobile =
+        cleanMobile(staff.mobile);
+
+      const status =
+        safe(staff.status)
+          .toLowerCase();
+
+
+      const matchSearch =
         !search ||
         name.includes(search) ||
-        mobile.includes(search)
-      )
+        mobile.includes(
+          search.replace(/\D/g,"")
+        );
 
-      &&
+      const matchRole =
+        !roleFilter ||
+        role === roleFilter;
 
-      (
-        role==="all" ||
-        itemRole===role
-      )
+      const matchStatus =
+        !statusFilter ||
+        status === statusFilter;
 
-      &&
+      return (
+        matchSearch &&
+        matchRole &&
+        matchStatus
+      );
 
-      (
-        status==="all" ||
-        itemStatus===status
-      )
+    });
 
-    );
+
+  list.sort((a,b)=>{
+
+    const roleA =
+      normalizeRole(a.role);
+
+    const roleB =
+      normalizeRole(b.role);
+
+    if(roleA !== roleB){
+
+      if(roleA === "telecaller"){
+        return -1;
+      }
+
+      if(roleB === "telecaller"){
+        return 1;
+      }
+
+    }
+
+    return safe(a.name)
+      .localeCompare(
+        safe(b.name)
+      );
 
   });
 
 
-  renderStaff();
+  if(!list.length){
 
-}
-
-
-document.getElementById("staffSearch")
-.addEventListener("input",applyStaffFilters);
-
-document.getElementById("staffRole")
-.addEventListener("change",applyStaffFilters);
-
-document.getElementById("staffStatus")
-.addEventListener("change",applyStaffFilters);
-
-
-/* =====================================================
-   RENDER STAFF
-===================================================== */
-
-function renderStaff(){
-
-  const grid=document.getElementById("staffGrid");
-
-  grid.innerHTML="";
-
-
-  document.getElementById("staffCount").textContent=
-    filteredStaff.length+" staff";
-
-
-  if(!filteredStaff.length){
-
-    grid.style.display="none";
-
-    document.getElementById("staffEmpty").style.display="block";
+    container.innerHTML = `
+      <div class="empty">
+        No staff found.
+      </div>
+    `;
 
     return;
 
   }
 
 
-  document.getElementById("staffEmpty").style.display="none";
+  container.innerHTML =
+    list.map(staff => {
 
-  grid.style.display="grid";
+      const role =
+        normalizeRole(staff.role);
 
+      const status =
+        safe(staff.status || "active")
+          .toLowerCase();
 
-  filteredStaff.forEach(item=>{
-
-    const role=normalizeRole(item.role);
-    const status=normalizeStaffStatus(item.status);
-
-    const count=getStaffInquiryCount(item);
-
-    const card=document.createElement("div");
-
-    card.className="staff-card";
+      const roleText =
+        role.charAt(0).toUpperCase() +
+        role.slice(1);
 
 
-    card.innerHTML=`
+      const isFromInquiry =
+        staff.source === "inquiry";
 
-      <div class="staff-top">
 
-        <div class="staff-avatar ${role}">
-          ${escapeHtml(initials(item.name||role))}
-        </div>
+      const actionId =
+        safe(staff.id);
 
-        <div class="staff-main">
 
-          <div class="staff-name">
-            ${escapeHtml(item.name||"Staff")}
+      return `
+        <div class="staffCard">
+
+          <div class="staffHead">
+
+            <div class="staffAvatar">
+              ${escapeHtml(
+                initials(staff.name)
+              )}
+            </div>
+
+            <div style="flex:1;min-width:0;">
+
+              <div class="staffName">
+                ${escapeHtml(
+                  staff.name || "Unknown"
+                )}
+              </div>
+
+              <div class="staffRole">
+                ${escapeHtml(roleText)}
+
+                ${
+                  isFromInquiry
+                  ? " • Inquiry data"
+                  : " • Staff collection"
+                }
+
+              </div>
+
+            </div>
+
+            ${
+              status === "active"
+              ?
+              `<span class="badge badgeActive">
+                Active
+              </span>`
+              :
+              `<span class="badge badgeInactive">
+                Inactive
+              </span>`
+            }
+
           </div>
 
-          <div class="staff-mobile">
-            ${escapeHtml(displayMobile(item.mobile||""))}
+
+          <div class="staffInfo">
+
+            <div class="infoBox">
+
+              <div class="infoLabel">
+                MOBILE
+              </div>
+
+              <div class="infoValue">
+                ${
+                  staff.mobile
+                  ?
+                  escapeHtml(
+                    staff.mobile
+                  )
+                  :
+                  "Not available"
+                }
+              </div>
+
+            </div>
+
+
+            <div class="infoBox">
+
+              <div class="infoLabel">
+                ROLE
+              </div>
+
+              <div class="infoValue">
+                ${escapeHtml(roleText)}
+              </div>
+
+            </div>
+
           </div>
 
-          <span class="role role-${role}">
-            ${escapeHtml(roleLabel(role))}
-          </span>
+
+          <div class="staffActions">
+
+            ${
+              staff.mobile
+              ?
+              `
+              <button
+                class="btn btnLight btnSmall"
+                onclick="callNumber('${escapeHtml(
+                  cleanMobile(staff.mobile)
+                )}')"
+              >
+                📞 Call
+              </button>
+              `
+              :
+              ""
+            }
+
+
+            ${
+              staff.mobile
+              ?
+              `
+              <button
+                class="btn btnLight btnSmall"
+                onclick="openWhatsApp('${escapeHtml(
+                  cleanMobile(staff.mobile)
+                )}')"
+              >
+                💬 WhatsApp
+              </button>
+              `
+              :
+              ""
+            }
+
+
+            <button
+              class="btn btnLight btnSmall"
+              onclick="viewStaff('${escapeHtml(
+                actionId
+              )}')"
+            >
+              👁 View
+            </button>
+
+
+            ${
+              !isFromInquiry
+              ?
+              `
+              <button
+                class="btn btnLight btnSmall"
+                onclick="toggleStaffStatus('${escapeHtml(
+                  actionId
+                )}','${status}')"
+              >
+                ${
+                  status === "active"
+                  ? "Deactivate"
+                  : "Activate"
+                }
+              </button>
+              `
+              :
+              ""
+            }
+
+
+            ${
+              !isFromInquiry
+              ?
+              `
+              <button
+                class="btn btnRed btnSmall"
+                onclick="deleteStaff('${escapeHtml(
+                  actionId
+                )}')"
+              >
+                Delete
+              </button>
+              `
+              :
+              ""
+            }
+
+          </div>
 
         </div>
+      `;
 
-        <span class="staff-status ${status}">
-          ● ${status==="active"?"Active":"Inactive"}
-        </span>
+    })
+    .join("");
 
+};
+
+
+/* =========================================
+   QUICK PEOPLE LISTS
+========================================= */
+
+function renderQuickPeople(){
+
+  const telecallerContainer =
+    document.getElementById(
+      "telecallerQuickList"
+    );
+
+  const coordinatorContainer =
+    document.getElementById(
+      "coordinatorQuickList"
+    );
+
+
+  const telecallers =
+    staffRecords
+      .filter(
+        x =>
+          normalizeRole(x.role) ===
+          "telecaller"
+      )
+      .sort(
+        (a,b)=>
+          safe(a.name)
+            .localeCompare(
+              safe(b.name)
+            )
+      );
+
+
+  const coordinators =
+    staffRecords
+      .filter(
+        x =>
+          normalizeRole(x.role) ===
+          "coordinator"
+      )
+      .sort(
+        (a,b)=>
+          safe(a.name)
+            .localeCompare(
+              safe(b.name)
+            )
+      );
+
+
+  /* TELECALLER */
+
+  if(!telecallers.length){
+
+    telecallerContainer.innerHTML = `
+      <div class="empty">
+        📞 No Telecaller found.<br><br>
+        Add Telecaller in Staff List or assign a Telecaller
+        to an inquiry.
       </div>
+    `;
+
+  }else{
+
+    telecallerContainer.innerHTML =
+      telecallers
+        .map((person,index)=>{
+
+          const handled =
+            inquiries.filter(
+              inquiry => {
+
+                const name =
+                  safe(
+                    inquiry.telecallerName
+                  ).trim()
+                  .toLowerCase();
+
+                const mobile =
+                  cleanMobile(
+                    inquiry.telecallerMobile
+                  );
+
+                const pName =
+                  safe(
+                    person.name
+                  ).trim()
+                  .toLowerCase();
+
+                const pMobile =
+                  cleanMobile(
+                    person.mobile
+                  );
+
+                return (
+                  (
+                    pMobile &&
+                    mobile &&
+                    pMobile === mobile
+                  ) ||
+                  (
+                    pName &&
+                    name &&
+                    pName === name
+                  )
+                );
+
+              }
+            ).length;
 
 
-      <div class="staff-meta">
+          return `
+            <div
+              style="
+                display:flex;
+                align-items:center;
+                gap:11px;
+                padding:11px 0;
+                border-bottom:1px solid #edf1f5;
+              "
+            >
 
-        <div class="meta">
-          <small>Inquiries</small>
-          <strong>${count}</strong>
-        </div>
+              <div class="staffAvatar"
+                   style="width:38px;height:38px;border-radius:10px;">
+                ${escapeHtml(
+                  initials(person.name)
+                )}
+              </div>
 
-        <div class="meta">
-          <small>Source</small>
-          <strong>
-            ${item.source==="staff"?"Staff":"Inquiry"}
-          </strong>
-        </div>
+              <div style="flex:1;min-width:0;">
 
+                <div style="
+                  font-weight:800;
+                  font-size:12px;
+                ">
+                  ${escapeHtml(
+                    person.name ||
+                    "Telecaller"
+                  )}
+                </div>
+
+                <div style="
+                  color:var(--muted);
+                  font-size:10px;
+                  margin-top:2px;
+                ">
+                  ${
+                    person.mobile
+                    ?
+                    escapeHtml(
+                      person.mobile
+                    )
+                    :
+                    "Mobile not available"
+                  }
+                </div>
+
+              </div>
+
+              <div style="text-align:right;">
+
+                <div style="
+                  font-size:14px;
+                  font-weight:850;
+                ">
+                  ${handled}
+                </div>
+
+                <div style="
+                  color:var(--muted);
+                  font-size:9px;
+                ">
+                  inquiries
+                </div>
+
+              </div>
+
+            </div>
+          `;
+
+        })
+        .join("");
+
+  }
+
+
+  /* COORDINATOR */
+
+  if(!coordinators.length){
+
+    coordinatorContainer.innerHTML = `
+      <div class="empty">
+        🧑‍💼 No Coordinator found.
       </div>
+    `;
 
+  }else{
 
-      <div class="staff-actions">
+    coordinatorContainer.innerHTML = `
 
-        <button
-          class="staff-action view-btn"
-          onclick="viewStaff('${attr(item.id)}')"
-        >
-          View
-        </button>
+      <div class="staffGrid">
 
         ${
-          item.source==="staff"
-          ?
+          coordinators
+            .map(person => {
 
-          `
-          <button
-            class="staff-action toggle-btn"
-            onclick="toggleStaff('${attr(item.id)}')"
-          >
-            ${status==="active"?"Deactivate":"Activate"}
-          </button>
+              const assigned =
+                inquiries.filter(
+                  inquiry => {
 
-          <button
-            class="staff-action delete-btn"
-            onclick="deleteStaff('${attr(item.id)}')"
-          >
-            Delete
-          </button>
-          `
+                    const name =
+                      safe(
+                        inquiry.coordinatorName
+                      )
+                      .trim()
+                      .toLowerCase();
 
-          :
+                    const mobile =
+                      cleanMobile(
+                        inquiry.coordinatorMobile
+                      );
 
-          `
-          <button
-            class="staff-action toggle-btn"
-            onclick="staffInquiry('${attr(item.name||"")}', '${role}')"
-          >
-            Inquiries
-          </button>
-          `
+                    const pName =
+                      safe(
+                        person.name
+                      )
+                      .trim()
+                      .toLowerCase();
+
+                    const pMobile =
+                      cleanMobile(
+                        person.mobile
+                      );
+
+                    return (
+                      (
+                        pMobile &&
+                        mobile &&
+                        pMobile === mobile
+                      ) ||
+                      (
+                        pName &&
+                        name &&
+                        pName === name
+                      )
+                    );
+
+                  }
+                ).length;
+
+
+              return `
+                <div class="staffCard">
+
+                  <div class="staffHead">
+
+                    <div class="staffAvatar">
+                      ${escapeHtml(
+                        initials(
+                          person.name
+                        )
+                      )}
+                    </div>
+
+                    <div style="flex:1;">
+
+                      <div class="staffName">
+                        ${escapeHtml(
+                          person.name
+                        )}
+                      </div>
+
+                      <div class="staffRole">
+                        Coordinator
+                      </div>
+
+                    </div>
+
+                    <span class="badge badgeActive">
+                      Active
+                    </span>
+
+                  </div>
+
+                  <div class="staffInfo">
+
+                    <div class="infoBox">
+
+                      <div class="infoLabel">
+                        MOBILE
+                      </div>
+
+                      <div class="infoValue">
+                        ${
+                          person.mobile
+                          ?
+                          escapeHtml(
+                            person.mobile
+                          )
+                          :
+                          "Not available"
+                        }
+                      </div>
+
+                    </div>
+
+                    <div class="infoBox">
+
+                      <div class="infoLabel">
+                        INQUIRIES
+                      </div>
+
+                      <div class="infoValue">
+                        ${assigned}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              `;
+
+            })
+            .join("")
         }
 
       </div>
 
     `;
 
-
-    grid.appendChild(card);
-
-  });
+  }
 
 }
 
 
-/* =====================================================
-   STAFF STATS
-===================================================== */
+/* =========================================
+   FILTER OPTIONS
+========================================= */
 
-function updateStaffStats(){
+function updateCourseFilter(){
 
-  const coordinators=
-    staff.filter(x=>normalizeRole(x.role)==="coordinator");
+  const select =
+    document.getElementById(
+      "inquiryCourseFilter"
+    );
 
-  const telecallers=
-    staff.filter(x=>normalizeRole(x.role)==="telecaller");
-
-
-  document.getElementById("coordinatorCount").textContent=
-    coordinators.length;
-
-  document.getElementById("telecallerCount").textContent=
-    telecallers.length;
-
-  document.getElementById("sideStaff").textContent=
-    staff.length;
-
-}
+  const current =
+    select.value;
 
 
-/* =====================================================
-   INQUIRY FILTERS
-===================================================== */
-
-function buildFilters(){
-
-  const courses=[
-    ...new Set(
+  const courses =
+    [...new Set(
       inquiries
-      .map(x=>String(x.course||"").trim())
-      .filter(Boolean)
-    )
-  ].sort();
+        .map(
+          x => safe(x.course).trim()
+        )
+        .filter(Boolean)
+    )]
+    .sort();
 
 
-  const coordinators=[
-    ...new Set(
-      inquiries
-      .map(x=>String(x.coordinatorName||"").trim())
-      .filter(Boolean)
-    )
-  ].sort();
+  select.innerHTML = `
+    <option value="">
+      All Courses
+    </option>
+  `;
 
 
-  const courseSelect=document.getElementById("course");
-  const coordinatorSelect=document.getElementById("coordinator");
+  courses.forEach(course => {
 
+    const option =
+      document.createElement("option");
 
-  const oldCourse=courseSelect.value;
-  const oldCoordinator=coordinatorSelect.value;
+    option.value = course;
 
+    option.textContent = course;
 
-  courseSelect.innerHTML=
-    `<option value="all">All Courses</option>`;
-
-
-  courses.forEach(course=>{
-
-    const option=document.createElement("option");
-
-    option.value=course;
-    option.textContent=course;
-
-    courseSelect.appendChild(option);
+    select.appendChild(option);
 
   });
 
 
-  coordinatorSelect.innerHTML=
-    `<option value="all">All Coordinators</option>`;
-
-
-  coordinators.forEach(name=>{
-
-    const option=document.createElement("option");
-
-    option.value=name;
-    option.textContent=name;
-
-    coordinatorSelect.appendChild(option);
-
-  });
-
-
-  if(courses.includes(oldCourse))
-    courseSelect.value=oldCourse;
-
-  if(coordinators.includes(oldCoordinator))
-    coordinatorSelect.value=oldCoordinator;
+  if(courses.includes(current)){
+    select.value = current;
+  }
 
 }
 
 
-/* =====================================================
-   INQUIRY FILTER
-===================================================== */
+function updatePeopleFilters(){
 
-function applyInquiryFilters(){
+  const coordinatorSelect =
+    document.getElementById(
+      "inquiryCoordinatorFilter"
+    );
 
-  const search=
-    document.getElementById("search")
-      .value
-      .trim()
-      .toLowerCase();
-
-  const course=
-    document.getElementById("course").value;
-
-  const status=
-    document.getElementById("status").value;
-
-  const coordinator=
-    document.getElementById("coordinator").value;
+  const telecallerSelect =
+    document.getElementById(
+      "inquiryTelecallerFilter"
+    );
 
 
-  filteredInquiries=inquiries.filter(item=>{
-
-    const text=(
-      String(item.studentName||"")+" "+
-      String(item.mobile||"")+" "+
-      String(item.course||"")+" "+
-      String(item.source||"")+" "+
-      String(item.coordinatorName||"")+" "+
-      String(item.telecallerName||"")
-    ).toLowerCase();
-
-
-    return (
-
-      (!search || text.includes(search))
-
-      &&
-
-      (
-        course==="all" ||
-        String(item.course||"")===course
+  const coordinators =
+    staffRecords
+      .filter(
+        x =>
+          normalizeRole(x.role) ===
+          "coordinator"
       )
+      .sort(
+        (a,b)=>
+          safe(a.name)
+            .localeCompare(
+              safe(b.name)
+            )
+      );
 
-      &&
 
-      (
-        status==="all" ||
-        normalizeStatus(item)===status
+  const telecallers =
+    staffRecords
+      .filter(
+        x =>
+          normalizeRole(x.role) ===
+          "telecaller"
       )
+      .sort(
+        (a,b)=>
+          safe(a.name)
+            .localeCompare(
+              safe(b.name)
+            )
+      );
 
-      &&
 
-      (
-        coordinator==="all" ||
-        String(item.coordinatorName||"")===coordinator
-      )
+  const oldCoordinator =
+    coordinatorSelect.value;
 
+  const oldTelecaller =
+    telecallerSelect.value;
+
+
+  coordinatorSelect.innerHTML = `
+    <option value="">
+      All Coordinators
+    </option>
+  `;
+
+
+  coordinators.forEach(person => {
+
+    const option =
+      document.createElement("option");
+
+    option.value =
+      safe(person.name);
+
+    option.textContent =
+      safe(person.name);
+
+    coordinatorSelect.appendChild(
+      option
     );
 
   });
 
 
-  renderInquiries();
-
-}
-
-
-document.getElementById("search")
-.addEventListener("input",applyInquiryFilters);
-
-document.getElementById("course")
-.addEventListener("change",applyInquiryFilters);
-
-document.getElementById("status")
-.addEventListener("change",applyInquiryFilters);
-
-document.getElementById("coordinator")
-.addEventListener("change",applyInquiryFilters);
+  telecallerSelect.innerHTML = `
+    <option value="">
+      All Telecallers
+    </option>
+  `;
 
 
-/* =====================================================
-   RENDER INQUIRIES
-===================================================== */
+  telecallers.forEach(person => {
 
-function renderInquiries(){
+    const option =
+      document.createElement("option");
 
-  const tbody=document.getElementById("tbody");
+    option.value =
+      safe(person.name);
 
-  tbody.innerHTML="";
+    option.textContent =
+      safe(person.name);
+
+    telecallerSelect.appendChild(
+      option
+    );
+
+  });
 
 
-  document.getElementById("resultCount").textContent=
-    filteredInquiries.length+" inquiries";
+  if(
+    coordinators.some(
+      x => safe(x.name) === oldCoordinator
+    )
+  ){
 
-
-  if(!filteredInquiries.length){
-
-    document.getElementById("tableWrap").style.display="none";
-    document.getElementById("empty").style.display="block";
-
-    return;
+    coordinatorSelect.value =
+      oldCoordinator;
 
   }
 
 
-  document.getElementById("empty").style.display="none";
-  document.getElementById("tableWrap").style.display="block";
+  if(
+    telecallers.some(
+      x => safe(x.name) === oldTelecaller
+    )
+  ){
+
+    telecallerSelect.value =
+      oldTelecaller;
+
+  }
+
+}
 
 
-  filteredInquiries.forEach(item=>{
+/* =========================================
+   RENDER INQUIRIES
+========================================= */
 
-    const status=normalizeStatus(item);
+window.renderInquiries = function(){
 
-    const tr=document.createElement("tr");
-
-
-    tr.innerHTML=`
-
-      <td>
-
-        <div class="student-name">
-          ${escapeHtml(item.studentName||"Student")}
-        </div>
-
-        <div class="student-mobile">
-          ${escapeHtml(displayMobile(item.mobile||""))}
-        </div>
-
-      </td>
+  const tbody =
+    document.getElementById(
+      "inquiryTable"
+    );
 
 
-      <td>
-        <span class="course">
-          ${escapeHtml(item.course||"—")}
-        </span>
-      </td>
+  const search =
+    safe(
+      document.getElementById(
+        "inquirySearch"
+      ).value
+    )
+    .toLowerCase()
+    .trim();
 
 
-      <td>
-        ${escapeHtml(item.source||"Direct")}
-      </td>
+  const course =
+    safe(
+      document.getElementById(
+        "inquiryCourseFilter"
+      ).value
+    );
 
 
-      <td>
-        <div class="coord">
-          ${escapeHtml(item.coordinatorName||"—")}
-        </div>
-      </td>
+  const status =
+    safe(
+      document.getElementById(
+        "inquiryStatusFilter"
+      ).value
+    )
+    .toLowerCase();
 
 
-      <td>
-        <div class="tele">
-          ${escapeHtml(item.telecallerName||"Not assigned")}
-        </div>
-      </td>
+  const coordinator =
+    safe(
+      document.getElementById(
+        "inquiryCoordinatorFilter"
+      ).value
+    )
+    .toLowerCase();
 
 
-      <td>
-        <span class="date">
-          ${escapeHtml(formatDate(item.createdAt))}
-        </span>
-      </td>
+  const telecaller =
+    safe(
+      document.getElementById(
+        "inquiryTelecallerFilter"
+      ).value
+    )
+    .toLowerCase();
 
 
-      <td>
-        ${statusHTML(status)}
-      </td>
+  let list =
+    inquiries.filter(inquiry => {
+
+      const student =
+        safe(
+          inquiry.studentName
+        ).toLowerCase();
+
+      const mobile =
+        cleanMobile(
+          inquiry.mobile
+        );
+
+      const inquiryCourse =
+        safe(
+          inquiry.course
+        ).toLowerCase();
+
+      const source =
+        safe(
+          inquiry.source
+        ).toLowerCase();
+
+      const coordinatorName =
+        safe(
+          inquiry.coordinatorName
+        ).toLowerCase();
+
+      const telecallerName =
+        safe(
+          inquiry.telecallerName
+        ).toLowerCase();
+
+      const inquiryStatus =
+        getStatus(inquiry);
 
 
-      <td>
+      const searchMatch =
+        !search ||
+        student.includes(search) ||
+        mobile.includes(
+          search.replace(/\D/g,"")
+        ) ||
+        inquiryCourse.includes(search) ||
+        source.includes(search) ||
+        coordinatorName.includes(search) ||
+        telecallerName.includes(search);
 
-        <div class="actions">
 
-          <button
-            class="action call"
-            title="Call"
-            onclick="callStudent('${attr(item.id)}')"
-          >
-            ☎
-          </button>
+      const courseMatch =
+        !course ||
+        safe(inquiry.course) === course;
 
-          <button
-            class="action wa"
-            title="WhatsApp"
-            onclick="whatsapp('${attr(item.id)}')"
-          >
-            ◉
-          </button>
 
-          <button
-            class="action view"
-            title="View"
-            onclick="viewInquiry('${attr(item.id)}')"
-          >
-            👁
-          </button>
+      const statusMatch =
+        !status ||
+        inquiryStatus === status;
 
-          <button
-            class="action change"
-            title="Change Status"
-            onclick="openStatus('${attr(item.id)}')"
-          >
-            ⇄
-          </button>
 
-          <button
-            class="action del"
-            title="Delete"
-            onclick="deleteInquiry('${attr(item.id)}')"
-          >
-            ×
-          </button>
+      const coordinatorMatch =
+        !coordinator ||
+        coordinatorName === coordinator;
 
-        </div>
 
-      </td>
+      const telecallerMatch =
+        !telecaller ||
+        telecallerName === telecaller;
 
+
+      return (
+        searchMatch &&
+        courseMatch &&
+        statusMatch &&
+        coordinatorMatch &&
+        telecallerMatch
+      );
+
+    });
+
+
+  if(!list.length){
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="9">
+          <div class="empty">
+            No inquiries found.
+          </div>
+        </td>
+      </tr>
     `;
 
+    return;
 
-    tbody.appendChild(tr);
+  }
 
-  });
+
+  tbody.innerHTML =
+    list.map(inquiry => {
+
+      const id =
+        safe(inquiry.id);
+
+      const statusValue =
+        getStatus(inquiry);
+
+      const mobile =
+        cleanMobile(
+          inquiry.mobile
+        );
+
+
+      return `
+        <tr>
+
+          <td>
+
+            <div class="name">
+              ${escapeHtml(
+                inquiry.studentName ||
+                "Unknown"
+              )}
+            </div>
+
+            <div class="muted">
+              ${escapeHtml(
+                inquiry.remark ||
+                ""
+              )}
+            </div>
+
+          </td>
+
+
+          <td>
+            ${escapeHtml(
+              inquiry.mobile ||
+              "—"
+            )}
+          </td>
+
+
+          <td>
+            ${escapeHtml(
+              inquiry.course ||
+              "—"
+            )}
+          </td>
+
+
+          <td>
+            ${escapeHtml(
+              inquiry.source ||
+              "Coordinator"
+            )}
+          </td>
+
+
+          <td>
+            ${
+              inquiry.coordinatorName
+              ?
+              `
+              <div class="name">
+                ${escapeHtml(
+                  inquiry.coordinatorName
+                )}
+              </div>
+              <div class="muted">
+                ${escapeHtml(
+                  inquiry.coordinatorMobile ||
+                  ""
+                )}
+              </div>
+              `
+              :
+              "—"
+            }
+          </td>
+
+
+          <td>
+            ${
+              inquiry.telecallerName
+              ?
+              `
+              <div class="name">
+                ${escapeHtml(
+                  inquiry.telecallerName
+                )}
+              </div>
+              <div class="muted">
+                ${escapeHtml(
+                  inquiry.telecallerMobile ||
+                  ""
+                )}
+              </div>
+              `
+              :
+              `
+              <span class="badge badgePending">
+                Not Assigned
+              </span>
+              `
+            }
+          </td>
+
+
+          <td>
+            ${statusBadge(
+              statusValue
+            )}
+          </td>
+
+
+          <td>
+            ${formatDate(
+              inquiry.createdAt
+            )}
+          </td>
+
+
+          <td>
+
+            <div style="
+              display:flex;
+              gap:5px;
+              flex-wrap:wrap;
+            ">
+
+              ${
+                mobile
+                ?
+                `
+                <button
+                  class="btn btnLight btnSmall"
+                  onclick="callNumber('${mobile}')"
+                >
+                  📞
+                </button>
+
+                <button
+                  class="btn btnLight btnSmall"
+                  onclick="openWhatsApp('${mobile}')"
+                >
+                  💬
+                </button>
+                `
+                :
+                ""
+              }
+
+
+              <button
+                class="btn btnLight btnSmall"
+                onclick="viewInquiry('${id}')"
+              >
+                👁
+              </button>
+
+
+              <button
+                class="btn btnPrimary btnSmall"
+                onclick="changeInquiryStatus('${id}')"
+              >
+                Status
+              </button>
+
+
+              <button
+                class="btn btnRed btnSmall"
+                onclick="deleteInquiry('${id}')"
+              >
+                🗑
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+      `;
+
+    })
+    .join("");
 
 }
 
 
-/* =====================================================
-   UPDATE STATS
-===================================================== */
+/* =========================================
+   STAFF DRAWER
+========================================= */
 
-function updateStats(){
+window.openStaffDrawer = function(){
 
-  let today=0;
-  let pending=0;
-  let converted=0;
+  document.getElementById(
+    "staffDrawer"
+  ).classList.add("show");
 
-
-  const start=new Date();
-
-  start.setHours(0,0,0,0);
-
-
-  inquiries.forEach(item=>{
-
-    if(timestamp(item.createdAt)>=start.getTime()){
-      today++;
-    }
-
-
-    const status=normalizeStatus(item);
-
-
-    if(
-      status==="new" ||
-      status==="pending" ||
-      status==="follow-up"
-    ){
-      pending++;
-    }
-
-
-    if(status==="converted"){
-      converted++;
-    }
-
-  });
-
-
-  document.getElementById("total").textContent=
-    inquiries.length;
-
-  document.getElementById("today").textContent=
-    today;
-
-  document.getElementById("pending").textContent=
-    pending;
-
-  document.getElementById("converted").textContent=
-    converted;
-
-  document.getElementById("sideInquiry").textContent=
-    inquiries.length;
-
-
-  updateStaffStats();
-
-}
-
-
-/* =====================================================
-   VIEW INQUIRY
-===================================================== */
-
-window.viewInquiry=function(id){
-
-  const item=inquiries.find(x=>x.id===id);
-
-  if(!item)return;
-
-
-  selectedInquiry=item;
-
-
-  document.getElementById("details").innerHTML=`
-
-    <div class="detail">
-      <div class="detail-label">Student</div>
-      <div class="detail-value">
-        ${escapeHtml(item.studentName||"—")}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Mobile</div>
-      <div class="detail-value">
-        ${escapeHtml(displayMobile(item.mobile||""))}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Course</div>
-      <div class="detail-value">
-        ${escapeHtml(item.course||"—")}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Source</div>
-      <div class="detail-value">
-        ${escapeHtml(item.source||"Direct")}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Coordinator</div>
-      <div class="detail-value">
-        ${escapeHtml(item.coordinatorName||"—")}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Coordinator Mobile</div>
-      <div class="detail-value">
-        ${escapeHtml(displayMobile(item.coordinatorMobile||""))}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Telecaller</div>
-      <div class="detail-value">
-        ${escapeHtml(item.telecallerName||"Not assigned")}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Telecaller Mobile</div>
-      <div class="detail-value">
-        ${escapeHtml(displayMobile(item.telecallerMobile||""))}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Status</div>
-      <div class="detail-value">
-        ${escapeHtml(statusLabel(normalizeStatus(item)))}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Received</div>
-      <div class="detail-value">
-        ${escapeHtml(formatDate(item.createdAt))}
-      </div>
-    </div>
-
-  `;
-
-
-  const remark=
-    item.telecallerRemark ||
-    item.remark ||
-    "";
-
-
-  if(remark){
-
-    document.getElementById("remark").style.display="block";
-
-    document.getElementById("remarkText").textContent=
-      remark;
-
-  }else{
-
-    document.getElementById("remark").style.display="none";
-
-  }
-
-
-  document.getElementById("callBtn").onclick=()=>{
-    callStudent(id);
-  };
-
-
-  document.getElementById("waBtn").onclick=()=>{
-    whatsapp(id);
-  };
-
-
-  document.getElementById("statusBtn").onclick=()=>{
-    closeModal("detailsModal");
-    openStatus(id);
-  };
-
-
-  openModal("detailsModal");
+  document.getElementById(
+    "drawerOverlay"
+  ).classList.add("show");
 
 };
 
 
-/* =====================================================
-   STATUS
-===================================================== */
+window.closeStaffDrawer = function(){
 
-window.openStatus=function(id){
+  document.getElementById(
+    "staffDrawer"
+  ).classList.remove("show");
 
-  const item=inquiries.find(x=>x.id===id);
-
-  if(!item)return;
-
-
-  selectedInquiry=item;
-
-
-  document.getElementById("statusStudent").textContent=
-    (item.studentName||"Student")+" — Select status";
-
-
-  openModal("statusModal");
+  document.getElementById(
+    "drawerOverlay"
+  ).classList.remove("show");
 
 };
 
 
-window.changeStatus=async function(status){
+window.saveStaff = async function(event){
 
-  if(!selectedInquiry)return;
+  event.preventDefault();
 
 
-  try{
+  const name =
+    safe(
+      document.getElementById(
+        "staffName"
+      ).value
+    ).trim();
 
-    await updateDoc(
 
-      doc(
-        db,
-        "studentInquiries",
-        selectedInquiry.id
-      ),
-
-      {
-        status:status,
-        telecallerStatus:status,
-        updatedAt:serverTimestamp()
-      }
-
-    );
-
-
-    closeModal("statusModal");
-
-    showToast("Status updated successfully.");
-
-    selectedInquiry=null;
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast("Unable to update status.");
-
-  }
-
-};
-
-
-/* =====================================================
-   CALL
-===================================================== */
-
-window.callStudent=function(id){
-
-  const item=inquiries.find(x=>x.id===id);
-
-  if(!item)return;
-
-
-  const mobile=cleanMobile(item.mobile||"");
-
-
-  if(mobile.length!==10){
-
-    showToast("Valid mobile number not available.");
-
-    return;
-
-  }
-
-
-  location.href="tel:+91"+mobile;
-
-};
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
-
-window.whatsapp=function(id){
-
-  const item=inquiries.find(x=>x.id===id);
-
-  if(!item)return;
-
-
-  const mobile=cleanMobile(item.mobile||"");
-
-
-  if(mobile.length!==10){
-
-    showToast("Valid mobile number not available.");
-
-    return;
-
-  }
-
-
-  const message=
-    "Hello "+(item.studentName||"Student")+
-    ", this is BlackTerminal Computer Institute, Baripada. "+
-    "We are contacting you regarding your inquiry for "+
-    (item.course||"course")+".";
-
-
-  window.open(
-    "https://wa.me/91"+
-    mobile+
-    "?text="+encodeURIComponent(message),
-    "_blank"
-  );
-
-};
-
-
-/* =====================================================
-   DELETE INQUIRY
-===================================================== */
-
-window.deleteInquiry=function(id){
-
-  const item=inquiries.find(x=>x.id===id);
-
-  if(!item)return;
-
-
-  deleteTarget=item;
-  deleteType="inquiry";
-
-
-  document.getElementById("deleteText").textContent=
-    "Delete inquiry for "+
-    (item.studentName||"this student")+
-    "? This action cannot be undone.";
-
-
-  openModal("deleteModal");
-
-};
-
-
-/* =====================================================
-   STAFF VIEW
-===================================================== */
-
-window.viewStaff=function(id){
-
-  const item=staff.find(x=>x.id===id);
-
-  if(!item)return;
-
-
-  selectedStaff=item;
-
-
-  const role=normalizeRole(item.role);
-  const status=normalizeStaffStatus(item.status);
-
-
-  document.getElementById("staffDetails").innerHTML=`
-
-    <div class="detail">
-      <div class="detail-label">Name</div>
-      <div class="detail-value">
-        ${escapeHtml(item.name||"—")}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Mobile</div>
-      <div class="detail-value">
-        ${escapeHtml(displayMobile(item.mobile||""))}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Role</div>
-      <div class="detail-value">
-        ${escapeHtml(roleLabel(role))}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Status</div>
-      <div class="detail-value">
-        ${status==="active"?"Active":"Inactive"}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Inquiry Activity</div>
-      <div class="detail-value">
-        ${getStaffInquiryCount(item)}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Source</div>
-      <div class="detail-value">
-        ${item.source==="staff"?"Staff Collection":"Inquiry Data"}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Last Login</div>
-      <div class="detail-value">
-        ${formatDate(item.lastLogin)}
-      </div>
-    </div>
-
-    <div class="detail">
-      <div class="detail-label">Note</div>
-      <div class="detail-value">
-        ${escapeHtml(item.note||"No note")}
-      </div>
-    </div>
-
-  `;
-
-
-  document.getElementById("staffCall").onclick=()=>{
-
-    const mobile=cleanMobile(item.mobile||"");
-
-    if(mobile.length===10){
-
-      location.href="tel:+91"+mobile;
-
-    }else{
-
-      showToast("Valid mobile number not available.");
-
-    }
-
-  };
-
-
-  document.getElementById("staffToggle").textContent=
-    status==="active"?"Deactivate":"Activate";
-
-
-  document.getElementById("staffToggle").onclick=()=>{
-
-    toggleStaff(id);
-
-  };
-
-
-  openModal("staffDetailsModal");
-
-};
-
-
-/* =====================================================
-   STAFF INQUIRY
-===================================================== */
-
-window.staffInquiry=function(name,role){
-
-  document.getElementById("search").value=name;
-
-  applyInquiryFilters();
-
-  go("inquirySection");
-
-};
-
-
-/* =====================================================
-   STAFF TOGGLE
-===================================================== */
-
-window.toggleStaff=async function(id){
-
-  const item=staff.find(x=>x.id===id);
-
-  if(!item)return;
-
-
-  if(item.source!=="staff"){
-
-    showToast(
-      "This staff was detected from inquiry data. Add it to Staff Collection for status management."
-    );
-
-    return;
-
-  }
-
-
-  const next=
-    normalizeStaffStatus(item.status)==="active"
-      ?"inactive"
-      :"active";
-
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "staff",
-        id
-      ),
-
-      {
-        status:next,
-        updatedAt:serverTimestamp()
-      }
-
-    );
-
-
-    closeModal("staffDetailsModal");
-
-    showToast(
-      next==="active"
-        ?"Staff activated."
-        :"Staff deactivated."
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast("Unable to change staff status.");
-
-  }
-
-};
-
-
-/* =====================================================
-   DELETE STAFF
-===================================================== */
-
-window.deleteStaff=function(id){
-
-  const item=staff.find(x=>x.id===id);
-
-  if(!item)return;
-
-
-  if(item.source!=="staff"){
-
-    showToast(
-      "Automatically detected staff cannot be deleted."
-    );
-
-    return;
-
-  }
-
-
-  deleteTarget=item;
-  deleteType="staff";
-
-
-  document.getElementById("deleteText").textContent=
-    "Delete staff member "+
-    (item.name||"this staff")+
-    "? This action cannot be undone.";
-
-
-  openModal("deleteModal");
-
-};
-
-
-/* =====================================================
-   CONFIRM DELETE
-===================================================== */
-
-window.confirmDelete=async function(){
-
-  if(!deleteTarget)return;
-
-
-  try{
-
-    if(deleteType==="staff"){
-
-      await deleteDoc(
-        doc(
-          db,
-          "staff",
-          deleteTarget.id
-        )
-      );
-
-      showToast("Staff deleted successfully.");
-
-    }
-
-
-    if(deleteType==="inquiry"){
-
-      await deleteDoc(
-        doc(
-          db,
-          "studentInquiries",
-          deleteTarget.id
-        )
-      );
-
-      showToast("Inquiry deleted successfully.");
-
-    }
-
-
-    closeModal("deleteModal");
-
-    deleteTarget=null;
-    deleteType=null;
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast("Delete failed.");
-
-  }
-
-};
-
-
-/* =====================================================
-   ADD STAFF
-===================================================== */
-
-window.openAddStaff=function(){
-
-  document.getElementById("staffNameInput").value="";
-  document.getElementById("staffMobileInput").value="";
-  document.getElementById("staffRoleInput").value="coordinator";
-  document.getElementById("staffStatusInput").value="active";
-  document.getElementById("staffNoteInput").value="";
-
-
-  openModal("staffFormModal");
-
-};
-
-
-window.saveStaff=async function(){
-
-  const name=
-    document.getElementById("staffNameInput")
-      .value.trim();
-
-  const mobile=
+  const mobile =
     cleanMobile(
-      document.getElementById("staffMobileInput").value
+      document.getElementById(
+        "staffMobile"
+      ).value
     );
 
-  const role=
-    document.getElementById("staffRoleInput").value;
 
-  const status=
-    document.getElementById("staffStatusInput").value;
+  const role =
+    safe(
+      document.getElementById(
+        "staffRole"
+      ).value
+    ).trim();
 
-  const note=
-    document.getElementById("staffNoteInput")
-      .value.trim();
+
+  const status =
+    safe(
+      document.getElementById(
+        "staffStatus"
+      ).value
+    );
+
+
+  const remark =
+    safe(
+      document.getElementById(
+        "staffRemark"
+      ).value
+    ).trim();
 
 
   if(!name){
 
-    showToast("Please enter staff name.");
+    showToast(
+      "Staff name required.",
+      "error"
+    );
 
     return;
 
   }
 
 
-  if(mobile.length!==10){
+  if(!/^\d{10}$/.test(mobile)){
 
-    showToast("Enter valid 10 digit mobile.");
+    showToast(
+      "Valid 10 digit mobile number required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!role){
+
+    showToast(
+      "Please select role.",
+      "error"
+    );
 
     return;
 
@@ -3355,33 +3495,57 @@ window.saveStaff=async function(){
   try{
 
     await addDoc(
-
-      collection(db,"staff"),
-
+      collection(
+        db,
+        "staff"
+      ),
       {
-        name:name,
-        mobile:mobile,
-        role:role,
-        status:status,
-        note:note,
-        createdAt:serverTimestamp(),
-        updatedAt:serverTimestamp(),
-        lastLogin:null
-      }
 
+        name,
+
+        fullName:name,
+
+        mobile,
+
+        phone:mobile,
+
+        role,
+
+        status,
+
+        remark,
+
+        createdAt:
+          serverTimestamp(),
+
+        updatedAt:
+          serverTimestamp()
+
+      }
     );
 
 
-    closeModal("staffFormModal");
+    closeStaffDrawer();
 
-    showToast("Staff added successfully.");
+    document.querySelector(
+      "#staffDrawer form"
+    ).reset();
+
+
+    showToast(
+      role +
+      " successfully added.",
+      "success"
+    );
 
   }catch(error){
 
     console.error(error);
 
     showToast(
-      "Unable to save staff. Check Firestore permission."
+      "Staff save nahi hua: " +
+      error.message,
+      "error"
     );
 
   }
@@ -3389,515 +3553,867 @@ window.saveStaff=async function(){
 };
 
 
-/* =====================================================
-   SUMMARY
-===================================================== */
+/* =========================================
+   STAFF VIEW
+========================================= */
 
-window.showSummary=function(){
+window.viewStaff = function(id){
 
-  const counts={
-    new:0,
-    pending:0,
-    contacted:0,
-    "follow-up":0,
-    converted:0,
-    "not-interested":0
-  };
+  const staff =
+    staffRecords.find(
+      x => x.id === id
+    );
 
 
-  inquiries.forEach(item=>{
+  if(!staff){
 
-    const s=normalizeStatus(item);
+    showToast(
+      "Staff details not found.",
+      "error"
+    );
 
-    if(counts[s]!==undefined){
-      counts[s]++;
-    }
+    return;
 
-  });
+  }
 
 
-  document.getElementById("summary").innerHTML=`
+  const role =
+    normalizeRole(staff.role);
 
-    <div class="detail">
-      <div class="detail-label">New</div>
-      <div class="detail-value">${counts.new}</div>
+
+  const roleText =
+    role.charAt(0).toUpperCase() +
+    role.slice(1);
+
+
+  const inquiryCount =
+    inquiries.filter(
+      inquiry => {
+
+        const pName =
+          safe(staff.name)
+            .trim()
+            .toLowerCase();
+
+        const iName =
+          safe(
+            role === "telecaller"
+            ? inquiry.telecallerName
+            : inquiry.coordinatorName
+          )
+          .trim()
+          .toLowerCase();
+
+
+        const pMobile =
+          cleanMobile(
+            staff.mobile
+          );
+
+        const iMobile =
+          cleanMobile(
+            role === "telecaller"
+            ? inquiry.telecallerMobile
+            : inquiry.coordinatorMobile
+          );
+
+
+        return (
+          (
+            pMobile &&
+            iMobile &&
+            pMobile === iMobile
+          ) ||
+          (
+            pName &&
+            iName &&
+            pName === iName
+          )
+        );
+
+      }
+    ).length;
+
+
+  document.getElementById(
+    "detailsContent"
+  ).innerHTML = `
+
+    <div style="
+      display:flex;
+      align-items:center;
+      gap:13px;
+      margin-bottom:20px;
+    ">
+
+      <div class="staffAvatar">
+        ${escapeHtml(
+          initials(
+            staff.name
+          )
+        )}
+      </div>
+
+      <div>
+
+        <div style="
+          font-size:18px;
+          font-weight:850;
+        ">
+          ${escapeHtml(
+            staff.name
+          )}
+        </div>
+
+        <div class="muted">
+          ${escapeHtml(
+            roleText
+          )}
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="detail">
-      <div class="detail-label">Pending</div>
-      <div class="detail-value">${counts.pending}</div>
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">
+        MOBILE
+      </div>
+      <div class="infoValue">
+        ${
+          staff.mobile
+          ?
+          escapeHtml(
+            staff.mobile
+          )
+          :
+          "Not available"
+        }
+      </div>
     </div>
 
-    <div class="detail">
-      <div class="detail-label">Contacted</div>
-      <div class="detail-value">${counts.contacted}</div>
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">
+        ROLE
+      </div>
+      <div class="infoValue">
+        ${escapeHtml(
+          roleText
+        )}
+      </div>
     </div>
 
-    <div class="detail">
-      <div class="detail-label">Follow-up</div>
-      <div class="detail-value">${counts["follow-up"]}</div>
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">
+        STATUS
+      </div>
+      <div class="infoValue">
+        ${escapeHtml(
+          staff.status ||
+          "active"
+        )}
+      </div>
     </div>
 
-    <div class="detail">
-      <div class="detail-label">Converted</div>
-      <div class="detail-value">${counts.converted}</div>
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">
+        RELATED INQUIRIES
+      </div>
+      <div class="infoValue">
+        ${inquiryCount}
+      </div>
     </div>
 
-    <div class="detail">
-      <div class="detail-label">Not Interested</div>
-      <div class="detail-value">${counts["not-interested"]}</div>
+
+    <div class="infoBox">
+
+      <div class="infoLabel">
+        REMARK
+      </div>
+
+      <div class="infoValue">
+        ${
+          staff.remark
+          ?
+          escapeHtml(
+            staff.remark
+          )
+          :
+          "No remark"
+        }
+      </div>
+
     </div>
 
   `;
 
 
-  openModal("summaryModal");
+  document.getElementById(
+    "detailsDrawer"
+  ).classList.add("show");
 
 };
 
 
-/* =====================================================
-   ROLE FILTER
-===================================================== */
+window.closeDetails = function(){
 
-window.showRole=function(role){
-
-  document.getElementById("staffRole").value=role;
-  document.getElementById("staffStatus").value="all";
-  document.getElementById("staffSearch").value="";
-
-  applyStaffFilters();
-
-  go("staffSection");
+  document.getElementById(
+    "detailsDrawer"
+  ).classList.remove("show");
 
 };
 
 
-/* =====================================================
-   REFRESH
-===================================================== */
+/* =========================================
+   STAFF STATUS
+========================================= */
 
-window.refreshAll=function(){
+window.toggleStaffStatus =
+async function(id,currentStatus){
 
-  showToast("Refreshing data...");
+  try{
 
-  if(inquiryUnsubscribe)
-    inquiryUnsubscribe();
-
-  if(staffUnsubscribe)
-    staffUnsubscribe();
-
-  loadInquiries();
-  loadStaff();
-
-};
+    const newStatus =
+      currentStatus === "active"
+      ? "inactive"
+      : "active";
 
 
-/* =====================================================
-   MODAL
-===================================================== */
+    await updateDoc(
+      doc(
+        db,
+        "staff",
+        id
+      ),
+      {
 
-window.openModal=function(id){
+        status:newStatus,
 
-  document.getElementById(id).classList.add("show");
+        updatedAt:
+          serverTimestamp()
 
-};
-
-
-window.closeModal=function(id){
-
-  document.getElementById(id).classList.remove("show");
-
-};
-
-
-document.querySelectorAll(".modal").forEach(modal=>{
-
-  modal.addEventListener("click",e=>{
-
-    if(e.target===modal){
-      modal.classList.remove("show");
-    }
-
-  });
-
-});
+      }
+    );
 
 
-document.addEventListener("keydown",e=>{
+    showToast(
+      "Staff status updated.",
+      "success"
+    );
 
-  if(e.key==="Escape"){
+  }catch(error){
 
-    document.querySelectorAll(".modal")
-      .forEach(x=>x.classList.remove("show"));
+    console.error(error);
+
+    showToast(
+      "Status update failed: " +
+      error.message,
+      "error"
+    );
 
   }
 
-});
+};
 
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
+/* =========================================
+   DELETE STAFF
+========================================= */
 
-window.go=function(id){
+window.deleteStaff =
+async function(id){
 
-  const el=document.getElementById(id);
+  const staff =
+    staffRecords.find(
+      x => x.id === id
+    );
 
-  if(el){
 
-    el.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
+  if(!staff){
+
+    return;
+
+  }
+
+
+  if(staff.source === "inquiry"){
+
+    showToast(
+      "Inquiry se generated staff record delete nahi hota.",
+      "info"
+    );
+
+    return;
+
+  }
+
+
+  const yes =
+    confirm(
+      "Delete " +
+      (staff.name || "this staff") +
+      "?"
+    );
+
+
+  if(!yes){
+
+    return;
+
+  }
+
+
+  try{
+
+    await deleteDoc(
+      doc(
+        db,
+        "staff",
+        id
+      )
+    );
+
+
+    showToast(
+      "Staff deleted.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Delete failed: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   INQUIRY VIEW
+========================================= */
+
+window.viewInquiry = function(id){
+
+  const inquiry =
+    inquiries.find(
+      x => x.id === id
+    );
+
+
+  if(!inquiry){
+
+    showToast(
+      "Inquiry not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "detailsContent"
+  ).innerHTML = `
+
+    <div style="
+      font-size:20px;
+      font-weight:850;
+      margin-bottom:4px;
+    ">
+      ${escapeHtml(
+        inquiry.studentName ||
+        "Student"
+      )}
+    </div>
+
+    <div class="muted" style="margin-bottom:18px;">
+      Student Inquiry
+    </div>
+
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">MOBILE</div>
+      <div class="infoValue">
+        ${escapeHtml(
+          inquiry.mobile || "—"
+        )}
+      </div>
+    </div>
+
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">COURSE</div>
+      <div class="infoValue">
+        ${escapeHtml(
+          inquiry.course || "—"
+        )}
+      </div>
+    </div>
+
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">SOURCE</div>
+      <div class="infoValue">
+        ${escapeHtml(
+          inquiry.source ||
+          "Coordinator"
+        )}
+      </div>
+    </div>
+
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">COORDINATOR</div>
+      <div class="infoValue">
+        ${
+          inquiry.coordinatorName
+          ?
+          escapeHtml(
+            inquiry.coordinatorName
+          ) +
+          "<br>" +
+          escapeHtml(
+            inquiry.coordinatorMobile ||
+            ""
+          )
+          :
+          "Not assigned"
+        }
+      </div>
+    </div>
+
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">TELECALLER</div>
+      <div class="infoValue">
+        ${
+          inquiry.telecallerName
+          ?
+          escapeHtml(
+            inquiry.telecallerName
+          ) +
+          "<br>" +
+          escapeHtml(
+            inquiry.telecallerMobile ||
+            ""
+          )
+          :
+          "Not assigned"
+        }
+      </div>
+    </div>
+
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">STATUS</div>
+      <div class="infoValue">
+        ${escapeHtml(
+          getStatus(inquiry)
+        )}
+      </div>
+    </div>
+
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">FOLLOW-UP DATE</div>
+      <div class="infoValue">
+        ${escapeHtml(
+          inquiry.followUpDate ||
+          "Not set"
+        )}
+      </div>
+    </div>
+
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">RECEIVED</div>
+      <div class="infoValue">
+        ${escapeHtml(
+          formatDateTime(
+            inquiry.createdAt
+          )
+        )}
+      </div>
+    </div>
+
+
+    <div class="infoBox" style="margin-bottom:9px;">
+      <div class="infoLabel">REMARK</div>
+      <div class="infoValue">
+        ${escapeHtml(
+          inquiry.remark ||
+          "No remark"
+        )}
+      </div>
+    </div>
+
+
+    <div class="infoBox">
+      <div class="infoLabel">
+        TELECALLER REMARK
+      </div>
+
+      <div class="infoValue">
+        ${escapeHtml(
+          inquiry.telecallerRemark ||
+          "No remark"
+        )}
+      </div>
+    </div>
+
+  `;
+
+
+  document.getElementById(
+    "detailsDrawer"
+  ).classList.add("show");
+
+};
+
+
+/* =========================================
+   CHANGE INQUIRY STATUS
+========================================= */
+
+window.changeInquiryStatus =
+async function(id){
+
+  const inquiry =
+    inquiries.find(
+      x => x.id === id
+    );
+
+
+  if(!inquiry){
+
+    return;
+
+  }
+
+
+  const current =
+    getStatus(inquiry);
+
+
+  const status =
+    prompt(
+      "Enter status:\n\nnew\npending\nfollow-up\nconverted\nclosed",
+      current
+    );
+
+
+  if(status === null){
+
+    return;
+
+  }
+
+
+  const cleanStatus =
+    status
+      .trim()
+      .toLowerCase();
+
+
+  const allowed = [
+    "new",
+    "pending",
+    "follow-up",
+    "converted",
+    "closed"
+  ];
+
+
+  if(!allowed.includes(cleanStatus)){
+
+    showToast(
+      "Invalid status.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    await updateDoc(
+      doc(
+        db,
+        "studentInquiries",
+        id
+      ),
+      {
+
+        status:
+          cleanStatus,
+
+        telecallerStatus:
+          cleanStatus,
+
+        updatedAt:
+          serverTimestamp()
+
+      }
+    );
+
+
+    showToast(
+      "Inquiry status updated.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Status update failed: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   DELETE INQUIRY
+========================================= */
+
+window.deleteInquiry =
+async function(id){
+
+  const inquiry =
+    inquiries.find(
+      x => x.id === id
+    );
+
+
+  if(!inquiry){
+
+    return;
+
+  }
+
+
+  const yes =
+    confirm(
+      "Delete inquiry of " +
+      (
+        inquiry.studentName ||
+        "this student"
+      ) +
+      "?"
+    );
+
+
+  if(!yes){
+
+    return;
+
+  }
+
+
+  try{
+
+    await deleteDoc(
+      doc(
+        db,
+        "studentInquiries",
+        id
+      )
+    );
+
+
+    showToast(
+      "Inquiry deleted.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Inquiry delete failed: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+};
+
+
+/* =========================================
+   CALL / WHATSAPP
+========================================= */
+
+window.callNumber =
+function(number){
+
+  const mobile =
+    cleanMobile(number);
+
+  if(!mobile){
+
+    showToast(
+      "Mobile number unavailable.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  window.location.href =
+    "tel:" + mobile;
+
+};
+
+
+window.openWhatsApp =
+function(number){
+
+  const mobile =
+    cleanMobile(number);
+
+  if(!mobile){
+
+    showToast(
+      "Mobile number unavailable.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const full =
+    mobile.length === 10
+    ? "91" + mobile
+    : mobile;
+
+
+  const text =
+    encodeURIComponent(
+      "Hello, this is BlackTerminal Computer Institute, Baripada."
+    );
+
+
+  window.open(
+    "https://wa.me/" +
+    full +
+    "?text=" +
+    text,
+    "_blank"
+  );
+
+};
+
+
+/* =========================================
+   REFRESH
+========================================= */
+
+window.loadInquiriesOnce =
+function(){
+
+  /*
+   Realtime listener already active.
+   This function simply refreshes local rendering.
+  */
+
+  renderInquiries();
+
+  renderStaff();
+
+  renderQuickPeople();
+
+  updateStats();
+
+  showToast(
+    "Dashboard refreshed.",
+    "success"
+  );
+
+};
+
+
+/* =========================================
+   SCROLL
+========================================= */
+
+window.scrollToStaff =
+function(type){
+
+  if(type === "telecaller"){
+
+    document.getElementById(
+      "telecallerSection"
+    ).scrollIntoView({
+      behavior:"smooth"
     });
 
   }
 
-  closeSidebar();
+};
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+window.toggleMobileMenu =
+function(){
+
+  document.getElementById(
+    "sidebar"
+  ).classList.toggle("open");
+
+  document.getElementById(
+    "mobileOverlay"
+  ).classList.toggle("show");
 
 };
 
 
-window.toggleSidebar=function(){
+window.closeMobileMenu =
+function(){
 
-  document
-    .getElementById("sidebar")
-    .classList.toggle("open");
+  document.getElementById(
+    "sidebar"
+  ).classList.remove("open");
 
-};
-
-
-window.closeSidebar=function(){
-
-  document
-    .getElementById("sidebar")
-    .classList.remove("open");
+  document.getElementById(
+    "mobileOverlay"
+  ).classList.remove("show");
 
 };
 
 
-/* =====================================================
-   HELPERS
-===================================================== */
+/* =========================================
+   START
+========================================= */
 
-function normalizeStatus(item){
+subscribeInquiries();
 
-  let status=
-    String(
-      item.telecallerStatus ||
-      item.status ||
-      "pending"
-    )
-    .toLowerCase()
-    .trim();
-
-
-  if(status==="followup" || status==="follow up")
-    status="follow-up";
-
-  if(status==="not interested" || status==="not_interested")
-    status="not-interested";
-
-
-  return status;
-
-}
-
-
-function statusLabel(status){
-
-  const labels={
-    new:"New",
-    pending:"Pending",
-    contacted:"Contacted",
-    "follow-up":"Follow-up",
-    converted:"Converted",
-    "not-interested":"Not Interested"
-  };
-
-  return labels[status]||"Pending";
-
-}
-
-
-function statusHTML(status){
-
-  return `
-    <span class="status s-${escapeHtml(status)}">
-      <span class="dot"></span>
-      ${escapeHtml(statusLabel(status))}
-    </span>
-  `;
-
-}
-
-
-function normalizeRole(role){
-
-  const value=
-    String(role||"")
-      .toLowerCase()
-      .trim();
-
-  if(value==="admin")
-    return "admin";
-
-  if(value==="coordinator")
-    return "coordinator";
-
-  return "telecaller";
-
-}
-
-
-function roleLabel(role){
-
-  if(role==="admin")
-    return "Admin";
-
-  if(role==="coordinator")
-    return "Coordinator";
-
-  return "Telecaller";
-
-}
-
-
-function normalizeStaffStatus(status){
-
-  return String(status||"active")
-    .toLowerCase()
-    .trim()==="inactive"
-      ?"inactive"
-      :"active";
-
-}
-
-
-function cleanMobile(value){
-
-  return String(value||"")
-    .replace(/\D/g,"");
-
-}
-
-
-function displayMobile(value){
-
-  const m=cleanMobile(value);
-
-  if(m.length===10){
-
-    return "+91 "+
-      m.substring(0,5)+" "+
-      m.substring(5);
-
-  }
-
-  return value||"—";
-
-}
-
-
-function timestamp(value){
-
-  if(!value)
-    return 0;
-
-  if(typeof value.toMillis==="function")
-    return value.toMillis();
-
-  if(value.seconds!==undefined)
-    return Number(value.seconds)*1000;
-
-  if(value._seconds!==undefined)
-    return Number(value._seconds)*1000;
-
-  const t=new Date(value).getTime();
-
-  return isNaN(t)?0:t;
-
-}
-
-
-function formatDate(value){
-
-  const t=timestamp(value);
-
-  if(!t)
-    return "Not available";
-
-  const date=new Date(t);
-
-  return date.toLocaleDateString(
-    "en-IN",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric"
-    }
-  )+" "+
-  date.toLocaleTimeString(
-    "en-IN",
-    {
-      hour:"2-digit",
-      minute:"2-digit"
-    }
-  );
-
-}
-
-
-function initials(name){
-
-  const parts=
-    String(name||"Staff")
-      .trim()
-      .split(/\s+/);
-
-  if(parts.length===1)
-    return parts[0].substring(0,2).toUpperCase();
-
-  return (
-    parts[0][0]+
-    parts[parts.length-1][0]
-  ).toUpperCase();
-
-}
-
-
-function slug(value){
-
-  return String(value||"")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g,"-");
-
-}
-
-
-function attr(value){
-
-  return String(value||"")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
-
-}
-
-
-function escapeHtml(value){
-
-  return String(value??"")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-function getStaffInquiryCount(item){
-
-  const role=normalizeRole(item.role);
-
-  const name=
-    String(item.name||"")
-      .toLowerCase()
-      .trim();
-
-  const mobile=
-    cleanMobile(item.mobile||"");
-
-
-  if(role==="coordinator"){
-
-    return inquiries.filter(x=>{
-
-      return (
-
-        (
-          mobile &&
-          cleanMobile(
-            x.coordinatorMobile||""
-          )===mobile
-        )
-
-        ||
-
-        (
-          name &&
-          String(
-            x.coordinatorName||""
-          ).toLowerCase().trim()===name
-        )
-
-      );
-
-    }).length;
-
-  }
-
-
-  if(role==="telecaller"){
-
-    return inquiries.filter(x=>{
-
-      return (
-
-        (
-          mobile &&
-          cleanMobile(
-            x.telecallerMobile||""
-          )===mobile
-        )
-
-        ||
-
-        (
-          name &&
-          String(
-            x.telecallerName||""
-          ).toLowerCase().trim()===name
-        )
-
-      );
-
-    }).length;
-
-  }
-
-
-  return inquiries.length;
-
-}
-
-
-function showError(id,message){
-
-  const el=document.getElementById(id);
-
-  el.textContent=message;
-  el.style.display="block";
-
-}
-
-
-function showToast(message){
-
-  const toast=document.getElementById("toast");
-
-  toast.textContent=message;
-  toast.classList.add("show");
-
-  clearTimeout(window.__toast);
-
-  window.__toast=setTimeout(()=>{
-
-    toast.classList.remove("show");
-
-  },3000);
-
-}
+subscribeStaff();
 
 </script>
 

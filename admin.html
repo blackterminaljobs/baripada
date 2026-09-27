@@ -1,4421 +1,1980 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BlackTerminal Admin Dashboard</title>
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Coordinator Payment Control | BlackTerminal</title>
 
 <style>
-:root{
-  --navy:#071426;
-  --navy2:#0c1d35;
-  --blue:#086ee1;
-  --blue2:#18a0ff;
-  --bg:#f4f7fb;
-  --white:#fff;
-  --text:#172236;
-  --muted:#738096;
-  --line:#e3e9f1;
-  --green:#16a34a;
-  --greenbg:#eaf8ef;
-  --orange:#f59e0b;
-  --orangebg:#fff7df;
-  --red:#dc2626;
-  --redbg:#fff0f0;
-  --purple:#7c3aed;
-  --purplebg:#f2edff;
-  --shadow:0 10px 30px rgba(15,35,65,.07);
-}
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
 }
 
 body{
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+    background:#f4f6fa;
+    color:#172033;
 }
 
-button,input,select,textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  width:255px;
-  background:linear-gradient(180deg,#061325,#0a1c34);
-  color:#fff;
-  z-index:1000;
-  overflow-y:auto;
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#101522;
+    color:#fff;
+    padding:24px 16px;
+    z-index:1000;
 }
 
 .logo{
-  height:72px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:0 22px;
-  border-bottom:1px solid rgba(255,255,255,.08);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 8px 25px;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.logoIcon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,var(--blue),var(--blue2));
-  font-weight:900;
-  font-size:17px;
+.logo-box{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:#fff;
+    color:#101522;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
 }
 
-.logoText strong{
-  display:block;
-  font-size:17px;
-  letter-spacing:.3px;
+.logo h2{
+    font-size:17px;
 }
 
-.logoText span{
-  font-size:11px;
-  color:#8ea3bd;
+.logo small{
+    display:block;
+    color:#8d98aa;
+    font-size:11px;
+    margin-top:3px;
 }
 
-.nav{
-  padding:18px 12px;
+.menu{
+    margin-top:25px;
 }
 
-.navTitle{
-  font-size:10px;
-  color:#667d98;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  padding:12px 12px 8px;
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#aeb7c7;
+    text-decoration:none;
+    padding:13px 14px;
+    border-radius:10px;
+    margin-bottom:7px;
+    font-size:14px;
+    transition:.2s;
 }
 
-.nav a{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px 13px;
-  margin-bottom:4px;
-  border-radius:10px;
-  color:#b8c6d8;
-  text-decoration:none;
-  font-size:13px;
-  transition:.2s;
+.menu a:hover,
+.menu a.active{
+    background:#1e2636;
+    color:#fff;
 }
 
-.nav a:hover,
-.nav a.active{
-  background:rgba(24,160,255,.13);
-  color:#fff;
+.menu-icon{
+    width:20px;
+    text-align:center;
 }
 
-.navIcon{
-  width:22px;
-  text-align:center;
-  font-size:16px;
-}
+/* =========================
+   MAIN
+========================= */
 
 .main{
-  margin-left:255px;
-  min-height:100vh;
+    margin-left:250px;
+    min-height:100vh;
 }
+
+/* =========================
+   TOPBAR
+========================= */
 
 .topbar{
-  height:72px;
-  background:#fff;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 28px;
-  position:sticky;
-  top:0;
-  z-index:500;
+    height:72px;
+    background:#fff;
+    border-bottom:1px solid #e7ebf1;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:900;
 }
 
-.pageTitle{
-  font-size:21px;
-  font-weight:800;
+.top-title h1{
+    font-size:20px;
 }
 
-.pageSubtitle{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:3px;
+.top-title p{
+    color:#8a94a6;
+    font-size:12px;
+    margin-top:3px;
 }
 
-.topRight{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.admin-profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.live{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-size:11px;
-  color:var(--green);
-  font-weight:700;
+.avatar{
+    width:40px;
+    height:40px;
+    background:#111827;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
 }
 
-.liveDot{
-  width:8px;
-  height:8px;
-  background:var(--green);
-  border-radius:50%;
-  box-shadow:0 0 0 4px rgba(22,163,74,.12);
+.profile-text strong{
+    display:block;
+    font-size:13px;
 }
 
-.adminBadge{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 12px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:#fff;
-  font-size:12px;
-  font-weight:700;
+.profile-text span{
+    display:block;
+    color:#8a94a6;
+    font-size:11px;
 }
 
-.adminAvatar{
-  width:31px;
-  height:31px;
-  border-radius:9px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,var(--blue),var(--blue2));
-  color:#fff;
-  font-weight:800;
+.mobile-menu{
+    display:none;
+    font-size:24px;
+    cursor:pointer;
 }
 
-.menuBtn{
-  display:none;
-  border:0;
-  background:var(--navy);
-  color:#fff;
-  width:40px;
-  height:40px;
-  border-radius:10px;
-  font-size:20px;
-}
+/* =========================
+   CONTENT
+========================= */
 
 .content{
-  padding:25px 28px 40px;
+    padding:28px;
 }
+
+/* =========================
+   HEADER BANNER
+========================= */
 
 .hero{
-  background:
-    radial-gradient(circle at 80% 20%,rgba(24,160,255,.27),transparent 35%),
-    linear-gradient(135deg,#071426,#0d315e);
-  color:#fff;
-  border-radius:18px;
-  padding:25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:25px;
-  margin-bottom:22px;
-  overflow:hidden;
+    background:linear-gradient(
+        135deg,
+        #111827,
+        #273248
+    );
+
+    color:#fff;
+
+    padding:28px;
+
+    border-radius:18px;
+
+    margin-bottom:25px;
+
+    position:relative;
+
+    overflow:hidden;
 }
 
-.hero h1{
-  font-size:27px;
-  margin-bottom:7px;
+.hero:after{
+    content:"";
+
+    position:absolute;
+
+    width:230px;
+    height:230px;
+
+    border-radius:50%;
+
+    border:35px solid rgba(255,255,255,.04);
+
+    right:-80px;
+    top:-100px;
+}
+
+.hero h2{
+    font-size:24px;
+    margin-bottom:8px;
 }
 
 .hero p{
-  color:#b9cce1;
-  font-size:13px;
-  max-width:650px;
-  line-height:1.6;
+    color:#c8cfdb;
+    font-size:13px;
+    max-width:650px;
 }
 
-.heroPills{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:16px;
+/* =========================
+   STATUS
+========================= */
+
+.status{
+    padding:13px 15px;
+    border-radius:11px;
+    font-size:12px;
+    margin-bottom:20px;
+    display:none;
 }
 
-.pill{
-  padding:7px 11px;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.07);
-  border-radius:30px;
-  font-size:11px;
-  color:#dcecff;
+.status.show{
+    display:block;
 }
 
-.heroIcon{
-  width:90px;
-  height:90px;
-  border-radius:24px;
-  display:grid;
-  place-items:center;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
-  font-size:43px;
-  flex-shrink:0;
+.status.success{
+    background:#eaf8ef;
+    color:#16803d;
+    border:1px solid #ccebd7;
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:14px;
-  margin-bottom:22px;
+.status.error{
+    background:#fff0f0;
+    color:#c62828;
+    border:1px solid #f2c8c8;
 }
 
-.stat{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:17px;
-  box-shadow:var(--shadow);
+.status.info{
+    background:#eef5ff;
+    color:#2563eb;
+    border:1px solid #d6e5ff;
 }
 
-.statTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+/* =========================
+   SUMMARY
+========================= */
+
+.summary{
+    display:grid;
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+
+    margin-bottom:25px;
 }
 
-.statIcon{
-  width:35px;
-  height:35px;
-  display:grid;
-  place-items:center;
-  border-radius:10px;
-  background:#edf5ff;
-  color:var(--blue);
+.summary-card{
+    background:#fff;
+
+    border:1px solid #e7ebf1;
+
+    border-radius:15px;
+
+    padding:20px;
 }
 
-.statLabel{
-  color:var(--muted);
-  font-size:11px;
-  font-weight:600;
+.summary-label{
+    font-size:11px;
+    color:#8993a4;
+    margin-bottom:10px;
 }
 
-.statValue{
-  font-size:25px;
-  font-weight:850;
+.summary-value{
+    font-size:26px;
+    font-weight:800;
 }
 
-.grid2{
-  display:grid;
-  grid-template-columns:1.25fr .75fr;
-  gap:20px;
+.summary-sub{
+    margin-top:6px;
+    font-size:11px;
+    color:#9ba4b2;
 }
+
+/* =========================
+   MAIN CARD
+========================= */
 
 .card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px;
-  box-shadow:var(--shadow);
-  margin-bottom:20px;
-  overflow:hidden;
+    background:#fff;
+
+    border:1px solid #e7ebf1;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    margin-bottom:25px;
 }
 
-.cardHeader{
-  padding:18px 20px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
+.card-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:20px;
 }
 
-.cardTitle{
-  font-size:15px;
-  font-weight:800;
+.card-header h3{
+    font-size:18px;
 }
 
-.cardSub{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:3px;
+.card-header p{
+    color:#8a94a6;
+    font-size:11px;
+    margin-top:4px;
 }
 
-.cardBody{
-  padding:20px;
+/* =========================
+   FORM
+========================= */
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
 }
 
-.filters{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
+.form-group label{
+    display:block;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    color:#4d586b;
+
+    margin-bottom:8px;
 }
 
-.input,
-.select{
-  border:1px solid var(--line);
-  background:#fff;
-  outline:none;
-  border-radius:9px;
-  padding:10px 11px;
-  font-size:12px;
-  color:var(--text);
-  min-height:39px;
+.input-wrap{
+    position:relative;
 }
 
-.input:focus,
-.select:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(8,110,225,.08);
+.currency{
+    position:absolute;
+
+    left:13px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    color:#778194;
+
+    font-weight:700;
+
+    font-size:13px;
 }
 
-.search{
-  min-width:230px;
+.form-group input{
+    width:100%;
+
+    border:1px solid #dce2ea;
+
+    border-radius:10px;
+
+    padding:13px 13px 13px 31px;
+
+    font-size:14px;
+
+    outline:none;
+
+    transition:.2s;
+}
+
+.form-group input:focus{
+    border-color:#111827;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(17,24,39,.06);
+}
+
+.help{
+    margin-top:7px;
+
+    font-size:10px;
+
+    color:#98a1af;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.button-row{
+    display:flex;
+
+    gap:10px;
+
+    margin-top:22px;
 }
 
 .btn{
-  border:0;
-  border-radius:9px;
-  padding:10px 13px;
-  font-size:12px;
-  font-weight:700;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
+    border:0;
+
+    border-radius:10px;
+
+    padding:12px 20px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
 }
 
-.btnPrimary{
-  background:var(--blue);
-  color:#fff;
+.btn-primary{
+    background:#111827;
+
+    color:#fff;
 }
 
-.btnPrimary:hover{
-  background:#075fc4;
+.btn-primary:hover{
+    background:#273248;
 }
 
-.btnLight{
-  background:#f2f6fb;
-  color:var(--text);
-  border:1px solid var(--line);
+.btn-secondary{
+    background:#f0f2f6;
+
+    color:#394457;
 }
 
-.btnGreen{
-  background:var(--green);
-  color:#fff;
+.btn-secondary:hover{
+    background:#e5e8ee;
 }
 
-.btnRed{
-  background:var(--red);
-  color:#fff;
+.btn:disabled{
+    opacity:.5;
+
+    cursor:not-allowed;
 }
 
-.btnSmall{
-  padding:7px 9px;
-  font-size:10px;
+/* =========================
+   PAYMENT RULE
+========================= */
+
+.rule-box{
+    background:#f8f9fc;
+
+    border:1px solid #e6eaf0;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    margin-top:20px;
 }
 
-.tableWrap{
-  overflow:auto;
+.rule-title{
+    font-size:13px;
+
+    font-weight:800;
+
+    margin-bottom:12px;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:920px;
+.rule-list{
+    display:grid;
+
+    gap:9px;
 }
 
-th{
-  background:#f8fafc;
-  color:#6d7c90;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  padding:12px 13px;
-  text-align:left;
-  border-bottom:1px solid var(--line);
+.rule-item{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 12px;
+
+    background:#fff;
+
+    border:1px solid #edf0f4;
+
+    border-radius:9px;
+
+    font-size:12px;
 }
 
-td{
-  padding:13px;
-  border-bottom:1px solid #edf1f5;
-  font-size:12px;
-  vertical-align:middle;
+.rule-item span:first-child{
+    color:#667185;
 }
 
-tr:hover td{
-  background:#fbfdff;
+.rule-item strong{
+    color:#111827;
 }
 
-.name{
-  font-weight:750;
+/* =========================
+   INFORMATION
+========================= */
+
+.info-box{
+    padding:16px;
+
+    background:#eef5ff;
+
+    border:1px solid #d7e5ff;
+
+    color:#315b96;
+
+    border-radius:12px;
+
+    font-size:12px;
+
+    line-height:1.7;
 }
 
-.muted{
-  color:var(--muted);
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  padding:5px 8px;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:750;
-}
-
-.badgeNew{
-  color:var(--blue);
-  background:#eaf4ff;
-}
-
-.badgePending{
-  color:#9a6700;
-  background:var(--orangebg);
-}
-
-.badgeFollow{
-  color:var(--purple);
-  background:var(--purplebg);
-}
-
-.badgeConverted{
-  color:var(--green);
-  background:var(--greenbg);
-}
-
-.badgeClosed{
-  color:var(--red);
-  background:var(--redbg);
-}
-
-.badgeActive{
-  color:var(--green);
-  background:var(--greenbg);
-}
-
-.badgeInactive{
-  color:var(--red);
-  background:var(--redbg);
-}
-
-.staffGrid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:13px;
-}
-
-.staffCard{
-  border:1px solid var(--line);
-  border-radius:13px;
-  padding:14px;
-  background:#fff;
-}
-
-.staffHead{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
-.staffAvatar{
-  width:43px;
-  height:43px;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  color:#fff;
-  font-weight:850;
-  background:linear-gradient(135deg,var(--blue),var(--blue2));
-  flex-shrink:0;
-}
-
-.staffName{
-  font-weight:800;
-  font-size:13px;
-}
-
-.staffRole{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
-}
-
-.staffInfo{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-  margin-top:13px;
-}
-
-.infoBox{
-  background:#f7f9fc;
-  padding:9px;
-  border-radius:8px;
-}
-
-.infoLabel{
-  color:var(--muted);
-  font-size:9px;
-  margin-bottom:3px;
-}
-
-.infoValue{
-  font-size:11px;
-  font-weight:700;
-  word-break:break-word;
-}
-
-.staffActions{
-  display:flex;
-  gap:6px;
-  margin-top:12px;
-}
-
-.empty{
-  padding:35px 15px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-}
+/* =========================
+   LOADING
+========================= */
 
 .loading{
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-}
+    text-align:center;
 
-.overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(2,12,26,.5);
-  z-index:1500;
-}
-
-.overlay.show{
-  display:block;
-}
-
-.drawer{
-  position:fixed;
-  right:0;
-  top:0;
-  bottom:0;
-  width:440px;
-  max-width:95vw;
-  background:#fff;
-  z-index:1600;
-  transform:translateX(110%);
-  transition:.25s;
-  box-shadow:-20px 0 60px rgba(0,0,0,.18);
-  overflow:auto;
-}
-
-.drawer.show{
-  transform:translateX(0);
-}
-
-.drawerHeader{
-  height:70px;
-  padding:0 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--line);
-}
-
-.drawerTitle{
-  font-size:16px;
-  font-weight:850;
-}
-
-.closeBtn{
-  width:35px;
-  height:35px;
-  border:0;
-  border-radius:9px;
-  background:#f2f5f8;
-  font-size:18px;
-}
-
-.form{
-  padding:20px;
-}
-
-.field{
-  margin-bottom:14px;
-}
-
-.field label{
-  display:block;
-  font-size:11px;
-  font-weight:750;
-  margin-bottom:6px;
-}
-
-.field .input,
-.field .select,
-.field textarea{
-  width:100%;
-}
-
-textarea{
-  resize:vertical;
-  min-height:90px;
-}
-
-.formActions{
-  display:flex;
-  gap:8px;
-  margin-top:18px;
-}
-
-.toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:3000;
-  min-width:280px;
-  max-width:390px;
-  background:#071426;
-  color:#fff;
-  padding:13px 15px;
-  border-radius:11px;
-  box-shadow:0 15px 40px rgba(0,0,0,.2);
-  transform:translateY(120px);
-  opacity:0;
-  transition:.25s;
-  font-size:12px;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-.toast.success{
-  border-left:4px solid var(--green);
-}
-
-.toast.error{
-  border-left:4px solid var(--red);
-}
-
-.toast.info{
-  border-left:4px solid var(--blue);
-}
-
-.mobileClose{
-  display:none;
-}
-
-@media(max-width:1200px){
-  .stats{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .grid2{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:850px){
-  .sidebar{
-    transform:translateX(-100%);
-    transition:.25s;
-  }
-
-  .sidebar.open{
-    transform:translateX(0);
-  }
-
-  .main{
-    margin-left:0;
-  }
-
-  .menuBtn{
-    display:block;
-  }
-
-  .topbar{
-    padding:0 16px;
-  }
-
-  .topRight .live{
-    display:none;
-  }
-
-  .content{
-    padding:18px 14px 30px;
-  }
-
-  .hero{
     padding:20px;
-  }
 
-  .heroIcon{
-    display:none;
-  }
+    color:#8b95a5;
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .staffGrid{
-    grid-template-columns:1fr;
-  }
+    font-size:12px;
 }
 
-@media(max-width:550px){
-  .pageTitle{
-    font-size:17px;
-  }
+/* =========================
+   FOOTER
+========================= */
 
-  .pageSubtitle{
-    display:none;
-  }
+.footer{
+    text-align:center;
 
-  .adminBadge span{
-    display:none;
-  }
+    padding:20px;
 
-  .hero h1{
-    font-size:22px;
-  }
+    color:#9aa3b2;
 
-  .stats{
-    grid-template-columns:1fr 1fr;
-    gap:9px;
-  }
-
-  .stat{
-    padding:13px;
-  }
-
-  .statValue{
-    font-size:21px;
-  }
-
-  .filters > *{
-    width:100%;
-  }
-
-  .search{
-    min-width:0;
-  }
+    font-size:11px;
 }
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:1000px){
+
+    .summary{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .form-grid{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+@media(max-width:760px){
+
+    .sidebar{
+        transform:
+            translateX(-100%);
+
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:
+            translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .profile-text{
+        display:none;
+    }
+
+    .topbar{
+        padding:0 17px;
+    }
+
+    .content{
+        padding:17px;
+    }
+
+    .summary{
+        grid-template-columns:
+            1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:
+            1fr;
+    }
+
+    .hero h2{
+        font-size:20px;
+    }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
 
-  <div class="logo">
-    <div class="logoIcon">BT</div>
-    <div class="logoText">
-      <strong>BlackTerminal</strong>
-      <span>Computer Institute</span>
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-box">
+            BT
+        </div>
+
+        <div>
+
+            <h2>
+                BlackTerminal
+            </h2>
+
+            <small>
+                Admin Panel
+            </small>
+
+        </div>
+
     </div>
-  </div>
 
-  <nav class="nav">
 
-    <div class="navTitle">Management</div>
+    <nav class="menu">
 
-    <a href="admin.html" class="active">
-      <span class="navIcon">📊</span>
-      Dashboard
-    </a>
+        <a href="admin.html">
 
-    <a href="student.html">
-      <span class="navIcon">🎓</span>
-      Students
-    </a>
+            <span class="menu-icon">
+                🏠
+            </span>
 
-    <a href="admission.html">
-      <span class="navIcon">📝</span>
-      Admissions
-    </a>
+            Admin Dashboard
 
-    <a href="#">
-      <span class="navIcon">💳</span>
-      Fees & Payments
-    </a>
+        </a>
 
-    <a href="#">
-      <span class="navIcon">📅</span>
-      Attendance
-    </a>
 
-    <div class="navTitle">People</div>
+        <a href="admin-coordinator-payment.html"
+           class="active">
 
-    <a href="#staffSection">
-      <span class="navIcon">👥</span>
-      Staff
-    </a>
+            <span class="menu-icon">
+                💰
+            </span>
 
-    <a href="#telecallerSection">
-      <span class="navIcon">📞</span>
-      Telecallers
-    </a>
+            Coordinator Payment
 
-    <a href="#coordinatorSection">
-      <span class="navIcon">🧑‍💼</span>
-      Coordinators
-    </a>
+        </a>
 
-    <div class="navTitle">Communication</div>
 
-    <a href="#">
-      <span class="navIcon">💬</span>
-      Communication
-    </a>
+        <a href="admin.html#staff">
 
-    <a href="#">
-      <span class="navIcon">📣</span>
-      Announcements
-    </a>
+            <span class="menu-icon">
+                👥
+            </span>
 
-    <div class="navTitle">Reports</div>
+            Staff Management
 
-    <a href="#">
-      <span class="navIcon">📈</span>
-      Reports
-    </a>
+        </a>
 
-    <a href="#">
-      <span class="navIcon">⚙️</span>
-      Settings
-    </a>
 
-  </nav>
+        <a href="admin.html#inquiries">
+
+            <span class="menu-icon">
+                📋
+            </span>
+
+            Student Inquiries
+
+        </a>
+
+    </nav>
+
 </aside>
 
-<div class="overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
 
-<!-- MAIN -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
 <main class="main">
 
-  <!-- TOPBAR -->
-  <header class="topbar">
 
-    <div style="display:flex;align-items:center;gap:12px;">
-      <button class="menuBtn" onclick="toggleMobileMenu()">☰</button>
+    <!-- TOPBAR -->
 
-      <div>
-        <div class="pageTitle">Admin Dashboard</div>
-        <div class="pageSubtitle">
-          BlackTerminal Computer Institute • Baripada
-        </div>
-      </div>
-    </div>
+    <header class="topbar">
 
-    <div class="topRight">
+        <div style="
+            display:flex;
+            align-items:center;
+            gap:15px;
+        ">
 
-      <div class="live">
-        <span class="liveDot"></span>
-        FIRESTORE LIVE
-      </div>
+            <div class="mobile-menu"
+                 onclick="toggleSidebar()">
 
-      <div class="adminBadge">
-        <div class="adminAvatar">A</div>
-        <span>Administrator</span>
-      </div>
+                ☰
 
-    </div>
-
-  </header>
-
-
-  <section class="content">
-
-    <!-- HERO -->
-    <div class="hero">
-
-      <div>
-        <h1>Admin Control Center</h1>
-
-        <p>
-          Monitor inquiries, coordinators, telecallers and staff
-          from one place. All important data is synced with Firestore.
-        </p>
-
-        <div class="heroPills">
-          <span class="pill">👥 Staff Management</span>
-          <span class="pill">📞 Telecaller List</span>
-          <span class="pill">🧑‍💼 Coordinator List</span>
-          <span class="pill">📊 Inquiry Monitoring</span>
-        </div>
-      </div>
-
-      <div class="heroIcon">
-        🛡️
-      </div>
-
-    </div>
-
-
-    <!-- STATS -->
-    <div class="stats">
-
-      <div class="stat">
-        <div class="statTop">
-          <span class="statLabel">Total Inquiries</span>
-          <div class="statIcon">📥</div>
-        </div>
-        <div class="statValue" id="totalInquiries">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="statTop">
-          <span class="statLabel">Today</span>
-          <div class="statIcon">📅</div>
-        </div>
-        <div class="statValue" id="todayInquiries">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="statTop">
-          <span class="statLabel">Pending</span>
-          <div class="statIcon">⏳</div>
-        </div>
-        <div class="statValue" id="pendingInquiries">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="statTop">
-          <span class="statLabel">Converted</span>
-          <div class="statIcon">🎓</div>
-        </div>
-        <div class="statValue" id="convertedInquiries">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="statTop">
-          <span class="statLabel">Coordinators</span>
-          <div class="statIcon">🧑‍💼</div>
-        </div>
-        <div class="statValue" id="coordinatorCount">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="statTop">
-          <span class="statLabel">Telecallers</span>
-          <div class="statIcon">📞</div>
-        </div>
-        <div class="statValue" id="telecallerCount">0</div>
-      </div>
-
-    </div>
-
-
-    <!-- STAFF + TELECALLER -->
-    <div class="grid2">
-
-      <!-- STAFF -->
-      <section class="card" id="staffSection">
-
-        <div class="cardHeader">
-
-          <div>
-            <div class="cardTitle">Staff List</div>
-            <div class="cardSub">
-              All Coordinator and Telecaller records
             </div>
-          </div>
-
-          <button class="btn btnPrimary" onclick="openStaffDrawer()">
-            ＋ Add Staff
-          </button>
-
-        </div>
-
-        <div class="cardBody">
-
-          <div class="filters" style="margin-bottom:15px;">
-
-            <input
-              class="input search"
-              id="staffSearch"
-              placeholder="Search name / mobile..."
-              oninput="renderStaff()"
-            >
-
-            <select
-              class="select"
-              id="staffRoleFilter"
-              onchange="renderStaff()"
-            >
-              <option value="">All Roles</option>
-              <option value="admin">Admin</option>
-              <option value="coordinator">Coordinator</option>
-              <option value="telecaller">Telecaller</option>
-            </select>
-
-            <select
-              class="select"
-              id="staffStatusFilter"
-              onchange="renderStaff()"
-            >
-              <option value="">All Status</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-
-          </div>
-
-          <div id="staffList" class="staffGrid">
-            <div class="loading">Loading staff...</div>
-          </div>
-
-        </div>
-
-      </section>
 
 
-      <!-- TELECALLER QUICK LIST -->
-      <section class="card" id="telecallerSection">
+            <div class="top-title">
 
-        <div class="cardHeader">
+                <h1>
+                    Coordinator Payment Control
+                </h1>
 
-          <div>
-            <div class="cardTitle">📞 Telecaller List</div>
-            <div class="cardSub">
-              Direct Firestore + inquiry fallback
+                <p>
+                    Manage coordinator salary and incentive rates
+                </p>
+
             </div>
-          </div>
-
-          <button
-            class="btn btnLight"
-            onclick="scrollToStaff('telecaller')"
-          >
-            View All
-          </button>
 
         </div>
 
-        <div class="cardBody">
 
-          <div id="telecallerQuickList">
-            <div class="loading">
-              Fetching Telecallers...
+        <div class="admin-profile">
+
+            <div class="avatar">
+                A
             </div>
-          </div>
+
+            <div class="profile-text">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <span>
+                    Admin
+                </span>
+
+            </div>
 
         </div>
 
-      </section>
-
-    </div>
+    </header>
 
 
-    <!-- COORDINATOR QUICK LIST -->
-    <section class="card" id="coordinatorSection">
+    <!-- CONTENT -->
 
-      <div class="cardHeader">
+    <section class="content">
 
-        <div>
-          <div class="cardTitle">🧑‍💼 Coordinator List</div>
-          <div class="cardSub">
-            All coordinators found in Staff and Inquiry records
-          </div>
+
+        <!-- HERO -->
+
+        <div class="hero">
+
+            <h2>
+                Coordinator Payment Management
+            </h2>
+
+            <p>
+                Configure the monthly base salary, student visit incentive,
+                and admission incentive for coordinators. Changes saved here
+                will be used automatically by the Coordinator Panel.
+            </p>
+
         </div>
 
-      </div>
 
-      <div class="cardBody">
+        <!-- STATUS -->
 
-        <div id="coordinatorQuickList">
-          <div class="loading">
-            Fetching Coordinators...
-          </div>
+        <div class="status"
+             id="statusBox">
         </div>
 
-      </div>
+
+        <!-- CURRENT SUMMARY -->
+
+        <div class="summary">
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    CURRENT BASE SALARY
+                </div>
+
+                <div class="summary-value"
+                     id="summaryBase">
+
+                    ₹0
+
+                </div>
+
+                <div class="summary-sub">
+                    Monthly fixed salary
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    CURRENT VISIT INCENTIVE
+                </div>
+
+                <div class="summary-value"
+                     id="summaryVisit">
+
+                    ₹0
+
+                </div>
+
+                <div class="summary-sub">
+                    Per unique visited student
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    CURRENT ADMISSION INCENTIVE
+                </div>
+
+                <div class="summary-value"
+                     id="summaryAdmission">
+
+                    ₹0
+
+                </div>
+
+                <div class="summary-sub">
+                    Per unique admission
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- PAYMENT SETTINGS -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        Payment Settings
+                    </h3>
+
+                    <p>
+                        Update the active coordinator payment structure.
+                    </p>
+
+                </div>
+
+                <span style="
+                    font-size:11px;
+                    color:#8a94a6;
+                "
+                id="lastUpdated">
+
+                    Not loaded
+
+                </span>
+
+            </div>
+
+
+            <form id="paymentForm">
+
+
+                <div class="form-grid">
+
+
+                    <!-- BASE SALARY -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Monthly Base Salary
+                        </label>
+
+                        <div class="input-wrap">
+
+                            <span class="currency">
+                                ₹
+                            </span>
+
+                            <input
+                                type="number"
+                                id="baseSalary"
+                                min="0"
+                                step="1"
+                                placeholder="1000"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="help">
+                            Fixed monthly amount paid to the coordinator.
+                        </div>
+
+                    </div>
+
+
+                    <!-- VISIT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Visited Student Incentive
+                        </label>
+
+                        <div class="input-wrap">
+
+                            <span class="currency">
+                                ₹
+                            </span>
+
+                            <input
+                                type="number"
+                                id="visitIncentive"
+                                min="0"
+                                step="1"
+                                placeholder="50"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="help">
+                            Amount paid for each unique student who visits the institute.
+                        </div>
+
+                    </div>
+
+
+                    <!-- ADMISSION -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Admission Incentive
+                        </label>
+
+                        <div class="input-wrap">
+
+                            <span class="currency">
+                                ₹
+                            </span>
+
+                            <input
+                                type="number"
+                                id="admissionIncentive"
+                                min="0"
+                                step="1"
+                                placeholder="50"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="help">
+                            Additional amount paid for each unique converted student.
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="button-row">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="saveBtn">
+
+                        Save Payment Settings
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        onclick="loadSettings()">
+
+                        Reset / Reload
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+            <!-- PAYMENT RULE -->
+
+            <div class="rule-box">
+
+                <div class="rule-title">
+                    Active Payment Structure
+                </div>
+
+
+                <div class="rule-list">
+
+
+                    <div class="rule-item">
+
+                        <span>
+                            Monthly Base Salary
+                        </span>
+
+                        <strong
+                            id="ruleBase">
+
+                            ₹0
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="rule-item">
+
+                        <span>
+                            Visited Student
+                        </span>
+
+                        <strong
+                            id="ruleVisit">
+
+                            ₹0
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="rule-item">
+
+                        <span>
+                            Admission / Converted Student
+                        </span>
+
+                        <strong
+                            id="ruleAdmission">
+
+                            ₹0
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+                        How Coordinator Payment Works
+                    </h3>
+
+                    <p>
+                        Current payment calculation rules
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <strong>
+                    Payment calculation:
+                </strong>
+
+                <br><br>
+
+                Total Payable =
+                Base Salary
+                +
+                (Unique Visited Students × Visit Incentive)
+                +
+                (Unique Converted Students × Admission Incentive)
+
+                <br><br>
+
+                Raw inquiries do not generate incentive.
+
+                <br>
+
+                Duplicate mobile numbers are not counted twice
+                for the same incentive category.
+
+                <br>
+
+                Payment is calculated for the current month
+                in the Coordinator Panel.
+
+            </div>
+
+        </div>
+
+
+        <div class="footer">
+
+            © <span id="year"></span>
+            BlackTerminal Computer Institute · Admin Payment Control
+
+        </div>
+
 
     </section>
-
-
-    <!-- INQUIRIES -->
-    <section class="card">
-
-      <div class="cardHeader">
-
-        <div>
-          <div class="cardTitle">📥 All Student Inquiries</div>
-          <div class="cardSub">
-            Coordinator → Telecaller → Admission pipeline
-          </div>
-        </div>
-
-        <button class="btn btnLight" onclick="loadInquiriesOnce()">
-          🔄 Refresh
-        </button>
-
-      </div>
-
-      <div class="cardBody">
-
-        <div class="filters" style="margin-bottom:16px;">
-
-          <input
-            class="input search"
-            id="inquirySearch"
-            placeholder="Search student / mobile / course..."
-            oninput="renderInquiries()"
-          >
-
-          <select
-            class="select"
-            id="inquiryCourseFilter"
-            onchange="renderInquiries()"
-          >
-            <option value="">All Courses</option>
-          </select>
-
-          <select
-            class="select"
-            id="inquiryStatusFilter"
-            onchange="renderInquiries()"
-          >
-            <option value="">All Status</option>
-            <option value="new">New</option>
-            <option value="pending">Pending</option>
-            <option value="follow-up">Follow-up</option>
-            <option value="converted">Converted</option>
-            <option value="closed">Closed</option>
-          </select>
-
-          <select
-            class="select"
-            id="inquiryCoordinatorFilter"
-            onchange="renderInquiries()"
-          >
-            <option value="">All Coordinators</option>
-          </select>
-
-          <select
-            class="select"
-            id="inquiryTelecallerFilter"
-            onchange="renderInquiries()"
-          >
-            <option value="">All Telecallers</option>
-          </select>
-
-        </div>
-
-
-        <div class="tableWrap">
-
-          <table>
-
-            <thead>
-              <tr>
-                <th>Student</th>
-                <th>Mobile</th>
-                <th>Course</th>
-                <th>Source</th>
-                <th>Coordinator</th>
-                <th>Telecaller</th>
-                <th>Status</th>
-                <th>Received</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-
-            <tbody id="inquiryTable">
-
-              <tr>
-                <td colspan="9">
-                  <div class="loading">
-                    Loading inquiries...
-                  </div>
-                </td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </section>
 
 </main>
 
 
-<!-- STAFF DRAWER -->
-<div class="overlay" id="drawerOverlay" onclick="closeStaffDrawer()"></div>
-
-<aside class="drawer" id="staffDrawer">
-
-  <div class="drawerHeader">
-
-    <div class="drawerTitle">
-      Add Staff
-    </div>
-
-    <button class="closeBtn" onclick="closeStaffDrawer()">
-      ×
-    </button>
-
-  </div>
-
-  <form class="form" onsubmit="saveStaff(event)">
-
-    <div class="field">
-
-      <label>Full Name</label>
-
-      <input
-        class="input"
-        id="staffName"
-        required
-        placeholder="Enter staff name"
-      >
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Mobile Number</label>
-
-      <input
-        class="input"
-        id="staffMobile"
-        required
-        maxlength="10"
-        inputmode="numeric"
-        placeholder="10 digit mobile"
-      >
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Role</label>
-
-      <select class="select" id="staffRole" required>
-
-        <option value="">
-          Select Role
-        </option>
-
-        <option value="Coordinator">
-          Coordinator
-        </option>
-
-        <option value="Telecaller">
-          Telecaller
-        </option>
-
-        <option value="Admin">
-          Admin
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Status</label>
-
-      <select class="select" id="staffStatus">
-
-        <option value="active">
-          Active
-        </option>
-
-        <option value="inactive">
-          Inactive
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Remark</label>
-
-      <textarea
-        id="staffRemark"
-        placeholder="Optional remark..."
-      ></textarea>
-
-    </div>
-
-
-    <div class="formActions">
-
-      <button
-        type="button"
-        class="btn btnLight"
-        onclick="closeStaffDrawer()"
-      >
-        Cancel
-      </button>
-
-      <button
-        type="submit"
-        class="btn btnPrimary"
-      >
-        Save Staff
-      </button>
-
-    </div>
-
-  </form>
-
-</aside>
-
-
-<!-- DETAILS DRAWER -->
-<aside class="drawer" id="detailsDrawer">
-
-  <div class="drawerHeader">
-
-    <div class="drawerTitle">
-      Details
-    </div>
-
-    <button class="closeBtn" onclick="closeDetails()">
-      ×
-    </button>
-
-  </div>
-
-  <div class="form" id="detailsContent"></div>
-
-</aside>
-
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
-
-
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  doc,
-  updateDoc,
-  deleteDoc,
-  onSnapshot,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+/* =========================================================
+   FIREBASE CONFIGURATION
+========================================================= */
 
-import { firebaseConfig } from "./firebaseconfig.js";
+const FIREBASE_PROJECT_ID =
+    "jobs-2f152";
 
 
-/* =========================================
-   FIREBASE
-========================================= */
+const FIREBASE_API_KEY =
+    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytd2b_m";
 
-const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const FIRESTORE_BASE =
+    "https://firestore.googleapis.com/v1/projects/" +
+    FIREBASE_PROJECT_ID +
+    "/databases/(default)/documents";
 
 
-/* =========================================
-   STATE
-========================================= */
+const PAYMENT_SETTINGS_URL =
+    FIRESTORE_BASE +
+    "/paymentSettings/coordinator";
 
-let inquiries = [];
 
-let staffRecords = [];
+/* =========================================================
+   DEFAULT VALUES
+========================================================= */
 
-let unsubscribeInquiries = null;
+const DEFAULT_BASE =
+    1000;
 
-let unsubscribeStaff = null;
+const DEFAULT_VISIT =
+    50;
 
+const DEFAULT_ADMISSION =
+    50;
 
-/* =========================================
-   HELPERS
-========================================= */
 
-function safe(value){
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-  if(value === undefined || value === null){
-    return "";
-  }
-
-  return String(value);
-
-}
-
-
-function normalizeRole(role){
-
-  const value = safe(role).trim().toLowerCase();
-
-  if(value.includes("tele")){
-    return "telecaller";
-  }
-
-  if(value.includes("coord")){
-    return "coordinator";
-  }
-
-  if(value.includes("admin")){
-    return "admin";
-  }
-
-  return value;
-
-}
-
-
-function cleanMobile(value){
-
-  return safe(value).replace(/\D/g,"");
-
-}
-
-
-function initials(name){
-
-  const text = safe(name).trim();
-
-  if(!text){
-    return "?";
-  }
-
-  const parts = text.split(/\s+/);
-
-  return (
-    (parts[0]?.[0] || "") +
-    (parts[1]?.[0] || "")
-  ).toUpperCase();
-
-}
-
-
-function formatDate(value){
-
-  if(!value){
-    return "—";
-  }
-
-  try{
-
-    let date;
-
-    if(
-      typeof value === "object" &&
-      value.seconds
-    ){
-
-      date = new Date(
-        Number(value.seconds) * 1000
-      );
-
-    }else{
-
-      date = new Date(value);
-
-    }
-
-    if(isNaN(date.getTime())){
-      return "—";
-    }
-
-    return date.toLocaleDateString(
-      "en-IN",
-      {
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-      }
-    );
-
-  }catch(e){
-
-    return "—";
-
-  }
-
-}
-
-
-function formatDateTime(value){
-
-  if(!value){
-    return "—";
-  }
-
-  try{
-
-    let date;
-
-    if(
-      typeof value === "object" &&
-      value.seconds
-    ){
-
-      date = new Date(
-        Number(value.seconds) * 1000
-      );
-
-    }else{
-
-      date = new Date(value);
-
-    }
-
-    if(isNaN(date.getTime())){
-      return "—";
-    }
-
-    return date.toLocaleString(
-      "en-IN",
-      {
-        day:"2-digit",
-        month:"short",
-        year:"numeric",
-        hour:"2-digit",
-        minute:"2-digit"
-      }
-    );
-
-  }catch(e){
-
-    return "—";
-
-  }
-
-}
-
-
-function isToday(value){
-
-  if(!value){
-    return false;
-  }
-
-  try{
-
-    let date;
-
-    if(
-      typeof value === "object" &&
-      value.seconds
-    ){
-
-      date = new Date(
-        Number(value.seconds) * 1000
-      );
-
-    }else{
-
-      date = new Date(value);
-
-    }
-
-    const now = new Date();
-
-    return (
-      date.getDate() === now.getDate() &&
-      date.getMonth() === now.getMonth() &&
-      date.getFullYear() === now.getFullYear()
-    );
-
-  }catch(e){
-
-    return false;
-
-  }
-
-}
-
-
-function getTimestamp(item){
-
-  if(!item){
-    return 0;
-  }
-
-  const value = item.createdAt;
-
-  if(
-    typeof value === "object" &&
-    value?.seconds
-  ){
-
-    return Number(value.seconds) * 1000;
-
-  }
-
-  const time = new Date(value || 0).getTime();
-
-  return isNaN(time) ? 0 : time;
-
-}
-
-
-function escapeHtml(value){
-
-  return safe(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-function showToast(message,type="info"){
-
-  const toast = document.getElementById("toast");
-
-  toast.textContent = message;
-
-  toast.className =
-    "toast show " + type;
-
-  clearTimeout(window.__toastTimer);
-
-  window.__toastTimer = setTimeout(()=>{
-
-    toast.className = "toast";
-
-  },3500);
-
-}
-
-
-/* =========================================
-   STATUS
-========================================= */
-
-function getStatus(inquiry){
-
-  const status =
-    safe(inquiry.telecallerStatus || inquiry.status)
-      .trim()
-      .toLowerCase();
-
-  if(!status){
-    return "new";
-  }
-
-  return status;
-
-}
-
-
-function statusBadge(status){
-
-  const s = safe(status).toLowerCase();
-
-  let cls = "badgeNew";
-
-  if(s === "pending"){
-    cls = "badgePending";
-  }
-
-  if(
-    s === "follow-up" ||
-    s === "followup"
-  ){
-    cls = "badgeFollow";
-  }
-
-  if(s === "converted"){
-    cls = "badgeConverted";
-  }
-
-  if(s === "closed"){
-    cls = "badgeClosed";
-  }
-
-  return `
-    <span class="badge ${cls}">
-      ${escapeHtml(status || "new")}
-    </span>
-  `;
-
-}
-
-
-/* =========================================
-   LOAD STAFF
-========================================= */
-
-function subscribeStaff(){
-
-  try{
-
-    if(unsubscribeStaff){
-      unsubscribeStaff();
-    }
-
-    unsubscribeStaff = onSnapshot(
-      collection(db,"staff"),
-
-      snapshot => {
-
-        staffRecords = [];
-
-        snapshot.forEach(item => {
-
-          const data = item.data() || {};
-
-          staffRecords.push({
-
-            id:item.id,
-
-            ...data,
-
-            name:
-              data.name ||
-              data.fullName ||
-              data.staffName ||
-              "",
-
-            mobile:
-              data.mobile ||
-              data.phone ||
-              data.staffMobile ||
-              "",
-
-            role:
-              data.role ||
-              data.userRole ||
-              "",
-
-            status:
-              data.status ||
-              "active"
-
-          });
-
-        });
-
-
-        /*
-         IMPORTANT:
-         Inquiry records are also used as fallback.
-
-         This means if your Telecaller is not yet
-         present inside staff collection, but has
-         already handled an inquiry, Admin will still
-         show that Telecaller.
-        */
-
-        mergeStaffFromInquiries();
-
-        renderStaff();
-
-        renderQuickPeople();
-
-        updatePeopleFilters();
-
-        updateStats();
-
-      },
-
-      error => {
-
-        console.error(
-          "Staff listener error:",
-          error
-        );
-
-        /*
-         Even if staff collection has permission
-         problem, we can still build the people list
-         from inquiry records.
-        */
-
-        staffRecords = [];
-
-        mergeStaffFromInquiries();
-
-        renderStaff();
-
-        renderQuickPeople();
-
-        updatePeopleFilters();
-
-        updateStats();
-
-        showToast(
-          "Staff collection load failed. Inquiry data se list build ki gayi.",
-          "error"
-        );
-
-      }
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-/* =========================================
-   MERGE COORDINATOR + TELECALLER FROM INQUIRIES
-========================================= */
-
-function mergeStaffFromInquiries(){
-
-  const map = new Map();
-
-
-  /* Existing staff first */
-
-  staffRecords.forEach(staff => {
-
-    const role = normalizeRole(staff.role);
-
-    const mobile = cleanMobile(staff.mobile);
-
-    const name = safe(staff.name).trim();
-
-    if(!role || !name){
-      return;
-    }
-
-    const key =
-      role + "|" +
-      (mobile || name.toLowerCase());
-
-    map.set(
-      key,
-      {
-        ...staff,
-        role:
-          role.charAt(0).toUpperCase() +
-          role.slice(1),
-        mobile
-      }
-    );
-
-  });
-
-
-  /* Coordinator from inquiries */
-
-  inquiries.forEach(inquiry => {
-
-    const coordinatorName =
-      safe(
-        inquiry.coordinatorName
-      ).trim();
-
-    const coordinatorMobile =
-      cleanMobile(
-        inquiry.coordinatorMobile
-      );
-
-    if(coordinatorName){
-
-      const key =
-        "coordinator|" +
-        (
-          coordinatorMobile ||
-          coordinatorName.toLowerCase()
-        );
-
-      if(!map.has(key)){
-
-        map.set(
-          key,
-          {
-            id:"inquiry-coordinator-" + key,
-            name:coordinatorName,
-            mobile:coordinatorMobile,
-            role:"Coordinator",
-            status:"active",
-            source:"inquiry"
-          }
-        );
-
-      }
-
-    }
-
-
-    /* TELECALLER FROM INQUIRIES */
-
-    const telecallerName =
-      safe(
-        inquiry.telecallerName
-      ).trim();
-
-    const telecallerMobile =
-      cleanMobile(
-        inquiry.telecallerMobile
-      );
-
-
-    if(telecallerName){
-
-      const key =
-        "telecaller|" +
-        (
-          telecallerMobile ||
-          telecallerName.toLowerCase()
-        );
-
-
-      if(!map.has(key)){
-
-        map.set(
-          key,
-          {
-            id:"inquiry-telecaller-" + key,
-            name:telecallerName,
-            mobile:telecallerMobile,
-            role:"Telecaller",
-            status:"active",
-            source:"inquiry"
-          }
-        );
-
-      }
-
-    }
-
-  });
-
-
-  staffRecords =
-    Array.from(map.values());
-
-}
-
-
-/* =========================================
-   LOAD INQUIRIES
-========================================= */
-
-function subscribeInquiries(){
-
-  try{
-
-    if(unsubscribeInquiries){
-      unsubscribeInquiries();
-    }
-
-    unsubscribeInquiries = onSnapshot(
-      collection(db,"studentInquiries"),
-
-      snapshot => {
-
-        inquiries = [];
-
-        snapshot.forEach(item => {
-
-          inquiries.push({
-
-            id:item.id,
-
-            ...item.data()
-
-          });
-
-        });
-
-
-        inquiries.sort(
-          (a,b) =>
-            getTimestamp(b) -
-            getTimestamp(a)
-        );
-
-
-        /*
-         Very important:
-         Inquiry update hone ke baad staff list bhi
-         recalculate hoti hai.
-        */
-
-        mergeStaffFromInquiries();
-
-        updateStats();
-
-        updateCourseFilter();
-
-        updatePeopleFilters();
-
-        renderStaff();
-
-        renderQuickPeople();
-
-        renderInquiries();
-
-      },
-
-      error => {
-
-        console.error(
-          "Inquiry listener error:",
-          error
-        );
-
-        document.getElementById(
-          "inquiryTable"
-        ).innerHTML = `
-          <tr>
-            <td colspan="9">
-              <div class="empty">
-                ❌ Firestore inquiry data load nahi hua.<br><br>
-                ${escapeHtml(error.message)}
-              </div>
-            </td>
-          </tr>
-        `;
-
-        showToast(
-          "Inquiry data load nahi hua.",
-          "error"
-        );
-
-      }
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-/* =========================================
-   STATS
-========================================= */
-
-function updateStats(){
-
-  const total =
-    inquiries.length;
-
-  const today =
-    inquiries.filter(
-      x => isToday(x.createdAt)
-    ).length;
-
-  const pending =
-    inquiries.filter(
-      x => {
-
-        const s = getStatus(x);
-
-        return (
-          s === "new" ||
-          s === "pending" ||
-          s === "follow-up" ||
-          s === "followup"
-        );
-
-      }
-    ).length;
-
-  const converted =
-    inquiries.filter(
-      x => getStatus(x) === "converted"
-    ).length;
-
-
-  const coordinators =
-    staffRecords.filter(
-      x => normalizeRole(x.role) === "coordinator"
-    ).length;
-
-  const telecallers =
-    staffRecords.filter(
-      x => normalizeRole(x.role) === "telecaller"
-    ).length;
-
-
-  document.getElementById(
-    "totalInquiries"
-  ).textContent = total;
-
-  document.getElementById(
-    "todayInquiries"
-  ).textContent = today;
-
-  document.getElementById(
-    "pendingInquiries"
-  ).textContent = pending;
-
-  document.getElementById(
-    "convertedInquiries"
-  ).textContent = converted;
-
-  document.getElementById(
-    "coordinatorCount"
-  ).textContent = coordinators;
-
-  document.getElementById(
-    "telecallerCount"
-  ).textContent = telecallers;
-
-}
-
-
-/* =========================================
-   STAFF RENDER
-========================================= */
-
-window.renderStaff = function(){
-
-  const container =
+const paymentForm =
     document.getElementById(
-      "staffList"
+        "paymentForm"
     );
 
-  const search =
-    safe(
-      document.getElementById(
-        "staffSearch"
-      ).value
-    )
-    .toLowerCase()
-    .trim();
 
-  const roleFilter =
-    safe(
-      document.getElementById(
-        "staffRoleFilter"
-      ).value
-    )
-    .toLowerCase();
-
-  const statusFilter =
-    safe(
-      document.getElementById(
-        "staffStatusFilter"
-      ).value
-    )
-    .toLowerCase();
+const saveBtn =
+    document.getElementById(
+        "saveBtn"
+    );
 
 
-  let list =
-    [...staffRecords];
+const statusBox =
+    document.getElementById(
+        "statusBox"
+    );
 
 
-  list =
-    list.filter(staff => {
+/* =========================================================
+   CURRENCY FORMAT
+========================================================= */
 
-      const role =
-        normalizeRole(staff.role);
+function formatRupee(
+    amount
+){
 
-      const name =
-        safe(staff.name).toLowerCase();
+    return new Intl.NumberFormat(
+        "en-IN",
+        {
+            style:"currency",
+            currency:"INR",
+            maximumFractionDigits:0
+        }
+    ).format(
+        Number(amount) || 0
+    );
 
-      const mobile =
-        cleanMobile(staff.mobile);
-
-      const status =
-        safe(staff.status)
-          .toLowerCase();
-
-
-      const matchSearch =
-        !search ||
-        name.includes(search) ||
-        mobile.includes(
-          search.replace(/\D/g,"")
-        );
-
-      const matchRole =
-        !roleFilter ||
-        role === roleFilter;
-
-      const matchStatus =
-        !statusFilter ||
-        status === statusFilter;
-
-      return (
-        matchSearch &&
-        matchRole &&
-        matchStatus
-      );
-
-    });
+}
 
 
-  list.sort((a,b)=>{
+/* =========================================================
+   FIRESTORE DOCUMENT CONVERTER
+========================================================= */
 
-    const roleA =
-      normalizeRole(a.role);
+function documentToObject(
+    doc
+){
 
-    const roleB =
-      normalizeRole(b.role);
-
-    if(roleA !== roleB){
-
-      if(roleA === "telecaller"){
-        return -1;
-      }
-
-      if(roleB === "telecaller"){
-        return 1;
-      }
-
-    }
-
-    return safe(a.name)
-      .localeCompare(
-        safe(b.name)
-      );
-
-  });
+    const fields =
+        doc.fields || {};
 
 
-  if(!list.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        No staff found.
-      </div>
-    `;
-
-    return;
-
-  }
+    const result = {};
 
 
-  container.innerHTML =
-    list.map(staff => {
+    Object.keys(fields)
+        .forEach(
+            key=>{
 
-      const role =
-        normalizeRole(staff.role);
-
-      const status =
-        safe(staff.status || "active")
-          .toLowerCase();
-
-      const roleText =
-        role.charAt(0).toUpperCase() +
-        role.slice(1);
+                const field =
+                    fields[key];
 
 
-      const isFromInquiry =
-        staff.source === "inquiry";
+                if(
+                    field.integerValue !==
+                    undefined
+                ){
 
+                    result[key] =
+                        Number(
+                            field.integerValue
+                        );
 
-      const actionId =
-        safe(staff.id);
-
-
-      return `
-        <div class="staffCard">
-
-          <div class="staffHead">
-
-            <div class="staffAvatar">
-              ${escapeHtml(
-                initials(staff.name)
-              )}
-            </div>
-
-            <div style="flex:1;min-width:0;">
-
-              <div class="staffName">
-                ${escapeHtml(
-                  staff.name || "Unknown"
-                )}
-              </div>
-
-              <div class="staffRole">
-                ${escapeHtml(roleText)}
-
-                ${
-                  isFromInquiry
-                  ? " • Inquiry data"
-                  : " • Staff collection"
                 }
 
-              </div>
+                else if(
+                    field.doubleValue !==
+                    undefined
+                ){
 
-            </div>
+                    result[key] =
+                        Number(
+                            field.doubleValue
+                        );
 
-            ${
-              status === "active"
-              ?
-              `<span class="badge badgeActive">
-                Active
-              </span>`
-              :
-              `<span class="badge badgeInactive">
-                Inactive
-              </span>`
-            }
-
-          </div>
-
-
-          <div class="staffInfo">
-
-            <div class="infoBox">
-
-              <div class="infoLabel">
-                MOBILE
-              </div>
-
-              <div class="infoValue">
-                ${
-                  staff.mobile
-                  ?
-                  escapeHtml(
-                    staff.mobile
-                  )
-                  :
-                  "Not available"
                 }
-              </div>
 
-            </div>
+                else if(
+                    field.stringValue !==
+                    undefined
+                ){
 
+                    result[key] =
+                        field.stringValue;
 
-            <div class="infoBox">
-
-              <div class="infoLabel">
-                ROLE
-              </div>
-
-              <div class="infoValue">
-                ${escapeHtml(roleText)}
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="staffActions">
-
-            ${
-              staff.mobile
-              ?
-              `
-              <button
-                class="btn btnLight btnSmall"
-                onclick="callNumber('${escapeHtml(
-                  cleanMobile(staff.mobile)
-                )}')"
-              >
-                📞 Call
-              </button>
-              `
-              :
-              ""
-            }
-
-
-            ${
-              staff.mobile
-              ?
-              `
-              <button
-                class="btn btnLight btnSmall"
-                onclick="openWhatsApp('${escapeHtml(
-                  cleanMobile(staff.mobile)
-                )}')"
-              >
-                💬 WhatsApp
-              </button>
-              `
-              :
-              ""
-            }
-
-
-            <button
-              class="btn btnLight btnSmall"
-              onclick="viewStaff('${escapeHtml(
-                actionId
-              )}')"
-            >
-              👁 View
-            </button>
-
-
-            ${
-              !isFromInquiry
-              ?
-              `
-              <button
-                class="btn btnLight btnSmall"
-                onclick="toggleStaffStatus('${escapeHtml(
-                  actionId
-                )}','${status}')"
-              >
-                ${
-                  status === "active"
-                  ? "Deactivate"
-                  : "Activate"
                 }
-              </button>
-              `
-              :
-              ""
+
+                else if(
+                    field.timestampValue !==
+                    undefined
+                ){
+
+                    result[key] =
+                        field.timestampValue;
+
+                }
+
             }
+        );
 
 
-            ${
-              !isFromInquiry
-              ?
-              `
-              <button
-                class="btn btnRed btnSmall"
-                onclick="deleteStaff('${escapeHtml(
-                  actionId
-                )}')"
-              >
-                Delete
-              </button>
-              `
-              :
-              ""
-            }
+    return result;
 
-          </div>
-
-        </div>
-      `;
-
-    })
-    .join("");
-
-};
+}
 
 
-/* =========================================
-   QUICK PEOPLE LISTS
-========================================= */
+/* =========================================================
+   FIRESTORE VALUE
+========================================================= */
 
-function renderQuickPeople(){
+function integerValue(
+    value
+){
 
-  const telecallerContainer =
-    document.getElementById(
-      "telecallerQuickList"
-    );
-
-  const coordinatorContainer =
-    document.getElementById(
-      "coordinatorQuickList"
-    );
-
-
-  const telecallers =
-    staffRecords
-      .filter(
-        x =>
-          normalizeRole(x.role) ===
-          "telecaller"
-      )
-      .sort(
-        (a,b)=>
-          safe(a.name)
-            .localeCompare(
-              safe(b.name)
+    return {
+        integerValue:
+            String(
+                Number(value) || 0
             )
-      );
+    };
+
+}
 
 
-  const coordinators =
-    staffRecords
-      .filter(
-        x =>
-          normalizeRole(x.role) ===
-          "coordinator"
-      )
-      .sort(
-        (a,b)=>
-          safe(a.name)
-            .localeCompare(
-              safe(b.name)
-            )
-      );
+/* =========================================================
+   STATUS MESSAGE
+========================================================= */
+
+function showStatus(
+    message,
+    type="info"
+){
+
+    statusBox.textContent =
+        message;
+
+    statusBox.className =
+        "status show " +
+        type;
+
+}
 
 
-  /* TELECALLER */
+/* =========================================================
+   UPDATE UI
+========================================================= */
 
-  if(!telecallers.length){
+function updateUI(
+    settings
+){
 
-    telecallerContainer.innerHTML = `
-      <div class="empty">
-        📞 No Telecaller found.<br><br>
-        Add Telecaller in Staff List or assign a Telecaller
-        to an inquiry.
-      </div>
-    `;
+    const base =
+        Number(
+            settings.baseSalary
+        ) || 0;
 
-  }else{
 
-    telecallerContainer.innerHTML =
-      telecallers
-        .map((person,index)=>{
+    const visit =
+        Number(
+            settings.visitIncentive
+        ) || 0;
 
-          const handled =
-            inquiries.filter(
-              inquiry => {
 
-                const name =
-                  safe(
-                    inquiry.telecallerName
-                  ).trim()
-                  .toLowerCase();
+    const admission =
+        Number(
+            settings.admissionIncentive
+        ) || 0;
 
-                const mobile =
-                  cleanMobile(
-                    inquiry.telecallerMobile
-                  );
 
-                const pName =
-                  safe(
-                    person.name
-                  ).trim()
-                  .toLowerCase();
+    document
+        .getElementById(
+            "baseSalary"
+        )
+        .value =
+        base;
 
-                const pMobile =
-                  cleanMobile(
-                    person.mobile
-                  );
 
-                return (
-                  (
-                    pMobile &&
-                    mobile &&
-                    pMobile === mobile
-                  ) ||
-                  (
-                    pName &&
-                    name &&
-                    pName === name
-                  )
+    document
+        .getElementById(
+            "visitIncentive"
+        )
+        .value =
+        visit;
+
+
+    document
+        .getElementById(
+            "admissionIncentive"
+        )
+        .value =
+        admission;
+
+
+    document
+        .getElementById(
+            "summaryBase"
+        )
+        .textContent =
+        formatRupee(
+            base
+        );
+
+
+    document
+        .getElementById(
+            "summaryVisit"
+        )
+        .textContent =
+        formatRupee(
+            visit
+        );
+
+
+    document
+        .getElementById(
+            "summaryAdmission"
+        )
+        .textContent =
+        formatRupee(
+            admission
+        );
+
+
+    document
+        .getElementById(
+            "ruleBase"
+        )
+        .textContent =
+        formatRupee(
+            base
+        );
+
+
+    document
+        .getElementById(
+            "ruleVisit"
+        )
+        .textContent =
+        formatRupee(
+            visit
+        );
+
+
+    document
+        .getElementById(
+            "ruleAdmission"
+        )
+        .textContent =
+        formatRupee(
+            admission
+        );
+
+}
+
+
+/* =========================================================
+   LOAD SETTINGS
+========================================================= */
+
+window.loadSettings =
+async function(){
+
+    showStatus(
+        "Loading payment settings...",
+        "info"
+    );
+
+
+    try{
+
+        const response =
+            await fetch(
+                PAYMENT_SETTINGS_URL +
+                "?key=" +
+                FIREBASE_API_KEY
+            );
+
+
+        if(
+            response.status ===
+            404
+        ){
+
+            /*
+             * Document does not exist yet.
+             */
+
+            const defaults = {
+
+                baseSalary:
+                    DEFAULT_BASE,
+
+                visitIncentive:
+                    DEFAULT_VISIT,
+
+                admissionIncentive:
+                    DEFAULT_ADMISSION
+
+            };
+
+
+            updateUI(
+                defaults
+            );
+
+
+            document
+                .getElementById(
+                    "lastUpdated"
+                )
+                .textContent =
+                "Not created yet";
+
+
+            showStatus(
+                "Payment settings have not been created yet. Default values are shown.",
+                "info"
+            );
+
+
+            return;
+
+        }
+
+
+        if(
+            !response.ok
+        ){
+
+            const errorText =
+                await response.text();
+
+            console.error(
+                errorText
+            );
+
+            throw new Error(
+                "Unable to load settings"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const settings =
+            documentToObject(
+                data
+            );
+
+
+        updateUI(
+            settings
+        );
+
+
+        if(
+            settings.updatedAt
+        ){
+
+            const date =
+                new Date(
+                    settings.updatedAt
                 );
 
-              }
-            ).length;
+
+            document
+                .getElementById(
+                    "lastUpdated"
+                )
+                .textContent =
+                "Updated " +
+                date.toLocaleString(
+                    "en-IN"
+                );
+
+        }
+        else{
+
+            document
+                .getElementById(
+                    "lastUpdated"
+                )
+                .textContent =
+                "Active settings";
+
+        }
 
 
-          return `
-            <div
-              style="
-                display:flex;
-                align-items:center;
-                gap:11px;
-                padding:11px 0;
-                border-bottom:1px solid #edf1f5;
-              "
-            >
+        showStatus(
+            "Current payment settings loaded successfully.",
+            "success"
+        );
 
-              <div class="staffAvatar"
-                   style="width:38px;height:38px;border-radius:10px;">
-                ${escapeHtml(
-                  initials(person.name)
-                )}
-              </div>
+    }
 
-              <div style="flex:1;min-width:0;">
+    catch(error){
 
-                <div style="
-                  font-weight:800;
-                  font-size:12px;
-                ">
-                  ${escapeHtml(
-                    person.name ||
-                    "Telecaller"
-                  )}
-                </div>
+        console.error(
+            error
+        );
 
-                <div style="
-                  color:var(--muted);
-                  font-size:10px;
-                  margin-top:2px;
-                ">
-                  ${
-                    person.mobile
-                    ?
-                    escapeHtml(
-                      person.mobile
+
+        showStatus(
+            "Unable to load payment settings. Please check Firestore access.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   SAVE SETTINGS
+========================================================= */
+
+paymentForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const base =
+            Number(
+                document
+                    .getElementById(
+                        "baseSalary"
                     )
-                    :
-                    "Mobile not available"
-                  }
-                </div>
-
-              </div>
-
-              <div style="text-align:right;">
-
-                <div style="
-                  font-size:14px;
-                  font-weight:850;
-                ">
-                  ${handled}
-                </div>
-
-                <div style="
-                  color:var(--muted);
-                  font-size:9px;
-                ">
-                  inquiries
-                </div>
-
-              </div>
-
-            </div>
-          `;
-
-        })
-        .join("");
-
-  }
+                    .value
+            );
 
 
-  /* COORDINATOR */
-
-  if(!coordinators.length){
-
-    coordinatorContainer.innerHTML = `
-      <div class="empty">
-        🧑‍💼 No Coordinator found.
-      </div>
-    `;
-
-  }else{
-
-    coordinatorContainer.innerHTML = `
-
-      <div class="staffGrid">
-
-        ${
-          coordinators
-            .map(person => {
-
-              const assigned =
-                inquiries.filter(
-                  inquiry => {
-
-                    const name =
-                      safe(
-                        inquiry.coordinatorName
-                      )
-                      .trim()
-                      .toLowerCase();
-
-                    const mobile =
-                      cleanMobile(
-                        inquiry.coordinatorMobile
-                      );
-
-                    const pName =
-                      safe(
-                        person.name
-                      )
-                      .trim()
-                      .toLowerCase();
-
-                    const pMobile =
-                      cleanMobile(
-                        person.mobile
-                      );
-
-                    return (
-                      (
-                        pMobile &&
-                        mobile &&
-                        pMobile === mobile
-                      ) ||
-                      (
-                        pName &&
-                        name &&
-                        pName === name
-                      )
-                    );
-
-                  }
-                ).length;
+        const visit =
+            Number(
+                document
+                    .getElementById(
+                        "visitIncentive"
+                    )
+                    .value
+            );
 
 
-              return `
-                <div class="staffCard">
+        const admission =
+            Number(
+                document
+                    .getElementById(
+                        "admissionIncentive"
+                    )
+                    .value
+            );
 
-                  <div class="staffHead">
 
-                    <div class="staffAvatar">
-                      ${escapeHtml(
-                        initials(
-                          person.name
-                        )
-                      )}
-                    </div>
+        /* =========================
+           VALIDATION
+        ========================= */
 
-                    <div style="flex:1;">
+        if(
+            !Number.isFinite(base) ||
+            base < 0
+        ){
 
-                      <div class="staffName">
-                        ${escapeHtml(
-                          person.name
-                        )}
-                      </div>
+            showStatus(
+                "Please enter a valid Base Salary.",
+                "error"
+            );
 
-                      <div class="staffRole">
-                        Coordinator
-                      </div>
+            return;
 
-                    </div>
-
-                    <span class="badge badgeActive">
-                      Active
-                    </span>
-
-                  </div>
-
-                  <div class="staffInfo">
-
-                    <div class="infoBox">
-
-                      <div class="infoLabel">
-                        MOBILE
-                      </div>
-
-                      <div class="infoValue">
-                        ${
-                          person.mobile
-                          ?
-                          escapeHtml(
-                            person.mobile
-                          )
-                          :
-                          "Not available"
-                        }
-                      </div>
-
-                    </div>
-
-                    <div class="infoBox">
-
-                      <div class="infoLabel">
-                        INQUIRIES
-                      </div>
-
-                      <div class="infoValue">
-                        ${assigned}
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-              `;
-
-            })
-            .join("")
         }
 
-      </div>
 
-    `;
+        if(
+            !Number.isFinite(visit) ||
+            visit < 0
+        ){
 
-  }
+            showStatus(
+                "Please enter a valid Visit Incentive.",
+                "error"
+            );
 
-}
+            return;
 
-
-/* =========================================
-   FILTER OPTIONS
-========================================= */
-
-function updateCourseFilter(){
-
-  const select =
-    document.getElementById(
-      "inquiryCourseFilter"
-    );
-
-  const current =
-    select.value;
+        }
 
 
-  const courses =
-    [...new Set(
-      inquiries
-        .map(
-          x => safe(x.course).trim()
+        if(
+            !Number.isFinite(admission) ||
+            admission < 0
+        ){
+
+            showStatus(
+                "Please enter a valid Admission Incentive.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /* =========================
+           CONFIRM
+        ========================= */
+
+        const confirmed =
+            confirm(
+                "Save these Coordinator payment settings?\n\n" +
+
+                "Base Salary: " +
+                formatRupee(base) +
+
+                "\nVisited Student: " +
+                formatRupee(visit) +
+
+                "\nAdmission: " +
+                formatRupee(admission)
+            );
+
+
+        if(
+            !confirmed
+        ){
+
+            return;
+
+        }
+
+
+        saveBtn.disabled =
+            true;
+
+        saveBtn.textContent =
+            "Saving...";
+
+
+        showStatus(
+            "Saving payment settings...",
+            "info"
+        );
+
+
+        const updatedAt =
+            new Date()
+                .toISOString();
+
+
+        const payload = {
+
+            fields:{
+
+                baseSalary:
+                    integerValue(
+                        base
+                    ),
+
+                visitIncentive:
+                    integerValue(
+                        visit
+                    ),
+
+                admissionIncentive:
+                    integerValue(
+                        admission
+                    ),
+
+                updatedAt:{
+                    timestampValue:
+                        updatedAt
+                }
+
+            }
+
+        };
+
+
+        try{
+
+            /*
+             * PATCH creates the document
+             * if it does not exist and updates
+             * it if it already exists.
+             */
+
+            const response =
+                await fetch(
+                    PAYMENT_SETTINGS_URL +
+                    "?key=" +
+                    FIREBASE_API_KEY,
+                    {
+
+                        method:
+                            "PATCH",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+
+                    }
+                );
+
+
+            if(
+                !response.ok
+            ){
+
+                const errorText =
+                    await response.text();
+
+                console.error(
+                    errorText
+                );
+
+                throw new Error(
+                    "Save failed"
+                );
+
+            }
+
+
+            updateUI({
+
+                baseSalary:
+                    base,
+
+                visitIncentive:
+                    visit,
+
+                admissionIncentive:
+                    admission,
+
+                updatedAt:
+                    updatedAt
+
+            });
+
+
+            document
+                .getElementById(
+                    "lastUpdated"
+                )
+                .textContent =
+                "Updated " +
+                new Date(
+                    updatedAt
+                ).toLocaleString(
+                    "en-IN"
+                );
+
+
+            showStatus(
+                "Payment settings saved successfully. The Coordinator Panel will use the new rates.",
+                "success"
+            );
+
+
+        }
+
+        catch(error){
+
+            console.error(
+                error
+            );
+
+
+            showStatus(
+                "Unable to save payment settings. Please check Firestore rules.",
+                "error"
+            );
+
+        }
+
+        finally{
+
+            saveBtn.disabled =
+                false;
+
+            saveBtn.textContent =
+                "Save Payment Settings";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+window.toggleSidebar =
+function(){
+
+    document
+        .getElementById(
+            "sidebar"
         )
-        .filter(Boolean)
-    )]
-    .sort();
-
-
-  select.innerHTML = `
-    <option value="">
-      All Courses
-    </option>
-  `;
-
-
-  courses.forEach(course => {
-
-    const option =
-      document.createElement("option");
-
-    option.value = course;
-
-    option.textContent = course;
-
-    select.appendChild(option);
-
-  });
-
-
-  if(courses.includes(current)){
-    select.value = current;
-  }
-
-}
-
-
-function updatePeopleFilters(){
-
-  const coordinatorSelect =
-    document.getElementById(
-      "inquiryCoordinatorFilter"
-    );
-
-  const telecallerSelect =
-    document.getElementById(
-      "inquiryTelecallerFilter"
-    );
-
-
-  const coordinators =
-    staffRecords
-      .filter(
-        x =>
-          normalizeRole(x.role) ===
-          "coordinator"
-      )
-      .sort(
-        (a,b)=>
-          safe(a.name)
-            .localeCompare(
-              safe(b.name)
-            )
-      );
-
-
-  const telecallers =
-    staffRecords
-      .filter(
-        x =>
-          normalizeRole(x.role) ===
-          "telecaller"
-      )
-      .sort(
-        (a,b)=>
-          safe(a.name)
-            .localeCompare(
-              safe(b.name)
-            )
-      );
-
-
-  const oldCoordinator =
-    coordinatorSelect.value;
-
-  const oldTelecaller =
-    telecallerSelect.value;
-
-
-  coordinatorSelect.innerHTML = `
-    <option value="">
-      All Coordinators
-    </option>
-  `;
-
-
-  coordinators.forEach(person => {
-
-    const option =
-      document.createElement("option");
-
-    option.value =
-      safe(person.name);
-
-    option.textContent =
-      safe(person.name);
-
-    coordinatorSelect.appendChild(
-      option
-    );
-
-  });
-
-
-  telecallerSelect.innerHTML = `
-    <option value="">
-      All Telecallers
-    </option>
-  `;
-
-
-  telecallers.forEach(person => {
-
-    const option =
-      document.createElement("option");
-
-    option.value =
-      safe(person.name);
-
-    option.textContent =
-      safe(person.name);
-
-    telecallerSelect.appendChild(
-      option
-    );
-
-  });
-
-
-  if(
-    coordinators.some(
-      x => safe(x.name) === oldCoordinator
-    )
-  ){
-
-    coordinatorSelect.value =
-      oldCoordinator;
-
-  }
-
-
-  if(
-    telecallers.some(
-      x => safe(x.name) === oldTelecaller
-    )
-  ){
-
-    telecallerSelect.value =
-      oldTelecaller;
-
-  }
-
-}
-
-
-/* =========================================
-   RENDER INQUIRIES
-========================================= */
-
-window.renderInquiries = function(){
-
-  const tbody =
-    document.getElementById(
-      "inquiryTable"
-    );
-
-
-  const search =
-    safe(
-      document.getElementById(
-        "inquirySearch"
-      ).value
-    )
-    .toLowerCase()
-    .trim();
-
-
-  const course =
-    safe(
-      document.getElementById(
-        "inquiryCourseFilter"
-      ).value
-    );
-
-
-  const status =
-    safe(
-      document.getElementById(
-        "inquiryStatusFilter"
-      ).value
-    )
-    .toLowerCase();
-
-
-  const coordinator =
-    safe(
-      document.getElementById(
-        "inquiryCoordinatorFilter"
-      ).value
-    )
-    .toLowerCase();
-
-
-  const telecaller =
-    safe(
-      document.getElementById(
-        "inquiryTelecallerFilter"
-      ).value
-    )
-    .toLowerCase();
-
-
-  let list =
-    inquiries.filter(inquiry => {
-
-      const student =
-        safe(
-          inquiry.studentName
-        ).toLowerCase();
-
-      const mobile =
-        cleanMobile(
-          inquiry.mobile
+        .classList.toggle(
+            "open"
         );
 
-      const inquiryCourse =
-        safe(
-          inquiry.course
-        ).toLowerCase();
-
-      const source =
-        safe(
-          inquiry.source
-        ).toLowerCase();
-
-      const coordinatorName =
-        safe(
-          inquiry.coordinatorName
-        ).toLowerCase();
-
-      const telecallerName =
-        safe(
-          inquiry.telecallerName
-        ).toLowerCase();
-
-      const inquiryStatus =
-        getStatus(inquiry);
-
-
-      const searchMatch =
-        !search ||
-        student.includes(search) ||
-        mobile.includes(
-          search.replace(/\D/g,"")
-        ) ||
-        inquiryCourse.includes(search) ||
-        source.includes(search) ||
-        coordinatorName.includes(search) ||
-        telecallerName.includes(search);
-
-
-      const courseMatch =
-        !course ||
-        safe(inquiry.course) === course;
-
-
-      const statusMatch =
-        !status ||
-        inquiryStatus === status;
-
-
-      const coordinatorMatch =
-        !coordinator ||
-        coordinatorName === coordinator;
-
-
-      const telecallerMatch =
-        !telecaller ||
-        telecallerName === telecaller;
-
-
-      return (
-        searchMatch &&
-        courseMatch &&
-        statusMatch &&
-        coordinatorMatch &&
-        telecallerMatch
-      );
-
-    });
-
-
-  if(!list.length){
-
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="9">
-          <div class="empty">
-            No inquiries found.
-          </div>
-        </td>
-      </tr>
-    `;
-
-    return;
-
-  }
-
-
-  tbody.innerHTML =
-    list.map(inquiry => {
-
-      const id =
-        safe(inquiry.id);
-
-      const statusValue =
-        getStatus(inquiry);
-
-      const mobile =
-        cleanMobile(
-          inquiry.mobile
-        );
-
-
-      return `
-        <tr>
-
-          <td>
-
-            <div class="name">
-              ${escapeHtml(
-                inquiry.studentName ||
-                "Unknown"
-              )}
-            </div>
-
-            <div class="muted">
-              ${escapeHtml(
-                inquiry.remark ||
-                ""
-              )}
-            </div>
-
-          </td>
-
-
-          <td>
-            ${escapeHtml(
-              inquiry.mobile ||
-              "—"
-            )}
-          </td>
-
-
-          <td>
-            ${escapeHtml(
-              inquiry.course ||
-              "—"
-            )}
-          </td>
-
-
-          <td>
-            ${escapeHtml(
-              inquiry.source ||
-              "Coordinator"
-            )}
-          </td>
-
-
-          <td>
-            ${
-              inquiry.coordinatorName
-              ?
-              `
-              <div class="name">
-                ${escapeHtml(
-                  inquiry.coordinatorName
-                )}
-              </div>
-              <div class="muted">
-                ${escapeHtml(
-                  inquiry.coordinatorMobile ||
-                  ""
-                )}
-              </div>
-              `
-              :
-              "—"
-            }
-          </td>
-
-
-          <td>
-            ${
-              inquiry.telecallerName
-              ?
-              `
-              <div class="name">
-                ${escapeHtml(
-                  inquiry.telecallerName
-                )}
-              </div>
-              <div class="muted">
-                ${escapeHtml(
-                  inquiry.telecallerMobile ||
-                  ""
-                )}
-              </div>
-              `
-              :
-              `
-              <span class="badge badgePending">
-                Not Assigned
-              </span>
-              `
-            }
-          </td>
-
-
-          <td>
-            ${statusBadge(
-              statusValue
-            )}
-          </td>
-
-
-          <td>
-            ${formatDate(
-              inquiry.createdAt
-            )}
-          </td>
-
-
-          <td>
-
-            <div style="
-              display:flex;
-              gap:5px;
-              flex-wrap:wrap;
-            ">
-
-              ${
-                mobile
-                ?
-                `
-                <button
-                  class="btn btnLight btnSmall"
-                  onclick="callNumber('${mobile}')"
-                >
-                  📞
-                </button>
-
-                <button
-                  class="btn btnLight btnSmall"
-                  onclick="openWhatsApp('${mobile}')"
-                >
-                  💬
-                </button>
-                `
-                :
-                ""
-              }
-
-
-              <button
-                class="btn btnLight btnSmall"
-                onclick="viewInquiry('${id}')"
-              >
-                👁
-              </button>
-
-
-              <button
-                class="btn btnPrimary btnSmall"
-                onclick="changeInquiryStatus('${id}')"
-              >
-                Status
-              </button>
-
-
-              <button
-                class="btn btnRed btnSmall"
-                onclick="deleteInquiry('${id}')"
-              >
-                🗑
-              </button>
-
-            </div>
-
-          </td>
-
-        </tr>
-      `;
-
-    })
-    .join("");
-
-}
-
-
-/* =========================================
-   STAFF DRAWER
-========================================= */
-
-window.openStaffDrawer = function(){
-
-  document.getElementById(
-    "staffDrawer"
-  ).classList.add("show");
-
-  document.getElementById(
-    "drawerOverlay"
-  ).classList.add("show");
-
 };
 
 
-window.closeStaffDrawer = function(){
-
-  document.getElementById(
-    "staffDrawer"
-  ).classList.remove("show");
-
-  document.getElementById(
-    "drawerOverlay"
-  ).classList.remove("show");
-
-};
-
-
-window.saveStaff = async function(event){
-
-  event.preventDefault();
-
-
-  const name =
-    safe(
-      document.getElementById(
-        "staffName"
-      ).value
-    ).trim();
-
-
-  const mobile =
-    cleanMobile(
-      document.getElementById(
-        "staffMobile"
-      ).value
-    );
-
-
-  const role =
-    safe(
-      document.getElementById(
-        "staffRole"
-      ).value
-    ).trim();
-
-
-  const status =
-    safe(
-      document.getElementById(
-        "staffStatus"
-      ).value
-    );
-
-
-  const remark =
-    safe(
-      document.getElementById(
-        "staffRemark"
-      ).value
-    ).trim();
-
-
-  if(!name){
-
-    showToast(
-      "Staff name required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!/^\d{10}$/.test(mobile)){
-
-    showToast(
-      "Valid 10 digit mobile number required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!role){
-
-    showToast(
-      "Please select role.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await addDoc(
-      collection(
-        db,
-        "staff"
-      ),
-      {
-
-        name,
-
-        fullName:name,
-
-        mobile,
-
-        phone:mobile,
-
-        role,
-
-        status,
-
-        remark,
-
-        createdAt:
-          serverTimestamp(),
-
-        updatedAt:
-          serverTimestamp()
-
-      }
-    );
-
-
-    closeStaffDrawer();
-
-    document.querySelector(
-      "#staffDrawer form"
-    ).reset();
-
-
-    showToast(
-      role +
-      " successfully added.",
-      "success"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Staff save nahi hua: " +
-      error.message,
-      "error"
-    );
-
-  }
-
-};
-
-
-/* =========================================
-   STAFF VIEW
-========================================= */
-
-window.viewStaff = function(id){
-
-  const staff =
-    staffRecords.find(
-      x => x.id === id
-    );
-
-
-  if(!staff){
-
-    showToast(
-      "Staff details not found.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const role =
-    normalizeRole(staff.role);
-
-
-  const roleText =
-    role.charAt(0).toUpperCase() +
-    role.slice(1);
-
-
-  const inquiryCount =
-    inquiries.filter(
-      inquiry => {
-
-        const pName =
-          safe(staff.name)
-            .trim()
-            .toLowerCase();
-
-        const iName =
-          safe(
-            role === "telecaller"
-            ? inquiry.telecallerName
-            : inquiry.coordinatorName
-          )
-          .trim()
-          .toLowerCase();
-
-
-        const pMobile =
-          cleanMobile(
-            staff.mobile
-          );
-
-        const iMobile =
-          cleanMobile(
-            role === "telecaller"
-            ? inquiry.telecallerMobile
-            : inquiry.coordinatorMobile
-          );
-
-
-        return (
-          (
-            pMobile &&
-            iMobile &&
-            pMobile === iMobile
-          ) ||
-          (
-            pName &&
-            iName &&
-            pName === iName
-          )
-        );
-
-      }
-    ).length;
-
-
-  document.getElementById(
-    "detailsContent"
-  ).innerHTML = `
-
-    <div style="
-      display:flex;
-      align-items:center;
-      gap:13px;
-      margin-bottom:20px;
-    ">
-
-      <div class="staffAvatar">
-        ${escapeHtml(
-          initials(
-            staff.name
-          )
-        )}
-      </div>
-
-      <div>
-
-        <div style="
-          font-size:18px;
-          font-weight:850;
-        ">
-          ${escapeHtml(
-            staff.name
-          )}
-        </div>
-
-        <div class="muted">
-          ${escapeHtml(
-            roleText
-          )}
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">
-        MOBILE
-      </div>
-      <div class="infoValue">
-        ${
-          staff.mobile
-          ?
-          escapeHtml(
-            staff.mobile
-          )
-          :
-          "Not available"
-        }
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">
-        ROLE
-      </div>
-      <div class="infoValue">
-        ${escapeHtml(
-          roleText
-        )}
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">
-        STATUS
-      </div>
-      <div class="infoValue">
-        ${escapeHtml(
-          staff.status ||
-          "active"
-        )}
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">
-        RELATED INQUIRIES
-      </div>
-      <div class="infoValue">
-        ${inquiryCount}
-      </div>
-    </div>
-
-
-    <div class="infoBox">
-
-      <div class="infoLabel">
-        REMARK
-      </div>
-
-      <div class="infoValue">
-        ${
-          staff.remark
-          ?
-          escapeHtml(
-            staff.remark
-          )
-          :
-          "No remark"
-        }
-      </div>
-
-    </div>
-
-  `;
-
-
-  document.getElementById(
-    "detailsDrawer"
-  ).classList.add("show");
-
-};
-
-
-window.closeDetails = function(){
-
-  document.getElementById(
-    "detailsDrawer"
-  ).classList.remove("show");
-
-};
-
-
-/* =========================================
-   STAFF STATUS
-========================================= */
-
-window.toggleStaffStatus =
-async function(id,currentStatus){
-
-  try{
-
-    const newStatus =
-      currentStatus === "active"
-      ? "inactive"
-      : "active";
-
-
-    await updateDoc(
-      doc(
-        db,
-        "staff",
-        id
-      ),
-      {
-
-        status:newStatus,
-
-        updatedAt:
-          serverTimestamp()
-
-      }
-    );
-
-
-    showToast(
-      "Staff status updated.",
-      "success"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Status update failed: " +
-      error.message,
-      "error"
-    );
-
-  }
-
-};
-
-
-/* =========================================
-   DELETE STAFF
-========================================= */
-
-window.deleteStaff =
-async function(id){
-
-  const staff =
-    staffRecords.find(
-      x => x.id === id
-    );
-
-
-  if(!staff){
-
-    return;
-
-  }
-
-
-  if(staff.source === "inquiry"){
-
-    showToast(
-      "Inquiry se generated staff record delete nahi hota.",
-      "info"
-    );
-
-    return;
-
-  }
-
-
-  const yes =
-    confirm(
-      "Delete " +
-      (staff.name || "this staff") +
-      "?"
-    );
-
-
-  if(!yes){
-
-    return;
-
-  }
-
-
-  try{
-
-    await deleteDoc(
-      doc(
-        db,
-        "staff",
-        id
-      )
-    );
-
-
-    showToast(
-      "Staff deleted.",
-      "success"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Delete failed: " +
-      error.message,
-      "error"
-    );
-
-  }
-
-};
-
-
-/* =========================================
-   INQUIRY VIEW
-========================================= */
-
-window.viewInquiry = function(id){
-
-  const inquiry =
-    inquiries.find(
-      x => x.id === id
-    );
-
-
-  if(!inquiry){
-
-    showToast(
-      "Inquiry not found.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  document.getElementById(
-    "detailsContent"
-  ).innerHTML = `
-
-    <div style="
-      font-size:20px;
-      font-weight:850;
-      margin-bottom:4px;
-    ">
-      ${escapeHtml(
-        inquiry.studentName ||
-        "Student"
-      )}
-    </div>
-
-    <div class="muted" style="margin-bottom:18px;">
-      Student Inquiry
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">MOBILE</div>
-      <div class="infoValue">
-        ${escapeHtml(
-          inquiry.mobile || "—"
-        )}
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">COURSE</div>
-      <div class="infoValue">
-        ${escapeHtml(
-          inquiry.course || "—"
-        )}
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">SOURCE</div>
-      <div class="infoValue">
-        ${escapeHtml(
-          inquiry.source ||
-          "Coordinator"
-        )}
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">COORDINATOR</div>
-      <div class="infoValue">
-        ${
-          inquiry.coordinatorName
-          ?
-          escapeHtml(
-            inquiry.coordinatorName
-          ) +
-          "<br>" +
-          escapeHtml(
-            inquiry.coordinatorMobile ||
-            ""
-          )
-          :
-          "Not assigned"
-        }
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">TELECALLER</div>
-      <div class="infoValue">
-        ${
-          inquiry.telecallerName
-          ?
-          escapeHtml(
-            inquiry.telecallerName
-          ) +
-          "<br>" +
-          escapeHtml(
-            inquiry.telecallerMobile ||
-            ""
-          )
-          :
-          "Not assigned"
-        }
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">STATUS</div>
-      <div class="infoValue">
-        ${escapeHtml(
-          getStatus(inquiry)
-        )}
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">FOLLOW-UP DATE</div>
-      <div class="infoValue">
-        ${escapeHtml(
-          inquiry.followUpDate ||
-          "Not set"
-        )}
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">RECEIVED</div>
-      <div class="infoValue">
-        ${escapeHtml(
-          formatDateTime(
-            inquiry.createdAt
-          )
-        )}
-      </div>
-    </div>
-
-
-    <div class="infoBox" style="margin-bottom:9px;">
-      <div class="infoLabel">REMARK</div>
-      <div class="infoValue">
-        ${escapeHtml(
-          inquiry.remark ||
-          "No remark"
-        )}
-      </div>
-    </div>
-
-
-    <div class="infoBox">
-      <div class="infoLabel">
-        TELECALLER REMARK
-      </div>
-
-      <div class="infoValue">
-        ${escapeHtml(
-          inquiry.telecallerRemark ||
-          "No remark"
-        )}
-      </div>
-    </div>
-
-  `;
-
-
-  document.getElementById(
-    "detailsDrawer"
-  ).classList.add("show");
-
-};
-
-
-/* =========================================
-   CHANGE INQUIRY STATUS
-========================================= */
-
-window.changeInquiryStatus =
-async function(id){
-
-  const inquiry =
-    inquiries.find(
-      x => x.id === id
-    );
-
-
-  if(!inquiry){
-
-    return;
-
-  }
-
-
-  const current =
-    getStatus(inquiry);
-
-
-  const status =
-    prompt(
-      "Enter status:\n\nnew\npending\nfollow-up\nconverted\nclosed",
-      current
-    );
-
-
-  if(status === null){
-
-    return;
-
-  }
-
-
-  const cleanStatus =
-    status
-      .trim()
-      .toLowerCase();
-
-
-  const allowed = [
-    "new",
-    "pending",
-    "follow-up",
-    "converted",
-    "closed"
-  ];
-
-
-  if(!allowed.includes(cleanStatus)){
-
-    showToast(
-      "Invalid status.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await updateDoc(
-      doc(
-        db,
-        "studentInquiries",
-        id
-      ),
-      {
-
-        status:
-          cleanStatus,
-
-        telecallerStatus:
-          cleanStatus,
-
-        updatedAt:
-          serverTimestamp()
-
-      }
-    );
-
-
-    showToast(
-      "Inquiry status updated.",
-      "success"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Status update failed: " +
-      error.message,
-      "error"
-    );
-
-  }
-
-};
-
-
-/* =========================================
-   DELETE INQUIRY
-========================================= */
-
-window.deleteInquiry =
-async function(id){
-
-  const inquiry =
-    inquiries.find(
-      x => x.id === id
-    );
-
-
-  if(!inquiry){
-
-    return;
-
-  }
-
-
-  const yes =
-    confirm(
-      "Delete inquiry of " +
-      (
-        inquiry.studentName ||
-        "this student"
-      ) +
-      "?"
-    );
-
-
-  if(!yes){
-
-    return;
-
-  }
-
-
-  try{
-
-    await deleteDoc(
-      doc(
-        db,
-        "studentInquiries",
-        id
-      )
-    );
-
-
-    showToast(
-      "Inquiry deleted.",
-      "success"
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      "Inquiry delete failed: " +
-      error.message,
-      "error"
-    );
-
-  }
-
-};
-
-
-/* =========================================
-   CALL / WHATSAPP
-========================================= */
-
-window.callNumber =
-function(number){
-
-  const mobile =
-    cleanMobile(number);
-
-  if(!mobile){
-
-    showToast(
-      "Mobile number unavailable.",
-      "error"
-    );
-
-    return;
-
-  }
-
-  window.location.href =
-    "tel:" + mobile;
-
-};
-
-
-window.openWhatsApp =
-function(number){
-
-  const mobile =
-    cleanMobile(number);
-
-  if(!mobile){
-
-    showToast(
-      "Mobile number unavailable.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const full =
-    mobile.length === 10
-    ? "91" + mobile
-    : mobile;
-
-
-  const text =
-    encodeURIComponent(
-      "Hello, this is BlackTerminal Computer Institute, Baripada."
-    );
-
-
-  window.open(
-    "https://wa.me/" +
-    full +
-    "?text=" +
-    text,
-    "_blank"
-  );
-
-};
-
-
-/* =========================================
-   REFRESH
-========================================= */
-
-window.loadInquiriesOnce =
-function(){
-
-  /*
-   Realtime listener already active.
-   This function simply refreshes local rendering.
-  */
-
-  renderInquiries();
-
-  renderStaff();
-
-  renderQuickPeople();
-
-  updateStats();
-
-  showToast(
-    "Dashboard refreshed.",
-    "success"
-  );
-
-};
-
-
-/* =========================================
-   SCROLL
-========================================= */
-
-window.scrollToStaff =
-function(type){
-
-  if(type === "telecaller"){
-
-    document.getElementById(
-      "telecallerSection"
-    ).scrollIntoView({
-      behavior:"smooth"
-    });
-
-  }
-
-};
-
-
-/* =========================================
-   MOBILE MENU
-========================================= */
-
-window.toggleMobileMenu =
-function(){
-
-  document.getElementById(
-    "sidebar"
-  ).classList.toggle("open");
-
-  document.getElementById(
-    "mobileOverlay"
-  ).classList.toggle("show");
-
-};
-
-
-window.closeMobileMenu =
-function(){
-
-  document.getElementById(
-    "sidebar"
-  ).classList.remove("open");
-
-  document.getElementById(
-    "mobileOverlay"
-  ).classList.remove("show");
-
-};
-
-
-/* =========================================
-   START
-========================================= */
-
-subscribeInquiries();
-
-subscribeStaff();
+/* =========================================================
+   YEAR
+========================================================= */
+
+document
+    .getElementById(
+        "year"
+    )
+    .textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+loadSettings();
 
 </script>
 
 </body>
+
 </html>

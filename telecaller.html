@@ -1,3701 +1,4170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>BlackTerminal | Telecaller</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#086ee1">
 
-  <style>
-    :root{
-      --navy:#071426;
-      --navy2:#0d2039;
-      --blue:#086ee1;
-      --blue2:#18a0ff;
-      --bg:#f4f7fb;
-      --card:#ffffff;
-      --text:#172236;
-      --muted:#738096;
-      --line:#e3e9f1;
+<title>BlackTerminal | Telecaller</title>
 
-      --green:#16a34a;
-      --red:#dc2626;
-      --orange:#f59e0b;
-      --purple:#7c3aed;
+<style>
 
-      --shadow:0 10px 30px rgba(7,20,38,.08);
+:root{
+    --navy:#071426;
+    --navy2:#0d2039;
+    --blue:#086ee1;
+    --blue2:#18a0ff;
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172236;
+    --muted:#738096;
+    --line:#e3e9f1;
 
-      --radius:16px;
-    }
+    --green:#16a34a;
+    --red:#dc2626;
+    --orange:#f59e0b;
+    --purple:#7c3aed;
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+    --shadow:0 10px 30px rgba(7,20,38,.08);
 
-    body{
-      font-family:Inter,Arial,Helvetica,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-    }
+    --radius:16px;
+}
 
-    button,
-    input,
-    select,
-    textarea{
-      font:inherit;
-    }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-    button{
-      cursor:pointer;
-    }
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
 
-    /* =========================
-       SIDEBAR
-    ========================= */
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
 
-    .sidebar{
-      width:255px;
-      background:linear-gradient(180deg,#071426,#0a1c31);
-      color:#fff;
-      position:fixed;
-      top:0;
-      left:0;
-      bottom:0;
-      z-index:1000;
-      padding:22px 16px;
-    }
+button{
+    cursor:pointer;
+}
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:8px 8px 25px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
 
-    .brand-logo{
-      width:43px;
-      height:43px;
-      border-radius:12px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(135deg,var(--blue),var(--blue2));
-      font-weight:800;
-      font-size:18px;
-    }
+/* =====================================================
+   SIDEBAR
+===================================================== */
 
-    .brand-text strong{
-      display:block;
-      font-size:16px;
-    }
+.sidebar{
+    width:255px;
+    background:linear-gradient(180deg,#071426,#0a1c31);
+    color:#fff;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    z-index:1000;
+    padding:22px 16px;
+    transition:.25s;
+}
 
-    .brand-text span{
-      color:#8da1ba;
-      font-size:11px;
-    }
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:8px 8px 25px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
 
-    .nav{
-      margin-top:25px;
-    }
+.brand-logo{
+    width:43px;
+    height:43px;
+    border-radius:12px;
 
-    .nav-title{
-      font-size:10px;
-      color:#70849d;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      margin:0 10px 9px;
-    }
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    .nav-item{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      color:#b9c7d8;
-      text-decoration:none;
-      padding:12px 13px;
-      border-radius:11px;
-      margin-bottom:5px;
-      font-size:14px;
-    }
-
-    .nav-item.active{
-      color:#fff;
-      background:rgba(24,160,255,.16);
-    }
-
-    .nav-item:hover{
-      background:rgba(255,255,255,.06);
-      color:#fff;
-    }
-
-    .nav-icon{
-      width:22px;
-      text-align:center;
-    }
-
-    .logout-btn{
-      position:absolute;
-      bottom:20px;
-      left:16px;
-      right:16px;
-
-      border:1px solid rgba(255,255,255,.1);
-
-      background:rgba(255,255,255,.04);
-
-      color:#fff;
-
-      padding:11px;
-
-      border-radius:10px;
-    }
-
-    .logout-btn:hover{
-      background:rgba(255,255,255,.09);
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
-
-    .main{
-      margin-left:255px;
-      min-height:100vh;
-    }
-
-    .topbar{
-      height:72px;
-
-      background:#fff;
-
-      border-bottom:1px solid var(--line);
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      padding:0 28px;
-
-      position:sticky;
-      top:0;
-
-      z-index:500;
-    }
-
-    .mobile-menu{
-      display:none;
-
-      border:0;
-
-      background:#eef4fb;
-
-      padding:9px 11px;
-
-      border-radius:9px;
-    }
-
-    .page-title h1{
-      font-size:21px;
-    }
-
-    .page-title p{
-      color:var(--muted);
-
-      font-size:12px;
-
-      margin-top:3px;
-    }
-
-    .user-box{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .avatar{
-      width:39px;
-      height:39px;
-
-      border-radius:50%;
-
-      background:linear-gradient(
+    background:linear-gradient(
         135deg,
         var(--blue),
         var(--blue2)
-      );
+    );
 
-      color:#fff;
+    font-weight:800;
+    font-size:18px;
+}
 
-      display:flex;
-      align-items:center;
-      justify-content:center;
+.brand-text strong{
+    display:block;
+    font-size:16px;
+}
 
-      font-weight:700;
-    }
+.brand-text span{
+    color:#8da1ba;
+    font-size:11px;
+}
 
-    .user-info strong{
-      display:block;
-      font-size:13px;
-    }
+.nav{
+    margin-top:25px;
+}
 
-    .user-info span{
-      display:block;
-      color:var(--muted);
-      font-size:11px;
-    }
+.nav-title{
+    font-size:10px;
+    color:#70849d;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin:0 10px 9px;
+}
 
-    .content{
-      padding:28px;
+.nav-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
 
-      max-width:1600px;
+    color:#b9c7d8;
 
-      margin:auto;
-    }
+    text-decoration:none;
 
-    /* =========================
-       SYSTEM MESSAGE
-    ========================= */
+    padding:12px 13px;
 
-    .system-message{
-      display:none;
+    border-radius:11px;
 
-      margin-bottom:18px;
+    margin-bottom:5px;
 
-      padding:13px 15px;
+    font-size:14px;
+}
 
-      border-radius:11px;
+.nav-item.active{
+    color:#fff;
+    background:rgba(24,160,255,.16);
+}
 
-      font-size:13px;
+.nav-item:hover{
+    background:rgba(255,255,255,.06);
+    color:#fff;
+}
 
-      line-height:1.5;
-    }
+.nav-icon{
+    width:22px;
+    text-align:center;
+}
 
-    .system-message.show{
-      display:block;
-    }
+.logout-btn{
+    position:absolute;
 
-    .system-message.success{
-      background:#ecfdf3;
-      border:1px solid #bbf7d0;
-      color:#15803d;
-    }
+    bottom:20px;
+    left:16px;
+    right:16px;
 
-    .system-message.error{
-      background:#fef2f2;
-      border:1px solid #fecaca;
-      color:#b91c1c;
-    }
+    border:1px solid rgba(255,255,255,.1);
 
-    .system-message.info{
-      background:#eff6ff;
-      border:1px solid #bfdbfe;
-      color:#1d4ed8;
-    }
+    background:rgba(255,255,255,.04);
 
-    /* =========================
-       STATS
-    ========================= */
+    color:#fff;
 
-    .stats{
-      display:grid;
+    padding:11px;
 
-      grid-template-columns:
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
+.logout-btn:hover{
+    background:rgba(255,255,255,.09);
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+    margin-left:255px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+
+    background:#fff;
+
+    border-bottom:1px solid var(--line);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 28px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:500;
+}
+
+.mobile-menu{
+    display:none;
+
+    border:0;
+
+    background:#eef4fb;
+
+    padding:9px 11px;
+
+    border-radius:9px;
+
+    font-size:18px;
+}
+
+.page-title h1{
+    font-size:21px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:3px;
+}
+
+.user-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:39px;
+    height:39px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--blue2)
+    );
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-weight:700;
+}
+
+.user-info strong{
+    display:block;
+    font-size:13px;
+}
+
+.user-info span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.content{
+    padding:28px;
+
+    max-width:1600px;
+
+    margin:auto;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.system-message{
+    display:none;
+
+    margin-bottom:18px;
+
+    padding:13px 15px;
+
+    border-radius:11px;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+.system-message.show{
+    display:block;
+}
+
+.system-message.success{
+    background:#ecfdf3;
+    border:1px solid #bbf7d0;
+    color:#15803d;
+}
+
+.system-message.error{
+    background:#fef2f2;
+    border:1px solid #fecaca;
+    color:#b91c1c;
+}
+
+.system-message.info{
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    color:#1d4ed8;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
         repeat(5,1fr);
 
-      gap:17px;
+    gap:17px;
 
-      margin-bottom:22px;
-    }
+    margin-bottom:22px;
+}
 
-    .stat{
-      background:#fff;
+.stat{
+    background:#fff;
 
-      border:1px solid var(--line);
+    border:1px solid var(--line);
 
-      border-radius:var(--radius);
+    border-radius:var(--radius);
 
-      padding:19px;
+    padding:19px;
 
-      box-shadow:var(--shadow);
-    }
+    box-shadow:var(--shadow);
+}
 
-    .stat-top{
-      display:flex;
+.stat-top{
+    display:flex;
 
-      align-items:center;
+    align-items:center;
 
-      justify-content:space-between;
-    }
+    justify-content:space-between;
+}
 
-    .stat-label{
-      font-size:12px;
-      color:var(--muted);
-    }
+.stat-label{
+    font-size:12px;
+    color:var(--muted);
+}
 
-    .stat-value{
-      font-size:27px;
+.stat-value{
+    font-size:27px;
 
-      font-weight:800;
+    font-weight:800;
 
-      margin-top:7px;
-    }
+    margin-top:7px;
+}
 
-    .stat-icon{
-      width:42px;
-      height:42px;
+.stat-icon{
+    width:42px;
+    height:42px;
 
-      border-radius:12px;
+    border-radius:12px;
 
-      display:flex;
+    display:flex;
 
-      align-items:center;
-      justify-content:center;
+    align-items:center;
+    justify-content:center;
 
-      background:#eaf4ff;
+    background:#eaf4ff;
 
-      color:var(--blue);
+    color:var(--blue);
 
-      font-size:18px;
-    }
+    font-size:18px;
+}
 
-    .stat.green .stat-icon{
-      background:#ecfdf3;
-      color:var(--green);
-    }
+.stat.green .stat-icon{
+    background:#ecfdf3;
+    color:var(--green);
+}
 
-    .stat.orange .stat-icon{
-      background:#fff7e6;
-      color:var(--orange);
-    }
+.stat.orange .stat-icon{
+    background:#fff7e6;
+    color:var(--orange);
+}
 
-    .stat.purple .stat-icon{
-      background:#f5f3ff;
-      color:var(--purple);
-    }
 
-    /* =========================
-       FILTER CARD
-    ========================= */
+/* =====================================================
+   FILTER
+===================================================== */
 
-    .filter-card{
-      background:#fff;
+.filter-card{
+    background:#fff;
 
-      border:1px solid var(--line);
+    border:1px solid var(--line);
 
-      border-radius:var(--radius);
+    border-radius:var(--radius);
 
-      box-shadow:var(--shadow);
+    box-shadow:var(--shadow);
 
-      padding:18px;
+    padding:18px;
 
-      margin-bottom:18px;
-    }
+    margin-bottom:18px;
+}
 
-    .filter-grid{
-      display:grid;
+.filter-grid{
+    display:grid;
 
-      grid-template-columns:
+    grid-template-columns:
         minmax(230px,2fr)
         1fr
         1fr
         1fr
         auto;
 
-      gap:11px;
-    }
+    gap:11px;
+}
 
-    .filter-input,
-    .filter-select{
-      width:100%;
+.filter-input,
+.filter-select{
+    width:100%;
 
-      border:1px solid #dbe3ec;
+    border:1px solid #dbe3ec;
 
-      border-radius:10px;
+    border-radius:10px;
 
-      padding:11px 12px;
+    padding:11px 12px;
 
-      background:#fff;
+    background:#fff;
 
-      outline:none;
-    }
+    outline:none;
+}
 
-    .filter-input:focus,
-    .filter-select:focus{
-      border-color:var(--blue);
+.filter-input:focus,
+.filter-select:focus{
+    border-color:var(--blue);
 
-      box-shadow:
+    box-shadow:
         0 0 0 3px
         rgba(8,110,225,.08);
+}
+
+.refresh-btn{
+    border:0;
+
+    background:#eef6ff;
+
+    color:var(--blue);
+
+    padding:0 15px;
+
+    border-radius:10px;
+
+    font-weight:700;
+}
+
+.refresh-btn:hover{
+    background:#dceeff;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-card{
+    background:#fff;
+
+    border:1px solid var(--line);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+}
+
+.table-header{
+    padding:20px 22px;
+
+    border-bottom:1px solid var(--line);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.table-header h2{
+    font-size:17px;
+}
+
+.table-header p{
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-top:3px;
+}
+
+.live-status{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    color:var(--green);
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+.live-dot{
+    width:8px;
+    height:8px;
+
+    background:#22c55e;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(34,197,94,.12);
+}
+
+.table-wrap{
+    width:100%;
+
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:1050px;
+}
+
+thead{
+    background:#f8fafc;
+}
+
+th{
+    text-align:left;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.4px;
+
+    color:#738096;
+
+    padding:13px 15px;
+
+    border-bottom:1px solid var(--line);
+
+    white-space:nowrap;
+}
+
+td{
+    padding:15px;
+
+    border-bottom:1px solid #edf1f5;
+
+    font-size:12px;
+
+    vertical-align:middle;
+}
+
+tbody tr:hover{
+    background:#fbfdff;
+}
+
+.student-cell{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.student-avatar{
+    width:35px;
+    height:35px;
+
+    border-radius:10px;
+
+    background:#eaf4ff;
+
+    color:var(--blue);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-weight:800;
+
+    flex-shrink:0;
+}
+
+.student-name{
+    font-weight:800;
+
+    font-size:13px;
+}
+
+.student-mobile{
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-top:3px;
+}
+
+.course-name{
+    font-weight:700;
+}
+
+.source-badge{
+    display:inline-block;
+
+    padding:5px 8px;
+
+    border-radius:7px;
+
+    background:#f1f5f9;
+
+    color:#475569;
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.coordinator-name{
+    font-weight:700;
+}
+
+.date-text{
+    color:#64748b;
+
+    font-size:11px;
+
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status-select{
+    border:0;
+
+    padding:7px 9px;
+
+    border-radius:8px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    outline:none;
+
+    cursor:pointer;
+}
+
+.status-select.new{
+    background:#eaf4ff;
+    color:#086ee1;
+}
+
+.status-select.pending{
+    background:#fff7e6;
+    color:#b77900;
+}
+
+.status-select.contacted{
+    background:#f1f5f9;
+    color:#475569;
+}
+
+.status-select.follow-up{
+    background:#f5f3ff;
+    color:#6d28d9;
+}
+
+.status-select.converted{
+    background:#ecfdf3;
+    color:#15803d;
+}
+
+.status-select.not-interested{
+    background:#fef2f2;
+    color:#b91c1c;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.actions{
+    display:flex;
+
+    gap:6px;
+
+    align-items:center;
+}
+
+.action-btn{
+    width:31px;
+    height:31px;
+
+    border:1px solid var(--line);
+
+    background:#fff;
+
+    border-radius:8px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:13px;
+}
+
+.action-btn:hover{
+    background:#f4f7fb;
+}
+
+.action-btn.call{
+    color:var(--green);
+}
+
+.action-btn.whatsapp{
+    color:#16a34a;
+}
+
+.action-btn.view{
+    color:var(--blue);
+}
+
+.action-btn.delete{
+    color:var(--red);
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.table-state{
+    padding:55px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+.spinner{
+    width:27px;
+    height:27px;
+
+    border:3px solid #e4edf7;
+
+    border-top-color:var(--blue);
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+
+    margin:0 auto 12px;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(7,20,38,.58);
+
+    z-index:2000;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+
+    max-width:620px;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.25);
+}
+
+.modal-header{
+    padding:19px 21px;
+
+    border-bottom:1px solid var(--line);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.modal-header h3{
+    font-size:17px;
+}
+
+.close-btn{
+    border:0;
+
+    background:#f1f5f9;
+
+    width:34px;
+    height:34px;
+
+    border-radius:9px;
+}
+
+.modal-body{
+    padding:21px;
+}
+
+.detail-grid{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+}
+
+.detail{
+    background:#f8fafc;
+
+    border:1px solid #edf1f5;
+
+    border-radius:11px;
+
+    padding:12px;
+}
+
+.detail.full{
+    grid-column:1/-1;
+}
+
+.detail-label{
+    color:var(--muted);
+
+    font-size:10px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+    margin-bottom:5px;
+}
+
+.detail-value{
+    font-size:13px;
+
+    font-weight:700;
+
+    word-break:break-word;
+}
+
+.modal-actions{
+    display:flex;
+
+    gap:9px;
+
+    margin-top:18px;
+}
+
+.modal-action{
+    flex:1;
+
+    padding:11px;
+
+    border-radius:10px;
+
+    border:1px solid var(--line);
+
+    background:#fff;
+
+    font-weight:700;
+
+    font-size:12px;
+}
+
+.modal-action.primary{
+    background:var(--blue);
+
+    color:#fff;
+
+    border-color:var(--blue);
+}
+
+.modal-action.green{
+    background:#16a34a;
+
+    color:#fff;
+
+    border-color:#16a34a;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+    position:fixed;
+
+    right:22px;
+
+    bottom:22px;
+
+    z-index:3000;
+
+    background:#071426;
+
+    color:#fff;
+
+    padding:13px 16px;
+
+    border-radius:11px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,.18);
+
+    font-size:12px;
+
+    transform:translateY(20px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.25s;
+
+    max-width:340px;
+}
+
+.toast.show{
+    transform:translateY(0);
+
+    opacity:1;
+}
+
+.toast.success{
+    border-left:4px solid var(--green);
+}
+
+.toast.error{
+    border-left:4px solid var(--red);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+.overlay{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.4);
+
+    z-index:900;
+}
+
+@media(max-width:1200px){
+
+    .stats{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .filter-grid{
+        grid-template-columns:
+            1fr 1fr 1fr;
     }
 
     .refresh-btn{
-      border:0;
-
-      background:#eef6ff;
-
-      color:var(--blue);
-
-      padding:0 15px;
-
-      border-radius:10px;
-
-      font-weight:700;
+        height:42px;
     }
 
-    .refresh-btn:hover{
-      background:#dceeff;
+}
+
+@media(max-width:760px){
+
+    .sidebar{
+        transform:translateX(-100%);
     }
 
-    /* =========================
-       TABLE CARD
-    ========================= */
-
-    .table-card{
-      background:#fff;
-
-      border:1px solid var(--line);
-
-      border-radius:var(--radius);
-
-      box-shadow:var(--shadow);
-
-      overflow:hidden;
+    .sidebar.open{
+        transform:translateX(0);
     }
 
-    .table-header{
-      padding:20px 22px;
-
-      border-bottom:1px solid var(--line);
-
-      display:flex;
-
-      align-items:center;
-
-      justify-content:space-between;
-
-      gap:15px;
+    .overlay.show{
+        display:block;
     }
 
-    .table-header h2{
-      font-size:17px;
+    .main{
+        margin-left:0;
     }
 
-    .table-header p{
-      color:var(--muted);
-
-      font-size:12px;
-
-      margin-top:3px;
+    .mobile-menu{
+        display:block;
     }
 
-    .live-status{
-      display:flex;
-
-      align-items:center;
-
-      gap:7px;
-
-      color:var(--green);
-
-      font-size:11px;
-
-      font-weight:700;
+    .topbar{
+        padding:0 16px;
     }
 
-    .live-dot{
-      width:8px;
-      height:8px;
-
-      background:#22c55e;
-
-      border-radius:50%;
-
-      box-shadow:
-        0 0 0 4px
-        rgba(34,197,94,.12);
+    .page-title{
+        display:none;
     }
 
-    .table-wrap{
-      width:100%;
-
-      overflow-x:auto;
+    .content{
+        padding:18px 14px;
     }
 
-    table{
-      width:100%;
-
-      border-collapse:collapse;
-
-      min-width:1050px;
+    .stats{
+        grid-template-columns:
+            1fr 1fr;
     }
 
-    thead{
-      background:#f8fafc;
+    .filter-grid{
+        grid-template-columns:1fr;
     }
 
-    th{
-      text-align:left;
-
-      font-size:11px;
-
-      text-transform:uppercase;
-
-      letter-spacing:.4px;
-
-      color:#738096;
-
-      padding:13px 15px;
-
-      border-bottom:1px solid var(--line);
-
-      white-space:nowrap;
+    .filter-input,
+    .filter-select,
+    .refresh-btn{
+        height:43px;
     }
 
-    td{
-      padding:15px;
-
-      border-bottom:1px solid #edf1f5;
-
-      font-size:12px;
-
-      vertical-align:middle;
-    }
-
-    tbody tr:hover{
-      background:#fbfdff;
-    }
-
-    .student-cell{
-      display:flex;
-
-      align-items:center;
-
-      gap:10px;
-    }
-
-    .student-avatar{
-      width:35px;
-      height:35px;
-
-      border-radius:10px;
-
-      background:#eaf4ff;
-
-      color:var(--blue);
-
-      display:flex;
-
-      align-items:center;
-      justify-content:center;
-
-      font-weight:800;
-
-      flex-shrink:0;
-    }
-
-    .student-name{
-      font-weight:800;
-
-      font-size:13px;
-    }
-
-    .student-mobile{
-      color:var(--muted);
-
-      font-size:11px;
-
-      margin-top:3px;
-    }
-
-    .course-name{
-      font-weight:700;
-    }
-
-    .source-badge{
-      display:inline-block;
-
-      padding:5px 8px;
-
-      border-radius:7px;
-
-      background:#f1f5f9;
-
-      color:#475569;
-
-      font-size:10px;
-
-      font-weight:700;
-    }
-
-    .coordinator-name{
-      font-weight:700;
-    }
-
-    .date-text{
-      color:#64748b;
-
-      font-size:11px;
-
-      white-space:nowrap;
-    }
-
-    /* =========================
-       STATUS
-    ========================= */
-
-    .status-select{
-      border:0;
-
-      padding:7px 9px;
-
-      border-radius:8px;
-
-      font-size:10px;
-
-      font-weight:800;
-
-      outline:none;
-
-      cursor:pointer;
-    }
-
-    .status-select.new{
-      background:#eaf4ff;
-      color:#086ee1;
-    }
-
-    .status-select.pending{
-      background:#fff7e6;
-      color:#b77900;
-    }
-
-    .status-select.contacted{
-      background:#f1f5f9;
-      color:#475569;
-    }
-
-    .status-select.follow-up{
-      background:#f5f3ff;
-      color:#6d28d9;
-    }
-
-    .status-select.converted{
-      background:#ecfdf3;
-      color:#15803d;
-    }
-
-    .status-select.not-interested{
-      background:#fef2f2;
-      color:#b91c1c;
-    }
-
-    /* =========================
-       ACTION BUTTONS
-    ========================= */
-
-    .actions{
-      display:flex;
-
-      gap:6px;
-
-      align-items:center;
-    }
-
-    .action-btn{
-      width:31px;
-      height:31px;
-
-      border:1px solid var(--line);
-
-      background:#fff;
-
-      border-radius:8px;
-
-      display:flex;
-
-      align-items:center;
-      justify-content:center;
-
-      font-size:13px;
-    }
-
-    .action-btn:hover{
-      background:#f4f7fb;
-    }
-
-    .action-btn.call{
-      color:var(--green);
-    }
-
-    .action-btn.whatsapp{
-      color:#16a34a;
-    }
-
-    .action-btn.view{
-      color:var(--blue);
-    }
-
-    .action-btn.delete{
-      color:var(--red);
-    }
-
-    /* =========================
-       EMPTY / LOADING
-    ========================= */
-
-    .table-state{
-      padding:55px 20px;
-
-      text-align:center;
-
-      color:var(--muted);
-
-      font-size:13px;
-    }
-
-    .spinner{
-      width:27px;
-      height:27px;
-
-      border:3px solid #e4edf7;
-
-      border-top-color:var(--blue);
-
-      border-radius:50%;
-
-      animation:spin .8s linear infinite;
-
-      margin:0 auto 12px;
-    }
-
-    @keyframes spin{
-      to{
-        transform:rotate(360deg);
-      }
-    }
-
-    /* =========================
-       MODAL
-    ========================= */
-
-    .modal{
-      display:none;
-
-      position:fixed;
-
-      inset:0;
-
-      background:rgba(7,20,38,.58);
-
-      z-index:2000;
-
-      align-items:center;
-
-      justify-content:center;
-
-      padding:20px;
-    }
-
-    .modal.show{
-      display:flex;
-    }
-
-    .modal-box{
-      width:100%;
-
-      max-width:620px;
-
-      max-height:90vh;
-
-      overflow:auto;
-
-      background:#fff;
-
-      border-radius:18px;
-
-      box-shadow:0 25px 70px rgba(0,0,0,.25);
-    }
-
-    .modal-header{
-      padding:19px 21px;
-
-      border-bottom:1px solid var(--line);
-
-      display:flex;
-
-      justify-content:space-between;
-
-      align-items:center;
-    }
-
-    .modal-header h3{
-      font-size:17px;
-    }
-
-    .close-btn{
-      border:0;
-
-      background:#f1f5f9;
-
-      width:34px;
-      height:34px;
-
-      border-radius:9px;
-    }
-
-    .modal-body{
-      padding:21px;
+    .user-info{
+        display:none;
     }
 
     .detail-grid{
-      display:grid;
-
-      grid-template-columns:1fr 1fr;
-
-      gap:14px;
-    }
-
-    .detail{
-      background:#f8fafc;
-
-      border:1px solid #edf1f5;
-
-      border-radius:11px;
-
-      padding:12px;
+        grid-template-columns:1fr;
     }
 
     .detail.full{
-      grid-column:1/-1;
-    }
-
-    .detail-label{
-      color:var(--muted);
-
-      font-size:10px;
-
-      text-transform:uppercase;
-
-      letter-spacing:.5px;
-
-      margin-bottom:5px;
-    }
-
-    .detail-value{
-      font-size:13px;
-
-      font-weight:700;
-
-      word-break:break-word;
+        grid-column:auto;
     }
 
     .modal-actions{
-      display:flex;
-
-      gap:9px;
-
-      margin-top:18px;
-    }
-
-    .modal-action{
-      flex:1;
-
-      padding:11px;
-
-      border-radius:10px;
-
-      border:1px solid var(--line);
-
-      background:#fff;
-
-      font-weight:700;
-
-      font-size:12px;
-    }
-
-    .modal-action.primary{
-      background:var(--blue);
-
-      color:#fff;
-
-      border-color:var(--blue);
-    }
-
-    .modal-action.green{
-      background:#16a34a;
-
-      color:#fff;
-
-      border-color:#16a34a;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    .toast{
-      position:fixed;
-
-      right:22px;
-
-      bottom:22px;
-
-      z-index:3000;
-
-      background:#071426;
-
-      color:#fff;
-
-      padding:13px 16px;
-
-      border-radius:11px;
-
-      box-shadow:0 12px 30px rgba(0,0,0,.18);
-
-      font-size:12px;
-
-      transform:translateY(20px);
-
-      opacity:0;
-
-      pointer-events:none;
-
-      transition:.25s;
-
-      max-width:340px;
-    }
-
-    .toast.show{
-      transform:translateY(0);
-
-      opacity:1;
-    }
-
-    .toast.success{
-      border-left:4px solid var(--green);
-    }
-
-    .toast.error{
-      border-left:4px solid var(--red);
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    .overlay{
-      display:none;
-
-      position:fixed;
-
-      inset:0;
-
-      background:rgba(0,0,0,.4);
-
-      z-index:900;
-    }
-
-    @media(max-width:1200px){
-
-      .stats{
-        grid-template-columns:
-          repeat(3,1fr);
-      }
-
-      .filter-grid{
-        grid-template-columns:
-          1fr 1fr 1fr;
-      }
-
-      .refresh-btn{
-        height:42px;
-      }
-    }
-
-    @media(max-width:760px){
-
-      .sidebar{
-        transform:translateX(-100%);
-
-        transition:.25s;
-      }
-
-      .sidebar.open{
-        transform:translateX(0);
-      }
-
-      .overlay.show{
-        display:block;
-      }
-
-      .main{
-        margin-left:0;
-      }
-
-      .mobile-menu{
-        display:block;
-      }
-
-      .topbar{
-        padding:0 16px;
-      }
-
-      .page-title{
-        display:none;
-      }
-
-      .content{
-        padding:18px 14px;
-      }
-
-      .stats{
-        grid-template-columns:
-          1fr 1fr;
-      }
-
-      .filter-grid{
-        grid-template-columns:1fr;
-      }
-
-      .filter-input,
-      .filter-select,
-      .refresh-btn{
-        height:43px;
-      }
-
-      .user-info{
-        display:none;
-      }
-
-      .detail-grid{
-        grid-template-columns:1fr;
-      }
-
-      .detail.full{
-        grid-column:auto;
-      }
-
-      .modal-actions{
         flex-direction:column;
-      }
     }
 
-    @media(max-width:450px){
+}
 
-      .stats{
+@media(max-width:450px){
+
+    .stats{
         grid-template-columns:1fr;
-      }
+    }
 
-      .table-header{
+    .table-header{
         align-items:flex-start;
         flex-direction:column;
-      }
-
-      .live-status{
-        align-self:flex-start;
-      }
     }
-  </style>
+
+    .live-status{
+        align-self:flex-start;
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
+
 <div class="app">
 
-  <!-- =========================
-       SIDEBAR
-  ========================== -->
 
-  <aside class="sidebar" id="sidebar">
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
 
     <div class="brand">
 
-      <div class="brand-logo">
-        BT
-      </div>
+        <div class="brand-logo">
+            BT
+        </div>
 
-      <div class="brand-text">
+        <div class="brand-text">
 
-        <strong>
-          BlackTerminal
-        </strong>
+            <strong>
+                BlackTerminal
+            </strong>
 
-        <span>
-          Computer Institute
-        </span>
+            <span>
+                Computer Institute
+            </span>
 
-      </div>
+        </div>
 
     </div>
 
 
     <nav class="nav">
 
-      <div class="nav-title">
-        Telecaller
-      </div>
+        <div class="nav-title">
+            Telecaller
+        </div>
 
-      <a
-        href="telecaller.html"
-        class="nav-item active"
-      >
-        <span class="nav-icon">
-          📊
-        </span>
 
-        <span>
-          Inquiry Dashboard
-        </span>
-      </a>
+        <a
+            href="#"
+            class="nav-item active"
+        >
+
+            <span class="nav-icon">
+                📊
+            </span>
+
+            <span>
+                Inquiry Dashboard
+            </span>
+
+        </a>
 
     </nav>
 
 
     <button
-      class="logout-btn"
-      id="logoutBtn"
+        class="logout-btn"
+        id="logoutBtn"
     >
-      🚪 Logout
+        🚪 Logout
     </button>
 
-  </aside>
+</aside>
 
 
-  <div
+<div
     class="overlay"
     id="overlay"
-  ></div>
+></div>
 
 
-  <!-- =========================
-       MAIN
-  ========================== -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-  <main class="main">
+<main class="main">
 
-    <!-- TOPBAR -->
 
-    <header class="topbar">
+<header class="topbar">
 
-      <div
+
+    <div
         style="
-          display:flex;
-          align-items:center;
-          gap:12px;
+            display:flex;
+            align-items:center;
+            gap:12px;
         "
-      >
+    >
 
         <button
-          class="mobile-menu"
-          id="mobileMenu"
+            class="mobile-menu"
+            id="mobileMenu"
         >
-          ☰
+            ☰
         </button>
+
 
         <div class="page-title">
 
-          <h1>
-            Telecaller Dashboard
-          </h1>
+            <h1>
+                Telecaller Dashboard
+            </h1>
 
-          <p>
-            Manage student inquiries received from coordinators
-          </p>
+            <p>
+                Manage student inquiries received from coordinators
+            </p>
 
         </div>
 
-      </div>
+    </div>
 
 
-      <div class="user-box">
+    <div class="user-box">
 
         <div
-          class="avatar"
-          id="avatar"
+            class="avatar"
+            id="avatar"
         >
-          T
+            T
         </div>
+
 
         <div class="user-info">
 
-          <strong id="userName">
-            Telecaller
-          </strong>
+            <strong id="userName">
+                Telecaller
+            </strong>
 
-          <span id="userEmail">
-            Loading...
-          </span>
+            <span>
+                Telecaller
+            </span>
 
         </div>
 
-      </div>
-
-    </header>
+    </div>
 
 
-    <!-- CONTENT -->
-
-    <section class="content">
-
-      <!-- SYSTEM MESSAGE -->
-
-      <div
-        class="system-message"
-        id="systemMessage"
-      ></div>
+</header>
 
 
-      <!-- =========================
-           STATS
-      ========================== -->
+<section class="content">
 
-      <div class="stats">
 
-        <div class="stat">
+<!-- SYSTEM MESSAGE -->
 
-          <div class="stat-top">
+<div
+    class="system-message"
+    id="systemMessage"
+></div>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<div class="stats">
+
+
+    <div class="stat">
+
+        <div class="stat-top">
 
             <div>
 
-              <div class="stat-label">
-                Total Inquiries
-              </div>
+                <div class="stat-label">
+                    Total Inquiries
+                </div>
 
-              <div
-                class="stat-value"
-                id="totalCount"
-              >
-                0
-              </div>
+                <div
+                    class="stat-value"
+                    id="totalCount"
+                >
+                    0
+                </div>
 
             </div>
 
             <div class="stat-icon">
-              📨
+                📨
             </div>
-
-          </div>
 
         </div>
 
+    </div>
 
-        <div class="stat">
 
-          <div class="stat-top">
+    <div class="stat">
+
+        <div class="stat-top">
 
             <div>
 
-              <div class="stat-label">
-                Today
-              </div>
+                <div class="stat-label">
+                    Today
+                </div>
 
-              <div
-                class="stat-value"
-                id="todayCount"
-              >
-                0
-              </div>
+                <div
+                    class="stat-value"
+                    id="todayCount"
+                >
+                    0
+                </div>
 
             </div>
 
             <div class="stat-icon">
-              📅
+                📅
             </div>
-
-          </div>
 
         </div>
 
+    </div>
 
-        <div class="stat orange">
 
-          <div class="stat-top">
+    <div class="stat orange">
+
+        <div class="stat-top">
 
             <div>
 
-              <div class="stat-label">
-                New
-              </div>
+                <div class="stat-label">
+                    New
+                </div>
 
-              <div
-                class="stat-value"
-                id="newCount"
-              >
-                0
-              </div>
+                <div
+                    class="stat-value"
+                    id="newCount"
+                >
+                    0
+                </div>
 
             </div>
 
             <div class="stat-icon">
-              🆕
+                🆕
             </div>
-
-          </div>
 
         </div>
 
+    </div>
 
-        <div class="stat orange">
 
-          <div class="stat-top">
+    <div class="stat orange">
+
+        <div class="stat-top">
 
             <div>
 
-              <div class="stat-label">
-                Pending
-              </div>
+                <div class="stat-label">
+                    Pending
+                </div>
 
-              <div
-                class="stat-value"
-                id="pendingCount"
-              >
-                0
-              </div>
+                <div
+                    class="stat-value"
+                    id="pendingCount"
+                >
+                    0
+                </div>
 
             </div>
 
             <div class="stat-icon">
-              ⏳
+                ⏳
             </div>
-
-          </div>
 
         </div>
 
+    </div>
 
-        <div class="stat green">
 
-          <div class="stat-top">
+    <div class="stat green">
+
+        <div class="stat-top">
 
             <div>
 
-              <div class="stat-label">
-                Converted
-              </div>
+                <div class="stat-label">
+                    Converted
+                </div>
 
-              <div
-                class="stat-value"
-                id="convertedCount"
-              >
-                0
-              </div>
+                <div
+                    class="stat-value"
+                    id="convertedCount"
+                >
+                    0
+                </div>
 
             </div>
 
             <div class="stat-icon">
-              ✅
+                ✅
             </div>
-
-          </div>
 
         </div>
 
-      </div>
+    </div>
 
 
-      <!-- =========================
-           FILTERS
-      ========================== -->
+</div>
 
-      <div class="filter-card">
 
-        <div class="filter-grid">
+<!-- =====================================================
+     FILTERS
+===================================================== -->
 
-          <input
+<div class="filter-card">
+
+    <div class="filter-grid">
+
+
+        <input
             type="search"
             id="searchInput"
             class="filter-input"
             placeholder="🔍 Search student, mobile, coordinator..."
-          >
+        >
 
 
-          <select
+        <select
             id="courseFilter"
             class="filter-select"
-          >
+        >
 
             <option value="">
-              All Courses
+                All Courses
             </option>
 
-          </select>
+        </select>
 
 
-          <select
+        <select
             id="statusFilter"
             class="filter-select"
-          >
+        >
 
             <option value="">
-              All Status
+                All Status
             </option>
 
             <option value="new">
-              New
+                New
             </option>
 
             <option value="pending">
-              Pending
+                Pending
             </option>
 
             <option value="contacted">
-              Contacted
+                Contacted
             </option>
 
             <option value="follow-up">
-              Follow-up
+                Follow-up
             </option>
 
             <option value="converted">
-              Converted
+                Converted
             </option>
 
             <option value="not-interested">
-              Not Interested
+                Not Interested
             </option>
 
-          </select>
+        </select>
 
 
-          <select
+        <select
             id="coordinatorFilter"
             class="filter-select"
-          >
+        >
 
             <option value="">
-              All Coordinators
+                All Coordinators
             </option>
 
-          </select>
+        </select>
 
 
-          <button
+        <button
             class="refresh-btn"
             id="refreshBtn"
-          >
+        >
             🔄 Refresh
-          </button>
-
-        </div>
-
-      </div>
+        </button>
 
 
-      <!-- =========================
-           TABLE
-      ========================== -->
+    </div>
 
-      <div class="table-card">
+</div>
 
-        <div class="table-header">
 
-          <div>
+<!-- =====================================================
+     TABLE
+===================================================== -->
+
+<div class="table-card">
+
+
+    <div class="table-header">
+
+        <div>
 
             <h2>
-              Student Inquiries
+                Student Inquiries
             </h2>
 
             <p id="resultText">
-              Loading inquiries...
+                Loading inquiries...
             </p>
 
-          </div>
+        </div>
 
 
-          <div class="live-status">
+        <div class="live-status">
 
             <span class="live-dot"></span>
 
             LIVE
 
-          </div>
-
         </div>
 
+    </div>
 
-        <div class="table-wrap">
 
-          <table>
+    <div class="table-wrap">
+
+        <table>
 
             <thead>
 
-              <tr>
+                <tr>
 
-                <th>
-                  Student
-                </th>
+                    <th>
+                        Student
+                    </th>
 
-                <th>
-                  Course
-                </th>
+                    <th>
+                        Course
+                    </th>
 
-                <th>
-                  Source
-                </th>
+                    <th>
+                        Source
+                    </th>
 
-                <th>
-                  Coordinator
-                </th>
+                    <th>
+                        Coordinator
+                    </th>
 
-                <th>
-                  Received
-                </th>
+                    <th>
+                        Received
+                    </th>
 
-                <th>
-                  Status
-                </th>
+                    <th>
+                        Status
+                    </th>
 
-                <th>
-                  Actions
-                </th>
+                    <th>
+                        Actions
+                    </th>
 
-              </tr>
+                </tr>
 
             </thead>
 
 
             <tbody
-              id="inquiryTableBody"
+                id="inquiryTableBody"
             >
 
-              <tr>
+                <tr>
 
-                <td
-                  colspan="7"
-                  class="table-state"
-                >
+                    <td
+                        colspan="7"
+                        class="table-state"
+                    >
 
-                  <div class="spinner"></div>
+                        <div class="spinner"></div>
 
-                  Loading inquiries...
+                        Loading inquiries...
 
-                </td>
+                    </td>
 
-              </tr>
+                </tr>
 
             </tbody>
 
-          </table>
+        </table>
+
+    </div>
+
+
+</div>
+
+
+</section>
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="detailModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3>
+                Inquiry Details
+            </h3>
+
+            <button
+                class="close-btn"
+                id="closeModal"
+            >
+                ✕
+            </button>
 
         </div>
 
-      </div>
 
-    </section>
-
-  </main>
-
-</div>
-
-
-<!-- =========================
-     DETAIL MODAL
-========================== -->
-
-<div
-  class="modal"
-  id="detailModal"
->
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <h3>
-        Inquiry Details
-      </h3>
-
-      <button
-        class="close-btn"
-        id="closeModal"
-      >
-        ✕
-      </button>
+        <div
+            class="modal-body"
+            id="modalBody"
+        ></div>
 
     </div>
 
-
-    <div
-      class="modal-body"
-      id="modalBody"
-    >
-    </div>
-
-  </div>
-
 </div>
 
 
-<!-- =========================
-     TOAST
-========================== -->
+<!-- TOAST -->
 
 <div
-  class="toast"
-  id="toast"
->
-</div>
+    class="toast"
+    id="toast"
+></div>
 
 
-<!-- =========================
-     FIREBASE
-========================== -->
+<!-- =====================================================
+     FIRESTORE REST SCRIPT
+     NO FIREBASE AUTH
+===================================================== -->
 
-<script type="module">
-
-  import {
-    initializeApp
-  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+<script>
 
 
-  import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+/*
+==========================================================
+BLACKTERMINAL TELECALLER
+==========================================================
+
+NO FIREBASE AUTHENTICATION
+
+Uses the same Firestore REST API architecture
+as Coordinator.
+
+Coordinator:
+POST -> studentInquiries
+
+Telecaller:
+GET  -> studentInquiries
+PATCH -> status
+DELETE -> inquiry
+
+==========================================================
+*/
 
 
-  import {
-    getFirestore,
-    collection,
-    onSnapshot,
-    query,
-    orderBy,
-    updateDoc,
-    deleteDoc,
-    doc,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+/* ======================================================
+   FIREBASE PROJECT
+====================================================== */
+
+const FIREBASE_PROJECT_ID =
+    "jobs-2f152";
 
 
-  import {
-    firebaseConfig
-  } from "./firebaseconfig.js";
+const FIREBASE_API_KEY =
+    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytd2b_M";
 
 
-  /* =========================================================
-     FIREBASE INITIALIZATION
-  ========================================================= */
-
-  const app =
-    initializeApp(firebaseConfig);
+const FIRESTORE_URL =
+    "https://firestore.googleapis.com/v1/projects/" +
+    FIREBASE_PROJECT_ID +
+    "/databases/(default)/documents/studentInquiries";
 
 
-  const auth =
-    getAuth(app);
+/* ======================================================
+   SESSION CHECK
+====================================================== */
 
-
-  const db =
-    getFirestore(app);
-
-
-  /* =========================================================
-     VARIABLES
-  ========================================================= */
-
-  let currentUser = null;
-
-  let allInquiries = [];
-
-  let unsubscribeInquiries = null;
-
-  let selectedInquiry = null;
-
-
-  /* =========================================================
-     DOM
-  ========================================================= */
-
-  const tableBody =
-    document.getElementById(
-      "inquiryTableBody"
+const loggedIn =
+    sessionStorage.getItem(
+        "bt_logged_in"
     );
 
 
-  const searchInput =
-    document.getElementById(
-      "searchInput"
+const userRole =
+    sessionStorage.getItem(
+        "bt_user_role"
     );
 
 
-  const courseFilter =
+const telecallerName =
+    sessionStorage.getItem(
+        "bt_user_name"
+    ) || "Telecaller";
+
+
+const telecallerMobile =
+    sessionStorage.getItem(
+        "bt_user_mobile"
+    ) || "";
+
+
+if(
+    loggedIn !== "true" ||
+    userRole !== "telecaller"
+){
+
+    window.location.replace(
+        "login.html"
+    );
+
+}
+
+
+/* ======================================================
+   ELEMENTS
+====================================================== */
+
+const tableBody =
     document.getElementById(
-      "courseFilter"
+        "inquiryTableBody"
     );
 
 
-  const statusFilter =
+const searchInput =
     document.getElementById(
-      "statusFilter"
+        "searchInput"
     );
 
 
-  const coordinatorFilter =
+const courseFilter =
     document.getElementById(
-      "coordinatorFilter"
+        "courseFilter"
     );
 
 
-  const resultText =
+const statusFilter =
     document.getElementById(
-      "resultText"
+        "statusFilter"
     );
 
 
-  const systemMessage =
+const coordinatorFilter =
     document.getElementById(
-      "systemMessage"
+        "coordinatorFilter"
     );
 
 
-  const toast =
+const resultText =
     document.getElementById(
-      "toast"
+        "resultText"
     );
 
 
-  /* =========================================================
-     MESSAGE
-  ========================================================= */
+const systemMessage =
+    document.getElementById(
+        "systemMessage"
+    );
 
-  function showSystemMessage(
+
+const toast =
+    document.getElementById(
+        "toast"
+    );
+
+
+let allInquiries = [];
+
+let toastTimer;
+
+
+/* ======================================================
+   USER DISPLAY
+====================================================== */
+
+document.getElementById(
+    "userName"
+).textContent =
+    telecallerName;
+
+
+document.getElementById(
+    "avatar"
+).textContent =
+    telecallerName
+        .charAt(0)
+        .toUpperCase() || "T";
+
+
+/* ======================================================
+   TIMEOUT FETCH
+====================================================== */
+
+async function fetchWithTimeout(
+    url,
+    options = {},
+    timeout = 12000
+){
+
+    const controller =
+        new AbortController();
+
+
+    const timer =
+        setTimeout(
+            ()=>{
+                controller.abort();
+            },
+            timeout
+        );
+
+
+    try{
+
+        return await fetch(
+            url,
+            {
+                ...options,
+                signal:
+                    controller.signal
+            }
+        );
+
+    }finally{
+
+        clearTimeout(
+            timer
+        );
+
+    }
+
+}
+
+
+/* ======================================================
+   ERROR MESSAGE
+====================================================== */
+
+async function readError(
+    response
+){
+
+    try{
+
+        const data =
+            await response.json();
+
+
+        return (
+            data?.error?.message ||
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        return (
+            "HTTP " +
+            response.status +
+            " " +
+            response.statusText
+        );
+
+    }
+
+}
+
+
+/* ======================================================
+   SYSTEM MESSAGE
+====================================================== */
+
+function showSystemMessage(
     type,
     message
-  ){
+){
 
     systemMessage.className =
-      "system-message show " + type;
+        "system-message show " +
+        type;
 
     systemMessage.innerHTML =
-      message;
+        message;
 
-  }
+}
 
 
-  function hideSystemMessage(){
+function hideSystemMessage(){
 
     systemMessage.className =
-      "system-message";
+        "system-message";
 
     systemMessage.innerHTML =
-      "";
+        "";
 
-  }
-
-
-  /* =========================================================
-     TOAST
-  ========================================================= */
-
-  let toastTimer = null;
+}
 
 
-  function showToast(
+/* ======================================================
+   TOAST
+====================================================== */
+
+function showToast(
     message,
-    type="success"
-  ){
+    type = "success"
+){
 
     toast.className =
-      "toast show " + type;
+        "toast show " +
+        type;
 
     toast.textContent =
-      message;
+        message;
 
 
     clearTimeout(
-      toastTimer
+        toastTimer
     );
 
 
     toastTimer =
-      setTimeout(
-        ()=>{
-          toast.className =
-            "toast";
-        },
-        3000
-      );
+        setTimeout(
+            ()=>{
+                toast.className =
+                    "toast";
+            },
+            3000
+        );
 
-  }
+}
 
 
-  /* =========================================================
-     ESCAPE HTML
-  ========================================================= */
+/* ======================================================
+   ESCAPE
+====================================================== */
 
-  function escapeHtml(value){
+function escapeHtml(
+    value
+){
 
     return String(
-      value ?? ""
+        value ?? ""
     )
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
-  }
+}
 
 
-  /* =========================================================
-     DATE FORMAT
-  ========================================================= */
+/* ======================================================
+   FIRESTORE REST VALUE CONVERTER
+====================================================== */
 
-  function getDate(timestamp){
+function firestoreValue(
+    field
+){
 
-    if(!timestamp){
-      return null;
+    if(!field){
+
+        return null;
+
     }
+
+
+    if(
+        field.stringValue !== undefined
+    ){
+
+        return field.stringValue;
+
+    }
+
+
+    if(
+        field.integerValue !== undefined
+    ){
+
+        return Number(
+            field.integerValue
+        );
+
+    }
+
+
+    if(
+        field.doubleValue !== undefined
+    ){
+
+        return Number(
+            field.doubleValue
+        );
+
+    }
+
+
+    if(
+        field.booleanValue !== undefined
+    ){
+
+        return field.booleanValue;
+
+    }
+
+
+    if(
+        field.timestampValue !== undefined
+    ){
+
+        return field.timestampValue;
+
+    }
+
+
+    if(
+        field.nullValue !== undefined
+    ){
+
+        return null;
+
+    }
+
+
+    return "";
+
+}
+
+
+/* ======================================================
+   FIRESTORE DOCUMENT CONVERTER
+====================================================== */
+
+function convertDocument(
+    document
+){
+
+    const fields =
+        document.fields || {};
+
+
+    return {
+
+        id:
+            document.name
+                ? document.name
+                    .split("/")
+                    .pop()
+                : "",
+
+        studentName:
+            firestoreValue(
+                fields.studentName
+            ) || "",
+
+        mobile:
+            firestoreValue(
+                fields.mobile
+            ) || "",
+
+        course:
+            firestoreValue(
+                fields.course
+            ) || "",
+
+        source:
+            firestoreValue(
+                fields.source
+            ) || "",
+
+        remark:
+            firestoreValue(
+                fields.remark
+            ) || "",
+
+        coordinatorName:
+            firestoreValue(
+                fields.coordinatorName
+            ) || "",
+
+        coordinatorMobile:
+            firestoreValue(
+                fields.coordinatorMobile
+            ) || "",
+
+        status:
+            firestoreValue(
+                fields.status
+            ) || "new",
+
+        telecallerStatus:
+            firestoreValue(
+                fields.telecallerStatus
+            ) || "pending",
+
+        telecallerRemark:
+            firestoreValue(
+                fields.telecallerRemark
+            ) || "",
+
+        followUpDate:
+            firestoreValue(
+                fields.followUpDate
+            ) || "",
+
+        createdAt:
+            firestoreValue(
+                fields.createdAt
+            ) || "",
+
+        updatedAt:
+            firestoreValue(
+                fields.updatedAt
+            ) || ""
+
+    };
+
+}
+
+
+/* ======================================================
+   GET ALL DOCUMENTS
+====================================================== */
+
+async function fetchAllInquiries(){
+
+    let allDocuments = [];
+
+    let pageToken = "";
+
+
+    do{
+
+        let url =
+            FIRESTORE_URL +
+            "?key=" +
+            encodeURIComponent(
+                FIREBASE_API_KEY
+            ) +
+            "&pageSize=300";
+
+
+        if(pageToken){
+
+            url +=
+                "&pageToken=" +
+                encodeURIComponent(
+                    pageToken
+                );
+
+        }
+
+
+        const response =
+            await fetchWithTimeout(
+                url,
+                {
+                    method:"GET"
+                },
+                12000
+            );
+
+
+        if(!response.ok){
+
+            const error =
+                await readError(
+                    response
+                );
+
+
+            throw new Error(
+                "Firestore Error (" +
+                response.status +
+                "): " +
+                error
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            Array.isArray(
+                data.documents
+            )
+        ){
+
+            allDocuments.push(
+                ...data.documents
+            );
+
+        }
+
+
+        pageToken =
+            data.nextPageToken ||
+            "";
+
+    }
+    while(pageToken);
+
+
+    return allDocuments.map(
+        convertDocument
+    );
+
+}
+
+
+/* ======================================================
+   LOAD INQUIRIES
+====================================================== */
+
+async function loadInquiries(){
+
+    tableBody.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="7"
+                class="table-state"
+            >
+
+                <div class="spinner"></div>
+
+                Loading inquiries...
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    showSystemMessage(
+        "info",
+        "⏳ Loading student inquiries from Firestore..."
+    );
+
 
     try{
 
-      if(
-        typeof timestamp.toDate ===
-        "function"
-      ){
+        allInquiries =
+            await fetchAllInquiries();
 
-        return timestamp.toDate();
 
-      }
+        /*
+          Newest first
+        */
 
-      return new Date(timestamp);
+        allInquiries.sort(
+            (a,b)=>{
+
+                const da =
+                    new Date(
+                        a.createdAt || 0
+                    ).getTime();
+
+
+                const db =
+                    new Date(
+                        b.createdAt || 0
+                    ).getTime();
+
+
+                return db - da;
+
+            }
+        );
+
+
+        hideSystemMessage();
+
+
+        updateStats();
+
+        populateFilters();
+
+        applyFilters();
+
+
+        if(
+            allInquiries.length > 0
+        ){
+
+            showToast(
+                `${allInquiries.length} inquiries loaded.`
+            );
+
+        }
+
 
     }catch(error){
 
-      return null;
+        console.error(
+            "LOAD INQUIRIES ERROR:",
+            error
+        );
+
+
+        tableBody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="table-state"
+                >
+
+                    <div style="font-size:30px;">
+                        ⚠️
+                    </div>
+
+                    <br>
+
+                    <strong>
+                        Unable to load inquiries
+                    </strong>
+
+                    <br><br>
+
+                    ${escapeHtml(
+                        error.message
+                    )}
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        showSystemMessage(
+            "error",
+            `
+                ❌ <strong>Firestore data load failed.</strong><br><br>
+                ${escapeHtml(
+                    error.message
+                )}
+            `
+        );
 
     }
 
-  }
+}
 
 
-  function formatDate(timestamp){
+/* ======================================================
+   STATUS
+====================================================== */
+
+function getStatus(
+    inquiry
+){
+
+    /*
+      Coordinator creates:
+
+      status = "new"
+      telecallerStatus = "pending"
+
+      We want a NEW inquiry to appear as New.
+
+      Therefore:
+
+      If telecallerStatus is pending AND
+      status is new → New
+    */
+
+    if(
+        inquiry.status === "new" &&
+        (
+            !inquiry.telecallerStatus ||
+            inquiry.telecallerStatus === "pending"
+        )
+    ){
+
+        return "new";
+
+    }
+
+
+    return (
+        inquiry.telecallerStatus ||
+        inquiry.status ||
+        "new"
+    );
+
+}
+
+
+/* ======================================================
+   STATUS TEXT
+====================================================== */
+
+function statusText(
+    status
+){
+
+    const map = {
+
+        new:"New",
+
+        pending:"Pending",
+
+        contacted:"Contacted",
+
+        "follow-up":"Follow-up",
+
+        converted:"Converted",
+
+        "not-interested":
+            "Not Interested"
+
+    };
+
+
+    return (
+        map[status] ||
+        "New"
+    );
+
+}
+
+
+/* ======================================================
+   DATE
+====================================================== */
+
+function formatDate(
+    value
+){
+
+    if(!value){
+
+        return "Just now";
+
+    }
+
 
     const date =
-      getDate(timestamp);
+        new Date(value);
 
 
-    if(!date){
-      return "Just now";
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Recently";
+
     }
 
 
     return date.toLocaleString(
-      "en-IN",
-      {
-        day:"2-digit",
-        month:"short",
-        year:"numeric",
-        hour:"2-digit",
-        minute:"2-digit"
-      }
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
     );
 
-  }
+}
 
 
-  /* =========================================================
-     TODAY
-  ========================================================= */
+/* ======================================================
+   TODAY
+====================================================== */
 
-  function isToday(timestamp){
+function isToday(
+    value
+){
+
+    if(!value){
+
+        return false;
+
+    }
+
 
     const date =
-      getDate(timestamp);
-
-
-    if(!date){
-      return false;
-    }
+        new Date(value);
 
 
     const now =
-      new Date();
+        new Date();
 
 
     return (
-      date.getDate() ===
-        now.getDate() &&
 
-      date.getMonth() ===
-        now.getMonth() &&
+        date.getDate() ===
+        now.getDate()
 
-      date.getFullYear() ===
+        &&
+
+        date.getMonth() ===
+        now.getMonth()
+
+        &&
+
+        date.getFullYear() ===
         now.getFullYear()
+
     );
 
-  }
+}
 
 
-  /* =========================================================
-     STATUS
-  ========================================================= */
+/* ======================================================
+   STATS
+====================================================== */
 
-  function normalizeStatus(inquiry){
-
-    /*
-      New inquiries from Coordinator:
-
-      status = new
-      telecallerStatus = pending
-
-      For Telecaller we primarily use
-      telecallerStatus after a telecaller
-      starts working on it.
-    */
-
-    return (
-      inquiry.telecallerStatus ||
-      inquiry.status ||
-      "new"
-    );
-
-  }
-
-
-  function statusText(status){
-
-    const map = {
-
-      new:"New",
-
-      pending:"Pending",
-
-      contacted:"Contacted",
-
-      "follow-up":"Follow-up",
-
-      converted:"Converted",
-
-      "not-interested":"Not Interested"
-
-    };
-
-    return (
-      map[status] ||
-      "New"
-    );
-
-  }
-
-
-  /* =========================================================
-     LOAD FIRESTORE
-  ========================================================= */
-
-  function startRealtimeListener(){
-
-    if(unsubscribeInquiries){
-
-      unsubscribeInquiries();
-
-    }
-
-
-    showSystemMessage(
-      "info",
-      "⏳ Connecting to live inquiry system..."
-    );
-
-
-    /*
-      IMPORTANT:
-
-      No where() filter here.
-
-      This lets Admin/Telecaller see all inquiries
-      and avoids composite-index problems.
-
-      Sorting is done in JavaScript.
-    */
-
-    const inquiriesQuery =
-      query(
-        collection(
-          db,
-          "studentInquiries"
-        ),
-
-        orderBy(
-          "createdAt",
-          "desc"
-        )
-      );
-
-
-    unsubscribeInquiries =
-      onSnapshot(
-
-        inquiriesQuery,
-
-        (snapshot)=>{
-
-          hideSystemMessage();
-
-
-          allInquiries = [];
-
-
-          snapshot.forEach(
-            (documentSnapshot)=>{
-
-              allInquiries.push({
-
-                id:
-                  documentSnapshot.id,
-
-                ...documentSnapshot.data()
-
-              });
-
-            }
-          );
-
-
-          /*
-            Safety sorting.
-
-            Firestore already sorts by createdAt,
-            but serverTimestamp can temporarily be null.
-          */
-
-          allInquiries.sort(
-            (a,b)=>{
-
-              const da =
-                getDate(a.createdAt)
-                  ?.getTime() || 0;
-
-              const dbDate =
-                getDate(b.createdAt)
-                  ?.getTime() || 0;
-
-              return dbDate - da;
-
-            }
-          );
-
-
-          updateStats();
-
-          populateFilters();
-
-          applyFilters();
-
-
-          /*
-            If a new inquiry arrives,
-            show notification.
-          */
-
-          if(
-            snapshot.docChanges()
-              .some(
-                change =>
-                  change.type ===
-                  "added"
-              )
-          ){
-
-            /*
-              Don't show noisy notification
-              during the initial load if
-              there are many documents.
-            */
-
-            if(
-              snapshot.metadata.hasPendingWrites
-              === false
-            ){
-
-              showToast(
-                "📨 New inquiry received!",
-                "success"
-              );
-
-            }
-
-          }
-
-        },
-
-        (error)=>{
-
-          console.error(
-            "Firestore listener error:",
-            error
-          );
-
-
-          tableBody.innerHTML = `
-
-            <tr>
-
-              <td
-                colspan="7"
-                class="table-state"
-              >
-
-                ❌ Unable to load inquiries.<br><br>
-
-                <strong>
-                  ${escapeHtml(
-                    error.message ||
-                    "Unknown Firebase error"
-                  )}
-                </strong>
-
-              </td>
-
-            </tr>
-
-          `;
-
-
-          if(
-            error.code ===
-            "permission-denied"
-          ){
-
-            showSystemMessage(
-              "error",
-              `
-                🔒 <strong>Firestore Permission Denied</strong><br>
-                Telecaller को <strong>studentInquiries</strong>
-                read करने की permission नहीं है।
-                Firestore Security Rules check करें।
-              `
-            );
-
-          }
-
-          else if(
-            error.code ===
-            "failed-precondition"
-          ){
-
-            showSystemMessage(
-              "error",
-              `
-                ⚠️ Firestore Index Required.<br>
-                Firebase Console में suggested index create करें।
-              `
-            );
-
-          }
-
-          else{
-
-            showSystemMessage(
-              "error",
-              `
-                ❌ Firebase connection error:<br>
-                ${escapeHtml(
-                  error.message ||
-                  "Unknown error"
-                )}
-              `
-            );
-
-          }
-
-        }
-
-      );
-
-  }
-
-
-  /* =========================================================
-     STATS
-  ========================================================= */
-
-  function updateStats(){
+function updateStats(){
 
     const total =
-      allInquiries.length;
+        allInquiries.length;
 
 
     const today =
-      allInquiries.filter(
-        inquiry =>
-          isToday(
-            inquiry.createdAt
-          )
-      ).length;
+        allInquiries.filter(
+            item =>
+                isToday(
+                    item.createdAt
+                )
+        ).length;
 
 
     const newCount =
-      allInquiries.filter(
-        inquiry =>
-          normalizeStatus(
-            inquiry
-          ) === "new"
-      ).length;
+        allInquiries.filter(
+            item =>
+                getStatus(item) ===
+                "new"
+        ).length;
 
 
     const pending =
-      allInquiries.filter(
-        inquiry =>
-          normalizeStatus(
-            inquiry
-          ) === "pending"
-      ).length;
+        allInquiries.filter(
+            item =>
+                getStatus(item) ===
+                "pending"
+        ).length;
 
 
     const converted =
-      allInquiries.filter(
-        inquiry =>
-          normalizeStatus(
-            inquiry
-          ) === "converted"
-      ).length;
+        allInquiries.filter(
+            item =>
+                getStatus(item) ===
+                "converted"
+        ).length;
 
 
     document.getElementById(
-      "totalCount"
+        "totalCount"
     ).textContent =
-      total;
+        total;
 
 
     document.getElementById(
-      "todayCount"
+        "todayCount"
     ).textContent =
-      today;
+        today;
 
 
     document.getElementById(
-      "newCount"
+        "newCount"
     ).textContent =
-      newCount;
+        newCount;
 
 
     document.getElementById(
-      "pendingCount"
+        "pendingCount"
     ).textContent =
-      pending;
+        pending;
 
 
     document.getElementById(
-      "convertedCount"
+        "convertedCount"
     ).textContent =
-      converted;
+        converted;
 
-  }
-
-
-  /* =========================================================
-     FILTER OPTIONS
-  ========================================================= */
-
-  function populateFilters(){
-
-    const currentCourse =
-      courseFilter.value;
+}
 
 
-    const currentCoordinator =
-      coordinatorFilter.value;
+/* ======================================================
+   FILTER OPTIONS
+====================================================== */
+
+function populateFilters(){
+
+    const selectedCourse =
+        courseFilter.value;
+
+
+    const selectedCoordinator =
+        coordinatorFilter.value;
 
 
     const courses =
-      [
-        ...new Set(
-          allInquiries
-            .map(
-              item =>
-                item.course
+        [
+            ...new Set(
+                allInquiries
+                    .map(
+                        item =>
+                            item.course
+                    )
+                    .filter(Boolean)
             )
-            .filter(Boolean)
-        )
-      ]
-      .sort();
+        ]
+        .sort();
 
 
     const coordinators =
-      [
-        ...new Set(
-          allInquiries
-            .map(
-              item =>
-                item.coordinatorName
+        [
+            ...new Set(
+                allInquiries
+                    .map(
+                        item =>
+                            item.coordinatorName
+                    )
+                    .filter(Boolean)
             )
-            .filter(Boolean)
-        )
-      ]
-      .sort();
+        ]
+        .sort();
 
 
     courseFilter.innerHTML = `
-      <option value="">
-        All Courses
-      </option>
+        <option value="">
+            All Courses
+        </option>
     `;
 
 
     courses.forEach(
-      course=>{
+        item=>{
 
-        const option =
-          document.createElement(
-            "option"
-          );
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        option.value =
-          course;
 
-        option.textContent =
-          course;
+            option.value =
+                item;
 
-        courseFilter.appendChild(
-          option
-        );
 
-      }
+            option.textContent =
+                item;
+
+
+            courseFilter.appendChild(
+                option
+            );
+
+        }
     );
 
 
     coordinatorFilter.innerHTML = `
-      <option value="">
-        All Coordinators
-      </option>
+        <option value="">
+            All Coordinators
+        </option>
     `;
 
 
     coordinators.forEach(
-      coordinator=>{
+        item=>{
 
-        const option =
-          document.createElement(
-            "option"
-          );
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        option.value =
-          coordinator;
 
-        option.textContent =
-          coordinator;
+            option.value =
+                item;
 
-        coordinatorFilter.appendChild(
-          option
-        );
 
-      }
+            option.textContent =
+                item;
+
+
+            coordinatorFilter.appendChild(
+                option
+            );
+
+        }
     );
 
 
-    /*
-      Restore previous selected values
-      if they still exist.
-    */
-
     if(
-      courses.includes(
-        currentCourse
-      )
+        courses.includes(
+            selectedCourse
+        )
     ){
 
-      courseFilter.value =
-        currentCourse;
+        courseFilter.value =
+            selectedCourse;
 
     }
 
 
     if(
-      coordinators.includes(
-        currentCoordinator
-      )
+        coordinators.includes(
+            selectedCoordinator
+        )
     ){
 
-      coordinatorFilter.value =
-        currentCoordinator;
+        coordinatorFilter.value =
+            selectedCoordinator;
 
     }
 
-  }
+}
 
 
-  /* =========================================================
-     APPLY FILTERS
-  ========================================================= */
+/* ======================================================
+   FILTER
+====================================================== */
 
-  function applyFilters(){
+function applyFilters(){
 
     const search =
-      searchInput.value
-        .trim()
-        .toLowerCase();
+        searchInput.value
+            .trim()
+            .toLowerCase();
 
 
     const course =
-      courseFilter.value;
+        courseFilter.value;
 
 
     const status =
-      statusFilter.value;
+        statusFilter.value;
 
 
     const coordinator =
-      coordinatorFilter.value;
+        coordinatorFilter.value;
 
 
     const filtered =
-      allInquiries.filter(
-        inquiry=>{
+        allInquiries.filter(
+            inquiry=>{
 
-          const studentName =
-            String(
-              inquiry.studentName ||
-              ""
-            ).toLowerCase();
-
-
-          const mobile =
-            String(
-              inquiry.mobile ||
-              ""
-            ).toLowerCase();
+                const name =
+                    String(
+                        inquiry.studentName ||
+                        ""
+                    ).toLowerCase();
 
 
-          const inquiryCourse =
-            String(
-              inquiry.course ||
-              ""
-            ).toLowerCase();
+                const mobile =
+                    String(
+                        inquiry.mobile ||
+                        ""
+                    ).toLowerCase();
 
 
-          const coordinatorName =
-            String(
-              inquiry.coordinatorName ||
-              ""
-            ).toLowerCase();
+                const courseName =
+                    String(
+                        inquiry.course ||
+                        ""
+                    ).toLowerCase();
 
 
-          const matchesSearch =
-            !search ||
-
-            studentName.includes(
-              search
-            ) ||
-
-            mobile.includes(
-              search
-            ) ||
-
-            inquiryCourse.includes(
-              search
-            ) ||
-
-            coordinatorName.includes(
-              search
-            );
+                const coordinatorName =
+                    String(
+                        inquiry.coordinatorName ||
+                        ""
+                    ).toLowerCase();
 
 
-          const matchesCourse =
-            !course ||
-            inquiry.course === course;
+                const matchesSearch =
+
+                    !search ||
+
+                    name.includes(
+                        search
+                    ) ||
+
+                    mobile.includes(
+                        search
+                    ) ||
+
+                    courseName.includes(
+                        search
+                    ) ||
+
+                    coordinatorName.includes(
+                        search
+                    );
 
 
-          const matchesCoordinator =
-            !coordinator ||
-            inquiry.coordinatorName ===
-              coordinator;
+                const matchesCourse =
+                    !course ||
+                    inquiry.course ===
+                        course;
 
 
-          const matchesStatus =
-            !status ||
-            normalizeStatus(
-              inquiry
-            ) === status;
+                const matchesCoordinator =
+                    !coordinator ||
+                    inquiry.coordinatorName ===
+                        coordinator;
 
 
-          return (
-            matchesSearch &&
-            matchesCourse &&
-            matchesCoordinator &&
-            matchesStatus
-          );
+                const matchesStatus =
+                    !status ||
+                    getStatus(inquiry) ===
+                        status;
 
-        }
-      );
+
+                return (
+                    matchesSearch &&
+                    matchesCourse &&
+                    matchesCoordinator &&
+                    matchesStatus
+                );
+
+            }
+        );
 
 
     renderTable(
-      filtered
+        filtered
     );
 
-  }
+}
 
 
-  /* =========================================================
-     RENDER TABLE
-  ========================================================= */
+/* ======================================================
+   RENDER TABLE
+====================================================== */
 
-  function renderTable(
+function renderTable(
     inquiries
-  ){
+){
 
     resultText.textContent =
-      `${inquiries.length} inquiry${
-        inquiries.length === 1
-          ? ""
-          : "ies"
-      } found`;
+        `${inquiries.length} inquiry${
+            inquiries.length === 1
+                ? ""
+                : "ies"
+        } found`;
 
 
-    if(!inquiries.length){
+    if(
+        inquiries.length === 0
+    ){
 
-      tableBody.innerHTML = `
+        tableBody.innerHTML = `
 
-        <tr>
+            <tr>
 
-          <td
-            colspan="7"
-            class="table-state"
-          >
+                <td
+                    colspan="7"
+                    class="table-state"
+                >
 
-            📭<br><br>
+                    <div style="font-size:34px;">
+                        📭
+                    </div>
 
-            No inquiries found.
+                    <br>
 
-          </td>
+                    No inquiries found.
 
-        </tr>
+                </td>
 
-      `;
+            </tr>
 
-      return;
+        `;
+
+        return;
 
     }
 
 
     tableBody.innerHTML =
-      inquiries
-        .map(
-          inquiry =>
-            createRow(
-              inquiry
+        inquiries
+            .map(
+                createRow
             )
-        )
-        .join("");
+            .join("");
 
-  }
+}
 
 
-  /* =========================================================
-     CREATE TABLE ROW
-  ========================================================= */
+/* ======================================================
+   ROW
+====================================================== */
 
-  function createRow(
+function createRow(
     inquiry
-  ){
-
-    const status =
-      normalizeStatus(
-        inquiry
-      );
-
+){
 
     const name =
-      inquiry.studentName ||
-      "Unknown Student";
+        inquiry.studentName ||
+        "Unknown";
 
 
     const initial =
-      name
-        .charAt(0)
-        .toUpperCase();
+        name
+            .charAt(0)
+            .toUpperCase();
 
 
-    const mobile =
-      inquiry.mobile ||
-      "";
-
-
-    const course =
-      inquiry.course ||
-      "-";
-
-
-    const source =
-      inquiry.source ||
-      "Coordinator";
-
-
-    const coordinator =
-      inquiry.coordinatorName ||
-      "Coordinator";
+    const status =
+        getStatus(
+            inquiry
+        );
 
 
     return `
 
-      <tr>
-
-        <!-- STUDENT -->
-
-        <td>
-
-          <div class="student-cell">
-
-            <div class="student-avatar">
-              ${escapeHtml(initial)}
-            </div>
-
-            <div>
-
-              <div class="student-name">
-                ${escapeHtml(name)}
-              </div>
-
-              <div class="student-mobile">
-                📱 ${escapeHtml(mobile)}
-              </div>
-
-            </div>
-
-          </div>
-
-        </td>
+        <tr>
 
 
-        <!-- COURSE -->
+            <td>
 
-        <td>
+                <div class="student-cell">
 
-          <div class="course-name">
-            ${escapeHtml(course)}
-          </div>
+                    <div class="student-avatar">
 
-        </td>
+                        ${escapeHtml(
+                            initial
+                        )}
 
-
-        <!-- SOURCE -->
-
-        <td>
-
-          <span class="source-badge">
-            ${escapeHtml(source)}
-          </span>
-
-        </td>
+                    </div>
 
 
-        <!-- COORDINATOR -->
+                    <div>
 
-        <td>
+                        <div class="student-name">
 
-          <div class="coordinator-name">
-            ${escapeHtml(coordinator)}
-          </div>
+                            ${escapeHtml(
+                                name
+                            )}
 
-        </td>
-
-
-        <!-- DATE -->
-
-        <td>
-
-          <div class="date-text">
-            ${escapeHtml(
-              formatDate(
-                inquiry.createdAt
-              )
-            )}
-          </div>
-
-        </td>
+                        </div>
 
 
-        <!-- STATUS -->
+                        <div class="student-mobile">
 
-        <td>
+                            📱
+                            ${escapeHtml(
+                                inquiry.mobile ||
+                                "-"
+                            )}
 
-          <select
-            class="status-select ${escapeHtml(status)}"
-            data-action="status"
-            data-id="${inquiry.id}"
-          >
+                        </div>
 
-            <option
-              value="new"
-              ${status==="new" ? "selected":""}
-            >
-              New
-            </option>
+                    </div>
 
-            <option
-              value="pending"
-              ${status==="pending" ? "selected":""}
-            >
-              Pending
-            </option>
+                </div>
 
-            <option
-              value="contacted"
-              ${status==="contacted" ? "selected":""}
-            >
-              Contacted
-            </option>
-
-            <option
-              value="follow-up"
-              ${status==="follow-up" ? "selected":""}
-            >
-              Follow-up
-            </option>
-
-            <option
-              value="converted"
-              ${status==="converted" ? "selected":""}
-            >
-              Converted
-            </option>
-
-            <option
-              value="not-interested"
-              ${status==="not-interested" ? "selected":""}
-            >
-              Not Interested
-            </option>
-
-          </select>
-
-        </td>
+            </td>
 
 
-        <!-- ACTIONS -->
+            <td>
 
-        <td>
+                <div class="course-name">
 
-          <div class="actions">
+                    ${escapeHtml(
+                        inquiry.course ||
+                        "-"
+                    )}
 
-            <button
-              class="action-btn call"
-              title="Call"
-              data-action="call"
-              data-id="${inquiry.id}"
-            >
-              📞
-            </button>
+                </div>
+
+            </td>
 
 
-            <button
-              class="action-btn whatsapp"
-              title="WhatsApp"
-              data-action="whatsapp"
-              data-id="${inquiry.id}"
-            >
-              💬
-            </button>
+            <td>
+
+                <span class="source-badge">
+
+                    ${escapeHtml(
+                        inquiry.source ||
+                        "Coordinator"
+                    )}
+
+                </span>
+
+            </td>
 
 
-            <button
-              class="action-btn view"
-              title="View"
-              data-action="view"
-              data-id="${inquiry.id}"
-            >
-              👁
-            </button>
+            <td>
+
+                <div class="coordinator-name">
+
+                    ${escapeHtml(
+                        inquiry.coordinatorName ||
+                        "-"
+                    )}
+
+                </div>
+
+            </td>
 
 
-            <button
-              class="action-btn delete"
-              title="Delete"
-              data-action="delete"
-              data-id="${inquiry.id}"
-            >
-              🗑
-            </button>
+            <td>
 
-          </div>
+                <div class="date-text">
 
-        </td>
+                    ${escapeHtml(
+                        formatDate(
+                            inquiry.createdAt
+                        )
+                    )}
 
-      </tr>
+                </div>
+
+            </td>
+
+
+            <td>
+
+                <select
+                    class="status-select ${escapeHtml(status)}"
+                    data-action="status"
+                    data-id="${escapeHtml(inquiry.id)}"
+                >
+
+                    <option
+                        value="new"
+                        ${status==="new" ? "selected":""}
+                    >
+                        New
+                    </option>
+
+                    <option
+                        value="pending"
+                        ${status==="pending" ? "selected":""}
+                    >
+                        Pending
+                    </option>
+
+                    <option
+                        value="contacted"
+                        ${status==="contacted" ? "selected":""}
+                    >
+                        Contacted
+                    </option>
+
+                    <option
+                        value="follow-up"
+                        ${status==="follow-up" ? "selected":""}
+                    >
+                        Follow-up
+                    </option>
+
+                    <option
+                        value="converted"
+                        ${status==="converted" ? "selected":""}
+                    >
+                        Converted
+                    </option>
+
+                    <option
+                        value="not-interested"
+                        ${status==="not-interested" ? "selected":""}
+                    >
+                        Not Interested
+                    </option>
+
+                </select>
+
+            </td>
+
+
+            <td>
+
+                <div class="actions">
+
+
+                    <button
+                        class="action-btn call"
+                        title="Call"
+                        data-action="call"
+                        data-id="${escapeHtml(inquiry.id)}"
+                    >
+                        📞
+                    </button>
+
+
+                    <button
+                        class="action-btn whatsapp"
+                        title="WhatsApp"
+                        data-action="whatsapp"
+                        data-id="${escapeHtml(inquiry.id)}"
+                    >
+                        💬
+                    </button>
+
+
+                    <button
+                        class="action-btn view"
+                        title="View"
+                        data-action="view"
+                        data-id="${escapeHtml(inquiry.id)}"
+                    >
+                        👁
+                    </button>
+
+
+                    <button
+                        class="action-btn delete"
+                        title="Delete"
+                        data-action="delete"
+                        data-id="${escapeHtml(inquiry.id)}"
+                    >
+                        🗑
+                    </button>
+
+
+                </div>
+
+            </td>
+
+
+        </tr>
 
     `;
 
-  }
+}
 
 
-  /* =========================================================
-     TABLE EVENTS
-  ========================================================= */
+/* ======================================================
+   TABLE CLICK
+====================================================== */
 
-  tableBody.addEventListener(
+tableBody.addEventListener(
     "click",
-    async(event)=>{
+    async function(event){
 
-      const button =
-        event.target.closest(
-          "[data-action]"
-        );
-
-
-      if(!button){
-        return;
-      }
+        const button =
+            event.target.closest(
+                "[data-action]"
+            );
 
 
-      const action =
-        button.dataset.action;
+        if(!button){
 
-
-      const id =
-        button.dataset.id;
-
-
-      const inquiry =
-        allInquiries.find(
-          item =>
-            item.id === id
-        );
-
-
-      if(!inquiry){
-        return;
-      }
-
-
-      if(action === "call"){
-
-        const mobile =
-          String(
-            inquiry.mobile ||
-            ""
-          )
-          .replace(/\D/g,"");
-
-
-        if(!mobile){
-
-          showToast(
-            "Mobile number not available.",
-            "error"
-          );
-
-          return;
+            return;
 
         }
 
 
-        window.location.href =
-          `tel:${mobile}`;
-
-      }
+        const action =
+            button.dataset.action;
 
 
-      else if(
-        action === "whatsapp"
-      ){
-
-        openWhatsApp(
-          inquiry
-        );
-
-      }
+        const id =
+            button.dataset.id;
 
 
-      else if(
-        action === "view"
-      ){
-
-        openDetails(
-          inquiry
-        );
-
-      }
+        const inquiry =
+            allInquiries.find(
+                item =>
+                    item.id === id
+            );
 
 
-      else if(
-        action === "delete"
-      ){
+        if(!inquiry){
 
-        await deleteInquiry(
-          inquiry
-        );
+            return;
 
-      }
+        }
+
+
+        if(
+            action === "call"
+        ){
+
+            const mobile =
+                String(
+                    inquiry.mobile ||
+                    ""
+                )
+                .replace(
+                    /\D/g,
+                    ""
+                );
+
+
+            if(mobile){
+
+                window.location.href =
+                    "tel:" +
+                    mobile;
+
+            }
+
+        }
+
+
+        else if(
+            action === "whatsapp"
+        ){
+
+            openWhatsApp(
+                inquiry
+            );
+
+        }
+
+
+        else if(
+            action === "view"
+        ){
+
+            openDetails(
+                inquiry
+            );
+
+        }
+
+
+        else if(
+            action === "delete"
+        ){
+
+            await deleteInquiry(
+                inquiry
+            );
+
+        }
 
     }
-  );
+);
 
 
-  /* =========================================================
-     STATUS CHANGE
-  ========================================================= */
+/* ======================================================
+   STATUS CHANGE
+====================================================== */
 
-  tableBody.addEventListener(
+tableBody.addEventListener(
     "change",
-    async(event)=>{
+    async function(event){
 
-      const select =
-        event.target.closest(
-          '[data-action="status"]'
+        const select =
+            event.target.closest(
+                '[data-action="status"]'
+            );
+
+
+        if(!select){
+
+            return;
+
+        }
+
+
+        const id =
+            select.dataset.id;
+
+
+        const status =
+            select.value;
+
+
+        await updateStatus(
+            id,
+            status
+        );
+
+    }
+);
+
+
+/* ======================================================
+   UPDATE STATUS
+====================================================== */
+
+async function updateStatus(
+    id,
+    status
+){
+
+    try{
+
+        const documentUrl =
+            FIRESTORE_URL +
+            "/" +
+            encodeURIComponent(
+                id
+            ) +
+            "?key=" +
+            encodeURIComponent(
+                FIREBASE_API_KEY
+            ) +
+
+            "&updateMask.fieldPaths=status" +
+
+            "&updateMask.fieldPaths=telecallerStatus" +
+
+            "&updateMask.fieldPaths=updatedAt" +
+
+            "&updateMask.fieldPaths=telecallerName" +
+
+            "&updateMask.fieldPaths=telecallerMobile";
+
+
+        const body = {
+
+            fields: {
+
+                status:{
+                    stringValue:
+                        status
+                },
+
+                telecallerStatus:{
+                    stringValue:
+                        status
+                },
+
+                updatedAt:{
+                    timestampValue:
+                        new Date().toISOString()
+                },
+
+                telecallerName:{
+                    stringValue:
+                        telecallerName
+                },
+
+                telecallerMobile:{
+                    stringValue:
+                        telecallerMobile
+                }
+
+            }
+
+        };
+
+
+        const response =
+            await fetchWithTimeout(
+                documentUrl,
+                {
+                    method:"PATCH",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            body
+                        )
+                },
+                12000
+            );
+
+
+        if(!response.ok){
+
+            const error =
+                await readError(
+                    response
+                );
+
+
+            throw new Error(
+                "Firestore Error (" +
+                response.status +
+                "): " +
+                error
+            );
+
+        }
+
+
+        /*
+          Update local data immediately.
+        */
+
+        const item =
+            allInquiries.find(
+                x =>
+                    x.id === id
+            );
+
+
+        if(item){
+
+            item.status =
+                status;
+
+            item.telecallerStatus =
+                status;
+
+            item.telecallerName =
+                telecallerName;
+
+            item.telecallerMobile =
+                telecallerMobile;
+
+        }
+
+
+        updateStats();
+
+        applyFilters();
+
+
+        showToast(
+            "Status updated successfully."
         );
 
 
-      if(!select){
-        return;
-      }
+    }catch(error){
+
+        console.error(
+            "STATUS ERROR:",
+            error
+        );
 
 
-      const id =
-        select.dataset.id;
+        showToast(
+            "Status update failed: " +
+            error.message,
+            "error"
+        );
 
 
-      const newStatus =
-        select.value;
+        /*
+          Reload original data
+        */
 
-
-      await updateInquiryStatus(
-        id,
-        newStatus
-      );
+        loadInquiries();
 
     }
-  );
+
+}
 
 
-  /* =========================================================
-     UPDATE STATUS
-  ========================================================= */
+/* ======================================================
+   DELETE
+====================================================== */
 
-  async function updateInquiryStatus(
-    id,
-    newStatus
-  ){
+async function deleteInquiry(
+    inquiry
+){
 
-    if(!currentUser){
+    const ok =
+        confirm(
+            "Delete inquiry of " +
+            (
+                inquiry.studentName ||
+                "this student"
+            ) +
+            "?"
+        );
 
-      showToast(
-        "Login session expired.",
-        "error"
-      );
 
-      return;
+    if(!ok){
+
+        return;
 
     }
 
 
     try{
 
-      await updateDoc(
-        doc(
-          db,
-          "studentInquiries",
-          id
-        ),
-        {
+        const url =
+            FIRESTORE_URL +
+            "/" +
+            encodeURIComponent(
+                inquiry.id
+            ) +
+            "?key=" +
+            encodeURIComponent(
+                FIREBASE_API_KEY
+            );
 
-          status:newStatus,
 
-          telecallerStatus:newStatus,
+        const response =
+            await fetchWithTimeout(
+                url,
+                {
+                    method:"DELETE"
+                },
+                12000
+            );
 
-          updatedAt:
-            serverTimestamp(),
 
-          telecallerUid:
-            currentUser.uid,
+        if(!response.ok){
 
-          telecallerEmail:
-            currentUser.email || ""
+            const error =
+                await readError(
+                    response
+                );
+
+
+            throw new Error(
+                "Firestore Error (" +
+                response.status +
+                "): " +
+                error
+            );
 
         }
-      );
 
 
-      showToast(
-        `Status updated to ${statusText(newStatus)}`
-      );
+        allInquiries =
+            allInquiries.filter(
+                item =>
+                    item.id !==
+                    inquiry.id
+            );
 
 
-    }catch(error){
+        updateStats();
 
-      console.error(
-        "Status update error:",
-        error
-      );
+        populateFilters();
 
-
-      showToast(
-        "Status update failed: " +
-        (
-          error.message ||
-          "Unknown error"
-        ),
-        "error"
-      );
-
-    }
-
-  }
+        applyFilters();
 
 
-  /* =========================================================
-     DELETE
-  ========================================================= */
-
-  async function deleteInquiry(
-    inquiry
-  ){
-
-    const confirmed =
-      confirm(
-        `Delete inquiry of ${inquiry.studentName || "this student"}?`
-      );
-
-
-    if(!confirmed){
-      return;
-    }
-
-
-    try{
-
-      await deleteDoc(
-        doc(
-          db,
-          "studentInquiries",
-          inquiry.id
-        )
-      );
-
-
-      showToast(
-        "Inquiry deleted successfully."
-      );
+        showToast(
+            "Inquiry deleted."
+        );
 
 
     }catch(error){
 
-      console.error(
-        "Delete error:",
-        error
-      );
+        console.error(
+            "DELETE ERROR:",
+            error
+        );
 
 
-      showToast(
-        "Delete failed: " +
-        (
-          error.message ||
-          "Unknown error"
-        ),
-        "error"
-      );
+        showToast(
+            "Delete failed: " +
+            error.message,
+            "error"
+        );
 
     }
 
-  }
+}
 
 
-  /* =========================================================
-     WHATSAPP
-  ========================================================= */
+/* ======================================================
+   WHATSAPP
+====================================================== */
 
-  function openWhatsApp(
+function openWhatsApp(
     inquiry
-  ){
+){
 
     let mobile =
-      String(
-        inquiry.mobile ||
-        ""
-      )
-      .replace(/\D/g,"");
+        String(
+            inquiry.mobile ||
+            ""
+        )
+        .replace(
+            /\D/g,
+            ""
+        );
 
-
-    /*
-      Indian number handling.
-    */
 
     if(
-      mobile.length === 10
+        mobile.length === 10
     ){
 
-      mobile =
-        "91" +
-        mobile;
+        mobile =
+            "91" +
+            mobile;
 
     }
 
 
     if(!mobile){
 
-      showToast(
-        "Mobile number not available.",
-        "error"
-      );
+        showToast(
+            "Mobile number not available.",
+            "error"
+        );
 
-      return;
+        return;
 
     }
 
 
     const message =
-      `Hello ${inquiry.studentName || ""},\n\n` +
-      `This is BlackTerminal Computer Institute, Baripada.\n\n` +
-      `Regarding your inquiry for ${inquiry.course || "our course"}.\n\n` +
-      `Please let us know how we can help you.`;
+        `Hello ${inquiry.studentName || ""},\n\n` +
+        `This is BlackTerminal Computer Institute, Baripada.\n\n` +
+        `Regarding your inquiry for ${inquiry.course || "our course"}.\n\n` +
+        `Please let us know how we can help you.`;
 
 
     const url =
-      `https://wa.me/${mobile}?text=${
+        "https://wa.me/" +
+        mobile +
+        "?text=" +
         encodeURIComponent(
-          message
-        )
-      }`;
+            message
+        );
 
 
     window.open(
-      url,
-      "_blank"
+        url,
+        "_blank"
     );
 
-  }
+}
 
 
-  /* =========================================================
-     DETAILS MODAL
-  ========================================================= */
+/* ======================================================
+   DETAILS
+====================================================== */
 
-  function openDetails(
+function openDetails(
     inquiry
-  ){
-
-    selectedInquiry =
-      inquiry;
-
-
-    const modalBody =
-      document.getElementById(
-        "modalBody"
-      );
-
+){
 
     const status =
-      normalizeStatus(
-        inquiry
-      );
+        getStatus(
+            inquiry
+        );
 
 
-    modalBody.innerHTML = `
+    document.getElementById(
+        "modalBody"
+    ).innerHTML = `
 
-      <div class="detail-grid">
+        <div class="detail-grid">
 
-        <div class="detail">
 
-          <div class="detail-label">
-            Student Name
-          </div>
+            <div class="detail">
 
-          <div class="detail-value">
-            ${escapeHtml(
-              inquiry.studentName ||
-              "-"
-            )}
-          </div>
+                <div class="detail-label">
+                    Student Name
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        inquiry.studentName ||
+                        "-"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Mobile
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        inquiry.mobile ||
+                        "-"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Course
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        inquiry.course ||
+                        "-"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Source
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        inquiry.source ||
+                        "-"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Coordinator
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        inquiry.coordinatorName ||
+                        "-"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Received
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        formatDate(
+                            inquiry.createdAt
+                        )
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Status
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        statusText(
+                            status
+                        )
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail">
+
+                <div class="detail-label">
+                    Follow-up
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        inquiry.followUpDate ||
+                        "-"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail full">
+
+                <div class="detail-label">
+                    Coordinator Remark
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        inquiry.remark ||
+                        "No remark"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail full">
+
+                <div class="detail-label">
+                    Telecaller Remark
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        inquiry.telecallerRemark ||
+                        "No remark"
+                    )}
+                </div>
+
+            </div>
+
 
         </div>
 
 
-        <div class="detail">
+        <div class="modal-actions">
 
-          <div class="detail-label">
-            Mobile
-          </div>
 
-          <div class="detail-value">
-            ${escapeHtml(
-              inquiry.mobile ||
-              "-"
-            )}
-          </div>
+            <button
+                class="modal-action green"
+                id="modalWhatsapp"
+            >
+                💬 WhatsApp
+            </button>
+
+
+            <button
+                class="modal-action primary"
+                id="modalCall"
+            >
+                📞 Call Student
+            </button>
+
 
         </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            Course
-          </div>
-
-          <div class="detail-value">
-            ${escapeHtml(
-              inquiry.course ||
-              "-"
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            Source
-          </div>
-
-          <div class="detail-value">
-            ${escapeHtml(
-              inquiry.source ||
-              "-"
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            Coordinator
-          </div>
-
-          <div class="detail-value">
-            ${escapeHtml(
-              inquiry.coordinatorName ||
-              "-"
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            Received
-          </div>
-
-          <div class="detail-value">
-            ${escapeHtml(
-              formatDate(
-                inquiry.createdAt
-              )
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            Status
-          </div>
-
-          <div class="detail-value">
-            ${escapeHtml(
-              statusText(status)
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail">
-
-          <div class="detail-label">
-            Follow-up Date
-          </div>
-
-          <div class="detail-value">
-            ${escapeHtml(
-              inquiry.followUpDate ||
-              "-"
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail full">
-
-          <div class="detail-label">
-            Coordinator Remark
-          </div>
-
-          <div class="detail-value">
-            ${escapeHtml(
-              inquiry.remark ||
-              "No remark"
-            )}
-          </div>
-
-        </div>
-
-
-        <div class="detail full">
-
-          <div class="detail-label">
-            Telecaller Remark
-          </div>
-
-          <div class="detail-value">
-            ${escapeHtml(
-              inquiry.telecallerRemark ||
-              "No telecaller remark"
-            )}
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="modal-actions">
-
-        <button
-          class="modal-action green"
-          id="modalWhatsApp"
-        >
-          💬 WhatsApp
-        </button>
-
-
-        <button
-          class="modal-action primary"
-          id="modalCall"
-        >
-          📞 Call Student
-        </button>
-
-      </div>
 
     `;
 
 
     document
-      .getElementById(
-        "detailModal"
-      )
-      .classList.add(
-        "show"
-      );
-
-
-    document
-      .getElementById(
-        "modalWhatsApp"
-      )
-      .onclick =
-      ()=>{
-        openWhatsApp(
-          inquiry
+        .getElementById(
+            "detailModal"
+        )
+        .classList.add(
+            "show"
         );
-      };
 
 
     document
-      .getElementById(
-        "modalCall"
-      )
-      .onclick =
-      ()=>{
-
-        const mobile =
-          String(
-            inquiry.mobile ||
-            ""
-          )
-          .replace(/\D/g,"");
+        .getElementById(
+            "modalWhatsapp"
+        )
+        .onclick =
+        ()=>{
+            openWhatsApp(
+                inquiry
+            );
+        };
 
 
-        if(mobile){
+    document
+        .getElementById(
+            "modalCall"
+        )
+        .onclick =
+        ()=>{
 
-          window.location.href =
-            `tel:${mobile}`;
+            const mobile =
+                String(
+                    inquiry.mobile ||
+                    ""
+                )
+                .replace(
+                    /\D/g,
+                    ""
+                );
 
+
+            if(mobile){
+
+                window.location.href =
+                    "tel:" +
+                    mobile;
+
+            }
+
+        };
+
+}
+
+
+/* ======================================================
+   CLOSE MODAL
+====================================================== */
+
+document
+    .getElementById(
+        "closeModal"
+    )
+    .addEventListener(
+        "click",
+        ()=>{
+            document
+                .getElementById(
+                    "detailModal"
+                )
+                .classList.remove(
+                    "show"
+                );
         }
-
-      };
-
-  }
+    );
 
 
-  /* =========================================================
-     CLOSE MODAL
-  ========================================================= */
-
-  function closeModal(){
-
-    document
-      .getElementById(
+document
+    .getElementById(
         "detailModal"
-      )
-      .classList.remove(
-        "show"
-      );
-
-  }
-
-
-  document
-    .getElementById(
-      "closeModal"
     )
     .addEventListener(
-      "click",
-      closeModal
-    );
+        "click",
+        event=>{
 
+            if(
+                event.target.id ===
+                "detailModal"
+            ){
 
-  document
-    .getElementById(
-      "detailModal"
-    )
-    .addEventListener(
-      "click",
-      event=>{
+                event.currentTarget
+                    .classList
+                    .remove(
+                        "show"
+                    );
 
-        if(
-          event.target.id ===
-          "detailModal"
-        ){
-
-          closeModal();
+            }
 
         }
-
-      }
     );
 
 
-  /* =========================================================
-     FILTER EVENTS
-  ========================================================= */
+/* ======================================================
+   FILTER EVENTS
+====================================================== */
 
-  searchInput.addEventListener(
+searchInput.addEventListener(
     "input",
     applyFilters
-  );
+);
 
 
-  courseFilter.addEventListener(
+courseFilter.addEventListener(
     "change",
     applyFilters
-  );
+);
 
 
-  statusFilter.addEventListener(
+statusFilter.addEventListener(
     "change",
     applyFilters
-  );
+);
 
 
-  coordinatorFilter.addEventListener(
+coordinatorFilter.addEventListener(
     "change",
     applyFilters
-  );
+);
 
 
-  /* =========================================================
-     REFRESH
-  ========================================================= */
+/* ======================================================
+   REFRESH
+====================================================== */
 
-  document
+document
     .getElementById(
-      "refreshBtn"
+        "refreshBtn"
     )
     .addEventListener(
-      "click",
-      ()=>{
+        "click",
+        async()=>{
 
-        /*
-          Firestore onSnapshot is already live.
-
-          We simply re-apply the current filters.
-        */
-
-        applyFilters();
-
-        showToast(
-          "Inquiry list refreshed."
-        );
-
-      }
-    );
-
-
-  /* =========================================================
-     AUTH
-  ========================================================= */
-
-  onAuthStateChanged(
-    auth,
-    user=>{
-
-      if(!user){
-
-        currentUser = null;
-
-
-        window.location.href =
-          "login.html";
-
-
-        return;
-
-      }
-
-
-      currentUser =
-        user;
-
-
-      document
-        .getElementById(
-          "userEmail"
-        )
-        .textContent =
-        user.email ||
-        "Telecaller";
-
-
-      const savedName =
-        sessionStorage.getItem(
-          "bt_user_name"
-        ) ||
-        localStorage.getItem(
-          "bt_user_name"
-        );
-
-
-      const name =
-        savedName ||
-        "Telecaller";
-
-
-      document
-        .getElementById(
-          "userName"
-        )
-        .textContent =
-        name;
-
-
-      document
-        .getElementById(
-          "avatar"
-        )
-        .textContent =
-        name
-          .charAt(0)
-          .toUpperCase();
-
-
-      /*
-        Start real-time Firestore listener.
-      */
-
-      startRealtimeListener();
-
-    }
-  );
-
-
-  /* =========================================================
-     LOGOUT
-  ========================================================= */
-
-  document
-    .getElementById(
-      "logoutBtn"
-    )
-    .addEventListener(
-      "click",
-      async()=>{
-
-        try{
-
-          if(unsubscribeInquiries){
-
-            unsubscribeInquiries();
-
-          }
-
-
-          await signOut(
-            auth
-          );
-
-
-          sessionStorage.clear();
-
-
-          window.location.href =
-            "login.html";
-
-
-        }catch(error){
-
-          console.error(
-            "Logout error:",
-            error
-          );
+            await loadInquiries();
 
         }
-
-      }
     );
 
 
-  /* =========================================================
-     MOBILE SIDEBAR
-  ========================================================= */
+/* ======================================================
+   LOGOUT
+====================================================== */
 
-  const sidebar =
-    document.getElementById(
-      "sidebar"
-    );
-
-
-  const overlay =
-    document.getElementById(
-      "overlay"
-    );
-
-
-  document
+document
     .getElementById(
-      "mobileMenu"
+        "logoutBtn"
     )
     .addEventListener(
-      "click",
-      ()=>{
+        "click",
+        ()=>{
 
-        sidebar.classList.add(
-          "open"
-        );
+            sessionStorage.removeItem(
+                "bt_logged_in"
+            );
 
-        overlay.classList.add(
-          "show"
-        );
+            sessionStorage.removeItem(
+                "bt_user_name"
+            );
 
-      }
+            sessionStorage.removeItem(
+                "bt_user_mobile"
+            );
+
+            sessionStorage.removeItem(
+                "bt_user_role"
+            );
+
+            sessionStorage.removeItem(
+                "bt_login_time"
+            );
+
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }
     );
 
 
-  overlay.addEventListener(
+/* ======================================================
+   MOBILE MENU
+====================================================== */
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+
+const overlay =
+    document.getElementById(
+        "overlay"
+    );
+
+
+document
+    .getElementById(
+        "mobileMenu"
+    )
+    .addEventListener(
+        "click",
+        ()=>{
+
+            sidebar.classList.add(
+                "open"
+            );
+
+            overlay.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+
+overlay.addEventListener(
     "click",
     ()=>{
 
-      sidebar.classList.remove(
-        "open"
-      );
+        sidebar.classList.remove(
+            "open"
+        );
 
-      overlay.classList.remove(
-        "show"
-      );
+        overlay.classList.remove(
+            "show"
+        );
 
     }
-  );
+);
+
+
+/* ======================================================
+   START
+====================================================== */
+
+loadInquiries();
+
+
+console.log(
+    "BlackTerminal Telecaller started."
+);
+
+console.log(
+    "Telecaller:",
+    telecallerName
+);
 
 </script>
 

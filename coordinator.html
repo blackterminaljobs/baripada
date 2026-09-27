@@ -1,60 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 
 <meta
   name="viewport"
-  content="width=device-width,initial-scale=1.0"
+  content="width=device-width, initial-scale=1.0"
 >
 
 <title>
   BlackTerminal | Student Coordinator
 </title>
 
+
 <style>
 
 :root{
+
   --navy:#071426;
   --navy2:#0d2039;
+
   --blue:#086ee1;
   --blue2:#18a0ff;
+
   --bg:#f4f7fb;
+  --white:#ffffff;
+
   --text:#172236;
   --muted:#738096;
+
   --line:#e3e9f1;
+
   --green:#16a34a;
   --red:#dc2626;
   --orange:#f59e0b;
+
 }
+
+
+/* =========================
+   RESET
+========================= */
 
 *{
+
   box-sizing:border-box;
+
   margin:0;
+
   padding:0;
+
 }
 
+
 body{
-  font-family:Inter,Arial,sans-serif;
+
+  font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
+
   background:var(--bg);
+
   color:var(--text);
+
 }
+
 
 button,
 input,
 select,
 textarea{
+
   font:inherit;
+
 }
+
 
 button{
+
   cursor:pointer;
+
 }
 
-/* SIDEBAR */
+
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar{
+
   position:fixed;
 
   left:0;
@@ -66,8 +104,8 @@ button{
   background:
     linear-gradient(
       180deg,
-      #071426,
-      #0a1c31
+      var(--navy),
+      var(--navy2)
     );
 
   color:#fff;
@@ -75,22 +113,34 @@ button{
   padding:22px 16px;
 
   z-index:1000;
+
 }
 
+
 .brand{
+
   display:flex;
+
   align-items:center;
+
   gap:12px;
 
-  padding:8px 8px 25px;
+  padding:
+    8px
+    8px
+    25px;
 
   border-bottom:
     1px solid
     rgba(255,255,255,.08);
+
 }
 
+
 .logo{
+
   width:43px;
+
   height:43px;
 
   border-radius:12px;
@@ -103,39 +153,65 @@ button{
     );
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   font-weight:900;
+
+  font-size:17px;
+
 }
+
 
 .brand-text strong{
+
   display:block;
+
+  font-size:15px;
+
 }
 
+
 .brand-text span{
+
   display:block;
 
   color:#8da1ba;
 
-  font-size:11px;
+  font-size:10px;
+
+  margin-top:3px;
+
 }
+
 
 .nav{
+
   margin-top:25px;
+
 }
 
+
 .nav-title{
+
   color:#70849d;
 
   font-size:10px;
 
   text-transform:uppercase;
 
-  margin:0 10px 9px;
+  margin:
+    0
+    10px
+    9px;
+
 }
 
+
 .nav-item{
+
   display:flex;
 
   align-items:center;
@@ -146,27 +222,37 @@ button{
 
   text-decoration:none;
 
-  padding:12px 13px;
+  padding:
+    12px
+    13px;
 
   border-radius:11px;
 
   margin-bottom:5px;
 
-  font-size:14px;
+  font-size:13px;
+
 }
 
+
 .nav-item.active{
+
   color:#fff;
 
   background:
     rgba(24,160,255,.16);
+
 }
 
-.logout{
+
+.logout-btn{
+
   position:absolute;
 
   left:16px;
+
   right:16px;
+
   bottom:20px;
 
   padding:11px;
@@ -181,17 +267,29 @@ button{
     rgba(255,255,255,.04);
 
   color:#fff;
+
 }
 
-/* MAIN */
+
+/* =========================
+   MAIN
+========================= */
 
 .main{
+
   margin-left:255px;
 
   min-height:100vh;
+
 }
 
+
+/* =========================
+   TOPBAR
+========================= */
+
 .topbar{
+
   height:72px;
 
   background:#fff;
@@ -206,16 +304,21 @@ button{
 
   justify-content:space-between;
 
-  padding:0 28px;
+  padding:
+    0
+    28px;
 
   position:sticky;
 
   top:0;
 
   z-index:500;
+
 }
 
-.menu{
+
+.menu-btn{
+
   display:none;
 
   border:0;
@@ -225,30 +328,43 @@ button{
   padding:9px 11px;
 
   border-radius:9px;
+
 }
 
-.title h1{
+
+.page-title h1{
+
   font-size:21px;
+
 }
 
-.title p{
+
+.page-title p{
+
   color:var(--muted);
 
   font-size:12px;
 
   margin-top:3px;
+
 }
 
+
 .user{
+
   display:flex;
 
   align-items:center;
 
   gap:10px;
+
 }
 
+
 .avatar{
+
   width:39px;
+
   height:39px;
 
   border-radius:50%;
@@ -269,33 +385,51 @@ button{
   justify-content:center;
 
   font-weight:800;
+
 }
 
+
 .user-info strong{
+
   display:block;
 
   font-size:13px;
+
 }
 
+
 .user-info span{
+
   display:block;
 
   color:var(--muted);
 
   font-size:11px;
+
 }
 
+
+/* =========================
+   CONTENT
+========================= */
+
 .content{
+
   padding:28px;
 
   max-width:1450px;
 
   margin:auto;
+
 }
 
-/* STATS */
+
+/* =========================
+   STATS
+========================= */
 
 .stats{
+
   display:grid;
 
   grid-template-columns:
@@ -304,9 +438,12 @@ button{
   gap:18px;
 
   margin-bottom:22px;
+
 }
 
+
 .stat{
+
   background:#fff;
 
   border:
@@ -319,33 +456,46 @@ button{
 
   box-shadow:
     0 10px 30px
-    rgba(7,20,38,.08);
+    rgba(7,20,38,.07);
+
 }
 
+
 .stat-top{
+
   display:flex;
+
+  align-items:center;
 
   justify-content:space-between;
 
-  align-items:center;
 }
 
+
 .stat-label{
+
   color:var(--muted);
 
   font-size:12px;
+
 }
 
+
 .stat-value{
+
   font-size:28px;
 
   font-weight:800;
 
   margin-top:7px;
+
 }
 
+
 .stat-icon{
+
   width:43px;
+
   height:43px;
 
   border-radius:12px;
@@ -359,11 +509,18 @@ button{
   align-items:center;
 
   justify-content:center;
+
+  font-size:19px;
+
 }
 
-/* GRID */
+
+/* =========================
+   GRID
+========================= */
 
 .grid{
+
   display:grid;
 
   grid-template-columns:
@@ -371,9 +528,12 @@ button{
     420px;
 
   gap:22px;
+
 }
 
+
 .card{
+
   background:#fff;
 
   border:
@@ -384,73 +544,109 @@ button{
 
   box-shadow:
     0 10px 30px
-    rgba(7,20,38,.08);
+    rgba(7,20,38,.07);
 
   overflow:hidden;
+
 }
 
+
 .card-header{
-  padding:20px 22px;
+
+  padding:
+    20px
+    22px;
 
   border-bottom:
     1px solid
     var(--line);
+
 }
+
 
 .card-header h2{
+
   font-size:17px;
+
 }
 
+
 .card-header p{
+
   color:var(--muted);
 
   font-size:12px;
 
   margin-top:3px;
+
 }
+
 
 .card-body{
+
   padding:22px;
+
 }
 
-/* FORM */
+
+/* =========================
+   FORM
+========================= */
 
 .form-grid{
+
   display:grid;
 
   grid-template-columns:
-    1fr 1fr;
+    1fr
+    1fr;
 
   gap:17px;
+
 }
 
+
 .form-group{
+
   display:flex;
 
   flex-direction:column;
 
   gap:7px;
+
 }
 
-.full{
-  grid-column:1/-1;
+
+.form-group.full{
+
+  grid-column:
+    1 / -1;
+
 }
+
 
 label{
+
   font-size:12px;
 
   font-weight:700;
 
   color:#344258;
+
 }
 
+
 .required{
+
   color:var(--red);
+
 }
+
 
 input,
 select,
 textarea{
+
   width:100%;
 
   border:
@@ -459,30 +655,48 @@ textarea{
 
   border-radius:10px;
 
-  padding:12px 13px;
+  padding:
+    12px
+    13px;
 
   outline:none;
 
   background:#fff;
+
+  color:var(--text);
+
 }
+
 
 input:focus,
 select:focus,
 textarea:focus{
-  border-color:var(--blue);
+
+  border-color:
+    var(--blue);
 
   box-shadow:
     0 0 0 3px
     rgba(8,110,225,.08);
+
 }
 
+
 textarea{
+
   min-height:95px;
 
   resize:vertical;
+
 }
 
+
+/* =========================
+   SEND BUTTON
+========================= */
+
 .send-btn{
+
   width:100%;
 
   margin-top:18px;
@@ -503,17 +717,37 @@ textarea{
   border-radius:11px;
 
   font-weight:800;
+
+  transition:.2s;
+
 }
 
+
+.send-btn:hover{
+
+  transform:
+    translateY(-1px);
+
+}
+
+
 .send-btn:disabled{
+
   opacity:.6;
 
   cursor:not-allowed;
+
+  transform:none;
+
 }
 
-/* MESSAGE */
+
+/* =========================
+   MESSAGE
+========================= */
 
 .message{
+
   display:none;
 
   margin-top:15px;
@@ -525,72 +759,114 @@ textarea{
   font-size:13px;
 
   line-height:1.5;
+
 }
+
 
 .message.show{
+
   display:block;
+
 }
 
+
 .message.success{
+
   background:#ecfdf3;
 
   color:#15803d;
 
-  border:1px solid #bbf7d0;
+  border:
+    1px solid
+    #bbf7d0;
+
 }
 
+
 .message.error{
+
   background:#fef2f2;
 
   color:#b91c1c;
 
-  border:1px solid #fecaca;
+  border:
+    1px solid
+    #fecaca;
+
 }
 
-/* RECENT */
+
+/* =========================
+   RECENT
+========================= */
 
 .recent{
+
   display:flex;
 
   flex-direction:column;
+
 }
 
+
 .recent-item{
-  padding:15px 0;
+
+  padding:
+    15px
+    0;
 
   border-bottom:
     1px solid
     var(--line);
+
 }
+
 
 .recent-item:last-child{
+
   border-bottom:0;
+
 }
 
+
 .recent-top{
+
   display:flex;
+
+  align-items:flex-start;
 
   justify-content:space-between;
 
   gap:10px;
+
 }
 
+
 .student{
+
   font-size:14px;
 
   font-weight:800;
+
 }
 
+
 .course{
+
   color:var(--muted);
 
   font-size:12px;
 
   margin-top:3px;
+
 }
 
+
 .status{
-  padding:5px 8px;
+
+  padding:
+    5px
+    8px;
 
   border-radius:20px;
 
@@ -599,37 +875,77 @@ textarea{
   font-weight:800;
 
   white-space:nowrap;
+
 }
+
 
 .status.new{
+
   background:#eaf4ff;
+
   color:#086ee1;
+
 }
+
 
 .status.pending{
+
   background:#fff7e6;
+
   color:#b77900;
+
 }
+
 
 .status.contacted{
+
   background:#f1f5f9;
+
   color:#475569;
+
 }
+
 
 .status.converted{
+
   background:#ecfdf3;
+
   color:#15803d;
+
 }
 
+
+.status.follow-up{
+
+  background:#f3e8ff;
+
+  color:#7e22ce;
+
+}
+
+
+.status.not-interested{
+
+  background:#fef2f2;
+
+  color:#b91c1c;
+
+}
+
+
 .meta{
+
   color:#8a96a8;
 
   font-size:10px;
 
   margin-top:8px;
+
 }
 
+
 .empty{
+
   text-align:center;
 
   color:var(--muted);
@@ -637,110 +953,198 @@ textarea{
   font-size:13px;
 
   padding:35px 10px;
+
 }
 
+
 .loading{
+
   text-align:center;
 
   color:var(--muted);
 
   padding:35px;
+
 }
 
-/* MOBILE */
+
+/* =========================
+   SESSION NOTICE
+========================= */
+
+.session-notice{
+
+  display:none;
+
+  margin-bottom:20px;
+
+  padding:13px 15px;
+
+  background:#eff6ff;
+
+  color:#1d4ed8;
+
+  border:
+    1px solid
+    #bfdbfe;
+
+  border-radius:11px;
+
+  font-size:12px;
+
+}
+
+
+.session-notice.show{
+
+  display:block;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 .overlay{
+
   display:none;
 
   position:fixed;
 
   inset:0;
 
-  background:rgba(0,0,0,.4);
+  background:
+    rgba(0,0,0,.4);
 
   z-index:900;
+
 }
+
 
 @media(max-width:1000px){
 
   .grid{
-    grid-template-columns:1fr;
-  }
 
-  .stats{
-    grid-template-columns:
-      repeat(3,1fr);
+    grid-template-columns:1fr;
+
   }
 
 }
 
+
 @media(max-width:760px){
 
   .sidebar{
+
     transform:
       translateX(-100%);
 
     transition:.25s;
+
   }
+
 
   .sidebar.open{
+
     transform:
       translateX(0);
+
   }
+
 
   .overlay.show{
+
     display:block;
+
   }
+
 
   .main{
+
     margin-left:0;
+
   }
 
-  .menu{
+
+  .menu-btn{
+
     display:block;
+
   }
 
-  .title{
+
+  .page-title{
+
     display:none;
+
   }
+
 
   .topbar{
-    padding:0 16px;
+
+    padding:
+      0
+      16px;
+
   }
+
 
   .content{
-    padding:18px 14px;
+
+    padding:
+      18px
+      14px;
+
   }
+
 
   .stats{
+
     grid-template-columns:1fr;
+
   }
+
 
   .form-grid{
+
     grid-template-columns:1fr;
+
   }
 
-  .full{
+
+  .form-group.full{
+
     grid-column:auto;
+
   }
+
 
   .user-info{
+
     display:none;
+
   }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<!-- SIDEBAR -->
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
 <aside
   class="sidebar"
   id="sidebar"
 >
+
 
   <div class="brand">
 
@@ -769,31 +1173,40 @@ textarea{
       Coordinator
     </div>
 
+
     <a
       href="coordinator.html"
       class="nav-item active"
     >
+
       📊 Dashboard
+
     </a>
+
 
     <a
       href="coordinator.html"
       class="nav-item"
     >
+
       📨 Send Inquiry
+
     </a>
 
   </nav>
 
 
   <button
-    class="logout"
+    class="logout-btn"
     id="logoutBtn"
   >
+
     🚪 Logout
+
   </button>
 
 </aside>
+
 
 
 <div
@@ -802,11 +1215,18 @@ textarea{
 ></div>
 
 
-<!-- MAIN -->
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main class="main">
 
+
+  <!-- TOPBAR -->
+
   <header class="topbar">
+
 
     <div
       style="
@@ -816,14 +1236,18 @@ textarea{
       "
     >
 
+
       <button
-        class="menu"
+        class="menu-btn"
         id="menuBtn"
       >
+
         ☰
+
       </button>
 
-      <div class="title">
+
+      <div class="page-title">
 
         <h1>
           Student Coordinator
@@ -835,49 +1259,78 @@ textarea{
 
       </div>
 
+
     </div>
 
 
+
     <div class="user">
+
 
       <div
         class="avatar"
         id="avatar"
       >
+
         C
+
       </div>
+
 
       <div class="user-info">
 
-        <strong id="userName">
+        <strong
+          id="userName"
+        >
+
           Coordinator
+
         </strong>
 
-        <span id="userEmail">
-          Checking login...
+
+        <span
+          id="userMobile"
+        >
+
+          Loading...
+
         </span>
 
       </div>
 
+
     </div>
+
 
   </header>
 
 
+
+  <!-- CONTENT -->
+
   <section class="content">
 
 
-    <!-- AUTH STATUS -->
+    <!-- SESSION -->
 
     <div
-      id="authMessage"
-      class="message"
-    ></div>
+      class="session-notice"
+      id="sessionNotice"
+    >
+
+      👤 Logged in as
+      <strong id="sessionUser">
+        Coordinator
+      </strong>
+
+    </div>
+
 
 
     <!-- STATS -->
 
     <div class="stats">
+
 
       <div class="stat">
 
@@ -898,6 +1351,7 @@ textarea{
 
           </div>
 
+
           <div class="stat-icon">
             📨
           </div>
@@ -905,6 +1359,7 @@ textarea{
         </div>
 
       </div>
+
 
 
       <div class="stat">
@@ -926,6 +1381,7 @@ textarea{
 
           </div>
 
+
           <div class="stat-icon">
             📅
           </div>
@@ -933,6 +1389,7 @@ textarea{
         </div>
 
       </div>
+
 
 
       <div class="stat">
@@ -954,6 +1411,7 @@ textarea{
 
           </div>
 
+
           <div class="stat-icon">
             ✅
           </div>
@@ -962,17 +1420,22 @@ textarea{
 
       </div>
 
+
     </div>
 
 
-    <!-- GRID -->
+
+    <!-- MAIN GRID -->
 
     <div class="grid">
 
 
-      <!-- SEND -->
+      <!-- =================================================
+           SEND INQUIRY
+      ================================================== -->
 
       <div class="card">
+
 
         <div class="card-header">
 
@@ -981,8 +1444,8 @@ textarea{
           </h2>
 
           <p>
-            Enter student details and forward
-            them to Telecaller.
+            Enter student details and send them
+            directly to Telecaller.
           </p>
 
         </div>
@@ -990,17 +1453,29 @@ textarea{
 
         <div class="card-body">
 
-          <form id="inquiryForm">
+
+          <form
+            id="inquiryForm"
+          >
+
 
             <div class="form-grid">
 
 
+              <!-- NAME -->
+
               <div class="form-group">
 
                 <label>
+
                   Student Name
-                  <span class="required">*</span>
+
+                  <span class="required">
+                    *
+                  </span>
+
                 </label>
+
 
                 <input
                   type="text"
@@ -1012,17 +1487,26 @@ textarea{
               </div>
 
 
+
+              <!-- MOBILE -->
+
               <div class="form-group">
 
                 <label>
+
                   Mobile Number
-                  <span class="required">*</span>
+
+                  <span class="required">
+                    *
+                  </span>
+
                 </label>
+
 
                 <input
                   type="tel"
-                  id="mobile"
-                  placeholder="10 digit mobile"
+                  id="studentMobile"
+                  placeholder="10 digit mobile number"
                   maxlength="10"
                   inputmode="numeric"
                   required
@@ -1031,12 +1515,21 @@ textarea{
               </div>
 
 
+
+              <!-- COURSE -->
+
               <div class="form-group">
 
                 <label>
+
                   Course
-                  <span class="required">*</span>
+
+                  <span class="required">
+                    *
+                  </span>
+
                 </label>
+
 
                 <select
                   id="course"
@@ -1047,43 +1540,43 @@ textarea{
                     Select Course
                   </option>
 
-                  <option>
+                  <option value="PGDCA">
                     PGDCA
                   </option>
 
-                  <option>
+                  <option value="Advanced PGDCA">
                     Advanced PGDCA
                   </option>
 
-                  <option>
+                  <option value="C Language">
                     C Language
                   </option>
 
-                  <option>
+                  <option value="Java">
                     Java
                   </option>
 
-                  <option>
+                  <option value="Python">
                     Python
                   </option>
 
-                  <option>
+                  <option value="Tally">
                     Tally
                   </option>
 
-                  <option>
+                  <option value="Spoken English">
                     Spoken English
                   </option>
 
-                  <option>
+                  <option value="Ethical Hacking">
                     Ethical Hacking
                   </option>
 
-                  <option>
+                  <option value="OS-CIT">
                     OS-CIT
                   </option>
 
-                  <option>
+                  <option value="Other">
                     Other
                   </option>
 
@@ -1091,6 +1584,9 @@ textarea{
 
               </div>
 
+
+
+              <!-- SOURCE -->
 
               <div class="form-group">
 
@@ -1098,37 +1594,40 @@ textarea{
                   Source
                 </label>
 
-                <select id="source">
+
+                <select
+                  id="source"
+                >
 
                   <option value="">
                     Select Source
                   </option>
 
-                  <option>
+                  <option value="Walk-in">
                     Walk-in
                   </option>
 
-                  <option>
+                  <option value="Phone Call">
                     Phone Call
                   </option>
 
-                  <option>
+                  <option value="WhatsApp">
                     WhatsApp
                   </option>
 
-                  <option>
+                  <option value="Facebook">
                     Facebook
                   </option>
 
-                  <option>
+                  <option value="Instagram">
                     Instagram
                   </option>
 
-                  <option>
+                  <option value="Reference">
                     Reference
                   </option>
 
-                  <option>
+                  <option value="Other">
                     Other
                   </option>
 
@@ -1137,11 +1636,17 @@ textarea{
               </div>
 
 
-              <div class="form-group full">
+
+              <!-- REMARK -->
+
+              <div
+                class="form-group full"
+              >
 
                 <label>
                   Remark
                 </label>
+
 
                 <textarea
                   id="remark"
@@ -1150,33 +1655,48 @@ textarea{
 
               </div>
 
+
             </div>
 
+
+
+            <!-- SEND -->
 
             <button
               type="submit"
               class="send-btn"
               id="sendBtn"
             >
+
               📨 Send Inquiry
+
             </button>
 
+
+
+            <!-- MESSAGE -->
 
             <div
               id="messageBox"
               class="message"
             ></div>
 
+
           </form>
+
 
         </div>
 
       </div>
 
 
-      <!-- RECENT -->
+
+      <!-- =================================================
+           RECENT INQUIRIES
+      ================================================== -->
 
       <div class="card">
+
 
         <div class="card-header">
 
@@ -1193,182 +1713,316 @@ textarea{
 
         <div class="card-body">
 
+
           <div
             class="recent"
             id="recentList"
           >
 
             <div class="loading">
-              Waiting for Firebase login...
+
+              Loading inquiries...
+
             </div>
 
           </div>
+
 
         </div>
 
       </div>
 
+
     </div>
 
+
   </section>
+
 
 </main>
 
 
+
+<!-- =====================================================
+     FIREBASE FIRESTORE ONLY
+     
+     IMPORTANT:
+     NO FIREBASE AUTHENTICATION
+===================================================== -->
+
 <script type="module">
 
+
 import {
+
   initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+} from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 
 import {
-  getAuth,
-  onAuthStateChanged,
-  signOut,
-  setPersistence,
-  browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-
-import {
   getFirestore,
+
   collection,
+
   addDoc,
+
   query,
+
   where,
+
   onSnapshot,
+
   limit,
+
   serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+} from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 import {
+
   firebaseConfig
+
 } from "./firebaseconfig.js";
 
 
-/* =========================================================
+
+/* =====================================================
    FIREBASE
-========================================================= */
+===================================================== */
 
 const app =
-  initializeApp(firebaseConfig);
+  initializeApp(
+    firebaseConfig
+  );
 
-const auth =
-  getAuth(app);
 
 const db =
-  getFirestore(app);
+  getFirestore(
+    app
+  );
 
 
-/* =========================================================
-   VARIABLES
-========================================================= */
 
-let currentUser = null;
+/* =====================================================
+   SIMPLE SESSION
+   NO FIREBASE AUTH
+===================================================== */
 
-let inquiryUnsubscribe = null;
+const loggedIn =
+  sessionStorage.getItem(
+    "bt_logged_in"
+  );
 
-let authResolved = false;
+
+const userRole =
+  sessionStorage.getItem(
+    "bt_user_role"
+  );
 
 
-/* =========================================================
+const coordinatorName =
+  sessionStorage.getItem(
+    "bt_user_name"
+  ) ||
+  "Coordinator";
+
+
+const coordinatorMobile =
+  sessionStorage.getItem(
+    "bt_user_mobile"
+  ) ||
+  "";
+
+
+
+/* =====================================================
+   SESSION CHECK
+===================================================== */
+
+if(
+
+  loggedIn !== "true" ||
+
+  userRole !== "coordinator"
+
+){
+
+  window.location.replace(
+    "login.html"
+  );
+
+}
+
+
+/* =====================================================
    DOM
-========================================================= */
+===================================================== */
 
-const form =
+const userNameElement =
   document.getElementById(
-    "inquiryForm"
-  );
-
-const sendBtn =
-  document.getElementById(
-    "sendBtn"
-  );
-
-const messageBox =
-  document.getElementById(
-    "messageBox"
-  );
-
-const recentList =
-  document.getElementById(
-    "recentList"
-  );
-
-const authMessage =
-  document.getElementById(
-    "authMessage"
+    "userName"
   );
 
 
-/* =========================================================
+const userMobileElement =
+  document.getElementById(
+    "userMobile"
+  );
+
+
+const avatarElement =
+  document.getElementById(
+    "avatar"
+  );
+
+
+const sessionNotice =
+  document.getElementById(
+    "sessionNotice"
+  );
+
+
+const sessionUser =
+  document.getElementById(
+    "sessionUser"
+  );
+
+
+/* =====================================================
+   USER INFO
+===================================================== */
+
+userNameElement.textContent =
+  coordinatorName;
+
+
+userMobileElement.textContent =
+  coordinatorMobile ||
+  "Student Coordinator";
+
+
+avatarElement.textContent =
+  coordinatorName
+    .charAt(0)
+    .toUpperCase();
+
+
+sessionUser.textContent =
+  coordinatorName;
+
+
+sessionNotice.classList.add(
+  "show"
+);
+
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let unsubscribe =
+  null;
+
+
+
+/* =====================================================
    MESSAGE
-========================================================= */
+===================================================== */
 
 function showMessage(
   type,
   text
 ){
 
-  messageBox.className =
+  const box =
+    document.getElementById(
+      "messageBox"
+    );
+
+
+  box.className =
     "message show " + type;
 
-  messageBox.innerHTML =
+
+  box.innerHTML =
     text;
 
 }
 
 
-function showAuthMessage(
-  type,
-  text
-){
+function hideMessage(){
 
-  authMessage.className =
-    "message show " + type;
-
-  authMessage.innerHTML =
-    text;
-
-}
+  const box =
+    document.getElementById(
+      "messageBox"
+    );
 
 
-function hideAuthMessage(){
-
-  authMessage.className =
+  box.className =
     "message";
 
-  authMessage.innerHTML =
+
+  box.innerHTML =
     "";
 
 }
 
 
-/* =========================================================
-   ESCAPE
-========================================================= */
 
-function escapeHtml(value){
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(
+  value
+){
 
   return String(
     value || ""
   )
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;")
-  .replaceAll("'","&#039;");
+
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
 
 }
 
 
-/* =========================================================
-   DATE
-========================================================= */
 
-function formatDate(timestamp){
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(
+  timestamp
+){
 
   if(!timestamp){
 
@@ -1388,15 +2042,21 @@ function formatDate(timestamp){
     return date.toLocaleString(
       "en-IN",
       {
+
         day:"2-digit",
+
         month:"short",
+
         year:"numeric",
+
         hour:"2-digit",
+
         minute:"2-digit"
+
       }
     );
 
-  }catch(e){
+  }catch(error){
 
     return "Just now";
 
@@ -1405,11 +2065,14 @@ function formatDate(timestamp){
 }
 
 
-/* =========================================================
-   TODAY
-========================================================= */
 
-function isToday(timestamp){
+/* =====================================================
+   TODAY CHECK
+===================================================== */
+
+function isToday(
+  timestamp
+){
 
   if(!timestamp){
 
@@ -1430,18 +2093,24 @@ function isToday(timestamp){
       new Date();
 
 
-    return (
+    return(
+
       date.getDate() ===
-      now.getDate() &&
+      now.getDate()
+
+      &&
 
       date.getMonth() ===
-      now.getMonth() &&
+      now.getMonth()
+
+      &&
 
       date.getFullYear() ===
       now.getFullYear()
+
     );
 
-  }catch(e){
+  }catch(error){
 
     return false;
 
@@ -1450,23 +2119,31 @@ function isToday(timestamp){
 }
 
 
-/* =========================================================
-   STATUS
-========================================================= */
 
-function statusText(status){
+/* =====================================================
+   STATUS TEXT
+===================================================== */
 
-  const map = {
+function statusText(
+  status
+){
 
-    new:"New",
+  const statuses = {
 
-    pending:"Pending",
+    new:
+      "New",
 
-    contacted:"Contacted",
+    pending:
+      "Pending",
 
-    "follow-up":"Follow-up",
+    contacted:
+      "Contacted",
 
-    converted:"Converted",
+    "follow-up":
+      "Follow-up",
+
+    converted:
+      "Converted",
 
     "not-interested":
       "Not Interested"
@@ -1474,45 +2151,78 @@ function statusText(status){
   };
 
 
-  return (
-    map[status] ||
+  return(
+    statuses[status] ||
     "New"
   );
 
 }
 
 
-/* =========================================================
-   LOAD MY INQUIRIES
-========================================================= */
 
-function loadMyInquiries(uid){
+/* =====================================================
+   LOAD MY INQUIRIES
+===================================================== */
+
+function loadMyInquiries(){
 
   if(
-    inquiryUnsubscribe
+    unsubscribe
   ){
 
-    inquiryUnsubscribe();
+    unsubscribe();
+
+  }
+
+
+  /*
+    We identify coordinator using mobile number.
+
+    No Firebase UID.
+  */
+
+  if(
+    !coordinatorMobile
+  ){
+
+    document.getElementById(
+      "recentList"
+    ).innerHTML = `
+
+      <div class="empty">
+
+        ⚠️ Coordinator mobile number
+        not found in session.
+
+        <br><br>
+
+        Please logout and login again.
+
+      </div>
+
+    `;
+
+    return;
 
   }
 
 
   console.log(
-    "Loading Coordinator inquiries:",
-    uid
+    "Loading inquiries for coordinator:",
+    coordinatorMobile
   );
 
 
   /*
-    No orderBy here.
+    IMPORTANT:
 
-    This avoids Firestore composite index
-    problems.
+    No orderBy is used here.
 
-    We sort locally.
+    This avoids Firestore composite
+    index errors.
   */
 
-  const q =
+  const inquiryQuery =
     query(
 
       collection(
@@ -1521,9 +2231,9 @@ function loadMyInquiries(uid){
       ),
 
       where(
-        "coordinatorUid",
+        "coordinatorMobile",
         "==",
-        uid
+        coordinatorMobile
       ),
 
       limit(100)
@@ -1531,22 +2241,23 @@ function loadMyInquiries(uid){
     );
 
 
-  inquiryUnsubscribe =
+  unsubscribe =
     onSnapshot(
 
-      q,
+      inquiryQuery,
 
       snapshot=>{
 
-        const data = [];
+        const inquiries = [];
 
 
         snapshot.forEach(
           doc=>{
 
-            data.push({
+            inquiries.push({
 
-              id:doc.id,
+              id:
+                doc.id,
 
               ...doc.data()
 
@@ -1556,17 +2267,23 @@ function loadMyInquiries(uid){
         );
 
 
-        data.sort(
+        /*
+          Sort newest first locally.
+        */
+
+        inquiries.sort(
           (a,b)=>{
 
             const aTime =
-              a.createdAt?.toMillis
+              a.createdAt &&
+              a.createdAt.toMillis
                 ? a.createdAt.toMillis()
                 : 0;
 
 
             const bTime =
-              b.createdAt?.toMillis
+              b.createdAt &&
+              b.createdAt.toMillis
                 ? b.createdAt.toMillis()
                 : 0;
 
@@ -1578,12 +2295,12 @@ function loadMyInquiries(uid){
 
 
         renderRecent(
-          data
+          inquiries
         );
 
 
         updateStats(
-          data
+          inquiries
         );
 
       },
@@ -1591,49 +2308,28 @@ function loadMyInquiries(uid){
       error=>{
 
         console.error(
-          "Inquiry listener error:",
+          "Firestore listener error:",
           error
         );
 
 
-        if(
-          error.code ===
-          "permission-denied"
-        ){
+        document.getElementById(
+          "recentList"
+        ).innerHTML = `
 
-          recentList.innerHTML = `
+          <div class="empty">
 
-            <div class="empty">
+            ❌ Unable to load inquiries.
 
-              🔒 Firestore permission denied.<br><br>
+            <br><br>
 
-              Coordinator को
-              <strong>
-                studentInquiries
-              </strong>
-              read करने की permission नहीं है।
+            ${escapeHtml(
+              error.message
+            )}
 
-            </div>
+          </div>
 
-          `;
-
-        }else{
-
-          recentList.innerHTML = `
-
-            <div class="empty">
-
-              ❌ Unable to load inquiries.<br><br>
-
-              ${escapeHtml(
-                error.message
-              )}
-
-            </div>
-
-          `;
-
-        }
+        `;
 
       }
 
@@ -1642,19 +2338,26 @@ function loadMyInquiries(uid){
 }
 
 
-/* =========================================================
+
+/* =====================================================
    RENDER RECENT
-========================================================= */
+===================================================== */
 
 function renderRecent(
   inquiries
 ){
 
+  const list =
+    document.getElementById(
+      "recentList"
+    );
+
+
   if(
     !inquiries.length
   ){
 
-    recentList.innerHTML = `
+    list.innerHTML = `
 
       <div class="empty">
 
@@ -1669,7 +2372,7 @@ function renderRecent(
   }
 
 
-  recentList.innerHTML =
+  list.innerHTML =
     inquiries
       .slice(0,10)
       .map(
@@ -1697,6 +2400,7 @@ function renderRecent(
 
                   </div>
 
+
                   <div class="course">
 
                     ${escapeHtml(
@@ -1709,10 +2413,15 @@ function renderRecent(
 
 
                 <span
-                  class="status ${escapeHtml(status)}"
+                  class="
+                    status
+                    ${escapeHtml(status)}
+                  "
                 >
 
-                  ${statusText(status)}
+                  ${statusText(
+                    status
+                  )}
 
                 </span>
 
@@ -1745,9 +2454,10 @@ function renderRecent(
 }
 
 
-/* =========================================================
-   STATS
-========================================================= */
+
+/* =====================================================
+   UPDATE STATS
+===================================================== */
 
 function updateStats(
   inquiries
@@ -1762,8 +2472,9 @@ function updateStats(
   document.getElementById(
     "todayCount"
   ).textContent =
+
     inquiries.filter(
-      item =>
+      item=>
         isToday(
           item.createdAt
         )
@@ -1773,374 +2484,476 @@ function updateStats(
   document.getElementById(
     "convertedCount"
   ).textContent =
+
     inquiries.filter(
-      item =>
-        (
-          item.status ===
-          "converted"
-        ) ||
-        (
-          item.telecallerStatus ===
-          "converted"
-        )
+      item=>
+
+        item.status ===
+        "converted"
+
+        ||
+
+        item.telecallerStatus ===
+        "converted"
+
     ).length;
 
 }
 
 
-/* =========================================================
+
+/* =====================================================
    SEND INQUIRY
-========================================================= */
+===================================================== */
 
-form.addEventListener(
-  "submit",
-  async(e)=>{
+document
+  .getElementById(
+    "inquiryForm"
+  )
+  .addEventListener(
+    "submit",
+    async(event)=>{
 
-    e.preventDefault();
-
-
-    if(!currentUser){
-
-      showMessage(
-        "error",
-        `
-          ❌ Firebase login session
-          is not ready. Please wait
-          or login again.
-        `
-      );
-
-      return;
-
-    }
+      event.preventDefault();
 
 
-    const studentName =
-      document.getElementById(
-        "studentName"
-      )
-      .value
-      .trim();
+      hideMessage();
 
 
-    const mobile =
-      document.getElementById(
-        "mobile"
-      )
-      .value
-      .trim();
+      /*
+        Double-check session.
+      */
 
+      if(
 
-    const course =
-      document.getElementById(
-        "course"
-      )
-      .value;
-
-
-    const source =
-      document.getElementById(
-        "source"
-      )
-      .value;
-
-
-    const remark =
-      document.getElementById(
-        "remark"
-      )
-      .value
-      .trim();
-
-
-    /* VALIDATION */
-
-    if(!studentName){
-
-      showMessage(
-        "error",
-        "❌ Please enter student name."
-      );
-
-      return;
-
-    }
-
-
-    if(
-      !/^[0-9]{10}$/.test(
-        mobile
-      )
-    ){
-
-      showMessage(
-        "error",
-        "❌ Please enter valid 10 digit mobile number."
-      );
-
-      return;
-
-    }
-
-
-    if(!course){
-
-      showMessage(
-        "error",
-        "❌ Please select course."
-      );
-
-      return;
-
-    }
-
-
-    /* LOADING */
-
-    sendBtn.disabled =
-      true;
-
-    sendBtn.innerHTML =
-      "⏳ Sending Inquiry...";
-
-
-    try{
-
-      const coordinatorName =
         sessionStorage.getItem(
-          "bt_user_name"
-        ) ||
-        "Coordinator";
+          "bt_logged_in"
+        ) !== "true"
 
+        ||
 
-      const coordinatorMobile =
         sessionStorage.getItem(
-          "bt_user_mobile"
-        ) ||
-        "";
+          "bt_user_role"
+        ) !== "coordinator"
+
+      ){
+
+        showMessage(
+          "error",
+          `
+            ❌ Login session expired.
+            Please login again.
+          `
+        );
+
+        setTimeout(
+          ()=>{
+            window.location.replace(
+              "login.html"
+            );
+          },
+          1000
+        );
+
+        return;
+
+      }
 
 
-      const data = {
+      /* =========================
+         GET FORM DATA
+      ========================= */
 
-        studentName:
-          studentName,
-
-        mobile:
-          mobile,
-
-        course:
-          course,
-
-        source:
-          source ||
-          "Coordinator",
-
-        remark:
-          remark,
-
-        coordinatorUid:
-          currentUser.uid,
-
-        coordinatorName:
-          coordinatorName,
-
-        coordinatorEmail:
-          currentUser.email ||
-          "",
-
-        coordinatorMobile:
-          coordinatorMobile,
-
-        status:
-          "new",
-
-        telecallerStatus:
-          "pending",
-
-        telecallerRemark:
-          "",
-
-        followUpDate:
-          "",
-
-        createdAt:
-          serverTimestamp(),
-
-        updatedAt:
-          serverTimestamp()
-
-      };
+      const studentName =
+        document
+          .getElementById(
+            "studentName"
+          )
+          .value
+          .trim();
 
 
-      console.log(
-        "Sending inquiry:",
-        data
-      );
+      const studentMobile =
+        document
+          .getElementById(
+            "studentMobile"
+          )
+          .value
+          .trim();
 
 
-      const docRef =
-        await addDoc(
-          collection(
-            db,
-            "studentInquiries"
-          ),
-          data
+      const course =
+        document
+          .getElementById(
+            "course"
+          )
+          .value;
+
+
+      const source =
+        document
+          .getElementById(
+            "source"
+          )
+          .value;
+
+
+      const remark =
+        document
+          .getElementById(
+            "remark"
+          )
+          .value
+          .trim();
+
+
+
+      /* =========================
+         VALIDATION
+      ========================= */
+
+      if(
+        studentName.length < 2
+      ){
+
+        showMessage(
+          "error",
+          "❌ Please enter student name."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        !/^[0-9]{10}$/.test(
+          studentMobile
+        )
+      ){
+
+        showMessage(
+          "error",
+          "❌ Please enter a valid 10 digit mobile number."
+        );
+
+        return;
+
+      }
+
+
+      if(!course){
+
+        showMessage(
+          "error",
+          "❌ Please select a course."
+        );
+
+        return;
+
+      }
+
+
+
+      /* =========================
+         BUTTON
+      ========================= */
+
+      const sendBtn =
+        document.getElementById(
+          "sendBtn"
         );
 
 
-      console.log(
-        "Inquiry sent:",
-        docRef.id
-      );
-
-
-      showMessage(
-        "success",
-        `
-          <strong>
-            ✅ Inquiry Sent Successfully!
-          </strong>
-          <br>
-          Student inquiry has been
-          sent to Telecaller.
-        `
-      );
-
-
-      form.reset();
-
-
-      document.getElementById(
-        "studentName"
-      ).focus();
-
-
-    }catch(error){
-
-      console.error(
-        "SEND ERROR:",
-        error
-      );
-
-
-      let text =
-        error.message ||
-        "Unable to send inquiry.";
-
-
-      if(
-        error.code ===
-        "permission-denied"
-      ){
-
-        text =
-          "Firestore permission denied. Please check Firestore Rules.";
-
-      }
-
-
-      showMessage(
-        "error",
-        `
-          <strong>
-            ❌ Inquiry Send Failed
-          </strong>
-          <br>
-          ${escapeHtml(text)}
-        `
-      );
-
-    }
-
-
-    finally{
-
       sendBtn.disabled =
-        false;
+        true;
+
 
       sendBtn.innerHTML =
-        "📨 Send Inquiry";
-
-    }
-
-  }
-);
+        "⏳ Sending Inquiry...";
 
 
-/* =========================================================
-   MOBILE NUMBER
-========================================================= */
 
-document.getElementById(
-  "mobile"
-).addEventListener(
-  "input",
-  function(){
-
-    this.value =
-      this.value
-        .replace(/\D/g,"")
-        .slice(0,10);
-
-  }
-);
+      try{
 
 
-/* =========================================================
-   LOGOUT
-========================================================= */
+        /*
+          Firestore document.
 
-document.getElementById(
-  "logoutBtn"
-).addEventListener(
-  "click",
-  async()=>{
+          NO Firebase Auth UID.
+        */
 
-    try{
+        const inquiryData = {
 
-      if(
-        inquiryUnsubscribe
-      ){
+          studentName:
+            studentName,
 
-        inquiryUnsubscribe();
+          mobile:
+            studentMobile,
+
+          course:
+            course,
+
+          source:
+            source ||
+            "Coordinator",
+
+          remark:
+            remark,
+
+          coordinatorName:
+            coordinatorName,
+
+          coordinatorMobile:
+            coordinatorMobile,
+
+          status:
+            "new",
+
+          telecallerStatus:
+            "pending",
+
+          telecallerRemark:
+            "",
+
+          followUpDate:
+            "",
+
+          createdAt:
+            serverTimestamp(),
+
+          updatedAt:
+            serverTimestamp()
+
+        };
+
+
+        console.log(
+          "Sending inquiry:",
+          inquiryData
+        );
+
+
+        /*
+          SEND TO FIRESTORE
+        */
+
+        const docRef =
+          await addDoc(
+
+            collection(
+              db,
+              "studentInquiries"
+            ),
+
+            inquiryData
+
+          );
+
+
+        console.log(
+          "Inquiry successfully sent:",
+          docRef.id
+        );
+
+
+        /*
+          SUCCESS MESSAGE
+        */
+
+        showMessage(
+          "success",
+          `
+            <strong>
+              ✅ Inquiry Sent Successfully!
+            </strong>
+
+            <br>
+
+            ${escapeHtml(
+              studentName
+            )}
+            की inquiry Telecaller को
+            successfully भेज दी गई है।
+          `
+        );
+
+
+        /*
+          RESET FORM
+        */
+
+        document
+          .getElementById(
+            "inquiryForm"
+          )
+          .reset();
+
+
+        /*
+          Keep focus
+        */
+
+        document
+          .getElementById(
+            "studentName"
+          )
+          .focus();
+
+
+      }catch(error){
+
+        console.error(
+          "INQUIRY SEND ERROR:",
+          error
+        );
+
+
+        let errorText =
+          error.message ||
+          "Unable to send inquiry.";
+
+
+        if(
+          error.code ===
+          "permission-denied"
+        ){
+
+          errorText =
+            "Firestore permission denied. Please check Firestore Security Rules.";
+
+        }
+
+
+        showMessage(
+          "error",
+          `
+            <strong>
+              ❌ Inquiry Send Failed
+            </strong>
+
+            <br>
+
+            ${escapeHtml(
+              errorText
+            )}
+          `
+        );
 
       }
 
 
-      await signOut(
-        auth
+      finally{
+
+        sendBtn.disabled =
+          false;
+
+        sendBtn.innerHTML =
+          "📨 Send Inquiry";
+
+      }
+
+    }
+  );
+
+
+
+/* =====================================================
+   STUDENT MOBILE INPUT
+===================================================== */
+
+document
+  .getElementById(
+    "studentMobile"
+  )
+  .addEventListener(
+    "input",
+    function(){
+
+      this.value =
+        this.value
+          .replace(
+            /\D/g,
+            ""
+          )
+          .slice(
+            0,
+            10
+          );
+
+    }
+  );
+
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+document
+  .getElementById(
+    "logoutBtn"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      /*
+        NO FIREBASE SIGNOUT.
+      */
+
+      if(
+        unsubscribe
+      ){
+
+        unsubscribe();
+
+      }
+
+
+      sessionStorage.removeItem(
+        "bt_logged_in"
       );
 
 
-      sessionStorage.clear();
+      sessionStorage.removeItem(
+        "bt_user_name"
+      );
+
+
+      sessionStorage.removeItem(
+        "bt_user_mobile"
+      );
+
+
+      sessionStorage.removeItem(
+        "bt_user_role"
+      );
+
+
+      sessionStorage.removeItem(
+        "bt_login_time"
+      );
 
 
       window.location.replace(
         "login.html"
       );
 
-
-    }catch(error){
-
-      console.error(
-        "Logout error:",
-        error
-      );
-
     }
-
-  }
-);
+  );
 
 
-/* =========================================================
+
+/* =====================================================
    MOBILE MENU
-========================================================= */
+===================================================== */
 
 const sidebar =
   document.getElementById(
     "sidebar"
   );
+
 
 const overlay =
   document.getElementById(
@@ -2148,27 +2961,29 @@ const overlay =
   );
 
 
-document.getElementById(
-  "menuBtn"
-).addEventListener(
-  "click",
-  ()=>{
+document
+  .getElementById(
+    "menuBtn"
+  )
+  .addEventListener(
+    "click",
+    function(){
 
-    sidebar.classList.add(
-      "open"
-    );
+      sidebar.classList.add(
+        "open"
+      );
 
-    overlay.classList.add(
-      "show"
-    );
+      overlay.classList.add(
+        "show"
+      );
 
-  }
-);
+    }
+  );
 
 
 overlay.addEventListener(
   "click",
-  ()=>{
+  function(){
 
     sidebar.classList.remove(
       "open"
@@ -2182,214 +2997,17 @@ overlay.addEventListener(
 );
 
 
-/* =========================================================
-   FINAL AUTH INITIALIZATION
-========================================================= */
 
-async function initializeCoordinator(){
+/* =====================================================
+   START
+===================================================== */
 
-  try{
+loadMyInquiries();
 
-    /*
-      Make sure Firebase uses LOCAL persistence.
-
-      This is important for the transition:
-
-      login.html
-          ↓
-      coordinator.html
-    */
-
-    await setPersistence(
-      auth,
-      browserLocalPersistence
-    );
-
-
-    console.log(
-      "Firebase persistence initialized."
-    );
-
-
-    /*
-      IMPORTANT:
-
-      Don't redirect immediately when
-      onAuthStateChanged starts.
-
-      Firebase first restores the existing
-      authentication session.
-    */
-
-    onAuthStateChanged(
-      auth,
-      user=>{
-
-        console.log(
-          "AUTH STATE:",
-          user
-        );
-
-
-        if(user){
-
-          /*
-            Firebase user confirmed.
-          */
-
-          currentUser =
-            user;
-
-
-          console.log(
-            "Coordinator Firebase User:",
-            user.uid,
-            user.email
-          );
-
-
-          /*
-            Update profile
-          */
-
-          const name =
-            sessionStorage.getItem(
-              "bt_user_name"
-            ) ||
-            "Coordinator";
-
-
-          document.getElementById(
-            "userName"
-          ).textContent =
-            name;
-
-
-          document.getElementById(
-            "userEmail"
-          ).textContent =
-            user.email ||
-            "Coordinator";
-
-
-          document.getElementById(
-            "avatar"
-          ).textContent =
-            name
-              .charAt(0)
-              .toUpperCase();
-
-
-          hideAuthMessage();
-
-
-          /*
-            Start Firestore listener
-          */
-
-          loadMyInquiries(
-            user.uid
-          );
-
-
-          return;
-
-        }
-
-
-        /*
-          No user.
-
-          Wait a little before redirecting.
-          This gives Firebase enough time to
-          restore local persistence.
-        */
-
-        setTimeout(
-          ()=>{
-
-            if(
-              auth.currentUser
-            ){
-
-              console.log(
-                "Firebase session restored."
-              );
-
-              return;
-
-            }
-
-
-            /*
-              Still no Firebase user.
-            */
-
-            console.log(
-              "No Firebase authentication session."
-            );
-
-
-            showAuthMessage(
-              "error",
-              `
-                ❌ Login session not found.
-                Redirecting to login...
-              `
-            );
-
-
-            setTimeout(
-              ()=>{
-
-                window.location.replace(
-                  "login.html"
-                );
-
-              },
-              1200
-            );
-
-          },
-          2500
-        );
-
-      }
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "AUTH INITIALIZATION ERROR:",
-      error
-    );
-
-
-    showAuthMessage(
-      "error",
-      `
-        ❌ Firebase authentication
-        could not be initialized.
-        <br><br>
-        ${escapeHtml(
-          error.message
-        )}
-      `
-    );
-
-  }
-
-}
-
-
-/*
-  START
-*/
-
-initializeCoordinator();
 
 </script>
 
+
 </body>
+
 </html>

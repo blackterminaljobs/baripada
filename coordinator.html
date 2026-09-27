@@ -1,0 +1,5220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#071426"
+  >
+
+  <title>Coordinator Portal | BlackTerminal</title>
+
+
+  <style>
+
+    /* =========================================================
+       ROOT
+    ========================================================= */
+
+    :root{
+
+      --navy:#071426;
+      --navy2:#0c1d35;
+
+      --blue:#086ee1;
+      --blue2:#2f72df;
+
+      --bg:#f4f7fb;
+      --white:#ffffff;
+
+      --text:#172236;
+      --muted:#738096;
+
+      --line:#e2e8f0;
+
+      --green:#219653;
+      --green-bg:#eaf8f0;
+
+      --orange:#e78a1a;
+      --orange-bg:#fff4e4;
+
+      --red:#d63d3d;
+      --red-bg:#fff0f0;
+
+      --purple:#7358c5;
+      --purple-bg:#f1edff;
+
+      --shadow:
+        0 10px 30px rgba(22,44,76,.07);
+
+      --shadow2:
+        0 18px 50px rgba(22,44,76,.13);
+
+      --radius:17px;
+
+    }
+
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    *{
+
+      box-sizing:border-box;
+
+      margin:0;
+      padding:0;
+
+    }
+
+
+    html{
+
+      scroll-behavior:smooth;
+
+    }
+
+
+    body{
+
+      min-height:100vh;
+
+      background:var(--bg);
+
+      color:var(--text);
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    }
+
+
+    button,
+    input,
+    select,
+    textarea{
+
+      font-family:inherit;
+
+    }
+
+
+    button{
+
+      cursor:pointer;
+
+    }
+
+
+    /* =========================================================
+       SIDEBAR
+    ========================================================= */
+
+    .sidebar{
+
+      position:fixed;
+
+      left:0;
+      top:0;
+      bottom:0;
+
+      width:255px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #071426 0%,
+          #0a1a31 100%
+        );
+
+      color:#fff;
+
+      z-index:1000;
+
+      display:flex;
+
+      flex-direction:column;
+
+      transition:.3s ease;
+
+    }
+
+
+    .brand{
+
+      height:78px;
+
+      display:flex;
+
+      align-items:center;
+
+      padding:0 24px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    }
+
+
+    .brand-logo{
+
+      width:43px;
+      height:43px;
+
+      border-radius:13px;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0b7cff,
+          #25a8ff
+        );
+
+      font-size:18px;
+
+      font-weight:900;
+
+      margin-right:12px;
+
+      box-shadow:
+        0 8px 20px rgba(0,126,255,.28);
+
+    }
+
+
+    .brand-text strong{
+
+      display:block;
+
+      font-size:17px;
+
+    }
+
+
+    .brand-text span{
+
+      display:block;
+
+      color:#8ea0ba;
+
+      font-size:11px;
+
+      margin-top:2px;
+
+    }
+
+
+    .sidebar-menu{
+
+      padding:22px 13px;
+
+      flex:1;
+
+      overflow-y:auto;
+
+    }
+
+
+    .menu-label{
+
+      color:#687c98;
+
+      font-size:10px;
+
+      font-weight:800;
+
+      text-transform:uppercase;
+
+      letter-spacing:1.2px;
+
+      padding:0 12px;
+
+      margin-bottom:9px;
+
+    }
+
+
+    .menu-item{
+
+      width:100%;
+
+      border:0;
+
+      background:transparent;
+
+      color:#aebbd0;
+
+      min-height:48px;
+
+      border-radius:11px;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:13px;
+
+      padding:0 13px;
+
+      margin-bottom:5px;
+
+      font-size:14px;
+
+      font-weight:600;
+
+      text-align:left;
+
+    }
+
+
+    .menu-item:hover{
+
+      background:rgba(255,255,255,.06);
+
+      color:#fff;
+
+    }
+
+
+    .menu-item.active{
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(28,125,236,.25),
+          rgba(28,125,236,.10)
+        );
+
+      color:#fff;
+
+    }
+
+
+    .menu-icon{
+
+      width:22px;
+
+      text-align:center;
+
+      font-size:18px;
+
+    }
+
+
+    .menu-badge{
+
+      margin-left:auto;
+
+      min-width:23px;
+
+      height:23px;
+
+      border-radius:20px;
+
+      background:#2f7ce5;
+
+      color:#fff;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      font-size:11px;
+
+      font-weight:800;
+
+    }
+
+
+    .sidebar-user{
+
+      padding:17px;
+
+      border-top:
+        1px solid rgba(255,255,255,.08);
+
+    }
+
+
+    .user-card{
+
+      background:
+        rgba(255,255,255,.055);
+
+      border:
+        1px solid rgba(255,255,255,.07);
+
+      border-radius:13px;
+
+      padding:13px;
+
+    }
+
+
+    .user-top{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:10px;
+
+    }
+
+
+    .user-avatar{
+
+      width:39px;
+      height:39px;
+
+      border-radius:50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #3b82f6,
+          #18a0ff
+        );
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      font-weight:800;
+
+      color:#fff;
+
+    }
+
+
+    .user-info{
+
+      min-width:0;
+
+    }
+
+
+    .user-info strong{
+
+      display:block;
+
+      color:#fff;
+
+      font-size:13px;
+
+      white-space:nowrap;
+
+      overflow:hidden;
+
+      text-overflow:ellipsis;
+
+    }
+
+
+    .user-info span{
+
+      display:block;
+
+      color:#8fa1bb;
+
+      font-size:11px;
+
+      margin-top:2px;
+
+    }
+
+
+    .logout-btn{
+
+      width:100%;
+
+      margin-top:11px;
+
+      height:38px;
+
+      border-radius:9px;
+
+      border:
+        1px solid rgba(255,255,255,.10);
+
+      background:
+        rgba(255,255,255,.04);
+
+      color:#c6d1e0;
+
+      font-weight:700;
+
+      font-size:12px;
+
+    }
+
+
+    .logout-btn:hover{
+
+      background:
+        rgba(216,60,60,.15);
+
+      color:#ffb4b4;
+
+    }
+
+
+    /* =========================================================
+       MOBILE SIDEBAR
+    ========================================================= */
+
+    .overlay{
+
+      display:none;
+
+      position:fixed;
+
+      inset:0;
+
+      background:
+        rgba(0,0,0,.45);
+
+      z-index:900;
+
+    }
+
+
+    .overlay.show{
+
+      display:block;
+
+    }
+
+
+    .mobile-menu-btn{
+
+      display:none;
+
+      width:42px;
+      height:42px;
+
+      border:0;
+
+      border-radius:11px;
+
+      background:#edf3fb;
+
+      color:#183456;
+
+      font-size:21px;
+
+    }
+
+
+    /* =========================================================
+       MAIN
+    ========================================================= */
+
+    .main{
+
+      margin-left:255px;
+
+      min-height:100vh;
+
+    }
+
+
+    /* =========================================================
+       TOPBAR
+    ========================================================= */
+
+    .topbar{
+
+      height:74px;
+
+      position:sticky;
+
+      top:0;
+
+      z-index:500;
+
+      background:
+        rgba(255,255,255,.94);
+
+      backdrop-filter:blur(15px);
+
+      border-bottom:
+        1px solid var(--line);
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      padding:0 30px;
+
+    }
+
+
+    .top-left{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:14px;
+
+    }
+
+
+    .page-title h1{
+
+      font-size:21px;
+
+      font-weight:800;
+
+      color:#152138;
+
+    }
+
+
+    .page-title p{
+
+      color:#8a96a9;
+
+      font-size:11px;
+
+      margin-top:3px;
+
+    }
+
+
+    .top-right{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:12px;
+
+    }
+
+
+    .live-status{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:7px;
+
+      padding:8px 12px;
+
+      border-radius:30px;
+
+      background:#edf8f1;
+
+      color:#328352;
+
+      font-size:12px;
+
+      font-weight:750;
+
+    }
+
+
+    .live-dot{
+
+      width:8px;
+      height:8px;
+
+      background:#36a260;
+
+      border-radius:50%;
+
+      box-shadow:
+        0 0 0 4px rgba(54,162,96,.10);
+
+    }
+
+
+    .top-avatar{
+
+      width:39px;
+      height:39px;
+
+      border-radius:50%;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      color:#fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #176fe4,
+          #24a0ff
+        );
+
+      font-weight:800;
+
+    }
+
+
+    /* =========================================================
+       CONTENT
+    ========================================================= */
+
+    .content{
+
+      padding:28px 30px 45px;
+
+      max-width:1500px;
+
+      margin:auto;
+
+    }
+
+
+    /* =========================================================
+       WELCOME
+    ========================================================= */
+
+    .welcome{
+
+      margin-bottom:23px;
+
+    }
+
+
+    .welcome h2{
+
+      font-size:25px;
+
+      font-weight:850;
+
+      letter-spacing:-.4px;
+
+    }
+
+
+    .welcome p{
+
+      color:var(--muted);
+
+      font-size:13px;
+
+      margin-top:6px;
+
+    }
+
+
+    /* =========================================================
+       STATS
+    ========================================================= */
+
+    .stats-grid{
+
+      display:grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:17px;
+
+      margin-bottom:23px;
+
+    }
+
+
+    .stat-card{
+
+      background:#fff;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:var(--radius);
+
+      padding:20px;
+
+      box-shadow:var(--shadow);
+
+      position:relative;
+
+      overflow:hidden;
+
+    }
+
+
+    .stat-card::after{
+
+      content:"";
+
+      position:absolute;
+
+      right:-25px;
+      bottom:-30px;
+
+      width:95px;
+      height:95px;
+
+      border-radius:50%;
+
+      background:
+        rgba(8,110,225,.035);
+
+    }
+
+
+    .stat-top{
+
+      display:flex;
+
+      justify-content:space-between;
+
+      align-items:center;
+
+      margin-bottom:13px;
+
+    }
+
+
+    .stat-label{
+
+      color:#7c899d;
+
+      font-size:12px;
+
+      font-weight:700;
+
+    }
+
+
+    .stat-icon{
+
+      width:38px;
+      height:38px;
+
+      border-radius:11px;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      font-size:17px;
+
+    }
+
+
+    .icon-blue{
+
+      color:#176fdc;
+
+      background:#eaf3ff;
+
+    }
+
+
+    .icon-orange{
+
+      color:#d98217;
+
+      background:#fff3df;
+
+    }
+
+
+    .icon-green{
+
+      color:#23824a;
+
+      background:#eaf8f0;
+
+    }
+
+
+    .stat-value{
+
+      font-size:29px;
+
+      font-weight:850;
+
+      letter-spacing:-1px;
+
+    }
+
+
+    .stat-sub{
+
+      color:#9aa5b5;
+
+      font-size:11px;
+
+      margin-top:5px;
+
+    }
+
+
+    /* =========================================================
+       MAIN GRID
+    ========================================================= */
+
+    .dashboard-grid{
+
+      display:grid;
+
+      grid-template-columns:
+        minmax(360px,.85fr)
+        minmax(500px,1.55fr);
+
+      gap:20px;
+
+      align-items:start;
+
+    }
+
+
+    /* =========================================================
+       CARD
+    ========================================================= */
+
+    .card{
+
+      background:#fff;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:var(--radius);
+
+      box-shadow:var(--shadow);
+
+      overflow:hidden;
+
+    }
+
+
+    .card-header{
+
+      padding:19px 20px;
+
+      border-bottom:
+        1px solid var(--line);
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      gap:12px;
+
+    }
+
+
+    .card-header h3{
+
+      font-size:16px;
+
+      font-weight:850;
+
+    }
+
+
+    .card-header p{
+
+      color:#8995a7;
+
+      font-size:11px;
+
+      margin-top:4px;
+
+    }
+
+
+    .card-body{
+
+      padding:20px;
+
+    }
+
+
+    /* =========================================================
+       FORM
+    ========================================================= */
+
+    .form-group{
+
+      margin-bottom:16px;
+
+    }
+
+
+    .form-label{
+
+      display:block;
+
+      font-size:12px;
+
+      font-weight:800;
+
+      color:#29374d;
+
+      margin-bottom:7px;
+
+    }
+
+
+    .required{
+
+      color:#d84c4c;
+
+    }
+
+
+    .input,
+    .select,
+    .textarea{
+
+      width:100%;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:11px;
+
+      background:#fbfcfe;
+
+      color:#26344a;
+
+      outline:none;
+
+      transition:.2s ease;
+
+      font-size:13px;
+
+    }
+
+
+    .input,
+    .select{
+
+      height:46px;
+
+      padding:0 13px;
+
+    }
+
+
+    .textarea{
+
+      min-height:95px;
+
+      resize:vertical;
+
+      padding:12px 13px;
+
+      line-height:1.5;
+
+    }
+
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus{
+
+      border-color:#6ea5e9;
+
+      background:#fff;
+
+      box-shadow:
+        0 0 0 3px rgba(8,110,225,.07);
+
+    }
+
+
+    .input::placeholder,
+    .textarea::placeholder{
+
+      color:#a0aabb;
+
+    }
+
+
+    .course-row{
+
+      display:grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:11px;
+
+    }
+
+
+    .mobile-input-wrap{
+
+      position:relative;
+
+    }
+
+
+    .mobile-prefix{
+
+      position:absolute;
+
+      left:13px;
+
+      top:50%;
+
+      transform:translateY(-50%);
+
+      color:#637188;
+
+      font-size:13px;
+
+      font-weight:750;
+
+      pointer-events:none;
+
+    }
+
+
+    .mobile-input{
+
+      padding-left:47px !important;
+
+    }
+
+
+    .form-note{
+
+      color:#8a96a8;
+
+      font-size:10px;
+
+      line-height:1.5;
+
+      margin-top:6px;
+
+    }
+
+
+    .send-btn{
+
+      width:100%;
+
+      height:49px;
+
+      border:0;
+
+      border-radius:11px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #3478e8,
+          #245bd1
+        );
+
+      color:#fff;
+
+      font-size:13px;
+
+      font-weight:850;
+
+      box-shadow:
+        0 10px 22px rgba(47,111,228,.22);
+
+      transition:.2s ease;
+
+    }
+
+
+    .send-btn:hover{
+
+      transform:translateY(-1px);
+
+      box-shadow:
+        0 13px 27px rgba(47,111,228,.28);
+
+    }
+
+
+    .send-btn.loading{
+
+      pointer-events:none;
+
+      opacity:.7;
+
+    }
+
+
+    .reset-btn{
+
+      width:100%;
+
+      height:43px;
+
+      margin-top:9px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:11px;
+
+      background:#fff;
+
+      color:#667389;
+
+      font-size:12px;
+
+      font-weight:750;
+
+    }
+
+
+    .reset-btn:hover{
+
+      background:#f7f9fc;
+
+    }
+
+
+    /* =========================================================
+       RECENT SEARCH
+    ========================================================= */
+
+    .recent-tools{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:8px;
+
+    }
+
+
+    .recent-search{
+
+      width:180px;
+
+      height:37px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:9px;
+
+      padding:0 11px;
+
+      outline:none;
+
+      font-size:11px;
+
+      background:#fbfcfe;
+
+    }
+
+
+    .recent-search:focus{
+
+      border-color:#7aabe8;
+
+      background:#fff;
+
+    }
+
+
+    .refresh-mini{
+
+      width:37px;
+      height:37px;
+
+      border:0;
+
+      border-radius:9px;
+
+      background:#edf3fb;
+
+      color:#286bc5;
+
+      font-size:16px;
+
+    }
+
+
+    /* =========================================================
+       INQUIRY LIST
+    ========================================================= */
+
+    .inquiry-list{
+
+      max-height:680px;
+
+      overflow-y:auto;
+
+    }
+
+
+    .inquiry-item{
+
+      padding:16px 20px;
+
+      border-bottom:
+        1px solid #edf0f4;
+
+      transition:.2s ease;
+
+    }
+
+
+    .inquiry-item:hover{
+
+      background:#fbfdff;
+
+    }
+
+
+    .inquiry-item:last-child{
+
+      border-bottom:0;
+
+    }
+
+
+    .inquiry-top{
+
+      display:flex;
+
+      align-items:flex-start;
+
+      justify-content:space-between;
+
+      gap:12px;
+
+    }
+
+
+    .student-block{
+
+      min-width:0;
+
+    }
+
+
+    .student-name{
+
+      font-size:13px;
+
+      font-weight:850;
+
+      color:#172236;
+
+      white-space:nowrap;
+
+      overflow:hidden;
+
+      text-overflow:ellipsis;
+
+    }
+
+
+    .student-mobile{
+
+      color:#78859a;
+
+      font-size:11px;
+
+      margin-top:4px;
+
+    }
+
+
+    .inquiry-meta{
+
+      display:flex;
+
+      align-items:center;
+
+      flex-wrap:wrap;
+
+      gap:7px;
+
+      margin-top:11px;
+
+    }
+
+
+    .course-tag{
+
+      display:inline-flex;
+
+      align-items:center;
+
+      padding:5px 8px;
+
+      border-radius:7px;
+
+      background:#edf5ff;
+
+      color:#256bc3;
+
+      font-size:10px;
+
+      font-weight:800;
+
+    }
+
+
+    .source-tag{
+
+      display:inline-flex;
+
+      align-items:center;
+
+      padding:5px 8px;
+
+      border-radius:7px;
+
+      background:#f3f5f8;
+
+      color:#68758a;
+
+      font-size:10px;
+
+      font-weight:750;
+
+    }
+
+
+    .date-tag{
+
+      color:#9aa5b4;
+
+      font-size:10px;
+
+    }
+
+
+    .status{
+
+      display:inline-flex;
+
+      align-items:center;
+
+      gap:5px;
+
+      border-radius:30px;
+
+      padding:5px 8px;
+
+      font-size:9px;
+
+      font-weight:850;
+
+      white-space:nowrap;
+
+    }
+
+
+    .status-dot{
+
+      width:6px;
+      height:6px;
+
+      border-radius:50%;
+
+    }
+
+
+    .status-new{
+
+      color:#c76d14;
+
+      background:#fff4e5;
+
+    }
+
+
+    .status-new .status-dot{
+
+      background:#ed8a20;
+
+    }
+
+
+    .status-pending{
+
+      color:#986719;
+
+      background:#fff5df;
+
+    }
+
+
+    .status-pending .status-dot{
+
+      background:#e3a02c;
+
+    }
+
+
+    .status-contacted{
+
+      color:#2465b1;
+
+      background:#eaf3ff;
+
+    }
+
+
+    .status-contacted .status-dot{
+
+      background:#2878d8;
+
+    }
+
+
+    .status-follow-up{
+
+      color:#7353b9;
+
+      background:#f1edff;
+
+    }
+
+
+    .status-follow-up .status-dot{
+
+      background:#7959c8;
+
+    }
+
+
+    .status-converted{
+
+      color:#237b48;
+
+      background:#eaf8f0;
+
+    }
+
+
+    .status-converted .status-dot{
+
+      background:#31a05d;
+
+    }
+
+
+    .status-not-interested{
+
+      color:#a63b3b;
+
+      background:#fff0f0;
+
+    }
+
+
+    .status-not-interested .status-dot{
+
+      background:#d84c4c;
+
+    }
+
+
+    .inquiry-actions{
+
+      display:flex;
+
+      gap:6px;
+
+      margin-top:12px;
+
+    }
+
+
+    .small-action{
+
+      height:31px;
+
+      padding:0 10px;
+
+      border:0;
+
+      border-radius:8px;
+
+      font-size:10px;
+
+      font-weight:800;
+
+    }
+
+
+    .call-action{
+
+      background:#eaf8f0;
+
+      color:#25804b;
+
+    }
+
+
+    .wa-action{
+
+      background:#eaf8f0;
+
+      color:#16834a;
+
+    }
+
+
+    .status-action{
+
+      background:#fff4e5;
+
+      color:#b86c12;
+
+    }
+
+
+    /* =========================================================
+       EMPTY
+    ========================================================= */
+
+    .empty{
+
+      padding:70px 25px;
+
+      text-align:center;
+
+      display:none;
+
+    }
+
+
+    .empty-icon{
+
+      width:62px;
+      height:62px;
+
+      border-radius:18px;
+
+      background:#edf3fb;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      margin:0 auto 15px;
+
+      font-size:27px;
+
+    }
+
+
+    .empty h3{
+
+      font-size:16px;
+
+      margin-bottom:6px;
+
+    }
+
+
+    .empty p{
+
+      color:#8793a5;
+
+      font-size:12px;
+
+      line-height:1.6;
+
+    }
+
+
+    /* =========================================================
+       LOADING
+    ========================================================= */
+
+    .loading{
+
+      padding:65px 20px;
+
+      text-align:center;
+
+    }
+
+
+    .spinner{
+
+      width:37px;
+      height:37px;
+
+      border-radius:50%;
+
+      border:4px solid #e3ebf5;
+
+      border-top-color:#2877df;
+
+      animation:
+        spin .8s linear infinite;
+
+      margin:0 auto 15px;
+
+    }
+
+
+    @keyframes spin{
+
+      to{
+        transform:rotate(360deg);
+      }
+
+    }
+
+
+    .loading p{
+
+      color:#8490a2;
+
+      font-size:12px;
+
+    }
+
+
+    /* =========================================================
+       ERROR
+    ========================================================= */
+
+    .error-box{
+
+      display:none;
+
+      margin-bottom:15px;
+
+      padding:13px 15px;
+
+      border-radius:11px;
+
+      background:#fff1f1;
+
+      border:1px solid #ffd2d2;
+
+      color:#bd3c3c;
+
+      font-size:11px;
+
+      line-height:1.5;
+
+    }
+
+
+    /* =========================================================
+       MODAL
+    ========================================================= */
+
+    .modal{
+
+      position:fixed;
+
+      inset:0;
+
+      background:
+        rgba(7,20,38,.52);
+
+      backdrop-filter:blur(4px);
+
+      display:none;
+
+      align-items:center;
+
+      justify-content:center;
+
+      padding:20px;
+
+      z-index:2000;
+
+    }
+
+
+    .modal.show{
+
+      display:flex;
+
+    }
+
+
+    .modal-box{
+
+      width:100%;
+
+      max-width:500px;
+
+      max-height:
+        calc(100vh - 40px);
+
+      overflow:auto;
+
+      background:#fff;
+
+      border-radius:20px;
+
+      box-shadow:var(--shadow2);
+
+      animation:
+        modalIn .2s ease;
+
+    }
+
+
+    @keyframes modalIn{
+
+      from{
+
+        opacity:0;
+
+        transform:
+          translateY(12px)
+          scale(.98);
+
+      }
+
+      to{
+
+        opacity:1;
+
+        transform:none;
+
+      }
+
+    }
+
+
+    .modal-header{
+
+      padding:20px 22px;
+
+      border-bottom:
+        1px solid var(--line);
+
+      display:flex;
+
+      align-items:flex-start;
+
+      justify-content:space-between;
+
+      gap:15px;
+
+    }
+
+
+    .modal-header h3{
+
+      font-size:18px;
+
+      font-weight:850;
+
+    }
+
+
+    .modal-header p{
+
+      color:#8995a7;
+
+      font-size:11px;
+
+      margin-top:4px;
+
+    }
+
+
+    .modal-close{
+
+      width:34px;
+      height:34px;
+
+      border:0;
+
+      border-radius:9px;
+
+      background:#f1f4f8;
+
+      color:#657288;
+
+      font-size:18px;
+
+      flex:none;
+
+    }
+
+
+    .modal-body{
+
+      padding:21px 22px;
+
+    }
+
+
+    .status-options{
+
+      display:grid;
+
+      grid-template-columns:
+        repeat(2,1fr);
+
+      gap:9px;
+
+    }
+
+
+    .status-option{
+
+      min-height:49px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:11px;
+
+      background:#fff;
+
+      color:#46546a;
+
+      font-size:12px;
+
+      font-weight:750;
+
+      text-align:left;
+
+      padding:0 13px;
+
+    }
+
+
+    .status-option:hover{
+
+      background:#f7faff;
+
+      border-color:#a9c9ef;
+
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast{
+
+      position:fixed;
+
+      right:25px;
+      bottom:25px;
+
+      min-width:280px;
+
+      max-width:420px;
+
+      background:#172236;
+
+      color:#fff;
+
+      padding:14px 17px;
+
+      border-radius:12px;
+
+      box-shadow:var(--shadow2);
+
+      font-size:12px;
+
+      font-weight:650;
+
+      display:none;
+
+      z-index:3000;
+
+    }
+
+
+    .toast.show{
+
+      display:block;
+
+      animation:
+        toastIn .25s ease;
+
+    }
+
+
+    @keyframes toastIn{
+
+      from{
+
+        opacity:0;
+
+        transform:
+          translateY(10px);
+
+      }
+
+      to{
+
+        opacity:1;
+
+        transform:none;
+
+      }
+
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media(max-width:1100px){
+
+      .dashboard-grid{
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .inquiry-list{
+
+        max-height:none;
+
+      }
+
+    }
+
+
+    @media(max-width:800px){
+
+      .sidebar{
+
+        transform:
+          translateX(-100%);
+
+        box-shadow:
+          15px 0 40px rgba(0,0,0,.15);
+
+      }
+
+
+      .sidebar.open{
+
+        transform:
+          translateX(0);
+
+      }
+
+
+      .main{
+
+        margin-left:0;
+
+      }
+
+
+      .mobile-menu-btn{
+
+        display:block;
+
+      }
+
+
+      .topbar{
+
+        padding:0 17px;
+
+      }
+
+
+      .content{
+
+        padding:
+          22px 17px 35px;
+
+      }
+
+
+      .page-title p{
+
+        display:none;
+
+      }
+
+    }
+
+
+    @media(max-width:600px){
+
+      .top-right .live-status{
+
+        display:none;
+
+      }
+
+
+      .stats-grid{
+
+        grid-template-columns:
+          1fr;
+
+        gap:10px;
+
+      }
+
+
+      .stat-card{
+
+        padding:16px;
+
+      }
+
+
+      .course-row{
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .recent-tools{
+
+        width:100%;
+
+      }
+
+
+      .recent-search{
+
+        flex:1;
+
+        width:auto;
+
+      }
+
+
+      .card-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+      }
+
+
+      .status-options{
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .toast{
+
+        left:15px;
+
+        right:15px;
+
+        bottom:15px;
+
+        min-width:0;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =======================================================
+       SIDEBAR
+  ======================================================== -->
+
+  <aside
+    class="sidebar"
+    id="sidebar"
+  >
+
+
+    <div class="brand">
+
+      <div class="brand-logo">
+        BT
+      </div>
+
+      <div class="brand-text">
+
+        <strong>
+          BlackTerminal
+        </strong>
+
+        <span>
+          Computer Institute
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-menu">
+
+
+      <div class="menu-label">
+        Coordinator
+      </div>
+
+
+      <button
+        class="menu-item active"
+        onclick="scrollTopPage()"
+      >
+
+        <span class="menu-icon">
+          📝
+        </span>
+
+        <span>
+          Send Inquiry
+        </span>
+
+      </button>
+
+
+      <button
+        class="menu-item"
+        onclick="focusStudentName()"
+      >
+
+        <span class="menu-icon">
+          ➕
+        </span>
+
+        <span>
+          New Inquiry
+        </span>
+
+      </button>
+
+
+      <button
+        class="menu-item"
+        onclick="focusRecentSearch()"
+      >
+
+        <span class="menu-icon">
+          🔎
+        </span>
+
+        <span>
+          My Inquiries
+        </span>
+
+        <span
+          class="menu-badge"
+          id="sideCount"
+        >
+          0
+        </span>
+
+      </button>
+
+
+      <div
+        class="menu-label"
+        style="margin-top:25px;"
+      >
+        Quick Actions
+      </div>
+
+
+      <button
+        class="menu-item"
+        onclick="refreshInquiries()"
+      >
+
+        <span class="menu-icon">
+          ↻
+        </span>
+
+        <span>
+          Refresh
+        </span>
+
+      </button>
+
+
+      <button
+        class="menu-item"
+        onclick="logout()"
+      >
+
+        <span class="menu-icon">
+          ⇥
+        </span>
+
+        <span>
+          Logout
+        </span>
+
+      </button>
+
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div class="user-card">
+
+        <div class="user-top">
+
+          <div
+            class="user-avatar"
+            id="sideAvatar"
+          >
+            C
+          </div>
+
+
+          <div class="user-info">
+
+            <strong id="sideName">
+              Coordinator
+            </strong>
+
+            <span>
+              Student Coordinator
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="logout-btn"
+          onclick="logout()"
+        >
+          Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MOBILE OVERLAY -->
+
+  <div
+    class="overlay"
+    id="overlay"
+    onclick="closeSidebar()"
+  ></div>
+
+
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+  <main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+
+      <div class="top-left">
+
+
+        <button
+          class="mobile-menu-btn"
+          onclick="openSidebar()"
+        >
+          ☰
+        </button>
+
+
+        <div class="page-title">
+
+          <h1>
+            Coordinator Portal
+          </h1>
+
+          <p>
+            Student Inquiry Forwarding
+          </p>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="top-right">
+
+
+        <div class="live-status">
+
+          <span class="live-dot"></span>
+
+          Live
+
+        </div>
+
+
+        <div
+          class="top-avatar"
+          id="topAvatar"
+        >
+          C
+        </div>
+
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         CONTENT
+    ====================================================== -->
+
+    <section class="content">
+
+
+      <!-- WELCOME -->
+
+      <div class="welcome">
+
+        <h2 id="welcomeName">
+          Welcome, Coordinator
+        </h2>
+
+        <p>
+          Student की inquiry details भरकर Telecaller को भेजें।
+        </p>
+
+      </div>
+
+
+      <!-- ===================================================
+           STATS
+      ==================================================== -->
+
+      <div class="stats-grid">
+
+
+        <!-- TOTAL -->
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+
+            <span class="stat-label">
+              My Inquiries
+            </span>
+
+            <span class="stat-icon icon-blue">
+              📝
+            </span>
+
+          </div>
+
+
+          <div
+            class="stat-value"
+            id="totalCount"
+          >
+            0
+          </div>
+
+
+          <div class="stat-sub">
+            Total inquiries sent
+          </div>
+
+        </div>
+
+
+        <!-- TODAY -->
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+
+            <span class="stat-label">
+              Today's Inquiries
+            </span>
+
+            <span class="stat-icon icon-orange">
+              ◷
+            </span>
+
+          </div>
+
+
+          <div
+            class="stat-value"
+            id="todayCount"
+          >
+            0
+          </div>
+
+
+          <div class="stat-sub">
+            Sent today
+          </div>
+
+        </div>
+
+
+        <!-- PENDING -->
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+
+            <span class="stat-label">
+              Pending
+            </span>
+
+            <span class="stat-icon icon-green">
+              ✓
+            </span>
+
+          </div>
+
+
+          <div
+            class="stat-value"
+            id="pendingCount"
+          >
+            0
+          </div>
+
+
+          <div class="stat-sub">
+            Waiting for telecaller action
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- ===================================================
+           DASHBOARD GRID
+      ==================================================== -->
+
+      <div class="dashboard-grid">
+
+
+        <!-- =================================================
+             NEW INQUIRY FORM
+        ================================================== -->
+
+        <div class="card">
+
+
+          <div class="card-header">
+
+            <div>
+
+              <h3>
+                Send New Inquiry
+              </h3>
+
+              <p>
+                Enter basic student details
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="card-body">
+
+
+            <!-- ERROR -->
+
+            <div
+              class="error-box"
+              id="formError"
+            ></div>
+
+
+            <!-- STUDENT NAME -->
+
+            <div class="form-group">
+
+              <label class="form-label">
+
+                Student Name
+
+                <span class="required">
+                  *
+                </span>
+
+              </label>
+
+
+              <input
+                type="text"
+                id="studentName"
+                class="input"
+                placeholder="Enter student full name"
+                maxlength="80"
+                autocomplete="name"
+              >
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div class="form-group">
+
+              <label class="form-label">
+
+                Mobile Number
+
+                <span class="required">
+                  *
+                </span>
+
+              </label>
+
+
+              <div class="mobile-input-wrap">
+
+                <span class="mobile-prefix">
+                  +91
+                </span>
+
+
+                <input
+                  type="tel"
+                  id="studentMobile"
+                  class="input mobile-input"
+                  placeholder="10-digit mobile number"
+                  maxlength="10"
+                  inputmode="numeric"
+                  autocomplete="tel"
+                >
+
+              </div>
+
+
+              <div class="form-note">
+
+                Enter a valid 10-digit Indian mobile number.
+
+              </div>
+
+            </div>
+
+
+            <!-- COURSE + SOURCE -->
+
+            <div class="course-row">
+
+
+              <!-- COURSE -->
+
+              <div class="form-group">
+
+                <label class="form-label">
+
+                  Course
+
+                  <span class="required">
+                    *
+                  </span>
+
+                </label>
+
+
+                <select
+                  id="course"
+                  class="select"
+                >
+
+                  <option value="">
+                    Select Course
+                  </option>
+
+                  <option value="PGDCA">
+                    PGDCA
+                  </option>
+
+                  <option value="Advanced PGDCA">
+                    Advanced PGDCA
+                  </option>
+
+                  <option value="C Language">
+                    C Language
+                  </option>
+
+                  <option value="Java">
+                    Java
+                  </option>
+
+                  <option value="Python">
+                    Python
+                  </option>
+
+                  <option value="Tally">
+                    Tally
+                  </option>
+
+                  <option value="Spoken English">
+                    Spoken English
+                  </option>
+
+                  <option value="OS-CIT">
+                    OS-CIT
+                  </option>
+
+                  <option value="Computer Basics">
+                    Computer Basics
+                  </option>
+
+                  <option value="Other">
+                    Other
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- SOURCE -->
+
+              <div class="form-group">
+
+                <label class="form-label">
+                  Source
+                </label>
+
+
+                <select
+                  id="source"
+                  class="select"
+                >
+
+                  <option value="Direct">
+                    Direct
+                  </option>
+
+                  <option value="WhatsApp">
+                    WhatsApp
+                  </option>
+
+                  <option value="Facebook">
+                    Facebook
+                  </option>
+
+                  <option value="Instagram">
+                    Instagram
+                  </option>
+
+                  <option value="Website">
+                    Website
+                  </option>
+
+                  <option value="Referral">
+                    Referral
+                  </option>
+
+                  <option value="Phone">
+                    Phone
+                  </option>
+
+                  <option value="Other">
+                    Other
+                  </option>
+
+                </select>
+
+              </div>
+
+
+            </div>
+
+
+            <!-- REMARK -->
+
+            <div class="form-group">
+
+              <label class="form-label">
+                Remark
+              </label>
+
+
+              <textarea
+                id="remark"
+                class="textarea"
+                placeholder="Optional note about the student..."
+                maxlength="500"
+              ></textarea>
+
+
+              <div class="form-note">
+
+                Optional — जैसे preferred course, callback request आदि।
+
+              </div>
+
+            </div>
+
+
+            <!-- SEND -->
+
+            <button
+              type="button"
+              class="send-btn"
+              id="sendBtn"
+              onclick="sendInquiry()"
+            >
+              Send Inquiry →
+            </button>
+
+
+            <!-- RESET -->
+
+            <button
+              type="button"
+              class="reset-btn"
+              onclick="resetForm()"
+            >
+              Clear Form
+            </button>
+
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RECENT INQUIRIES
+        ================================================== -->
+
+        <div class="card">
+
+
+          <div class="card-header">
+
+
+            <div>
+
+              <h3>
+                My Recent Inquiries
+              </h3>
+
+              <p>
+                आपके द्वारा भेजी गई inquiries
+              </p>
+
+            </div>
+
+
+            <div class="recent-tools">
+
+              <input
+                type="search"
+                class="recent-search"
+                id="recentSearch"
+                placeholder="Search..."
+                autocomplete="off"
+              >
+
+
+              <button
+                class="refresh-mini"
+                onclick="refreshInquiries()"
+                title="Refresh"
+              >
+                ↻
+              </button>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="error-box"
+            id="listError"
+            style="margin:15px 20px;"
+          ></div>
+
+
+          <!-- LOADING -->
+
+          <div
+            class="loading"
+            id="listLoading"
+          >
+
+            <div class="spinner"></div>
+
+            <p>
+              Loading your inquiries...
+            </p>
+
+          </div>
+
+
+          <!-- LIST -->
+
+          <div
+            class="inquiry-list"
+            id="inquiryList"
+            style="display:none;"
+          ></div>
+
+
+          <!-- EMPTY -->
+
+          <div
+            class="empty"
+            id="emptyState"
+          >
+
+            <div class="empty-icon">
+              📝
+            </div>
+
+            <h3>
+              No inquiries yet
+            </h3>
+
+            <p>
+              पहली student inquiry भेजने के बाद
+              वह यहाँ दिखाई देगी।
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       STATUS MODAL
+  ======================================================== -->
+
+  <div
+    class="modal"
+    id="statusModal"
+    onclick="closeModalOutside(event)"
+  >
+
+
+    <div class="modal-box">
+
+
+      <div class="modal-header">
+
+        <div>
+
+          <h3>
+            Inquiry Status
+          </h3>
+
+          <p>
+            Telecaller की current status
+          </p>
+
+        </div>
+
+
+        <button
+          class="modal-close"
+          onclick="closeStatusModal()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div id="statusModalContent"></div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       TOAST
+  ======================================================== -->
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <!-- =======================================================
+       FIREBASE + JAVASCRIPT
+  ======================================================== -->
+
+  <script type="module">
+
+
+    /* ========================================================
+       FIREBASE IMPORTS
+    ======================================================== */
+
+    import {
+      initializeApp
+    }
+    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      query,
+      where,
+      onSnapshot,
+      serverTimestamp
+    }
+    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+    import {
+      firebaseConfig
+    }
+    from "./firebaseconfig.js";
+
+
+    /* ========================================================
+       FIREBASE
+    ======================================================== */
+
+    const app =
+      initializeApp(
+        firebaseConfig
+      );
+
+
+    const db =
+      getFirestore(app);
+
+
+    /* ========================================================
+       GLOBAL VARIABLES
+    ======================================================== */
+
+    let myInquiries = [];
+
+    let filteredInquiries = [];
+
+    let unsubscribe = null;
+
+    let currentUserName = "";
+
+    let currentUserMobile = "";
+
+    let selectedInquiry = null;
+
+
+    /* ========================================================
+       DOM
+    ======================================================== */
+
+    const studentName =
+      document.getElementById(
+        "studentName"
+      );
+
+
+    const studentMobile =
+      document.getElementById(
+        "studentMobile"
+      );
+
+
+    const course =
+      document.getElementById(
+        "course"
+      );
+
+
+    const source =
+      document.getElementById(
+        "source"
+      );
+
+
+    const remark =
+      document.getElementById(
+        "remark"
+      );
+
+
+    const sendBtn =
+      document.getElementById(
+        "sendBtn"
+      );
+
+
+    const recentSearch =
+      document.getElementById(
+        "recentSearch"
+      );
+
+
+    /* ========================================================
+       CHECK SIMPLE LOGIN
+    ======================================================== */
+
+    function checkLogin(){
+
+      const loggedIn =
+        sessionStorage.getItem(
+          "bt_logged_in"
+        );
+
+
+      const role =
+        sessionStorage.getItem(
+          "bt_user_role"
+        );
+
+
+      currentUserName =
+        sessionStorage.getItem(
+          "bt_user_name"
+        ) || "Coordinator";
+
+
+      currentUserMobile =
+        sessionStorage.getItem(
+          "bt_user_mobile"
+        ) || "";
+
+
+      /*
+       ============================================
+       LOGIN REQUIRED
+       ============================================
+      */
+
+      if(
+        loggedIn !== "true" ||
+        role !== "coordinator"
+      ){
+
+        window.location.href =
+          "login.html";
+
+        return false;
+
+      }
+
+
+      /*
+       ============================================
+       USER DISPLAY
+       ============================================
+      */
+
+      const initials =
+        getInitials(
+          currentUserName
+        );
+
+
+      document.getElementById(
+        "welcomeName"
+      ).textContent =
+        "Welcome, " +
+        currentUserName;
+
+
+      document.getElementById(
+        "sideName"
+      ).textContent =
+        currentUserName;
+
+
+      document.getElementById(
+        "sideAvatar"
+      ).textContent =
+        initials;
+
+
+      document.getElementById(
+        "topAvatar"
+      ).textContent =
+        initials;
+
+
+      return true;
+
+    }
+
+
+    /* ========================================================
+       START
+    ======================================================== */
+
+    if(checkLogin()){
+
+      loadMyInquiries();
+
+    }
+
+
+    /* ========================================================
+       INITIALS
+    ======================================================== */
+
+    function getInitials(name){
+
+      if(!name){
+
+        return "C";
+
+      }
+
+
+      const words =
+        name
+          .trim()
+          .split(/\s+/);
+
+
+      if(words.length === 1){
+
+        return words[0]
+          .substring(0,2)
+          .toUpperCase();
+
+      }
+
+
+      return (
+        words[0][0] +
+        words[words.length - 1][0]
+      ).toUpperCase();
+
+    }
+
+
+    /* ========================================================
+       MOBILE INPUT
+    ======================================================== */
+
+    studentMobile.addEventListener(
+      "input",
+      function(){
+
+        this.value =
+          this.value
+            .replace(/\D/g,"")
+            .slice(0,10);
+
+      }
+    );
+
+
+    /* ========================================================
+       NAME INPUT
+    ======================================================== */
+
+    studentName.addEventListener(
+      "input",
+      function(){
+
+        this.value =
+          this.value
+            .replace(/\s+/g," ")
+            .slice(0,80);
+
+      }
+    );
+
+
+    /* ========================================================
+       LOAD MY INQUIRIES
+    ======================================================== */
+
+    function loadMyInquiries(){
+
+      showListLoading();
+
+      hideListError();
+
+
+      try{
+
+        /*
+         ======================================================
+         IMPORTANT
+
+         Coordinator की inquiries उसकी login identity से
+         identify की जाएंगी।
+
+         यहाँ coordinatorMobile भी save किया गया है ताकि
+         Firebase Auth के बिना भी data ownership maintain रहे।
+         ======================================================
+        */
+
+
+        const inquiriesRef =
+          collection(
+            db,
+            "studentInquiries"
+          );
+
+
+        const q =
+          query(
+
+            inquiriesRef,
+
+            where(
+              "coordinatorMobile",
+              "==",
+              currentUserMobile
+            )
+
+          );
+
+
+        unsubscribe =
+          onSnapshot(
+
+            q,
+
+            function(snapshot){
+
+              myInquiries = [];
+
+
+              snapshot.forEach(
+                function(docSnap){
+
+                  myInquiries.push({
+
+                    id:
+                      docSnap.id,
+
+                    ...docSnap.data()
+
+                  });
+
+                }
+              );
+
+
+              /*
+               Newest first
+              */
+
+              myInquiries.sort(
+                function(a,b){
+
+                  return getTimestamp(
+                    b.createdAt
+                  )
+                  -
+                  getTimestamp(
+                    a.createdAt
+                  );
+
+                }
+              );
+
+
+              updateStats();
+
+              applyRecentSearch();
+
+              hideListLoading();
+
+            },
+
+
+            function(error){
+
+              console.error(
+                "Coordinator Firestore error:",
+                error
+              );
+
+
+              hideListLoading();
+
+
+              showListError(
+                getFirestoreError(
+                  error
+                )
+              );
+
+            }
+
+          );
+
+      }
+      catch(error){
+
+        console.error(error);
+
+        hideListLoading();
+
+        showListError(
+          "Unable to load your inquiries. Please check Firebase configuration."
+        );
+
+      }
+
+    }
+
+
+    /* ========================================================
+       FIRESTORE ERROR
+    ======================================================== */
+
+    function getFirestoreError(error){
+
+      if(
+        error &&
+        error.code ===
+        "permission-denied"
+      ){
+
+        return (
+          "Firestore permission denied. Security Rules में Coordinator को अपनी inquiries read करने की permission दें."
+        );
+
+      }
+
+
+      if(
+        error &&
+        error.code ===
+        "failed-precondition"
+      ){
+
+        return (
+          "Firestore query configuration issue. Please check your Firestore database."
+        );
+
+      }
+
+
+      if(
+        error &&
+        error.code ===
+        "unavailable"
+      ){
+
+        return (
+          "Firebase temporarily unavailable. Please check your internet connection."
+        );
+
+      }
+
+
+      return (
+        "Unable to load inquiries. Please refresh and try again."
+      );
+
+    }
+
+
+    /* ========================================================
+       SEND INQUIRY
+    ======================================================== */
+
+    window.sendInquiry =
+      async function(){
+
+        clearFormError();
+
+
+        const name =
+          studentName.value
+            .trim();
+
+
+        const mobile =
+          studentMobile.value
+            .trim();
+
+
+        const selectedCourse =
+          course.value;
+
+
+        const selectedSource =
+          source.value;
+
+
+        const selectedRemark =
+          remark.value
+            .trim();
+
+
+        /* ================================================
+           NAME
+        ================================================ */
+
+        if(name.length < 2){
+
+          showFormError(
+            "Please enter the student's full name."
+          );
+
+          studentName.focus();
+
+          return;
+
+        }
+
+
+        /* ================================================
+           MOBILE
+        ================================================ */
+
+        if(
+          !/^[6-9][0-9]{9}$/.test(
+            mobile
+          )
+        ){
+
+          showFormError(
+            "Please enter a valid 10-digit Indian mobile number."
+          );
+
+          studentMobile.focus();
+
+          return;
+
+        }
+
+
+        /* ================================================
+           COURSE
+        ================================================ */
+
+        if(!selectedCourse){
+
+          showFormError(
+            "Please select a course."
+          );
+
+          course.focus();
+
+          return;
+
+        }
+
+
+        /* ================================================
+           BUTTON LOADING
+        ================================================ */
+
+        sendBtn.classList.add(
+          "loading"
+        );
+
+
+        sendBtn.innerHTML =
+          "Sending Inquiry...";
+
+
+        try{
+
+
+          /*
+           ==================================================
+           SAVE TO FIRESTORE
+           ==================================================
+          */
+
+          await addDoc(
+
+            collection(
+              db,
+              "studentInquiries"
+            ),
+
+            {
+
+              /*
+               Student details
+              */
+
+              studentName:
+                name,
+
+              mobile:
+                mobile,
+
+              course:
+                selectedCourse,
+
+              source:
+                selectedSource || "Direct",
+
+              remark:
+                selectedRemark,
+
+
+              /*
+               Coordinator details
+              */
+
+              coordinatorName:
+                currentUserName,
+
+              coordinatorMobile:
+                currentUserMobile,
+
+
+              /*
+               Status
+
+               Telecaller will use this.
+              */
+
+              status:
+                "new",
+
+              telecallerStatus:
+                "pending",
+
+
+              /*
+               Time
+              */
+
+              createdAt:
+                serverTimestamp(),
+
+              updatedAt:
+                serverTimestamp()
+
+            }
+
+          );
+
+
+          /*
+           ==================================================
+           SUCCESS
+           ==================================================
+          */
+
+          resetForm();
+
+
+          showToast(
+            "Inquiry sent successfully to Telecaller."
+          );
+
+
+          /*
+           Scroll recent list
+          */
+
+          setTimeout(
+            function(){
+
+              document
+                .querySelector(
+                  ".card:nth-child(2)"
+                )
+                ?.scrollIntoView({
+
+                  behavior:"smooth",
+
+                  block:"start"
+
+                });
+
+            },
+            300
+          );
+
+
+        }
+        catch(error){
+
+          console.error(
+            "Send inquiry error:",
+            error
+          );
+
+
+          if(
+            error.code ===
+            "permission-denied"
+          ){
+
+            showFormError(
+              "Permission denied. Firestore Rules में Coordinator को inquiry create करने की permission दें."
+            );
+
+          }
+          else{
+
+            showFormError(
+              "Inquiry send नहीं हो सकी. Please try again."
+            );
+
+          }
+
+        }
+        finally{
+
+          sendBtn.classList.remove(
+            "loading"
+          );
+
+
+          sendBtn.innerHTML =
+            "Send Inquiry →";
+
+        }
+
+      };
+
+
+    /* ========================================================
+       RESET FORM
+    ======================================================== */
+
+    window.resetForm =
+      function(){
+
+        studentName.value =
+          "";
+
+        studentMobile.value =
+          "";
+
+        course.value =
+          "";
+
+        source.value =
+          "Direct";
+
+        remark.value =
+          "";
+
+        clearFormError();
+
+        studentName.focus();
+
+      };
+
+
+    /* ========================================================
+       SEARCH
+    ======================================================== */
+
+    recentSearch.addEventListener(
+      "input",
+      function(){
+
+        applyRecentSearch();
+
+      }
+    );
+
+
+    function applyRecentSearch(){
+
+      const search =
+        recentSearch.value
+          .trim()
+          .toLowerCase();
+
+
+      filteredInquiries =
+        myInquiries.filter(
+          function(item){
+
+            if(!search){
+
+              return true;
+
+            }
+
+
+            const name =
+              (
+                item.studentName ||
+                ""
+              )
+              .toString()
+              .toLowerCase();
+
+
+            const mobile =
+              (
+                item.mobile ||
+                ""
+              )
+              .toString()
+              .toLowerCase();
+
+
+            const itemCourse =
+              (
+                item.course ||
+                ""
+              )
+              .toString()
+              .toLowerCase();
+
+
+            const sourceValue =
+              (
+                item.source ||
+                ""
+              )
+              .toString()
+              .toLowerCase();
+
+
+            return (
+
+              name.includes(
+                search
+              )
+
+              ||
+
+              mobile.includes(
+                search
+              )
+
+              ||
+
+              itemCourse.includes(
+                search
+              )
+
+              ||
+
+              sourceValue.includes(
+                search
+              )
+
+            );
+
+          }
+        );
+
+
+      renderInquiries();
+
+    }
+
+
+    /* ========================================================
+       UPDATE STATS
+    ======================================================== */
+
+    function updateStats(){
+
+      const total =
+        myInquiries.length;
+
+
+      const todayStart =
+        new Date();
+
+
+      todayStart.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+
+      const todayTime =
+        todayStart.getTime();
+
+
+      let today = 0;
+
+      let pending = 0;
+
+
+      myInquiries.forEach(
+        function(item){
+
+          const timestamp =
+            getTimestamp(
+              item.createdAt
+            );
+
+
+          if(
+            timestamp >=
+            todayTime
+          ){
+
+            today++;
+
+          }
+
+
+          const status =
+            normalizeStatus(
+              item
+            );
+
+
+          if(
+
+            status === "new" ||
+
+            status === "pending" ||
+
+            status === "follow-up"
+
+          ){
+
+            pending++;
+
+          }
+
+        }
+      );
+
+
+      document.getElementById(
+        "totalCount"
+      ).textContent =
+        total;
+
+
+      document.getElementById(
+        "todayCount"
+      ).textContent =
+        today;
+
+
+      document.getElementById(
+        "pendingCount"
+      ).textContent =
+        pending;
+
+
+      document.getElementById(
+        "sideCount"
+      ).textContent =
+        total;
+
+    }
+
+
+    /* ========================================================
+       RENDER INQUIRIES
+    ======================================================== */
+
+    function renderInquiries(){
+
+      const list =
+        document.getElementById(
+          "inquiryList"
+        );
+
+
+      list.innerHTML =
+        "";
+
+
+      if(
+        filteredInquiries.length === 0
+      ){
+
+        list.style.display =
+          "none";
+
+
+        document.getElementById(
+          "emptyState"
+        ).style.display =
+          "block";
+
+
+        return;
+
+      }
+
+
+      document.getElementById(
+        "emptyState"
+      ).style.display =
+        "none";
+
+
+      list.style.display =
+        "block";
+
+
+      filteredInquiries.forEach(
+        function(item){
+
+          const status =
+            normalizeStatus(
+              item
+            );
+
+
+          const mobile =
+            cleanMobile(
+              item.mobile ||
+              ""
+            );
+
+
+          const div =
+            document.createElement(
+              "div"
+            );
+
+
+          div.className =
+            "inquiry-item";
+
+
+          div.innerHTML = `
+
+            <div class="inquiry-top">
+
+              <div class="student-block">
+
+                <div class="student-name">
+
+                  ${escapeHtml(
+                    item.studentName ||
+                    "Student"
+                  )}
+
+                </div>
+
+                <div class="student-mobile">
+
+                  ${escapeHtml(
+                    displayMobile(
+                      mobile
+                    )
+                  )}
+
+                </div>
+
+              </div>
+
+
+              ${statusHTML(
+                status
+              )}
+
+            </div>
+
+
+            <div class="inquiry-meta">
+
+              <span class="course-tag">
+
+                ${escapeHtml(
+                  item.course ||
+                  "Course"
+                )}
+
+              </span>
+
+
+              <span class="source-tag">
+
+                ${escapeHtml(
+                  item.source ||
+                  "Direct"
+                )}
+
+              </span>
+
+
+              <span class="date-tag">
+
+                ${escapeHtml(
+                  formatDate(
+                    item.createdAt
+                  )
+                )}
+
+              </span>
+
+            </div>
+
+
+            ${
+              item.remark
+              ?
+              `
+              <div
+                style="
+                  margin-top:9px;
+                  color:#6d7a8e;
+                  font-size:10px;
+                  line-height:1.5;
+                "
+              >
+
+                ${escapeHtml(
+                  item.remark
+                )}
+
+              </div>
+              `
+              :
+              ""
+            }
+
+
+            <div class="inquiry-actions">
+
+
+              <button
+                class="small-action call-action"
+                onclick="callStudent('${item.id}')"
+              >
+                ☎ Call
+              </button>
+
+
+              <button
+                class="small-action wa-action"
+                onclick="whatsappStudent('${item.id}')"
+              >
+                WhatsApp
+              </button>
+
+
+              <button
+                class="small-action status-action"
+                onclick="viewStatus('${item.id}')"
+              >
+                Status
+              </button>
+
+
+            </div>
+
+          `;
+
+
+          list.appendChild(
+            div
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ========================================================
+       STATUS NORMALIZE
+    ======================================================== */
+
+    function normalizeStatus(item){
+
+      let status =
+        (
+          item.telecallerStatus ||
+          item.status ||
+          "pending"
+        )
+        .toString()
+        .toLowerCase()
+        .trim();
+
+
+      if(
+        status === "followup"
+      ){
+
+        status =
+          "follow-up";
+
+      }
+
+
+      if(
+        status === "follow up"
+      ){
+
+        status =
+          "follow-up";
+
+      }
+
+
+      if(
+        status === "not_interested"
+      ){
+
+        status =
+          "not-interested";
+
+      }
+
+
+      if(
+        status === "not interested"
+      ){
+
+        status =
+          "not-interested";
+
+      }
+
+
+      return status;
+
+    }
+
+
+    /* ========================================================
+       STATUS LABEL
+    ======================================================== */
+
+    function statusLabel(status){
+
+      const labels = {
+
+        "new":
+          "New",
+
+        "pending":
+          "Pending",
+
+        "contacted":
+          "Contacted",
+
+        "follow-up":
+          "Follow-up",
+
+        "converted":
+          "Converted",
+
+        "not-interested":
+          "Not Interested"
+
+      };
+
+
+      return (
+        labels[status] ||
+        "Pending"
+      );
+
+    }
+
+
+    /* ========================================================
+       STATUS HTML
+    ======================================================== */
+
+    function statusHTML(status){
+
+      return `
+
+        <span
+          class="status status-${escapeHtml(
+            status
+          )}"
+        >
+
+          <span class="status-dot"></span>
+
+          ${escapeHtml(
+            statusLabel(
+              status
+            )
+          )}
+
+        </span>
+
+      `;
+
+    }
+
+
+    /* ========================================================
+       CALL STUDENT
+    ======================================================== */
+
+    window.callStudent =
+      function(id){
+
+        const item =
+          myInquiries.find(
+            function(x){
+
+              return x.id === id;
+
+            }
+          );
+
+
+        if(!item){
+
+          showToast(
+            "Inquiry not found."
+          );
+
+          return;
+
+        }
+
+
+        const mobile =
+          cleanMobile(
+            item.mobile ||
+            ""
+          );
+
+
+        if(
+          mobile.length !== 10
+        ){
+
+          showToast(
+            "Valid mobile number is not available."
+          );
+
+          return;
+
+        }
+
+
+        window.location.href =
+          "tel:+91" +
+          mobile;
+
+      };
+
+
+    /* ========================================================
+       WHATSAPP
+    ======================================================== */
+
+    window.whatsappStudent =
+      function(id){
+
+        const item =
+          myInquiries.find(
+            function(x){
+
+              return x.id === id;
+
+            }
+          );
+
+
+        if(!item){
+
+          showToast(
+            "Inquiry not found."
+          );
+
+          return;
+
+        }
+
+
+        let mobile =
+          cleanMobile(
+            item.mobile ||
+            ""
+          );
+
+
+        if(
+          mobile.length !== 10
+        ){
+
+          showToast(
+            "Valid mobile number is not available."
+          );
+
+          return;
+
+        }
+
+
+        const name =
+          item.studentName ||
+          "Student";
+
+
+        const courseName =
+          item.course ||
+          "course";
+
+
+        const message =
+          "Hello " +
+          name +
+          ", this is BlackTerminal Computer Institute, Baripada. You had shown interest in " +
+          courseName +
+          ". Our Telecaller will contact you shortly.";
+
+
+        window.open(
+
+          "https://wa.me/91" +
+          mobile +
+          "?text=" +
+          encodeURIComponent(
+            message
+          ),
+
+          "_blank"
+
+        );
+
+      };
+
+
+    /* ========================================================
+       VIEW STATUS
+    ======================================================== */
+
+    window.viewStatus =
+      function(id){
+
+        const item =
+          myInquiries.find(
+            function(x){
+
+              return x.id === id;
+
+            }
+          );
+
+
+        if(!item){
+
+          return;
+
+        }
+
+
+        selectedInquiry =
+          item;
+
+
+        const status =
+          normalizeStatus(
+            item
+          );
+
+
+        document.getElementById(
+          "statusModalContent"
+        ).innerHTML = `
+
+          <div
+            style="
+              padding:14px;
+              background:#f8fafc;
+              border-radius:11px;
+              margin-bottom:15px;
+            "
+          >
+
+            <div
+              style="
+                color:#8a96a8;
+                font-size:9px;
+                font-weight:800;
+                text-transform:uppercase;
+                letter-spacing:.6px;
+                margin-bottom:5px;
+              "
+            >
+              Student
+            </div>
+
+            <div
+              style="
+                color:#26344a;
+                font-size:14px;
+                font-weight:800;
+              "
+            >
+
+              ${escapeHtml(
+                item.studentName ||
+                "Student"
+              )}
+
+            </div>
+
+          </div>
+
+
+          <div
+            style="
+              margin-bottom:17px;
+              color:#748096;
+              font-size:11px;
+            "
+          >
+            Current Status:
+            <strong>
+              ${escapeHtml(
+                statusLabel(
+                  status
+                )
+              )}
+            </strong>
+          </div>
+
+
+          <div
+            style="
+              padding:13px;
+              background:#edf8f1;
+              color:#287c4b;
+              border-radius:11px;
+              font-size:11px;
+              line-height:1.6;
+            "
+          >
+
+            Telecaller इस inquiry की status update
+            करेगा। Coordinator यहाँ केवल status देख सकता है।
+
+          </div>
+
+        `;
+
+
+        document.getElementById(
+          "statusModal"
+        ).classList.add(
+          "show"
+        );
+
+      };
+
+
+    /* ========================================================
+       REFRESH
+    ======================================================== */
+
+    window.refreshInquiries =
+      function(){
+
+        showToast(
+          "Refreshing inquiries..."
+        );
+
+
+        if(unsubscribe){
+
+          unsubscribe();
+
+        }
+
+
+        loadMyInquiries();
+
+      };
+
+
+    /* ========================================================
+       FORM FOCUS
+    ======================================================== */
+
+    window.focusStudentName =
+      function(){
+
+        closeSidebar();
+
+
+        studentName.focus();
+
+
+        window.scrollTo({
+
+          top:0,
+
+          behavior:"smooth"
+
+        });
+
+      };
+
+
+    /* ========================================================
+       RECENT SEARCH FOCUS
+    ======================================================== */
+
+    window.focusRecentSearch =
+      function(){
+
+        closeSidebar();
+
+
+        recentSearch.focus();
+
+
+        document
+          .querySelector(
+            ".dashboard-grid"
+          )
+          ?.scrollIntoView({
+
+            behavior:"smooth",
+
+            block:"start"
+
+          });
+
+      };
+
+
+    /* ========================================================
+       SCROLL TOP
+    ======================================================== */
+
+    window.scrollTopPage =
+      function(){
+
+        window.scrollTo({
+
+          top:0,
+
+          behavior:"smooth"
+
+        });
+
+      };
+
+
+    /* ========================================================
+       RESET FORM
+    ======================================================== */
+
+    function clearFormError(){
+
+      const box =
+        document.getElementById(
+          "formError"
+        );
+
+
+      box.textContent =
+        "";
+
+
+      box.style.display =
+        "none";
+
+    }
+
+
+    function showFormError(
+      message
+    ){
+
+      const box =
+        document.getElementById(
+          "formError"
+        );
+
+
+      box.textContent =
+        message;
+
+
+      box.style.display =
+        "block";
+
+    }
+
+
+    /* ========================================================
+       LIST ERROR
+    ======================================================== */
+
+    function hideListError(){
+
+      const box =
+        document.getElementById(
+          "listError"
+        );
+
+
+      box.textContent =
+        "";
+
+
+      box.style.display =
+        "none";
+
+    }
+
+
+    function showListError(
+      message
+    ){
+
+      const box =
+        document.getElementById(
+          "listError"
+        );
+
+
+      box.textContent =
+        message;
+
+
+      box.style.display =
+        "block";
+
+    }
+
+
+    /* ========================================================
+       LOADING
+    ======================================================== */
+
+    function showListLoading(){
+
+      document.getElementById(
+        "listLoading"
+      ).style.display =
+        "block";
+
+
+      document.getElementById(
+        "inquiryList"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "emptyState"
+      ).style.display =
+        "none";
+
+    }
+
+
+    function hideListLoading(){
+
+      document.getElementById(
+        "listLoading"
+      ).style.display =
+        "none";
+
+    }
+
+
+    /* ========================================================
+       TIMESTAMP
+    ======================================================== */
+
+    function getTimestamp(value){
+
+      if(!value){
+
+        return 0;
+
+      }
+
+
+      if(
+        typeof value.toMillis ===
+        "function"
+      ){
+
+        return value.toMillis();
+
+      }
+
+
+      if(
+        value.seconds
+      ){
+
+        return (
+          Number(
+            value.seconds
+          ) * 1000
+        );
+
+      }
+
+
+      if(
+        value instanceof Date
+      ){
+
+        return value.getTime();
+
+      }
+
+
+      const parsed =
+        new Date(
+          value
+        ).getTime();
+
+
+      return isNaN(parsed)
+        ? 0
+        : parsed;
+
+    }
+
+
+    /* ========================================================
+       DATE FORMAT
+    ======================================================== */
+
+    function formatDate(
+      value
+    ){
+
+      const timestamp =
+        getTimestamp(
+          value
+        );
+
+
+      if(!timestamp){
+
+        return "Just now";
+
+      }
+
+
+      const date =
+        new Date(
+          timestamp
+        );
+
+
+      const today =
+        new Date();
+
+
+      if(
+        date.toDateString() ===
+        today.toDateString()
+      ){
+
+        return date.toLocaleTimeString(
+          "en-IN",
+          {
+            hour:"2-digit",
+            minute:"2-digit"
+          }
+        );
+
+      }
+
+
+      return date.toLocaleDateString(
+        "en-IN",
+        {
+          day:"2-digit",
+          month:"short",
+          year:"numeric"
+        }
+      );
+
+    }
+
+
+    /* ========================================================
+       MOBILE HELPERS
+    ======================================================== */
+
+    function cleanMobile(
+      value
+    ){
+
+      return value
+        .toString()
+        .replace(
+          /\D/g,
+          ""
+        );
+
+    }
+
+
+    function displayMobile(
+      value
+    ){
+
+      const mobile =
+        cleanMobile(
+          value
+        );
+
+
+      if(
+        mobile.length === 10
+      ){
+
+        return (
+          "+91 " +
+          mobile.substring(0,5) +
+          " " +
+          mobile.substring(5)
+        );
+
+      }
+
+
+      return value || "—";
+
+    }
+
+
+    /* ========================================================
+       MODAL CLOSE
+    ======================================================== */
+
+    window.closeStatusModal =
+      function(){
+
+        document.getElementById(
+          "statusModal"
+        ).classList.remove(
+          "show"
+        );
+
+        selectedInquiry =
+          null;
+
+      };
+
+
+    window.closeModalOutside =
+      function(event){
+
+        if(
+          event.target.id ===
+          "statusModal"
+        ){
+
+          closeStatusModal();
+
+        }
+
+      };
+
+
+    /* ========================================================
+       TOAST
+    ======================================================== */
+
+    let toastTimer =
+      null;
+
+
+    function showToast(
+      message
+    ){
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      toast.textContent =
+        message;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      toastTimer =
+        setTimeout(
+          function(){
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          3200
+        );
+
+    }
+
+
+    /* ========================================================
+       SIDEBAR
+    ======================================================== */
+
+    window.openSidebar =
+      function(){
+
+        document
+          .getElementById(
+            "sidebar"
+          )
+          .classList.add(
+            "open"
+          );
+
+
+        document
+          .getElementById(
+            "overlay"
+          )
+          .classList.add(
+            "show"
+          );
+
+      };
+
+
+    window.closeSidebar =
+      function(){
+
+        document
+          .getElementById(
+            "sidebar"
+          )
+          .classList.remove(
+            "open"
+          );
+
+
+        document
+          .getElementById(
+            "overlay"
+          )
+          .classList.remove(
+            "show"
+          );
+
+      };
+
+
+    /* ========================================================
+       LOGOUT
+    ======================================================== */
+
+    window.logout =
+      function(){
+
+        if(unsubscribe){
+
+          unsubscribe();
+
+        }
+
+
+        sessionStorage.removeItem(
+          "bt_logged_in"
+        );
+
+
+        sessionStorage.removeItem(
+          "bt_user_name"
+        );
+
+
+        sessionStorage.removeItem(
+          "bt_user_mobile"
+        );
+
+
+        sessionStorage.removeItem(
+          "bt_user_role"
+        );
+
+
+        sessionStorage.removeItem(
+          "bt_login_time"
+        );
+
+
+        window.location.href =
+          "login.html";
+
+      };
+
+
+    /* ========================================================
+       ESCAPE HTML
+    ======================================================== */
+
+    function escapeHtml(
+      value
+    ){
+
+      return String(
+        value ?? ""
+      )
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+    }
+
+
+    /* ========================================================
+       ESC KEY
+    ======================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function(event){
+
+        if(
+          event.key === "Escape"
+        ){
+
+          closeStatusModal();
+
+          closeSidebar();
+
+        }
+
+      }
+    );
+
+
+    /* ========================================================
+       CLEANUP
+    ======================================================== */
+
+    window.addEventListener(
+      "beforeunload",
+      function(){
+
+        if(unsubscribe){
+
+          unsubscribe();
+
+        }
+
+      }
+    );
+
+
+  </script>
+
+
+</body>
+
+</html>

@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BlackTerminal - Telecaller Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f6f8fc">
+<title>BlackTerminal | Telecaller</title>
 
 <style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-    font-family:Inter,Segoe UI,Arial,sans-serif;
+    -webkit-tap-highlight-color:transparent;
 }
 
 :root{
-    --bg:#f5f7fb;
+    --bg:#f6f8fc;
     --card:#ffffff;
     --text:#172033;
-    --muted:#788399;
-    --border:#e8ebf2;
+    --muted:#7b8497;
+    --line:#e8ecf3;
 
     --blue:#2563eb;
     --cyan:#06b6d4;
@@ -27,559 +28,655 @@
     --purple:#7c3aed;
     --pink:#ec4899;
     --red:#ef4444;
-    --dark:#111827;
+
+    --shadow:0 8px 30px rgba(15,23,42,.055);
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
     background:var(--bg);
     color:var(--text);
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
     min-height:100vh;
 }
 
-/* ================= SIDEBAR ================= */
+/* ================= APP ================= */
+
+.app{
+    min-height:100vh;
+}
+
+/* ================= DESKTOP SIDEBAR ================= */
 
 .sidebar{
     position:fixed;
     left:0;
     top:0;
     bottom:0;
-    width:250px;
-    background:linear-gradient(180deg,#111827 0%,#172554 100%);
+    width:238px;
+    background:#111827;
     color:#fff;
-    padding:22px 16px;
+    padding:20px 14px;
     z-index:100;
 }
 
-.logo{
+.brand{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:0 10px 25px;
-    border-bottom:1px solid rgba(255,255,255,.1);
+    gap:11px;
+    padding:6px 8px 22px;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.logo-icon{
-    width:42px;
-    height:42px;
+.brand-logo{
+    width:40px;
+    height:40px;
     border-radius:12px;
     background:linear-gradient(135deg,#06b6d4,#7c3aed);
     display:flex;
     align-items:center;
     justify-content:center;
+    font-size:14px;
     font-weight:900;
-    font-size:18px;
 }
 
-.logo h2{
-    font-size:18px;
+.brand-title{
+    font-size:16px;
+    font-weight:800;
 }
 
-.logo span{
-    display:block;
+.brand-sub{
     color:#94a3b8;
-    font-size:11px;
+    font-size:10px;
     margin-top:2px;
 }
 
-.menu{
-    margin-top:25px;
+.nav{
+    margin-top:22px;
 }
 
-.menu-title{
+.nav-label{
     color:#64748b;
-    font-size:10px;
+    font-size:9px;
     text-transform:uppercase;
     letter-spacing:1.5px;
-    padding:0 12px 10px;
+    padding:0 11px 9px;
 }
 
-.menu-item{
+.nav-item{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:13px 14px;
-    margin:5px 0;
-    border-radius:12px;
+    gap:11px;
+    padding:12px 12px;
+    margin:4px 0;
+    border-radius:11px;
     color:#cbd5e1;
-    font-size:14px;
+    font-size:12px;
+    cursor:pointer;
 }
 
-.menu-item.active{
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
+.nav-item.active{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
     color:#fff;
-    box-shadow:0 8px 20px rgba(37,99,235,.25);
 }
 
-.menu-icon{
+.nav-icon{
     width:20px;
     text-align:center;
 }
 
-.user-box{
+.side-profile{
     position:absolute;
-    left:16px;
-    right:16px;
-    bottom:18px;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:14px;
-    padding:13px;
+    left:14px;
+    right:14px;
+    bottom:16px;
+    padding:12px;
+    border-radius:13px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.07);
 }
 
-.user-name{
+.side-name{
+    font-size:12px;
     font-weight:700;
-    font-size:13px;
 }
 
-.user-role{
+.side-role{
     color:#94a3b8;
-    font-size:11px;
+    font-size:10px;
     margin-top:3px;
 }
 
 /* ================= MAIN ================= */
 
 .main{
-    margin-left:250px;
+    margin-left:238px;
     min-height:100vh;
 }
 
 .topbar{
-    height:75px;
-    background:#fff;
-    border-bottom:1px solid var(--border);
+    height:68px;
+    background:rgba(255,255,255,.92);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(14px);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 28px;
+    padding:0 25px;
     position:sticky;
     top:0;
-    z-index:50;
+    z-index:80;
 }
 
-.page-title h1{
-    font-size:22px;
-}
-
-.page-title p{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:3px;
-}
-
-.top-user{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.avatar{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#06b6d4,#7c3aed);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.top-title{
+    font-size:19px;
     font-weight:800;
 }
 
-.content{
-    padding:25px 28px 40px;
+.top-sub{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:2px;
 }
 
-/* ================= STATS ================= */
-
-.stats-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    margin-bottom:22px;
+.profile-chip{
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
-.stat-card{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:18px;
-    position:relative;
-    overflow:hidden;
-    box-shadow:0 5px 18px rgba(15,23,42,.04);
-}
-
-.stat-card:after{
-    content:"";
-    position:absolute;
-    width:80px;
-    height:80px;
+.avatar{
+    width:36px;
+    height:36px;
     border-radius:50%;
-    right:-25px;
-    top:-25px;
-    opacity:.1;
-    background:currentColor;
-}
-
-.stat-icon{
-    width:42px;
-    height:42px;
-    border-radius:12px;
+    color:#fff;
+    background:linear-gradient(135deg,#06b6d4,#7c3aed);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:18px;
-    margin-bottom:12px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.page{
+    padding:22px 25px 35px;
+    max-width:1450px;
+}
+
+/* ================= WELCOME ================= */
+
+.welcome{
+    margin-bottom:18px;
+}
+
+.welcome h1{
+    font-size:22px;
+    font-weight:850;
+}
+
+.welcome p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
+}
+
+/* ================= MINI STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:15px;
+    box-shadow:var(--shadow);
+}
+
+.stat-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.stat-icon{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:15px;
 }
 
 .stat-label{
     color:var(--muted);
-    font-size:12px;
+    font-size:10px;
+    margin-top:12px;
 }
 
 .stat-value{
-    font-size:26px;
-    font-weight:800;
-    margin-top:4px;
+    font-size:22px;
+    font-weight:850;
+    margin-top:2px;
 }
 
-/* ================= TARGET HERO ================= */
+/* ================= EARNING HERO ================= */
 
-.target-hero{
-    border-radius:22px;
-    padding:24px;
-    color:#fff;
-    margin-bottom:22px;
-    background:
-        radial-gradient(circle at 90% 10%,rgba(255,255,255,.20),transparent 30%),
-        radial-gradient(circle at 10% 90%,rgba(255,255,255,.12),transparent 35%),
-        linear-gradient(135deg,#2563eb 0%,#7c3aed 52%,#ec4899 100%);
-    box-shadow:0 14px 35px rgba(79,70,229,.22);
+.earning-hero{
     position:relative;
     overflow:hidden;
+    color:#fff;
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:16px;
+
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(255,255,255,.2),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 5% 100%,
+            rgba(255,255,255,.1),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #5b21b6 58%,
+            #db2777
+        );
+
+    box-shadow:
+        0 16px 40px
+        rgba(79,70,229,.2);
 }
 
-.target-hero:before{
+.earning-hero:after{
     content:"";
     position:absolute;
-    width:230px;
-    height:230px;
-    border:35px solid rgba(255,255,255,.07);
+    width:190px;
+    height:190px;
+    border:32px solid rgba(255,255,255,.05);
     border-radius:50%;
     right:-70px;
-    bottom:-100px;
+    bottom:-95px;
 }
 
-.target-top{
+.hero-head{
     display:flex;
-    align-items:flex-start;
     justify-content:space-between;
-    gap:20px;
+    gap:15px;
     position:relative;
     z-index:2;
 }
 
-.target-title{
-    font-size:23px;
-    font-weight:800;
+.hero-label{
+    font-size:11px;
+    color:rgba(255,255,255,.76);
 }
 
-.target-sub{
+.hero-amount{
+    font-size:34px;
+    line-height:1;
+    font-weight:900;
     margin-top:5px;
-    color:rgba(255,255,255,.8);
-    font-size:13px;
 }
 
-.layer-badge{
-    padding:10px 17px;
+.hero-caption{
+    font-size:10px;
+    color:rgba(255,255,255,.7);
+    margin-top:5px;
+}
+
+.level-pill{
+    height:max-content;
+    padding:8px 12px;
     border-radius:30px;
-    background:rgba(255,255,255,.16);
-    border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.2);
     backdrop-filter:blur(10px);
+    font-size:11px;
     font-weight:800;
-    font-size:13px;
     white-space:nowrap;
 }
 
-.progress-wrap{
-    margin-top:24px;
+.hero-divider{
+    height:1px;
+    background:rgba(255,255,255,.15);
+    margin:18px 0;
+}
+
+.earning-breakdown{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
     position:relative;
     z-index:2;
 }
 
-.progress-label{
-    display:flex;
-    justify-content:space-between;
-    font-size:12px;
-    margin-bottom:8px;
-    color:rgba(255,255,255,.9);
+.earning-mini{
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:13px;
+    padding:11px;
 }
 
-.progress-bar{
-    height:13px;
-    background:rgba(255,255,255,.18);
-    border-radius:30px;
+.earning-mini span{
+    display:block;
+    color:rgba(255,255,255,.68);
+    font-size:9px;
+}
+
+.earning-mini strong{
+    display:block;
+    margin-top:4px;
+    font-size:15px;
+}
+
+/* ================= TARGET ================= */
+
+.target-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:19px;
+    margin-bottom:16px;
+    box-shadow:var(--shadow);
+}
+
+.target-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.target-title{
+    font-size:15px;
+    font-weight:850;
+}
+
+.target-sub{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:4px;
+}
+
+.target-number{
+    color:var(--purple);
+    font-size:12px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.progress{
+    height:10px;
+    background:#eef2f7;
+    border-radius:20px;
     overflow:hidden;
+    margin-top:17px;
 }
 
 .progress-fill{
     height:100%;
-    width:0%;
-    border-radius:30px;
-    background:#fff;
-    box-shadow:0 0 14px rgba(255,255,255,.55);
+    width:0;
+    border-radius:20px;
+    background:linear-gradient(90deg,#2563eb,#7c3aed,#ec4899);
     transition:width .5s ease;
 }
 
-.next-target{
-    margin-top:13px;
-    font-size:12px;
-    color:rgba(255,255,255,.82);
-}
-
-/* ================= PLAN ================= */
-
-.section-head{
+.target-foot{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    margin-bottom:13px;
-}
-
-.section-head h2{
-    font-size:17px;
-}
-
-.section-head span{
+    gap:10px;
+    margin-top:9px;
+    font-size:10px;
     color:var(--muted);
-    font-size:11px;
 }
 
-.plan-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-    margin-bottom:22px;
+.next-target{
+    color:var(--blue);
+    font-weight:700;
 }
 
-.plan-card{
-    background:#fff;
-    border-radius:20px;
-    padding:20px;
-    border:2px solid var(--border);
-    position:relative;
-    overflow:hidden;
-    transition:.25s;
-}
+/* ================= LEVELS ================= */
 
-.plan-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 12px 30px rgba(15,23,42,.08);
-}
-
-.plan-card.active{
-    border-color:var(--blue);
-    box-shadow:0 10px 30px rgba(37,99,235,.14);
-}
-
-.plan-card.active:before{
-    content:"CURRENT";
-    position:absolute;
-    right:-28px;
-    top:14px;
-    transform:rotate(45deg);
-    width:110px;
-    text-align:center;
-    background:var(--blue);
-    color:#fff;
-    font-size:9px;
-    font-weight:800;
-    padding:5px;
-}
-
-.plan-head{
+.section-title{
     display:flex;
     align-items:center;
-    gap:12px;
+    justify-content:space-between;
+    margin-bottom:11px;
 }
 
-.plan-number{
-    width:44px;
-    height:44px;
-    border-radius:14px;
+.section-title h2{
+    font-size:15px;
+    font-weight:850;
+}
+
+.section-title span{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.level-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.level-card{
+    display:none;
+    background:#fff;
+    border:2px solid var(--line);
+    border-radius:18px;
+    padding:17px;
+    position:relative;
+    overflow:hidden;
+}
+
+.level-card.show{
+    display:block;
+}
+
+.level-card.current{
+    border-color:var(--blue);
+    box-shadow:0 10px 30px rgba(37,99,235,.1);
+}
+
+.level-card.current:after{
+    content:"CURRENT";
+    position:absolute;
+    top:12px;
+    right:-28px;
+    width:100px;
+    padding:4px;
+    text-align:center;
+    transform:rotate(45deg);
+    background:var(--blue);
     color:#fff;
+    font-size:8px;
+    font-weight:800;
+}
+
+.level-top{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.level-icon{
+    width:38px;
+    height:38px;
+    border-radius:11px;
     display:flex;
     align-items:center;
     justify-content:center;
+    color:#fff;
+    font-size:14px;
     font-weight:900;
-    font-size:18px;
 }
 
-.layer1 .plan-number{
+.l1 .level-icon{
     background:linear-gradient(135deg,#10b981,#34d399);
 }
 
-.layer2 .plan-number{
+.l2 .level-icon{
     background:linear-gradient(135deg,#2563eb,#06b6d4);
 }
 
-.layer3 .plan-number{
+.l3 .level-icon{
     background:linear-gradient(135deg,#7c3aed,#ec4899);
 }
 
-.plan-name{
-    font-size:16px;
-    font-weight:800;
+.level-name{
+    font-size:13px;
+    font-weight:850;
 }
 
-.plan-target{
+.level-target{
     color:var(--muted);
-    font-size:11px;
-    margin-top:3px;
+    font-size:9px;
+    margin-top:2px;
 }
 
-.rate-grid{
+.level-rate{
+    margin-top:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#f8fafc;
+    padding:11px;
+    border-radius:11px;
+}
+
+.level-rate span{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.level-rate strong{
+    font-size:17px;
+}
+
+/* ================= RULE ================= */
+
+.rules{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
-    margin-top:18px;
+    margin-bottom:18px;
 }
 
-.rate{
-    padding:12px;
-    border-radius:13px;
-    background:#f8fafc;
-}
-
-.rate small{
-    color:var(--muted);
-    font-size:10px;
-}
-
-.rate strong{
-    display:block;
-    margin-top:3px;
-    font-size:18px;
-}
-
-/* ================= EARNING CARD ================= */
-
-.earning-card{
+.rule{
     background:#fff;
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:21px;
-    margin-bottom:22px;
-    box-shadow:0 5px 18px rgba(15,23,42,.04);
-}
-
-.earning-grid{
-    display:grid;
-    grid-template-columns:1.2fr 1fr 1fr 1fr;
-    gap:14px;
-}
-
-.earning-item{
-    padding:15px;
+    border:1px solid var(--line);
     border-radius:15px;
-    background:#f8fafc;
+    padding:13px;
 }
 
-.earning-item.highlight{
-    background:linear-gradient(135deg,#ecfdf5,#f0fdf4);
-    border:1px solid #bbf7d0;
+.rule-icon{
+    font-size:17px;
 }
 
-.earning-label{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.earning-value{
-    margin-top:5px;
-    font-size:21px;
+.rule-title{
+    font-size:10px;
     font-weight:800;
+    margin-top:7px;
 }
 
-.total-earning{
-    color:#059669;
+.rule-text{
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.5;
+    margin-top:4px;
 }
 
-/* ================= FILTERS ================= */
+/* ================= INQUIRIES ================= */
 
-.filter-card{
+.inquiry-section{
     background:#fff;
-    border:1px solid var(--border);
-    border-radius:18px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.inquiry-header{
     padding:17px;
-    margin-bottom:16px;
+    border-bottom:1px solid var(--line);
+}
+
+.inquiry-title-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.inquiry-title{
+    font-size:15px;
+    font-weight:850;
+}
+
+.result{
+    color:var(--muted);
+    font-size:9px;
 }
 
 .filters{
     display:grid;
     grid-template-columns:2fr 1fr 1fr 1fr auto;
-    gap:10px;
+    gap:8px;
+    margin-top:13px;
 }
 
-input,select{
+input,
+select{
     width:100%;
-    border:1px solid #dfe4ed;
+    border:1px solid #e0e5ed;
     background:#fff;
-    border-radius:11px;
-    padding:11px 12px;
-    outline:none;
     color:var(--text);
-    font-size:12px;
+    border-radius:10px;
+    padding:10px 11px;
+    outline:none;
+    font-size:10px;
 }
 
-input:focus,select:focus{
+input:focus,
+select:focus{
     border-color:var(--blue);
-    box-shadow:0 0 0 3px rgba(37,99,235,.08);
+    box-shadow:0 0 0 3px rgba(37,99,235,.07);
 }
 
-.btn{
-    border:none;
-    border-radius:11px;
-    padding:11px 15px;
-    cursor:pointer;
-    font-weight:700;
-    font-size:12px;
-}
-
-.btn-blue{
-    background:linear-gradient(135deg,#2563eb,#4f46e5);
-    color:#fff;
-}
-
-.btn-light{
+.reset{
+    border:0;
     background:#f1f5f9;
-    color:#334155;
+    color:#475569;
+    border-radius:10px;
+    padding:0 13px;
+    font-size:10px;
+    font-weight:700;
+    cursor:pointer;
 }
 
-/* ================= TABLE ================= */
-
-.table-card{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:18px;
-    overflow:hidden;
-}
-
-.table-top{
-    padding:17px 18px;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.table-top h2{
-    font-size:16px;
-}
-
-.result-text{
-    color:var(--muted);
-    font-size:11px;
-}
+/* ================= DESKTOP TABLE ================= */
 
 .table-wrap{
     overflow-x:auto;
@@ -588,111 +685,235 @@ input:focus,select:focus{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:900px;
+    min-width:850px;
 }
 
 th{
-    text-align:left;
-    padding:12px 15px;
-    font-size:10px;
-    color:#64748b;
-    text-transform:uppercase;
-    letter-spacing:.5px;
+    padding:11px 14px;
     background:#f8fafc;
+    color:#64748b;
+    text-align:left;
+    font-size:8px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
 }
 
 td{
-    padding:14px 15px;
+    padding:12px 14px;
     border-top:1px solid #eef1f5;
-    font-size:12px;
-}
-
-.student-name{
-    font-weight:700;
-}
-
-.student-mobile{
-    color:var(--muted);
     font-size:10px;
-    margin-top:3px;
+}
+
+.student{
+    font-weight:750;
+}
+
+.mobile{
+    color:var(--muted);
+    font-size:8px;
+    margin-top:2px;
 }
 
 .status{
-    display:inline-flex;
-    padding:6px 9px;
+    display:inline-block;
     border-radius:20px;
-    font-size:10px;
+    padding:5px 8px;
+    font-size:8px;
     font-weight:800;
 }
 
-.status-new{background:#eff6ff;color:#2563eb}
-.status-pending{background:#fff7ed;color:#ea580c}
-.status-contacted{background:#ecfeff;color:#0891b2}
-.status-follow-up{background:#fefce8;color:#ca8a04}
-.status-visited{background:#ecfdf5;color:#059669}
-.status-converted{background:#f5f3ff;color:#7c3aed}
-.status-not-interested{background:#fef2f2;color:#dc2626}
+.status-new{
+    background:#eff6ff;
+    color:#2563eb;
+}
+
+.status-pending{
+    background:#fff7ed;
+    color:#ea580c;
+}
+
+.status-contacted{
+    background:#ecfeff;
+    color:#0891b2;
+}
+
+.status-follow-up{
+    background:#fefce8;
+    color:#ca8a04;
+}
+
+.status-visited{
+    background:#ecfdf5;
+    color:#059669;
+}
+
+.status-converted{
+    background:#f5f3ff;
+    color:#7c3aed;
+}
+
+.status-not-interested{
+    background:#fef2f2;
+    color:#dc2626;
+}
 
 .actions{
+    display:flex;
+    gap:5px;
+}
+
+.action{
+    width:29px;
+    height:29px;
+    border:0;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.a-call{
+    background:#ecfdf5;
+    color:#059669;
+}
+
+.a-wa{
+    background:#f0fdf4;
+    color:#16a34a;
+}
+
+.a-view{
+    background:#eff6ff;
+    color:#2563eb;
+}
+
+.a-delete{
+    background:#fef2f2;
+    color:#dc2626;
+}
+
+/* ================= MOBILE INQUIRY CARDS ================= */
+
+.mobile-list{
+    display:none;
+}
+
+.inquiry-card{
+    padding:14px;
+    border-top:1px solid var(--line);
+}
+
+.inquiry-card-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.card-name{
+    font-size:12px;
+    font-weight:800;
+}
+
+.card-mobile{
+    color:var(--muted);
+    font-size:9px;
+    margin-top:3px;
+}
+
+.card-course{
+    margin-top:9px;
+    font-size:10px;
+    font-weight:700;
+}
+
+.card-meta{
+    color:var(--muted);
+    font-size:9px;
+    margin-top:4px;
+}
+
+.card-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin-top:11px;
+}
+
+.card-actions{
     display:flex;
     gap:6px;
 }
 
-.action-btn{
-    width:30px;
-    height:30px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.card-status-select{
+    max-width:145px;
 }
 
-.call{background:#ecfdf5;color:#059669}
-.whatsapp{background:#f0fdf4;color:#16a34a}
-.view{background:#eff6ff;color:#2563eb}
-.delete{background:#fef2f2;color:#dc2626}
+/* ================= EMPTY ================= */
+
+.empty{
+    text-align:center;
+    padding:42px 20px;
+    color:var(--muted);
+}
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.empty-title{
+    font-size:12px;
+    font-weight:700;
+}
+
+.empty-text{
+    font-size:9px;
+    margin-top:4px;
+}
 
 /* ================= MODAL ================= */
 
 .modal{
-    display:none;
     position:fixed;
     inset:0;
     background:rgba(15,23,42,.55);
     backdrop-filter:blur(5px);
-    z-index:500;
+    display:none;
     align-items:center;
     justify-content:center;
-    padding:20px;
+    padding:18px;
+    z-index:500;
 }
 
 .modal-box{
-    background:#fff;
     width:100%;
     max-width:500px;
-    border-radius:22px;
-    padding:23px;
-    box-shadow:0 25px 70px rgba(0,0,0,.2);
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:20px;
+    padding:18px;
+    box-shadow:0 25px 70px rgba(0,0,0,.22);
 }
 
 .modal-head{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    margin-bottom:20px;
+    align-items:center;
+    margin-bottom:15px;
 }
 
 .modal-head h2{
-    font-size:19px;
+    font-size:16px;
 }
 
 .close{
-    border:none;
+    border:0;
     background:#f1f5f9;
-    width:34px;
-    height:34px;
+    width:32px;
+    height:32px;
     border-radius:50%;
     cursor:pointer;
 }
@@ -700,13 +921,13 @@ td{
 .detail-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:10px;
+    gap:8px;
 }
 
 .detail{
-    padding:13px;
     background:#f8fafc;
-    border-radius:12px;
+    border-radius:11px;
+    padding:11px;
 }
 
 .detail.full{
@@ -715,583 +936,1340 @@ td{
 
 .detail small{
     color:var(--muted);
-    font-size:10px;
+    font-size:8px;
 }
 
 .detail strong{
     display:block;
-    margin-top:4px;
-    font-size:13px;
-}
-
-/* ================= EMPTY ================= */
-
-.empty{
-    text-align:center;
-    padding:50px 20px;
-    color:var(--muted);
-}
-
-.empty-icon{
-    font-size:40px;
-    margin-bottom:10px;
+    font-size:11px;
+    margin-top:3px;
 }
 
 /* ================= RESPONSIVE ================= */
 
-@media(max-width:1100px){
-    .stats-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
+@media(max-width:1050px){
 
-    .earning-grid{
+    .stats{
         grid-template-columns:repeat(2,1fr);
     }
 
     .filters{
         grid-template-columns:1fr 1fr;
     }
+
+    .rules{
+        grid-template-columns:1fr 1fr;
+    }
 }
 
-@media(max-width:850px){
+@media(max-width:800px){
+
     .sidebar{
-        width:70px;
+        width:68px;
         padding:15px 8px;
     }
 
-    .logo{
+    .brand{
         justify-content:center;
-        padding:0 0 20px;
+        padding:5px 0 18px;
     }
 
-    .logo-text,
-    .menu-title,
-    .menu-item span,
-    .user-box{
+    .brand-text,
+    .nav-label,
+    .nav-item span,
+    .side-profile{
         display:none;
     }
 
-    .menu-item{
+    .nav-item{
         justify-content:center;
-        padding:13px 5px;
+        padding:12px 4px;
     }
 
     .main{
-        margin-left:70px;
+        margin-left:68px;
     }
 
-    .plan-grid{
+    .page{
+        padding:18px;
+    }
+
+    .level-grid{
         grid-template-columns:1fr;
     }
 
-    .target-top{
-        flex-direction:column;
+    .level-card{
+        padding:15px;
     }
 }
 
 @media(max-width:600px){
+
+    body{
+        padding-bottom:68px;
+    }
+
+    .sidebar{
+        position:fixed;
+        left:0;
+        right:0;
+        top:auto;
+        bottom:0;
+        width:100%;
+        height:62px;
+        padding:6px 10px;
+        background:#fff;
+        border-top:1px solid var(--line);
+        box-shadow:0 -5px 20px rgba(15,23,42,.08);
+    }
+
+    .brand,
+    .side-profile,
+    .nav-label{
+        display:none;
+    }
+
+    .nav{
+        margin:0;
+        height:100%;
+        display:flex;
+        align-items:center;
+        justify-content:space-around;
+    }
+
+    .nav-item{
+        margin:0;
+        padding:8px 13px;
+        color:#64748b;
+        display:flex;
+        flex-direction:column;
+        gap:2px;
+        border-radius:10px;
+        font-size:8px;
+    }
+
+    .nav-item.active{
+        color:#2563eb;
+        background:#eff6ff;
+    }
+
+    .nav-item span{
+        display:block;
+        font-size:8px;
+    }
+
+    .nav-icon{
+        font-size:17px;
+        height:19px;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
     .topbar{
-        padding:0 15px;
+        height:60px;
+        padding:0 14px;
     }
 
-    .content{
-        padding:18px 14px 30px;
+    .top-title{
+        font-size:16px;
     }
 
-    .stats-grid{
+    .top-sub{
+        display:none;
+    }
+
+    .profile-chip{
+        display:none;
+    }
+
+    .page{
+        padding:14px 12px 20px;
+    }
+
+    .welcome{
+        margin-bottom:13px;
+    }
+
+    .welcome h1{
+        font-size:19px;
+    }
+
+    .welcome p{
+        font-size:10px;
+    }
+
+    .stats{
         grid-template-columns:1fr 1fr;
-        gap:10px;
+        gap:8px;
+        margin-bottom:12px;
     }
 
-    .stat-card{
-        padding:14px;
+    .stat{
+        padding:12px;
+        border-radius:14px;
+    }
+
+    .stat-icon{
+        width:30px;
+        height:30px;
+        font-size:13px;
+    }
+
+    .stat-label{
+        font-size:8px;
+        margin-top:9px;
     }
 
     .stat-value{
-        font-size:21px;
+        font-size:19px;
     }
 
-    .earning-grid{
+    .earning-hero{
+        padding:18px;
+        border-radius:18px;
+    }
+
+    .hero-amount{
+        font-size:30px;
+    }
+
+    .earning-breakdown{
         grid-template-columns:1fr 1fr;
     }
+
+    .earning-mini:last-child{
+        grid-column:1/-1;
+    }
+
+    .target-card{
+        padding:15px;
+        border-radius:17px;
+    }
+
+    .target-title{
+        font-size:13px;
+    }
+
+    .rules{
+        grid-template-columns:1fr;
+    }
+
+    .filters{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filters input{
+        grid-column:1/-1;
+    }
+
+    .reset{
+        min-height:37px;
+    }
+
+    .table-wrap{
+        display:none;
+    }
+
+    .mobile-list{
+        display:block;
+    }
+
+    .inquiry-section{
+        border-radius:17px;
+    }
+
+    .inquiry-header{
+        padding:14px;
+    }
+
+    .section-title span{
+        display:none;
+    }
+
+    .modal{
+        align-items:flex-end;
+        padding:0;
+    }
+
+    .modal-box{
+        max-height:88vh;
+        border-radius:20px 20px 0 0;
+    }
+
+}
+
+@media(max-width:380px){
 
     .filters{
         grid-template-columns:1fr;
     }
 
-    .target-title{
-        font-size:19px;
+    .filters input{
+        grid-column:auto;
+    }
+
+    .hero-amount{
+        font-size:27px;
+    }
+
+    .earning-mini strong{
+        font-size:13px;
     }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= SIDEBAR ================= -->
+
+<div class="app">
+
+
+<!-- =====================================================
+     SIDEBAR / MOBILE NAV
+===================================================== -->
 
 <aside class="sidebar">
 
-    <div class="logo">
-        <div class="logo-icon">BT</div>
+    <div class="brand">
 
-        <div class="logo-text">
-            <h2>BlackTerminal</h2>
-            <span>Computer Institute</span>
-        </div>
-    </div>
-
-    <div class="menu">
-
-        <div class="menu-title">Workspace</div>
-
-        <div class="menu-item active">
-            <div class="menu-icon">📊</div>
-            <span>Telecaller Dashboard</span>
+        <div class="brand-logo">
+            BT
         </div>
 
-        <div class="menu-item" onclick="scrollToInquiries()">
-            <div class="menu-icon">📞</div>
-            <span>Inquiries</span>
-        </div>
+        <div class="brand-text">
 
-        <div class="menu-item" onclick="scrollToTarget()">
-            <div class="menu-icon">🎯</div>
-            <span>My Target</span>
+            <div class="brand-title">
+                BlackTerminal
+            </div>
+
+            <div class="brand-sub">
+                Computer Institute
+            </div>
+
         </div>
 
     </div>
 
-    <div class="user-box">
-        <div class="user-name" id="sideUserName">Telecaller</div>
-        <div class="user-role">Telecaller Account</div>
+
+    <nav class="nav">
+
+        <div class="nav-label">
+            Workspace
+        </div>
+
+
+        <div
+            class="nav-item active"
+            onclick="scrollToTop()"
+        >
+
+            <div class="nav-icon">
+                🏠
+            </div>
+
+            <span>
+                Dashboard
+            </span>
+
+        </div>
+
+
+        <div
+            class="nav-item"
+            onclick="scrollToTarget()"
+        >
+
+            <div class="nav-icon">
+                🎯
+            </div>
+
+            <span>
+                Target
+            </span>
+
+        </div>
+
+
+        <div
+            class="nav-item"
+            onclick="scrollToInquiries()"
+        >
+
+            <div class="nav-icon">
+                📞
+            </div>
+
+            <span>
+                Inquiries
+            </span>
+
+        </div>
+
+    </nav>
+
+
+    <div class="side-profile">
+
+        <div
+            class="side-name"
+            id="sideUserName"
+        >
+            Telecaller
+        </div>
+
+        <div class="side-role">
+            Telecaller
+        </div>
+
     </div>
 
 </aside>
 
 
-<!-- ================= MAIN ================= -->
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main class="main">
 
-    <header class="topbar">
 
-        <div class="page-title">
-            <h1>Telecaller Dashboard</h1>
-            <p>Target based performance & earnings</p>
+<header class="topbar">
+
+    <div>
+
+        <div class="top-title">
+            Telecaller
         </div>
 
-        <div class="top-user">
-            <div class="avatar" id="topAvatar">T</div>
+        <div class="top-sub">
+            BlackTerminal Computer Institute
         </div>
 
-    </header>
+    </div>
 
 
-    <section class="content">
+    <div class="profile-chip">
 
-        <!-- ================= STATS ================= -->
-
-        <div class="stats-grid">
-
-            <div class="stat-card" style="color:#2563eb;">
-                <div class="stat-icon" style="background:#eff6ff;color:#2563eb;">
-                    📋
-                </div>
-                <div class="stat-label">Total Inquiries</div>
-                <div class="stat-value" id="totalInquiries">0</div>
-            </div>
-
-            <div class="stat-card" style="color:#10b981;">
-                <div class="stat-icon" style="background:#ecfdf5;color:#10b981;">
-                    👣
-                </div>
-                <div class="stat-label">Visited This Month</div>
-                <div class="stat-value" id="visitedCount">0</div>
-            </div>
-
-            <div class="stat-card" style="color:#7c3aed;">
-                <div class="stat-icon" style="background:#f5f3ff;color:#7c3aed;">
-                    🎓
-                </div>
-                <div class="stat-label">Admissions</div>
-                <div class="stat-value" id="convertedCount">0</div>
-            </div>
-
-            <div class="stat-card" style="color:#f59e0b;">
-                <div class="stat-icon" style="background:#fffbeb;color:#f59e0b;">
-                    💰
-                </div>
-                <div class="stat-label">Estimated Earnings</div>
-                <div class="stat-value" id="estimatedEarning">₹1,000</div>
-            </div>
-
+        <div
+            class="avatar"
+            id="topAvatar"
+        >
+            T
         </div>
 
+    </div>
 
-        <!-- ================= TARGET HERO ================= -->
+</header>
 
-        <div class="target-hero" id="targetSection">
 
-            <div class="target-top">
 
-                <div>
-                    <div class="target-title">
-                        🎯 Monthly Performance Target
-                    </div>
+<div class="page" id="dashboardTop">
 
-                    <div class="target-sub">
-                        Reach the next layer to unlock a higher earning rate.
-                    </div>
-                </div>
 
-                <div class="layer-badge" id="currentLayer">
-                    Layer 1
-                </div>
+<!-- =====================================================
+     WELCOME
+===================================================== -->
 
-            </div>
+<div class="welcome">
 
-            <div class="progress-wrap">
+    <h1>
+        Hello, <span id="welcomeName">Telecaller</span> 👋
+    </h1>
 
-                <div class="progress-label">
-                    <span id="targetProgressText">
-                        0 visited students
-                    </span>
+    <p>
+        Track your admissions, target and monthly earnings.
+    </p>
 
-                    <span id="targetRange">
-                        Target: 1–4
-                    </span>
-                </div>
+</div>
 
-                <div class="progress-bar">
-                    <div class="progress-fill" id="targetProgress"></div>
-                </div>
 
-                <div class="next-target" id="nextTarget">
-                    Start your first visit to enter Layer 1.
-                </div>
 
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<div class="stats">
+
+
+    <div class="stat">
+
+        <div class="stat-top">
+
+            <div
+                class="stat-icon"
+                style="
+                background:#eff6ff;
+                color:#2563eb;
+                "
+            >
+                📋
             </div>
 
         </div>
 
-
-        <!-- ================= 3 LAYER PLAN ================= -->
-
-        <div class="section-head">
-            <h2>🚀 3-Layer Earning Plan</h2>
-            <span>Based on monthly unique visited students</span>
+        <div class="stat-label">
+            Total Inquiries
         </div>
 
-        <div class="plan-grid">
+        <div
+            class="stat-value"
+            id="totalInquiries"
+        >
+            0
+        </div>
 
-            <div class="plan-card layer1" id="plan1">
-
-                <div class="plan-head">
-
-                    <div class="plan-number">1</div>
-
-                    <div>
-                        <div class="plan-name">Starter Layer</div>
-                        <div class="plan-target">1 – 4 visited students</div>
-                    </div>
-
-                </div>
-
-                <div class="rate-grid">
-
-                    <div class="rate">
-                        <small>Per Visit</small>
-                        <strong id="tier1Visit">₹30</strong>
-                    </div>
-
-                    <div class="rate">
-                        <small>Per Admission</small>
-                        <strong id="tier1Admission">₹50</strong>
-                    </div>
-
-                </div>
-
-            </div>
+    </div>
 
 
-            <div class="plan-card layer2" id="plan2">
 
-                <div class="plan-head">
+    <div class="stat">
 
-                    <div class="plan-number">2</div>
+        <div class="stat-top">
 
-                    <div>
-                        <div class="plan-name">Growth Layer</div>
-                        <div class="plan-target">5 – 9 visited students</div>
-                    </div>
-
-                </div>
-
-                <div class="rate-grid">
-
-                    <div class="rate">
-                        <small>Per Visit</small>
-                        <strong id="tier2Visit">₹50</strong>
-                    </div>
-
-                    <div class="rate">
-                        <small>Per Admission</small>
-                        <strong id="tier2Admission">₹75</strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="plan-card layer3" id="plan3">
-
-                <div class="plan-head">
-
-                    <div class="plan-number">3</div>
-
-                    <div>
-                        <div class="plan-name">Pro Layer</div>
-                        <div class="plan-target">10+ visited students</div>
-                    </div>
-
-                </div>
-
-                <div class="rate-grid">
-
-                    <div class="rate">
-                        <small>Per Visit</small>
-                        <strong id="tier3Visit">₹75</strong>
-                    </div>
-
-                    <div class="rate">
-                        <small>Per Admission</small>
-                        <strong id="tier3Admission">₹100</strong>
-                    </div>
-
-                </div>
-
+            <div
+                class="stat-icon"
+                style="
+                background:#ecfdf5;
+                color:#10b981;
+                "
+            >
+                👣
             </div>
 
         </div>
 
+        <div class="stat-label">
+            Visits This Month
+        </div>
 
-        <!-- ================= EARNING SUMMARY ================= -->
+        <div
+            class="stat-value"
+            id="visitedCount"
+        >
+            0
+        </div>
 
-        <div class="earning-card">
+    </div>
 
-            <div class="section-head">
-                <h2>💰 Current Month Earnings</h2>
-                <span id="earningMonth">Current Month</span>
+
+
+    <div class="stat">
+
+        <div class="stat-top">
+
+            <div
+                class="stat-icon"
+                style="
+                background:#f5f3ff;
+                color:#7c3aed;
+                "
+            >
+                🎓
             </div>
 
-            <div class="earning-grid">
+        </div>
 
-                <div class="earning-item highlight">
+        <div class="stat-label">
+            Admissions
+        </div>
 
-                    <div class="earning-label">
-                        Base Salary
-                    </div>
+        <div
+            class="stat-value"
+            id="convertedCount"
+        >
+            0
+        </div>
 
-                    <div class="earning-value" id="baseSalaryDisplay">
-                        ₹1,000
-                    </div>
+    </div>
 
-                </div>
 
-                <div class="earning-item">
 
-                    <div class="earning-label">
-                        Visit Incentive
-                    </div>
+    <div class="stat">
 
-                    <div class="earning-value" id="visitEarning">
-                        ₹0
-                    </div>
+        <div class="stat-top">
 
-                </div>
+            <div
+                class="stat-icon"
+                style="
+                background:#ecfdf5;
+                color:#059669;
+                "
+            >
+                💰
+            </div>
 
-                <div class="earning-item">
+        </div>
 
-                    <div class="earning-label">
-                        Admission Incentive
-                    </div>
+        <div class="stat-label">
+            Estimated Earnings
+        </div>
 
-                    <div class="earning-value" id="admissionEarning">
-                        ₹0
-                    </div>
+        <div
+            class="stat-value"
+            id="estimatedEarning"
+        >
+            ₹1,000
+        </div>
 
-                </div>
+    </div>
 
-                <div class="earning-item highlight">
 
-                    <div class="earning-label">
-                        Total Estimated
-                    </div>
+</div>
 
-                    <div class="earning-value total-earning" id="totalEarning">
-                        ₹1,000
-                    </div>
 
-                </div>
 
+<!-- =====================================================
+     EARNING HERO
+===================================================== -->
+
+<div class="earning-hero">
+
+
+    <div class="hero-head">
+
+
+        <div>
+
+            <div class="hero-label">
+                CURRENT MONTH ESTIMATED EARNING
+            </div>
+
+            <div
+                class="hero-amount"
+                id="heroTotal"
+            >
+                ₹1,000
+            </div>
+
+            <div class="hero-caption">
+                Base salary + admission incentive
             </div>
 
         </div>
 
 
-        <!-- ================= FILTER ================= -->
+        <div
+            class="level-pill"
+            id="heroLevel"
+        >
+            Level 1
+        </div>
 
-        <div class="filter-card">
 
-            <div class="filters">
+    </div>
 
-                <input
-                    id="searchInput"
-                    type="text"
-                    placeholder="Search student name or mobile..."
-                    oninput="applyFilters()"
-                >
 
-                <select id="courseFilter" onchange="applyFilters()">
-                    <option value="">All Courses</option>
-                </select>
+    <div class="hero-divider"></div>
 
-                <select id="statusFilter" onchange="applyFilters()">
-                    <option value="">All Status</option>
-                    <option value="new">New</option>
-                    <option value="pending">Pending</option>
-                    <option value="contacted">Contacted</option>
-                    <option value="follow-up">Follow-up</option>
-                    <option value="visited">Visited</option>
-                    <option value="converted">Converted</option>
-                    <option value="not-interested">Not Interested</option>
-                </select>
 
-                <select id="coordinatorFilter" onchange="applyFilters()">
-                    <option value="">All Coordinators</option>
-                </select>
+    <div class="earning-breakdown">
 
-                <button class="btn btn-light" onclick="resetFilters()">
-                    Reset
-                </button>
 
+        <div class="earning-mini">
+
+            <span>
+                Base Salary
+            </span>
+
+            <strong id="heroBase">
+                ₹1,000
+            </strong>
+
+        </div>
+
+
+        <div class="earning-mini">
+
+            <span>
+                Admission Incentive
+            </span>
+
+            <strong id="heroAdmission">
+                ₹0
+            </strong>
+
+        </div>
+
+
+        <div class="earning-mini">
+
+            <span>
+                Visit Reward
+            </span>
+
+            <strong>
+                ₹0
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     TARGET
+===================================================== -->
+
+<div
+    class="target-card"
+    id="targetSection"
+>
+
+
+    <div class="target-head">
+
+
+        <div>
+
+            <div class="target-title">
+                🎯 Monthly Admission Target
+            </div>
+
+            <div class="target-sub">
+                More admissions unlock a higher earning rate.
             </div>
 
         </div>
 
 
-        <!-- ================= INQUIRIES ================= -->
+        <div
+            class="target-number"
+            id="targetNumber"
+        >
+            0 / 3
+        </div>
 
-        <div class="table-card" id="inquirySection">
 
-            <div class="table-top">
+    </div>
 
-                <h2>Student Inquiries</h2>
 
-                <div class="result-text" id="resultText">
-                    Loading inquiries...
+    <div class="progress">
+
+        <div
+            class="progress-fill"
+            id="targetProgress"
+        ></div>
+
+    </div>
+
+
+    <div class="target-foot">
+
+        <span id="targetRange">
+            Level 1 • 0–2 admissions
+        </span>
+
+        <span
+            class="next-target"
+            id="nextTarget"
+        >
+            3 more admissions to Level 2
+        </span>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     LEVEL PLAN
+===================================================== -->
+
+<div class="section-title">
+
+    <h2>
+        🚀 Admission Earning Plan
+    </h2>
+
+    <span>
+        Progressive target system
+    </span>
+
+</div>
+
+
+
+<div class="level-grid">
+
+
+    <!-- LEVEL 1 -->
+
+    <div
+        class="level-card l1"
+        id="level1"
+    >
+
+        <div class="level-top">
+
+            <div class="level-icon">
+                1
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Starter Level
+                </div>
+
+                <div class="level-target">
+                    0–2 Admissions
                 </div>
 
             </div>
 
-            <div class="table-wrap">
+        </div>
 
-                <table>
 
-                    <thead>
-                        <tr>
-                            <th>Student</th>
-                            <th>Course</th>
-                            <th>Source</th>
-                            <th>Coordinator</th>
-                            <th>Status</th>
-                            <th>Follow-up</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
+        <div class="level-rate">
 
-                    <tbody id="inquiryBody"></tbody>
+            <span>
+                Reward per Admission
+            </span>
 
-                </table>
+            <strong id="rate1">
+                ₹50
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- LEVEL 2 -->
+
+    <div
+        class="level-card l2"
+        id="level2"
+    >
+
+        <div class="level-top">
+
+            <div class="level-icon">
+                2
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Growth Level
+                </div>
+
+                <div class="level-target">
+                    3–5 Admissions
+                </div>
 
             </div>
 
         </div>
 
-    </section>
+
+        <div class="level-rate">
+
+            <span>
+                Reward per Admission
+            </span>
+
+            <strong id="rate2">
+                ₹75
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- LEVEL 3 -->
+
+    <div
+        class="level-card l3"
+        id="level3"
+    >
+
+        <div class="level-top">
+
+            <div class="level-icon">
+                3
+            </div>
+
+            <div>
+
+                <div class="level-name">
+                    Pro Level
+                </div>
+
+                <div class="level-target">
+                    6+ Admissions
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="level-rate">
+
+            <span>
+                Reward per Admission
+            </span>
+
+            <strong id="rate3">
+                ₹100
+            </strong>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     COUNTING RULES
+===================================================== -->
+
+<div class="section-title">
+
+    <h2>
+        📌 How Performance Is Counted
+    </h2>
+
+</div>
+
+
+
+<div class="rules">
+
+
+    <div class="rule">
+
+        <div class="rule-icon">
+            👣
+        </div>
+
+        <div class="rule-title">
+            Visit Count
+        </div>
+
+        <div class="rule-text">
+            Counted when status is exactly
+            <b>Visited</b>. One unique mobile number
+            is counted once in the current month.
+        </div>
+
+    </div>
+
+
+    <div class="rule">
+
+        <div class="rule-icon">
+            🎓
+        </div>
+
+        <div class="rule-title">
+            Admission Count
+        </div>
+
+        <div class="rule-text">
+            Counted when status is exactly
+            <b>Converted</b>. One unique mobile number
+            is counted once in the current month.
+        </div>
+
+    </div>
+
+
+    <div class="rule">
+
+        <div class="rule-icon">
+            💰
+        </div>
+
+        <div class="rule-title">
+            Reward Rule
+        </div>
+
+        <div class="rule-text">
+            Visits have <b>₹0 reward</b>.
+            Only current-month unique converted
+            admissions generate incentive.
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     INQUIRIES
+===================================================== -->
+
+<div
+    class="inquiry-section"
+    id="inquirySection"
+>
+
+
+    <div class="inquiry-header">
+
+
+        <div class="inquiry-title-row">
+
+            <div class="inquiry-title">
+                📞 Student Inquiries
+            </div>
+
+            <div
+                class="result"
+                id="resultText"
+            >
+                Loading...
+            </div>
+
+        </div>
+
+
+        <div class="filters">
+
+
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Search name or mobile..."
+                oninput="applyFilters()"
+            >
+
+
+            <select
+                id="courseFilter"
+                onchange="applyFilters()"
+            >
+
+                <option value="">
+                    All Courses
+                </option>
+
+            </select>
+
+
+            <select
+                id="statusFilter"
+                onchange="applyFilters()"
+            >
+
+                <option value="">
+                    All Status
+                </option>
+
+                <option value="new">
+                    New
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="contacted">
+                    Contacted
+                </option>
+
+                <option value="follow-up">
+                    Follow-up
+                </option>
+
+                <option value="visited">
+                    Visited
+                </option>
+
+                <option value="converted">
+                    Converted
+                </option>
+
+                <option value="not-interested">
+                    Not Interested
+                </option>
+
+            </select>
+
+
+            <select
+                id="coordinatorFilter"
+                onchange="applyFilters()"
+            >
+
+                <option value="">
+                    All Coordinators
+                </option>
+
+            </select>
+
+
+            <button
+                class="reset"
+                onclick="resetFilters()"
+            >
+                Reset
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- DESKTOP TABLE -->
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Student
+                    </th>
+
+                    <th>
+                        Course
+                    </th>
+
+                    <th>
+                        Source
+                    </th>
+
+                    <th>
+                        Coordinator
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Follow-up
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody
+                id="inquiryBody"
+            ></tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- MOBILE CARDS -->
+
+    <div
+        class="mobile-list"
+        id="mobileInquiryList"
+    ></div>
+
+
+</div>
+
+
+</div>
 
 </main>
 
+</div>
 
-<!-- ================= MODAL ================= -->
 
-<div class="modal" id="detailModal">
+
+<!-- =====================================================
+     DETAIL MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="detailModal"
+>
+
 
     <div class="modal-box">
 
+
         <div class="modal-head">
 
-            <h2>Student Details</h2>
+            <h2>
+                Student Details
+            </h2>
 
-            <button class="close" onclick="closeModal()">
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
                 ✕
             </button>
 
         </div>
 
+
         <div class="detail-grid">
 
-            <div class="detail">
-                <small>Student Name</small>
-                <strong id="dName">-</strong>
-            </div>
 
             <div class="detail">
-                <small>Mobile</small>
-                <strong id="dMobile">-</strong>
+
+                <small>
+                    Student Name
+                </small>
+
+                <strong id="dName">
+                    -
+                </strong>
+
             </div>
 
-            <div class="detail">
-                <small>Course</small>
-                <strong id="dCourse">-</strong>
-            </div>
 
             <div class="detail">
-                <small>Status</small>
-                <strong id="dStatus">-</strong>
+
+                <small>
+                    Mobile
+                </small>
+
+                <strong id="dMobile">
+                    -
+                </strong>
+
             </div>
 
-            <div class="detail">
-                <small>Source</small>
-                <strong id="dSource">-</strong>
-            </div>
 
             <div class="detail">
-                <small>Coordinator</small>
-                <strong id="dCoordinator">-</strong>
+
+                <small>
+                    Course
+                </small>
+
+                <strong id="dCourse">
+                    -
+                </strong>
+
             </div>
 
-            <div class="detail">
-                <small>Follow-up Date</small>
-                <strong id="dFollowUp">-</strong>
-            </div>
 
             <div class="detail">
-                <small>Created</small>
-                <strong id="dCreated">-</strong>
+
+                <small>
+                    Status
+                </small>
+
+                <strong id="dStatus">
+                    -
+                </strong>
+
             </div>
+
+
+            <div class="detail">
+
+                <small>
+                    Source
+                </small>
+
+                <strong id="dSource">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <small>
+                    Coordinator
+                </small>
+
+                <strong id="dCoordinator">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <small>
+                    Follow-up
+                </small>
+
+                <strong id="dFollowUp">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <small>
+                    Created
+                </small>
+
+                <strong id="dCreated">
+                    -
+                </strong>
+
+            </div>
+
 
             <div class="detail full">
-                <small>Remark</small>
-                <strong id="dRemark">-</strong>
+
+                <small>
+                    Coordinator Remark
+                </small>
+
+                <strong id="dRemark">
+                    -
+                </strong>
+
             </div>
 
+
             <div class="detail full">
-                <small>Telecaller Remark</small>
-                <strong id="dTeleRemark">-</strong>
+
+                <small>
+                    Telecaller Remark
+                </small>
+
+                <strong id="dTeleRemark">
+                    -
+                </strong>
+
             </div>
+
 
         </div>
 
@@ -1300,13 +2278,15 @@ td{
 </div>
 
 
+
 <script>
 
 /* =========================================================
-   FIREBASE / FIRESTORE CONFIG
+   FIRESTORE CONFIG
 ========================================================= */
 
-const FIREBASE_PROJECT_ID = "jobs-2f152";
+const FIREBASE_PROJECT_ID =
+    "jobs-2f152";
 
 const FIREBASE_API_KEY =
     "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
@@ -1317,14 +2297,16 @@ const FIRESTORE_BASE =
     "/databases/(default)/documents";
 
 const FIRESTORE_URL =
-    FIRESTORE_BASE + "/studentInquiries";
+    FIRESTORE_BASE +
+    "/studentInquiries";
 
 const PAYMENT_SETTINGS_URL =
-    FIRESTORE_BASE + "/paymentSettings/telecaller";
+    FIRESTORE_BASE +
+    "/paymentSettings/telecaller";
 
 
 /* =========================================================
-   SESSION CHECK
+   SESSION
 ========================================================= */
 
 const loggedIn =
@@ -1350,36 +2332,58 @@ if(
 
 
 /* =========================================================
-   GLOBAL VARIABLES
+   EARNING CONFIG
+========================================================= */
+
+let BASE_SALARY = 1000;
+
+/*
+    Visits NEVER generate reward.
+*/
+
+const VISIT_REWARD = 0;
+
+/*
+    Admission earning by level.
+*/
+
+let LEVEL1_ADMISSION = 50;
+let LEVEL2_ADMISSION = 75;
+let LEVEL3_ADMISSION = 100;
+
+/*
+    Admission targets.
+*/
+
+const LEVEL2_TARGET = 3;
+const LEVEL3_TARGET = 6;
+
+
+/* =========================================================
+   GLOBAL DATA
 ========================================================= */
 
 let inquiries = [];
 let filteredInquiries = [];
 
-let BASE_SALARY = 1000;
-
-/*
-   Default target-based earning rates
-*/
-
-let TIER1_VISIT = 30;
-let TIER1_ADMISSION = 50;
-
-let TIER2_VISIT = 50;
-let TIER2_ADMISSION = 75;
-
-let TIER3_VISIT = 75;
-let TIER3_ADMISSION = 100;
-
 
 /* =========================================================
-   USER DISPLAY
+   USER UI
 ========================================================= */
 
-document.getElementById("sideUserName").textContent =
+document.getElementById(
+    "sideUserName"
+).textContent =
     telecallerName;
 
-document.getElementById("topAvatar").textContent =
+document.getElementById(
+    "welcomeName"
+).textContent =
+    telecallerName;
+
+document.getElementById(
+    "topAvatar"
+).textContent =
     telecallerName
         .trim()
         .charAt(0)
@@ -1392,7 +2396,10 @@ document.getElementById("topAvatar").textContent =
 
 function escapeHTML(value){
 
-    if(value === null || value === undefined){
+    if(
+        value === null ||
+        value === undefined
+    ){
         return "";
     }
 
@@ -1408,7 +2415,8 @@ function escapeHTML(value){
 function formatMoney(value){
 
     return "₹" +
-        Number(value || 0).toLocaleString("en-IN");
+        Number(value || 0)
+        .toLocaleString("en-IN");
 }
 
 
@@ -1427,28 +2435,34 @@ function currentMonthKey(){
     return (
         d.getFullYear() +
         "-" +
-        String(d.getMonth()+1).padStart(2,"0")
+        String(
+            d.getMonth() + 1
+        ).padStart(2,"0")
     );
 }
 
 
-function isCurrentMonth(dateValue){
+function currentMonthKeyFromDate(
+    value
+){
 
-    if(!dateValue){
-        return false;
+    const d =
+        new Date(value);
+
+    if(
+        isNaN(
+            d.getTime()
+        )
+    ){
+        return "";
     }
-
-    const d = new Date(dateValue);
-
-    if(isNaN(d.getTime())){
-        return false;
-    }
-
-    const now = new Date();
 
     return (
-        d.getFullYear() === now.getFullYear() &&
-        d.getMonth() === now.getMonth()
+        d.getFullYear() +
+        "-" +
+        String(
+            d.getMonth() + 1
+        ).padStart(2,"0")
     );
 }
 
@@ -1459,23 +2473,37 @@ function firestoreValueToJS(field){
         return "";
     }
 
-    if(field.stringValue !== undefined){
+    if(
+        field.stringValue !== undefined
+    ){
         return field.stringValue;
     }
 
-    if(field.integerValue !== undefined){
-        return Number(field.integerValue);
+    if(
+        field.integerValue !== undefined
+    ){
+        return Number(
+            field.integerValue
+        );
     }
 
-    if(field.doubleValue !== undefined){
-        return Number(field.doubleValue);
+    if(
+        field.doubleValue !== undefined
+    ){
+        return Number(
+            field.doubleValue
+        );
     }
 
-    if(field.booleanValue !== undefined){
+    if(
+        field.booleanValue !== undefined
+    ){
         return field.booleanValue;
     }
 
-    if(field.timestampValue !== undefined){
+    if(
+        field.timestampValue !== undefined
+    ){
         return field.timestampValue;
     }
 
@@ -1485,13 +2513,21 @@ function firestoreValueToJS(field){
 
 function convertFirestoreDocument(doc){
 
-    const fields = doc.fields || {};
+    const fields =
+        doc.fields || {};
 
     const item = {};
 
-    Object.keys(fields).forEach(key => {
-        item[key] = firestoreValueToJS(fields[key]);
-    });
+    Object.keys(fields).forEach(
+        key => {
+
+            item[key] =
+                firestoreValueToJS(
+                    fields[key]
+                );
+
+        }
+    );
 
     item._id =
         doc.name
@@ -1504,20 +2540,26 @@ function convertFirestoreDocument(doc){
 
 function toFirestoreValue(value){
 
-    if(typeof value === "number"){
+    if(
+        typeof value === "number"
+    ){
         return {
-            integerValue:String(value)
+            integerValue:
+                String(value)
         };
     }
 
-    if(typeof value === "boolean"){
+    if(
+        typeof value === "boolean"
+    ){
         return {
             booleanValue:value
         };
     }
 
     return {
-        stringValue:String(value ?? "")
+        stringValue:
+            String(value ?? "")
     };
 }
 
@@ -1534,15 +2576,13 @@ async function loadPaymentSettings(){
             await fetch(
                 PAYMENT_SETTINGS_URL +
                 "?key=" +
-                encodeURIComponent(FIREBASE_API_KEY)
+                encodeURIComponent(
+                    FIREBASE_API_KEY
+                )
             );
 
         if(!response.ok){
-
-            console.log(
-                "Payment settings not found. Using defaults."
-            );
-
+            updatePlanUI();
             updateDashboard();
             return;
         }
@@ -1553,74 +2593,64 @@ async function loadPaymentSettings(){
         const fields =
             data.fields || {};
 
+
         if(fields.baseSalary){
+
             BASE_SALARY =
                 Number(
                     firestoreValueToJS(
                         fields.baseSalary
                     )
                 ) || 1000;
+
         }
+
 
         /*
-          Future Admin support:
-          If Admin later saves tier rates,
-          Telecaller page automatically uses them.
+            Future-compatible fields.
         */
 
-        if(fields.tier1VisitIncentive){
-            TIER1_VISIT =
+        if(
+            fields.level1AdmissionIncentive
+        ){
+
+            LEVEL1_ADMISSION =
                 Number(
                     firestoreValueToJS(
-                        fields.tier1VisitIncentive
+                        fields.level1AdmissionIncentive
                     )
                 );
+
         }
 
-        if(fields.tier1AdmissionIncentive){
-            TIER1_ADMISSION =
+
+        if(
+            fields.level2AdmissionIncentive
+        ){
+
+            LEVEL2_ADMISSION =
                 Number(
                     firestoreValueToJS(
-                        fields.tier1AdmissionIncentive
+                        fields.level2AdmissionIncentive
                     )
                 );
+
         }
 
-        if(fields.tier2VisitIncentive){
-            TIER2_VISIT =
+
+        if(
+            fields.level3AdmissionIncentive
+        ){
+
+            LEVEL3_ADMISSION =
                 Number(
                     firestoreValueToJS(
-                        fields.tier2VisitIncentive
+                        fields.level3AdmissionIncentive
                     )
                 );
+
         }
 
-        if(fields.tier2AdmissionIncentive){
-            TIER2_ADMISSION =
-                Number(
-                    firestoreValueToJS(
-                        fields.tier2AdmissionIncentive
-                    )
-                );
-        }
-
-        if(fields.tier3VisitIncentive){
-            TIER3_VISIT =
-                Number(
-                    firestoreValueToJS(
-                        fields.tier3VisitIncentive
-                    )
-                );
-        }
-
-        if(fields.tier3AdmissionIncentive){
-            TIER3_ADMISSION =
-                Number(
-                    firestoreValueToJS(
-                        fields.tier3AdmissionIncentive
-                    )
-                );
-        }
 
         updatePlanUI();
         updateDashboard();
@@ -1628,7 +2658,7 @@ async function loadPaymentSettings(){
     }catch(error){
 
         console.error(
-            "Payment settings error:",
+            "Payment settings:",
             error
         );
 
@@ -1639,7 +2669,7 @@ async function loadPaymentSettings(){
 
 
 /* =========================================================
-   FETCH ALL INQUIRIES
+   LOAD INQUIRIES
 ========================================================= */
 
 async function loadInquiries(){
@@ -1659,11 +2689,13 @@ async function loadInquiries(){
                 );
 
             if(pageToken){
+
                 url +=
                     "&pageToken=" +
                     encodeURIComponent(
                         pageToken
                     );
+
             }
 
             const response =
@@ -1672,7 +2704,7 @@ async function loadInquiries(){
             if(!response.ok){
 
                 throw new Error(
-                    "Firestore request failed: " +
+                    "Firestore error: " +
                     response.status
                 );
             }
@@ -1680,11 +2712,17 @@ async function loadInquiries(){
             const data =
                 await response.json();
 
-            if(Array.isArray(data.documents)){
+            if(
+                Array.isArray(
+                    data.documents
+                )
+            ){
+
                 allDocs =
                     allDocs.concat(
                         data.documents
                     );
+
             }
 
             pageToken =
@@ -1699,9 +2737,8 @@ async function loadInquiries(){
             );
 
 
-        updateCoordinatorFilter();
         updateCourseFilter();
-
+        updateCoordinatorFilter();
         applyFilters();
 
     }catch(error){
@@ -1711,20 +2748,12 @@ async function loadInquiries(){
         document.getElementById(
             "resultText"
         ).textContent =
-            "Unable to load inquiries";
+            "Unable to load";
 
-        document.getElementById(
-            "inquiryBody"
-        ).innerHTML = `
-            <tr>
-                <td colspan="7">
-                    <div class="empty">
-                        <div class="empty-icon">⚠️</div>
-                        <div>Unable to load inquiries.</div>
-                    </div>
-                </td>
-            </tr>
-        `;
+        showEmptyState(
+            "Unable to load inquiries",
+            "Please check your Firestore connection."
+        );
     }
 }
 
@@ -1746,7 +2775,9 @@ function updateCourseFilter(){
     const courses =
         [...new Set(
             inquiries
-                .map(x => x.course)
+                .map(
+                    x => x.course
+                )
                 .filter(Boolean)
         )]
         .sort();
@@ -1754,18 +2785,28 @@ function updateCourseFilter(){
     select.innerHTML =
         `<option value="">All Courses</option>`;
 
-    courses.forEach(course => {
+    courses.forEach(
+        course => {
 
-        const option =
-            document.createElement("option");
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        option.value = course;
-        option.textContent = course;
+            option.value =
+                course;
 
-        select.appendChild(option);
-    });
+            option.textContent =
+                course;
 
-    select.value = current;
+            select.appendChild(
+                option
+            );
+        }
+    );
+
+    select.value =
+        current;
 }
 
 
@@ -1779,10 +2820,13 @@ function updateCoordinatorFilter(){
     const current =
         select.value;
 
-    const coordinators =
+    const names =
         [...new Set(
             inquiries
-                .map(x => x.coordinatorName)
+                .map(
+                    x =>
+                        x.coordinatorName
+                )
                 .filter(Boolean)
         )]
         .sort();
@@ -1790,18 +2834,28 @@ function updateCoordinatorFilter(){
     select.innerHTML =
         `<option value="">All Coordinators</option>`;
 
-    coordinators.forEach(name => {
+    names.forEach(
+        name => {
 
-        const option =
-            document.createElement("option");
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        option.value = name;
-        option.textContent = name;
+            option.value =
+                name;
 
-        select.appendChild(option);
-    });
+            option.textContent =
+                name;
 
-    select.value = current;
+            select.appendChild(
+                option
+            );
+        }
+    );
+
+    select.value =
+        current;
 }
 
 
@@ -1814,7 +2868,8 @@ function applyFilters(){
     const search =
         document.getElementById(
             "searchInput"
-        ).value
+        )
+        .value
         .trim()
         .toLowerCase();
 
@@ -1835,44 +2890,50 @@ function applyFilters(){
 
 
     filteredInquiries =
-        inquiries.filter(item => {
+        inquiries.filter(
+            item => {
 
-            const matchesSearch =
-                !search ||
-                String(
-                    item.studentName || ""
-                )
-                .toLowerCase()
-                .includes(search) ||
+                const name =
+                    String(
+                        item.studentName ||
+                        ""
+                    ).toLowerCase();
 
-                String(
-                    item.mobile || ""
-                )
-                .includes(search);
+                const mobile =
+                    String(
+                        item.mobile ||
+                        ""
+                    );
 
-            const matchesCourse =
-                !course ||
-                item.course === course;
+                const matchesSearch =
+                    !search ||
+                    name.includes(search) ||
+                    mobile.includes(search);
 
-            const matchesStatus =
-                !status ||
-                item.status === status;
+                const matchesCourse =
+                    !course ||
+                    item.course === course;
 
-            const matchesCoordinator =
-                !coordinator ||
-                item.coordinatorName === coordinator;
+                const matchesStatus =
+                    !status ||
+                    item.status === status;
 
-            return (
-                matchesSearch &&
-                matchesCourse &&
-                matchesStatus &&
-                matchesCoordinator
-            );
-        });
+                const matchesCoordinator =
+                    !coordinator ||
+                    item.coordinatorName ===
+                    coordinator;
+
+                return (
+                    matchesSearch &&
+                    matchesCourse &&
+                    matchesStatus &&
+                    matchesCoordinator
+                );
+            }
+        );
 
 
     renderInquiries();
-
     updateDashboard();
 }
 
@@ -1900,15 +2961,96 @@ function resetFilters(){
 
 
 /* =========================================================
-   RENDER TABLE
+   EMPTY STATE
 ========================================================= */
 
-function renderInquiries(){
+function showEmptyState(
+    title,
+    message
+){
 
-    const body =
+    const desktop =
         document.getElementById(
             "inquiryBody"
         );
+
+    const mobile =
+        document.getElementById(
+            "mobileInquiryList"
+        );
+
+    desktop.innerHTML = `
+        <tr>
+            <td colspan="7">
+                <div class="empty">
+                    <div class="empty-icon">📭</div>
+                    <div class="empty-title">
+                        ${escapeHTML(title)}
+                    </div>
+                    <div class="empty-text">
+                        ${escapeHTML(message)}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    `;
+
+    mobile.innerHTML = `
+        <div class="empty">
+            <div class="empty-icon">📭</div>
+            <div class="empty-title">
+                ${escapeHTML(title)}
+            </div>
+            <div class="empty-text">
+                ${escapeHTML(message)}
+            </div>
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   STATUS SELECT HTML
+========================================================= */
+
+function statusOptions(
+    item
+){
+
+    const status =
+        item.status || "new";
+
+    const options = [
+        ["new","New"],
+        ["pending","Pending"],
+        ["contacted","Contacted"],
+        ["follow-up","Follow-up"],
+        ["visited","Visited"],
+        ["converted","Converted"],
+        ["not-interested","Not Interested"]
+    ];
+
+    return options.map(
+        option => {
+
+            return `
+                <option
+                    value="${option[0]}"
+                    ${status === option[0] ? "selected" : ""}
+                >
+                    ${option[1]}
+                </option>
+            `;
+        }
+    ).join("");
+}
+
+
+/* =========================================================
+   RENDER INQUIRIES
+========================================================= */
+
+function renderInquiries(){
 
     document.getElementById(
         "resultText"
@@ -1917,201 +3059,382 @@ function renderInquiries(){
             filteredInquiries.length === 1
                 ? "inquiry"
                 : "inquiries"
-        } found`;
+        }`;
 
 
-    if(!filteredInquiries.length){
+    if(
+        !filteredInquiries.length
+    ){
 
-        body.innerHTML = `
-            <tr>
-                <td colspan="7">
-                    <div class="empty">
-                        <div class="empty-icon">📭</div>
-                        <div>No inquiries found.</div>
-                    </div>
-                </td>
-            </tr>
-        `;
+        showEmptyState(
+            "No inquiries found",
+            "Try changing your search or filters."
+        );
 
         return;
     }
 
 
-    body.innerHTML =
-        filteredInquiries
-            .map(item => {
+    const desktop =
+        document.getElementById(
+            "inquiryBody"
+        );
+
+    const mobile =
+        document.getElementById(
+            "mobileInquiryList"
+        );
+
+
+    desktop.innerHTML =
+        filteredInquiries.map(
+            item => {
 
                 const status =
                     item.status || "new";
 
                 const statusClass =
                     "status-" +
-                    status
-                        .replace(/\s+/g,"-");
-
-
-                const coordinator =
-                    item.coordinatorName ||
-                    "—";
+                    status.replace(
+                        /\s+/g,
+                        "-"
+                    );
 
 
                 return `
-                    <tr>
 
-                        <td>
-                            <div class="student-name">
+                <tr>
+
+                    <td>
+
+                        <div class="student">
+                            ${escapeHTML(
+                                item.studentName ||
+                                "Unknown"
+                            )}
+                        </div>
+
+                        <div class="mobile">
+                            ${escapeHTML(
+                                item.mobile ||
+                                "—"
+                            )}
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            item.course ||
+                            "—"
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            item.source ||
+                            "—"
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            item.coordinatorName ||
+                            "—"
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <select
+                            onchange="
+                                changeStatus(
+                                    '${escapeHTML(item._id)}',
+                                    this.value
+                                )
+                            "
+                        >
+
+                            ${statusOptions(item)}
+
+                        </select>
+
+                        <div style="margin-top:5px">
+
+                            <span
+                                class="
+                                    status
+                                    ${statusClass}
+                                "
+                            >
+                                ${escapeHTML(status)}
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            item.followUpDate ||
+                            "—"
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="action a-call"
+                                onclick="
+                                    callStudent(
+                                        '${escapeHTML(
+                                            item.mobile || ""
+                                        )}'
+                                    )
+                                "
+                            >
+                                📞
+                            </button>
+
+
+                            <button
+                                class="action a-wa"
+                                onclick="
+                                    whatsappStudent(
+                                        '${escapeHTML(
+                                            item.mobile || ""
+                                        )}',
+                                        '${escapeHTML(
+                                            item.studentName || ""
+                                        )}'
+                                    )
+                                "
+                            >
+                                💬
+                            </button>
+
+
+                            <button
+                                class="action a-view"
+                                onclick="
+                                    viewStudent(
+                                        '${escapeHTML(
+                                            item._id
+                                        )}'
+                                    )
+                                "
+                            >
+                                👁
+                            </button>
+
+
+                            <button
+                                class="action a-delete"
+                                onclick="
+                                    deleteInquiry(
+                                        '${escapeHTML(
+                                            item._id
+                                        )}'
+                                    )
+                                "
+                            >
+                                🗑
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+                `;
+
+            }
+        ).join("");
+
+
+    mobile.innerHTML =
+        filteredInquiries.map(
+            item => {
+
+                const status =
+                    item.status || "new";
+
+                const statusClass =
+                    "status-" +
+                    status.replace(
+                        /\s+/g,
+                        "-"
+                    );
+
+
+                return `
+
+                <div class="inquiry-card">
+
+
+                    <div class="inquiry-card-top">
+
+                        <div>
+
+                            <div class="card-name">
                                 ${escapeHTML(
                                     item.studentName ||
                                     "Unknown"
                                 )}
                             </div>
 
-                            <div class="student-mobile">
+                            <div class="card-mobile">
                                 ${escapeHTML(
                                     item.mobile ||
                                     "—"
                                 )}
                             </div>
-                        </td>
 
-                        <td>
-                            ${escapeHTML(
-                                item.course ||
-                                "—"
-                            )}
-                        </td>
+                        </div>
 
-                        <td>
-                            ${escapeHTML(
-                                item.source ||
-                                "—"
-                            )}
-                        </td>
 
-                        <td>
-                            ${escapeHTML(
-                                coordinator
-                            )}
-                        </td>
+                        <span
+                            class="
+                                status
+                                ${statusClass}
+                            "
+                        >
+                            ${escapeHTML(status)}
+                        </span>
 
-                        <td>
-                            <select
-                                style="min-width:125px;"
-                                onchange="changeStatus(
+                    </div>
+
+
+                    <div class="card-course">
+                        ${escapeHTML(
+                            item.course ||
+                            "Course not specified"
+                        )}
+                    </div>
+
+
+                    <div class="card-meta">
+                        Source:
+                        ${escapeHTML(
+                            item.source ||
+                            "—"
+                        )}
+                    </div>
+
+
+                    <div class="card-meta">
+                        Coordinator:
+                        ${escapeHTML(
+                            item.coordinatorName ||
+                            "—"
+                        )}
+                    </div>
+
+
+                    <div class="card-bottom">
+
+
+                        <select
+                            class="card-status-select"
+                            onchange="
+                                changeStatus(
                                     '${escapeHTML(item._id)}',
                                     this.value
-                                )"
+                                )
+                            "
+                        >
+
+                            ${statusOptions(item)}
+
+                        </select>
+
+
+                        <div class="card-actions">
+
+
+                            <button
+                                class="action a-call"
+                                onclick="
+                                    callStudent(
+                                        '${escapeHTML(
+                                            item.mobile || ""
+                                        )}'
+                                    )
+                                "
                             >
-                                <option value="new"
-                                    ${status==="new"?"selected":""}>
-                                    New
-                                </option>
+                                📞
+                            </button>
 
-                                <option value="pending"
-                                    ${status==="pending"?"selected":""}>
-                                    Pending
-                                </option>
 
-                                <option value="contacted"
-                                    ${status==="contacted"?"selected":""}>
-                                    Contacted
-                                </option>
+                            <button
+                                class="action a-wa"
+                                onclick="
+                                    whatsappStudent(
+                                        '${escapeHTML(
+                                            item.mobile || ""
+                                        )}',
+                                        '${escapeHTML(
+                                            item.studentName || ""
+                                        )}'
+                                    )
+                                "
+                            >
+                                💬
+                            </button>
 
-                                <option value="follow-up"
-                                    ${status==="follow-up"?"selected":""}>
-                                    Follow-up
-                                </option>
 
-                                <option value="visited"
-                                    ${status==="visited"?"selected":""}>
-                                    Visited
-                                </option>
+                            <button
+                                class="action a-view"
+                                onclick="
+                                    viewStudent(
+                                        '${escapeHTML(
+                                            item._id
+                                        )}'
+                                    )
+                                "
+                            >
+                                👁
+                            </button>
 
-                                <option value="converted"
-                                    ${status==="converted"?"selected":""}>
-                                    Converted
-                                </option>
 
-                                <option value="not-interested"
-                                    ${status==="not-interested"?"selected":""}>
-                                    Not Interested
-                                </option>
+                            <button
+                                class="action a-delete"
+                                onclick="
+                                    deleteInquiry(
+                                        '${escapeHTML(
+                                            item._id
+                                        )}'
+                                    )
+                                "
+                            >
+                                🗑
+                            </button>
 
-                            </select>
 
-                            <div style="margin-top:5px;">
-                                <span class="status ${statusClass}">
-                                    ${escapeHTML(status)}
-                                </span>
-                            </div>
-                        </td>
+                        </div>
 
-                        <td>
-                            ${escapeHTML(
-                                item.followUpDate ||
-                                "—"
-                            )}
-                        </td>
+                    </div>
 
-                        <td>
 
-                            <div class="actions">
+                </div>
 
-                                <button
-                                    class="action-btn call"
-                                    title="Call"
-                                    onclick="callStudent(
-                                        '${escapeHTML(item.mobile || "")}'
-                                    )"
-                                >
-                                    📞
-                                </button>
-
-                                <button
-                                    class="action-btn whatsapp"
-                                    title="WhatsApp"
-                                    onclick="whatsappStudent(
-                                        '${escapeHTML(item.mobile || "")}',
-                                        '${escapeHTML(item.studentName || "")}'
-                                    )"
-                                >
-                                    💬
-                                </button>
-
-                                <button
-                                    class="action-btn view"
-                                    title="View"
-                                    onclick="viewStudent(
-                                        '${escapeHTML(item._id)}'
-                                    )"
-                                >
-                                    👁
-                                </button>
-
-                                <button
-                                    class="action-btn delete"
-                                    title="Delete"
-                                    onclick="deleteInquiry(
-                                        '${escapeHTML(item._id)}'
-                                    )"
-                                >
-                                    🗑
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
                 `;
 
-            })
-            .join("");
+            }
+        ).join("");
 }
 
 
 /* =========================================================
-   TARGET CALCULATION
+   PERFORMANCE COUNT
 ========================================================= */
 
 function getCurrentMonthPerformance(){
@@ -2119,90 +3442,120 @@ function getCurrentMonthPerformance(){
     const month =
         currentMonthKey();
 
+
+    const currentMonthItems =
+        inquiries.filter(
+            item => {
+
+                return (
+                    item.createdAt &&
+                    currentMonthKeyFromDate(
+                        item.createdAt
+                    ) === month
+                );
+
+            }
+        );
+
+
     /*
-       Only current-month records.
-       Unique mobile numbers prevent duplicate
-       incentive counting.
+        VISIT COUNT
+
+        Current status must be:
+        visited
+
+        Duplicate mobile:
+        counted once.
     */
-
-    const monthItems =
-        inquiries.filter(item => {
-
-            return (
-                item.createdAt &&
-                currentMonthKeyFromDate(
-                    item.createdAt
-                ) === month
-            );
-        });
-
 
     const visitedMobiles =
         new Set();
 
-    const convertedMobiles =
+
+    /*
+        ADMISSION COUNT
+
+        Current status must be:
+        converted
+
+        Duplicate mobile:
+        counted once.
+    */
+
+    const admissionMobiles =
         new Set();
 
 
-    monthItems.forEach(item => {
+    currentMonthItems.forEach(
+        item => {
 
-        const mobile =
-            normalizeMobile(
-                item.mobile
-            );
+            const mobile =
+                normalizeMobile(
+                    item.mobile
+                );
 
-        if(!mobile){
-            return;
+
+            if(!mobile){
+                return;
+            }
+
+
+            if(
+                item.status === "visited"
+            ){
+
+                visitedMobiles.add(
+                    mobile
+                );
+
+            }
+
+
+            if(
+                item.status === "converted"
+            ){
+
+                admissionMobiles.add(
+                    mobile
+                );
+
+            }
+
         }
-
-        if(item.status === "visited"){
-            visitedMobiles.add(mobile);
-        }
-
-        if(item.status === "converted"){
-            convertedMobiles.add(mobile);
-        }
-
-    });
+    );
 
 
     return {
-        visited:visitedMobiles.size,
-        converted:convertedMobiles.size
+
+        visited:
+            visitedMobiles.size,
+
+        admissions:
+            admissionMobiles.size
+
     };
 }
 
 
-function currentMonthKeyFromDate(dateValue){
-
-    const d =
-        new Date(dateValue);
-
-    if(isNaN(d.getTime())){
-        return "";
-    }
-
-    return (
-        d.getFullYear() +
-        "-" +
-        String(
-            d.getMonth()+1
-        ).padStart(2,"0")
-    );
-}
-
-
 /* =========================================================
-   DETERMINE CURRENT LAYER
+   LEVEL
 ========================================================= */
 
-function getCurrentLayer(visited){
+function getCurrentLevel(
+    admissions
+){
 
-    if(visited >= 10){
+    if(
+        admissions >=
+        LEVEL3_TARGET
+    ){
         return 3;
     }
 
-    if(visited >= 5){
+    if(
+        admissions >=
+        LEVEL2_TARGET
+    ){
         return 2;
     }
 
@@ -2210,101 +3563,120 @@ function getCurrentLayer(visited){
 }
 
 
-function getLayerRates(layer){
+function getAdmissionRate(
+    level
+){
 
-    if(layer === 3){
-
-        return {
-            visit:TIER3_VISIT,
-            admission:TIER3_ADMISSION
-        };
+    if(level === 3){
+        return LEVEL3_ADMISSION;
     }
 
-    if(layer === 2){
-
-        return {
-            visit:TIER2_VISIT,
-            admission:TIER2_ADMISSION
-        };
+    if(level === 2){
+        return LEVEL2_ADMISSION;
     }
 
-    return {
-        visit:TIER1_VISIT,
-        admission:TIER1_ADMISSION
-    };
+    return LEVEL1_ADMISSION;
 }
 
 
 /* =========================================================
-   UPDATE TARGET UI
+   TARGET UI
 ========================================================= */
 
-function updateTargetUI(visited){
+function updateTargetUI(
+    admissions
+){
 
-    const layer =
-        getCurrentLayer(
-            visited
+    const level =
+        getCurrentLevel(
+            admissions
         );
 
+
     document.getElementById(
-        "currentLayer"
+        "heroLevel"
     ).textContent =
-        `Layer ${layer}`;
+        `Level ${level}`;
 
 
     let percentage = 0;
-    let rangeText = "";
+    let targetText = "";
     let nextText = "";
+    let targetNumber = "";
 
 
-    if(layer === 1){
+    if(level === 1){
 
         percentage =
             Math.min(
-                (visited / 5) * 100,
+                (
+                    admissions /
+                    LEVEL2_TARGET
+                ) * 100,
                 100
             );
 
-        rangeText =
-            "Target: 1–4";
 
-        if(visited === 0){
+        targetText =
+            "Level 1 • 0–2 admissions";
 
-            nextText =
-                "Start your first visit to enter Layer 1.";
 
-        }else{
+        const remaining =
+            LEVEL2_TARGET -
+            admissions;
 
-            const remaining =
-                5 - visited;
 
-            nextText =
-                `${remaining} more visited student${
-                    remaining === 1 ? "" : "s"
-                } to unlock Layer 2.`;
-        }
+        nextText =
+            `${remaining} more admission${
+                remaining === 1
+                    ? ""
+                    : "s"
+            } to unlock Level 2.`;
+
+
+        targetNumber =
+            `${admissions} / ${LEVEL2_TARGET}`;
 
     }
 
 
-    else if(layer === 2){
+    else if(level === 2){
 
         percentage =
             Math.min(
-                ((visited - 5) / 5) * 100,
+                (
+                    (
+                        admissions -
+                        LEVEL2_TARGET
+                    ) /
+                    (
+                        LEVEL3_TARGET -
+                        LEVEL2_TARGET
+                    )
+                ) * 100,
                 100
             );
 
-        rangeText =
-            "Target: 5–9";
+
+        targetText =
+            "Level 2 • 3–5 admissions";
+
 
         const remaining =
-            10 - visited;
+            LEVEL3_TARGET -
+            admissions;
+
 
         nextText =
-            `${remaining} more visited student${
-                remaining === 1 ? "" : "s"
-            } to unlock Layer 3.`;
+            `${remaining} more admission${
+                remaining === 1
+                    ? ""
+                    : "s"
+            } to unlock Level 3.`;
+
+
+        targetNumber =
+            `${admissions} / ${LEVEL3_TARGET}`;
 
     }
 
@@ -2313,11 +3685,15 @@ function updateTargetUI(visited){
 
         percentage = 100;
 
-        rangeText =
-            "Target: 10+";
+        targetText =
+            "Level 3 • 6+ admissions";
 
         nextText =
-            "🔥 Top earning layer reached. Keep going!";
+            "🔥 Highest earning level unlocked.";
+
+        targetNumber =
+            `${admissions} admissions`;
+
     }
 
 
@@ -2328,17 +3704,9 @@ function updateTargetUI(visited){
 
 
     document.getElementById(
-        "targetProgressText"
-    ).textContent =
-        `${visited} visited student${
-            visited === 1 ? "" : "s"
-        }`;
-
-
-    document.getElementById(
         "targetRange"
     ).textContent =
-        rangeText;
+        targetText;
 
 
     document.getElementById(
@@ -2348,82 +3716,96 @@ function updateTargetUI(visited){
 
 
     document.getElementById(
-        "plan1"
-    ).classList.toggle(
-        "active",
-        layer === 1
-    );
+        "targetNumber"
+    ).textContent =
+        targetNumber;
+
+
+    /*
+        Progressive level visibility.
+    */
 
     document.getElementById(
-        "plan2"
-    ).classList.toggle(
-        "active",
-        layer === 2
+        "level1"
+    ).classList.add(
+        "show"
     );
 
+
     document.getElementById(
-        "plan3"
+        "level2"
     ).classList.toggle(
-        "active",
-        layer === 3
+        "show",
+        level >= 2
+    );
+
+
+    document.getElementById(
+        "level3"
+    ).classList.toggle(
+        "show",
+        level >= 3
+    );
+
+
+    document.getElementById(
+        "level1"
+    ).classList.toggle(
+        "current",
+        level === 1
+    );
+
+
+    document.getElementById(
+        "level2"
+    ).classList.toggle(
+        "current",
+        level === 2
+    );
+
+
+    document.getElementById(
+        "level3"
+    ).classList.toggle(
+        "current",
+        level === 3
     );
 }
 
 
 /* =========================================================
-   UPDATE PLAN UI
+   PLAN UI
 ========================================================= */
 
 function updatePlanUI(){
 
     document.getElementById(
-        "tier1Visit"
+        "rate1"
     ).textContent =
         formatMoney(
-            TIER1_VISIT
-        );
-
-    document.getElementById(
-        "tier1Admission"
-    ).textContent =
-        formatMoney(
-            TIER1_ADMISSION
+            LEVEL1_ADMISSION
         );
 
 
     document.getElementById(
-        "tier2Visit"
+        "rate2"
     ).textContent =
         formatMoney(
-            TIER2_VISIT
-        );
-
-    document.getElementById(
-        "tier2Admission"
-    ).textContent =
-        formatMoney(
-            TIER2_ADMISSION
+            LEVEL2_ADMISSION
         );
 
 
     document.getElementById(
-        "tier3Visit"
+        "rate3"
     ).textContent =
         formatMoney(
-            TIER3_VISIT
-        );
-
-    document.getElementById(
-        "tier3Admission"
-    ).textContent =
-        formatMoney(
-            TIER3_ADMISSION
+            LEVEL3_ADMISSION
         );
 }
 
 
 /* =========================================================
-   UPDATE EARNINGS
+   DASHBOARD
 ========================================================= */
 
 function updateDashboard(){
@@ -2431,35 +3813,49 @@ function updateDashboard(){
     const performance =
         getCurrentMonthPerformance();
 
+
     const visited =
         performance.visited;
 
-    const converted =
-        performance.converted;
+
+    const admissions =
+        performance.admissions;
 
 
-    const layer =
-        getCurrentLayer(
-            visited
-        );
-
-    const rates =
-        getLayerRates(
-            layer
+    const level =
+        getCurrentLevel(
+            admissions
         );
 
 
-    const visitEarning =
-        visited *
-        rates.visit;
+    const rate =
+        getAdmissionRate(
+            level
+        );
+
+
+    /*
+        VISIT REWARD = ZERO
+    */
+
+    const visitReward = 0;
+
+
+    /*
+        ADMISSION EARNING
+    */
 
     const admissionEarning =
-        converted *
-        rates.admission;
+        admissions *
+        rate;
+
+
+    /*
+        TOTAL
+    */
 
     const total =
         Number(BASE_SALARY) +
-        visitEarning +
         admissionEarning;
 
 
@@ -2478,39 +3874,7 @@ function updateDashboard(){
     document.getElementById(
         "convertedCount"
     ).textContent =
-        converted;
-
-
-    document.getElementById(
-        "baseSalaryDisplay"
-    ).textContent =
-        formatMoney(
-            BASE_SALARY
-        );
-
-
-    document.getElementById(
-        "visitEarning"
-    ).textContent =
-        formatMoney(
-            visitEarning
-        );
-
-
-    document.getElementById(
-        "admissionEarning"
-    ).textContent =
-        formatMoney(
-            admissionEarning
-        );
-
-
-    document.getElementById(
-        "totalEarning"
-    ).textContent =
-        formatMoney(
-            total
-        );
+        admissions;
 
 
     document.getElementById(
@@ -2521,24 +3885,33 @@ function updateDashboard(){
         );
 
 
-    updateTargetUI(
-        visited
-    );
+    document.getElementById(
+        "heroTotal"
+    ).textContent =
+        formatMoney(
+            total
+        );
 
-
-    const now =
-        new Date();
 
     document.getElementById(
-        "earningMonth"
+        "heroBase"
     ).textContent =
-        now.toLocaleDateString(
-            "en-IN",
-            {
-                month:"long",
-                year:"numeric"
-            }
+        formatMoney(
+            BASE_SALARY
         );
+
+
+    document.getElementById(
+        "heroAdmission"
+    ).textContent =
+        formatMoney(
+            admissionEarning
+        );
+
+
+    updateTargetUI(
+        admissions
+    );
 }
 
 
@@ -2586,7 +3959,8 @@ async function changeStatus(
 
                 updatedAt:
                     toFirestoreValue(
-                        new Date().toISOString()
+                        new Date()
+                            .toISOString()
                     ),
 
                 telecallerName:
@@ -2598,18 +3972,24 @@ async function changeStatus(
                     toFirestoreValue(
                         telecallerMobile
                     )
+
             }
+
         };
+
+
+        const updateMask =
+            "&updateMask.fieldPaths=status" +
+            "&updateMask.fieldPaths=telecallerStatus" +
+            "&updateMask.fieldPaths=updatedAt" +
+            "&updateMask.fieldPaths=telecallerName" +
+            "&updateMask.fieldPaths=telecallerMobile";
 
 
         const response =
             await fetch(
                 documentUrl +
-                "&updateMask.fieldPaths=status" +
-                "&updateMask.fieldPaths=telecallerStatus" +
-                "&updateMask.fieldPaths=updatedAt" +
-                "&updateMask.fieldPaths=telecallerName" +
-                "&updateMask.fieldPaths=telecallerMobile",
+                updateMask,
                 {
                     method:"PATCH",
                     headers:{
@@ -2626,19 +4006,18 @@ async function changeStatus(
 
         if(!response.ok){
 
-            const errorText =
-                await response.text();
-
             throw new Error(
-                errorText
+                await response.text()
             );
         }
 
 
         const item =
             inquiries.find(
-                x => x._id === docId
+                x =>
+                    x._id === docId
             );
+
 
         if(item){
 
@@ -2649,7 +4028,8 @@ async function changeStatus(
                 newStatus;
 
             item.updatedAt =
-                new Date().toISOString();
+                new Date()
+                    .toISOString();
 
             item.telecallerName =
                 telecallerName;
@@ -2661,9 +4041,12 @@ async function changeStatus(
 
         applyFilters();
 
+
     }catch(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         alert(
             "Unable to update status."
@@ -2678,16 +4061,28 @@ async function changeStatus(
    CALL
 ========================================================= */
 
-function callStudent(mobile){
+function callStudent(
+    mobile
+){
 
-    if(!mobile){
-        alert("Mobile number not available.");
+    const number =
+        normalizeMobile(
+            mobile
+        );
+
+    if(!number){
+
+        alert(
+            "Mobile number not available."
+        );
+
         return;
     }
 
+
     window.location.href =
         "tel:" +
-        normalizeMobile(mobile);
+        number;
 }
 
 
@@ -2705,14 +4100,20 @@ function whatsappStudent(
             mobile
         );
 
+
     if(!number){
-        alert("Mobile number not available.");
+
+        alert(
+            "Mobile number not available."
+        );
+
         return;
     }
 
 
     const message =
         `Hello ${name || "Student"}, this is BlackTerminal Computer Institute. We are contacting you regarding your course inquiry.`;
+
 
     const url =
         "https://wa.me/91" +
@@ -2721,6 +4122,7 @@ function whatsappStudent(
         encodeURIComponent(
             message
         );
+
 
     window.open(
         url,
@@ -2733,12 +4135,17 @@ function whatsappStudent(
    VIEW STUDENT
 ========================================================= */
 
-function viewStudent(docId){
+function viewStudent(
+    docId
+){
 
     const item =
         inquiries.find(
-            x => x._id === docId
+            x =>
+                x._id ===
+                docId
         );
+
 
     if(!item){
         return;
@@ -2748,43 +4155,50 @@ function viewStudent(docId){
     document.getElementById(
         "dName"
     ).textContent =
-        item.studentName || "—";
+        item.studentName ||
+        "—";
 
 
     document.getElementById(
         "dMobile"
     ).textContent =
-        item.mobile || "—";
+        item.mobile ||
+        "—";
 
 
     document.getElementById(
         "dCourse"
     ).textContent =
-        item.course || "—";
+        item.course ||
+        "—";
 
 
     document.getElementById(
         "dStatus"
     ).textContent =
-        item.status || "—";
+        item.status ||
+        "—";
 
 
     document.getElementById(
         "dSource"
     ).textContent =
-        item.source || "—";
+        item.source ||
+        "—";
 
 
     document.getElementById(
         "dCoordinator"
     ).textContent =
-        item.coordinatorName || "—";
+        item.coordinatorName ||
+        "—";
 
 
     document.getElementById(
         "dFollowUp"
     ).textContent =
-        item.followUpDate || "—";
+        item.followUpDate ||
+        "—";
 
 
     document.getElementById(
@@ -2802,13 +4216,15 @@ function viewStudent(docId){
     document.getElementById(
         "dRemark"
     ).textContent =
-        item.remark || "—";
+        item.remark ||
+        "—";
 
 
     document.getElementById(
         "dTeleRemark"
     ).textContent =
-        item.telecallerRemark || "—";
+        item.telecallerRemark ||
+        "—";
 
 
     document.getElementById(
@@ -2833,7 +4249,9 @@ document.getElementById(
     "click",
     function(e){
 
-        if(e.target === this){
+        if(
+            e.target === this
+        ){
             closeModal();
         }
 
@@ -2842,17 +4260,18 @@ document.getElementById(
 
 
 /* =========================================================
-   DELETE INQUIRY
+   DELETE
 ========================================================= */
 
-async function deleteInquiry(docId){
+async function deleteInquiry(
+    docId
+){
 
-    const confirmed =
-        confirm(
+    if(
+        !confirm(
             "Are you sure you want to delete this inquiry?"
-        );
-
-    if(!confirmed){
+        )
+    ){
         return;
     }
 
@@ -2882,30 +4301,29 @@ async function deleteInquiry(docId){
 
         if(!response.ok){
 
-            const errorText =
-                await response.text();
-
             throw new Error(
-                errorText
+                await response.text()
             );
         }
 
 
         inquiries =
             inquiries.filter(
-                x => x._id !== docId
+                x =>
+                    x._id !== docId
             );
 
 
-        updateCoordinatorFilter();
         updateCourseFilter();
-
+        updateCoordinatorFilter();
         applyFilters();
 
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         alert(
             "Unable to delete inquiry."
@@ -2918,12 +4336,22 @@ async function deleteInquiry(docId){
    NAVIGATION
 ========================================================= */
 
+function scrollToTop(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
 function scrollToTarget(){
 
     document.getElementById(
         "targetSection"
     ).scrollIntoView({
-        behavior:"smooth"
+        behavior:"smooth",
+        block:"center"
     });
 }
 
@@ -2933,7 +4361,8 @@ function scrollToInquiries(){
     document.getElementById(
         "inquirySection"
     ).scrollIntoView({
-        behavior:"smooth"
+        behavior:"smooth",
+        block:"start"
     });
 }
 
@@ -2945,6 +4374,8 @@ function scrollToInquiries(){
 async function init(){
 
     updatePlanUI();
+
+    updateDashboard();
 
     await loadPaymentSettings();
 
@@ -2961,19 +4392,10 @@ init();
    AUTO REFRESH
 ========================================================= */
 
-/*
-   Payment settings refresh every 60 seconds.
-*/
-
 setInterval(
     loadPaymentSettings,
     60000
 );
-
-
-/*
-   Inquiry data refresh every 60 seconds.
-*/
 
 setInterval(
     loadInquiries,

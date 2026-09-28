@@ -185,11 +185,17 @@ body{
 ========================= */
 
 .hero{
-    background:linear-gradient(
-        135deg,
-        #111827,
-        #273248
-    );
+    background:
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(124,58,237,.28),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #111827,
+            #273248
+        );
 
     color:#fff;
 
@@ -228,7 +234,7 @@ body{
 .hero p{
     color:#c8cfdb;
     font-size:13px;
-    max-width:720px;
+    max-width:760px;
     line-height:1.6;
 }
 
@@ -379,6 +385,60 @@ body{
 }
 
 /* =========================
+   TELECALLER LEVEL SUMMARY
+========================= */
+
+.tele-level-summary{
+    display:none;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:-10px 0 25px;
+}
+
+.tele-level-summary.show{
+    display:grid;
+}
+
+.level-mini{
+    background:#fff;
+    border:1px solid #e7ebf1;
+    border-radius:15px;
+    padding:16px;
+    position:relative;
+    overflow:hidden;
+}
+
+.level-mini.level-one{
+    border-top:4px solid #10b981;
+}
+
+.level-mini.level-two{
+    border-top:4px solid #2563eb;
+}
+
+.level-mini.level-three{
+    border-top:4px solid #7c3aed;
+}
+
+.level-mini-title{
+    font-size:11px;
+    font-weight:800;
+    color:#687386;
+}
+
+.level-mini-value{
+    font-size:23px;
+    font-weight:900;
+    margin-top:7px;
+}
+
+.level-mini-sub{
+    color:#929bab;
+    font-size:9px;
+    margin-top:4px;
+}
+
+/* =========================
    MAIN CARD
 ========================= */
 
@@ -416,6 +476,10 @@ body{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
+}
+
+.form-grid.telecaller-grid{
+    grid-template-columns:repeat(4,1fr);
 }
 
 .form-group label{
@@ -462,6 +526,85 @@ body{
     font-size:10px;
     color:#98a1af;
     line-height:1.5;
+}
+
+/* =========================
+   LEVEL INPUT CARDS
+========================= */
+
+.level-input-card{
+    border-radius:14px;
+    padding:16px;
+    border:1px solid #e4e8ef;
+}
+
+.level-input-card.level1{
+    background:linear-gradient(
+        145deg,
+        #f0fdf4,
+        #ffffff
+    );
+    border-color:#bbf7d0;
+}
+
+.level-input-card.level2{
+    background:linear-gradient(
+        145deg,
+        #eff6ff,
+        #ffffff
+    );
+    border-color:#bfdbfe;
+}
+
+.level-input-card.level3{
+    background:linear-gradient(
+        145deg,
+        #f5f3ff,
+        #ffffff
+    );
+    border-color:#ddd6fe;
+}
+
+.level-input-header{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:13px;
+}
+
+.level-badge{
+    width:30px;
+    height:30px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:11px;
+    font-weight:900;
+}
+
+.level1 .level-badge{
+    background:#10b981;
+}
+
+.level2 .level-badge{
+    background:#2563eb;
+}
+
+.level3 .level-badge{
+    background:#7c3aed;
+}
+
+.level-input-title{
+    font-size:12px;
+    font-weight:850;
+}
+
+.level-input-target{
+    font-size:9px;
+    color:#8b95a5;
+    margin-top:2px;
 }
 
 /* =========================
@@ -564,6 +707,40 @@ body{
 }
 
 /* =========================
+   TELECALLER INFO
+========================= */
+
+.tele-info{
+    display:none;
+    background:
+        linear-gradient(
+            135deg,
+            #f5f3ff,
+            #eff6ff
+        );
+    border:1px solid #ddd6fe;
+    border-radius:15px;
+    padding:17px;
+    margin-top:20px;
+}
+
+.tele-info.show{
+    display:block;
+}
+
+.tele-info-title{
+    font-size:13px;
+    font-weight:850;
+    margin-bottom:8px;
+}
+
+.tele-info-text{
+    color:#687386;
+    font-size:10px;
+    line-height:1.7;
+}
+
+/* =========================
    LOADING
 ========================= */
 
@@ -589,6 +766,14 @@ body{
    MOBILE
 ========================= */
 
+@media(max-width:1150px){
+
+    .form-grid.telecaller-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
 @media(max-width:1000px){
 
     .summary{
@@ -596,6 +781,10 @@ body{
     }
 
     .form-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .tele-level-summary{
         grid-template-columns:1fr 1fr;
     }
 
@@ -640,12 +829,29 @@ body{
         grid-template-columns:1fr;
     }
 
-    .form-grid{
+    .form-grid,
+    .form-grid.telecaller-grid{
+        grid-template-columns:1fr;
+    }
+
+    .tele-level-summary{
         grid-template-columns:1fr;
     }
 
     .hero h2{
         font-size:20px;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .button-row{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
     }
 
 }
@@ -767,7 +973,7 @@ body{
             </h1>
 
             <p>
-                Manage Coordinator and Telecaller salary and incentive rates
+                Manage staff salary and performance-based incentives
             </p>
 
         </div>
@@ -813,8 +1019,8 @@ body{
 
     <p>
         Configure salary and incentive rates separately for Coordinators
-        and Telecallers. Changes saved here are automatically used by
-        the respective staff panels.
+        and Telecallers. Telecaller admission incentives can be managed
+        independently for Level 1, Level 2 and Level 3.
     </p>
 
 </div>
@@ -855,7 +1061,7 @@ body{
                     </h3>
 
                     <p>
-                        Coordinator salary settings
+                        Coordinator salary and incentive settings
                     </p>
 
                 </div>
@@ -890,7 +1096,7 @@ body{
                     </h3>
 
                     <p>
-                        Telecaller salary settings
+                        Three-level admission earning system
                     </p>
 
                 </div>
@@ -936,10 +1142,14 @@ body{
     </div>
 
 
-    <div class="summary-card">
+    <div class="summary-card"
+         id="summarySecondCard">
 
-        <div class="summary-label">
+        <div class="summary-label"
+             id="summarySecondLabel">
+
             CURRENT VISIT INCENTIVE
+
         </div>
 
         <div class="summary-value"
@@ -949,8 +1159,11 @@ body{
 
         </div>
 
-        <div class="summary-sub">
+        <div class="summary-sub"
+             id="summarySecondSub">
+
             Per unique visited student
+
         </div>
 
     </div>
@@ -958,8 +1171,11 @@ body{
 
     <div class="summary-card">
 
-        <div class="summary-label">
+        <div class="summary-label"
+             id="summaryThirdLabel">
+
             CURRENT ADMISSION INCENTIVE
+
         </div>
 
         <div class="summary-value"
@@ -969,8 +1185,11 @@ body{
 
         </div>
 
-        <div class="summary-sub">
+        <div class="summary-sub"
+             id="summaryThirdSub">
+
             Per unique converted student
+
         </div>
 
     </div>
@@ -980,7 +1199,78 @@ body{
 
 
 <!-- =====================================================
-     PAYMENT SETTINGS
+     TELECALLER LEVEL QUICK VIEW
+===================================================== -->
+
+<div class="tele-level-summary"
+     id="teleLevelSummary">
+
+
+    <div class="level-mini level-one">
+
+        <div class="level-mini-title">
+            LEVEL 1
+        </div>
+
+        <div class="level-mini-value"
+             id="quickLevel1">
+
+            ₹50
+
+        </div>
+
+        <div class="level-mini-sub">
+            0–2 Admissions
+        </div>
+
+    </div>
+
+
+    <div class="level-mini level-two">
+
+        <div class="level-mini-title">
+            LEVEL 2
+        </div>
+
+        <div class="level-mini-value"
+             id="quickLevel2">
+
+            ₹75
+
+        </div>
+
+        <div class="level-mini-sub">
+            3–5 Admissions
+        </div>
+
+    </div>
+
+
+    <div class="level-mini level-three">
+
+        <div class="level-mini-title">
+            LEVEL 3
+        </div>
+
+        <div class="level-mini-value"
+             id="quickLevel3">
+
+            ₹100
+
+        </div>
+
+        <div class="level-mini-sub">
+            6+ Admissions
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     PAYMENT SETTINGS CARD
 ===================================================== -->
 
 <div class="card">
@@ -999,12 +1289,13 @@ body{
 
         </div>
 
-        <span style="
-            font-size:11px;
-            color:#8a94a6;
-            text-align:right;
-        "
-        id="lastUpdated">
+        <span
+            style="
+                font-size:11px;
+                color:#8a94a6;
+                text-align:right;
+            "
+            id="lastUpdated">
 
             Not loaded
 
@@ -1016,7 +1307,14 @@ body{
     <form id="paymentForm">
 
 
-        <div class="form-grid">
+        <!-- =============================================
+             COORDINATOR FORM
+        ============================================== -->
+
+        <div
+            class="form-grid"
+            id="coordinatorForm"
+        >
 
 
             <!-- BASE -->
@@ -1045,7 +1343,7 @@ body{
                 </div>
 
                 <div class="help">
-                    Fixed monthly amount paid to the selected staff role.
+                    Fixed monthly amount paid to the Coordinator.
                 </div>
 
             </div>
@@ -1118,6 +1416,205 @@ body{
         </div>
 
 
+        <!-- =============================================
+             TELECALLER FORM
+        ============================================== -->
+
+        <div
+            class="form-grid telecaller-grid"
+            id="telecallerForm"
+            style="display:none;"
+        >
+
+
+            <!-- BASE SALARY -->
+
+            <div class="form-group">
+
+                <label>
+                    Monthly Base Salary
+                </label>
+
+                <div class="input-wrap">
+
+                    <span class="currency">
+                        ₹
+                    </span>
+
+                    <input
+                        type="number"
+                        id="teleBaseSalary"
+                        min="0"
+                        step="1"
+                        placeholder="1000"
+                    >
+
+                </div>
+
+                <div class="help">
+                    Fixed monthly Telecaller salary.
+                </div>
+
+            </div>
+
+
+            <!-- LEVEL 1 -->
+
+            <div
+                class="level-input-card level1"
+            >
+
+                <div class="level-input-header">
+
+                    <div class="level-badge">
+                        1
+                    </div>
+
+                    <div>
+
+                        <div class="level-input-title">
+                            Level 1 Admission
+                        </div>
+
+                        <div class="level-input-target">
+                            0–2 Admissions
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-wrap">
+
+                    <span class="currency">
+                        ₹
+                    </span>
+
+                    <input
+                        type="number"
+                        id="level1Admission"
+                        min="0"
+                        step="1"
+                        placeholder="50"
+                    >
+
+                </div>
+
+                <div class="help">
+                    Reward for each unique Converted admission at Level 1.
+                </div>
+
+            </div>
+
+
+            <!-- LEVEL 2 -->
+
+            <div
+                class="level-input-card level2"
+            >
+
+                <div class="level-input-header">
+
+                    <div class="level-badge">
+                        2
+                    </div>
+
+                    <div>
+
+                        <div class="level-input-title">
+                            Level 2 Admission
+                        </div>
+
+                        <div class="level-input-target">
+                            3–5 Admissions
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-wrap">
+
+                    <span class="currency">
+                        ₹
+                    </span>
+
+                    <input
+                        type="number"
+                        id="level2Admission"
+                        min="0"
+                        step="1"
+                        placeholder="75"
+                    >
+
+                </div>
+
+                <div class="help">
+                    Reward for each unique Converted admission at Level 2.
+                </div>
+
+            </div>
+
+
+            <!-- LEVEL 3 -->
+
+            <div
+                class="level-input-card level3"
+            >
+
+                <div class="level-input-header">
+
+                    <div class="level-badge">
+                        3
+                    </div>
+
+                    <div>
+
+                        <div class="level-input-title">
+                            Level 3 Admission
+                        </div>
+
+                        <div class="level-input-target">
+                            6+ Admissions
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="input-wrap">
+
+                    <span class="currency">
+                        ₹
+                    </span>
+
+                    <input
+                        type="number"
+                        id="level3Admission"
+                        min="0"
+                        step="1"
+                        placeholder="100"
+                    >
+
+                </div>
+
+                <div class="help">
+                    Reward for each unique Converted admission at Level 3.
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =============================================
+             BUTTONS
+        ============================================== -->
+
         <div class="button-row">
 
             <button
@@ -1145,12 +1642,17 @@ body{
     </form>
 
 
-    <!-- PAYMENT RULE -->
+    <!-- =============================================
+         COORDINATOR RULE
+    ============================================== -->
 
-    <div class="rule-box">
+    <div
+        class="rule-box"
+        id="coordinatorRule"
+    >
 
         <div class="rule-title">
-            Active Payment Structure
+            Active Coordinator Payment Structure
         </div>
 
 
@@ -1200,11 +1702,146 @@ body{
 
     </div>
 
+
+    <!-- =============================================
+         TELECALLER RULE
+    ============================================== -->
+
+    <div
+        class="rule-box"
+        id="telecallerRule"
+        style="display:none;"
+    >
+
+        <div class="rule-title">
+            Active Telecaller Admission Earning Structure
+        </div>
+
+
+        <div class="rule-list">
+
+
+            <div class="rule-item">
+
+                <span>
+                    Monthly Base Salary
+                </span>
+
+                <strong id="teleRuleBase">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div class="rule-item">
+
+                <span>
+                    Level 1 · 0–2 Admissions
+                </span>
+
+                <strong id="teleRuleLevel1">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div class="rule-item">
+
+                <span>
+                    Level 2 · 3–5 Admissions
+                </span>
+
+                <strong id="teleRuleLevel2">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div class="rule-item">
+
+                <span>
+                    Level 3 · 6+ Admissions
+                </span>
+
+                <strong id="teleRuleLevel3">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div class="rule-item">
+
+                <span>
+                    Visit Reward
+                </span>
+
+                <strong>
+                    ₹0
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =============================================
+         TELECALLER INFO
+    ============================================== -->
+
+    <div
+        class="tele-info"
+        id="teleInfo"
+    >
+
+        <div class="tele-info-title">
+            🎯 Telecaller Target System
+        </div>
+
+        <div class="tele-info-text">
+
+            <b>Level 1:</b>
+            0–2 unique admissions.
+            Each converted admission receives the Level 1 rate.
+
+            <br>
+
+            <b>Level 2:</b>
+            3–5 unique admissions.
+            Each converted admission receives the Level 2 rate.
+
+            <br>
+
+            <b>Level 3:</b>
+            6+ unique admissions.
+            Each converted admission receives the Level 3 rate.
+
+            <br><br>
+
+            Visits do not generate incentive.
+            Only unique current-month Converted admissions are used
+            for Telecaller admission earning.
+
+            <br>
+
+            The Telecaller page automatically reads these rates from
+            the Admin payment settings.
+
+        </div>
+
+    </div>
+
 </div>
 
 
 <!-- =====================================================
-     INFORMATION
+     GENERAL INFORMATION
 ===================================================== -->
 
 <div class="card">
@@ -1214,11 +1851,11 @@ body{
         <div>
 
             <h3>
-                How Staff Payment Works
+                Payment Rules
             </h3>
 
             <p>
-                Current payment calculation rules
+                Current system calculation rules
             </p>
 
         </div>
@@ -1229,10 +1866,10 @@ body{
     <div class="info-box">
 
         <strong>
-            Payment calculation:
+            Coordinator:
         </strong>
 
-        <br><br>
+        <br>
 
         Total Payable =
         Base Salary
@@ -1243,22 +1880,34 @@ body{
 
         <br><br>
 
-        Raw inquiries do not generate incentive.
-
-        <br>
-
-        Duplicate mobile numbers are not counted twice
-        for the same incentive category.
-
-        <br>
-
-        Payment is calculated for the current month.
-
-        <br>
-
         <strong>
-            Coordinator settings and Telecaller settings are stored separately.
+            Telecaller:
         </strong>
+
+        <br>
+
+        Total Payable =
+        Base Salary
+        +
+        (Unique Converted Admissions × Active Level Admission Rate)
+
+        <br><br>
+
+        Telecaller visits have
+        <strong>₹0 reward</strong>.
+
+        <br>
+
+        Duplicate mobile numbers are counted only once
+        within the same incentive category.
+
+        <br>
+
+        Only current-month performance is used.
+
+        <br>
+
+        Raw inquiries do not generate incentive.
 
     </div>
 
@@ -1279,7 +1928,6 @@ body{
 
 
 <script>
-
 
 /* =========================================================
    FIREBASE CONFIGURATION
@@ -1328,6 +1976,20 @@ const DEFAULT_VISIT =
 
 const DEFAULT_ADMISSION =
     50;
+
+
+/*
+    Telecaller defaults
+*/
+
+const DEFAULT_LEVEL1 =
+    50;
+
+const DEFAULT_LEVEL2 =
+    75;
+
+const DEFAULT_LEVEL3 =
+    100;
 
 
 /* =========================================================
@@ -1480,6 +2142,26 @@ function integerValue(
 
 
 /* =========================================================
+   FIRESTORE STRING VALUE
+========================================================= */
+
+function stringValue(
+    value
+){
+
+    return {
+
+        stringValue:
+            String(
+                value || ""
+            )
+
+    };
+
+}
+
+
+/* =========================================================
    STATUS
 ========================================================= */
 
@@ -1536,9 +2218,164 @@ function updateRoleText(){
             "settingsDescription"
         )
         .textContent =
-        "Update the active " +
-        name +
-        " payment structure.";
+        currentStaff ===
+        "telecaller"
+
+        ?
+
+        "Manage Telecaller base salary and three-level admission incentives."
+
+        :
+
+        "Update the active Coordinator payment structure.";
+
+}
+
+
+/* =========================================================
+   UPDATE FORM VISIBILITY
+========================================================= */
+
+function updateFormVisibility(){
+
+    const coordinator =
+        currentStaff ===
+        "coordinator";
+
+
+    document
+        .getElementById(
+            "coordinatorForm"
+        )
+        .style.display =
+        coordinator
+            ? "grid"
+            : "none";
+
+
+    document
+        .getElementById(
+            "telecallerForm"
+        )
+        .style.display =
+        coordinator
+            ? "none"
+            : "grid";
+
+
+    document
+        .getElementById(
+            "coordinatorRule"
+        )
+        .style.display =
+        coordinator
+            ? "block"
+            : "none";
+
+
+    document
+        .getElementById(
+            "telecallerRule"
+        )
+        .style.display =
+        coordinator
+            ? "none"
+            : "block";
+
+
+    document
+        .getElementById(
+            "teleInfo"
+        )
+        .classList.toggle(
+            "show",
+            !coordinator
+        );
+
+
+    document
+        .getElementById(
+            "teleLevelSummary"
+        )
+        .classList.toggle(
+            "show",
+            !coordinator
+        );
+
+
+    /*
+        Summary labels
+    */
+
+    if(coordinator){
+
+        document
+            .getElementById(
+                "summarySecondLabel"
+            )
+            .textContent =
+            "CURRENT VISIT INCENTIVE";
+
+
+        document
+            .getElementById(
+                "summarySecondSub"
+            )
+            .textContent =
+            "Per unique visited student";
+
+
+        document
+            .getElementById(
+                "summaryThirdLabel"
+            )
+            .textContent =
+            "CURRENT ADMISSION INCENTIVE";
+
+
+        document
+            .getElementById(
+                "summaryThirdSub"
+            )
+            .textContent =
+            "Per unique converted student";
+
+    }
+
+    else{
+
+        document
+            .getElementById(
+                "summarySecondLabel"
+            )
+            .textContent =
+            "LEVEL 1 ADMISSION";
+
+
+        document
+            .getElementById(
+                "summarySecondSub"
+            )
+            .textContent =
+            "0–2 admissions";
+
+
+        document
+            .getElementById(
+                "summaryThirdLabel"
+            )
+            .textContent =
+            "LEVEL 2 ADMISSION";
+
+
+        document
+            .getElementById(
+                "summaryThirdSub"
+            )
+            .textContent =
+            "3–5 admissions";
+
+    }
 
 }
 
@@ -1551,106 +2388,290 @@ function updateUI(
     settings
 ){
 
-    const base =
-        Number(
-            settings.baseSalary
-        ) || 0;
+    if(
+        currentStaff ===
+        "coordinator"
+    ){
+
+        const base =
+            Number(
+                settings.baseSalary
+            ) || 0;
 
 
-    const visit =
-        Number(
-            settings.visitIncentive
-        ) || 0;
+        const visit =
+            Number(
+                settings.visitIncentive
+            ) || 0;
 
 
-    const admission =
-        Number(
-            settings.admissionIncentive
-        ) || 0;
+        const admission =
+            Number(
+                settings.admissionIncentive
+            ) || 0;
 
 
-    document
-        .getElementById(
-            "baseSalary"
-        )
-        .value =
-        base;
+        document
+            .getElementById(
+                "baseSalary"
+            )
+            .value =
+            base;
 
 
-    document
-        .getElementById(
-            "visitIncentive"
-        )
-        .value =
-        visit;
+        document
+            .getElementById(
+                "visitIncentive"
+            )
+            .value =
+            visit;
 
 
-    document
-        .getElementById(
-            "admissionIncentive"
-        )
-        .value =
-        admission;
+        document
+            .getElementById(
+                "admissionIncentive"
+            )
+            .value =
+            admission;
 
 
-    document
-        .getElementById(
-            "summaryBase"
-        )
-        .textContent =
-        formatRupee(
-            base
-        );
+        document
+            .getElementById(
+                "summaryBase"
+            )
+            .textContent =
+            formatRupee(base);
 
 
-    document
-        .getElementById(
-            "summaryVisit"
-        )
-        .textContent =
-        formatRupee(
-            visit
-        );
+        document
+            .getElementById(
+                "summaryVisit"
+            )
+            .textContent =
+            formatRupee(visit);
 
 
-    document
-        .getElementById(
-            "summaryAdmission"
-        )
-        .textContent =
-        formatRupee(
-            admission
-        );
+        document
+            .getElementById(
+                "summaryAdmission"
+            )
+            .textContent =
+            formatRupee(admission);
 
 
-    document
-        .getElementById(
-            "ruleBase"
-        )
-        .textContent =
-        formatRupee(
-            base
-        );
+        document
+            .getElementById(
+                "ruleBase"
+            )
+            .textContent =
+            formatRupee(base);
 
 
-    document
-        .getElementById(
-            "ruleVisit"
-        )
-        .textContent =
-        formatRupee(
-            visit
-        );
+        document
+            .getElementById(
+                "ruleVisit"
+            )
+            .textContent =
+            formatRupee(visit);
 
 
-    document
-        .getElementById(
-            "ruleAdmission"
-        )
-        .textContent =
-        formatRupee(
-            admission
-        );
+        document
+            .getElementById(
+                "ruleAdmission"
+            )
+            .textContent =
+            formatRupee(admission);
+
+    }
+
+    else{
+
+        const base =
+            Number(
+                settings.baseSalary
+            ) || 0;
+
+
+        const level1 =
+            Number(
+                settings.level1AdmissionIncentive
+            );
+
+
+        const level2 =
+            Number(
+                settings.level2AdmissionIncentive
+            );
+
+
+        const level3 =
+            Number(
+                settings.level3AdmissionIncentive
+            );
+
+
+        const safeLevel1 =
+            Number.isFinite(level1)
+                ? level1
+                : DEFAULT_LEVEL1;
+
+
+        const safeLevel2 =
+            Number.isFinite(level2)
+                ? level2
+                : DEFAULT_LEVEL2;
+
+
+        const safeLevel3 =
+            Number.isFinite(level3)
+                ? level3
+                : DEFAULT_LEVEL3;
+
+
+        /*
+            Telecaller form
+        */
+
+        document
+            .getElementById(
+                "teleBaseSalary"
+            )
+            .value =
+            base;
+
+
+        document
+            .getElementById(
+                "level1Admission"
+            )
+            .value =
+            safeLevel1;
+
+
+        document
+            .getElementById(
+                "level2Admission"
+            )
+            .value =
+            safeLevel2;
+
+
+        document
+            .getElementById(
+                "level3Admission"
+            )
+            .value =
+            safeLevel3;
+
+
+        /*
+            Summary
+        */
+
+        document
+            .getElementById(
+                "summaryBase"
+            )
+            .textContent =
+            formatRupee(base);
+
+
+        document
+            .getElementById(
+                "summaryVisit"
+            )
+            .textContent =
+            formatRupee(
+                safeLevel1
+            );
+
+
+        document
+            .getElementById(
+                "summaryAdmission"
+            )
+            .textContent =
+            formatRupee(
+                safeLevel2
+            );
+
+
+        /*
+            Quick Level Cards
+        */
+
+        document
+            .getElementById(
+                "quickLevel1"
+            )
+            .textContent =
+            formatRupee(
+                safeLevel1
+            );
+
+
+        document
+            .getElementById(
+                "quickLevel2"
+            )
+            .textContent =
+            formatRupee(
+                safeLevel2
+            );
+
+
+        document
+            .getElementById(
+                "quickLevel3"
+            )
+            .textContent =
+            formatRupee(
+                safeLevel3
+            );
+
+
+        /*
+            Telecaller rule
+        */
+
+        document
+            .getElementById(
+                "teleRuleBase"
+            )
+            .textContent =
+            formatRupee(base);
+
+
+        document
+            .getElementById(
+                "teleRuleLevel1"
+            )
+            .textContent =
+            formatRupee(
+                safeLevel1
+            );
+
+
+        document
+            .getElementById(
+                "teleRuleLevel2"
+            )
+            .textContent =
+            formatRupee(
+                safeLevel2
+            );
+
+
+        document
+            .getElementById(
+                "teleRuleLevel3"
+            )
+            .textContent =
+            formatRupee(
+                safeLevel3
+            );
+
+    }
 
 }
 
@@ -1685,7 +2706,7 @@ async function(
         .classList.toggle(
             "active",
             staff ===
-                "coordinator"
+            "coordinator"
         );
 
 
@@ -1696,12 +2717,13 @@ async function(
         .classList.toggle(
             "active",
             staff ===
-                "telecaller"
+            "telecaller"
         );
 
 
     updateRoleText();
 
+    updateFormVisibility();
 
     await loadCurrentStaffSettings();
 
@@ -1709,7 +2731,7 @@ async function(
 
 
 /* =========================================================
-   LOAD CURRENT STAFF SETTINGS
+   LOAD SETTINGS
 ========================================================= */
 
 window.loadCurrentStaffSettings =
@@ -1741,34 +2763,54 @@ async function(){
             );
 
 
+        /*
+            Document does not exist.
+        */
+
         if(
             response.status ===
             404
         ){
 
-            /*
-             * Settings document does not exist.
-             * Show defaults without creating
-             * the document automatically.
-             */
+            if(
+                currentStaff ===
+                "coordinator"
+            ){
 
-            const defaults = {
+                updateUI({
 
-                baseSalary:
-                    DEFAULT_BASE,
+                    baseSalary:
+                        DEFAULT_BASE,
 
-                visitIncentive:
-                    DEFAULT_VISIT,
+                    visitIncentive:
+                        DEFAULT_VISIT,
 
-                admissionIncentive:
-                    DEFAULT_ADMISSION
+                    admissionIncentive:
+                        DEFAULT_ADMISSION
 
-            };
+                });
 
+            }
 
-            updateUI(
-                defaults
-            );
+            else{
+
+                updateUI({
+
+                    baseSalary:
+                        DEFAULT_BASE,
+
+                    level1AdmissionIncentive:
+                        DEFAULT_LEVEL1,
+
+                    level2AdmissionIncentive:
+                        DEFAULT_LEVEL2,
+
+                    level3AdmissionIncentive:
+                        DEFAULT_LEVEL3
+
+                });
+
+            }
 
 
             document
@@ -1781,7 +2823,7 @@ async function(){
 
             showStatus(
                 staffName +
-                " payment settings have not been created yet. Default values are shown.",
+                " settings are not created yet. Default values are shown.",
                 "info"
             );
 
@@ -1845,6 +2887,7 @@ async function(){
                 );
 
         }
+
         else{
 
             document
@@ -1895,118 +2938,304 @@ paymentForm.addEventListener(
         event.preventDefault();
 
 
-        const base =
-            Number(
-                document
-                    .getElementById(
-                        "baseSalary"
-                    )
-                    .value
-            );
-
-
-        const visit =
-            Number(
-                document
-                    .getElementById(
-                        "visitIncentive"
-                    )
-                    .value
-            );
-
-
-        const admission =
-            Number(
-                document
-                    .getElementById(
-                        "admissionIncentive"
-                    )
-                    .value
-            );
-
-
-        /* =========================
-           VALIDATION
-        ========================= */
-
-        if(
-            !Number.isFinite(base) ||
-            base < 0
-        ){
-
-            showStatus(
-                "Please enter a valid Base Salary.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(
-            !Number.isFinite(visit) ||
-            visit < 0
-        ){
-
-            showStatus(
-                "Please enter a valid Visit Incentive.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(
-            !Number.isFinite(admission) ||
-            admission < 0
-        ){
-
-            showStatus(
-                "Please enter a valid Admission Incentive.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
         const staffName =
             getStaffName();
 
 
-        /* =========================
-           CONFIRM
-        ========================= */
+        let payloadFields = {};
 
-        const confirmed =
-            confirm(
-                "Save " +
-                staffName +
-                " payment settings?\n\n" +
 
-                "Base Salary: " +
-                formatRupee(base) +
-
-                "\nVisited Student: " +
-                formatRupee(visit) +
-
-                "\nAdmission: " +
-                formatRupee(admission)
-            );
-
+        /*
+        =====================================================
+        COORDINATOR
+        =====================================================
+        */
 
         if(
-            !confirmed
+            currentStaff ===
+            "coordinator"
         ){
 
-            return;
+            const base =
+                Number(
+                    document
+                        .getElementById(
+                            "baseSalary"
+                        )
+                        .value
+                );
+
+
+            const visit =
+                Number(
+                    document
+                        .getElementById(
+                            "visitIncentive"
+                        )
+                        .value
+                );
+
+
+            const admission =
+                Number(
+                    document
+                        .getElementById(
+                            "admissionIncentive"
+                        )
+                        .value
+                );
+
+
+            if(
+                !Number.isFinite(base) ||
+                base < 0
+            ){
+
+                showStatus(
+                    "Please enter a valid Base Salary.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !Number.isFinite(visit) ||
+                visit < 0
+            ){
+
+                showStatus(
+                    "Please enter a valid Visit Incentive.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !Number.isFinite(admission) ||
+                admission < 0
+            ){
+
+                showStatus(
+                    "Please enter a valid Admission Incentive.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Save Coordinator payment settings?\n\n" +
+
+                    "Base Salary: " +
+                    formatRupee(base) +
+
+                    "\nVisited Student: " +
+                    formatRupee(visit) +
+
+                    "\nAdmission: " +
+                    formatRupee(admission)
+                );
+
+
+            if(!confirmed){
+                return;
+            }
+
+
+            payloadFields = {
+
+                baseSalary:
+                    integerValue(
+                        base
+                    ),
+
+                visitIncentive:
+                    integerValue(
+                        visit
+                    ),
+
+                admissionIncentive:
+                    integerValue(
+                        admission
+                    )
+
+            };
 
         }
 
+
+        /*
+        =====================================================
+        TELECALLER
+        =====================================================
+        */
+
+        else{
+
+            const base =
+                Number(
+                    document
+                        .getElementById(
+                            "teleBaseSalary"
+                        )
+                        .value
+                );
+
+
+            const level1 =
+                Number(
+                    document
+                        .getElementById(
+                            "level1Admission"
+                        )
+                        .value
+                );
+
+
+            const level2 =
+                Number(
+                    document
+                        .getElementById(
+                            "level2Admission"
+                        )
+                        .value
+                );
+
+
+            const level3 =
+                Number(
+                    document
+                        .getElementById(
+                            "level3Admission"
+                        )
+                        .value
+                );
+
+
+            if(
+                !Number.isFinite(base) ||
+                base < 0
+            ){
+
+                showStatus(
+                    "Please enter a valid Telecaller Base Salary.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !Number.isFinite(level1) ||
+                level1 < 0
+            ){
+
+                showStatus(
+                    "Please enter a valid Level 1 Admission Incentive.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !Number.isFinite(level2) ||
+                level2 < 0
+            ){
+
+                showStatus(
+                    "Please enter a valid Level 2 Admission Incentive.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !Number.isFinite(level3) ||
+                level3 < 0
+            ){
+
+                showStatus(
+                    "Please enter a valid Level 3 Admission Incentive.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Save Telecaller payment settings?\n\n" +
+
+                    "Base Salary: " +
+                    formatRupee(base) +
+
+                    "\nLevel 1 Admission: " +
+                    formatRupee(level1) +
+
+                    "\nLevel 2 Admission: " +
+                    formatRupee(level2) +
+
+                    "\nLevel 3 Admission: " +
+                    formatRupee(level3) +
+
+                    "\nVisit Reward: ₹0"
+                );
+
+
+            if(!confirmed){
+                return;
+            }
+
+
+            payloadFields = {
+
+                baseSalary:
+                    integerValue(
+                        base
+                    ),
+
+                level1AdmissionIncentive:
+                    integerValue(
+                        level1
+                    ),
+
+                level2AdmissionIncentive:
+                    integerValue(
+                        level2
+                    ),
+
+                level3AdmissionIncentive:
+                    integerValue(
+                        level3
+                    )
+
+            };
+
+        }
+
+
+        /* =================================================
+           SAVE
+        ================================================= */
 
         saveBtn.disabled =
             true;
@@ -2028,31 +3257,18 @@ paymentForm.addEventListener(
                 .toISOString();
 
 
+        payloadFields.updatedAt = {
+
+            timestampValue:
+                updatedAt
+
+        };
+
+
         const payload = {
 
-            fields:{
-
-                baseSalary:
-                    integerValue(
-                        base
-                    ),
-
-                visitIncentive:
-                    integerValue(
-                        visit
-                    ),
-
-                admissionIncentive:
-                    integerValue(
-                        admission
-                    ),
-
-                updatedAt:{
-                    timestampValue:
-                        updatedAt
-                }
-
-            }
+            fields:
+                payloadFields
 
         };
 
@@ -2105,21 +3321,97 @@ paymentForm.addEventListener(
             }
 
 
-            updateUI({
+            /*
+                Update local UI
+            */
 
-                baseSalary:
-                    base,
+            if(
+                currentStaff ===
+                "coordinator"
+            ){
 
-                visitIncentive:
-                    visit,
+                updateUI({
 
-                admissionIncentive:
-                    admission,
+                    baseSalary:
+                        Number(
+                            document
+                                .getElementById(
+                                    "baseSalary"
+                                )
+                                .value
+                        ),
 
-                updatedAt:
-                    updatedAt
+                    visitIncentive:
+                        Number(
+                            document
+                                .getElementById(
+                                    "visitIncentive"
+                                )
+                                .value
+                        ),
 
-            });
+                    admissionIncentive:
+                        Number(
+                            document
+                                .getElementById(
+                                    "admissionIncentive"
+                                )
+                                .value
+                        ),
+
+                    updatedAt:
+                        updatedAt
+
+                });
+
+            }
+
+            else{
+
+                updateUI({
+
+                    baseSalary:
+                        Number(
+                            document
+                                .getElementById(
+                                    "teleBaseSalary"
+                                )
+                                .value
+                        ),
+
+                    level1AdmissionIncentive:
+                        Number(
+                            document
+                                .getElementById(
+                                    "level1Admission"
+                                )
+                                .value
+                        ),
+
+                    level2AdmissionIncentive:
+                        Number(
+                            document
+                                .getElementById(
+                                    "level2Admission"
+                                )
+                                .value
+                        ),
+
+                    level3AdmissionIncentive:
+                        Number(
+                            document
+                                .getElementById(
+                                    "level3Admission"
+                                )
+                                .value
+                        ),
+
+                    updatedAt:
+                        updatedAt
+
+                });
+
+            }
 
 
             document
@@ -2208,6 +3500,8 @@ document
 ========================================================= */
 
 updateRoleText();
+
+updateFormVisibility();
 
 loadCurrentStaffSettings();
 

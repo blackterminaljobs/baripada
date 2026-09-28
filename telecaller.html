@@ -1,189 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#086ee1">
-
-<title>BlackTerminal | Telecaller</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlackTerminal - Telecaller Dashboard</title>
 
 <style>
-
-:root{
-    --navy:#071426;
-    --navy2:#0d2039;
-    --blue:#086ee1;
-    --blue2:#18a0ff;
-    --bg:#f4f7fb;
-    --card:#ffffff;
-    --text:#172236;
-    --muted:#738096;
-    --line:#e3e9f1;
-
-    --green:#16a34a;
-    --red:#dc2626;
-    --orange:#f59e0b;
-    --purple:#7c3aed;
-
-    --shadow:0 10px 30px rgba(7,20,38,.08);
-    --radius:16px;
-}
-
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+}
+
+:root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#788399;
+    --border:#e8ebf2;
+
+    --blue:#2563eb;
+    --cyan:#06b6d4;
+    --green:#10b981;
+    --orange:#f59e0b;
+    --purple:#7c3aed;
+    --pink:#ec4899;
+    --red:#ef4444;
+    --dark:#111827;
 }
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
     background:var(--bg);
     color:var(--text);
-}
-
-button,
-input,
-select,
-textarea{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
+    min-height:100vh;
 }
 
 /* ================= SIDEBAR ================= */
 
 .sidebar{
-    width:255px;
-    background:linear-gradient(180deg,#071426,#0a1c31);
-    color:#fff;
     position:fixed;
-    top:0;
     left:0;
+    top:0;
     bottom:0;
-    z-index:1000;
+    width:250px;
+    background:linear-gradient(180deg,#111827 0%,#172554 100%);
+    color:#fff;
     padding:22px 16px;
-    transition:.25s;
+    z-index:100;
 }
 
-.brand{
+.logo{
     display:flex;
     align-items:center;
     gap:12px;
-    padding:8px 8px 25px;
-    border-bottom:1px solid rgba(255,255,255,.08);
+    padding:0 10px 25px;
+    border-bottom:1px solid rgba(255,255,255,.1);
 }
 
-.brand-logo{
-    width:43px;
-    height:43px;
+.logo-icon{
+    width:42px;
+    height:42px;
     border-radius:12px;
+    background:linear-gradient(135deg,#06b6d4,#7c3aed);
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(135deg,var(--blue),var(--blue2));
-    font-weight:800;
+    font-weight:900;
     font-size:18px;
 }
 
-.brand-text strong{
+.logo h2{
+    font-size:18px;
+}
+
+.logo span{
     display:block;
-    font-size:16px;
-}
-
-.brand-text span{
-    color:#8da1ba;
+    color:#94a3b8;
     font-size:11px;
+    margin-top:2px;
 }
 
-.nav{
+.menu{
     margin-top:25px;
 }
 
-.nav-title{
+.menu-title{
+    color:#64748b;
     font-size:10px;
-    color:#70849d;
     text-transform:uppercase;
-    letter-spacing:1px;
-    margin:0 10px 9px;
+    letter-spacing:1.5px;
+    padding:0 12px 10px;
 }
 
-.nav-item{
+.menu-item{
     display:flex;
     align-items:center;
     gap:12px;
-    color:#b9c7d8;
-    text-decoration:none;
-    padding:12px 13px;
-    border-radius:11px;
-    margin-bottom:5px;
+    padding:13px 14px;
+    margin:5px 0;
+    border-radius:12px;
+    color:#cbd5e1;
     font-size:14px;
 }
 
-.nav-item.active{
+.menu-item.active{
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
     color:#fff;
-    background:rgba(24,160,255,.16);
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
 }
 
-.nav-item:hover{
-    background:rgba(255,255,255,.06);
-    color:#fff;
-}
-
-.nav-icon{
-    width:22px;
+.menu-icon{
+    width:20px;
     text-align:center;
 }
 
-.logout-btn{
+.user-box{
     position:absolute;
-    bottom:20px;
     left:16px;
     right:16px;
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.04);
-    color:#fff;
-    padding:11px;
-    border-radius:10px;
+    bottom:18px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    padding:13px;
 }
 
-.logout-btn:hover{
-    background:rgba(255,255,255,.09);
+.user-name{
+    font-weight:700;
+    font-size:13px;
+}
+
+.user-role{
+    color:#94a3b8;
+    font-size:11px;
+    margin-top:3px;
 }
 
 /* ================= MAIN ================= */
 
 .main{
-    margin-left:255px;
+    margin-left:250px;
     min-height:100vh;
 }
 
 .topbar{
-    height:72px;
+    height:75px;
     background:#fff;
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
     padding:0 28px;
     position:sticky;
     top:0;
-    z-index:500;
-}
-
-.mobile-menu{
-    display:none;
-    border:0;
-    background:#eef4fb;
-    padding:9px 11px;
-    border-radius:9px;
-    font-size:18px;
+    z-index:50;
 }
 
 .page-title h1{
-    font-size:21px;
+    font-size:22px;
 }
 
 .page-title p{
@@ -192,106 +167,57 @@ button{
     margin-top:3px;
 }
 
-.user-box{
+.top-user{
     display:flex;
     align-items:center;
     gap:10px;
 }
 
 .avatar{
-    width:39px;
-    height:39px;
+    width:40px;
+    height:40px;
     border-radius:50%;
-    background:linear-gradient(135deg,var(--blue),var(--blue2));
+    background:linear-gradient(135deg,#06b6d4,#7c3aed);
     color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-weight:700;
-}
-
-.user-info strong{
-    display:block;
-    font-size:13px;
-}
-
-.user-info span{
-    display:block;
-    color:var(--muted);
-    font-size:11px;
+    font-weight:800;
 }
 
 .content{
-    padding:28px;
-    max-width:1600px;
-    margin:auto;
-}
-
-/* ================= MESSAGE ================= */
-
-.system-message{
-    display:none;
-    margin-bottom:18px;
-    padding:13px 15px;
-    border-radius:11px;
-    font-size:13px;
-    line-height:1.5;
-}
-
-.system-message.show{
-    display:block;
-}
-
-.system-message.success{
-    background:#ecfdf3;
-    border:1px solid #bbf7d0;
-    color:#15803d;
-}
-
-.system-message.error{
-    background:#fef2f2;
-    border:1px solid #fecaca;
-    color:#b91c1c;
-}
-
-.system-message.info{
-    background:#eff6ff;
-    border:1px solid #bfdbfe;
-    color:#1d4ed8;
+    padding:25px 28px 40px;
 }
 
 /* ================= STATS ================= */
 
-.stats{
+.stats-grid{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:17px;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
     margin-bottom:22px;
 }
 
-.stat{
+.stat-card{
     background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:19px;
-    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 5px 18px rgba(15,23,42,.04);
 }
 
-.stat-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.stat-label{
-    font-size:12px;
-    color:var(--muted);
-}
-
-.stat-value{
-    font-size:27px;
-    font-weight:800;
-    margin-top:7px;
+.stat-card:after{
+    content:"";
+    position:absolute;
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    right:-25px;
+    top:-25px;
+    opacity:.1;
+    background:currentColor;
 }
 
 .stat-icon{
@@ -301,406 +227,432 @@ button{
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#eaf4ff;
-    color:var(--blue);
     font-size:18px;
+    margin-bottom:12px;
 }
 
-.stat.green .stat-icon{
-    background:#ecfdf3;
-    color:var(--green);
-}
-
-.stat.orange .stat-icon{
-    background:#fff7e6;
-    color:var(--orange);
-}
-
-/* ================= SALARY ================= */
-
-.salary-card{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    margin-bottom:22px;
-    overflow:hidden;
-}
-
-.salary-header{
-    padding:19px 22px;
-    border-bottom:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.salary-header h2{
-    font-size:17px;
-}
-
-.salary-header p{
+.stat-label{
     color:var(--muted);
     font-size:12px;
+}
+
+.stat-value{
+    font-size:26px;
+    font-weight:800;
     margin-top:4px;
 }
 
-.salary-month{
-    padding:7px 11px;
-    background:#eef6ff;
-    color:var(--blue);
-    border-radius:8px;
-    font-size:11px;
-    font-weight:800;
-}
+/* ================= TARGET HERO ================= */
 
-.salary-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-    padding:18px;
-}
-
-.salary-item{
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:15px;
-    background:#fbfdff;
-}
-
-.salary-item.total{
-    background:linear-gradient(135deg,#071426,#0d2745);
+.target-hero{
+    border-radius:22px;
+    padding:24px;
     color:#fff;
-    border-color:#071426;
+    margin-bottom:22px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(255,255,255,.20),transparent 30%),
+        radial-gradient(circle at 10% 90%,rgba(255,255,255,.12),transparent 35%),
+        linear-gradient(135deg,#2563eb 0%,#7c3aed 52%,#ec4899 100%);
+    box-shadow:0 14px 35px rgba(79,70,229,.22);
+    position:relative;
+    overflow:hidden;
 }
 
-.salary-label{
-    font-size:11px;
-    color:var(--muted);
+.target-hero:before{
+    content:"";
+    position:absolute;
+    width:230px;
+    height:230px;
+    border:35px solid rgba(255,255,255,.07);
+    border-radius:50%;
+    right:-70px;
+    bottom:-100px;
 }
 
-.salary-item.total .salary-label{
-    color:#a9bdd4;
+.target-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:20px;
+    position:relative;
+    z-index:2;
 }
 
-.salary-amount{
-    font-size:22px;
+.target-title{
+    font-size:23px;
     font-weight:800;
-    margin-top:6px;
 }
 
-.salary-description{
+.target-sub{
     margin-top:5px;
-    font-size:10px;
-    color:#64748b;
+    color:rgba(255,255,255,.8);
+    font-size:13px;
 }
 
-.salary-item.total .salary-description{
-    color:#a9bdd4;
+.layer-badge{
+    padding:10px 17px;
+    border-radius:30px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.25);
+    backdrop-filter:blur(10px);
+    font-weight:800;
+    font-size:13px;
+    white-space:nowrap;
 }
 
-.salary-note{
-    padding:0 18px 18px;
+.progress-wrap{
+    margin-top:24px;
+    position:relative;
+    z-index:2;
+}
+
+.progress-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    margin-bottom:8px;
+    color:rgba(255,255,255,.9);
+}
+
+.progress-bar{
+    height:13px;
+    background:rgba(255,255,255,.18);
+    border-radius:30px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    border-radius:30px;
+    background:#fff;
+    box-shadow:0 0 14px rgba(255,255,255,.55);
+    transition:width .5s ease;
+}
+
+.next-target{
+    margin-top:13px;
+    font-size:12px;
+    color:rgba(255,255,255,.82);
+}
+
+/* ================= PLAN ================= */
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:13px;
+}
+
+.section-head h2{
+    font-size:17px;
+}
+
+.section-head span{
     color:var(--muted);
     font-size:11px;
-    line-height:1.5;
 }
 
-/* ================= FILTER ================= */
+.plan-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-bottom:22px;
+}
+
+.plan-card{
+    background:#fff;
+    border-radius:20px;
+    padding:20px;
+    border:2px solid var(--border);
+    position:relative;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.plan-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(15,23,42,.08);
+}
+
+.plan-card.active{
+    border-color:var(--blue);
+    box-shadow:0 10px 30px rgba(37,99,235,.14);
+}
+
+.plan-card.active:before{
+    content:"CURRENT";
+    position:absolute;
+    right:-28px;
+    top:14px;
+    transform:rotate(45deg);
+    width:110px;
+    text-align:center;
+    background:var(--blue);
+    color:#fff;
+    font-size:9px;
+    font-weight:800;
+    padding:5px;
+}
+
+.plan-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.plan-number{
+    width:44px;
+    height:44px;
+    border-radius:14px;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:18px;
+}
+
+.layer1 .plan-number{
+    background:linear-gradient(135deg,#10b981,#34d399);
+}
+
+.layer2 .plan-number{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+}
+
+.layer3 .plan-number{
+    background:linear-gradient(135deg,#7c3aed,#ec4899);
+}
+
+.plan-name{
+    font-size:16px;
+    font-weight:800;
+}
+
+.plan-target{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:3px;
+}
+
+.rate-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:18px;
+}
+
+.rate{
+    padding:12px;
+    border-radius:13px;
+    background:#f8fafc;
+}
+
+.rate small{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.rate strong{
+    display:block;
+    margin-top:3px;
+    font-size:18px;
+}
+
+/* ================= EARNING CARD ================= */
+
+.earning-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:21px;
+    margin-bottom:22px;
+    box-shadow:0 5px 18px rgba(15,23,42,.04);
+}
+
+.earning-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1fr 1fr;
+    gap:14px;
+}
+
+.earning-item{
+    padding:15px;
+    border-radius:15px;
+    background:#f8fafc;
+}
+
+.earning-item.highlight{
+    background:linear-gradient(135deg,#ecfdf5,#f0fdf4);
+    border:1px solid #bbf7d0;
+}
+
+.earning-label{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.earning-value{
+    margin-top:5px;
+    font-size:21px;
+    font-weight:800;
+}
+
+.total-earning{
+    color:#059669;
+}
+
+/* ================= FILTERS ================= */
 
 .filter-card{
     background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    padding:18px;
-    margin-bottom:18px;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:17px;
+    margin-bottom:16px;
 }
 
-.filter-grid{
+.filters{
     display:grid;
-    grid-template-columns:minmax(230px,2fr) 1fr 1fr 1fr auto;
-    gap:11px;
+    grid-template-columns:2fr 1fr 1fr 1fr auto;
+    gap:10px;
 }
 
-.filter-input,
-.filter-select{
+input,select{
     width:100%;
-    border:1px solid #dbe3ec;
-    border-radius:10px;
-    padding:11px 12px;
+    border:1px solid #dfe4ed;
     background:#fff;
+    border-radius:11px;
+    padding:11px 12px;
     outline:none;
+    color:var(--text);
+    font-size:12px;
 }
 
-.filter-input:focus,
-.filter-select:focus{
+input:focus,select:focus{
     border-color:var(--blue);
-    box-shadow:0 0 0 3px rgba(8,110,225,.08);
+    box-shadow:0 0 0 3px rgba(37,99,235,.08);
 }
 
-.refresh-btn{
-    border:0;
-    background:#eef6ff;
-    color:var(--blue);
-    padding:0 15px;
-    border-radius:10px;
+.btn{
+    border:none;
+    border-radius:11px;
+    padding:11px 15px;
+    cursor:pointer;
     font-weight:700;
+    font-size:12px;
 }
 
-.refresh-btn:hover{
-    background:#dceeff;
+.btn-blue{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:#fff;
+}
+
+.btn-light{
+    background:#f1f5f9;
+    color:#334155;
 }
 
 /* ================= TABLE ================= */
 
 .table-card{
     background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+    border-radius:18px;
     overflow:hidden;
 }
 
-.table-header{
-    padding:20px 22px;
-    border-bottom:1px solid var(--line);
+.table-top{
+    padding:17px 18px;
+    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
 }
 
-.table-header h2{
-    font-size:17px;
+.table-top h2{
+    font-size:16px;
 }
 
-.table-header p{
+.result-text{
     color:var(--muted);
-    font-size:12px;
-    margin-top:3px;
-}
-
-.live-status{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    color:var(--green);
     font-size:11px;
-    font-weight:700;
-}
-
-.live-dot{
-    width:8px;
-    height:8px;
-    background:#22c55e;
-    border-radius:50%;
-    box-shadow:0 0 0 4px rgba(34,197,94,.12);
 }
 
 .table-wrap{
-    width:100%;
     overflow-x:auto;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1050px;
-}
-
-thead{
-    background:#f8fafc;
+    min-width:900px;
 }
 
 th{
     text-align:left;
-    font-size:11px;
+    padding:12px 15px;
+    font-size:10px;
+    color:#64748b;
     text-transform:uppercase;
-    letter-spacing:.4px;
-    color:#738096;
-    padding:13px 15px;
-    border-bottom:1px solid var(--line);
-    white-space:nowrap;
+    letter-spacing:.5px;
+    background:#f8fafc;
 }
 
 td{
-    padding:15px;
-    border-bottom:1px solid #edf1f5;
+    padding:14px 15px;
+    border-top:1px solid #eef1f5;
     font-size:12px;
-    vertical-align:middle;
-}
-
-tbody tr:hover{
-    background:#fbfdff;
-}
-
-.student-cell{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.student-avatar{
-    width:35px;
-    height:35px;
-    border-radius:10px;
-    background:#eaf4ff;
-    color:var(--blue);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-    flex-shrink:0;
 }
 
 .student-name{
-    font-weight:800;
-    font-size:13px;
+    font-weight:700;
 }
 
 .student-mobile{
     color:var(--muted);
-    font-size:11px;
+    font-size:10px;
     margin-top:3px;
 }
 
-.course-name{
-    font-weight:700;
-}
-
-.source-badge{
-    display:inline-block;
-    padding:5px 8px;
-    border-radius:7px;
-    background:#f1f5f9;
-    color:#475569;
-    font-size:10px;
-    font-weight:700;
-}
-
-.coordinator-name{
-    font-weight:700;
-}
-
-.date-text{
-    color:#64748b;
-    font-size:11px;
-    white-space:nowrap;
-}
-
-/* ================= STATUS ================= */
-
-.status-select{
-    border:0;
-    padding:7px 9px;
-    border-radius:8px;
+.status{
+    display:inline-flex;
+    padding:6px 9px;
+    border-radius:20px;
     font-size:10px;
     font-weight:800;
-    outline:none;
-    cursor:pointer;
 }
 
-.status-select.new{
-    background:#eaf4ff;
-    color:#086ee1;
-}
-
-.status-select.pending{
-    background:#fff7e6;
-    color:#b77900;
-}
-
-.status-select.contacted{
-    background:#f1f5f9;
-    color:#475569;
-}
-
-.status-select.follow-up{
-    background:#f5f3ff;
-    color:#6d28d9;
-}
-
-.status-select.visited{
-    background:#fff7ed;
-    color:#c2410c;
-}
-
-.status-select.converted{
-    background:#ecfdf3;
-    color:#15803d;
-}
-
-.status-select.not-interested{
-    background:#fef2f2;
-    color:#b91c1c;
-}
-
-/* ================= ACTIONS ================= */
+.status-new{background:#eff6ff;color:#2563eb}
+.status-pending{background:#fff7ed;color:#ea580c}
+.status-contacted{background:#ecfeff;color:#0891b2}
+.status-follow-up{background:#fefce8;color:#ca8a04}
+.status-visited{background:#ecfdf5;color:#059669}
+.status-converted{background:#f5f3ff;color:#7c3aed}
+.status-not-interested{background:#fef2f2;color:#dc2626}
 
 .actions{
     display:flex;
     gap:6px;
-    align-items:center;
 }
 
 .action-btn{
-    width:31px;
-    height:31px;
-    border:1px solid var(--line);
-    background:#fff;
+    width:30px;
+    height:30px;
+    border:none;
     border-radius:8px;
+    cursor:pointer;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:13px;
 }
 
-.action-btn:hover{
-    background:#f4f7fb;
-}
-
-.action-btn.call{
-    color:var(--green);
-}
-
-.action-btn.whatsapp{
-    color:#16a34a;
-}
-
-.action-btn.view{
-    color:var(--blue);
-}
-
-.action-btn.delete{
-    color:var(--red);
-}
-
-/* ================= LOADING ================= */
-
-.table-state{
-    padding:55px 20px;
-    text-align:center;
-    color:var(--muted);
-    font-size:13px;
-}
-
-.spinner{
-    width:27px;
-    height:27px;
-    border:3px solid #e4edf7;
-    border-top-color:var(--blue);
-    border-radius:50%;
-    animation:spin .8s linear infinite;
-    margin:0 auto 12px;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
+.call{background:#ecfdf5;color:#059669}
+.whatsapp{background:#f0fdf4;color:#16a34a}
+.view{background:#eff6ff;color:#2563eb}
+.delete{background:#fef2f2;color:#dc2626}
 
 /* ================= MODAL ================= */
 
@@ -708,785 +660,570 @@ tbody tr:hover{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(7,20,38,.58);
-    z-index:2000;
+    background:rgba(15,23,42,.55);
+    backdrop-filter:blur(5px);
+    z-index:500;
     align-items:center;
     justify-content:center;
     padding:20px;
 }
 
-.modal.show{
-    display:flex;
-}
-
 .modal-box{
-    width:100%;
-    max-width:620px;
-    max-height:90vh;
-    overflow:auto;
     background:#fff;
-    border-radius:18px;
-    box-shadow:0 25px 70px rgba(0,0,0,.25);
+    width:100%;
+    max-width:500px;
+    border-radius:22px;
+    padding:23px;
+    box-shadow:0 25px 70px rgba(0,0,0,.2);
 }
 
-.modal-header{
-    padding:19px 21px;
-    border-bottom:1px solid var(--line);
+.modal-head{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
 }
 
-.modal-header h3{
-    font-size:17px;
+.modal-head h2{
+    font-size:19px;
 }
 
-.close-btn{
-    border:0;
+.close{
+    border:none;
     background:#f1f5f9;
     width:34px;
     height:34px;
-    border-radius:9px;
-}
-
-.modal-body{
-    padding:21px;
+    border-radius:50%;
+    cursor:pointer;
 }
 
 .detail-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:14px;
+    gap:10px;
 }
 
 .detail{
+    padding:13px;
     background:#f8fafc;
-    border:1px solid #edf1f5;
-    border-radius:11px;
-    padding:12px;
+    border-radius:12px;
 }
 
 .detail.full{
     grid-column:1/-1;
 }
 
-.detail-label{
+.detail small{
     color:var(--muted);
     font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:.5px;
-    margin-bottom:5px;
 }
 
-.detail-value{
+.detail strong{
+    display:block;
+    margin-top:4px;
     font-size:13px;
-    font-weight:700;
-    word-break:break-word;
 }
 
-.modal-actions{
-    display:flex;
-    gap:9px;
-    margin-top:18px;
+/* ================= EMPTY ================= */
+
+.empty{
+    text-align:center;
+    padding:50px 20px;
+    color:var(--muted);
 }
 
-.modal-action{
-    flex:1;
-    padding:11px;
-    border-radius:10px;
-    border:1px solid var(--line);
-    background:#fff;
-    font-weight:700;
-    font-size:12px;
+.empty-icon{
+    font-size:40px;
+    margin-bottom:10px;
 }
 
-.modal-action.primary{
-    background:var(--blue);
-    color:#fff;
-    border-color:var(--blue);
-}
+/* ================= RESPONSIVE ================= */
 
-.modal-action.green{
-    background:#16a34a;
-    color:#fff;
-    border-color:#16a34a;
-}
-
-/* ================= TOAST ================= */
-
-.toast{
-    position:fixed;
-    right:22px;
-    bottom:22px;
-    z-index:3000;
-    background:#071426;
-    color:#fff;
-    padding:13px 16px;
-    border-radius:11px;
-    box-shadow:0 12px 30px rgba(0,0,0,.18);
-    font-size:12px;
-    transform:translateY(20px);
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-    max-width:340px;
-}
-
-.toast.show{
-    transform:translateY(0);
-    opacity:1;
-}
-
-.toast.success{
-    border-left:4px solid var(--green);
-}
-
-.toast.error{
-    border-left:4px solid var(--red);
-}
-
-/* ================= MOBILE ================= */
-
-.overlay{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.4);
-    z-index:900;
-}
-
-@media(max-width:1200px){
-
-    .stats{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .salary-grid{
+@media(max-width:1100px){
+    .stats-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .filter-grid{
-        grid-template-columns:1fr 1fr 1fr;
+    .earning-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .refresh-btn{
-        height:42px;
+    .filters{
+        grid-template-columns:1fr 1fr;
     }
-
 }
 
-@media(max-width:760px){
-
+@media(max-width:850px){
     .sidebar{
-        transform:translateX(-100%);
+        width:70px;
+        padding:15px 8px;
     }
 
-    .sidebar.open{
-        transform:translateX(0);
+    .logo{
+        justify-content:center;
+        padding:0 0 20px;
     }
 
-    .overlay.show{
-        display:block;
+    .logo-text,
+    .menu-title,
+    .menu-item span,
+    .user-box{
+        display:none;
+    }
+
+    .menu-item{
+        justify-content:center;
+        padding:13px 5px;
     }
 
     .main{
-        margin-left:0;
+        margin-left:70px;
     }
 
-    .mobile-menu{
-        display:block;
+    .plan-grid{
+        grid-template-columns:1fr;
     }
 
+    .target-top{
+        flex-direction:column;
+    }
+}
+
+@media(max-width:600px){
     .topbar{
-        padding:0 16px;
-    }
-
-    .page-title{
-        display:none;
+        padding:0 15px;
     }
 
     .content{
-        padding:18px 14px;
+        padding:18px 14px 30px;
     }
 
-    .stats{
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:14px;
+    }
+
+    .stat-value{
+        font-size:21px;
+    }
+
+    .earning-grid{
         grid-template-columns:1fr 1fr;
     }
 
-    .salary-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .filter-grid{
+    .filters{
         grid-template-columns:1fr;
     }
 
-    .filter-input,
-    .filter-select,
-    .refresh-btn{
-        height:43px;
+    .target-title{
+        font-size:19px;
     }
-
-    .user-info{
-        display:none;
-    }
-
-    .detail-grid{
-        grid-template-columns:1fr;
-    }
-
-    .detail.full{
-        grid-column:auto;
-    }
-
-    .modal-actions{
-        flex-direction:column;
-    }
-
 }
-
-@media(max-width:450px){
-
-    .stats{
-        grid-template-columns:1fr;
-    }
-
-    .salary-grid{
-        grid-template-columns:1fr;
-    }
-
-    .table-header{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .live-status{
-        align-self:flex-start;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
 <!-- ================= SIDEBAR ================= -->
 
-<aside class="sidebar" id="sidebar">
+<aside class="sidebar">
 
-    <div class="brand">
+    <div class="logo">
+        <div class="logo-icon">BT</div>
 
-        <div class="brand-logo">
-            BT
-        </div>
-
-        <div class="brand-text">
-
-            <strong>BlackTerminal</strong>
-
+        <div class="logo-text">
+            <h2>BlackTerminal</h2>
             <span>Computer Institute</span>
-
         </div>
-
     </div>
 
-    <nav class="nav">
+    <div class="menu">
 
-        <div class="nav-title">
-            Telecaller
+        <div class="menu-title">Workspace</div>
+
+        <div class="menu-item active">
+            <div class="menu-icon">📊</div>
+            <span>Telecaller Dashboard</span>
         </div>
 
-        <a href="#" class="nav-item active">
+        <div class="menu-item" onclick="scrollToInquiries()">
+            <div class="menu-icon">📞</div>
+            <span>Inquiries</span>
+        </div>
 
-            <span class="nav-icon">
-                📊
-            </span>
-
-            <span>
-                Inquiry Dashboard
-            </span>
-
-        </a>
-
-    </nav>
-
-    <button class="logout-btn" id="logoutBtn">
-        🚪 Logout
-    </button>
-
-</aside>
-
-<div class="overlay" id="overlay"></div>
-
-<!-- ================= MAIN ================= -->
-
-<main class="main">
-
-<header class="topbar">
-
-    <div style="
-        display:flex;
-        align-items:center;
-        gap:12px;
-    ">
-
-        <button class="mobile-menu" id="mobileMenu">
-            ☰
-        </button>
-
-        <div class="page-title">
-
-            <h1>
-                Telecaller Dashboard
-            </h1>
-
-            <p>
-                Manage student inquiries received from coordinators
-            </p>
-
+        <div class="menu-item" onclick="scrollToTarget()">
+            <div class="menu-icon">🎯</div>
+            <span>My Target</span>
         </div>
 
     </div>
 
     <div class="user-box">
-
-        <div class="avatar" id="avatar">
-            T
-        </div>
-
-        <div class="user-info">
-
-            <strong id="userName">
-                Telecaller
-            </strong>
-
-            <span>
-                Telecaller
-            </span>
-
-        </div>
-
+        <div class="user-name" id="sideUserName">Telecaller</div>
+        <div class="user-role">Telecaller Account</div>
     </div>
 
-</header>
+</aside>
 
-<section class="content">
 
-<!-- SYSTEM MESSAGE -->
+<!-- ================= MAIN ================= -->
 
-<div class="system-message" id="systemMessage"></div>
+<main class="main">
 
-<!-- ================= STATS ================= -->
+    <header class="topbar">
 
-<div class="stats">
+        <div class="page-title">
+            <h1>Telecaller Dashboard</h1>
+            <p>Target based performance & earnings</p>
+        </div>
 
-    <div class="stat">
+        <div class="top-user">
+            <div class="avatar" id="topAvatar">T</div>
+        </div>
 
-        <div class="stat-top">
+    </header>
 
-            <div>
 
-                <div class="stat-label">
-                    Total Inquiries
+    <section class="content">
+
+        <!-- ================= STATS ================= -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card" style="color:#2563eb;">
+                <div class="stat-icon" style="background:#eff6ff;color:#2563eb;">
+                    📋
                 </div>
-
-                <div class="stat-value" id="totalCount">
-                    0
-                </div>
-
+                <div class="stat-label">Total Inquiries</div>
+                <div class="stat-value" id="totalInquiries">0</div>
             </div>
 
-            <div class="stat-icon">
-                📨
+            <div class="stat-card" style="color:#10b981;">
+                <div class="stat-icon" style="background:#ecfdf5;color:#10b981;">
+                    👣
+                </div>
+                <div class="stat-label">Visited This Month</div>
+                <div class="stat-value" id="visitedCount">0</div>
+            </div>
+
+            <div class="stat-card" style="color:#7c3aed;">
+                <div class="stat-icon" style="background:#f5f3ff;color:#7c3aed;">
+                    🎓
+                </div>
+                <div class="stat-label">Admissions</div>
+                <div class="stat-value" id="convertedCount">0</div>
+            </div>
+
+            <div class="stat-card" style="color:#f59e0b;">
+                <div class="stat-icon" style="background:#fffbeb;color:#f59e0b;">
+                    💰
+                </div>
+                <div class="stat-label">Estimated Earnings</div>
+                <div class="stat-value" id="estimatedEarning">₹1,000</div>
             </div>
 
         </div>
 
-    </div>
 
-    <div class="stat">
+        <!-- ================= TARGET HERO ================= -->
 
-        <div class="stat-top">
+        <div class="target-hero" id="targetSection">
 
-            <div>
+            <div class="target-top">
 
-                <div class="stat-label">
-                    Today
+                <div>
+                    <div class="target-title">
+                        🎯 Monthly Performance Target
+                    </div>
+
+                    <div class="target-sub">
+                        Reach the next layer to unlock a higher earning rate.
+                    </div>
                 </div>
 
-                <div class="stat-value" id="todayCount">
-                    0
-                </div>
-
-            </div>
-
-            <div class="stat-icon">
-                📅
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="stat orange">
-
-        <div class="stat-top">
-
-            <div>
-
-                <div class="stat-label">
-                    New
-                </div>
-
-                <div class="stat-value" id="newCount">
-                    0
+                <div class="layer-badge" id="currentLayer">
+                    Layer 1
                 </div>
 
             </div>
 
-            <div class="stat-icon">
-                🆕
-            </div>
+            <div class="progress-wrap">
 
-        </div>
+                <div class="progress-label">
+                    <span id="targetProgressText">
+                        0 visited students
+                    </span>
 
-    </div>
-
-    <div class="stat orange">
-
-        <div class="stat-top">
-
-            <div>
-
-                <div class="stat-label">
-                    Pending
+                    <span id="targetRange">
+                        Target: 1–4
+                    </span>
                 </div>
 
-                <div class="stat-value" id="pendingCount">
-                    0
+                <div class="progress-bar">
+                    <div class="progress-fill" id="targetProgress"></div>
                 </div>
 
-            </div>
-
-            <div class="stat-icon">
-                ⏳
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="stat green">
-
-        <div class="stat-top">
-
-            <div>
-
-                <div class="stat-label">
-                    Converted
-                </div>
-
-                <div class="stat-value" id="convertedCount">
-                    0
+                <div class="next-target" id="nextTarget">
+                    Start your first visit to enter Layer 1.
                 </div>
 
             </div>
 
-            <div class="stat-icon">
-                ✅
+        </div>
+
+
+        <!-- ================= 3 LAYER PLAN ================= -->
+
+        <div class="section-head">
+            <h2>🚀 3-Layer Earning Plan</h2>
+            <span>Based on monthly unique visited students</span>
+        </div>
+
+        <div class="plan-grid">
+
+            <div class="plan-card layer1" id="plan1">
+
+                <div class="plan-head">
+
+                    <div class="plan-number">1</div>
+
+                    <div>
+                        <div class="plan-name">Starter Layer</div>
+                        <div class="plan-target">1 – 4 visited students</div>
+                    </div>
+
+                </div>
+
+                <div class="rate-grid">
+
+                    <div class="rate">
+                        <small>Per Visit</small>
+                        <strong id="tier1Visit">₹30</strong>
+                    </div>
+
+                    <div class="rate">
+                        <small>Per Admission</small>
+                        <strong id="tier1Admission">₹50</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="plan-card layer2" id="plan2">
+
+                <div class="plan-head">
+
+                    <div class="plan-number">2</div>
+
+                    <div>
+                        <div class="plan-name">Growth Layer</div>
+                        <div class="plan-target">5 – 9 visited students</div>
+                    </div>
+
+                </div>
+
+                <div class="rate-grid">
+
+                    <div class="rate">
+                        <small>Per Visit</small>
+                        <strong id="tier2Visit">₹50</strong>
+                    </div>
+
+                    <div class="rate">
+                        <small>Per Admission</small>
+                        <strong id="tier2Admission">₹75</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="plan-card layer3" id="plan3">
+
+                <div class="plan-head">
+
+                    <div class="plan-number">3</div>
+
+                    <div>
+                        <div class="plan-name">Pro Layer</div>
+                        <div class="plan-target">10+ visited students</div>
+                    </div>
+
+                </div>
+
+                <div class="rate-grid">
+
+                    <div class="rate">
+                        <small>Per Visit</small>
+                        <strong id="tier3Visit">₹75</strong>
+                    </div>
+
+                    <div class="rate">
+                        <small>Per Admission</small>
+                        <strong id="tier3Admission">₹100</strong>
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
-    </div>
 
-</div>
+        <!-- ================= EARNING SUMMARY ================= -->
 
-<!-- ================= SALARY ================= -->
+        <div class="earning-card">
 
-<div class="salary-card">
-
-    <div class="salary-header">
-
-        <div>
-
-            <h2>
-                Current Month Salary
-            </h2>
-
-            <p>
-                Your estimated earnings based on Admin-controlled payment rules
-            </p>
-
-        </div>
-
-        <div class="salary-month" id="salaryMonth">
-            Current Month
-        </div>
-
-    </div>
-
-    <div class="salary-grid">
-
-        <div class="salary-item">
-
-            <div class="salary-label">
-                Base Salary
+            <div class="section-head">
+                <h2>💰 Current Month Earnings</h2>
+                <span id="earningMonth">Current Month</span>
             </div>
 
-            <div class="salary-amount" id="baseSalaryAmount">
-                ₹0
-            </div>
+            <div class="earning-grid">
 
-            <div class="salary-description">
-                Monthly fixed salary
-            </div>
+                <div class="earning-item highlight">
 
-        </div>
+                    <div class="earning-label">
+                        Base Salary
+                    </div>
 
-        <div class="salary-item">
+                    <div class="earning-value" id="baseSalaryDisplay">
+                        ₹1,000
+                    </div>
 
-            <div class="salary-label">
-                Visit Incentive
-            </div>
+                </div>
 
-            <div class="salary-amount" id="visitSalaryAmount">
-                ₹0
-            </div>
+                <div class="earning-item">
 
-            <div class="salary-description" id="visitSalaryDescription">
-                ₹0 × 0 visited students
-            </div>
+                    <div class="earning-label">
+                        Visit Incentive
+                    </div>
 
-        </div>
+                    <div class="earning-value" id="visitEarning">
+                        ₹0
+                    </div>
 
-        <div class="salary-item">
+                </div>
 
-            <div class="salary-label">
-                Admission Incentive
-            </div>
+                <div class="earning-item">
 
-            <div class="salary-amount" id="admissionSalaryAmount">
-                ₹0
-            </div>
+                    <div class="earning-label">
+                        Admission Incentive
+                    </div>
 
-            <div class="salary-description" id="admissionSalaryDescription">
-                ₹0 × 0 converted students
+                    <div class="earning-value" id="admissionEarning">
+                        ₹0
+                    </div>
+
+                </div>
+
+                <div class="earning-item highlight">
+
+                    <div class="earning-label">
+                        Total Estimated
+                    </div>
+
+                    <div class="earning-value total-earning" id="totalEarning">
+                        ₹1,000
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
-        <div class="salary-item total">
 
-            <div class="salary-label">
-                Estimated Total Salary
-            </div>
+        <!-- ================= FILTER ================= -->
 
-            <div class="salary-amount" id="totalSalaryAmount">
-                ₹0
-            </div>
+        <div class="filter-card">
 
-            <div class="salary-description">
-                Current month estimate
+            <div class="filters">
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search student name or mobile..."
+                    oninput="applyFilters()"
+                >
+
+                <select id="courseFilter" onchange="applyFilters()">
+                    <option value="">All Courses</option>
+                </select>
+
+                <select id="statusFilter" onchange="applyFilters()">
+                    <option value="">All Status</option>
+                    <option value="new">New</option>
+                    <option value="pending">Pending</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="follow-up">Follow-up</option>
+                    <option value="visited">Visited</option>
+                    <option value="converted">Converted</option>
+                    <option value="not-interested">Not Interested</option>
+                </select>
+
+                <select id="coordinatorFilter" onchange="applyFilters()">
+                    <option value="">All Coordinators</option>
+                </select>
+
+                <button class="btn btn-light" onclick="resetFilters()">
+                    Reset
+                </button>
+
             </div>
 
         </div>
 
-    </div>
 
-    <div class="salary-note">
-        Salary is calculated using unique mobile numbers for the current month.
-        Inquiries alone do not generate incentive. Admin controls the payment rates.
-    </div>
+        <!-- ================= INQUIRIES ================= -->
 
-</div>
+        <div class="table-card" id="inquirySection">
 
-<!-- ================= FILTERS ================= -->
+            <div class="table-top">
 
-<div class="filter-card">
+                <h2>Student Inquiries</h2>
 
-    <div class="filter-grid">
+                <div class="result-text" id="resultText">
+                    Loading inquiries...
+                </div>
 
-        <input
-            type="search"
-            id="searchInput"
-            class="filter-input"
-            placeholder="🔍 Search student, mobile, coordinator..."
-        >
+            </div>
 
-        <select
-            id="courseFilter"
-            class="filter-select"
-        >
+            <div class="table-wrap">
 
-            <option value="">
-                All Courses
-            </option>
+                <table>
 
-        </select>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Source</th>
+                            <th>Coordinator</th>
+                            <th>Status</th>
+                            <th>Follow-up</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
 
-        <select
-            id="statusFilter"
-            class="filter-select"
-        >
+                    <tbody id="inquiryBody"></tbody>
 
-            <option value="">
-                All Status
-            </option>
+                </table>
 
-            <option value="new">
-                New
-            </option>
-
-            <option value="pending">
-                Pending
-            </option>
-
-            <option value="contacted">
-                Contacted
-            </option>
-
-            <option value="follow-up">
-                Follow-up
-            </option>
-
-            <option value="visited">
-                Visited
-            </option>
-
-            <option value="converted">
-                Converted
-            </option>
-
-            <option value="not-interested">
-                Not Interested
-            </option>
-
-        </select>
-
-        <select
-            id="coordinatorFilter"
-            class="filter-select"
-        >
-
-            <option value="">
-                All Coordinators
-            </option>
-
-        </select>
-
-        <button
-            class="refresh-btn"
-            id="refreshBtn"
-        >
-            🔄 Refresh
-        </button>
-
-    </div>
-
-</div>
-
-<!-- ================= TABLE ================= -->
-
-<div class="table-card">
-
-    <div class="table-header">
-
-        <div>
-
-            <h2>
-                Student Inquiries
-            </h2>
-
-            <p id="resultText">
-                Loading inquiries...
-            </p>
+            </div>
 
         </div>
 
-        <div class="live-status">
-
-            <span class="live-dot"></span>
-
-            LIVE
-
-        </div>
-
-    </div>
-
-    <div class="table-wrap">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Student
-                    </th>
-
-                    <th>
-                        Course
-                    </th>
-
-                    <th>
-                        Source
-                    </th>
-
-                    <th>
-                        Coordinator
-                    </th>
-
-                    <th>
-                        Received
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                    <th>
-                        Actions
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="inquiryTableBody">
-
-                <tr>
-
-                    <td
-                        colspan="7"
-                        class="table-state"
-                    >
-
-                        <div class="spinner"></div>
-
-                        Loading inquiries...
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-</section>
+    </section>
 
 </main>
 
-</div>
 
 <!-- ================= MODAL ================= -->
 
@@ -1494,82 +1231,85 @@ tbody tr:hover{
 
     <div class="modal-box">
 
-        <div class="modal-header">
+        <div class="modal-head">
 
-            <h3>
-                Inquiry Details
-            </h3>
+            <h2>Student Details</h2>
 
-            <button
-                class="close-btn"
-                id="closeModal"
-            >
+            <button class="close" onclick="closeModal()">
                 ✕
             </button>
 
         </div>
 
-        <div
-            class="modal-body"
-            id="modalBody"
-        ></div>
+        <div class="detail-grid">
+
+            <div class="detail">
+                <small>Student Name</small>
+                <strong id="dName">-</strong>
+            </div>
+
+            <div class="detail">
+                <small>Mobile</small>
+                <strong id="dMobile">-</strong>
+            </div>
+
+            <div class="detail">
+                <small>Course</small>
+                <strong id="dCourse">-</strong>
+            </div>
+
+            <div class="detail">
+                <small>Status</small>
+                <strong id="dStatus">-</strong>
+            </div>
+
+            <div class="detail">
+                <small>Source</small>
+                <strong id="dSource">-</strong>
+            </div>
+
+            <div class="detail">
+                <small>Coordinator</small>
+                <strong id="dCoordinator">-</strong>
+            </div>
+
+            <div class="detail">
+                <small>Follow-up Date</small>
+                <strong id="dFollowUp">-</strong>
+            </div>
+
+            <div class="detail">
+                <small>Created</small>
+                <strong id="dCreated">-</strong>
+            </div>
+
+            <div class="detail full">
+                <small>Remark</small>
+                <strong id="dRemark">-</strong>
+            </div>
+
+            <div class="detail full">
+                <small>Telecaller Remark</small>
+                <strong id="dTeleRemark">-</strong>
+            </div>
+
+        </div>
 
     </div>
 
 </div>
 
-<!-- TOAST -->
-
-<div class="toast" id="toast"></div>
 
 <script>
 
-/*
-==========================================================
-BLACKTERMINAL TELECALLER
-SALARY + INQUIRY MANAGEMENT
-==========================================================
+/* =========================================================
+   FIREBASE / FIRESTORE CONFIG
+========================================================= */
 
-NO FIREBASE AUTHENTICATION
-
-Firestore collections:
-
-studentInquiries
-paymentSettings
-
-Telecaller payment settings document:
-
-paymentSettings/telecaller
-
-Expected fields:
-
-baseSalary
-visitIncentive
-admissionIncentive
-updatedAt
-
-Salary formula:
-
-Base Salary
-+
-Unique Visited Students × Visit Incentive
-+
-Unique Converted Students × Admission Incentive
-
-Current month only.
-
-==========================================================
-*/
-
-/* ======================================================
-   FIREBASE PROJECT
-====================================================== */
-
-const FIREBASE_PROJECT_ID =
-    "jobs-2f152";
+const FIREBASE_PROJECT_ID = "jobs-2f152";
 
 const FIREBASE_API_KEY =
-    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_M";
+    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
 
 const FIRESTORE_BASE =
     "https://firestore.googleapis.com/v1/projects/" +
@@ -1577,524 +1317,234 @@ const FIRESTORE_BASE =
     "/databases/(default)/documents";
 
 const FIRESTORE_URL =
-    FIRESTORE_BASE +
-    "/studentInquiries";
+    FIRESTORE_BASE + "/studentInquiries";
 
 const PAYMENT_SETTINGS_URL =
-    FIRESTORE_BASE +
-    "/paymentSettings/telecaller";
+    FIRESTORE_BASE + "/paymentSettings/telecaller";
 
 
-/* ======================================================
-   DEFAULT SALARY SETTINGS
-====================================================== */
-
-let BASE_SALARY = 1000;
-
-let VISIT_INCENTIVE = 50;
-
-let ADMISSION_INCENTIVE = 50;
-
-
-/* ======================================================
+/* =========================================================
    SESSION CHECK
-====================================================== */
+========================================================= */
 
 const loggedIn =
-    sessionStorage.getItem(
-        "bt_logged_in"
-    );
+    sessionStorage.getItem("bt_logged_in");
 
 const userRole =
-    sessionStorage.getItem(
-        "bt_user_role"
-    );
+    sessionStorage.getItem("bt_user_role");
 
 const telecallerName =
-    sessionStorage.getItem(
-        "bt_user_name"
-    ) || "Telecaller";
+    sessionStorage.getItem("bt_user_name") ||
+    "Telecaller";
 
 const telecallerMobile =
-    sessionStorage.getItem(
-        "bt_user_mobile"
-    ) || "";
-
+    sessionStorage.getItem("bt_user_mobile") ||
+    "";
 
 if(
     loggedIn !== "true" ||
     userRole !== "telecaller"
 ){
-
-    window.location.replace(
-        "login.html"
-    );
-
+    window.location.replace("login.html");
 }
 
 
-/* ======================================================
-   ELEMENTS
-====================================================== */
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
 
-const tableBody =
-    document.getElementById(
-        "inquiryTableBody"
-    );
+let inquiries = [];
+let filteredInquiries = [];
 
-const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
+let BASE_SALARY = 1000;
 
-const courseFilter =
-    document.getElementById(
-        "courseFilter"
-    );
+/*
+   Default target-based earning rates
+*/
 
-const statusFilter =
-    document.getElementById(
-        "statusFilter"
-    );
+let TIER1_VISIT = 30;
+let TIER1_ADMISSION = 50;
 
-const coordinatorFilter =
-    document.getElementById(
-        "coordinatorFilter"
-    );
+let TIER2_VISIT = 50;
+let TIER2_ADMISSION = 75;
 
-const resultText =
-    document.getElementById(
-        "resultText"
-    );
-
-const systemMessage =
-    document.getElementById(
-        "systemMessage"
-    );
-
-const toast =
-    document.getElementById(
-        "toast"
-    );
+let TIER3_VISIT = 75;
+let TIER3_ADMISSION = 100;
 
 
-let allInquiries = [];
-
-let toastTimer;
-
-
-/* ======================================================
+/* =========================================================
    USER DISPLAY
-====================================================== */
+========================================================= */
 
-document.getElementById(
-    "userName"
-).textContent =
+document.getElementById("sideUserName").textContent =
     telecallerName;
 
-document.getElementById(
-    "avatar"
-).textContent =
+document.getElementById("topAvatar").textContent =
     telecallerName
+        .trim()
         .charAt(0)
-        .toUpperCase() || "T";
+        .toUpperCase();
 
 
-/* ======================================================
-   FETCH TIMEOUT
-====================================================== */
+/* =========================================================
+   HELPERS
+========================================================= */
 
-async function fetchWithTimeout(
-    url,
-    options = {},
-    timeout = 12000
-){
+function escapeHTML(value){
 
-    const controller =
-        new AbortController();
-
-    const timer =
-        setTimeout(
-            ()=>{
-                controller.abort();
-            },
-            timeout
-        );
-
-    try{
-
-        return await fetch(
-            url,
-            {
-                ...options,
-                signal:
-                    controller.signal
-            }
-        );
-
-    }finally{
-
-        clearTimeout(
-            timer
-        );
-
+    if(value === null || value === undefined){
+        return "";
     }
 
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 }
 
 
-/* ======================================================
-   READ ERROR
-====================================================== */
+function formatMoney(value){
 
-async function readError(
-    response
-){
+    return "₹" +
+        Number(value || 0).toLocaleString("en-IN");
+}
 
-    try{
 
-        const data =
-            await response.json();
+function normalizeMobile(value){
 
-        return (
-            data?.error?.message ||
-            JSON.stringify(data)
-        );
+    return String(value || "")
+        .replace(/\D/g,"")
+        .slice(-10);
+}
 
-    }catch(error){
 
-        return (
-            "HTTP " +
-            response.status +
-            " " +
-            response.statusText
-        );
+function currentMonthKey(){
 
+    const d = new Date();
+
+    return (
+        d.getFullYear() +
+        "-" +
+        String(d.getMonth()+1).padStart(2,"0")
+    );
+}
+
+
+function isCurrentMonth(dateValue){
+
+    if(!dateValue){
+        return false;
     }
 
-}
+    const d = new Date(dateValue);
 
+    if(isNaN(d.getTime())){
+        return false;
+    }
 
-/* ======================================================
-   SYSTEM MESSAGE
-====================================================== */
+    const now = new Date();
 
-function showSystemMessage(
-    type,
-    message
-){
-
-    systemMessage.className =
-        "system-message show " +
-        type;
-
-    systemMessage.innerHTML =
-        message;
-
-}
-
-function hideSystemMessage(){
-
-    systemMessage.className =
-        "system-message";
-
-    systemMessage.innerHTML =
-        "";
-
-}
-
-
-/* ======================================================
-   TOAST
-====================================================== */
-
-function showToast(
-    message,
-    type = "success"
-){
-
-    toast.className =
-        "toast show " +
-        type;
-
-    toast.textContent =
-        message;
-
-    clearTimeout(
-        toastTimer
+    return (
+        d.getFullYear() === now.getFullYear() &&
+        d.getMonth() === now.getMonth()
     );
-
-    toastTimer =
-        setTimeout(
-            ()=>{
-                toast.className =
-                    "toast";
-            },
-            3000
-        );
-
 }
 
 
-/* ======================================================
-   ESCAPE HTML
-====================================================== */
-
-function escapeHtml(
-    value
-){
-
-    return String(
-        value ?? ""
-    )
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
-
-}
-
-
-/* ======================================================
-   FIRESTORE VALUE CONVERTER
-====================================================== */
-
-function firestoreValue(
-    field
-){
+function firestoreValueToJS(field){
 
     if(!field){
-
-        return null;
-
+        return "";
     }
 
-    if(
-        field.stringValue !== undefined
-    ){
-
+    if(field.stringValue !== undefined){
         return field.stringValue;
-
     }
 
-    if(
-        field.integerValue !== undefined
-    ){
-
-        return Number(
-            field.integerValue
-        );
-
+    if(field.integerValue !== undefined){
+        return Number(field.integerValue);
     }
 
-    if(
-        field.doubleValue !== undefined
-    ){
-
-        return Number(
-            field.doubleValue
-        );
-
+    if(field.doubleValue !== undefined){
+        return Number(field.doubleValue);
     }
 
-    if(
-        field.booleanValue !== undefined
-    ){
-
+    if(field.booleanValue !== undefined){
         return field.booleanValue;
-
     }
 
-    if(
-        field.timestampValue !== undefined
-    ){
-
+    if(field.timestampValue !== undefined){
         return field.timestampValue;
-
-    }
-
-    if(
-        field.nullValue !== undefined
-    ){
-
-        return null;
-
     }
 
     return "";
-
 }
 
 
-/* ======================================================
-   DOCUMENT CONVERTER
-====================================================== */
+function convertFirestoreDocument(doc){
 
-function convertDocument(
-    document
-){
+    const fields = doc.fields || {};
 
-    const fields =
-        document.fields || {};
+    const item = {};
+
+    Object.keys(fields).forEach(key => {
+        item[key] = firestoreValueToJS(fields[key]);
+    });
+
+    item._id =
+        doc.name
+        ? doc.name.split("/").pop()
+        : "";
+
+    return item;
+}
+
+
+function toFirestoreValue(value){
+
+    if(typeof value === "number"){
+        return {
+            integerValue:String(value)
+        };
+    }
+
+    if(typeof value === "boolean"){
+        return {
+            booleanValue:value
+        };
+    }
 
     return {
-
-        id:
-            document.name
-                ? document.name
-                    .split("/")
-                    .pop()
-                : "",
-
-        studentName:
-            firestoreValue(
-                fields.studentName
-            ) || "",
-
-        mobile:
-            firestoreValue(
-                fields.mobile
-            ) || "",
-
-        course:
-            firestoreValue(
-                fields.course
-            ) || "",
-
-        source:
-            firestoreValue(
-                fields.source
-            ) || "",
-
-        remark:
-            firestoreValue(
-                fields.remark
-            ) || "",
-
-        coordinatorName:
-            firestoreValue(
-                fields.coordinatorName
-            ) || "",
-
-        coordinatorMobile:
-            firestoreValue(
-                fields.coordinatorMobile
-            ) || "",
-
-        status:
-            firestoreValue(
-                fields.status
-            ) || "new",
-
-        telecallerStatus:
-            firestoreValue(
-                fields.telecallerStatus
-            ) || "pending",
-
-        telecallerRemark:
-            firestoreValue(
-                fields.telecallerRemark
-            ) || "",
-
-        followUpDate:
-            firestoreValue(
-                fields.followUpDate
-            ) || "",
-
-        createdAt:
-            firestoreValue(
-                fields.createdAt
-            ) || "",
-
-        updatedAt:
-            firestoreValue(
-                fields.updatedAt
-            ) || "",
-
-        telecallerName:
-            firestoreValue(
-                fields.telecallerName
-            ) || "",
-
-        telecallerMobile:
-            firestoreValue(
-                fields.telecallerMobile
-            ) || ""
-
+        stringValue:String(value ?? "")
     };
-
 }
 
 
-/* ======================================================
-   LOAD PAYMENT SETTINGS
-====================================================== */
+/* =========================================================
+   PAYMENT SETTINGS
+========================================================= */
 
 async function loadPaymentSettings(){
 
     try{
 
-        const url =
-            PAYMENT_SETTINGS_URL +
-            "?key=" +
-            encodeURIComponent(
-                FIREBASE_API_KEY
-            );
-
         const response =
-            await fetchWithTimeout(
-                url,
-                {
-                    method:"GET"
-                },
-                10000
+            await fetch(
+                PAYMENT_SETTINGS_URL +
+                "?key=" +
+                encodeURIComponent(FIREBASE_API_KEY)
             );
-
-        /*
-          If Admin has not created the document yet,
-          keep the default values.
-        */
-
-        if(
-            response.status === 404
-        ){
-
-            updateSalaryDisplay();
-
-            return;
-
-        }
 
         if(!response.ok){
 
-            const error =
-                await readError(
-                    response
-                );
-
-            throw new Error(
-                "Payment settings error (" +
-                response.status +
-                "): " +
-                error
+            console.log(
+                "Payment settings not found. Using defaults."
             );
 
+            updateDashboard();
+            return;
         }
 
         const data =
@@ -2103,1440 +1553,1008 @@ async function loadPaymentSettings(){
         const fields =
             data.fields || {};
 
-        const base =
-            firestoreValue(
-                fields.baseSalary
-            );
-
-        const visit =
-            firestoreValue(
-                fields.visitIncentive
-            );
-
-        const admission =
-            firestoreValue(
-                fields.admissionIncentive
-            );
-
-        if(
-            Number.isFinite(
-                Number(base)
-            )
-        ){
-
+        if(fields.baseSalary){
             BASE_SALARY =
-                Math.max(
-                    0,
-                    Number(base)
-                );
-
+                Number(
+                    firestoreValueToJS(
+                        fields.baseSalary
+                    )
+                ) || 1000;
         }
 
-        if(
-            Number.isFinite(
-                Number(visit)
-            )
-        ){
+        /*
+          Future Admin support:
+          If Admin later saves tier rates,
+          Telecaller page automatically uses them.
+        */
 
-            VISIT_INCENTIVE =
-                Math.max(
-                    0,
-                    Number(visit)
+        if(fields.tier1VisitIncentive){
+            TIER1_VISIT =
+                Number(
+                    firestoreValueToJS(
+                        fields.tier1VisitIncentive
+                    )
                 );
-
         }
 
-        if(
-            Number.isFinite(
-                Number(admission)
-            )
-        ){
-
-            ADMISSION_INCENTIVE =
-                Math.max(
-                    0,
-                    Number(admission)
+        if(fields.tier1AdmissionIncentive){
+            TIER1_ADMISSION =
+                Number(
+                    firestoreValueToJS(
+                        fields.tier1AdmissionIncentive
+                    )
                 );
-
         }
 
-        updateSalaryDisplay();
+        if(fields.tier2VisitIncentive){
+            TIER2_VISIT =
+                Number(
+                    firestoreValueToJS(
+                        fields.tier2VisitIncentive
+                    )
+                );
+        }
+
+        if(fields.tier2AdmissionIncentive){
+            TIER2_ADMISSION =
+                Number(
+                    firestoreValueToJS(
+                        fields.tier2AdmissionIncentive
+                    )
+                );
+        }
+
+        if(fields.tier3VisitIncentive){
+            TIER3_VISIT =
+                Number(
+                    firestoreValueToJS(
+                        fields.tier3VisitIncentive
+                    )
+                );
+        }
+
+        if(fields.tier3AdmissionIncentive){
+            TIER3_ADMISSION =
+                Number(
+                    firestoreValueToJS(
+                        fields.tier3AdmissionIncentive
+                    )
+                );
+        }
+
+        updatePlanUI();
+        updateDashboard();
 
     }catch(error){
 
         console.error(
-            "PAYMENT SETTINGS ERROR:",
+            "Payment settings error:",
             error
         );
 
-        /*
-          Do not stop the dashboard if
-          payment settings cannot be loaded.
-        */
-
-        updateSalaryDisplay();
-
+        updatePlanUI();
+        updateDashboard();
     }
-
 }
 
 
-/* ======================================================
-   GET ALL DOCUMENTS
-====================================================== */
-
-async function fetchAllInquiries(){
-
-    let allDocuments = [];
-
-    let pageToken = "";
-
-    do{
-
-        let url =
-            FIRESTORE_URL +
-            "?key=" +
-            encodeURIComponent(
-                FIREBASE_API_KEY
-            ) +
-            "&pageSize=300";
-
-        if(pageToken){
-
-            url +=
-                "&pageToken=" +
-                encodeURIComponent(
-                    pageToken
-                );
-
-        }
-
-        const response =
-            await fetchWithTimeout(
-                url,
-                {
-                    method:"GET"
-                },
-                12000
-            );
-
-        if(!response.ok){
-
-            const error =
-                await readError(
-                    response
-                );
-
-            throw new Error(
-                "Firestore Error (" +
-                response.status +
-                "): " +
-                error
-            );
-
-        }
-
-        const data =
-            await response.json();
-
-        if(
-            Array.isArray(
-                data.documents
-            )
-        ){
-
-            allDocuments.push(
-                ...data.documents
-            );
-
-        }
-
-        pageToken =
-            data.nextPageToken ||
-            "";
-
-    }
-    while(pageToken);
-
-    return allDocuments.map(
-        convertDocument
-    );
-
-}
-
-
-/* ======================================================
-   LOAD INQUIRIES
-====================================================== */
+/* =========================================================
+   FETCH ALL INQUIRIES
+========================================================= */
 
 async function loadInquiries(){
 
-    tableBody.innerHTML = `
-
-        <tr>
-
-            <td
-                colspan="7"
-                class="table-state"
-            >
-
-                <div class="spinner"></div>
-
-                Loading inquiries...
-
-            </td>
-
-        </tr>
-
-    `;
-
-    showSystemMessage(
-        "info",
-        "⏳ Loading student inquiries from Firestore..."
-    );
-
     try{
 
-        allInquiries =
-            await fetchAllInquiries();
+        let allDocs = [];
+        let pageToken = "";
 
-        allInquiries.sort(
-            (a,b)=>{
+        do{
 
-                const da =
-                    new Date(
-                        a.createdAt || 0
-                    ).getTime();
+            let url =
+                FIRESTORE_URL +
+                "?key=" +
+                encodeURIComponent(
+                    FIREBASE_API_KEY
+                );
 
-                const db =
-                    new Date(
-                        b.createdAt || 0
-                    ).getTime();
-
-                return db - da;
-
+            if(pageToken){
+                url +=
+                    "&pageToken=" +
+                    encodeURIComponent(
+                        pageToken
+                    );
             }
-        );
 
-        hideSystemMessage();
+            const response =
+                await fetch(url);
 
-        updateStats();
+            if(!response.ok){
 
-        populateFilters();
+                throw new Error(
+                    "Firestore request failed: " +
+                    response.status
+                );
+            }
+
+            const data =
+                await response.json();
+
+            if(Array.isArray(data.documents)){
+                allDocs =
+                    allDocs.concat(
+                        data.documents
+                    );
+            }
+
+            pageToken =
+                data.nextPageToken || "";
+
+        }while(pageToken);
+
+
+        inquiries =
+            allDocs.map(
+                convertFirestoreDocument
+            );
+
+
+        updateCoordinatorFilter();
+        updateCourseFilter();
 
         applyFilters();
 
-        updateSalaryDisplay();
-
-        if(
-            allInquiries.length > 0
-        ){
-
-            showToast(
-                `${allInquiries.length} inquiries loaded.`
-            );
-
-        }
-
     }catch(error){
 
-        console.error(
-            "LOAD INQUIRIES ERROR:",
-            error
+        console.error(error);
+
+        document.getElementById(
+            "resultText"
+        ).textContent =
+            "Unable to load inquiries";
+
+        document.getElementById(
+            "inquiryBody"
+        ).innerHTML = `
+            <tr>
+                <td colspan="7">
+                    <div class="empty">
+                        <div class="empty-icon">⚠️</div>
+                        <div>Unable to load inquiries.</div>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+}
+
+
+/* =========================================================
+   FILTER OPTIONS
+========================================================= */
+
+function updateCourseFilter(){
+
+    const select =
+        document.getElementById(
+            "courseFilter"
         );
 
-        tableBody.innerHTML = `
+    const current =
+        select.value;
 
+    const courses =
+        [...new Set(
+            inquiries
+                .map(x => x.course)
+                .filter(Boolean)
+        )]
+        .sort();
+
+    select.innerHTML =
+        `<option value="">All Courses</option>`;
+
+    courses.forEach(course => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = course;
+        option.textContent = course;
+
+        select.appendChild(option);
+    });
+
+    select.value = current;
+}
+
+
+function updateCoordinatorFilter(){
+
+    const select =
+        document.getElementById(
+            "coordinatorFilter"
+        );
+
+    const current =
+        select.value;
+
+    const coordinators =
+        [...new Set(
+            inquiries
+                .map(x => x.coordinatorName)
+                .filter(Boolean)
+        )]
+        .sort();
+
+    select.innerHTML =
+        `<option value="">All Coordinators</option>`;
+
+    coordinators.forEach(name => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = name;
+        option.textContent = name;
+
+        select.appendChild(option);
+    });
+
+    select.value = current;
+}
+
+
+/* =========================================================
+   FILTERING
+========================================================= */
+
+function applyFilters(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .trim()
+        .toLowerCase();
+
+    const course =
+        document.getElementById(
+            "courseFilter"
+        ).value;
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+    const coordinator =
+        document.getElementById(
+            "coordinatorFilter"
+        ).value;
+
+
+    filteredInquiries =
+        inquiries.filter(item => {
+
+            const matchesSearch =
+                !search ||
+                String(
+                    item.studentName || ""
+                )
+                .toLowerCase()
+                .includes(search) ||
+
+                String(
+                    item.mobile || ""
+                )
+                .includes(search);
+
+            const matchesCourse =
+                !course ||
+                item.course === course;
+
+            const matchesStatus =
+                !status ||
+                item.status === status;
+
+            const matchesCoordinator =
+                !coordinator ||
+                item.coordinatorName === coordinator;
+
+            return (
+                matchesSearch &&
+                matchesCourse &&
+                matchesStatus &&
+                matchesCoordinator
+            );
+        });
+
+
+    renderInquiries();
+
+    updateDashboard();
+}
+
+
+function resetFilters(){
+
+    document.getElementById(
+        "searchInput"
+    ).value = "";
+
+    document.getElementById(
+        "courseFilter"
+    ).value = "";
+
+    document.getElementById(
+        "statusFilter"
+    ).value = "";
+
+    document.getElementById(
+        "coordinatorFilter"
+    ).value = "";
+
+    applyFilters();
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderInquiries(){
+
+    const body =
+        document.getElementById(
+            "inquiryBody"
+        );
+
+    document.getElementById(
+        "resultText"
+    ).textContent =
+        `${filteredInquiries.length} ${
+            filteredInquiries.length === 1
+                ? "inquiry"
+                : "inquiries"
+        } found`;
+
+
+    if(!filteredInquiries.length){
+
+        body.innerHTML = `
             <tr>
-
-                <td
-                    colspan="7"
-                    class="table-state"
-                >
-
-                    <div style="font-size:30px;">
-                        ⚠️
+                <td colspan="7">
+                    <div class="empty">
+                        <div class="empty-icon">📭</div>
+                        <div>No inquiries found.</div>
                     </div>
-
-                    <br>
-
-                    <strong>
-                        Unable to load inquiries
-                    </strong>
-
-                    <br><br>
-
-                    ${escapeHtml(
-                        error.message
-                    )}
-
                 </td>
-
             </tr>
-
         `;
 
-        showSystemMessage(
-            "error",
-            `
-                ❌ <strong>Firestore data load failed.</strong><br><br>
-                ${escapeHtml(
-                    error.message
-                )}
-            `
-        );
-
+        return;
     }
 
+
+    body.innerHTML =
+        filteredInquiries
+            .map(item => {
+
+                const status =
+                    item.status || "new";
+
+                const statusClass =
+                    "status-" +
+                    status
+                        .replace(/\s+/g,"-");
+
+
+                const coordinator =
+                    item.coordinatorName ||
+                    "—";
+
+
+                return `
+                    <tr>
+
+                        <td>
+                            <div class="student-name">
+                                ${escapeHTML(
+                                    item.studentName ||
+                                    "Unknown"
+                                )}
+                            </div>
+
+                            <div class="student-mobile">
+                                ${escapeHTML(
+                                    item.mobile ||
+                                    "—"
+                                )}
+                            </div>
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                item.course ||
+                                "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                item.source ||
+                                "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                coordinator
+                            )}
+                        </td>
+
+                        <td>
+                            <select
+                                style="min-width:125px;"
+                                onchange="changeStatus(
+                                    '${escapeHTML(item._id)}',
+                                    this.value
+                                )"
+                            >
+                                <option value="new"
+                                    ${status==="new"?"selected":""}>
+                                    New
+                                </option>
+
+                                <option value="pending"
+                                    ${status==="pending"?"selected":""}>
+                                    Pending
+                                </option>
+
+                                <option value="contacted"
+                                    ${status==="contacted"?"selected":""}>
+                                    Contacted
+                                </option>
+
+                                <option value="follow-up"
+                                    ${status==="follow-up"?"selected":""}>
+                                    Follow-up
+                                </option>
+
+                                <option value="visited"
+                                    ${status==="visited"?"selected":""}>
+                                    Visited
+                                </option>
+
+                                <option value="converted"
+                                    ${status==="converted"?"selected":""}>
+                                    Converted
+                                </option>
+
+                                <option value="not-interested"
+                                    ${status==="not-interested"?"selected":""}>
+                                    Not Interested
+                                </option>
+
+                            </select>
+
+                            <div style="margin-top:5px;">
+                                <span class="status ${statusClass}">
+                                    ${escapeHTML(status)}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                item.followUpDate ||
+                                "—"
+                            )}
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    class="action-btn call"
+                                    title="Call"
+                                    onclick="callStudent(
+                                        '${escapeHTML(item.mobile || "")}'
+                                    )"
+                                >
+                                    📞
+                                </button>
+
+                                <button
+                                    class="action-btn whatsapp"
+                                    title="WhatsApp"
+                                    onclick="whatsappStudent(
+                                        '${escapeHTML(item.mobile || "")}',
+                                        '${escapeHTML(item.studentName || "")}'
+                                    )"
+                                >
+                                    💬
+                                </button>
+
+                                <button
+                                    class="action-btn view"
+                                    title="View"
+                                    onclick="viewStudent(
+                                        '${escapeHTML(item._id)}'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+                                <button
+                                    class="action-btn delete"
+                                    title="Delete"
+                                    onclick="deleteInquiry(
+                                        '${escapeHTML(item._id)}'
+                                    )"
+                                >
+                                    🗑
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                `;
+
+            })
+            .join("");
 }
 
 
-/* ======================================================
-   STATUS
-====================================================== */
+/* =========================================================
+   TARGET CALCULATION
+========================================================= */
 
-function getStatus(
-    inquiry
-){
+function getCurrentMonthPerformance(){
 
-    if(
-        inquiry.status === "new" &&
-        (
-            !inquiry.telecallerStatus ||
-            inquiry.telecallerStatus === "pending"
-        )
-    ){
-
-        return "new";
-
-    }
-
-    return (
-        inquiry.telecallerStatus ||
-        inquiry.status ||
-        "new"
-    );
-
-}
-
-
-/* ======================================================
-   STATUS TEXT
-====================================================== */
-
-function statusText(
-    status
-){
-
-    const map = {
-
-        new:"New",
-
-        pending:"Pending",
-
-        contacted:"Contacted",
-
-        "follow-up":"Follow-up",
-
-        visited:"Visited",
-
-        converted:"Converted",
-
-        "not-interested":
-            "Not Interested"
-
-    };
-
-    return (
-        map[status] ||
-        "New"
-    );
-
-}
-
-
-/* ======================================================
-   DATE
-====================================================== */
-
-function formatDate(
-    value
-){
-
-    if(!value){
-
-        return "Just now";
-
-    }
-
-    const date =
-        new Date(value);
-
-    if(
-        isNaN(
-            date.getTime()
-        )
-    ){
-
-        return "Recently";
-
-    }
-
-    return date.toLocaleString(
-        "en-IN",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric",
-            hour:"2-digit",
-            minute:"2-digit"
-        }
-    );
-
-}
-
-
-/* ======================================================
-   TODAY
-====================================================== */
-
-function isToday(
-    value
-){
-
-    if(!value){
-
-        return false;
-
-    }
-
-    const date =
-        new Date(value);
-
-    const now =
-        new Date();
-
-    return (
-
-        date.getDate() ===
-        now.getDate()
-
-        &&
-
-        date.getMonth() ===
-        now.getMonth()
-
-        &&
-
-        date.getFullYear() ===
-        now.getFullYear()
-
-    );
-
-}
-
-
-/* ======================================================
-   CURRENT MONTH
-====================================================== */
-
-function isCurrentMonth(
-    value
-){
-
-    if(!value){
-
-        return false;
-
-    }
-
-    const date =
-        new Date(value);
-
-    const now =
-        new Date();
-
-    if(
-        isNaN(
-            date.getTime()
-        )
-    ){
-
-        return false;
-
-    }
-
-    return (
-
-        date.getMonth() ===
-        now.getMonth()
-
-        &&
-
-        date.getFullYear() ===
-        now.getFullYear()
-
-    );
-
-}
-
-
-/* ======================================================
-   NORMALIZE MOBILE
-====================================================== */
-
-function normalizeMobile(
-    value
-){
-
-    let mobile =
-        String(
-            value || ""
-        )
-        .replace(
-            /\D/g,
-            ""
-        );
+    const month =
+        currentMonthKey();
 
     /*
-      Indian numbers:
-      9876543210
-      919876543210
+       Only current-month records.
+       Unique mobile numbers prevent duplicate
+       incentive counting.
     */
 
-    if(
-        mobile.length > 10
-    ){
+    const monthItems =
+        inquiries.filter(item => {
 
-        mobile =
-            mobile.slice(
-                -10
+            return (
+                item.createdAt &&
+                currentMonthKeyFromDate(
+                    item.createdAt
+                ) === month
             );
-
-    }
-
-    return mobile;
-
-}
+        });
 
 
-/* ======================================================
-   UNIQUE MOBILE COUNT
-====================================================== */
-
-function uniqueMobileCount(
-    inquiries
-){
-
-    const set =
+    const visitedMobiles =
         new Set();
 
-    inquiries.forEach(
-        inquiry=>{
+    const convertedMobiles =
+        new Set();
 
-            const mobile =
-                normalizeMobile(
-                    inquiry.mobile
-                );
 
-            if(mobile){
+    monthItems.forEach(item => {
 
-                set.add(
-                    mobile
-                );
+        const mobile =
+            normalizeMobile(
+                item.mobile
+            );
 
-            }
-
+        if(!mobile){
+            return;
         }
-    );
 
-    return set.size;
+        if(item.status === "visited"){
+            visitedMobiles.add(mobile);
+        }
 
+        if(item.status === "converted"){
+            convertedMobiles.add(mobile);
+        }
+
+    });
+
+
+    return {
+        visited:visitedMobiles.size,
+        converted:convertedMobiles.size
+    };
 }
 
 
-/* ======================================================
-   SALARY CALCULATION
-====================================================== */
+function currentMonthKeyFromDate(dateValue){
 
-function calculateSalary(){
+    const d =
+        new Date(dateValue);
 
-    const currentMonth =
-        allInquiries.filter(
-            inquiry =>
-                isCurrentMonth(
-                    inquiry.createdAt
-                )
-        );
+    if(isNaN(d.getTime())){
+        return "";
+    }
 
-    /*
-      Visited students
+    return (
+        d.getFullYear() +
+        "-" +
+        String(
+            d.getMonth()+1
+        ).padStart(2,"0")
+    );
+}
 
-      Only exact status "visited"
-      counts for visit incentive.
-    */
 
-    const visited =
-        currentMonth.filter(
-            inquiry =>
-                getStatus(
-                    inquiry
-                ) === "visited"
-        );
+/* =========================================================
+   DETERMINE CURRENT LAYER
+========================================================= */
 
-    /*
-      Converted students
+function getCurrentLayer(visited){
 
-      Only exact status "converted"
-      counts for admission incentive.
-    */
+    if(visited >= 10){
+        return 3;
+    }
 
-    const converted =
-        currentMonth.filter(
-            inquiry =>
-                getStatus(
-                    inquiry
-                ) === "converted"
-        );
+    if(visited >= 5){
+        return 2;
+    }
 
-    const uniqueVisited =
-        uniqueMobileCount(
+    return 1;
+}
+
+
+function getLayerRates(layer){
+
+    if(layer === 3){
+
+        return {
+            visit:TIER3_VISIT,
+            admission:TIER3_ADMISSION
+        };
+    }
+
+    if(layer === 2){
+
+        return {
+            visit:TIER2_VISIT,
+            admission:TIER2_ADMISSION
+        };
+    }
+
+    return {
+        visit:TIER1_VISIT,
+        admission:TIER1_ADMISSION
+    };
+}
+
+
+/* =========================================================
+   UPDATE TARGET UI
+========================================================= */
+
+function updateTargetUI(visited){
+
+    const layer =
+        getCurrentLayer(
             visited
         );
 
-    const uniqueConverted =
-        uniqueMobileCount(
-            converted
-        );
-
-    const visitPayment =
-        uniqueVisited *
-        VISIT_INCENTIVE;
-
-    const admissionPayment =
-        uniqueConverted *
-        ADMISSION_INCENTIVE;
-
-    const total =
-        BASE_SALARY +
-        visitPayment +
-        admissionPayment;
-
-    return {
-
-        base:
-            BASE_SALARY,
-
-        uniqueVisited,
-
-        uniqueConverted,
-
-        visitPayment,
-
-        admissionPayment,
-
-        total
-
-    };
-
-}
+    document.getElementById(
+        "currentLayer"
+    ).textContent =
+        `Layer ${layer}`;
 
 
-/* ======================================================
-   CURRENCY
-====================================================== */
-
-function money(
-    value
-){
-
-    return "₹" +
-        Number(
-            value || 0
-        ).toLocaleString(
-            "en-IN"
-        );
-
-}
+    let percentage = 0;
+    let rangeText = "";
+    let nextText = "";
 
 
-/* ======================================================
-   UPDATE SALARY DISPLAY
-====================================================== */
+    if(layer === 1){
 
-function updateSalaryDisplay(){
+        percentage =
+            Math.min(
+                (visited / 5) * 100,
+                100
+            );
 
-    const salary =
-        calculateSalary();
+        rangeText =
+            "Target: 1–4";
+
+        if(visited === 0){
+
+            nextText =
+                "Start your first visit to enter Layer 1.";
+
+        }else{
+
+            const remaining =
+                5 - visited;
+
+            nextText =
+                `${remaining} more visited student${
+                    remaining === 1 ? "" : "s"
+                } to unlock Layer 2.`;
+        }
+
+    }
+
+
+    else if(layer === 2){
+
+        percentage =
+            Math.min(
+                ((visited - 5) / 5) * 100,
+                100
+            );
+
+        rangeText =
+            "Target: 5–9";
+
+        const remaining =
+            10 - visited;
+
+        nextText =
+            `${remaining} more visited student${
+                remaining === 1 ? "" : "s"
+            } to unlock Layer 3.`;
+
+    }
+
+
+    else{
+
+        percentage = 100;
+
+        rangeText =
+            "Target: 10+";
+
+        nextText =
+            "🔥 Top earning layer reached. Keep going!";
+    }
+
 
     document.getElementById(
-        "baseSalaryAmount"
-    ).textContent =
-        money(
-            salary.base
-        );
+        "targetProgress"
+    ).style.width =
+        percentage + "%";
+
 
     document.getElementById(
-        "visitSalaryAmount"
+        "targetProgressText"
     ).textContent =
-        money(
-            salary.visitPayment
-        );
-
-    document.getElementById(
-        "admissionSalaryAmount"
-    ).textContent =
-        money(
-            salary.admissionPayment
-        );
-
-    document.getElementById(
-        "totalSalaryAmount"
-    ).textContent =
-        money(
-            salary.total
-        );
-
-    document.getElementById(
-        "visitSalaryDescription"
-    ).textContent =
-        `${money(VISIT_INCENTIVE)} × ${salary.uniqueVisited} visited student${
-            salary.uniqueVisited === 1
-                ? ""
-                : "s"
+        `${visited} visited student${
+            visited === 1 ? "" : "s"
         }`;
 
-    document.getElementById(
-        "admissionSalaryDescription"
-    ).textContent =
-        `${money(ADMISSION_INCENTIVE)} × ${salary.uniqueConverted} converted student${
-            salary.uniqueConverted === 1
-                ? ""
-                : "s"
-        }`;
-
-    const now =
-        new Date();
 
     document.getElementById(
-        "salaryMonth"
+        "targetRange"
     ).textContent =
-        now.toLocaleString(
-            "en-IN",
-            {
-                month:"long",
-                year:"numeric"
-            }
-        );
+        rangeText;
 
+
+    document.getElementById(
+        "nextTarget"
+    ).textContent =
+        nextText;
+
+
+    document.getElementById(
+        "plan1"
+    ).classList.toggle(
+        "active",
+        layer === 1
+    );
+
+    document.getElementById(
+        "plan2"
+    ).classList.toggle(
+        "active",
+        layer === 2
+    );
+
+    document.getElementById(
+        "plan3"
+    ).classList.toggle(
+        "active",
+        layer === 3
+    );
 }
 
 
-/* ======================================================
-   STATS
-====================================================== */
+/* =========================================================
+   UPDATE PLAN UI
+========================================================= */
 
-function updateStats(){
+function updatePlanUI(){
 
-    const total =
-        allInquiries.length;
+    document.getElementById(
+        "tier1Visit"
+    ).textContent =
+        formatMoney(
+            TIER1_VISIT
+        );
 
-    const today =
-        allInquiries.filter(
-            item =>
-                isToday(
-                    item.createdAt
-                )
-        ).length;
+    document.getElementById(
+        "tier1Admission"
+    ).textContent =
+        formatMoney(
+            TIER1_ADMISSION
+        );
 
-    const newCount =
-        allInquiries.filter(
-            item =>
-                getStatus(item) ===
-                "new"
-        ).length;
 
-    const pending =
-        allInquiries.filter(
-            item =>
-                getStatus(item) ===
-                "pending"
-        ).length;
+    document.getElementById(
+        "tier2Visit"
+    ).textContent =
+        formatMoney(
+            TIER2_VISIT
+        );
+
+    document.getElementById(
+        "tier2Admission"
+    ).textContent =
+        formatMoney(
+            TIER2_ADMISSION
+        );
+
+
+    document.getElementById(
+        "tier3Visit"
+    ).textContent =
+        formatMoney(
+            TIER3_VISIT
+        );
+
+    document.getElementById(
+        "tier3Admission"
+    ).textContent =
+        formatMoney(
+            TIER3_ADMISSION
+        );
+}
+
+
+/* =========================================================
+   UPDATE EARNINGS
+========================================================= */
+
+function updateDashboard(){
+
+    const performance =
+        getCurrentMonthPerformance();
+
+    const visited =
+        performance.visited;
 
     const converted =
-        allInquiries.filter(
-            item =>
-                getStatus(item) ===
-                "converted"
-        ).length;
+        performance.converted;
+
+
+    const layer =
+        getCurrentLayer(
+            visited
+        );
+
+    const rates =
+        getLayerRates(
+            layer
+        );
+
+
+    const visitEarning =
+        visited *
+        rates.visit;
+
+    const admissionEarning =
+        converted *
+        rates.admission;
+
+    const total =
+        Number(BASE_SALARY) +
+        visitEarning +
+        admissionEarning;
+
 
     document.getElementById(
-        "totalCount"
+        "totalInquiries"
     ).textContent =
-        total;
+        inquiries.length;
+
 
     document.getElementById(
-        "todayCount"
+        "visitedCount"
     ).textContent =
-        today;
+        visited;
 
-    document.getElementById(
-        "newCount"
-    ).textContent =
-        newCount;
-
-    document.getElementById(
-        "pendingCount"
-    ).textContent =
-        pending;
 
     document.getElementById(
         "convertedCount"
     ).textContent =
         converted;
 
-}
 
-
-/* ======================================================
-   FILTER OPTIONS
-====================================================== */
-
-function populateFilters(){
-
-    const selectedCourse =
-        courseFilter.value;
-
-    const selectedCoordinator =
-        coordinatorFilter.value;
-
-    const courses =
-        [
-            ...new Set(
-                allInquiries
-                    .map(
-                        item =>
-                            item.course
-                    )
-                    .filter(Boolean)
-            )
-        ]
-        .sort();
-
-    const coordinators =
-        [
-            ...new Set(
-                allInquiries
-                    .map(
-                        item =>
-                            item.coordinatorName
-                    )
-                    .filter(Boolean)
-            )
-        ]
-        .sort();
-
-    courseFilter.innerHTML = `
-        <option value="">
-            All Courses
-        </option>
-    `;
-
-    courses.forEach(
-        item=>{
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                item;
-
-            option.textContent =
-                item;
-
-            courseFilter.appendChild(
-                option
-            );
-
-        }
-    );
-
-    coordinatorFilter.innerHTML = `
-        <option value="">
-            All Coordinators
-        </option>
-    `;
-
-    coordinators.forEach(
-        item=>{
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                item;
-
-            option.textContent =
-                item;
-
-            coordinatorFilter.appendChild(
-                option
-            );
-
-        }
-    );
-
-    if(
-        courses.includes(
-            selectedCourse
-        )
-    ){
-
-        courseFilter.value =
-            selectedCourse;
-
-    }
-
-    if(
-        coordinators.includes(
-            selectedCoordinator
-        )
-    ){
-
-        coordinatorFilter.value =
-            selectedCoordinator;
-
-    }
-
-}
-
-
-/* ======================================================
-   FILTER
-====================================================== */
-
-function applyFilters(){
-
-    const search =
-        searchInput.value
-            .trim()
-            .toLowerCase();
-
-    const course =
-        courseFilter.value;
-
-    const status =
-        statusFilter.value;
-
-    const coordinator =
-        coordinatorFilter.value;
-
-    const filtered =
-        allInquiries.filter(
-            inquiry=>{
-
-                const name =
-                    String(
-                        inquiry.studentName ||
-                        ""
-                    ).toLowerCase();
-
-                const mobile =
-                    String(
-                        inquiry.mobile ||
-                        ""
-                    ).toLowerCase();
-
-                const courseName =
-                    String(
-                        inquiry.course ||
-                        ""
-                    ).toLowerCase();
-
-                const coordinatorName =
-                    String(
-                        inquiry.coordinatorName ||
-                        ""
-                    ).toLowerCase();
-
-                const matchesSearch =
-
-                    !search ||
-
-                    name.includes(
-                        search
-                    ) ||
-
-                    mobile.includes(
-                        search
-                    ) ||
-
-                    courseName.includes(
-                        search
-                    ) ||
-
-                    coordinatorName.includes(
-                        search
-                    );
-
-                const matchesCourse =
-                    !course ||
-                    inquiry.course ===
-                        course;
-
-                const matchesCoordinator =
-                    !coordinator ||
-                    inquiry.coordinatorName ===
-                        coordinator;
-
-                const matchesStatus =
-                    !status ||
-                    getStatus(inquiry) ===
-                        status;
-
-                return (
-                    matchesSearch &&
-                    matchesCourse &&
-                    matchesCoordinator &&
-                    matchesStatus
-                );
-
-            }
+    document.getElementById(
+        "baseSalaryDisplay"
+    ).textContent =
+        formatMoney(
+            BASE_SALARY
         );
 
-    renderTable(
-        filtered
+
+    document.getElementById(
+        "visitEarning"
+    ).textContent =
+        formatMoney(
+            visitEarning
+        );
+
+
+    document.getElementById(
+        "admissionEarning"
+    ).textContent =
+        formatMoney(
+            admissionEarning
+        );
+
+
+    document.getElementById(
+        "totalEarning"
+    ).textContent =
+        formatMoney(
+            total
+        );
+
+
+    document.getElementById(
+        "estimatedEarning"
+    ).textContent =
+        formatMoney(
+            total
+        );
+
+
+    updateTargetUI(
+        visited
     );
 
+
+    const now =
+        new Date();
+
+    document.getElementById(
+        "earningMonth"
+    ).textContent =
+        now.toLocaleDateString(
+            "en-IN",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        );
 }
 
 
-/* ======================================================
-   RENDER TABLE
-====================================================== */
+/* =========================================================
+   CHANGE STATUS
+========================================================= */
 
-function renderTable(
-    inquiries
+async function changeStatus(
+    docId,
+    newStatus
 ){
 
-    resultText.textContent =
-        `${inquiries.length} inquiry${
-            inquiries.length === 1
-                ? ""
-                : "ies"
-        } found`;
-
-    if(
-        inquiries.length === 0
-    ){
-
-        tableBody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="7"
-                    class="table-state"
-                >
-
-                    <div style="font-size:34px;">
-                        📭
-                    </div>
-
-                    <br>
-
-                    No inquiries found.
-
-                </td>
-
-            </tr>
-
-        `;
-
+    if(!docId){
         return;
-
     }
 
-    tableBody.innerHTML =
-        inquiries
-            .map(
-                createRow
-            )
-            .join("");
-
-}
-
-
-/* ======================================================
-   CREATE ROW
-====================================================== */
-
-function createRow(
-    inquiry
-){
-
-    const name =
-        inquiry.studentName ||
-        "Unknown";
-
-    const initial =
-        name
-            .charAt(0)
-            .toUpperCase();
-
-    const status =
-        getStatus(
-            inquiry
-        );
-
-    return `
-
-        <tr>
-
-            <td>
-
-                <div class="student-cell">
-
-                    <div class="student-avatar">
-
-                        ${escapeHtml(
-                            initial
-                        )}
-
-                    </div>
-
-                    <div>
-
-                        <div class="student-name">
-
-                            ${escapeHtml(
-                                name
-                            )}
-
-                        </div>
-
-                        <div class="student-mobile">
-
-                            📱
-                            ${escapeHtml(
-                                inquiry.mobile ||
-                                "-"
-                            )}
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </td>
-
-            <td>
-
-                <div class="course-name">
-
-                    ${escapeHtml(
-                        inquiry.course ||
-                        "-"
-                    )}
-
-                </div>
-
-            </td>
-
-            <td>
-
-                <span class="source-badge">
-
-                    ${escapeHtml(
-                        inquiry.source ||
-                        "Coordinator"
-                    )}
-
-                </span>
-
-            </td>
-
-            <td>
-
-                <div class="coordinator-name">
-
-                    ${escapeHtml(
-                        inquiry.coordinatorName ||
-                        "-"
-                    )}
-
-                </div>
-
-            </td>
-
-            <td>
-
-                <div class="date-text">
-
-                    ${escapeHtml(
-                        formatDate(
-                            inquiry.createdAt
-                        )
-                    )}
-
-                </div>
-
-            </td>
-
-            <td>
-
-                <select
-                    class="status-select ${escapeHtml(status)}"
-                    data-action="status"
-                    data-id="${escapeHtml(inquiry.id)}"
-                >
-
-                    <option
-                        value="new"
-                        ${status==="new" ? "selected":""}
-                    >
-                        New
-                    </option>
-
-                    <option
-                        value="pending"
-                        ${status==="pending" ? "selected":""}
-                    >
-                        Pending
-                    </option>
-
-                    <option
-                        value="contacted"
-                        ${status==="contacted" ? "selected":""}
-                    >
-                        Contacted
-                    </option>
-
-                    <option
-                        value="follow-up"
-                        ${status==="follow-up" ? "selected":""}
-                    >
-                        Follow-up
-                    </option>
-
-                    <option
-                        value="visited"
-                        ${status==="visited" ? "selected":""}
-                    >
-                        Visited
-                    </option>
-
-                    <option
-                        value="converted"
-                        ${status==="converted" ? "selected":""}
-                    >
-                        Converted
-                    </option>
-
-                    <option
-                        value="not-interested"
-                        ${status==="not-interested" ? "selected":""}
-                    >
-                        Not Interested
-                    </option>
-
-                </select>
-
-            </td>
-
-            <td>
-
-                <div class="actions">
-
-                    <button
-                        class="action-btn call"
-                        title="Call"
-                        data-action="call"
-                        data-id="${escapeHtml(inquiry.id)}"
-                    >
-                        📞
-                    </button>
-
-                    <button
-                        class="action-btn whatsapp"
-                        title="WhatsApp"
-                        data-action="whatsapp"
-                        data-id="${escapeHtml(inquiry.id)}"
-                    >
-                        💬
-                    </button>
-
-                    <button
-                        class="action-btn view"
-                        title="View"
-                        data-action="view"
-                        data-id="${escapeHtml(inquiry.id)}"
-                    >
-                        👁
-                    </button>
-
-                    <button
-                        class="action-btn delete"
-                        title="Delete"
-                        data-action="delete"
-                        data-id="${escapeHtml(inquiry.id)}"
-                    >
-                        🗑
-                    </button>
-
-                </div>
-
-            </td>
-
-        </tr>
-
-    `;
-
-}
-
-
-/* ======================================================
-   TABLE CLICK
-====================================================== */
-
-tableBody.addEventListener(
-    "click",
-    async function(event){
-
-        const button =
-            event.target.closest(
-                "[data-action]"
-            );
-
-        if(!button){
-
-            return;
-
-        }
-
-        const action =
-            button.dataset.action;
-
-        const id =
-            button.dataset.id;
-
-        const inquiry =
-            allInquiries.find(
-                item =>
-                    item.id === id
-            );
-
-        if(!inquiry){
-
-            return;
-
-        }
-
-        if(
-            action === "call"
-        ){
-
-            const mobile =
-                String(
-                    inquiry.mobile ||
-                    ""
-                )
-                .replace(
-                    /\D/g,
-                    ""
-                );
-
-            if(mobile){
-
-                window.location.href =
-                    "tel:" +
-                    mobile;
-
-            }
-
-        }
-
-        else if(
-            action === "whatsapp"
-        ){
-
-            openWhatsApp(
-                inquiry
-            );
-
-        }
-
-        else if(
-            action === "view"
-        ){
-
-            openDetails(
-                inquiry
-            );
-
-        }
-
-        else if(
-            action === "delete"
-        ){
-
-            await deleteInquiry(
-                inquiry
-            );
-
-        }
-
-    }
-);
-
-
-/* ======================================================
-   STATUS CHANGE
-====================================================== */
-
-tableBody.addEventListener(
-    "change",
-    async function(event){
-
-        const select =
-            event.target.closest(
-                '[data-action="status"]'
-            );
-
-        if(!select){
-
-            return;
-
-        }
-
-        const id =
-            select.dataset.id;
-
-        const status =
-            select.value;
-
-        await updateStatus(
-            id,
-            status
-        );
-
-    }
-);
-
-
-/* ======================================================
-   UPDATE STATUS
-====================================================== */
-
-async function updateStatus(
-    id,
-    status
-){
 
     try{
 
@@ -3544,297 +2562,161 @@ async function updateStatus(
             FIRESTORE_URL +
             "/" +
             encodeURIComponent(
-                id
+                docId
             ) +
             "?key=" +
             encodeURIComponent(
                 FIREBASE_API_KEY
-            ) +
-
-            "&updateMask.fieldPaths=status" +
-
-            "&updateMask.fieldPaths=telecallerStatus" +
-
-            "&updateMask.fieldPaths=updatedAt" +
-
-            "&updateMask.fieldPaths=telecallerName" +
-
-            "&updateMask.fieldPaths=telecallerMobile";
+            );
 
 
-        const body = {
+        const payload = {
 
-            fields: {
+            fields:{
 
-                status:{
-                    stringValue:
-                        status
-                },
+                status:
+                    toFirestoreValue(
+                        newStatus
+                    ),
 
-                telecallerStatus:{
-                    stringValue:
-                        status
-                },
+                telecallerStatus:
+                    toFirestoreValue(
+                        newStatus
+                    ),
 
-                updatedAt:{
-                    timestampValue:
+                updatedAt:
+                    toFirestoreValue(
                         new Date().toISOString()
-                },
+                    ),
 
-                telecallerName:{
-                    stringValue:
+                telecallerName:
+                    toFirestoreValue(
                         telecallerName
-                },
+                    ),
 
-                telecallerMobile:{
-                    stringValue:
+                telecallerMobile:
+                    toFirestoreValue(
                         telecallerMobile
-                }
-
+                    )
             }
-
         };
 
 
         const response =
-            await fetchWithTimeout(
-                documentUrl,
+            await fetch(
+                documentUrl +
+                "&updateMask.fieldPaths=status" +
+                "&updateMask.fieldPaths=telecallerStatus" +
+                "&updateMask.fieldPaths=updatedAt" +
+                "&updateMask.fieldPaths=telecallerName" +
+                "&updateMask.fieldPaths=telecallerMobile",
                 {
                     method:"PATCH",
-
                     headers:{
                         "Content-Type":
                             "application/json"
                     },
-
                     body:
                         JSON.stringify(
-                            body
+                            payload
                         )
-                },
-                12000
+                }
             );
 
 
         if(!response.ok){
 
-            const error =
-                await readError(
-                    response
-                );
+            const errorText =
+                await response.text();
 
             throw new Error(
-                "Firestore Error (" +
-                response.status +
-                "): " +
-                error
+                errorText
             );
-
         }
 
 
         const item =
-            allInquiries.find(
-                x =>
-                    x.id === id
+            inquiries.find(
+                x => x._id === docId
             );
-
 
         if(item){
 
             item.status =
-                status;
+                newStatus;
 
             item.telecallerStatus =
-                status;
+                newStatus;
+
+            item.updatedAt =
+                new Date().toISOString();
 
             item.telecallerName =
                 telecallerName;
 
             item.telecallerMobile =
                 telecallerMobile;
-
         }
 
 
-        updateStats();
-
-        updateSalaryDisplay();
-
         applyFilters();
-
-        showToast(
-            "Status updated successfully."
-        );
-
 
     }catch(error){
 
-        console.error(
-            "STATUS ERROR:",
-            error
-        );
+        console.error(error);
 
-        showToast(
-            "Status update failed: " +
-            error.message,
-            "error"
+        alert(
+            "Unable to update status."
         );
 
         loadInquiries();
-
     }
-
 }
 
 
-/* ======================================================
-   DELETE
-====================================================== */
+/* =========================================================
+   CALL
+========================================================= */
 
-async function deleteInquiry(
-    inquiry
-){
-
-    const ok =
-        confirm(
-            "Delete inquiry of " +
-            (
-                inquiry.studentName ||
-                "this student"
-            ) +
-            "?"
-        );
-
-    if(!ok){
-
-        return;
-
-    }
-
-    try{
-
-        const url =
-            FIRESTORE_URL +
-            "/" +
-            encodeURIComponent(
-                inquiry.id
-            ) +
-            "?key=" +
-            encodeURIComponent(
-                FIREBASE_API_KEY
-            );
-
-        const response =
-            await fetchWithTimeout(
-                url,
-                {
-                    method:"DELETE"
-                },
-                12000
-            );
-
-        if(!response.ok){
-
-            const error =
-                await readError(
-                    response
-                );
-
-            throw new Error(
-                "Firestore Error (" +
-                response.status +
-                "): " +
-                error
-            );
-
-        }
-
-        allInquiries =
-            allInquiries.filter(
-                item =>
-                    item.id !==
-                    inquiry.id
-            );
-
-        updateStats();
-
-        updateSalaryDisplay();
-
-        populateFilters();
-
-        applyFilters();
-
-        showToast(
-            "Inquiry deleted."
-        );
-
-    }catch(error){
-
-        console.error(
-            "DELETE ERROR:",
-            error
-        );
-
-        showToast(
-            "Delete failed: " +
-            error.message,
-            "error"
-        );
-
-    }
-
-}
-
-
-/* ======================================================
-   WHATSAPP
-====================================================== */
-
-function openWhatsApp(
-    inquiry
-){
-
-    let mobile =
-        String(
-            inquiry.mobile ||
-            ""
-        )
-        .replace(
-            /\D/g,
-            ""
-        );
-
-    if(
-        mobile.length === 10
-    ){
-
-        mobile =
-            "91" +
-            mobile;
-
-    }
+function callStudent(mobile){
 
     if(!mobile){
-
-        showToast(
-            "Mobile number not available.",
-            "error"
-        );
-
+        alert("Mobile number not available.");
         return;
-
     }
 
+    window.location.href =
+        "tel:" +
+        normalizeMobile(mobile);
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function whatsappStudent(
+    mobile,
+    name
+){
+
+    const number =
+        normalizeMobile(
+            mobile
+        );
+
+    if(!number){
+        alert("Mobile number not available.");
+        return;
+    }
+
+
     const message =
-        `Hello ${inquiry.studentName || ""},\n\n` +
-        `This is BlackTerminal Computer Institute, Baripada.\n\n` +
-        `Regarding your inquiry for ${inquiry.course || "our course"}.\n\n` +
-        `Please let us know how we can help you.`;
+        `Hello ${name || "Student"}, this is BlackTerminal Computer Institute. We are contacting you regarding your course inquiry.`;
 
     const url =
-        "https://wa.me/" +
-        mobile +
+        "https://wa.me/91" +
+        number +
         "?text=" +
         encodeURIComponent(
             message
@@ -3844,437 +2726,244 @@ function openWhatsApp(
         url,
         "_blank"
     );
-
 }
 
 
-/* ======================================================
-   DETAILS
-====================================================== */
+/* =========================================================
+   VIEW STUDENT
+========================================================= */
 
-function openDetails(
-    inquiry
-){
+function viewStudent(docId){
 
-    const status =
-        getStatus(
-            inquiry
+    const item =
+        inquiries.find(
+            x => x._id === docId
         );
+
+    if(!item){
+        return;
+    }
+
 
     document.getElementById(
-        "modalBody"
-    ).innerHTML = `
+        "dName"
+    ).textContent =
+        item.studentName || "—";
 
-        <div class="detail-grid">
 
-            <div class="detail">
+    document.getElementById(
+        "dMobile"
+    ).textContent =
+        item.mobile || "—";
 
-                <div class="detail-label">
-                    Student Name
-                </div>
 
-                <div class="detail-value">
-                    ${escapeHtml(
-                        inquiry.studentName ||
-                        "-"
-                    )}
-                </div>
+    document.getElementById(
+        "dCourse"
+    ).textContent =
+        item.course || "—";
 
-            </div>
 
-            <div class="detail">
+    document.getElementById(
+        "dStatus"
+    ).textContent =
+        item.status || "—";
 
-                <div class="detail-label">
-                    Mobile
-                </div>
 
-                <div class="detail-value">
-                    ${escapeHtml(
-                        inquiry.mobile ||
-                        "-"
-                    )}
-                </div>
+    document.getElementById(
+        "dSource"
+    ).textContent =
+        item.source || "—";
 
-            </div>
 
-            <div class="detail">
+    document.getElementById(
+        "dCoordinator"
+    ).textContent =
+        item.coordinatorName || "—";
 
-                <div class="detail-label">
-                    Course
-                </div>
 
-                <div class="detail-value">
-                    ${escapeHtml(
-                        inquiry.course ||
-                        "-"
-                    )}
-                </div>
+    document.getElementById(
+        "dFollowUp"
+    ).textContent =
+        item.followUpDate || "—";
 
-            </div>
 
-            <div class="detail">
-
-                <div class="detail-label">
-                    Source
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHtml(
-                        inquiry.source ||
-                        "-"
-                    )}
-                </div>
-
-            </div>
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Coordinator
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHtml(
-                        inquiry.coordinatorName ||
-                        "-"
-                    )}
-                </div>
-
-            </div>
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Received
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHtml(
-                        formatDate(
-                            inquiry.createdAt
-                        )
-                    )}
-                </div>
-
-            </div>
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Status
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHtml(
-                        statusText(
-                            status
-                        )
-                    )}
-                </div>
-
-            </div>
-
-            <div class="detail">
-
-                <div class="detail-label">
-                    Follow-up
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHtml(
-                        inquiry.followUpDate ||
-                        "-"
-                    )}
-                </div>
-
-            </div>
-
-            <div class="detail full">
-
-                <div class="detail-label">
-                    Coordinator Remark
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHtml(
-                        inquiry.remark ||
-                        "No remark"
-                    )}
-                </div>
-
-            </div>
-
-            <div class="detail full">
-
-                <div class="detail-label">
-                    Telecaller Remark
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHtml(
-                        inquiry.telecallerRemark ||
-                        "No remark"
-                    )}
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="modal-actions">
-
-            <button
-                class="modal-action green"
-                id="modalWhatsapp"
-            >
-                💬 WhatsApp
-            </button>
-
-            <button
-                class="modal-action primary"
-                id="modalCall"
-            >
-                📞 Call Student
-            </button>
-
-        </div>
-
-    `;
-
-    document
-        .getElementById(
-            "detailModal"
+    document.getElementById(
+        "dCreated"
+    ).textContent =
+        item.createdAt
+        ? new Date(
+            item.createdAt
+        ).toLocaleString(
+            "en-IN"
         )
-        .classList.add(
-            "show"
-        );
-
-    document
-        .getElementById(
-            "modalWhatsapp"
-        )
-        .onclick =
-        ()=>{
-            openWhatsApp(
-                inquiry
-            );
-        };
-
-    document
-        .getElementById(
-            "modalCall"
-        )
-        .onclick =
-        ()=>{
-
-            const mobile =
-                String(
-                    inquiry.mobile ||
-                    ""
-                )
-                .replace(
-                    /\D/g,
-                    ""
-                );
-
-            if(mobile){
-
-                window.location.href =
-                    "tel:" +
-                    mobile;
-
-            }
-
-        };
-
-}
+        : "—";
 
 
-/* ======================================================
-   CLOSE MODAL
-====================================================== */
-
-document
-    .getElementById(
-        "closeModal"
-    )
-    .addEventListener(
-        "click",
-        ()=>{
-            document
-                .getElementById(
-                    "detailModal"
-                )
-                .classList.remove(
-                    "show"
-                );
-        }
-    );
+    document.getElementById(
+        "dRemark"
+    ).textContent =
+        item.remark || "—";
 
 
-document
-    .getElementById(
+    document.getElementById(
+        "dTeleRemark"
+    ).textContent =
+        item.telecallerRemark || "—";
+
+
+    document.getElementById(
         "detailModal"
-    )
-    .addEventListener(
-        "click",
-        event=>{
-
-            if(
-                event.target.id ===
-                "detailModal"
-            ){
-
-                event.currentTarget
-                    .classList
-                    .remove(
-                        "show"
-                    );
-
-            }
-
-        }
-    );
+    ).style.display =
+        "flex";
+}
 
 
-/* ======================================================
-   FILTER EVENTS
-====================================================== */
+function closeModal(){
 
-searchInput.addEventListener(
-    "input",
-    applyFilters
-);
-
-courseFilter.addEventListener(
-    "change",
-    applyFilters
-);
-
-statusFilter.addEventListener(
-    "change",
-    applyFilters
-);
-
-coordinatorFilter.addEventListener(
-    "change",
-    applyFilters
-);
-
-
-/* ======================================================
-   REFRESH
-====================================================== */
-
-document
-    .getElementById(
-        "refreshBtn"
-    )
-    .addEventListener(
-        "click",
-        async()=>{
-
-            await Promise.all([
-                loadInquiries(),
-                loadPaymentSettings()
-            ]);
-
-        }
-    );
-
-
-/* ======================================================
-   LOGOUT
-====================================================== */
-
-document
-    .getElementById(
-        "logoutBtn"
-    )
-    .addEventListener(
-        "click",
-        ()=>{
-
-            sessionStorage.removeItem(
-                "bt_logged_in"
-            );
-
-            sessionStorage.removeItem(
-                "bt_user_name"
-            );
-
-            sessionStorage.removeItem(
-                "bt_user_mobile"
-            );
-
-            sessionStorage.removeItem(
-                "bt_user_role"
-            );
-
-            sessionStorage.removeItem(
-                "bt_login_time"
-            );
-
-            window.location.replace(
-                "login.html"
-            );
-
-        }
-    );
-
-
-/* ======================================================
-   MOBILE MENU
-====================================================== */
-
-const sidebar =
     document.getElementById(
-        "sidebar"
-    );
+        "detailModal"
+    ).style.display =
+        "none";
+}
 
-const overlay =
-    document.getElementById(
-        "overlay"
-    );
 
-document
-    .getElementById(
-        "mobileMenu"
-    )
-    .addEventListener(
-        "click",
-        ()=>{
-
-            sidebar.classList.add(
-                "open"
-            );
-
-            overlay.classList.add(
-                "show"
-            );
-
-        }
-    );
-
-overlay.addEventListener(
+document.getElementById(
+    "detailModal"
+).addEventListener(
     "click",
-    ()=>{
+    function(e){
 
-        sidebar.classList.remove(
-            "open"
-        );
-
-        overlay.classList.remove(
-            "show"
-        );
+        if(e.target === this){
+            closeModal();
+        }
 
     }
 );
 
 
-/* ======================================================
-   AUTO REFRESH PAYMENT SETTINGS
-====================================================== */
+/* =========================================================
+   DELETE INQUIRY
+========================================================= */
+
+async function deleteInquiry(docId){
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this inquiry?"
+        );
+
+    if(!confirmed){
+        return;
+    }
+
+
+    try{
+
+        const url =
+            FIRESTORE_URL +
+            "/" +
+            encodeURIComponent(
+                docId
+            ) +
+            "?key=" +
+            encodeURIComponent(
+                FIREBASE_API_KEY
+            );
+
+
+        const response =
+            await fetch(
+                url,
+                {
+                    method:"DELETE"
+                }
+            );
+
+
+        if(!response.ok){
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                errorText
+            );
+        }
+
+
+        inquiries =
+            inquiries.filter(
+                x => x._id !== docId
+            );
+
+
+        updateCoordinatorFilter();
+        updateCourseFilter();
+
+        applyFilters();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Unable to delete inquiry."
+        );
+    }
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function scrollToTarget(){
+
+    document.getElementById(
+        "targetSection"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+
+function scrollToInquiries(){
+
+    document.getElementById(
+        "inquirySection"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+async function init(){
+
+    updatePlanUI();
+
+    await loadPaymentSettings();
+
+    await loadInquiries();
+
+    updateDashboard();
+}
+
+
+init();
+
+
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
+
+/*
+   Payment settings refresh every 60 seconds.
+*/
 
 setInterval(
     loadPaymentSettings,
@@ -4282,26 +2971,13 @@ setInterval(
 );
 
 
-/* ======================================================
-   START
-====================================================== */
+/*
+   Inquiry data refresh every 60 seconds.
+*/
 
-(async function(){
-
-    await loadPaymentSettings();
-
-    await loadInquiries();
-
-})();
-
-
-console.log(
-    "BlackTerminal Telecaller started."
-);
-
-console.log(
-    "Telecaller:",
-    telecallerName
+setInterval(
+    loadInquiries,
+    60000
 );
 
 </script>

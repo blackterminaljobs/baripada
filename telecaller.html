@@ -1,3466 +1,2991 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BlackTerminal - Telecaller Dashboard</title>
-
-  <style>
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    :root{
-      --bg:#f5f7fb;
-      --card:#ffffff;
-      --text:#111827;
-      --muted:#6b7280;
-      --border:#e5e7eb;
-      --primary:#111827;
-      --primary2:#374151;
-      --success:#15803d;
-      --warning:#b45309;
-      --danger:#dc2626;
-      --info:#2563eb;
-      --purple:#7c3aed;
-      --shadow:0 10px 30px rgba(15,23,42,.07);
-      --radius:18px;
-    }
-
-    body{
-      font-family:Inter,Arial,Helvetica,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      min-height:100vh;
-    }
-
-    button,input,select,textarea{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    .app{
-      min-height:100vh;
-      display:flex;
-    }
-
-    /* SIDEBAR */
-
-    .sidebar{
-      width:260px;
-      background:#0b0f19;
-      color:#fff;
-      position:fixed;
-      left:0;
-      top:0;
-      bottom:0;
-      z-index:100;
-      padding:20px 15px;
-      transition:.25s;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:8px 10px 24px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      margin-bottom:18px;
-    }
-
-    .brand-logo{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      background:#fff;
-      color:#111827;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:900;
-      font-size:16px;
-    }
-
-    .brand-text strong{
-      display:block;
-      font-size:16px;
-    }
-
-    .brand-text span{
-      display:block;
-      font-size:11px;
-      color:#9ca3af;
-      margin-top:3px;
-    }
-
-    .nav{
-      display:flex;
-      flex-direction:column;
-      gap:7px;
-    }
-
-    .nav-btn{
-      border:0;
-      background:transparent;
-      color:#9ca3af;
-      padding:12px 13px;
-      border-radius:12px;
-      text-align:left;
-      display:flex;
-      align-items:center;
-      gap:11px;
-      width:100%;
-      transition:.2s;
-    }
-
-    .nav-btn:hover,
-    .nav-btn.active{
-      background:#1f2937;
-      color:#fff;
-    }
-
-    .nav-icon{
-      width:22px;
-      text-align:center;
-      font-size:16px;
-    }
-
-    .sidebar-user{
-      position:absolute;
-      left:15px;
-      right:15px;
-      bottom:20px;
-      padding:12px;
-      border-radius:14px;
-      background:#111827;
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .sidebar-user .user-name{
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .sidebar-user .user-role{
-      font-size:11px;
-      color:#9ca3af;
-      margin-top:3px;
-    }
-
-    .logout-btn{
-      width:100%;
-      margin-top:10px;
-      border:0;
-      border-radius:9px;
-      background:#dc2626;
-      color:#fff;
-      padding:8px;
-      font-size:12px;
-      font-weight:700;
-    }
-
-    /* MAIN */
-
-    .main{
-      margin-left:260px;
-      width:calc(100% - 260px);
-      min-height:100vh;
-    }
-
-    .topbar{
-      height:72px;
-      background:#fff;
-      border-bottom:1px solid var(--border);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 28px;
-      position:sticky;
-      top:0;
-      z-index:50;
-    }
-
-    .topbar-left{
-      display:flex;
-      align-items:center;
-      gap:13px;
-    }
-
-    .mobile-menu{
-      display:none;
-      border:0;
-      background:#f3f4f6;
-      width:40px;
-      height:40px;
-      border-radius:10px;
-      font-size:19px;
-    }
-
-    .page-title{
-      font-size:20px;
-      font-weight:800;
-    }
-
-    .page-subtitle{
-      color:var(--muted);
-      font-size:12px;
-      margin-top:2px;
-    }
-
-    .top-user{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .avatar{
-      width:38px;
-      height:38px;
-      border-radius:50%;
-      background:#111827;
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:800;
-      font-size:13px;
-    }
-
-    .content{
-      padding:24px;
-      max-width:1600px;
-      margin:auto;
-    }
-
-    .section{
-      display:none;
-    }
-
-    .section.active{
-      display:block;
-    }
-
-    /* HERO */
-
-    .hero{
-      background:linear-gradient(135deg,#111827,#1f2937);
-      color:#fff;
-      border-radius:22px;
-      padding:26px;
-      margin-bottom:22px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .hero:after{
-      content:"";
-      position:absolute;
-      width:220px;
-      height:220px;
-      right:-80px;
-      top:-80px;
-      border-radius:50%;
-      border:40px solid rgba(255,255,255,.05);
-    }
-
-    .hero h1{
-      font-size:25px;
-      margin-bottom:7px;
-      position:relative;
-      z-index:2;
-    }
-
-    .hero p{
-      color:#d1d5db;
-      font-size:13px;
-      position:relative;
-      z-index:2;
-    }
-
-    .date-badge{
-      display:inline-flex;
-      margin-top:14px;
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.12);
-      padding:7px 10px;
-      border-radius:9px;
-      font-size:11px;
-      position:relative;
-      z-index:2;
-    }
-
-    /* CARDS */
-
-    .stats-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-      margin-bottom:22px;
-    }
-
-    .stat-card{
-      background:#fff;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
-      border-radius:17px;
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .stat-label{
-      color:var(--muted);
-      font-size:12px;
-      font-weight:600;
-    }
-
-    .stat-value{
-      font-size:25px;
-      font-weight:850;
-      margin-top:9px;
-    }
-
-    .stat-small{
-      color:var(--muted);
-      font-size:11px;
-      margin-top:5px;
-    }
-
-    .stat-icon{
-      position:absolute;
-      right:15px;
-      top:15px;
-      width:38px;
-      height:38px;
-      border-radius:11px;
-      background:#f3f4f6;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    /* EARNING */
-
-    .earning-layout{
-      display:grid;
-      grid-template-columns:1.6fr 1fr;
-      gap:18px;
-      margin-bottom:22px;
-    }
-
-    .card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      padding:20px;
-    }
-
-    .card-title{
-      font-size:16px;
-      font-weight:800;
-      margin-bottom:4px;
-    }
-
-    .card-subtitle{
-      color:var(--muted);
-      font-size:11px;
-      margin-bottom:17px;
-    }
-
-    .earning-total{
-      font-size:38px;
-      font-weight:900;
-      margin:8px 0;
-    }
-
-    .earning-breakdown{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      margin-top:17px;
-    }
-
-    .earning-item{
-      border:1px solid var(--border);
-      border-radius:13px;
-      padding:13px;
-      background:#fafafa;
-    }
-
-    .earning-item-label{
-      color:var(--muted);
-      font-size:10px;
-      font-weight:700;
-    }
-
-    .earning-item-value{
-      font-size:18px;
-      font-weight:850;
-      margin-top:5px;
-    }
-
-    .level-card{
-      border:1px solid var(--border);
-      border-radius:15px;
-      padding:15px;
-      margin-bottom:10px;
-      background:#fff;
-    }
-
-    .level-card.active{
-      border:2px solid #111827;
-      background:#f9fafb;
-    }
-
-    .level-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-    }
-
-    .level-name{
-      font-weight:800;
-      font-size:13px;
-    }
-
-    .level-rate{
-      font-size:17px;
-      font-weight:900;
-    }
-
-    .level-range{
-      color:var(--muted);
-      font-size:10px;
-      margin-top:5px;
-    }
-
-    .level-tag{
-      font-size:9px;
-      padding:4px 7px;
-      border-radius:7px;
-      background:#111827;
-      color:#fff;
-      font-weight:800;
-    }
-
-    .progress{
-      height:8px;
-      background:#e5e7eb;
-      border-radius:20px;
-      overflow:hidden;
-      margin-top:12px;
-    }
-
-    .progress-bar{
-      height:100%;
-      width:0%;
-      background:#111827;
-      border-radius:20px;
-      transition:.3s;
-    }
-
-    .next-level-text{
-      color:var(--muted);
-      font-size:10px;
-      margin-top:8px;
-    }
-
-    .salary-box{
-      margin-top:15px;
-      border-radius:14px;
-      padding:14px;
-      background:#f8fafc;
-      border:1px solid var(--border);
-    }
-
-    .salary-row{
-      display:flex;
-      justify-content:space-between;
-      padding:7px 0;
-      font-size:12px;
-    }
-
-    .salary-row strong{
-      font-size:13px;
-    }
-
-    /* TOOLBAR */
-
-    .toolbar{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:17px;
-      box-shadow:var(--shadow);
-      padding:15px;
-      margin-bottom:18px;
-    }
-
-    .toolbar-grid{
-      display:grid;
-      grid-template-columns:2fr 1fr 1fr 1fr auto;
-      gap:10px;
-    }
-
-    .input,
-    .select,
-    .textarea{
-      width:100%;
-      border:1px solid #d1d5db;
-      border-radius:10px;
-      padding:10px 12px;
-      outline:none;
-      background:#fff;
-      color:#111827;
-      font-size:12px;
-    }
-
-    .input:focus,
-    .select:focus,
-    .textarea:focus{
-      border-color:#111827;
-      box-shadow:0 0 0 3px rgba(17,24,39,.08);
-    }
-
-    .btn{
-      border:0;
-      border-radius:10px;
-      padding:10px 13px;
-      font-size:12px;
-      font-weight:750;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      transition:.2s;
-    }
-
-    .btn-primary{
-      background:#111827;
-      color:#fff;
-    }
-
-    .btn-primary:hover{
-      background:#000;
-    }
-
-    .btn-light{
-      background:#f3f4f6;
-      color:#111827;
-    }
-
-    .btn-success{
-      background:#15803d;
-      color:#fff;
-    }
-
-    .btn-danger{
-      background:#dc2626;
-      color:#fff;
-    }
-
-    .btn-info{
-      background:#2563eb;
-      color:#fff;
-    }
-
-    /* TABLE */
-
-    .table-card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-
-    .table-head{
-      padding:18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      border-bottom:1px solid var(--border);
-    }
-
-    .result-count{
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    .table-wrap{
-      overflow:auto;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:950px;
-    }
-
-    th{
-      text-align:left;
-      font-size:10px;
-      color:#6b7280;
-      text-transform:uppercase;
-      letter-spacing:.5px;
-      background:#f9fafb;
-      padding:12px 14px;
-      border-bottom:1px solid var(--border);
-      white-space:nowrap;
-    }
-
-    td{
-      padding:13px 14px;
-      border-bottom:1px solid #f0f0f0;
-      font-size:12px;
-      vertical-align:middle;
-    }
-
-    tr:hover td{
-      background:#fafafa;
-    }
-
-    .student-name{
-      font-weight:800;
-    }
-
-    .student-mobile{
-      font-size:10px;
-      color:var(--muted);
-      margin-top:3px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:5px 8px;
-      border-radius:8px;
-      font-size:9px;
-      font-weight:800;
-      white-space:nowrap;
-    }
-
-    .badge-new{
-      background:#eff6ff;
-      color:#2563eb;
-    }
-
-    .badge-pending{
-      background:#fff7ed;
-      color:#c2410c;
-    }
-
-    .badge-interested{
-      background:#ecfdf5;
-      color:#15803d;
-    }
-
-    .badge-contacted{
-      background:#f3f4f6;
-      color:#374151;
-    }
-
-    .badge-delay{
-      background:#fff7ed;
-      color:#b45309;
-    }
-
-    .badge-follow-up{
-      background:#faf5ff;
-      color:#7c3aed;
-    }
-
-    .badge-visited{
-      background:#ecfdf5;
-      color:#15803d;
-    }
-
-    .badge-demo-completed,
-    .badge-demo{
-      background:#ecfeff;
-      color:#0e7490;
-    }
-
-    .badge-converted{
-      background:#dcfce7;
-      color:#166534;
-    }
-
-    .badge-not-interested{
-      background:#fef2f2;
-      color:#b91c1c;
-    }
-
-    .badge-custom{
-      background:#f3e8ff;
-      color:#7e22ce;
-    }
-
-    .action-group{
-      display:flex;
-      gap:5px;
-      flex-wrap:wrap;
-    }
-
-    .mini-btn{
-      border:0;
-      border-radius:7px;
-      padding:6px 8px;
-      font-size:10px;
-      font-weight:700;
-    }
-
-    .mini-call{
-      background:#dcfce7;
-      color:#166534;
-    }
-
-    .mini-wa{
-      background:#dcfce7;
-      color:#15803d;
-    }
-
-    .mini-view{
-      background:#eff6ff;
-      color:#2563eb;
-    }
-
-    .mini-delete{
-      background:#fef2f2;
-      color:#dc2626;
-    }
-
-    /* PAGINATION */
-
-    .pagination{
-      padding:14px 18px;
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      gap:6px;
-      border-top:1px solid var(--border);
-    }
-
-    .page-btn{
-      width:32px;
-      height:32px;
-      border:1px solid var(--border);
-      border-radius:8px;
-      background:#fff;
-      font-size:11px;
-      font-weight:700;
-    }
-
-    .page-btn.active{
-      background:#111827;
-      color:#fff;
-      border-color:#111827;
-    }
-
-    .page-info{
-      color:var(--muted);
-      font-size:10px;
-      margin-right:auto;
-    }
-
-    /* CONTENT */
-
-    .content-controls{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-    }
-
-    .display-switch{
-      display:flex;
-      gap:5px;
-      background:#fff;
-      border:1px solid var(--border);
-      padding:4px;
-      border-radius:10px;
-    }
-
-    .display-btn{
-      border:0;
-      background:transparent;
-      border-radius:7px;
-      padding:7px 11px;
-      font-size:10px;
-      font-weight:750;
-    }
-
-    .display-btn.active{
-      background:#111827;
-      color:#fff;
-    }
-
-    /* BANNER */
-
-    .banner-list{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-    }
-
-    .promo-banner{
-      min-height:190px;
-      border-radius:20px;
-      overflow:hidden;
-      position:relative;
-      background:#111827;
-      color:#fff;
-      display:flex;
-      align-items:stretch;
-      border:1px solid rgba(0,0,0,.05);
-    }
-
-    .promo-image{
-      width:34%;
-      background:#e5e7eb;
-      overflow:hidden;
-    }
-
-    .promo-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .promo-content{
-      padding:25px;
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-
-    .promo-tag{
-      font-size:9px;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      opacity:.7;
-      font-weight:800;
-      margin-bottom:7px;
-    }
-
-    .promo-title{
-      font-size:24px;
-      font-weight:900;
-    }
-
-    .promo-description{
-      color:#d1d5db;
-      font-size:12px;
-      margin-top:8px;
-      max-width:600px;
-      line-height:1.5;
-    }
-
-    .price-line{
-      display:flex;
-      align-items:center;
-      gap:9px;
-      margin-top:13px;
-    }
-
-    .old-price{
-      text-decoration:line-through;
-      color:#9ca3af;
-      font-size:12px;
-    }
-
-    .offer-price{
-      font-size:22px;
-      font-weight:900;
-    }
-
-    .validity{
-      font-size:9px;
-      color:#d1d5db;
-      margin-top:7px;
-    }
-
-    /* CAROUSEL */
-
-    .carousel{
-      position:relative;
-      overflow:hidden;
-      border-radius:20px;
-    }
-
-    .carousel-track{
-      display:flex;
-      transition:.45s ease;
-    }
-
-    .carousel-slide{
-      min-width:100%;
-    }
-
-    .carousel-control{
-      position:absolute;
-      top:50%;
-      transform:translateY(-50%);
-      width:38px;
-      height:38px;
-      border:0;
-      border-radius:50%;
-      background:rgba(0,0,0,.65);
-      color:#fff;
-      z-index:5;
-      font-size:18px;
-    }
-
-    .carousel-prev{
-      left:12px;
-    }
-
-    .carousel-next{
-      right:12px;
-    }
-
-    .carousel-dots{
-      position:absolute;
-      bottom:13px;
-      left:50%;
-      transform:translateX(-50%);
-      display:flex;
-      gap:5px;
-      z-index:5;
-    }
-
-    .carousel-dot{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      border:0;
-      background:rgba(255,255,255,.5);
-    }
-
-    .carousel-dot.active{
-      background:#fff;
-    }
-
-    /* COURSE GRID */
-
-    .course-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:17px;
-    }
-
-    .course-card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:17px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-    }
-
-    .course-image{
-      height:145px;
-      background:#e5e7eb;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .course-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .course-body{
-      padding:16px;
-    }
-
-    .course-title{
-      font-size:16px;
-      font-weight:850;
-    }
-
-    .course-duration{
-      color:var(--muted);
-      font-size:10px;
-      margin-top:5px;
-    }
-
-    .course-description{
-      color:#6b7280;
-      font-size:11px;
-      line-height:1.5;
-      margin-top:9px;
-      min-height:34px;
-    }
-
-    .course-price{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      margin-top:12px;
-    }
-
-    .course-old{
-      text-decoration:line-through;
-      color:#9ca3af;
-      font-size:11px;
-    }
-
-    .course-current{
-      font-size:20px;
-      font-weight:900;
-    }
-
-    .course-actions{
-      display:flex;
-      gap:7px;
-      margin-top:14px;
-    }
-
-    .course-actions .btn{
-      flex:1;
-    }
-
-    /* LIST */
-
-    .content-list{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-
-    .list-item{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:15px;
-      display:flex;
-      align-items:center;
-      gap:15px;
-      box-shadow:0 5px 18px rgba(15,23,42,.04);
-    }
-
-    .list-thumb{
-      width:80px;
-      height:60px;
-      border-radius:10px;
-      overflow:hidden;
-      background:#e5e7eb;
-      flex-shrink:0;
-    }
-
-    .list-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .list-info{
-      flex:1;
-    }
-
-    .list-title{
-      font-size:14px;
-      font-weight:800;
-    }
-
-    .list-desc{
-      color:var(--muted);
-      font-size:10px;
-      margin-top:4px;
-    }
-
-    .list-price{
-      font-weight:900;
-      font-size:17px;
-      white-space:nowrap;
-    }
-
-    /* EMPTY */
-
-    .empty{
-      padding:45px 20px;
-      text-align:center;
-      color:var(--muted);
-    }
-
-    .empty-icon{
-      font-size:34px;
-      margin-bottom:9px;
-    }
-
-    .empty-title{
-      font-weight:800;
-      color:#374151;
-      margin-bottom:4px;
-    }
-
-    .empty-text{
-      font-size:11px;
-    }
-
-    /* LOADING */
-
-    .loading{
-      padding:40px;
-      text-align:center;
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .spinner{
-      width:27px;
-      height:27px;
-      border:3px solid #e5e7eb;
-      border-top-color:#111827;
-      border-radius:50%;
-      animation:spin .8s linear infinite;
-      margin:0 auto 10px;
-    }
-
-    @keyframes spin{
-      to{transform:rotate(360deg);}
-    }
-
-    /* MODAL */
-
-    .modal-overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(15,23,42,.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:500;
-      padding:20px;
-    }
-
-    .modal-overlay.show{
-      display:flex;
-    }
-
-    .modal{
-      background:#fff;
-      width:100%;
-      max-width:620px;
-      max-height:90vh;
-      overflow:auto;
-      border-radius:20px;
-      box-shadow:0 25px 70px rgba(0,0,0,.2);
-    }
-
-    .modal-head{
-      padding:18px 20px;
-      border-bottom:1px solid var(--border);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      position:sticky;
-      top:0;
-      background:#fff;
-      z-index:2;
-    }
-
-    .modal-title{
-      font-size:16px;
-      font-weight:850;
-    }
-
-    .close-btn{
-      width:32px;
-      height:32px;
-      border:0;
-      border-radius:9px;
-      background:#f3f4f6;
-      font-size:18px;
-    }
-
-    .modal-body{
-      padding:20px;
-    }
-
-    .detail-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-
-    .detail-box{
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:12px;
-    }
-
-    .detail-label{
-      color:var(--muted);
-      font-size:9px;
-      text-transform:uppercase;
-      font-weight:800;
-    }
-
-    .detail-value{
-      margin-top:5px;
-      font-size:12px;
-      font-weight:700;
-      word-break:break-word;
-    }
-
-    .modal-footer{
-      padding:15px 20px;
-      border-top:1px solid var(--border);
-      display:flex;
-      justify-content:flex-end;
-      gap:8px;
-    }
-
-    /* TOAST */
-
-    .toast-container{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:1000;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
-    .toast{
-      min-width:250px;
-      max-width:360px;
-      background:#111827;
-      color:#fff;
-      padding:12px 14px;
-      border-radius:11px;
-      box-shadow:0 15px 40px rgba(0,0,0,.18);
-      font-size:11px;
-      animation:toastIn .2s ease;
-    }
-
-    .toast.success{
-      background:#15803d;
-    }
-
-    .toast.error{
-      background:#dc2626;
-    }
-
-    @keyframes toastIn{
-      from{
-        transform:translateY(10px);
-        opacity:0;
-      }
-      to{
-        transform:translateY(0);
-        opacity:1;
-      }
-    }
-
-    /* MOBILE */
-
-    @media(max-width:1100px){
-      .stats-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .earning-layout{
-        grid-template-columns:1fr;
-      }
-
-      .toolbar-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .course-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-    }
-
-    @media(max-width:760px){
-      .sidebar{
-        transform:translateX(-100%);
-      }
-
-      .sidebar.open{
-        transform:translateX(0);
-      }
-
-      .main{
-        margin-left:0;
-        width:100%;
-      }
-
-      .mobile-menu{
-        display:block;
-      }
-
-      .topbar{
-        padding:0 15px;
-      }
-
-      .top-user .top-user-info{
-        display:none;
-      }
-
-      .content{
-        padding:15px;
-      }
-
-      .hero{
-        padding:20px;
-      }
-
-      .hero h1{
-        font-size:21px;
-      }
-
-      .stats-grid{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-      }
-
-      .stat-card{
-        padding:14px;
-      }
-
-      .stat-value{
-        font-size:21px;
-      }
-
-      .earning-breakdown{
-        grid-template-columns:1fr;
-      }
-
-      .toolbar-grid{
-        grid-template-columns:1fr;
-      }
-
-      .course-grid{
-        grid-template-columns:1fr;
-      }
-
-      .promo-banner{
-        min-height:330px;
-        flex-direction:column;
-      }
-
-      .promo-image{
-        width:100%;
-        height:150px;
-      }
-
-      .promo-content{
-        padding:18px;
-      }
-
-      .promo-title{
-        font-size:20px;
-      }
-
-      .detail-grid{
-        grid-template-columns:1fr;
-      }
-
-      .list-item{
-        align-items:flex-start;
-      }
-
-      .list-price{
-        font-size:14px;
-      }
-    }
-
-    @media(max-width:450px){
-      .stats-grid{
-        grid-template-columns:1fr;
-      }
-
-      .topbar{
-        height:65px;
-      }
-
-      .page-title{
-        font-size:17px;
-      }
-
-      .page-subtitle{
-        display:none;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BlackTerminal - Telecaller Dashboard</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#f5f7fb;--card:#fff;--text:#111827;--muted:#6b7280;
+--border:#e5e7eb;--primary:#111827;--success:#15803d;
+--danger:#dc2626;--info:#2563eb;--purple:#7c3aed;
+--shadow:0 10px 30px rgba(15,23,42,.07);--radius:18px
+}
+body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.app{min-height:100vh;display:flex}
+
+/* SIDEBAR */
+.sidebar{
+width:260px;background:#0b0f19;color:#fff;position:fixed;left:0;top:0;bottom:0;
+z-index:100;padding:20px 15px;transition:.25s
+}
+.brand{display:flex;align-items:center;gap:12px;padding:8px 10px 24px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:18px}
+.brand-logo{width:42px;height:42px;border-radius:12px;background:#fff;color:#111827;display:flex;align-items:center;justify-content:center;font-weight:900}
+.brand-text strong{display:block;font-size:16px}
+.brand-text span{display:block;font-size:11px;color:#9ca3af;margin-top:3px}
+.nav{display:flex;flex-direction:column;gap:7px}
+.nav-btn{border:0;background:transparent;color:#9ca3af;padding:12px 13px;border-radius:12px;text-align:left;display:flex;align-items:center;gap:11px;width:100%}
+.nav-btn:hover,.nav-btn.active{background:#1f2937;color:#fff}
+.nav-icon{width:22px;text-align:center}
+.sidebar-user{position:absolute;left:15px;right:15px;bottom:20px;padding:12px;border-radius:14px;background:#111827;border:1px solid rgba(255,255,255,.08)}
+.user-name{font-size:13px;font-weight:700}.user-role{font-size:11px;color:#9ca3af;margin-top:3px}
+.logout-btn{width:100%;margin-top:10px;border:0;border-radius:9px;background:#dc2626;color:#fff;padding:8px;font-size:12px;font-weight:700}
+
+/* MAIN */
+.main{margin-left:260px;width:calc(100% - 260px);min-height:100vh}
+.topbar{height:72px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:50}
+.topbar-left{display:flex;align-items:center;gap:13px}
+.mobile-menu{display:none;border:0;background:#f3f4f6;width:40px;height:40px;border-radius:10px}
+.page-title{font-size:20px;font-weight:800}.page-subtitle{color:var(--muted);font-size:12px;margin-top:2px}
+.top-user{display:flex;align-items:center;gap:10px}.avatar{width:38px;height:38px;border-radius:50%;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.content{padding:24px;max-width:1600px;margin:auto}
+.section{display:none}.section.active{display:block}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#111827,#1f2937);color:#fff;border-radius:22px;padding:26px;margin-bottom:22px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:220px;height:220px;right:-80px;top:-80px;border-radius:50%;border:40px solid rgba(255,255,255,.05)}
+.hero h1{font-size:25px;margin-bottom:7px;position:relative;z-index:2}.hero p{color:#d1d5db;font-size:13px;position:relative;z-index:2}
+.date-badge{display:inline-flex;margin-top:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);padding:7px 10px;border-radius:9px;font-size:11px;position:relative;z-index:2}
+
+/* CARDS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.stat-card{background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);border-radius:17px;padding:18px;position:relative}
+.stat-label{color:var(--muted);font-size:12px;font-weight:600}.stat-value{font-size:25px;font-weight:850;margin-top:9px}.stat-small{color:var(--muted);font-size:11px;margin-top:5px}
+.stat-icon{position:absolute;right:15px;top:15px;width:38px;height:38px;border-radius:11px;background:#f3f4f6;display:flex;align-items:center;justify-content:center}
+.card{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:20px}
+.card-title{font-size:16px;font-weight:800;margin-bottom:4px}.card-subtitle{color:var(--muted);font-size:11px;margin-bottom:17px}
+.earning-layout{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;margin-bottom:22px}
+.earning-total{font-size:38px;font-weight:900;margin:8px 0}
+.earning-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:17px}
+.earning-item{border:1px solid var(--border);border-radius:13px;padding:13px;background:#fafafa}
+.earning-item-label{color:var(--muted);font-size:10px;font-weight:700}.earning-item-value{font-size:18px;font-weight:850;margin-top:5px}
+.salary-box{margin-top:15px;border-radius:14px;padding:14px;background:#f8fafc;border:1px solid var(--border)}
+.salary-row{display:flex;justify-content:space-between;padding:7px 0;font-size:12px}.salary-row strong{font-size:13px}
+.level-card{border:1px solid var(--border);border-radius:15px;padding:15px;margin-bottom:10px;background:#fff}
+.level-card.active{border:2px solid #111827;background:#f9fafb}
+.level-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.level-name{font-weight:800;font-size:13px}.level-rate{font-size:17px;font-weight:900}.level-range{color:var(--muted);font-size:10px;margin-top:5px}
+.level-tag{font-size:9px;padding:4px 7px;border-radius:7px;background:#111827;color:#fff;font-weight:800}
+.next-level-text{color:var(--muted);font-size:10px;margin-top:8px}
+
+/* FORM */
+.toolbar{background:#fff;border:1px solid var(--border);border-radius:17px;box-shadow:var(--shadow);padding:15px;margin-bottom:18px}
+.toolbar-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px}
+.input,.select,.textarea{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:10px 12px;outline:none;background:#fff;color:#111827;font-size:12px}
+.input:focus,.select:focus,.textarea:focus{border-color:#111827;box-shadow:0 0 0 3px rgba(17,24,39,.08)}
+.btn{border:0;border-radius:10px;padding:10px 13px;font-size:12px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn-primary{background:#111827;color:#fff}.btn-light{background:#f3f4f6;color:#111827}.btn-success{background:#15803d;color:#fff}.btn-danger{background:#dc2626;color:#fff}
+
+/* TABLE */
+.table-card{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.table-head{padding:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border)}
+.result-count{color:var(--muted);font-size:11px}.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:950px}
+th{text-align:left;font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;padding:12px 14px;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:13px 14px;border-bottom:1px solid #f0f0f0;font-size:12px;vertical-align:middle}
+tr:hover td{background:#fafafa}
+.student-name{font-weight:800}.student-mobile{font-size:10px;color:var(--muted);margin-top:3px}
+.badge{display:inline-flex;align-items:center;justify-content:center;padding:5px 8px;border-radius:8px;font-size:9px;font-weight:800;white-space:nowrap}
+.badge-new{background:#eff6ff;color:#2563eb}.badge-pending{background:#fff7ed;color:#c2410c}.badge-interested{background:#ecfdf5;color:#15803d}
+.badge-contacted{background:#f3f4f6;color:#374151}.badge-delay{background:#fff7ed;color:#b45309}.badge-follow-up{background:#faf5ff;color:#7c3aed}
+.badge-visited{background:#ecfdf5;color:#15803d}.badge-demo-completed{background:#ecfeff;color:#0e7490}.badge-converted{background:#dcfce7;color:#166534}
+.badge-not-interested{background:#fef2f2;color:#b91c1c}.badge-custom{background:#f3e8ff;color:#7e22ce}
+.action-group{display:flex;gap:5px;flex-wrap:wrap}.mini-btn{border:0;border-radius:7px;padding:6px 8px;font-size:10px;font-weight:700}
+.mini-call,.mini-wa{background:#dcfce7;color:#15803d}.mini-view{background:#eff6ff;color:#2563eb}.mini-delete{background:#fef2f2;color:#dc2626}
+.pagination{padding:14px 18px;display:flex;justify-content:flex-end;align-items:center;gap:6px;border-top:1px solid var(--border)}
+.page-btn{width:32px;height:32px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:11px;font-weight:700}.page-btn.active{background:#111827;color:#fff;border-color:#111827}
+.page-info{color:var(--muted);font-size:10px;margin-right:auto}
+
+/* CONTENT */
+.content-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.display-switch{display:flex;gap:5px;background:#fff;border:1px solid var(--border);padding:4px;border-radius:10px}
+.display-btn{border:0;background:transparent;border-radius:7px;padding:7px 11px;font-size:10px;font-weight:750}.display-btn.active{background:#111827;color:#fff}
+.banner-list{display:flex;flex-direction:column;gap:16px}.promo-banner{min-height:190px;border-radius:20px;overflow:hidden;background:#111827;color:#fff;display:flex}
+.promo-image{width:34%;background:#e5e7eb;overflow:hidden}.promo-image img{width:100%;height:100%;object-fit:cover}
+.promo-content{padding:25px;flex:1;display:flex;flex-direction:column;justify-content:center}.promo-tag{font-size:9px;text-transform:uppercase;letter-spacing:1px;opacity:.7;font-weight:800;margin-bottom:7px}
+.promo-title{font-size:24px;font-weight:900}.promo-description{color:#d1d5db;font-size:12px;margin-top:8px;line-height:1.5}
+.price-line{display:flex;align-items:center;gap:9px;margin-top:13px}.old-price{text-decoration:line-through;color:#9ca3af;font-size:12px}.offer-price{font-size:22px;font-weight:900}.validity{font-size:9px;color:#d1d5db;margin-top:7px}
+.carousel{position:relative;overflow:hidden;border-radius:20px}.carousel-track{display:flex;transition:.45s ease}.carousel-slide{min-width:100%}
+.carousel-control{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;z-index:5;font-size:18px}
+.carousel-prev{left:12px}.carousel-next{right:12px}.carousel-dots{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:5}
+.carousel-dot{width:7px;height:7px;border-radius:50%;border:0;background:rgba(255,255,255,.5)}.carousel-dot.active{background:#fff}
+.content-list{display:flex;flex-direction:column;gap:10px}.list-item{background:#fff;border:1px solid var(--border);border-radius:14px;padding:15px;display:flex;align-items:center;gap:15px;box-shadow:0 5px 18px rgba(15,23,42,.04)}
+.list-thumb{width:80px;height:60px;border-radius:10px;overflow:hidden;background:#e5e7eb;flex-shrink:0}.list-thumb img{width:100%;height:100%;object-fit:cover}
+.list-info{flex:1}.list-title{font-size:14px;font-weight:800}.list-desc{color:var(--muted);font-size:10px;margin-top:4px}.list-price{font-weight:900;font-size:17px;white-space:nowrap}
+
+/* EMPTY / LOADING */
+.empty{padding:45px 20px;text-align:center;color:var(--muted)}.empty-icon{font-size:34px;margin-bottom:9px}.empty-title{font-weight:800;color:#374151;margin-bottom:4px}.empty-text{font-size:11px}
+.loading{padding:40px;text-align:center;color:var(--muted);font-size:12px}.spinner{width:27px;height:27px;border:3px solid #e5e7eb;border-top-color:#111827;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;z-index:500;padding:20px}
+.modal-overlay.show{display:flex}.modal{background:#fff;width:100%;max-width:620px;max-height:90vh;overflow:auto;border-radius:20px;box-shadow:0 25px 70px rgba(0,0,0,.2)}
+.modal-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff;z-index:2}
+.modal-title{font-size:16px;font-weight:850}.close-btn{width:32px;height:32px;border:0;border-radius:9px;background:#f3f4f6;font-size:18px}
+.modal-body{padding:20px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-box{border:1px solid var(--border);border-radius:12px;padding:12px}
+.detail-label{color:var(--muted);font-size:9px;text-transform:uppercase;font-weight:800}.detail-value{margin-top:5px;font-size:12px;font-weight:700;word-break:break-word}
+.modal-footer{padding:15px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+.toast-container{position:fixed;right:20px;bottom:20px;z-index:1000;display:flex;flex-direction:column;gap:8px}
+.toast{min-width:250px;max-width:360px;background:#111827;color:#fff;padding:12px 14px;border-radius:11px;box-shadow:0 15px 40px rgba(0,0,0,.18);font-size:11px}
+.toast.success{background:#15803d}.toast.error{background:#dc2626}
+
+/* MOBILE */
+@media(max-width:1100px){
+.stats-grid{grid-template-columns:repeat(2,1fr)}.earning-layout{grid-template-columns:1fr}.toolbar-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0;width:100%}.mobile-menu{display:block}
+.topbar{padding:0 15px}.top-user-info{display:none!important}.content{padding:15px}.hero{padding:20px}.hero h1{font-size:21px}
+.earning-breakdown{grid-template-columns:1fr}.toolbar-grid{grid-template-columns:1fr}.promo-banner{min-height:330px;flex-direction:column}.promo-image{width:100%;height:150px}.promo-content{padding:18px}
+.detail-grid{grid-template-columns:1fr}.course-grid{grid-template-columns:1fr}
+}
+@media(max-width:450px){
+.stats-grid{grid-template-columns:1fr}.topbar{height:65px}.page-title{font-size:17px}.page-subtitle{display:none}
+}
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <aside class="sidebar" id="sidebar">
-
-    <div class="brand">
-      <div class="brand-logo">BT</div>
-      <div class="brand-text">
-        <strong>BlackTerminal</strong>
-        <span>Telecaller Panel</span>
-      </div>
-    </div>
-
-    <nav class="nav">
-
-      <button class="nav-btn active" data-section="dashboard">
-        <span class="nav-icon">⌂</span>
-        <span>Dashboard</span>
-      </button>
-
-      <button class="nav-btn" data-section="inquiries">
-        <span class="nav-icon">☰</span>
-        <span>Student Inquiries</span>
-      </button>
-
-      <button class="nav-btn" data-section="courses">
-        <span class="nav-icon">▣</span>
-        <span>Courses & Offers</span>
-      </button>
-
-      <button class="nav-btn" data-section="earnings">
-        <span class="nav-icon">₹</span>
-        <span>My Earnings</span>
-      </button>
-
-    </nav>
-
-    <div class="sidebar-user">
-      <div class="user-name" id="sideUserName">Telecaller</div>
-      <div class="user-role">Telecaller</div>
-      <button class="logout-btn" id="logoutBtn">Logout</button>
-    </div>
-
-  </aside>
-
-  <main class="main">
-
-    <header class="topbar">
-
-      <div class="topbar-left">
-
-        <button class="mobile-menu" id="mobileMenu">☰</button>
-
-        <div>
-          <div class="page-title" id="pageTitle">Telecaller Dashboard</div>
-          <div class="page-subtitle">Student management and performance</div>
-        </div>
-
-      </div>
-
-      <div class="top-user">
-
-        <div class="top-user-info">
-          <div style="font-size:12px;font-weight:800;" id="topUserName">
-            Telecaller
-          </div>
-          <div style="font-size:10px;color:#6b7280;" id="topUserMobile">
-            -
-          </div>
-        </div>
-
-        <div class="avatar" id="avatar">
-          T
-        </div>
-
-      </div>
-
-    </header>
-
-    <div class="content">
-
-      <!-- ================= DASHBOARD ================= -->
-
-      <section class="section active" id="dashboard">
-
-        <div class="hero">
-
-          <h1>Welcome, <span id="heroName">Telecaller</span></h1>
-
-          <p>
-            Manage student inquiries, demo classes, admissions and your monthly earnings.
-          </p>
-
-          <div class="date-badge" id="todayDate">
-            Loading date...
-          </div>
-
-        </div>
-
-        <div class="stats-grid">
-
-          <div class="stat-card">
-            <div class="stat-icon">☰</div>
-            <div class="stat-label">Total Inquiries</div>
-            <div class="stat-value" id="statInquiries">0</div>
-            <div class="stat-small">Assigned inquiries</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon">▶</div>
-            <div class="stat-label">Demo Completed</div>
-            <div class="stat-value" id="statDemo">0</div>
-            <div class="stat-small">Current month</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon">✓</div>
-            <div class="stat-label">Converted</div>
-            <div class="stat-value" id="statConverted">0</div>
-            <div class="stat-small">Current month</div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon">₹</div>
-            <div class="stat-label">Current Earnings</div>
-            <div class="stat-value" id="statEarning">₹0</div>
-            <div class="stat-small">Current month</div>
-          </div>
-
-        </div>
-
-        <div class="earning-layout">
-
-          <div class="card">
-
-            <div class="card-title">
-              Current Month Earnings
-            </div>
-
-            <div class="card-subtitle">
-              Your earnings are calculated automatically from Admin settings.
-            </div>
-
-            <div class="earning-total" id="dashboardTotal">
-              ₹0
-            </div>
-
-            <div class="earning-breakdown">
-
-              <div class="earning-item">
-                <div class="earning-item-label">
-                  BASE SALARY
-                </div>
-                <div class="earning-item-value" id="dashBase">
-                  ₹0
-                </div>
-              </div>
-
-              <div class="earning-item">
-                <div class="earning-item-label">
-                  DEMO REWARD
-                </div>
-                <div class="earning-item-value" id="dashDemoReward">
-                  ₹0
-                </div>
-              </div>
-
-              <div class="earning-item">
-                <div class="earning-item-label">
-                  ADMISSION REWARD
-                </div>
-                <div class="earning-item-value" id="dashAdmissionReward">
-                  ₹0
-                </div>
-              </div>
-
-            </div>
-
-            <div class="salary-box">
-
-              <div class="salary-row">
-                <span>Current Base Salary</span>
-                <strong id="currentBaseText">₹0</strong>
-              </div>
-
-              <div class="salary-row">
-                <span>Previous Month Level</span>
-                <strong id="previousLevelText">Not available</strong>
-              </div>
-
-              <div class="salary-row">
-                <span>Next Month Base Salary</span>
-                <strong id="nextBaseText">₹0</strong>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="card">
-
-            <div class="card-title">
-              Admission Level
-            </div>
-
-            <div class="card-subtitle">
-              Level is automatically determined from current-month converted admissions.
-            </div>
-
-            <div id="levelCards">
-            </div>
-
-            <div class="next-level-text" id="levelProgressText">
-              Loading...
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= INQUIRIES ================= -->
-
-      <section class="section" id="inquiries">
-
-        <div class="hero">
-
-          <h1>Student Inquiries</h1>
-
-          <p>
-            Search, contact, update status and manage student inquiries.
-          </p>
-
-        </div>
-
-        <div class="toolbar">
-
-          <div class="toolbar-grid">
-
-            <input
-              type="text"
-              id="searchInput"
-              class="input"
-              placeholder="Search student name, mobile, course..."
-            >
-
-            <select id="statusFilter" class="select">
-
-              <option value="">All Status</option>
-
-              <option value="new">
-                New
-              </option>
-
-              <option value="pending">
-                Pending
-              </option>
-
-              <option value="interested">
-                Interested
-              </option>
-
-              <option value="contacted">
-                Contacted
-              </option>
-
-              <option value="delay">
-                Delay
-              </option>
-
-              <option value="follow-up">
-                Follow-up
-              </option>
-
-              <option value="visited">
-                Visited
-              </option>
-
-              <option value="demo-completed">
-                Demo Completed
-              </option>
-
-              <option value="converted">
-                Converted
-              </option>
-
-              <option value="not-interested">
-                Not Interested
-              </option>
-
-              <option value="custom">
-                Custom Status
-              </option>
-
-            </select>
-
-            <select id="courseFilter" class="select">
-              <option value="">All Courses</option>
-            </select>
-
-            <select id="coordinatorFilter" class="select">
-              <option value="">All Coordinators</option>
-            </select>
-
-            <button class="btn btn-primary" id="refreshBtn">
-              ↻ Refresh
-            </button>
-
-          </div>
-
-        </div>
-
-        <div class="table-card">
-
-          <div class="table-head">
-
-            <div>
-              <div class="card-title">
-                Inquiry List
-              </div>
-
-              <div class="result-count" id="resultCount">
-                0 inquiries found
-              </div>
-            </div>
-
-            <button class="btn btn-light" id="clearFiltersBtn">
-              Clear Filters
-            </button>
-
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-                <tr>
-                  <th>Student</th>
-                  <th>Course</th>
-                  <th>Source</th>
-                  <th>Coordinator</th>
-                  <th>Status</th>
-                  <th>Follow-up</th>
-                  <th>Updated</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-
-              <tbody id="inquiryBody">
-
-                <tr>
-                  <td colspan="8">
-
-                    <div class="loading">
-
-                      <div class="spinner"></div>
-
-                      Loading inquiries...
-
-                    </div>
-
-                  </td>
-                </tr>
-
-              </tbody>
-
-            </table>
-
-          </div>
-
-          <div class="pagination">
-
-            <div class="page-info" id="pageInfo">
-              Page 1
-            </div>
-
-            <div id="paginationButtons"></div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= COURSES ================= -->
-
-      <section class="section" id="courses">
-
-        <div class="hero">
-
-          <h1>Courses & Special Offers</h1>
-
-          <p>
-            Course prices, offers and promotional information published by Admin.
-          </p>
-
-        </div>
-
-        <div class="content-controls">
-
-          <div>
-
-            <div class="card-title">
-              Available Information
-            </div>
-
-            <div class="card-subtitle" style="margin:4px 0 0;">
-              Always use the latest price and offer shown here when talking to students.
-            </div>
-
-          </div>
-
-          <div style="display:flex;gap:8px;align-items:center;">
-
-            <button class="btn btn-light" id="refreshContentBtn">
-              ↻ Refresh
-            </button>
-
-            <div class="display-switch">
-
-              <button
-                class="display-btn active"
-                data-display="carousel"
-              >
-                Carousel
-              </button>
-
-              <button
-                class="display-btn"
-                data-display="banner"
-              >
-                Banner
-              </button>
-
-              <button
-                class="display-btn"
-                data-display="list"
-              >
-                List
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div id="contentArea">
-
-          <div class="loading">
-
-            <div class="spinner"></div>
-
-            Loading courses and offers...
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= EARNINGS ================= -->
-
-      <section class="section" id="earnings">
-
-        <div class="hero">
-
-          <h1>My Earnings</h1>
-
-          <p>
-            Transparent monthly earning calculation based on Admin-controlled rules.
-          </p>
-
-        </div>
-
-        <div class="card">
-
-          <div class="card-title">
-            Current Month Payment
-          </div>
-
-          <div class="card-subtitle">
-            Current month earning calculation
-          </div>
-
-          <div class="earning-total" id="earningPageTotal">
-            ₹0
-          </div>
-
-          <div class="earning-breakdown">
-
-            <div class="earning-item">
-              <div class="earning-item-label">
-                BASE SALARY
-              </div>
-
-              <div class="earning-item-value" id="earningPageBase">
-                ₹0
-              </div>
-            </div>
-
-            <div class="earning-item">
-
-              <div class="earning-item-label">
-                DEMO CLASSES
-              </div>
-
-              <div class="earning-item-value" id="earningPageDemo">
-                ₹0
-              </div>
-
-            </div>
-
-            <div class="earning-item">
-
-              <div class="earning-item-label">
-                ADMISSIONS
-              </div>
-
-              <div class="earning-item-value" id="earningPageAdmission">
-                ₹0
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div style="height:16px;"></div>
-
-        <div class="card">
-
-          <div class="card-title">
-            Performance Details
-          </div>
-
-          <div class="card-subtitle">
-            Your current month performance
-          </div>
-
-          <div class="detail-grid">
-
-            <div class="detail-box">
-              <div class="detail-label">Demo Completed</div>
-              <div class="detail-value" id="earnDemoCount">0</div>
-            </div>
-
-            <div class="detail-box">
-              <div class="detail-label">Demo Reward / Student</div>
-              <div class="detail-value" id="earnDemoRate">₹0</div>
-            </div>
-
-            <div class="detail-box">
-              <div class="detail-label">Converted Admissions</div>
-              <div class="detail-value" id="earnAdmissionCount">0</div>
-            </div>
-
-            <div class="detail-box">
-              <div class="detail-label">Current Admission Level</div>
-              <div class="detail-value" id="earnLevel">Level 1</div>
-            </div>
-
-            <div class="detail-box">
-              <div class="detail-label">Admission Reward / Student</div>
-              <div class="detail-value" id="earnAdmissionRate">₹0</div>
-            </div>
-
-            <div class="detail-box">
-              <div class="detail-label">Visit Reward</div>
-              <div class="detail-value">₹0</div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div style="height:16px;"></div>
-
-        <div class="card">
-
-          <div class="card-title">
-            Next Month Base Salary
-          </div>
-
-          <div class="card-subtitle">
-            This is determined from your current month's final admission level.
-          </div>
-
-          <div class="earning-total" id="nextMonthSalaryBig">
-            ₹1,000
-          </div>
-
-          <div class="detail-grid">
-
-            <div class="detail-box">
-              <div class="detail-label">Current Level</div>
-              <div class="detail-value" id="salaryCurrentLevel">Level 1</div>
-            </div>
-
-            <div class="detail-box">
-              <div class="detail-label">Current Default Base</div>
-              <div class="detail-value" id="salaryDefaultBase">₹1,000</div>
-            </div>
-
-            <div class="detail-box">
-              <div class="detail-label">Next Month Base</div>
-              <div class="detail-value" id="salaryNextBase">₹800</div>
-            </div>
-
-            <div class="detail-box">
-              <div class="detail-label">Adjustment Period</div>
-              <div class="detail-value">One Month Only</div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-    </div>
-
-  </main>
-
+<aside class="sidebar" id="sidebar">
+<div class="brand">
+<div class="brand-logo">BT</div>
+<div class="brand-text">
+<strong>BlackTerminal</strong>
+<span>Telecaller Panel</span>
+</div>
+</div>
+
+<nav class="nav">
+<button class="nav-btn active" data-section="dashboard"><span class="nav-icon">⌂</span><span>Dashboard</span></button>
+<button class="nav-btn" data-section="inquiries"><span class="nav-icon">☰</span><span>Student Inquiries</span></button>
+<button class="nav-btn" data-section="courses"><span class="nav-icon">▣</span><span>Courses & Offers</span></button>
+<button class="nav-btn" data-section="earnings"><span class="nav-icon">₹</span><span>My Earnings</span></button>
+</nav>
+
+<div class="sidebar-user">
+<div class="user-name" id="sideUserName">Telecaller</div>
+<div class="user-role">Telecaller</div>
+<button class="logout-btn" id="logoutBtn">Logout</button>
+</div>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+<div class="topbar-left">
+<button class="mobile-menu" id="mobileMenu">☰</button>
+<div>
+<div class="page-title" id="pageTitle">Telecaller Dashboard</div>
+<div class="page-subtitle">Student management and performance</div>
+</div>
+</div>
+
+<div class="top-user">
+<div class="top-user-info">
+<div style="font-size:12px;font-weight:800" id="topUserName">Telecaller</div>
+<div style="font-size:10px;color:#6b7280" id="topUserMobile">-</div>
+</div>
+<div class="avatar" id="avatar">T</div>
+</div>
+</header>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+<section class="section active" id="dashboard">
+
+<div class="hero">
+<h1>Welcome, <span id="heroName">Telecaller</span></h1>
+<p>Manage student inquiries, demo classes, admissions and your monthly earnings.</p>
+<div class="date-badge" id="todayDate">Loading date...</div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-icon">☰</div><div class="stat-label">Total Inquiries</div><div class="stat-value" id="statInquiries">0</div><div class="stat-small">Assigned inquiries</div></div>
+<div class="stat-card"><div class="stat-icon">▶</div><div class="stat-label">Demo Completed</div><div class="stat-value" id="statDemo">0</div><div class="stat-small">Current month</div></div>
+<div class="stat-card"><div class="stat-icon">✓</div><div class="stat-label">Converted</div><div class="stat-value" id="statConverted">0</div><div class="stat-small">Current month</div></div>
+<div class="stat-card"><div class="stat-icon">₹</div><div class="stat-label">Current Earnings</div><div class="stat-value" id="statEarning">₹0</div><div class="stat-small">Current month</div></div>
+</div>
+
+<div class="earning-layout">
+
+<div class="card">
+<div class="card-title">Current Month Earnings</div>
+<div class="card-subtitle">Your earnings are calculated automatically from Admin settings.</div>
+<div class="earning-total" id="dashboardTotal">₹0</div>
+
+<div class="earning-breakdown">
+<div class="earning-item"><div class="earning-item-label">BASE SALARY</div><div class="earning-item-value" id="dashBase">₹0</div></div>
+<div class="earning-item"><div class="earning-item-label">DEMO REWARD</div><div class="earning-item-value" id="dashDemoReward">₹0</div></div>
+<div class="earning-item"><div class="earning-item-label">ADMISSION REWARD</div><div class="earning-item-value" id="dashAdmissionReward">₹0</div></div>
+</div>
+
+<div class="salary-box">
+<div class="salary-row"><span>Current Base Salary</span><strong id="currentBaseText">₹0</strong></div>
+<div class="salary-row"><span>Previous Month Level</span><strong id="previousLevelText">Not available</strong></div>
+<div class="salary-row"><span>Next Month Base Salary</span><strong id="nextBaseText">₹0</strong></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Admission Level</div>
+<div class="card-subtitle">Level is automatically determined from current-month converted admissions.</div>
+<div id="levelCards"></div>
+<div class="next-level-text" id="levelProgressText">Loading...</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- INQUIRIES -->
+<section class="section" id="inquiries">
+
+<div class="hero">
+<h1>Student Inquiries</h1>
+<p>Search, contact, update status and manage student inquiries.</p>
+</div>
+
+<div class="toolbar">
+<div class="toolbar-grid">
+
+<input type="text" id="searchInput" class="input" placeholder="Search student name, mobile, course...">
+
+<select id="statusFilter" class="select">
+<option value="">All Status</option>
+<option value="new">New</option>
+<option value="pending">Pending</option>
+<option value="interested">Interested</option>
+<option value="contacted">Contacted</option>
+<option value="delay">Delay</option>
+<option value="follow-up">Follow-up</option>
+<option value="visited">Visited</option>
+<option value="demo-completed">Demo Completed</option>
+<option value="converted">Converted</option>
+<option value="not-interested">Not Interested</option>
+<option value="custom">Custom Status</option>
+</select>
+
+<select id="courseFilter" class="select"><option value="">All Courses</option></select>
+<select id="coordinatorFilter" class="select"><option value="">All Coordinators</option></select>
+<button class="btn btn-primary" id="refreshBtn">↻ Refresh</button>
+
+</div>
+</div>
+
+<div class="table-card">
+
+<div class="table-head">
+<div>
+<div class="card-title">Inquiry List</div>
+<div class="result-count" id="resultCount">0 inquiries found</div>
+</div>
+<button class="btn btn-light" id="clearFiltersBtn">Clear Filters</button>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Student</th>
+<th>Course</th>
+<th>Source</th>
+<th>Coordinator</th>
+<th>Status</th>
+<th>Follow-up</th>
+<th>Updated</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="inquiryBody">
+<tr><td colspan="8"><div class="loading"><div class="spinner"></div>Loading inquiries...</div></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="pagination">
+<div class="page-info" id="pageInfo">Page 1</div>
+<div id="paginationButtons"></div>
+</div>
+
+</div>
+</section>
+
+
+<!-- COURSES -->
+<section class="section" id="courses">
+
+<div class="hero">
+<h1>Courses & Special Offers</h1>
+<p>Course prices, offers and promotional information published by Admin.</p>
+</div>
+
+<div class="content-controls">
+<div>
+<div class="card-title">Available Information</div>
+<div class="card-subtitle" style="margin:4px 0 0">Always use the latest price and offer shown here when talking to students.</div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center">
+<button class="btn btn-light" id="refreshContentBtn">↻ Refresh</button>
+<div class="display-switch">
+<button class="display-btn active" data-display="carousel">Carousel</button>
+<button class="display-btn" data-display="banner">Banner</button>
+<button class="display-btn" data-display="list">List</button>
+</div>
+</div>
+</div>
+
+<div id="contentArea">
+<div class="loading"><div class="spinner"></div>Loading courses and offers...</div>
+</div>
+</section>
+
+
+<!-- EARNINGS -->
+<section class="section" id="earnings">
+
+<div class="hero">
+<h1>My Earnings</h1>
+<p>Transparent monthly earning calculation based on Admin-controlled rules.</p>
+</div>
+
+<div class="card">
+<div class="card-title">Current Month Payment</div>
+<div class="card-subtitle">Current month earning calculation</div>
+<div class="earning-total" id="earningPageTotal">₹0</div>
+
+<div class="earning-breakdown">
+<div class="earning-item"><div class="earning-item-label">BASE SALARY</div><div class="earning-item-value" id="earningPageBase">₹0</div></div>
+<div class="earning-item"><div class="earning-item-label">DEMO CLASSES</div><div class="earning-item-value" id="earningPageDemo">₹0</div></div>
+<div class="earning-item"><div class="earning-item-label">ADMISSIONS</div><div class="earning-item-value" id="earningPageAdmission">₹0</div></div>
+</div>
+</div>
+
+<div style="height:16px"></div>
+
+<div class="card">
+<div class="card-title">Performance Details</div>
+<div class="card-subtitle">Your current month performance</div>
+
+<div class="detail-grid">
+<div class="detail-box"><div class="detail-label">Demo Completed</div><div class="detail-value" id="earnDemoCount">0</div></div>
+<div class="detail-box"><div class="detail-label">Demo Reward / Student</div><div class="detail-value" id="earnDemoRate">₹0</div></div>
+<div class="detail-box"><div class="detail-label">Converted Admissions</div><div class="detail-value" id="earnAdmissionCount">0</div></div>
+<div class="detail-box"><div class="detail-label">Current Admission Level</div><div class="detail-value" id="earnLevel">Level 1</div></div>
+<div class="detail-box"><div class="detail-label">Admission Reward / Student</div><div class="detail-value" id="earnAdmissionRate">₹0</div></div>
+<div class="detail-box"><div class="detail-label">Visit Reward</div><div class="detail-value">₹0</div></div>
+</div>
+</div>
+
+<div style="height:16px"></div>
+
+<div class="card">
+<div class="card-title">Next Month Base Salary</div>
+<div class="card-subtitle">This is determined from your current month's final admission level.</div>
+<div class="earning-total" id="nextMonthSalaryBig">₹1,000</div>
+
+<div class="detail-grid">
+<div class="detail-box"><div class="detail-label">Current Level</div><div class="detail-value" id="salaryCurrentLevel">Level 1</div></div>
+<div class="detail-box"><div class="detail-label">Current Default Base</div><div class="detail-value" id="salaryDefaultBase">₹1,000</div></div>
+<div class="detail-box"><div class="detail-label">Next Month Base</div><div class="detail-value" id="salaryNextBase">₹800</div></div>
+<div class="detail-box"><div class="detail-label">Adjustment Period</div><div class="detail-value">One Month Only</div></div>
+</div>
+</div>
+
+</section>
+
+</div>
+</main>
 </div>
 
 
-<!-- ================= DETAIL MODAL ================= -->
-
+<!-- DETAIL MODAL -->
 <div class="modal-overlay" id="detailModal">
+<div class="modal">
 
-  <div class="modal">
+<div class="modal-head">
+<div class="modal-title">Student Details</div>
+<button class="close-btn" data-close="detailModal">×</button>
+</div>
 
-    <div class="modal-head">
+<div class="modal-body">
+<div class="detail-grid">
 
-      <div class="modal-title">
-        Student Details
-      </div>
+<div class="detail-box"><div class="detail-label">Student Name</div><div class="detail-value" id="detailName">-</div></div>
+<div class="detail-box"><div class="detail-label">Mobile</div><div class="detail-value" id="detailMobile">-</div></div>
+<div class="detail-box"><div class="detail-label">Course</div><div class="detail-value" id="detailCourse">-</div></div>
+<div class="detail-box"><div class="detail-label">Source</div><div class="detail-value" id="detailSource">-</div></div>
+<div class="detail-box"><div class="detail-label">Coordinator</div><div class="detail-value" id="detailCoordinator">-</div></div>
+<div class="detail-box"><div class="detail-label">Coordinator Mobile</div><div class="detail-value" id="detailCoordinatorMobile">-</div></div>
+<div class="detail-box"><div class="detail-label">Status</div><div class="detail-value" id="detailStatus">-</div></div>
+<div class="detail-box"><div class="detail-label">Telecaller Status</div><div class="detail-value" id="detailTelecallerStatus">-</div></div>
+<div class="detail-box"><div class="detail-label">Custom Status</div><div class="detail-value" id="detailCustomStatus">-</div></div>
+<div class="detail-box"><div class="detail-label">Follow-up Date</div><div class="detail-value" id="detailFollowup">-</div></div>
+<div class="detail-box"><div class="detail-label">Created At</div><div class="detail-value" id="detailCreated">-</div></div>
 
-      <button class="close-btn" data-close="detailModal">
-        ×
-      </button>
+<div class="detail-box" style="grid-column:1/-1">
+<div class="detail-label">Coordinator Remark</div>
+<div class="detail-value" id="detailRemark">-</div>
+</div>
 
-    </div>
+<div class="detail-box" style="grid-column:1/-1">
+<div class="detail-label">Telecaller Remark</div>
+<div class="detail-value" id="detailTeleRemark">-</div>
+</div>
 
-    <div class="modal-body">
+</div>
+</div>
 
-      <div class="detail-grid">
+<div class="modal-footer">
+<button class="btn btn-light" data-close="detailModal">Close</button>
+<button class="btn btn-success" id="detailCallBtn">Call Student</button>
+<button class="btn btn-success" id="detailWhatsAppBtn">WhatsApp</button>
+</div>
 
-        <div class="detail-box">
-          <div class="detail-label">Student Name</div>
-          <div class="detail-value" id="detailName">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Mobile</div>
-          <div class="detail-value" id="detailMobile">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Course</div>
-          <div class="detail-value" id="detailCourse">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Source</div>
-          <div class="detail-value" id="detailSource">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Coordinator</div>
-          <div class="detail-value" id="detailCoordinator">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Coordinator Mobile</div>
-          <div class="detail-value" id="detailCoordinatorMobile">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Status</div>
-          <div class="detail-value" id="detailStatus">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Telecaller Status</div>
-          <div class="detail-value" id="detailTelecallerStatus">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Custom Status</div>
-          <div class="detail-value" id="detailCustomStatus">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Follow-up Date</div>
-          <div class="detail-value" id="detailFollowup">-</div>
-        </div>
-
-        <div class="detail-box">
-          <div class="detail-label">Created At</div>
-          <div class="detail-value" id="detailCreated">-</div>
-        </div>
-
-        <div class="detail-box" style="grid-column:1/-1;">
-          <div class="detail-label">Coordinator Remark</div>
-          <div class="detail-value" id="detailRemark">-</div>
-        </div>
-
-        <div class="detail-box" style="grid-column:1/-1;">
-          <div class="detail-label">Telecaller Remark</div>
-          <div class="detail-value" id="detailTeleRemark">-</div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="modal-footer">
-
-      <button class="btn btn-light" data-close="detailModal">
-        Close
-      </button>
-
-      <button class="btn btn-success" id="detailCallBtn">
-        Call Student
-      </button>
-
-      <button class="btn btn-success" id="detailWhatsAppBtn">
-        WhatsApp
-      </button>
-
-    </div>
-
-  </div>
-
+</div>
 </div>
 
 
-<!-- ================= STATUS MODAL ================= -->
-
+<!-- STATUS MODAL -->
 <div class="modal-overlay" id="statusModal">
+<div class="modal">
 
-  <div class="modal">
+<div class="modal-head">
+<div class="modal-title">Update Student Status</div>
+<button class="close-btn" data-close="statusModal">×</button>
+</div>
 
-    <div class="modal-head">
+<div class="modal-body">
 
-      <div class="modal-title">
-        Update Student Status
-      </div>
+<input type="hidden" id="statusDocName">
 
-      <button class="close-btn" data-close="statusModal">
-        ×
-      </button>
+<div style="margin-bottom:13px">
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Student</label>
+<input type="text" class="input" id="statusStudentName" readonly>
+</div>
 
-    </div>
+<div style="margin-bottom:13px">
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Status</label>
 
-    <div class="modal-body">
+<select class="select" id="newStatus">
+<option value="new">New</option>
+<option value="pending">Pending</option>
+<option value="interested">Interested</option>
+<option value="contacted">Contacted</option>
+<option value="delay">Delay</option>
+<option value="follow-up">Follow-up</option>
+<option value="visited">Visited</option>
+<option value="demo-completed">Demo Completed</option>
+<option value="converted">Converted</option>
+<option value="not-interested">Not Interested</option>
+<option value="custom">Custom Status</option>
+</select>
+</div>
 
-      <input type="hidden" id="statusDocName">
+<div id="customStatusBox" style="display:none;margin-bottom:13px">
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Custom Status</label>
+<input type="text" class="input" id="newCustomStatus" maxlength="80" placeholder="Enter custom status...">
+<div style="font-size:9px;color:#6b7280;margin-top:5px">Example: Call Tomorrow, Waiting for Parents, Fee Issue, Join Next Month</div>
+</div>
 
-      <div style="margin-bottom:13px;">
+<div style="margin-bottom:13px">
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Follow-up Date</label>
+<input type="date" class="input" id="newFollowupDate">
+</div>
 
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
-          Student
-        </label>
-
-        <input
-          type="text"
-          class="input"
-          id="statusStudentName"
-          readonly
-        >
-
-      </div>
-
-      <div style="margin-bottom:13px;">
-
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
-          Status
-        </label>
-
-        <select class="select" id="newStatus">
-
-          <option value="new">
-            New
-          </option>
-
-          <option value="pending">
-            Pending
-          </option>
-
-          <option value="interested">
-            Interested
-          </option>
-
-          <option value="contacted">
-            Contacted
-          </option>
-
-          <option value="delay">
-            Delay
-          </option>
-
-          <option value="follow-up">
-            Follow-up
-          </option>
-
-          <option value="visited">
-            Visited
-          </option>
-
-          <option value="demo-completed">
-            Demo Completed
-          </option>
-
-          <option value="converted">
-            Converted
-          </option>
-
-          <option value="not-interested">
-            Not Interested
-          </option>
-
-          <option value="custom">
-            Custom Status
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <!-- CUSTOM STATUS -->
-
-      <div
-        id="customStatusBox"
-        style="display:none;margin-bottom:13px;"
-      >
-
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
-          Custom Status
-        </label>
-
-        <input
-          type="text"
-          class="input"
-          id="newCustomStatus"
-          maxlength="80"
-          placeholder="Enter custom status..."
-        >
-
-        <div style="font-size:9px;color:#6b7280;margin-top:5px;">
-          Example: Call Tomorrow, Waiting for Parents, Fee Issue, Join Next Month
-        </div>
-
-      </div>
-
-
-      <div style="margin-bottom:13px;">
-
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
-          Follow-up Date
-        </label>
-
-        <input
-          type="date"
-          class="input"
-          id="newFollowupDate"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
-          Telecaller Remark
-        </label>
-
-        <textarea
-          class="textarea"
-          id="newTelecallerRemark"
-          rows="4"
-          placeholder="Enter remark..."
-        ></textarea>
-
-      </div>
-
-    </div>
-
-    <div class="modal-footer">
-
-      <button class="btn btn-light" data-close="statusModal">
-        Cancel
-      </button>
-
-      <button class="btn btn-primary" id="saveStatusBtn">
-        Save Status
-      </button>
-
-    </div>
-
-  </div>
+<div>
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Telecaller Remark</label>
+<textarea class="textarea" id="newTelecallerRemark" rows="4" placeholder="Enter remark..."></textarea>
+</div>
 
 </div>
 
+<div class="modal-footer">
+<button class="btn btn-light" data-close="statusModal">Cancel</button>
+<button class="btn btn-primary" id="saveStatusBtn">Save Status</button>
+</div>
+
+</div>
+</div>
 
 <div class="toast-container" id="toastContainer"></div>
 
 
 <script>
+/* ============================================================
+AUTH
+============================================================ */
 
-  /* ============================================================
-     AUTH / SESSION
-  ============================================================ */
+const loggedIn=sessionStorage.getItem("bt_logged_in");
+const userRole=sessionStorage.getItem("bt_user_role");
 
-  const loggedIn = sessionStorage.getItem("bt_logged_in");
-  const userRole = sessionStorage.getItem("bt_user_role");
+const telecallerName=sessionStorage.getItem("bt_user_name")||"Telecaller";
+const telecallerMobile=sessionStorage.getItem("bt_user_mobile")||"";
 
-  const telecallerName =
-    sessionStorage.getItem("bt_user_name") || "Telecaller";
+if(loggedIn!=="true"||userRole!=="telecaller"){
+window.location.replace("login.html");
+}
 
-  const telecallerMobile =
-    sessionStorage.getItem("bt_user_mobile") || "";
 
-  if(
-    loggedIn !== "true" ||
-    userRole !== "telecaller"
-  ){
-    window.location.replace("login.html");
-  }
+/* ============================================================
+FIRESTORE CONFIG
+============================================================ */
 
+const FIREBASE_PROJECT_ID="jobs-2f152";
 
-  /* ============================================================
-     FIRESTORE CONFIG
-  ============================================================ */
+const FIREBASE_API_KEY=
+"AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
 
-  const FIREBASE_PROJECT_ID = "jobs-2f152";
+const FIRESTORE_BASE=
+"https://firestore.googleapis.com/v1/projects/"+
+FIREBASE_PROJECT_ID+
+"/databases/(default)/documents";
 
-  const FIREBASE_API_KEY =
-    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
+const INQUIRY_URL=
+FIRESTORE_BASE+"/studentInquiries";
 
-  const FIRESTORE_BASE =
-    "https://firestore.googleapis.com/v1/projects/" +
-    FIREBASE_PROJECT_ID +
-    "/databases/(default)/documents";
+const PAYMENT_SETTINGS_URL=
+FIRESTORE_BASE+"/paymentSettings/telecaller";
 
-  const INQUIRY_URL =
-    FIRESTORE_BASE + "/studentInquiries";
+const CONTENT_URL=
+FIRESTORE_BASE+"/telecallerContent";
 
-  const PAYMENT_SETTINGS_URL =
-    FIRESTORE_BASE + "/paymentSettings/telecaller";
 
-  const CONTENT_URL =
-    FIRESTORE_BASE + "/telecallerContent";
+/* ============================================================
+SETTINGS
+============================================================ */
 
+let SETTINGS={
+baseSalary:1000,
+demoIncentive:30,
 
-  /* ============================================================
-     DEFAULT SETTINGS
-  ============================================================ */
+level1Min:0,
+level1Max:2,
+level1AdmissionIncentive:50,
+level1NextBaseSalary:800,
 
-  let SETTINGS = {
+level2Min:3,
+level2Max:5,
+level2AdmissionIncentive:75,
+level2NextBaseSalary:900,
 
-    baseSalary:1000,
+level3Min:6,
+level3Max:null,
+level3AdmissionIncentive:100,
+level3NextBaseSalary:2000
+};
 
-    demoIncentive:30,
 
-    level1Min:0,
-    level1Max:2,
-    level1AdmissionIncentive:50,
-    level1NextBaseSalary:800,
+/* ============================================================
+STATE
+============================================================ */
 
-    level2Min:3,
-    level2Max:5,
-    level2AdmissionIncentive:75,
-    level2NextBaseSalary:900,
+let inquiries=[];
+let filteredInquiries=[];
+let currentPage=1;
+const PAGE_SIZE=10;
 
-    level3Min:6,
-    level3Max:null,
-    level3AdmissionIncentive:100,
-    level3NextBaseSalary:2000
+let currentDetailInquiry=null;
+let currentContent=[];
+let currentDisplay="carousel";
+let carouselIndex=0;
+let carouselTimer=null;
 
-  };
 
+/* ============================================================
+FIRESTORE HELPERS
+============================================================ */
 
-  /* ============================================================
-     APP STATE
-  ============================================================ */
+function firestoreValue(value){
 
-  let inquiries = [];
-  let filteredInquiries = [];
+if(value===null||value===undefined)return null;
 
-  let currentPage = 1;
+if(typeof value==="number"){
+return {integerValue:String(Math.round(value))};
+}
 
-  const PAGE_SIZE = 10;
+if(typeof value==="boolean"){
+return {booleanValue:value};
+}
 
-  let currentDetailInquiry = null;
+return {stringValue:String(value)};
+}
 
-  let currentContent = [];
 
-  let currentDisplay = "carousel";
+function extractFirestoreValue(field){
 
-  let carouselIndex = 0;
+if(!field)return "";
 
-  let carouselTimer = null;
+if(field.stringValue!==undefined)return field.stringValue;
 
+if(field.integerValue!==undefined)return Number(field.integerValue);
 
-  /* ============================================================
-     FIRESTORE HELPERS
-  ============================================================ */
+if(field.doubleValue!==undefined)return Number(field.doubleValue);
 
-  function firestoreValue(value){
-
-    if(value === null || value === undefined){
-      return null;
-    }
-
-    if(typeof value === "number"){
-      return {
-        integerValue:String(Math.round(value))
-      };
-    }
+if(field.booleanValue!==undefined)return field.booleanValue;
 
-    if(typeof value === "boolean"){
-      return {
-        booleanValue:value
-      };
-    }
+if(field.timestampValue!==undefined)return field.timestampValue;
 
-    return {
-      stringValue:String(value)
-    };
-  }
+if(field.arrayValue){
+return(field.arrayValue.values||[]).map(extractFirestoreValue);
+}
 
+if(field.mapValue){
+return firestoreFieldsToObject(field.mapValue.fields||{});
+}
 
-  function extractFirestoreValue(field){
+return "";
+}
 
-    if(!field){
-      return "";
-    }
 
-    if(field.stringValue !== undefined){
-      return field.stringValue;
-    }
+function firestoreFieldsToObject(fields){
 
-    if(field.integerValue !== undefined){
-      return Number(field.integerValue);
-    }
+const obj={};
 
-    if(field.doubleValue !== undefined){
-      return Number(field.doubleValue);
-    }
+Object.keys(fields||{}).forEach(key=>{
+obj[key]=extractFirestoreValue(fields[key]);
+});
 
-    if(field.booleanValue !== undefined){
-      return field.booleanValue;
-    }
+return obj;
+}
 
-    if(field.timestampValue !== undefined){
-      return field.timestampValue;
-    }
 
-    if(field.arrayValue){
-      return (field.arrayValue.values || [])
-        .map(extractFirestoreValue);
-    }
+async function firestoreFetch(url,options={}){
 
-    if(field.mapValue){
-      return firestoreFieldsToObject(
-        field.mapValue.fields || {}
-      );
-    }
+const separator=url.includes("?")?"&":"?";
 
-    return "";
-  }
+const finalUrl=
+url+
+separator+
+"key="+
+encodeURIComponent(FIREBASE_API_KEY);
 
+const response=await fetch(
+finalUrl,
+{
+...options,
+headers:{
+"Content-Type":"application/json",
+...(options.headers||{})
+}
+}
+);
 
-  function firestoreFieldsToObject(fields){
+const text=await response.text();
 
-    const obj = {};
+let data={};
 
-    Object.keys(fields || {}).forEach(key => {
-      obj[key] = extractFirestoreValue(fields[key]);
-    });
+try{
+data=text?JSON.parse(text):{};
+}catch{
+data={};
+}
 
-    return obj;
-  }
+if(!response.ok){
 
+const message=
+data?.error?.message||
+"Firestore request failed.";
 
-  async function firestoreFetch(
-    url,
-    options = {}
-  ){
+throw new Error(message);
+}
 
-    const separator =
-      url.includes("?") ? "&" : "?";
+return data;
+}
 
-    const finalUrl =
-      url +
-      separator +
-      "key=" +
-      encodeURIComponent(FIREBASE_API_KEY);
 
-    const response =
-      await fetch(
-        finalUrl,
-        {
-          ...options,
-          headers:{
-            "Content-Type":"application/json",
-            ...(options.headers || {})
-          }
-        }
-      );
+/* ============================================================
+DOCUMENT URL FIX
+============================================================ */
 
-    const text =
-      await response.text();
+/*
+IMPORTANT:
 
-    let data = {};
+Firestore returns a document name like:
 
-    try{
-      data = text ? JSON.parse(text) : {};
-    }catch{
-      data = {};
-    }
+projects/jobs-2f152/databases/(default)/documents/studentInquiries/ABC123
 
-    if(!response.ok){
+The old code incorrectly did:
 
-      let message =
-        data?.error?.message ||
-        "Firestore request failed.";
+FIRESTORE_BASE + "/" + docName
 
-      throw new Error(message);
-    }
+which produced:
 
-    return data;
-  }
+.../documents/projects/jobs-2f152/...
 
+and caused:
 
-  /* ============================================================
-     PAGINATED INQUIRY FETCH
-  ============================================================ */
+"Document name lacks '/' at index..."
 
-  async function loadInquiries(){
+This function fixes that permanently.
+*/
 
-    const tbody =
-      document.getElementById("inquiryBody");
+function getDocumentUrl(docName){
 
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="8">
-          <div class="loading">
-            <div class="spinner"></div>
-            Loading inquiries...
-          </div>
-        </td>
-      </tr>
-    `;
+if(!docName){
+throw new Error("Firestore document path is missing.");
+}
 
-    try{
+if(docName.startsWith("https://")){
+return docName;
+}
 
-      let allDocs = [];
+if(docName.startsWith("projects/")){
+return "https://firestore.googleapis.com/v1/"+docName;
+}
 
-      let pageToken = "";
+if(docName.startsWith("/v1/projects/")){
+return "https://firestore.googleapis.com"+docName;
+}
 
-      do{
+return FIRESTORE_BASE+"/"+docName;
+}
 
-        let url =
-          INQUIRY_URL +
-          "?pageSize=300";
 
-        if(pageToken){
-          url +=
-            "&pageToken=" +
-            encodeURIComponent(pageToken);
-        }
+/* ============================================================
+LOAD INQUIRIES
+============================================================ */
 
-        const data =
-          await firestoreFetch(url);
+async function loadInquiries(){
 
-        const docs =
-          data.documents || [];
+const tbody=document.getElementById("inquiryBody");
 
-        allDocs =
-          allDocs.concat(docs);
+tbody.innerHTML=`
+<tr>
+<td colspan="8">
+<div class="loading">
+<div class="spinner"></div>
+Loading inquiries...
+</div>
+</td>
+</tr>
+`;
 
-        pageToken =
-          data.nextPageToken || "";
+try{
 
-      }while(pageToken);
+let allDocs=[];
+let pageToken="";
 
+do{
 
-      inquiries =
-        allDocs.map(doc => {
+let url=INQUIRY_URL+"?pageSize=300";
 
-          const obj =
-            firestoreFieldsToObject(
-              doc.fields || {}
-            );
+if(pageToken){
+url+="&pageToken="+encodeURIComponent(pageToken);
+}
 
-          obj.__docName =
-            doc.name || "";
+const data=await firestoreFetch(url);
 
-          return obj;
+allDocs=allDocs.concat(data.documents||[]);
 
-        });
+pageToken=data.nextPageToken||"";
 
-      inquiries.sort(
-        (a,b) =>
-          new Date(b.createdAt || 0) -
-          new Date(a.createdAt || 0)
-      );
+}while(pageToken);
 
 
-      buildFilters();
+inquiries=allDocs.map(doc=>{
 
-      applyFilters();
+const obj=firestoreFieldsToObject(doc.fields||{});
 
-      updateDashboard();
+obj.__docName=doc.name||"";
 
-      calculateAndRenderEarnings();
+return obj;
 
-    }catch(error){
+});
 
-      console.error(error);
 
-      inquiries = [];
+inquiries.sort(
+(a,b)=>
+new Date(b.createdAt||0)-
+new Date(a.createdAt||0)
+);
 
-      document.getElementById("inquiryBody").innerHTML = `
-        <tr>
-          <td colspan="8">
-            <div class="empty">
-              <div class="empty-icon">⚠</div>
-              <div class="empty-title">
-                Unable to load inquiries
-              </div>
-              <div class="empty-text">
-                ${escapeHtml(error.message)}
-              </div>
-            </div>
-          </td>
-        </tr>
-      `;
 
-      showToast(
-        error.message,
-        "error"
-      );
-    }
-  }
+buildFilters();
+applyFilters();
+updateDashboard();
+calculateAndRenderEarnings();
 
+}catch(error){
 
-  /* ============================================================
-     PAYMENT SETTINGS
-  ============================================================ */
+console.error(error);
 
-  async function loadPaymentSettings(){
+inquiries=[];
 
-    try{
+document.getElementById("inquiryBody").innerHTML=`
+<tr>
+<td colspan="8">
+<div class="empty">
+<div class="empty-icon">⚠</div>
+<div class="empty-title">Unable to load inquiries</div>
+<div class="empty-text">${escapeHtml(error.message)}</div>
+</div>
+</td>
+</tr>
+`;
 
-      const data =
-        await firestoreFetch(
-          PAYMENT_SETTINGS_URL
-        );
+showToast(error.message,"error");
+}
+}
 
-      const fields =
-        data.fields || {};
 
-      const getNumber =
-        (name, fallback) => {
+/* ============================================================
+PAYMENT SETTINGS
+============================================================ */
 
-          const value =
-            extractFirestoreValue(
-              fields[name]
-            );
+async function loadPaymentSettings(){
 
-          const num =
-            Number(value);
+try{
 
-          return Number.isFinite(num)
-            ? num
-            : fallback;
-        };
+const data=await firestoreFetch(PAYMENT_SETTINGS_URL);
 
+const fields=data.fields||{};
 
-      SETTINGS.baseSalary =
-        getNumber(
-          "baseSalary",
-          SETTINGS.baseSalary
-        );
+const getNumber=(name,fallback)=>{
 
+const value=extractFirestoreValue(fields[name]);
+const num=Number(value);
 
-      SETTINGS.demoIncentive =
-        getNumber(
-          "demoIncentive",
-          SETTINGS.demoIncentive
-        );
+return Number.isFinite(num)?num:fallback;
+};
 
 
-      SETTINGS.level1Min =
-        getNumber(
-          "level1Min",
-          SETTINGS.level1Min
-        );
+SETTINGS.baseSalary=
+getNumber("baseSalary",SETTINGS.baseSalary);
 
-      SETTINGS.level1Max =
-        getNumber(
-          "level1Max",
-          SETTINGS.level1Max
-        );
+SETTINGS.demoIncentive=
+getNumber("demoIncentive",SETTINGS.demoIncentive);
 
-      SETTINGS.level1AdmissionIncentive =
-        getNumber(
-          "level1AdmissionIncentive",
-          SETTINGS.level1AdmissionIncentive
-        );
+SETTINGS.level1Min=
+getNumber("level1Min",SETTINGS.level1Min);
 
-      SETTINGS.level1NextBaseSalary =
-        getNumber(
-          "level1NextBaseSalary",
-          SETTINGS.level1NextBaseSalary
-        );
+SETTINGS.level1Max=
+getNumber("level1Max",SETTINGS.level1Max);
 
+SETTINGS.level1AdmissionIncentive=
+getNumber(
+"level1AdmissionIncentive",
+SETTINGS.level1AdmissionIncentive
+);
 
-      SETTINGS.level2Min =
-        getNumber(
-          "level2Min",
-          SETTINGS.level2Min
-        );
+SETTINGS.level1NextBaseSalary=
+getNumber(
+"level1NextBaseSalary",
+SETTINGS.level1NextBaseSalary
+);
 
-      SETTINGS.level2Max =
-        getNumber(
-          "level2Max",
-          SETTINGS.level2Max
-        );
+SETTINGS.level2Min=
+getNumber("level2Min",SETTINGS.level2Min);
 
-      SETTINGS.level2AdmissionIncentive =
-        getNumber(
-          "level2AdmissionIncentive",
-          SETTINGS.level2AdmissionIncentive
-        );
+SETTINGS.level2Max=
+getNumber("level2Max",SETTINGS.level2Max);
 
-      SETTINGS.level2NextBaseSalary =
-        getNumber(
-          "level2NextBaseSalary",
-          SETTINGS.level2NextBaseSalary
-        );
+SETTINGS.level2AdmissionIncentive=
+getNumber(
+"level2AdmissionIncentive",
+SETTINGS.level2AdmissionIncentive
+);
 
+SETTINGS.level2NextBaseSalary=
+getNumber(
+"level2NextBaseSalary",
+SETTINGS.level2NextBaseSalary
+);
 
-      SETTINGS.level3Min =
-        getNumber(
-          "level3Min",
-          SETTINGS.level3Min
-        );
+SETTINGS.level3Min=
+getNumber("level3Min",SETTINGS.level3Min);
 
-      const level3Max =
-        extractFirestoreValue(
-          fields.level3Max
-        );
+const level3Max=extractFirestoreValue(fields.level3Max);
 
-      SETTINGS.level3Max =
-        level3Max === "" ||
-        level3Max === null ||
-        level3Max === undefined
-          ? null
-          : Number(level3Max);
+SETTINGS.level3Max=
+level3Max===""||
+level3Max===null||
+level3Max===undefined
+?null
+:Number(level3Max);
 
+SETTINGS.level3AdmissionIncentive=
+getNumber(
+"level3AdmissionIncentive",
+SETTINGS.level3AdmissionIncentive
+);
 
-      SETTINGS.level3AdmissionIncentive =
-        getNumber(
-          "level3AdmissionIncentive",
-          SETTINGS.level3AdmissionIncentive
-        );
+SETTINGS.level3NextBaseSalary=
+getNumber(
+"level3NextBaseSalary",
+SETTINGS.level3NextBaseSalary
+);
 
-      SETTINGS.level3NextBaseSalary =
-        getNumber(
-          "level3NextBaseSalary",
-          SETTINGS.level3NextBaseSalary
-        );
+calculateAndRenderEarnings();
 
+}catch(error){
 
-      calculateAndRenderEarnings();
+console.warn(
+"Payment settings could not be loaded:",
+error.message
+);
 
-    }catch(error){
+calculateAndRenderEarnings();
+}
+}
 
-      console.warn(
-        "Payment settings could not be loaded:",
-        error.message
-      );
 
-      calculateAndRenderEarnings();
-    }
-  }
+/* ============================================================
+CONTENT
+============================================================ */
 
+async function loadContent(){
 
-  /* ============================================================
-     CONTENT LOAD
-  ============================================================ */
+try{
 
-  async function loadContent(){
+let allDocs=[];
+let pageToken="";
 
-    try{
+do{
 
-      let allDocs = [];
+let url=CONTENT_URL+"?pageSize=300";
 
-      let pageToken = "";
+if(pageToken){
+url+="&pageToken="+encodeURIComponent(pageToken);
+}
 
-      do{
+const data=await firestoreFetch(url);
 
-        let url =
-          CONTENT_URL +
-          "?pageSize=300";
+allDocs=allDocs.concat(data.documents||[]);
 
-        if(pageToken){
-          url +=
-            "&pageToken=" +
-            encodeURIComponent(pageToken);
-        }
+pageToken=data.nextPageToken||"";
 
-        const data =
-          await firestoreFetch(url);
+}while(pageToken);
 
-        allDocs =
-          allDocs.concat(
-            data.documents || []
-          );
 
-        pageToken =
-          data.nextPageToken || "";
+currentContent=
+allDocs
+.map(doc=>{
 
-      }while(pageToken);
+const obj=firestoreFieldsToObject(doc.fields||{});
 
+obj.__docName=doc.name||"";
 
-      currentContent =
-        allDocs
-          .map(doc => {
+return obj;
 
-            const obj =
-              firestoreFieldsToObject(
-                doc.fields || {}
-              );
+})
+.filter(item=>item.active!==false&&item.active!=="false")
+.sort(
+(a,b)=>
+Number(a.order||9999)-
+Number(b.order||9999)
+);
 
-            obj.__docName =
-              doc.name || "";
+renderContent();
 
-            return obj;
+}catch(error){
 
-          })
-          .filter(item => {
+console.warn(
+"Content could not be loaded:",
+error.message
+);
 
-            if(
-              item.active === false ||
-              item.active === "false"
-            ){
-              return false;
-            }
+currentContent=[];
+renderContent();
+}
+}
 
-            return true;
 
-          })
-          .sort(
-            (a,b) =>
-              Number(a.order || 9999) -
-              Number(b.order || 9999)
-          );
+/* ============================================================
+MONTH HELPERS
+============================================================ */
 
+function isCurrentMonth(dateString){
 
-      renderContent();
+if(!dateString)return false;
 
-    }catch(error){
+const date=new Date(dateString);
 
-      console.warn(
-        "Content could not be loaded:",
-        error.message
-      );
+if(Number.isNaN(date.getTime()))return false;
 
-      currentContent = [];
+const now=new Date();
 
-      renderContent();
-    }
-  }
+return date.getFullYear()===now.getFullYear()&&
+date.getMonth()===now.getMonth();
+}
 
 
-  /* ============================================================
-     MONTH HELPERS
-  ============================================================ */
+function getPreviousMonthRange(){
 
-  function getMonthKey(date = new Date()){
+const now=new Date();
 
-    const y =
-      date.getFullYear();
+return{
+start:new Date(now.getFullYear(),now.getMonth()-1,1),
+end:new Date(now.getFullYear(),now.getMonth(),0,23,59,59,999)
+};
+}
 
-    const m =
-      String(
-        date.getMonth() + 1
-      ).padStart(2,"0");
 
-    return `${y}-${m}`;
-  }
+function isInPreviousMonth(dateString){
 
+if(!dateString)return false;
 
-  function isCurrentMonth(dateString){
+const date=new Date(dateString);
 
-    if(!dateString){
-      return false;
-    }
+if(Number.isNaN(date.getTime()))return false;
 
-    const date =
-      new Date(dateString);
+const range=getPreviousMonthRange();
 
-    if(Number.isNaN(date.getTime())){
-      return false;
-    }
+return date>=range.start&&date<=range.end;
+}
 
-    return (
-      date.getFullYear() ===
-      new Date().getFullYear()
-      &&
-      date.getMonth() ===
-      new Date().getMonth()
-    );
-  }
 
+/* ============================================================
+UNIQUE STUDENTS
+============================================================ */
 
-  function getPreviousMonthRange(){
+function normalizeMobile(mobile){
 
-    const now = new Date();
+return String(mobile||"")
+.replace(/\D/g,"")
+.slice(-10);
+}
 
-    const firstCurrent =
-      new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        1
-      );
 
-    const firstPrevious =
-      new Date(
-        now.getFullYear(),
-        now.getMonth() - 1,
-        1
-      );
+function uniqueByMobile(list){
 
-    const lastPrevious =
-      new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        0,
-        23,
-        59,
-        59,
-        999
-      );
+const map=new Map();
 
-    return {
-      start:firstPrevious,
-      end:lastPrevious
-    };
-  }
+list.forEach(item=>{
 
+const mobile=normalizeMobile(item.mobile);
 
-  function isInPreviousMonth(dateString){
+if(!mobile)return;
 
-    if(!dateString){
-      return false;
-    }
+if(!map.has(mobile)){
+map.set(mobile,item);
+}
 
-    const date =
-      new Date(dateString);
+});
 
-    if(Number.isNaN(date.getTime())){
-      return false;
-    }
+return Array.from(map.values());
+}
 
-    const range =
-      getPreviousMonthRange();
 
-    return (
-      date >= range.start &&
-      date <= range.end
-    );
-  }
+/* ============================================================
+STATUS HELPERS
+============================================================ */
 
+function normalizeStatus(value){
 
-  /* ============================================================
-     UNIQUE STUDENTS
-  ============================================================ */
+return String(value||"")
+.toLowerCase()
+.trim()
+.replace(/_/g,"-")
+.replace(/\s+/g,"-");
+}
 
-  function normalizeMobile(mobile){
 
-    return String(
-      mobile || ""
-    )
-      .replace(/\D/g,"")
-      .slice(-10);
-  }
+function isDemoCompleted(item){
 
+const status=normalizeStatus(item.status);
+const teleStatus=normalizeStatus(item.telecallerStatus);
 
-  function uniqueByMobile(list){
+return[
+"demo-completed",
+"demo"
+].includes(status)||
+[
+"demo-completed",
+"demo"
+].includes(teleStatus);
+}
 
-    const map =
-      new Map();
 
-    list.forEach(item => {
+function isConverted(item){
 
-      const mobile =
-        normalizeMobile(
-          item.mobile
-        );
+return normalizeStatus(item.status)==="converted"||
+normalizeStatus(item.telecallerStatus)==="converted";
+}
 
-      if(!mobile){
-        return;
-      }
 
-      if(!map.has(mobile)){
-        map.set(
-          mobile,
-          item
-        );
-      }
+function getCurrentMonthDemoStudents(){
 
-    });
+return uniqueByMobile(
+inquiries.filter(item=>{
 
-    return Array.from(
-      map.values()
-    );
-  }
+const date=item.updatedAt||item.createdAt;
 
+return isCurrentMonth(date)&&isDemoCompleted(item);
 
-  /* ============================================================
-     DEMO / CONVERTED COUNTS
-  ============================================================ */
+})
+);
+}
 
-  function isDemoCompleted(item){
 
-    const status =
-      String(
-        item.status || ""
-      ).toLowerCase()
-      .trim();
+function getCurrentMonthConvertedStudents(){
 
-    const teleStatus =
-      String(
-        item.telecallerStatus || ""
-      ).toLowerCase()
-      .trim();
+return uniqueByMobile(
+inquiries.filter(item=>{
 
-    return (
-      status === "demo-completed" ||
-      status === "demo completed" ||
-      status === "demo_completed" ||
-      teleStatus === "demo-completed" ||
-      teleStatus === "demo completed" ||
-      teleStatus === "demo_completed"
-    );
-  }
+const date=item.updatedAt||item.createdAt;
 
+return isCurrentMonth(date)&&isConverted(item);
 
-  function isConverted(item){
+})
+);
+}
 
-    const status =
-      String(
-        item.status || ""
-      ).toLowerCase()
-      .trim();
 
-    const teleStatus =
-      String(
-        item.telecallerStatus || ""
-      ).toLowerCase()
-      .trim();
+function getPreviousMonthConvertedStudents(){
 
-    return (
-      status === "converted" ||
-      teleStatus === "converted"
-    );
-  }
+return uniqueByMobile(
+inquiries.filter(item=>{
 
+const date=item.updatedAt||item.createdAt;
 
-  function getCurrentMonthDemoStudents(){
+return isInPreviousMonth(date)&&isConverted(item);
 
-    const list =
-      inquiries.filter(item => {
+})
+);
+}
 
-        const date =
-          item.updatedAt ||
-          item.createdAt;
 
-        return (
-          isCurrentMonth(date) &&
-          isDemoCompleted(item)
-        );
+/* ============================================================
+LEVEL
+============================================================ */
 
-      });
+function getLevelByCount(count){
 
-    return uniqueByMobile(list);
-  }
+if(count>=SETTINGS.level3Min){
 
+return{
+level:3,
+name:"Level 3",
+rate:SETTINGS.level3AdmissionIncentive,
+nextBase:SETTINGS.level3NextBaseSalary,
+min:SETTINGS.level3Min,
+max:SETTINGS.level3Max
+};
 
-  function getCurrentMonthConvertedStudents(){
+}
 
-    const list =
-      inquiries.filter(item => {
+if(
+count>=SETTINGS.level2Min&&
+count<=SETTINGS.level2Max
+){
 
-        const date =
-          item.updatedAt ||
-          item.createdAt;
+return{
+level:2,
+name:"Level 2",
+rate:SETTINGS.level2AdmissionIncentive,
+nextBase:SETTINGS.level2NextBaseSalary,
+min:SETTINGS.level2Min,
+max:SETTINGS.level2Max
+};
 
-        return (
-          isCurrentMonth(date) &&
-          isConverted(item)
-        );
+}
 
-      });
+return{
+level:1,
+name:"Level 1",
+rate:SETTINGS.level1AdmissionIncentive,
+nextBase:SETTINGS.level1NextBaseSalary,
+min:SETTINGS.level1Min,
+max:SETTINGS.level1Max
+};
+}
 
-    return uniqueByMobile(list);
-  }
 
+function getPreviousMonthLevel(){
 
-  /* ============================================================
-     LEVEL CALCULATION
-  ============================================================ */
+const count=getPreviousMonthConvertedStudents().length;
 
-  function getLevelByCount(count){
+if(count===0){
+return{
+count:0,
+level:null,
+name:"No Previous Data",
+nextBase:SETTINGS.baseSalary
+};
+}
 
-    if(
-      count >= SETTINGS.level3Min
-    ){
-      return {
-        level:3,
-        name:"Level 3",
-        rate:SETTINGS.level3AdmissionIncentive,
-        nextBase:SETTINGS.level3NextBaseSalary,
-        min:SETTINGS.level3Min,
-        max:SETTINGS.level3Max
-      };
-    }
+return{
+count,
+...getLevelByCount(count)
+};
+}
 
-    if(
-      count >= SETTINGS.level2Min &&
-      count <= SETTINGS.level2Max
-    ){
-      return {
-        level:2,
-        name:"Level 2",
-        rate:SETTINGS.level2AdmissionIncentive,
-        nextBase:SETTINGS.level2NextBaseSalary,
-        min:SETTINGS.level2Min,
-        max:SETTINGS.level2Max
-      };
-    }
 
-    return {
-      level:1,
-      name:"Level 1",
-      rate:SETTINGS.level1AdmissionIncentive,
-      nextBase:SETTINGS.level1NextBaseSalary,
-      min:SETTINGS.level1Min,
-      max:SETTINGS.level1Max
-    };
-  }
+function getCurrentBaseSalary(){
 
+const previous=getPreviousMonthLevel();
 
-  /* ============================================================
-     PREVIOUS MONTH LEVEL
-  ============================================================ */
+return previous.level?
+previous.nextBase:
+SETTINGS.baseSalary;
+}
 
-  function getPreviousMonthConvertedStudents(){
 
-    const list =
-      inquiries.filter(item => {
+/* ============================================================
+EARNINGS
+============================================================ */
 
-        const date =
-          item.updatedAt ||
-          item.createdAt;
+function calculateEarnings(){
 
-        return (
-          isInPreviousMonth(date) &&
-          isConverted(item)
-        );
+const demoCount=
+getCurrentMonthDemoStudents().length;
 
-      });
+const convertedCount=
+getCurrentMonthConvertedStudents().length;
 
-    return uniqueByMobile(list);
-  }
+const level=getLevelByCount(convertedCount);
 
+const baseSalary=getCurrentBaseSalary();
 
-  function getPreviousMonthLevel(){
+const demoReward=
+demoCount*SETTINGS.demoIncentive;
 
-    const count =
-      getPreviousMonthConvertedStudents().length;
+const admissionReward=
+convertedCount*level.rate;
 
-    if(count === 0){
+return{
+demoCount,
+convertedCount,
+level,
+baseSalary,
+demoReward,
+admissionReward,
+total:
+baseSalary+
+demoReward+
+admissionReward
+};
+}
 
-      return {
-        count:0,
-        level:null,
-        name:"No Previous Data",
-        nextBase:SETTINGS.baseSalary
-      };
 
-    }
+function calculateAndRenderEarnings(){
 
-    return {
-      count,
-      ...getLevelByCount(count)
-    };
-  }
+const earning=calculateEarnings();
 
+const previous=getPreviousMonthLevel();
 
-  function getCurrentBaseSalary(){
+setText("dashboardTotal",money(earning.total));
+setText("dashBase",money(earning.baseSalary));
+setText("dashDemoReward",money(earning.demoReward));
+setText("dashAdmissionReward",money(earning.admissionReward));
+setText("currentBaseText",money(earning.baseSalary));
 
-    const previous =
-      getPreviousMonthLevel();
+setText(
+"previousLevelText",
+previous.level
+?`${previous.name} (${previous.count} admissions)`
+:"No previous data"
+);
 
-    if(!previous.level){
-      return SETTINGS.baseSalary;
-    }
+setText("nextBaseText",money(earning.level.nextBase));
 
-    return previous.nextBase;
-  }
+setText("statDemo",earning.demoCount);
+setText("statConverted",earning.convertedCount);
+setText("statEarning",money(earning.total));
 
+setText("earningPageTotal",money(earning.total));
+setText("earningPageBase",money(earning.baseSalary));
+setText("earningPageDemo",money(earning.demoReward));
+setText("earningPageAdmission",money(earning.admissionReward));
 
-  /* ============================================================
-     EARNINGS
-  ============================================================ */
+setText("earnDemoCount",earning.demoCount);
+setText("earnDemoRate",money(SETTINGS.demoIncentive));
+setText("earnAdmissionCount",earning.convertedCount);
+setText("earnLevel",earning.level.name);
+setText("earnAdmissionRate",money(earning.level.rate));
 
-  function calculateEarnings(){
+setText("nextMonthSalaryBig",money(earning.level.nextBase));
+setText("salaryCurrentLevel",earning.level.name);
+setText("salaryDefaultBase",money(SETTINGS.baseSalary));
+setText("salaryNextBase",money(earning.level.nextBase));
 
-    const demoStudents =
-      getCurrentMonthDemoStudents();
+renderLevelCards(
+earning.convertedCount,
+earning.level
+);
+}
 
-    const convertedStudents =
-      getCurrentMonthConvertedStudents();
 
-    const demoCount =
-      demoStudents.length;
+function renderLevelCards(count,currentLevel){
 
-    const convertedCount =
-      convertedStudents.length;
+const container=document.getElementById("levelCards");
 
-    const level =
-      getLevelByCount(
-        convertedCount
-      );
+const levels=[
+{
+level:1,title:"Level 1",
+min:SETTINGS.level1Min,
+max:SETTINGS.level1Max,
+rate:SETTINGS.level1AdmissionIncentive,
+nextBase:SETTINGS.level1NextBaseSalary
+},
+{
+level:2,title:"Level 2",
+min:SETTINGS.level2Min,
+max:SETTINGS.level2Max,
+rate:SETTINGS.level2AdmissionIncentive,
+nextBase:SETTINGS.level2NextBaseSalary
+},
+{
+level:3,title:"Level 3",
+min:SETTINGS.level3Min,
+max:SETTINGS.level3Max,
+rate:SETTINGS.level3AdmissionIncentive,
+nextBase:SETTINGS.level3NextBaseSalary
+}
+];
 
-    const baseSalary =
-      getCurrentBaseSalary();
+container.innerHTML=levels.map(item=>{
 
-    const demoReward =
-      demoCount *
-      SETTINGS.demoIncentive;
+const active=item.level===currentLevel.level;
 
-    const admissionReward =
-      convertedCount *
-      level.rate;
+const range=
+item.level===3
+?`${item.min}+ admissions`
+:`${item.min}–${item.max} admissions`;
 
-    const total =
-      baseSalary +
-      demoReward +
-      admissionReward;
+return`
+<div class="level-card ${active?"active":""}">
+<div class="level-head">
+<div>
+<div class="level-name">
+${item.title}
+${active?`<span class="level-tag">CURRENT</span>`:""}
+</div>
+<div class="level-range">${range}</div>
+</div>
+<div class="level-rate">${money(item.rate)}</div>
+</div>
+<div style="font-size:10px;color:#6b7280;margin-top:6px">Admission reward per student</div>
+<div style="font-size:10px;color:#6b7280;margin-top:4px">
+Next month base: <strong>${money(item.nextBase)}</strong>
+</div>
+</div>
+`;
 
-    return {
+}).join("");
 
-      demoCount,
+let progressText="";
 
-      convertedCount,
+if(currentLevel.level===1){
 
-      level,
+const remaining=
+Math.max(0,SETTINGS.level2Min-count);
 
-      baseSalary,
+progressText=
+remaining>0
+?`${remaining} more admission${remaining===1?"":"s"} to reach Level 2.`
+:"Level 2 reached.";
 
-      demoReward,
+}else if(currentLevel.level===2){
 
-      admissionReward,
+const remaining=
+Math.max(0,SETTINGS.level3Min-count);
 
-      total
+progressText=
+remaining>0
+?`${remaining} more admission${remaining===1?"":"s"} to reach Level 3.`
+:"Level 3 reached.";
 
-    };
-  }
+}else{
+progressText="Level 3 active. Highest configured admission level.";
+}
 
+setText(
+"levelProgressText",
+`Current: ${currentLevel.name} • ${count} converted admission${count===1?"":"s"} • ${progressText}`
+);
+}
 
-  function calculateAndRenderEarnings(){
 
-    const earning =
-      calculateEarnings();
+function updateDashboard(){
 
-    const previous =
-      getPreviousMonthLevel();
+setText("statInquiries",inquiries.length);
 
+const earning=calculateEarnings();
 
-    setText(
-      "dashboardTotal",
-      money(earning.total)
-    );
+setText("statDemo",earning.demoCount);
+setText("statConverted",earning.convertedCount);
+setText("statEarning",money(earning.total));
+}
 
-    setText(
-      "dashBase",
-      money(earning.baseSalary)
-    );
 
-    setText(
-      "dashDemoReward",
-      money(earning.demoReward)
-    );
+/* ============================================================
+FILTERS
+============================================================ */
 
-    setText(
-      "dashAdmissionReward",
-      money(earning.admissionReward)
-    );
+function buildFilters(){
 
-    setText(
-      "currentBaseText",
-      money(earning.baseSalary)
-    );
+const courseSelect=document.getElementById("courseFilter");
+const coordinatorSelect=document.getElementById("coordinatorFilter");
 
-    setText(
-      "previousLevelText",
-      previous.level
-        ? `${previous.name} (${previous.count} admissions)`
-        : "No previous data"
-    );
+const courses=[
+...new Set(
+inquiries.map(x=>x.course).filter(Boolean)
+)
+].sort();
 
-    setText(
-      "nextBaseText",
-      money(
-        earning.level.nextBase
-      )
-    );
+const coordinators=[
+...new Set(
+inquiries.map(x=>x.coordinatorName).filter(Boolean)
+)
+].sort();
 
-    setText(
-      "statDemo",
-      earning.demoCount
-    );
+const oldCourse=courseSelect.value;
+const oldCoordinator=coordinatorSelect.value;
 
-    setText(
-      "statConverted",
-      earning.convertedCount
-    );
+courseSelect.innerHTML=
+`<option value="">All Courses</option>`+
+courses.map(
+course=>
+`<option value="${escapeAttr(course)}">${escapeHtml(course)}</option>`
+).join("");
 
-    setText(
-      "statEarning",
-      money(earning.total)
-    );
+coordinatorSelect.innerHTML=
+`<option value="">All Coordinators</option>`+
+coordinators.map(
+name=>
+`<option value="${escapeAttr(name)}">${escapeHtml(name)}</option>`
+).join("");
 
-    setText(
-      "earningPageTotal",
-      money(earning.total)
-    );
+courseSelect.value=
+courses.includes(oldCourse)?oldCourse:"";
 
-    setText(
-      "earningPageBase",
-      money(earning.baseSalary)
-    );
+coordinatorSelect.value=
+coordinators.includes(oldCoordinator)?oldCoordinator:"";
+}
 
-    setText(
-      "earningPageDemo",
-      money(earning.demoReward)
-    );
 
-    setText(
-      "earningPageAdmission",
-      money(earning.admissionReward)
-    );
+function applyFilters(){
 
-    setText(
-      "earnDemoCount",
-      earning.demoCount
-    );
+const search=
+document.getElementById("searchInput").value.toLowerCase().trim();
 
-    setText(
-      "earnDemoRate",
-      money(SETTINGS.demoIncentive)
-    );
+const status=
+document.getElementById("statusFilter").value;
 
-    setText(
-      "earnAdmissionCount",
-      earning.convertedCount
-    );
+const course=
+document.getElementById("courseFilter").value;
 
-    setText(
-      "earnLevel",
-      earning.level.name
-    );
+const coordinator=
+document.getElementById("coordinatorFilter").value;
 
-    setText(
-      "earnAdmissionRate",
-      money(earning.level.rate)
-    );
+filteredInquiries=inquiries.filter(item=>{
 
-    setText(
-      "nextMonthSalaryBig",
-      money(earning.level.nextBase)
-    );
+const text=[
+item.studentName,
+item.mobile,
+item.course,
+item.source,
+item.remark,
+item.telecallerRemark,
+item.customStatus,
+item.coordinatorName
+]
+.filter(Boolean)
+.join(" ")
+.toLowerCase();
 
-    setText(
-      "salaryCurrentLevel",
-      earning.level.name
-    );
+if(search&&!text.includes(search))return false;
 
-    setText(
-      "salaryDefaultBase",
-      money(SETTINGS.baseSalary)
-    );
+if(
+status&&
+normalizeStatus(item.status)!==normalizeStatus(status)
+){
+return false;
+}
 
-    setText(
-      "salaryNextBase",
-      money(earning.level.nextBase)
-    );
+if(course&&item.course!==course)return false;
 
-    renderLevelCards(
-      earning.convertedCount,
-      earning.level
-    );
-  }
+if(coordinator&&item.coordinatorName!==coordinator)return false;
 
+return true;
+});
 
-  function renderLevelCards(
-    count,
-    currentLevel
-  ){
+currentPage=1;
+renderInquiryTable();
+}
 
-    const container =
-      document.getElementById(
-        "levelCards"
-      );
 
-    const levels = [
+/* ============================================================
+DISPLAY STATUS
+============================================================ */
 
-      {
-        level:1,
-        title:"Level 1",
-        min:SETTINGS.level1Min,
-        max:SETTINGS.level1Max,
-        rate:SETTINGS.level1AdmissionIncentive,
-        nextBase:SETTINGS.level1NextBaseSalary
-      },
+function getEffectiveStatus(item){
 
-      {
-        level:2,
-        title:"Level 2",
-        min:SETTINGS.level2Min,
-        max:SETTINGS.level2Max,
-        rate:SETTINGS.level2AdmissionIncentive,
-        nextBase:SETTINGS.level2NextBaseSalary
-      },
+const status=normalizeStatus(item.status);
 
-      {
-        level:3,
-        title:"Level 3",
-        
+const custom=String(item.customStatus||"").trim();
+
+if(status==="custom"&&custom)return custom;
+
+return formatStatus(status||"new");
+}
+
+
+function getStatusClass(item){
+
+const status=normalizeStatus(item.status||"new");
+
+if(status==="custom")return"badge-custom";
+
+if(status==="demo-completed"||status==="demo"){
+return"badge-demo-completed";
+}
+
+return"badge-"+status;
+}
+
+
+/* ============================================================
+TABLE
+============================================================ */
+
+function renderInquiryTable(){
+
+const tbody=document.getElementById("inquiryBody");
+
+const total=filteredInquiries.length;
+
+const totalPages=Math.max(
+1,
+Math.ceil(total/PAGE_SIZE)
+);
+
+if(currentPage>totalPages){
+currentPage=totalPages;
+}
+
+const start=(currentPage-1)*PAGE_SIZE;
+
+const pageItems=
+filteredInquiries.slice(start,start+PAGE_SIZE);
+
+setText(
+"resultCount",
+`${total} ${total===1?"inquiry":"inquiries"} found`
+);
+
+if(pageItems.length===0){
+
+tbody.innerHTML=`
+<tr>
+<td colspan="8">
+<div class="empty">
+<div class="empty-icon">⌕</div>
+<div class="empty-title">No inquiries found</div>
+<div class="empty-text">Try changing your search or filters.</div>
+</div>
+</td>
+</tr>
+`;
+
+}else{
+
+tbody.innerHTML=
+pageItems.map(renderInquiryRow).join("");
+}
+
+renderPagination(totalPages);
+}
+
+
+function renderInquiryRow(item){
+
+const statusClass=getStatusClass(item);
+const updated=formatDate(item.updatedAt);
+
+return`
+<tr>
+
+<td>
+<div class="student-name">${escapeHtml(item.studentName||"Unknown")}</div>
+<div class="student-mobile">${escapeHtml(item.mobile||"-")}</div>
+</td>
+
+<td>${escapeHtml(item.course||"-")}</td>
+
+<td>${escapeHtml(item.source||"-")}</td>
+
+<td>
+<div style="font-size:11px;font-weight:700">${escapeHtml(item.coordinatorName||"-")}</div>
+<div style="font-size:9px;color:#6b7280">${escapeHtml(item.coordinatorMobile||"")}</div>
+</td>
+
+<td>
+<button
+class="badge ${statusClass}"
+onclick="openStatusModalByDoc('${escapeAttr(item.__docName||"")}')"
+style="border:0"
+title="Click to update status"
+>
+${escapeHtml(getEffectiveStatus(item))}
+</button>
+</td>
+
+<td>${escapeHtml(item.followUpDate||"-")}</td>
+
+<td>${escapeHtml(updated)}</td>
+
+<td>
+<div class="action-group">
+
+<button class="mini-btn mini-call"
+onclick="callStudent('${escapeAttr(item.mobile||"")}')">
+Call
+</button>
+
+<button class="mini-btn mini-wa"
+onclick="whatsappStudent('${escapeAttr(item.mobile||"")}','${escapeAttr(item.studentName||"")}')">
+WhatsApp
+</button>
+
+<button class="mini-btn mini-view"
+onclick="viewStudent('${escapeAttr(item.__docName||"")}')">
+View
+</button>
+
+<button class="mini-btn mini-delete"
+onclick="deleteStudent('${escapeAttr(item.__docName||"")}','${escapeAttr(item.studentName||"")}')">
+Delete
+</button>
+
+</div>
+</td>
+
+</tr>
+`;
+}
+
+
+function renderPagination(totalPages){
+
+const container=document.getElementById("paginationButtons");
+
+setText(
+"pageInfo",
+`Page ${currentPage} of ${totalPages}`
+);
+
+if(totalPages<=1){
+container.innerHTML="";
+return;
+}
+
+let html="";
+
+if(currentPage>1){
+html+=`
+<button class="page-btn" onclick="goToPage(${currentPage-1})">‹</button>
+`;
+}
+
+const start=Math.max(1,currentPage-2);
+const end=Math.min(totalPages,currentPage+2);
+
+for(let i=start;i<=end;i++){
+
+html+=`
+<button
+class="page-btn ${i===currentPage?"active":""}"
+onclick="goToPage(${i})"
+>${i}</button>
+`;
+}
+
+if(currentPage<totalPages){
+html+=`
+<button class="page-btn" onclick="goToPage(${currentPage+1})">›</button>
+`;
+}
+
+container.innerHTML=html;
+}
+
+
+function goToPage(page){
+
+currentPage=Number(page)||1;
+renderInquiryTable();
+}
+
+
+/* ============================================================
+STATUS MODAL
+============================================================ */
+
+function toggleCustomStatusBox(){
+
+const status=document.getElementById("newStatus").value;
+
+const box=document.getElementById("customStatusBox");
+const input=document.getElementById("newCustomStatus");
+
+if(status==="custom"){
+
+box.style.display="block";
+
+setTimeout(
+()=>input.focus(),
+50
+);
+
+}else{
+
+box.style.display="none";
+input.value="";
+}
+}
+
+
+function openStatusModalByDoc(docName){
+
+const item=inquiries.find(
+x=>x.__docName===docName
+);
+
+if(!item){
+showToast("Student record was not found.","error");
+return;
+}
+
+document.getElementById("statusDocName").value=docName;
+
+document.getElementById("statusStudentName").value=
+item.studentName||"";
+
+const currentStatus=
+normalizeStatus(item.status||"new");
+
+const knownStatuses=[
+"new",
+"pending",
+"interested",
+"contacted",
+"delay",
+"follow-up",
+"visited",
+"demo-completed",
+"converted",
+"not-interested",
+"custom"
+];
+
+document.getElementById("newStatus").value=
+knownStatuses.includes(currentStatus)
+?currentStatus
+:"custom";
+
+document.getElementById("newFollowupDate").value=
+item.followUpDate||"";
+
+document.getElementById("newTelecallerRemark").value=
+item.telecallerRemark||"";
+
+document.getElementById("newCustomStatus").value=
+item.customStatus||"";
+
+toggleCustomStatusBox();
+
+showModal("statusModal");
+}
+
+
+/* ============================================================
+FIXED SAVE STATUS
+============================================================ */
+
+async function saveStatus(){
+
+const docName=
+document.getElementById("statusDocName").value;
+
+let status=
+document.getElementById("newStatus").value;
+
+const followUpDate=
+document.getElementById("newFollowupDate").value;
+
+const remark=
+document.getElementById("newTelecallerRemark").value.trim();
+
+const customStatus=
+document.getElementById("newCustomStatus").value.trim();
+
+
+if(!docName){
+
+showToast(
+"Student document was not found.",
+"error"
+);
+
+return;
+}
+
+
+if(status==="custom"&&!customStatus){
+
+showToast(
+"Please enter a custom status.",
+"error"
+);
+
+document.getElementById("newCustomStatus").focus();
+
+return;
+}
+
+
+if(status!=="custom"){
+document.getElementById("newCustomStatus").value="";
+}
+
+
+const saveBtn=
+document.getElementById("saveStatusBtn");
+
+saveBtn.disabled=true;
+saveBtn.textContent="Saving...";
+
+
+try{
+
+/*
+IMPORTANT FIX:
+
+docName already contains:
+
+projects/jobs-2f152/databases/(default)/documents/studentInquiries/XXXXX
+
+DO NOT do:
+
+FIRESTORE_BASE + "/" + docName
+
+because that creates an invalid duplicated path.
+*/
+
+const url=getDocumentUrl(docName);
+
+
+/*
+Only update the fields that belong to status management.
+Other student data remains untouched.
+*/
+
+const fields={
+
+status:
+firestoreValue(status),
+
+telecallerStatus:
+firestoreValue(status),
+
+customStatus:
+firestoreValue(
+status==="custom"
+?customStatus
+:""
+),
+
+telecallerRemark:
+firestoreValue(remark),
+
+followUpDate:
+firestoreValue(followUpDate),
+
+telecallerName:
+firestoreValue(telecallerName),
+
+telecallerMobile:
+firestoreValue(telecallerMobile),
+
+updatedAt:{
+timestampValue:new Date().toISOString()
+}
+
+};
+
+
+/*
+Firestore updateMask.
+
+This tells Firestore exactly which fields
+should be updated.
+*/
+
+const updateFields=[
+"status",
+"telecallerStatus",
+"customStatus",
+"telecallerRemark",
+"followUpDate",
+"telecallerName",
+"telecallerMobile",
+"updatedAt"
+];
+
+const updateMask=
+updateFields
+.map(
+field=>
+"updateMask.fieldPaths="+
+encodeURIComponent(field)
+)
+.join("&");
+
+
+await firestoreFetch(
+url+"?"+updateMask,
+{
+method:"PATCH",
+body:JSON.stringify({
+fields
+})
+}
+);
+
+
+/*
+Close modal only after successful Firestore update.
+*/
+
+hideModal("statusModal");
+
+
+showToast(
+status==="custom"
+?`Custom status "${customStatus}" saved successfully.`
+:`Student status changed to "${formatStatus(status)}".`,
+"success"
+);
+
+
+/*
+Reload data from Firestore so Coordinator
+and Telecaller see the same updated record.
+*/
+
+await loadInquiries();
+
+
+}catch(error){
+
+console.error(
+"STATUS UPDATE ERROR:",
+error
+);
+
+showToast(
+"Unable to update status: "+
+(error.message||"Firestore request failed."),
+"error"
+);
+
+}finally{
+
+saveBtn.disabled=false;
+saveBtn.textContent="Save Status";
+}
+}
+
+
+/* ============================================================
+VIEW STUDENT
+============================================================ */
+
+function viewStudent(docName){
+
+const item=inquiries.find(
+x=>x.__docName===docName
+);
+
+if(!item)return;
+
+currentDetailInquiry=item;
+
+setText("detailName",item.studentName||"-");
+setText("detailMobile",item.mobile||"-");
+setText("detailCourse",item.course||"-");
+setText("detailSource",item.source||"-");
+setText("detailCoordinator",item.coordinatorName||"-");
+setText("detailCoordinatorMobile",item.coordinatorMobile||"-");
+setText("detailStatus",getEffectiveStatus(item));
+
+setText(
+"detailTelecallerStatus",
+item.telecallerStatus
+?formatStatus(item.telecallerStatus)
+:"-"
+);
+
+setText(
+"detailCustomStatus",
+item.customStatus||"-"
+);
+
+setText(
+"detailFollowup",
+item.followUpDate||"-"
+);
+
+setText(
+"detailCreated",
+formatDate(item.createdAt)
+);
+
+setText(
+"detailRemark",
+item.remark||"-"
+);
+
+setText(
+"detailTeleRemark",
+item.telecallerRemark||"-"
+);
+
+showModal("detailModal");
+}
+
+
+/* ============================================================
+CALL / WHATSAPP
+============================================================ */
+
+function callStudent(mobile){
+
+const clean=String(mobile||"").replace(/[^\d+]/g,"");
+
+if(!clean){
+
+showToast(
+"Student mobile number is not available.",
+"error"
+);
+
+return;
+}
+
+window.location.href="tel:"+clean;
+}
+
+
+function whatsappStudent(mobile,studentName=""){
+
+const clean=normalizeMobile(mobile);
+
+if(!clean){
+
+showToast(
+"Student mobile number is not available.",
+"error"
+);
+
+return;
+}
+
+const message=
+`Hello ${studentName||"Student"}, this is ${telecallerName} from BlackTerminal Computer Institute. How can I help you?`;
+
+const url=
+"https://wa.me/91"+
+clean+
+"?text="+
+encodeURIComponent(message);
+
+window.open(url,"_blank");
+}
+
+
+/* ============================================================
+FIXED DELETE
+============================================================ */
+
+async function deleteStudent(docName,studentName){
+
+if(!docName){
+
+showToast(
+"Student document was not found.",
+"error"
+);
+
+return;
+}
+
+const confirmed=
+window.confirm(
+`Delete inquiry for ${studentName||"this student"}?`
+);
+
+if(!confirmed)return;
+
+try{
+
+/*
+docName is already the complete Firestore document name.
+*/
+
+const url=getDocumentUrl(docName);
+
+await firestoreFetch(
+url,
+{
+method:"DELETE"
+}
+);
+
+showToast(
+"Inquiry deleted successfully.",
+"success"
+);
+
+await loadInquiries();
+
+}catch(error){
+
+console.error(
+"DELETE ERROR:",
+error
+);
+
+showToast(
+"Unable to delete inquiry: "+
+(error.message||"Firestore request failed."),
+"error"
+);
+}
+}
+
+
+/* ============================================================
+CONTENT HELPERS
+============================================================ */
+
+function getContentTitle(item){
+
+return item.title||
+item.courseName||
+item.name||
+"Untitled";
+}
+
+
+function getContentDescription(item){
+
+return item.description||
+item.shortDescription||
+"";
+}
+
+
+function getContentImage(item){
+
+return item.imageUrl||
+item.bannerUrl||
+item.image||
+"";
+}
+
+
+function getContentPrice(item){
+
+if(
+item.offerPrice!==undefined&&
+item.offerPrice!==null&&
+item.offerPrice!==""
+){
+return item.offerPrice;
+}
+
+return item.price||"";
+}
+
+
+function renderContent(){
+
+const area=document.getElementById("contentArea");
+
+if(!currentContent.length){
+
+area.innerHTML=`
+<div class="card">
+<div class="empty">
+<div class="empty-icon">▣</div>
+<div class="empty-title">No courses or offers available</div>
+<div class="empty-text">Admin has not published any active course or offer yet.</div>
+</div>
+</div>
+`;
+
+return;
+}
+
+if(currentDisplay==="list"){
+renderContentList(area);
+return;
+}
+
+if(currentDisplay==="banner"){
+renderContentBanner(area);
+return;
+}
+
+renderContentCarousel(area);
+}
+
+
+function contentItemHtml(item){
+
+const title=getContentTitle(item);
+const description=getContentDescription(item);
+const image=getContentImage(item);
+const price=getContentPrice(item);
+const originalPrice=item.price||"";
+const duration=item.duration||"";
+const validUntil=item.validUntil||"";
+const type=String(item.type||"course").toLowerCase();
+
+let priceHtml="";
+
+if(originalPrice&&price){
+
+if(String(originalPrice)!==String(price)){
+
+priceHtml=`
+<div class="price-line">
+<span class="old-price">₹${escapeHtml(String(originalPrice))}</span>
+<span class="offer-price">₹${escapeHtml(String(price))}</span>
+</div>
+`;
+
+}else{
+
+priceHtml=`
+<div class="price-line">
+<span class="offer-price">₹${escapeHtml(String(price))}</span>
+</div>
+`;
+}
+
+}else if(price){
+
+priceHtml=`
+<div class="price-line">
+<span class="offer-price">₹${escapeHtml(String(price))}</span>
+</div>
+`;
+}
+
+const imageHtml=image
+?`<img src="${escapeAttr(image)}" alt="${escapeAttr(title)}" onerror="this.style.display='none'">`
+:"";
+
+return`
+
+<div class="promo-image">${imageHtml}</div>
+
+<div class="promo-content">
+
+<div class="promo-tag">
+${type==="offer"?"SPECIAL OFFER":"COURSE"}
+</div>
+
+<div class="promo-title">
+${escapeHtml(title)}
+</div>
+
+${duration?
+`<div style="font-size:10px;color:#d1d5db;margin-top:5px">
+Duration: ${escapeHtml(String(duration))}
+</div>`:""}
+
+<div class="promo-description">
+${escapeHtml(description)}
+</div>
+
+${priceHtml}
+
+${validUntil?
+`<div class="validity">
+Valid until: ${escapeHtml(String(validUntil))}
+</div>`:""}
+
+</div>
+`;
+}
+
+
+function renderContentBanner(area){
+
+area.innerHTML=`
+<div class="banner-list">
+${currentContent.map(
+item=>`
+<div class="promo-banner">
+${contentItemHtml(item)}
+</div>
+`
+).join("")}
+</div>
+`;
+}
+
+
+function renderContentCarousel(area){
+
+carouselIndex=0;
+
+if(carouselTimer){
+clearInterval(carouselTimer);
+}
+
+area.innerHTML=`
+<div class="carousel">
+
+<div class="carousel-track" id="carouselTrack">
+
+${currentContent.map(
+item=>`
+<div class="carousel-slide">
+<div class="promo-banner">
+${contentItemHtml(item)}
+</div>
+</div>
+`
+).join("")}
+
+</div>
+
+${currentContent.length>1?`
+
+<button class="carousel-control carousel-prev" id="carouselPrev">‹</button>
+<button class="carousel-control carousel-next" id="carouselNext">›</button>
+
+<div class="carousel-dots" id="carouselDots">
+
+${currentContent.map(
+(_,i)=>
+`<button class="carousel-dot ${i===0?"active":""}" onclick="goCarousel(${i})"></button>`
+).join("")}
+
+</div>
+
+`:""}
+
+</div>
+`;
+
+const next=document.getElementById("carouselNext");
+const prev=document.getElementById("carouselPrev");
+
+if(next){
+next.onclick=()=>goCarousel(carouselIndex+1);
+}
+
+if(prev){
+prev.onclick=()=>goCarousel(carouselIndex-1);
+}
+
+if(currentContent.length>1){
+
+carouselTimer=
+setInterval(
+()=>goCarousel(carouselIndex+1),
+5000
+);
+}
+}
+
+
+function goCarousel(index){
+
+if(!currentContent.length)return;
+
+if(index<0){
+index=currentContent.length-1;
+}
+
+if(index>=currentContent.length){
+index=0;
+}
+
+carouselIndex=index;
+
+const track=document.getElementById("carouselTrack");
+
+if(track){
+track.style.transform=
+`translateX(-${index*100}%)`;
+}
+
+document
+.querySelectorAll(".carousel-dot")
+.forEach(
+(dot,i)=>
+dot.classList.toggle(
+"active",
+i===index
+)
+);
+}
+
+
+function renderContentList(area){
+
+area.innerHTML=`
+<div class="content-list">
+
+${currentContent.map(item=>{
+
+const title=getContentTitle(item);
+const desc=getContentDescription(item);
+const image=getContentImage(item);
+const price=getContentPrice(item);
+const duration=item.duration||"";
+
+return`
+
+<div class="list-item">
+
+<div class="list-thumb">
+${image?
+`<img src="${escapeAttr(image)}" alt="${escapeAttr(title)}" onerror="this.style.display='none'">`
+:""}
+</div>
+
+<div class="list-info">
+
+<div class="list-title">
+${escapeHtml(title)}
+</div>
+
+${duration?
+`<div class="list-desc">
+Duration: ${escapeHtml(String(duration))}
+</div>`:""}
+
+<div class="list-desc">
+${escapeHtml(desc)}
+</div>
+
+</div>
+
+<div class="list-price">
+${price?`₹${escapeHtml(String(price))}`:"Contact Admin"}
+</div>
+
+</div>
+`;
+
+}).join("")}
+
+</div>
+`;
+}
+
+
+/* ============================================================
+UI HELPERS
+============================================================ */
+
+function money(value){
+
+const number=Number(value)||0;
+
+return"₹"+number.toLocaleString("en-IN");
+}
+
+
+function setText(id,value){
+
+const element=document.getElementById(id);
+
+if(element){
+element.textContent=String(value);
+}
+}
+
+
+function formatStatus(status){
+
+if(!status)return"-";
+
+return String(status)
+.replace(/[-_]/g," ")
+.replace(/\b\w/g,c=>c.toUpperCase());
+}
+
+
+function formatDate(value){
+
+if(!value)return"-";
+
+const date=new Date(value);
+
+if(Number.isNaN(date.getTime())){
+return String(value);
+}
+
+return date.toLocaleString(
+"en-IN",
+{
+day:"2-digit",
+month:"short",
+year:"numeric",
+hour:"2-digit",
+minute:"2-digit"
+}
+);
+}
+
+
+function escapeHtml(value){
+
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+
+function escapeAttr(value){
+
+return escapeHtml(value);
+}
+
+
+function showToast(message,type=""){
+
+const container=
+document.getElementById("toastContainer");
+
+const toast=
+document.createElement("div");
+
+toast.className=`toast ${type}`;
+toast.textContent=message;
+
+container.appendChild(toast);
+
+setTimeout(
+()=>toast.remove(),
+3500
+);
+}
+
+
+function showModal(id){
+
+document
+.getElementById(id)
+.classList.add("show");
+}
+
+
+function hideModal(id){
+
+document
+.getElementById(id)
+.classList.remove("show");
+}
+
+
+/* ============================================================
+NAVIGATION
+============================================================ */
+
+function openSection(sectionId){
+
+document
+.querySelectorAll(".section")
+.forEach(
+section=>
+section.classList.toggle(
+"active",
+section.id===sectionId
+)
+);
+
+document
+.querySelectorAll(".nav-btn")
+.forEach(
+btn=>
+btn.classList.toggle(
+"active",
+btn.dataset.section===sectionId
+)
+);
+
+const titles={
+dashboard:"Telecaller Dashboard",
+inquiries:"Student Inquiries",
+courses:"Courses & Offers",
+earnings:"My Earnings"
+};
+
+setText(
+"pageTitle",
+titles[sectionId]||
+"Telecaller Dashboard"
+);
+
+document
+.getElementById("sidebar")
+.classList.remove("open");
+
+if(sectionId==="courses"){
+renderContent();
+}
+}
+
+
+/* ============================================================
+EVENTS
+============================================================ */
+
+document
+.querySelectorAll(".nav-btn")
+.forEach(btn=>{
+btn.addEventListener(
+"click",
+()=>openSection(btn.dataset.section)
+);
+});
+
+
+document
+.getElementById("mobileMenu")
+.addEventListener(
+"click",
+()=>{
+document
+.getElementById("sidebar")
+.classList.toggle("open");
+}
+);
+
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+"click",
+()=>{
+
+sessionStorage.removeItem("bt_logged_in");
+sessionStorage.removeItem("bt_user_name");
+sessionStorage.removeItem("bt_user_mobile");
+sessionStorage.removeItem("bt_user_role");
+sessionStorage.removeItem("bt_login_time");
+
+window.location.replace("login.html");
+
+}
+);
+
+
+document
+.getElementById("searchInput")
+.addEventListener(
+"input",
+applyFilters
+);
+
+
+document
+.getElementById("statusFilter")
+.addEventListener(
+"change",
+applyFilters
+);
+
+
+document
+.getElementById("courseFilter")
+.addEventListener(
+"change",
+applyFilters
+);
+
+
+document
+.getElementById("coordinatorFilter")
+.addEventListener(
+"change",
+applyFilters
+);
+
+
+document
+.getElementById("clearFiltersBtn")
+.addEventListener(
+"click",
+()=>{
+
+document.getElementById("searchInput").value="";
+document.getElementById("statusFilter").value="";
+document.getElementById("courseFilter").value="";
+document.getElementById("coordinatorFilter").value="";
+
+applyFilters();
+
+}
+);
+
+
+document
+.getElementById("refreshBtn")
+.addEventListener(
+"click",
+async()=>{
+
+await loadInquiries();
+await loadPaymentSettings();
+
+showToast(
+"Data refreshed.",
+"success"
+);
+
+}
+);
+
+
+document
+.getElementById("refreshContentBtn")
+.addEventListener(
+"click",
+async()=>{
+
+await loadContent();
+
+showToast(
+"Course and offer information refreshed.",
+"success"
+);
+
+}
+);
+
+
+document
+.querySelectorAll(".display-btn")
+.forEach(btn=>{
+
+btn.addEventListener(
+"click",
+()=>{
+
+currentDisplay=btn.dataset.display;
+
+document
+.querySelectorAll(".display-btn")
+.forEach(x=>
+x.classList.remove("active")
+);
+
+btn.classList.add("active");
+
+renderContent();
+
+}
+);
+
+});
+
+
+document
+.getElementById("newStatus")
+.addEventListener(
+"change",
+toggleCustomStatusBox
+);
+
+
+document
+.getElementById("saveStatusBtn")
+.addEventListener(
+"click",
+saveStatus
+);
+
+
+document
+.querySelectorAll("[data-close]")
+.forEach(btn=>{
+
+btn.addEventListener(
+"click",
+()=>hideModal(btn.dataset.close)
+);
+
+});
+
+
+document
+.getElementById("detailCallBtn")
+.addEventListener(
+"click",
+()=>{
+
+if(currentDetailInquiry){
+callStudent(
+currentDetailInquiry.mobile
+);
+}
+
+}
+);
+
+
+document
+.getElementById("detailWhatsAppBtn")
+.addEventListener(
+"click",
+()=>{
+
+if(currentDetailInquiry){
+
+whatsappStudent(
+currentDetailInquiry.mobile,
+currentDetailInquiry.studentName
+);
+
+}
+
+}
+);
+
+
+document
+.querySelectorAll(".modal-overlay")
+.forEach(overlay=>{
+
+overlay.addEventListener(
+"click",
+event=>{
+
+if(event.target===overlay){
+overlay.classList.remove("show");
+}
+
+}
+);
+
+});
+
+
+/* ============================================================
+USER INFO
+============================================================ */
+
+setText("sideUserName",telecallerName);
+setText("topUserName",telecallerName);
+setText("topUserMobile",telecallerMobile||"-");
+setText("heroName",telecallerName);
+
+const avatar=
+telecallerName.trim().charAt(0).toUpperCase()||"T";
+
+setText("avatar",avatar);
+
+setText(
+"todayDate",
+new Date().toLocaleDateString(
+"en-IN",
+{
+weekday:"long",
+day:"2-digit",
+month:"long",
+year:"numeric"
+}
+)
+);
+
+
+/* ============================================================
+INITIAL LOAD
+============================================================ */
+
+async function initialize(){
+
+await Promise.all([
+loadInquiries(),
+loadPaymentSettings(),
+loadContent()
+]);
+
+}
+
+initialize();
+
+
+/* ============================================================
+AUTO REFRESH
+============================================================ */
+
+setInterval(
+async()=>{
+
+try{
+
+await loadPaymentSettings();
+await loadContent();
+
+}catch(error){
+
+console.warn(error);
+
+}
+
+},
+60000
+);
+
+
+setInterval(
+async()=>{
+
+try{
+
+await loadInquiries();
+
+}catch(error){
+
+console.warn(error);
+
+}
+
+},
+60000
+);
+
+
+/* ============================================================
+GLOBAL FUNCTIONS
+============================================================ */
+
+window.goToPage=goToPage;
+window.openStatusModalByDoc=openStatusModalByDoc;
+window.viewStudent=viewStudent;
+window.callStudent=callStudent;
+window.whatsappStudent=whatsappStudent;
+window.deleteStudent=deleteStudent;
+window.goCarousel=goCarousel;
+
+</script>
+
+</body>
+</html>

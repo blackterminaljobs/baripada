@@ -7,146 +7,1358 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
 :root{
---bg:#f5f7fb;--card:#fff;--text:#111827;--muted:#6b7280;
---border:#e5e7eb;--primary:#111827;--success:#15803d;
---danger:#dc2626;--info:#2563eb;--purple:#7c3aed;
---shadow:0 10px 30px rgba(15,23,42,.07);--radius:18px
+--bg:#f5f7fb;
+--card:#fff;
+--text:#111827;
+--muted:#6b7280;
+--border:#e5e7eb;
+--primary:#111827;
+--blue:#2563eb;
+--green:#059669;
+--orange:#f59e0b;
+--purple:#7c3aed;
+--pink:#db2777;
+--red:#dc2626;
+--cyan:#0891b2;
+--shadow:0 10px 30px rgba(15,23,42,.07);
+--radius:18px;
 }
-body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+body{
+font-family:Inter,Arial,Helvetica,sans-serif;
+background:var(--bg);
+color:var(--text);
+min-height:100vh
+}
+
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 a{text-decoration:none;color:inherit}
+
 .app{min-height:100vh;display:flex}
 
-/* SIDEBAR */
+/* ================= SIDEBAR ================= */
+
 .sidebar{
-width:260px;background:#0b0f19;color:#fff;position:fixed;left:0;top:0;bottom:0;
-z-index:100;padding:20px 15px;transition:.25s
+width:260px;
+background:#0b0f19;
+color:#fff;
+position:fixed;
+left:0;
+top:0;
+bottom:0;
+z-index:100;
+padding:20px 15px;
+transition:.25s
 }
-.brand{display:flex;align-items:center;gap:12px;padding:8px 10px 24px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:18px}
-.brand-logo{width:42px;height:42px;border-radius:12px;background:#fff;color:#111827;display:flex;align-items:center;justify-content:center;font-weight:900}
-.brand-text strong{display:block;font-size:16px}
-.brand-text span{display:block;font-size:11px;color:#9ca3af;margin-top:3px}
-.nav{display:flex;flex-direction:column;gap:7px}
-.nav-btn{border:0;background:transparent;color:#9ca3af;padding:12px 13px;border-radius:12px;text-align:left;display:flex;align-items:center;gap:11px;width:100%}
-.nav-btn:hover,.nav-btn.active{background:#1f2937;color:#fff}
-.nav-icon{width:22px;text-align:center}
-.sidebar-user{position:absolute;left:15px;right:15px;bottom:20px;padding:12px;border-radius:14px;background:#111827;border:1px solid rgba(255,255,255,.08)}
-.user-name{font-size:13px;font-weight:700}.user-role{font-size:11px;color:#9ca3af;margin-top:3px}
-.logout-btn{width:100%;margin-top:10px;border:0;border-radius:9px;background:#dc2626;color:#fff;padding:8px;font-size:12px;font-weight:700}
 
-/* MAIN */
-.main{margin-left:260px;width:calc(100% - 260px);min-height:100vh}
-.topbar{height:72px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:50}
-.topbar-left{display:flex;align-items:center;gap:13px}
-.mobile-menu{display:none;border:0;background:#f3f4f6;width:40px;height:40px;border-radius:10px}
-.page-title{font-size:20px;font-weight:800}.page-subtitle{color:var(--muted);font-size:12px;margin-top:2px}
-.top-user{display:flex;align-items:center;gap:10px}.avatar{width:38px;height:38px;border-radius:50%;background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
-.content{padding:24px;max-width:1600px;margin:auto}
-.section{display:none}.section.active{display:block}
-
-/* HERO */
-.hero{background:linear-gradient(135deg,#111827,#1f2937);color:#fff;border-radius:22px;padding:26px;margin-bottom:22px;position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;width:220px;height:220px;right:-80px;top:-80px;border-radius:50%;border:40px solid rgba(255,255,255,.05)}
-.hero h1{font-size:25px;margin-bottom:7px;position:relative;z-index:2}.hero p{color:#d1d5db;font-size:13px;position:relative;z-index:2}
-.date-badge{display:inline-flex;margin-top:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);padding:7px 10px;border-radius:9px;font-size:11px;position:relative;z-index:2}
-
-/* CARDS */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
-.stat-card{background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);border-radius:17px;padding:18px;position:relative}
-.stat-label{color:var(--muted);font-size:12px;font-weight:600}.stat-value{font-size:25px;font-weight:850;margin-top:9px}.stat-small{color:var(--muted);font-size:11px;margin-top:5px}
-.stat-icon{position:absolute;right:15px;top:15px;width:38px;height:38px;border-radius:11px;background:#f3f4f6;display:flex;align-items:center;justify-content:center}
-.card{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:20px}
-.card-title{font-size:16px;font-weight:800;margin-bottom:4px}.card-subtitle{color:var(--muted);font-size:11px;margin-bottom:17px}
-.earning-layout{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;margin-bottom:22px}
-.earning-total{font-size:38px;font-weight:900;margin:8px 0}
-.earning-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:17px}
-.earning-item{border:1px solid var(--border);border-radius:13px;padding:13px;background:#fafafa}
-.earning-item-label{color:var(--muted);font-size:10px;font-weight:700}.earning-item-value{font-size:18px;font-weight:850;margin-top:5px}
-.salary-box{margin-top:15px;border-radius:14px;padding:14px;background:#f8fafc;border:1px solid var(--border)}
-.salary-row{display:flex;justify-content:space-between;padding:7px 0;font-size:12px}.salary-row strong{font-size:13px}
-.level-card{border:1px solid var(--border);border-radius:15px;padding:15px;margin-bottom:10px;background:#fff}
-.level-card.active{border:2px solid #111827;background:#f9fafb}
-.level-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.level-name{font-weight:800;font-size:13px}.level-rate{font-size:17px;font-weight:900}.level-range{color:var(--muted);font-size:10px;margin-top:5px}
-.level-tag{font-size:9px;padding:4px 7px;border-radius:7px;background:#111827;color:#fff;font-weight:800}
-.next-level-text{color:var(--muted);font-size:10px;margin-top:8px}
-
-/* FORM */
-.toolbar{background:#fff;border:1px solid var(--border);border-radius:17px;box-shadow:var(--shadow);padding:15px;margin-bottom:18px}
-.toolbar-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px}
-.input,.select,.textarea{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:10px 12px;outline:none;background:#fff;color:#111827;font-size:12px}
-.input:focus,.select:focus,.textarea:focus{border-color:#111827;box-shadow:0 0 0 3px rgba(17,24,39,.08)}
-.btn{border:0;border-radius:10px;padding:10px 13px;font-size:12px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:7px}
-.btn-primary{background:#111827;color:#fff}.btn-light{background:#f3f4f6;color:#111827}.btn-success{background:#15803d;color:#fff}.btn-danger{background:#dc2626;color:#fff}
-
-/* TABLE */
-.table-card{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-.table-head{padding:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border)}
-.result-count{color:var(--muted);font-size:11px}.table-wrap{overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:950px}
-th{text-align:left;font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;padding:12px 14px;border-bottom:1px solid var(--border);white-space:nowrap}
-td{padding:13px 14px;border-bottom:1px solid #f0f0f0;font-size:12px;vertical-align:middle}
-tr:hover td{background:#fafafa}
-.student-name{font-weight:800}.student-mobile{font-size:10px;color:var(--muted);margin-top:3px}
-.badge{display:inline-flex;align-items:center;justify-content:center;padding:5px 8px;border-radius:8px;font-size:9px;font-weight:800;white-space:nowrap}
-.badge-new{background:#eff6ff;color:#2563eb}.badge-pending{background:#fff7ed;color:#c2410c}.badge-interested{background:#ecfdf5;color:#15803d}
-.badge-contacted{background:#f3f4f6;color:#374151}.badge-delay{background:#fff7ed;color:#b45309}.badge-follow-up{background:#faf5ff;color:#7c3aed}
-.badge-visited{background:#ecfdf5;color:#15803d}.badge-demo-completed{background:#ecfeff;color:#0e7490}.badge-converted{background:#dcfce7;color:#166534}
-.badge-not-interested{background:#fef2f2;color:#b91c1c}.badge-custom{background:#f3e8ff;color:#7e22ce}
-.action-group{display:flex;gap:5px;flex-wrap:wrap}.mini-btn{border:0;border-radius:7px;padding:6px 8px;font-size:10px;font-weight:700}
-.mini-call,.mini-wa{background:#dcfce7;color:#15803d}.mini-view{background:#eff6ff;color:#2563eb}.mini-delete{background:#fef2f2;color:#dc2626}
-.pagination{padding:14px 18px;display:flex;justify-content:flex-end;align-items:center;gap:6px;border-top:1px solid var(--border)}
-.page-btn{width:32px;height:32px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:11px;font-weight:700}.page-btn.active{background:#111827;color:#fff;border-color:#111827}
-.page-info{color:var(--muted);font-size:10px;margin-right:auto}
-
-/* CONTENT */
-.content-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
-.display-switch{display:flex;gap:5px;background:#fff;border:1px solid var(--border);padding:4px;border-radius:10px}
-.display-btn{border:0;background:transparent;border-radius:7px;padding:7px 11px;font-size:10px;font-weight:750}.display-btn.active{background:#111827;color:#fff}
-.banner-list{display:flex;flex-direction:column;gap:16px}.promo-banner{min-height:190px;border-radius:20px;overflow:hidden;background:#111827;color:#fff;display:flex}
-.promo-image{width:34%;background:#e5e7eb;overflow:hidden}.promo-image img{width:100%;height:100%;object-fit:cover}
-.promo-content{padding:25px;flex:1;display:flex;flex-direction:column;justify-content:center}.promo-tag{font-size:9px;text-transform:uppercase;letter-spacing:1px;opacity:.7;font-weight:800;margin-bottom:7px}
-.promo-title{font-size:24px;font-weight:900}.promo-description{color:#d1d5db;font-size:12px;margin-top:8px;line-height:1.5}
-.price-line{display:flex;align-items:center;gap:9px;margin-top:13px}.old-price{text-decoration:line-through;color:#9ca3af;font-size:12px}.offer-price{font-size:22px;font-weight:900}.validity{font-size:9px;color:#d1d5db;margin-top:7px}
-.carousel{position:relative;overflow:hidden;border-radius:20px}.carousel-track{display:flex;transition:.45s ease}.carousel-slide{min-width:100%}
-.carousel-control{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;z-index:5;font-size:18px}
-.carousel-prev{left:12px}.carousel-next{right:12px}.carousel-dots{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:5}
-.carousel-dot{width:7px;height:7px;border-radius:50%;border:0;background:rgba(255,255,255,.5)}.carousel-dot.active{background:#fff}
-.content-list{display:flex;flex-direction:column;gap:10px}.list-item{background:#fff;border:1px solid var(--border);border-radius:14px;padding:15px;display:flex;align-items:center;gap:15px;box-shadow:0 5px 18px rgba(15,23,42,.04)}
-.list-thumb{width:80px;height:60px;border-radius:10px;overflow:hidden;background:#e5e7eb;flex-shrink:0}.list-thumb img{width:100%;height:100%;object-fit:cover}
-.list-info{flex:1}.list-title{font-size:14px;font-weight:800}.list-desc{color:var(--muted);font-size:10px;margin-top:4px}.list-price{font-weight:900;font-size:17px;white-space:nowrap}
-
-/* EMPTY / LOADING */
-.empty{padding:45px 20px;text-align:center;color:var(--muted)}.empty-icon{font-size:34px;margin-bottom:9px}.empty-title{font-weight:800;color:#374151;margin-bottom:4px}.empty-text{font-size:11px}
-.loading{padding:40px;text-align:center;color:var(--muted);font-size:12px}.spinner{width:27px;height:27px;border:3px solid #e5e7eb;border-top-color:#111827;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;z-index:500;padding:20px}
-.modal-overlay.show{display:flex}.modal{background:#fff;width:100%;max-width:620px;max-height:90vh;overflow:auto;border-radius:20px;box-shadow:0 25px 70px rgba(0,0,0,.2)}
-.modal-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff;z-index:2}
-.modal-title{font-size:16px;font-weight:850}.close-btn{width:32px;height:32px;border:0;border-radius:9px;background:#f3f4f6;font-size:18px}
-.modal-body{padding:20px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-box{border:1px solid var(--border);border-radius:12px;padding:12px}
-.detail-label{color:var(--muted);font-size:9px;text-transform:uppercase;font-weight:800}.detail-value{margin-top:5px;font-size:12px;font-weight:700;word-break:break-word}
-.modal-footer{padding:15px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
-.toast-container{position:fixed;right:20px;bottom:20px;z-index:1000;display:flex;flex-direction:column;gap:8px}
-.toast{min-width:250px;max-width:360px;background:#111827;color:#fff;padding:12px 14px;border-radius:11px;box-shadow:0 15px 40px rgba(0,0,0,.18);font-size:11px}
-.toast.success{background:#15803d}.toast.error{background:#dc2626}
-
-/* MOBILE */
-@media(max-width:1100px){
-.stats-grid{grid-template-columns:repeat(2,1fr)}.earning-layout{grid-template-columns:1fr}.toolbar-grid{grid-template-columns:1fr 1fr}
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+padding:8px 10px 24px;
+border-bottom:1px solid rgba(255,255,255,.08);
+margin-bottom:18px
 }
+
+.brand-logo{
+width:42px;
+height:42px;
+border-radius:12px;
+background:#fff;
+color:#111827;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900
+}
+
+.brand-text strong{
+display:block;
+font-size:16px
+}
+
+.brand-text span{
+display:block;
+font-size:11px;
+color:#9ca3af;
+margin-top:3px
+}
+
+.nav{
+display:flex;
+flex-direction:column;
+gap:7px
+}
+
+.nav-btn{
+border:0;
+background:transparent;
+color:#9ca3af;
+padding:12px 13px;
+border-radius:12px;
+text-align:left;
+display:flex;
+align-items:center;
+gap:11px;
+width:100%
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+background:#1f2937;
+color:#fff
+}
+
+.nav-icon{
+width:22px;
+text-align:center
+}
+
+.sidebar-user{
+position:absolute;
+left:15px;
+right:15px;
+bottom:20px;
+padding:12px;
+border-radius:14px;
+background:#111827;
+border:1px solid rgba(255,255,255,.08)
+}
+
+.user-name{
+font-size:13px;
+font-weight:700
+}
+
+.user-role{
+font-size:11px;
+color:#9ca3af;
+margin-top:3px
+}
+
+.logout-btn{
+width:100%;
+margin-top:10px;
+border:0;
+border-radius:9px;
+background:#dc2626;
+color:#fff;
+padding:8px;
+font-size:12px;
+font-weight:700
+}
+
+/* ================= MAIN ================= */
+
+.main{
+margin-left:260px;
+width:calc(100% - 260px);
+min-height:100vh
+}
+
+.topbar{
+height:72px;
+background:#fff;
+border-bottom:1px solid var(--border);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 28px;
+position:sticky;
+top:0;
+z-index:50
+}
+
+.topbar-left{
+display:flex;
+align-items:center;
+gap:13px
+}
+
+.mobile-menu{
+display:none;
+border:0;
+background:#f3f4f6;
+width:40px;
+height:40px;
+border-radius:10px
+}
+
+.page-title{
+font-size:20px;
+font-weight:800
+}
+
+.page-subtitle{
+color:var(--muted);
+font-size:12px;
+margin-top:2px
+}
+
+.top-user{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.avatar{
+width:38px;
+height:38px;
+border-radius:50%;
+background:#111827;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:800
+}
+
+.content{
+padding:24px;
+max-width:1600px;
+margin:auto
+}
+
+.section{display:none}
+.section.active{display:block}
+
+/* ================= HERO ================= */
+
+.hero{
+background:linear-gradient(135deg,#111827,#1f2937);
+color:#fff;
+border-radius:22px;
+padding:26px;
+margin-bottom:22px;
+position:relative;
+overflow:hidden
+}
+
+.hero:after{
+content:"";
+position:absolute;
+width:220px;
+height:220px;
+right:-80px;
+top:-80px;
+border-radius:50%;
+border:40px solid rgba(255,255,255,.05)
+}
+
+.hero h1{
+font-size:25px;
+margin-bottom:7px;
+position:relative;
+z-index:2
+}
+
+.hero p{
+color:#d1d5db;
+font-size:13px;
+position:relative;
+z-index:2
+}
+
+.date-badge{
+display:inline-flex;
+margin-top:14px;
+background:rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.12);
+padding:7px 10px;
+border-radius:9px;
+font-size:11px;
+position:relative;
+z-index:2
+}
+
+/* ================= STATS ================= */
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+margin-bottom:22px
+}
+
+.stat-card{
+background:#fff;
+border:1px solid var(--border);
+box-shadow:var(--shadow);
+border-radius:17px;
+padding:18px;
+position:relative;
+overflow:hidden
+}
+
+.stat-card:nth-child(1){border-top:4px solid #2563eb}
+.stat-card:nth-child(2){border-top:4px solid #0891b2}
+.stat-card:nth-child(3){border-top:4px solid #059669}
+.stat-card:nth-child(4){border-top:4px solid #7c3aed}
+
+.stat-label{
+color:var(--muted);
+font-size:12px;
+font-weight:600
+}
+
+.stat-value{
+font-size:25px;
+font-weight:850;
+margin-top:9px
+}
+
+.stat-small{
+color:var(--muted);
+font-size:11px;
+margin-top:5px
+}
+
+.stat-icon{
+position:absolute;
+right:15px;
+top:15px;
+width:38px;
+height:38px;
+border-radius:11px;
+background:#f3f4f6;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+/* ================= CARDS ================= */
+
+.card{
+background:#fff;
+border:1px solid var(--border);
+border-radius:18px;
+box-shadow:var(--shadow);
+padding:20px
+}
+
+.card-title{
+font-size:16px;
+font-weight:800;
+margin-bottom:4px
+}
+
+.card-subtitle{
+color:var(--muted);
+font-size:11px;
+margin-bottom:17px
+}
+
+.earning-layout{
+display:grid;
+grid-template-columns:1.6fr 1fr;
+gap:18px;
+margin-bottom:22px
+}
+
+.earning-total{
+font-size:38px;
+font-weight:900;
+margin:8px 0
+}
+
+.earning-breakdown{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:17px
+}
+
+.earning-item{
+border:1px solid var(--border);
+border-radius:13px;
+padding:13px;
+background:#fafafa
+}
+
+.earning-item-label{
+color:var(--muted);
+font-size:10px;
+font-weight:700
+}
+
+.earning-item-value{
+font-size:18px;
+font-weight:850;
+margin-top:5px
+}
+
+.salary-box{
+margin-top:15px;
+border-radius:14px;
+padding:14px;
+background:#f8fafc;
+border:1px solid var(--border)
+}
+
+.salary-row{
+display:flex;
+justify-content:space-between;
+padding:7px 0;
+font-size:12px
+}
+
+.salary-row strong{font-size:13px}
+
+/* ================= LEVEL ================= */
+
+.level-card{
+border:1px solid var(--border);
+border-radius:15px;
+padding:15px;
+margin-bottom:10px;
+background:#fff
+}
+
+.level-card.active{
+border:2px solid #111827;
+background:#f9fafb
+}
+
+.level-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px
+}
+
+.level-name{
+font-weight:800;
+font-size:13px
+}
+
+.level-rate{
+font-size:17px;
+font-weight:900
+}
+
+.level-range{
+color:var(--muted);
+font-size:10px;
+margin-top:5px
+}
+
+.level-tag{
+font-size:9px;
+padding:4px 7px;
+border-radius:7px;
+background:#111827;
+color:#fff;
+font-weight:800
+}
+
+.next-level-text{
+color:var(--muted);
+font-size:10px;
+margin-top:8px
+}
+
+/* ================= TOOLBAR ================= */
+
+.toolbar{
+background:#fff;
+border:1px solid var(--border);
+border-radius:17px;
+box-shadow:var(--shadow);
+padding:15px;
+margin-bottom:18px
+}
+
+.toolbar-grid{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr auto;
+gap:10px
+}
+
+.input,
+.select,
+.textarea{
+width:100%;
+border:1px solid #d1d5db;
+border-radius:10px;
+padding:10px 12px;
+outline:none;
+background:#fff;
+color:#111827;
+font-size:12px
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus{
+border-color:#111827;
+box-shadow:0 0 0 3px rgba(17,24,39,.08)
+}
+
+.btn{
+border:0;
+border-radius:10px;
+padding:10px 13px;
+font-size:12px;
+font-weight:750;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:7px
+}
+
+.btn-primary{background:#111827;color:#fff}
+.btn-light{background:#f3f4f6;color:#111827}
+.btn-success{background:#15803d;color:#fff}
+.btn-danger{background:#dc2626;color:#fff}
+
+/* ================= INQUIRY CARD AREA ================= */
+
+.inquiry-container{
+background:#fff;
+border:1px solid var(--border);
+border-radius:20px;
+box-shadow:var(--shadow);
+padding:18px
+}
+
+.inquiry-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:16px
+}
+
+.inquiry-header-title{
+font-size:17px;
+font-weight:850
+}
+
+.result-count{
+color:var(--muted);
+font-size:11px;
+margin-top:3px
+}
+
+.inquiry-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:16px
+}
+
+/* ================= STUDENT CARD ================= */
+
+.student-card{
+position:relative;
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:18px;
+padding:17px;
+overflow:hidden;
+box-shadow:0 7px 22px rgba(15,23,42,.055);
+transition:.22s ease
+}
+
+.student-card:hover{
+transform:translateY(-3px);
+box-shadow:0 15px 35px rgba(15,23,42,.11)
+}
+
+.student-card:before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+bottom:0;
+width:5px;
+background:#2563eb
+}
+
+.student-card:nth-child(4n+2):before{background:#10b981}
+.student-card:nth-child(4n+3):before{background:#f59e0b}
+.student-card:nth-child(4n+4):before{background:#7c3aed}
+.student-card:nth-child(5n+5):before{background:#ec4899}
+
+.student-card-head{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:10px;
+padding-left:5px
+}
+
+.student-main{
+display:flex;
+align-items:center;
+gap:11px;
+min-width:0
+}
+
+.student-avatar{
+width:45px;
+height:45px;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:17px;
+font-weight:900;
+background:linear-gradient(135deg,#dbeafe,#eff6ff);
+color:#2563eb;
+flex-shrink:0
+}
+
+.student-card:nth-child(4n+2) .student-avatar{
+background:linear-gradient(135deg,#d1fae5,#ecfdf5);
+color:#059669
+}
+
+.student-card:nth-child(4n+3) .student-avatar{
+background:linear-gradient(135deg,#fef3c7,#fffbeb);
+color:#d97706
+}
+
+.student-card:nth-child(4n+4) .student-avatar{
+background:linear-gradient(135deg,#ede9fe,#f5f3ff);
+color:#7c3aed
+}
+
+.student-name-wrap{
+min-width:0
+}
+
+.student-name{
+font-size:14px;
+font-weight:850;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis
+}
+
+.student-mobile{
+font-size:10px;
+color:var(--muted);
+margin-top:4px
+}
+
+.status-btn{
+border:0;
+flex-shrink:0
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:6px 9px;
+border-radius:9px;
+font-size:9px;
+font-weight:800;
+white-space:nowrap
+}
+
+.badge-new{background:#eff6ff;color:#2563eb}
+.badge-pending{background:#fff7ed;color:#c2410c}
+.badge-interested{background:#ecfdf5;color:#15803d}
+.badge-contacted{background:#f3f4f6;color:#374151}
+.badge-delay{background:#fff7ed;color:#b45309}
+.badge-follow-up{background:#faf5ff;color:#7c3aed}
+.badge-visited{background:#ecfdf5;color:#15803d}
+.badge-demo-completed{background:#ecfeff;color:#0e7490}
+.badge-converted{background:#dcfce7;color:#166534}
+.badge-not-interested{background:#fef2f2;color:#b91c1c}
+.badge-custom{background:#f3e8ff;color:#7e22ce}
+
+.student-tags{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+margin:13px 0 12px;
+padding-left:5px
+}
+
+.info-tag{
+font-size:9px;
+font-weight:750;
+padding:5px 8px;
+border-radius:8px;
+background:#f8fafc;
+border:1px solid #e5e7eb;
+color:#4b5563
+}
+
+.info-tag.blue{
+background:#eff6ff;
+border-color:#dbeafe;
+color:#2563eb
+}
+
+.info-tag.green{
+background:#ecfdf5;
+border-color:#d1fae5;
+color:#047857
+}
+
+.info-tag.orange{
+background:#fff7ed;
+border-color:#fed7aa;
+color:#c2410c
+}
+
+.info-tag.purple{
+background:#faf5ff;
+border-color:#e9d5ff;
+color:#7c3aed
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+padding-left:5px
+}
+
+.info-box{
+border:1px solid #edf0f4;
+border-radius:11px;
+padding:10px;
+background:#fafbfc;
+min-width:0
+}
+
+.info-label{
+font-size:8px;
+color:#9ca3af;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:.3px
+}
+
+.info-value{
+font-size:10px;
+font-weight:750;
+color:#374151;
+margin-top:4px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis
+}
+
+.student-remark{
+margin:11px 0 0 5px;
+padding:10px;
+border-radius:11px;
+background:#f8fafc;
+font-size:10px;
+color:#6b7280;
+line-height:1.45
+}
+
+.student-remark strong{
+color:#374151
+}
+
+.card-actions{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:7px;
+margin-top:13px;
+padding-left:5px
+}
+
+.card-action{
+border:0;
+border-radius:9px;
+padding:9px 5px;
+font-size:10px;
+font-weight:800;
+transition:.15s
+}
+
+.card-action:hover{
+transform:translateY(-1px)
+}
+
+.action-call{
+background:#ecfdf5;
+color:#047857
+}
+
+.action-whatsapp{
+background:#dcfce7;
+color:#15803d
+}
+
+.action-view{
+background:#eff6ff;
+color:#2563eb
+}
+
+.action-delete{
+background:#fef2f2;
+color:#dc2626
+}
+
+.card-footer{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+margin-top:11px;
+padding:9px 5px 0;
+border-top:1px dashed #e5e7eb;
+font-size:9px;
+color:#9ca3af
+}
+
+.card-footer strong{
+color:#6b7280
+}
+
+/* ================= PAGINATION ================= */
+
+.pagination{
+padding:16px 3px 3px;
+display:flex;
+justify-content:flex-end;
+align-items:center;
+gap:6px
+}
+
+.page-btn{
+width:32px;
+height:32px;
+border:1px solid var(--border);
+border-radius:8px;
+background:#fff;
+font-size:11px;
+font-weight:700
+}
+
+.page-btn.active{
+background:#111827;
+color:#fff;
+border-color:#111827
+}
+
+.page-info{
+color:var(--muted);
+font-size:10px;
+margin-right:auto
+}
+
+/* ================= CONTENT ================= */
+
+.content-controls{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:18px;
+flex-wrap:wrap
+}
+
+.display-switch{
+display:flex;
+gap:5px;
+background:#fff;
+border:1px solid var(--border);
+padding:4px;
+border-radius:10px
+}
+
+.display-btn{
+border:0;
+background:transparent;
+border-radius:7px;
+padding:7px 11px;
+font-size:10px;
+font-weight:750
+}
+
+.display-btn.active{
+background:#111827;
+color:#fff
+}
+
+.banner-list{
+display:flex;
+flex-direction:column;
+gap:16px
+}
+
+.promo-banner{
+min-height:190px;
+border-radius:20px;
+overflow:hidden;
+background:#111827;
+color:#fff;
+display:flex
+}
+
+.promo-image{
+width:34%;
+background:#e5e7eb;
+overflow:hidden
+}
+
+.promo-image img{
+width:100%;
+height:100%;
+object-fit:cover
+}
+
+.promo-content{
+padding:25px;
+flex:1;
+display:flex;
+flex-direction:column;
+justify-content:center
+}
+
+.promo-tag{
+font-size:9px;
+text-transform:uppercase;
+letter-spacing:1px;
+opacity:.7;
+font-weight:800;
+margin-bottom:7px
+}
+
+.promo-title{
+font-size:24px;
+font-weight:900
+}
+
+.promo-description{
+color:#d1d5db;
+font-size:12px;
+margin-top:8px;
+line-height:1.5
+}
+
+.price-line{
+display:flex;
+align-items:center;
+gap:9px;
+margin-top:13px
+}
+
+.old-price{
+text-decoration:line-through;
+color:#9ca3af;
+font-size:12px
+}
+
+.offer-price{
+font-size:22px;
+font-weight:900
+}
+
+.validity{
+font-size:9px;
+color:#d1d5db;
+margin-top:7px
+}
+
+.carousel{
+position:relative;
+overflow:hidden;
+border-radius:20px
+}
+
+.carousel-track{
+display:flex;
+transition:.45s ease
+}
+
+.carousel-slide{
+min-width:100%
+}
+
+.carousel-control{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:38px;
+height:38px;
+border:0;
+border-radius:50%;
+background:rgba(0,0,0,.65);
+color:#fff;
+z-index:5;
+font-size:18px
+}
+
+.carousel-prev{left:12px}
+.carousel-next{right:12px}
+
+.carousel-dots{
+position:absolute;
+bottom:13px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:5px;
+z-index:5
+}
+
+.carousel-dot{
+width:7px;
+height:7px;
+border-radius:50%;
+border:0;
+background:rgba(255,255,255,.5)
+}
+
+.carousel-dot.active{background:#fff}
+
+.content-list{
+display:flex;
+flex-direction:column;
+gap:10px
+}
+
+.list-item{
+background:#fff;
+border:1px solid var(--border);
+border-radius:14px;
+padding:15px;
+display:flex;
+align-items:center;
+gap:15px;
+box-shadow:0 5px 18px rgba(15,23,42,.04)
+}
+
+.list-thumb{
+width:80px;
+height:60px;
+border-radius:10px;
+overflow:hidden;
+background:#e5e7eb;
+flex-shrink:0
+}
+
+.list-thumb img{
+width:100%;
+height:100%;
+object-fit:cover
+}
+
+.list-info{flex:1}
+
+.list-title{
+font-size:14px;
+font-weight:800
+}
+
+.list-desc{
+color:var(--muted);
+font-size:10px;
+margin-top:4px
+}
+
+.list-price{
+font-weight:900;
+font-size:17px;
+white-space:nowrap
+}
+
+/* ================= EMPTY / LOADING ================= */
+
+.empty{
+padding:45px 20px;
+text-align:center;
+color:var(--muted)
+}
+
+.empty-icon{
+font-size:34px;
+margin-bottom:9px
+}
+
+.empty-title{
+font-weight:800;
+color:#374151;
+margin-bottom:4px
+}
+
+.empty-text{
+font-size:11px
+}
+
+.loading{
+padding:40px;
+text-align:center;
+color:var(--muted);
+font-size:12px
+}
+
+.spinner{
+width:27px;
+height:27px;
+border:3px solid #e5e7eb;
+border-top-color:#111827;
+border-radius:50%;
+animation:spin .8s linear infinite;
+margin:0 auto 10px
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+/* ================= MODAL ================= */
+
+.modal-overlay{
+position:fixed;
+inset:0;
+background:rgba(15,23,42,.55);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:500;
+padding:20px
+}
+
+.modal-overlay.show{display:flex}
+
+.modal{
+background:#fff;
+width:100%;
+max-width:620px;
+max-height:90vh;
+overflow:auto;
+border-radius:20px;
+box-shadow:0 25px 70px rgba(0,0,0,.2)
+}
+
+.modal-head{
+padding:18px 20px;
+border-bottom:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+background:#fff;
+z-index:2
+}
+
+.modal-title{
+font-size:16px;
+font-weight:850
+}
+
+.close-btn{
+width:32px;
+height:32px;
+border:0;
+border-radius:9px;
+background:#f3f4f6;
+font-size:18px
+}
+
+.modal-body{padding:20px}
+
+.detail-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+.detail-box{
+border:1px solid var(--border);
+border-radius:12px;
+padding:12px
+}
+
+.detail-label{
+color:var(--muted);
+font-size:9px;
+text-transform:uppercase;
+font-weight:800
+}
+
+.detail-value{
+margin-top:5px;
+font-size:12px;
+font-weight:700;
+word-break:break-word
+}
+
+.modal-footer{
+padding:15px 20px;
+border-top:1px solid var(--border);
+display:flex;
+justify-content:flex-end;
+gap:8px
+}
+
+/* ================= TOAST ================= */
+
+.toast-container{
+position:fixed;
+right:20px;
+bottom:20px;
+z-index:1000;
+display:flex;
+flex-direction:column;
+gap:8px
+}
+
+.toast{
+min-width:250px;
+max-width:360px;
+background:#111827;
+color:#fff;
+padding:12px 14px;
+border-radius:11px;
+box-shadow:0 15px 40px rgba(0,0,0,.18);
+font-size:11px
+}
+
+.toast.success{background:#15803d}
+.toast.error{background:#dc2626}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1200px){
+
+.stats-grid{
+grid-template-columns:repeat(2,1fr)
+}
+
+.earning-layout{
+grid-template-columns:1fr
+}
+
+.toolbar-grid{
+grid-template-columns:1fr 1fr
+}
+
+.inquiry-grid{
+grid-template-columns:1fr
+}
+
+}
+
 @media(max-width:760px){
-.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0;width:100%}.mobile-menu{display:block}
-.topbar{padding:0 15px}.top-user-info{display:none!important}.content{padding:15px}.hero{padding:20px}.hero h1{font-size:21px}
-.earning-breakdown{grid-template-columns:1fr}.toolbar-grid{grid-template-columns:1fr}.promo-banner{min-height:330px;flex-direction:column}.promo-image{width:100%;height:150px}.promo-content{padding:18px}
-.detail-grid{grid-template-columns:1fr}.course-grid{grid-template-columns:1fr}
+
+.sidebar{
+transform:translateX(-100%)
 }
+
+.sidebar.open{
+transform:translateX(0)
+}
+
+.main{
+margin-left:0;
+width:100%
+}
+
+.mobile-menu{
+display:block
+}
+
+.topbar{
+padding:0 15px
+}
+
+.top-user-info{
+display:none!important
+}
+
+.content{
+padding:15px
+}
+
+.hero{
+padding:20px
+}
+
+.hero h1{
+font-size:21px
+}
+
+.earning-breakdown{
+grid-template-columns:1fr
+}
+
+.toolbar-grid{
+grid-template-columns:1fr
+}
+
+.promo-banner{
+min-height:330px;
+flex-direction:column
+}
+
+.promo-image{
+width:100%;
+height:150px
+}
+
+.promo-content{
+padding:18px
+}
+
+.detail-grid{
+grid-template-columns:1fr
+}
+
+.card-actions{
+grid-template-columns:repeat(2,1fr)
+}
+
+.info-grid{
+grid-template-columns:1fr 1fr
+}
+
+.inquiry-container{
+padding:12px
+}
+
+.student-card{
+padding:14px
+}
+
+}
+
 @media(max-width:450px){
-.stats-grid{grid-template-columns:1fr}.topbar{height:65px}.page-title{font-size:17px}.page-subtitle{display:none}
+
+.stats-grid{
+grid-template-columns:1fr
+}
+
+.topbar{
+height:65px
+}
+
+.page-title{
+font-size:17px
+}
+
+.page-subtitle{
+display:none
+}
+
+.info-grid{
+grid-template-columns:1fr
+}
+
+.student-card-head{
+flex-direction:column
+}
+
+.status-btn{
+align-self:flex-start
+}
+
 }
 </style>
 </head>
@@ -155,9 +1367,13 @@ tr:hover td{background:#fafafa}
 
 <div class="app">
 
+<!-- ================= SIDEBAR ================= -->
+
 <aside class="sidebar" id="sidebar">
+
 <div class="brand">
 <div class="brand-logo">BT</div>
+
 <div class="brand-text">
 <strong>BlackTerminal</strong>
 <span>Telecaller Panel</span>
@@ -165,102 +1381,333 @@ tr:hover td{background:#fafafa}
 </div>
 
 <nav class="nav">
-<button class="nav-btn active" data-section="dashboard"><span class="nav-icon">⌂</span><span>Dashboard</span></button>
-<button class="nav-btn" data-section="inquiries"><span class="nav-icon">☰</span><span>Student Inquiries</span></button>
-<button class="nav-btn" data-section="courses"><span class="nav-icon">▣</span><span>Courses & Offers</span></button>
-<button class="nav-btn" data-section="earnings"><span class="nav-icon">₹</span><span>My Earnings</span></button>
+
+<button class="nav-btn active" data-section="dashboard">
+<span class="nav-icon">⌂</span>
+<span>Dashboard</span>
+</button>
+
+<button class="nav-btn" data-section="inquiries">
+<span class="nav-icon">☰</span>
+<span>Student Inquiries</span>
+</button>
+
+<button class="nav-btn" data-section="courses">
+<span class="nav-icon">▣</span>
+<span>Courses & Offers</span>
+</button>
+
+<button class="nav-btn" data-section="earnings">
+<span class="nav-icon">₹</span>
+<span>My Earnings</span>
+</button>
+
 </nav>
 
 <div class="sidebar-user">
-<div class="user-name" id="sideUserName">Telecaller</div>
-<div class="user-role">Telecaller</div>
-<button class="logout-btn" id="logoutBtn">Logout</button>
+
+<div class="user-name" id="sideUserName">
+Telecaller
 </div>
+
+<div class="user-role">
+Telecaller
+</div>
+
+<button class="logout-btn" id="logoutBtn">
+Logout
+</button>
+
+</div>
+
 </aside>
+
+
+<!-- ================= MAIN ================= -->
 
 <main class="main">
 
 <header class="topbar">
+
 <div class="topbar-left">
-<button class="mobile-menu" id="mobileMenu">☰</button>
+
+<button class="mobile-menu" id="mobileMenu">
+☰
+</button>
+
 <div>
-<div class="page-title" id="pageTitle">Telecaller Dashboard</div>
-<div class="page-subtitle">Student management and performance</div>
+<div class="page-title" id="pageTitle">
+Telecaller Dashboard
 </div>
+
+<div class="page-subtitle">
+Student management and performance
+</div>
+</div>
+
 </div>
 
 <div class="top-user">
+
 <div class="top-user-info">
-<div style="font-size:12px;font-weight:800" id="topUserName">Telecaller</div>
-<div style="font-size:10px;color:#6b7280" id="topUserMobile">-</div>
+
+<div style="font-size:12px;font-weight:800" id="topUserName">
+Telecaller
 </div>
-<div class="avatar" id="avatar">T</div>
+
+<div style="font-size:10px;color:#6b7280" id="topUserMobile">
+-
 </div>
+
+</div>
+
+<div class="avatar" id="avatar">
+T
+</div>
+
+</div>
+
 </header>
+
 
 <div class="content">
 
-<!-- DASHBOARD -->
+
+<!-- ================= DASHBOARD ================= -->
+
 <section class="section active" id="dashboard">
 
 <div class="hero">
-<h1>Welcome, <span id="heroName">Telecaller</span></h1>
-<p>Manage student inquiries, demo classes, admissions and your monthly earnings.</p>
-<div class="date-badge" id="todayDate">Loading date...</div>
+
+<h1>
+Welcome, <span id="heroName">Telecaller</span>
+</h1>
+
+<p>
+Manage student inquiries, follow-ups, admissions and your monthly earnings.
+</p>
+
+<div class="date-badge" id="todayDate">
+Loading date...
 </div>
 
-<div class="stats-grid">
-<div class="stat-card"><div class="stat-icon">☰</div><div class="stat-label">Total Inquiries</div><div class="stat-value" id="statInquiries">0</div><div class="stat-small">Assigned inquiries</div></div>
-<div class="stat-card"><div class="stat-icon">▶</div><div class="stat-label">Demo Completed</div><div class="stat-value" id="statDemo">0</div><div class="stat-small">Current month</div></div>
-<div class="stat-card"><div class="stat-icon">✓</div><div class="stat-label">Converted</div><div class="stat-value" id="statConverted">0</div><div class="stat-small">Current month</div></div>
-<div class="stat-card"><div class="stat-icon">₹</div><div class="stat-label">Current Earnings</div><div class="stat-value" id="statEarning">₹0</div><div class="stat-small">Current month</div></div>
 </div>
+
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<div class="stat-icon">☰</div>
+
+<div class="stat-label">
+Total Inquiries
+</div>
+
+<div class="stat-value" id="statInquiries">
+0
+</div>
+
+<div class="stat-small">
+Assigned inquiries
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">▶</div>
+
+<div class="stat-label">
+Demo Completed
+</div>
+
+<div class="stat-value" id="statDemo">
+0
+</div>
+
+<div class="stat-small">
+Current month
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">✓</div>
+
+<div class="stat-label">
+Converted
+</div>
+
+<div class="stat-value" id="statConverted">
+0
+</div>
+
+<div class="stat-small">
+Current month
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">₹</div>
+
+<div class="stat-label">
+Current Earnings
+</div>
+
+<div class="stat-value" id="statEarning">
+₹0
+</div>
+
+<div class="stat-small">
+Current month
+</div>
+
+</div>
+
+</div>
+
 
 <div class="earning-layout">
 
 <div class="card">
-<div class="card-title">Current Month Earnings</div>
-<div class="card-subtitle">Your earnings are calculated automatically from Admin settings.</div>
-<div class="earning-total" id="dashboardTotal">₹0</div>
+
+<div class="card-title">
+Current Month Earnings
+</div>
+
+<div class="card-subtitle">
+Your earnings are calculated automatically from Admin settings.
+</div>
+
+<div class="earning-total" id="dashboardTotal">
+₹0
+</div>
 
 <div class="earning-breakdown">
-<div class="earning-item"><div class="earning-item-label">BASE SALARY</div><div class="earning-item-value" id="dashBase">₹0</div></div>
-<div class="earning-item"><div class="earning-item-label">DEMO REWARD</div><div class="earning-item-value" id="dashDemoReward">₹0</div></div>
-<div class="earning-item"><div class="earning-item-label">ADMISSION REWARD</div><div class="earning-item-value" id="dashAdmissionReward">₹0</div></div>
+
+<div class="earning-item">
+
+<div class="earning-item-label">
+BASE SALARY
 </div>
+
+<div class="earning-item-value" id="dashBase">
+₹0
+</div>
+
+</div>
+
+
+<div class="earning-item">
+
+<div class="earning-item-label">
+VISIT REWARD
+</div>
+
+<div class="earning-item-value" id="dashDemoReward">
+₹0
+</div>
+
+</div>
+
+
+<div class="earning-item">
+
+<div class="earning-item-label">
+ADMISSION REWARD
+</div>
+
+<div class="earning-item-value" id="dashAdmissionReward">
+₹0
+</div>
+
+</div>
+
+</div>
+
 
 <div class="salary-box">
-<div class="salary-row"><span>Current Base Salary</span><strong id="currentBaseText">₹0</strong></div>
-<div class="salary-row"><span>Previous Month Level</span><strong id="previousLevelText">Not available</strong></div>
-<div class="salary-row"><span>Next Month Base Salary</span><strong id="nextBaseText">₹0</strong></div>
+
+<div class="salary-row">
+<span>Current Base Salary</span>
+<strong id="currentBaseText">₹0</strong>
 </div>
+
+<div class="salary-row">
+<span>Previous Month Level</span>
+<strong id="previousLevelText">Not available</strong>
 </div>
+
+<div class="salary-row">
+<span>Configured Base Salary</span>
+<strong id="nextBaseText">₹0</strong>
+</div>
+
+</div>
+
+</div>
+
 
 <div class="card">
-<div class="card-title">Admission Level</div>
-<div class="card-subtitle">Level is automatically determined from current-month converted admissions.</div>
+
+<div class="card-title">
+Admission Level
+</div>
+
+<div class="card-subtitle">
+Level is automatically determined from current-month converted admissions.
+</div>
+
 <div id="levelCards"></div>
-<div class="next-level-text" id="levelProgressText">Loading...</div>
+
+<div class="next-level-text" id="levelProgressText">
+Loading...
 </div>
 
 </div>
+
+</div>
+
 </section>
 
 
-<!-- INQUIRIES -->
+<!-- ================= INQUIRIES ================= -->
+
 <section class="section" id="inquiries">
 
 <div class="hero">
-<h1>Student Inquiries</h1>
-<p>Search, contact, update status and manage student inquiries.</p>
+
+<h1>
+Student Inquiries
+</h1>
+
+<p>
+Search, contact, update status and manage student inquiries.
+</p>
+
 </div>
 
+
 <div class="toolbar">
+
 <div class="toolbar-grid">
 
-<input type="text" id="searchInput" class="input" placeholder="Search student name, mobile, course...">
+<input
+type="text"
+id="searchInput"
+class="input"
+placeholder="Search student name, mobile, course..."
+>
 
 <select id="statusFilter" class="select">
+
 <option value="">All Status</option>
 <option value="new">New</option>
 <option value="pending">Pending</option>
@@ -273,211 +1720,590 @@ tr:hover td{background:#fafafa}
 <option value="converted">Converted</option>
 <option value="not-interested">Not Interested</option>
 <option value="custom">Custom Status</option>
+
 </select>
 
-<select id="courseFilter" class="select"><option value="">All Courses</option></select>
-<select id="coordinatorFilter" class="select"><option value="">All Coordinators</option></select>
-<button class="btn btn-primary" id="refreshBtn">↻ Refresh</button>
+
+<select id="courseFilter" class="select">
+<option value="">All Courses</option>
+</select>
+
+
+<select id="coordinatorFilter" class="select">
+<option value="">All Coordinators</option>
+</select>
+
+
+<button class="btn btn-primary" id="refreshBtn">
+↻ Refresh
+</button>
 
 </div>
+
 </div>
 
-<div class="table-card">
 
-<div class="table-head">
+<div class="inquiry-container">
+
+<div class="inquiry-header">
+
 <div>
-<div class="card-title">Inquiry List</div>
-<div class="result-count" id="resultCount">0 inquiries found</div>
-</div>
-<button class="btn btn-light" id="clearFiltersBtn">Clear Filters</button>
+
+<div class="inquiry-header-title">
+Student Inquiry List
 </div>
 
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Student</th>
-<th>Course</th>
-<th>Source</th>
-<th>Coordinator</th>
-<th>Status</th>
-<th>Follow-up</th>
-<th>Updated</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody id="inquiryBody">
-<tr><td colspan="8"><div class="loading"><div class="spinner"></div>Loading inquiries...</div></td></tr>
-</tbody>
-</table>
+<div class="result-count" id="resultCount">
+0 inquiries found
 </div>
+
+</div>
+
+
+<button class="btn btn-light" id="clearFiltersBtn">
+Clear Filters
+</button>
+
+</div>
+
+
+<div id="inquiryBody">
+
+<div class="loading">
+
+<div class="spinner"></div>
+
+Loading inquiries...
+
+</div>
+
+</div>
+
 
 <div class="pagination">
-<div class="page-info" id="pageInfo">Page 1</div>
+
+<div class="page-info" id="pageInfo">
+Page 1
+</div>
+
 <div id="paginationButtons"></div>
+
 </div>
 
 </div>
+
 </section>
 
 
-<!-- COURSES -->
+<!-- ================= COURSES ================= -->
+
 <section class="section" id="courses">
 
 <div class="hero">
-<h1>Courses & Special Offers</h1>
-<p>Course prices, offers and promotional information published by Admin.</p>
+
+<h1>
+Courses & Special Offers
+</h1>
+
+<p>
+Latest courses and prices published by Admin.
+</p>
+
 </div>
+
 
 <div class="content-controls">
+
 <div>
-<div class="card-title">Available Information</div>
-<div class="card-subtitle" style="margin:4px 0 0">Always use the latest price and offer shown here when talking to students.</div>
+
+<div class="card-title">
+Available Courses
 </div>
+
+<div class="card-subtitle" style="margin:4px 0 0">
+Always use the latest price and duration shown here.
+</div>
+
+</div>
+
 
 <div style="display:flex;gap:8px;align-items:center">
-<button class="btn btn-light" id="refreshContentBtn">↻ Refresh</button>
+
+<button class="btn btn-light" id="refreshContentBtn">
+↻ Refresh
+</button>
+
 <div class="display-switch">
-<button class="display-btn active" data-display="carousel">Carousel</button>
-<button class="display-btn" data-display="banner">Banner</button>
-<button class="display-btn" data-display="list">List</button>
-</div>
-</div>
+
+<button class="display-btn active" data-display="carousel">
+Carousel
+</button>
+
+<button class="display-btn" data-display="banner">
+Banner
+</button>
+
+<button class="display-btn" data-display="list">
+List
+</button>
+
 </div>
 
-<div id="contentArea">
-<div class="loading"><div class="spinner"></div>Loading courses and offers...</div>
 </div>
+
+</div>
+
+
+<div id="contentArea">
+
+<div class="loading">
+
+<div class="spinner"></div>
+
+Loading courses...
+
+</div>
+
+</div>
+
 </section>
 
 
-<!-- EARNINGS -->
+<!-- ================= EARNINGS ================= -->
+
 <section class="section" id="earnings">
 
 <div class="hero">
-<h1>My Earnings</h1>
-<p>Transparent monthly earning calculation based on Admin-controlled rules.</p>
+
+<h1>
+My Earnings
+</h1>
+
+<p>
+Transparent monthly earning calculation based on Admin-controlled rules.
+</p>
+
 </div>
 
+
 <div class="card">
-<div class="card-title">Current Month Payment</div>
-<div class="card-subtitle">Current month earning calculation</div>
-<div class="earning-total" id="earningPageTotal">₹0</div>
+
+<div class="card-title">
+Current Month Payment
+</div>
+
+<div class="card-subtitle">
+Current month earning calculation
+</div>
+
+<div class="earning-total" id="earningPageTotal">
+₹0
+</div>
+
 
 <div class="earning-breakdown">
-<div class="earning-item"><div class="earning-item-label">BASE SALARY</div><div class="earning-item-value" id="earningPageBase">₹0</div></div>
-<div class="earning-item"><div class="earning-item-label">DEMO CLASSES</div><div class="earning-item-value" id="earningPageDemo">₹0</div></div>
-<div class="earning-item"><div class="earning-item-label">ADMISSIONS</div><div class="earning-item-value" id="earningPageAdmission">₹0</div></div>
+
+<div class="earning-item">
+
+<div class="earning-item-label">
+BASE SALARY
 </div>
+
+<div class="earning-item-value" id="earningPageBase">
+₹0
 </div>
+
+</div>
+
+
+<div class="earning-item">
+
+<div class="earning-item-label">
+VISIT REWARD
+</div>
+
+<div class="earning-item-value" id="earningPageDemo">
+₹0
+</div>
+
+</div>
+
+
+<div class="earning-item">
+
+<div class="earning-item-label">
+ADMISSIONS
+</div>
+
+<div class="earning-item-value" id="earningPageAdmission">
+₹0
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 
 <div style="height:16px"></div>
 
+
 <div class="card">
-<div class="card-title">Performance Details</div>
-<div class="card-subtitle">Your current month performance</div>
+
+<div class="card-title">
+Performance Details
+</div>
+
+<div class="card-subtitle">
+Your current month performance
+</div>
+
 
 <div class="detail-grid">
-<div class="detail-box"><div class="detail-label">Demo Completed</div><div class="detail-value" id="earnDemoCount">0</div></div>
-<div class="detail-box"><div class="detail-label">Demo Reward / Student</div><div class="detail-value" id="earnDemoRate">₹0</div></div>
-<div class="detail-box"><div class="detail-label">Converted Admissions</div><div class="detail-value" id="earnAdmissionCount">0</div></div>
-<div class="detail-box"><div class="detail-label">Current Admission Level</div><div class="detail-value" id="earnLevel">Level 1</div></div>
-<div class="detail-box"><div class="detail-label">Admission Reward / Student</div><div class="detail-value" id="earnAdmissionRate">₹0</div></div>
-<div class="detail-box"><div class="detail-label">Visit Reward</div><div class="detail-value">₹0</div></div>
+
+<div class="detail-box">
+
+<div class="detail-label">
+Unique Visits
 </div>
+
+<div class="detail-value" id="earnDemoCount">
+0
 </div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Visit Reward / Student
+</div>
+
+<div class="detail-value" id="earnDemoRate">
+₹0
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Converted Admissions
+</div>
+
+<div class="detail-value" id="earnAdmissionCount">
+0
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Current Admission Level
+</div>
+
+<div class="detail-value" id="earnLevel">
+Level 1
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Admission Reward / Student
+</div>
+
+<div class="detail-value" id="earnAdmissionRate">
+₹0
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Payment Rule
+</div>
+
+<div class="detail-value">
+Base + Admission Incentive
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 
 <div style="height:16px"></div>
 
+
 <div class="card">
-<div class="card-title">Next Month Base Salary</div>
-<div class="card-subtitle">This is determined from your current month's final admission level.</div>
-<div class="earning-total" id="nextMonthSalaryBig">₹1,000</div>
+
+<div class="card-title">
+Base Salary Information
+</div>
+
+<div class="card-subtitle">
+Salary settings are controlled by Admin.
+</div>
+
+<div class="earning-total" id="nextMonthSalaryBig">
+₹1,000
+</div>
+
 
 <div class="detail-grid">
-<div class="detail-box"><div class="detail-label">Current Level</div><div class="detail-value" id="salaryCurrentLevel">Level 1</div></div>
-<div class="detail-box"><div class="detail-label">Current Default Base</div><div class="detail-value" id="salaryDefaultBase">₹1,000</div></div>
-<div class="detail-box"><div class="detail-label">Next Month Base</div><div class="detail-value" id="salaryNextBase">₹800</div></div>
-<div class="detail-box"><div class="detail-label">Adjustment Period</div><div class="detail-value">One Month Only</div></div>
+
+<div class="detail-box">
+
+<div class="detail-label">
+Current Level
 </div>
+
+<div class="detail-value" id="salaryCurrentLevel">
+Level 1
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Configured Base Salary
+</div>
+
+<div class="detail-value" id="salaryDefaultBase">
+₹1,000
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Base Salary
+</div>
+
+<div class="detail-value" id="salaryNextBase">
+₹1,000
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Calculation
+</div>
+
+<div class="detail-value">
+Monthly
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </section>
 
 </div>
+
 </main>
+
 </div>
 
 
-<!-- DETAIL MODAL -->
+<!-- ================= DETAIL MODAL ================= -->
+
 <div class="modal-overlay" id="detailModal">
+
 <div class="modal">
 
 <div class="modal-head">
-<div class="modal-title">Student Details</div>
-<button class="close-btn" data-close="detailModal">×</button>
+
+<div class="modal-title">
+Student Details
 </div>
+
+<button class="close-btn" data-close="detailModal">
+×
+</button>
+
+</div>
+
 
 <div class="modal-body">
+
 <div class="detail-grid">
 
-<div class="detail-box"><div class="detail-label">Student Name</div><div class="detail-value" id="detailName">-</div></div>
-<div class="detail-box"><div class="detail-label">Mobile</div><div class="detail-value" id="detailMobile">-</div></div>
-<div class="detail-box"><div class="detail-label">Course</div><div class="detail-value" id="detailCourse">-</div></div>
-<div class="detail-box"><div class="detail-label">Source</div><div class="detail-value" id="detailSource">-</div></div>
-<div class="detail-box"><div class="detail-label">Coordinator</div><div class="detail-value" id="detailCoordinator">-</div></div>
-<div class="detail-box"><div class="detail-label">Coordinator Mobile</div><div class="detail-value" id="detailCoordinatorMobile">-</div></div>
-<div class="detail-box"><div class="detail-label">Status</div><div class="detail-value" id="detailStatus">-</div></div>
-<div class="detail-box"><div class="detail-label">Telecaller Status</div><div class="detail-value" id="detailTelecallerStatus">-</div></div>
-<div class="detail-box"><div class="detail-label">Custom Status</div><div class="detail-value" id="detailCustomStatus">-</div></div>
-<div class="detail-box"><div class="detail-label">Follow-up Date</div><div class="detail-value" id="detailFollowup">-</div></div>
-<div class="detail-box"><div class="detail-label">Created At</div><div class="detail-value" id="detailCreated">-</div></div>
+<div class="detail-box">
+<div class="detail-label">Student Name</div>
+<div class="detail-value" id="detailName">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Mobile</div>
+<div class="detail-value" id="detailMobile">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Course</div>
+<div class="detail-value" id="detailCourse">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Source</div>
+<div class="detail-value" id="detailSource">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Coordinator</div>
+<div class="detail-value" id="detailCoordinator">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Coordinator Mobile</div>
+<div class="detail-value" id="detailCoordinatorMobile">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Status</div>
+<div class="detail-value" id="detailStatus">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Telecaller Status</div>
+<div class="detail-value" id="detailTelecallerStatus">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Custom Status</div>
+<div class="detail-value" id="detailCustomStatus">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Follow-up Date</div>
+<div class="detail-value" id="detailFollowup">-</div>
+</div>
+
+<div class="detail-box">
+<div class="detail-label">Created At</div>
+<div class="detail-value" id="detailCreated">-</div>
+</div>
 
 <div class="detail-box" style="grid-column:1/-1">
-<div class="detail-label">Coordinator Remark</div>
-<div class="detail-value" id="detailRemark">-</div>
+
+<div class="detail-label">
+Coordinator Remark
+</div>
+
+<div class="detail-value" id="detailRemark">
+-
+</div>
+
 </div>
 
 <div class="detail-box" style="grid-column:1/-1">
-<div class="detail-label">Telecaller Remark</div>
-<div class="detail-value" id="detailTeleRemark">-</div>
+
+<div class="detail-label">
+Telecaller Remark
+</div>
+
+<div class="detail-value" id="detailTeleRemark">
+-
 </div>
 
 </div>
+
 </div>
+
+</div>
+
 
 <div class="modal-footer">
-<button class="btn btn-light" data-close="detailModal">Close</button>
-<button class="btn btn-success" id="detailCallBtn">Call Student</button>
-<button class="btn btn-success" id="detailWhatsAppBtn">WhatsApp</button>
+
+<button class="btn btn-light" data-close="detailModal">
+Close
+</button>
+
+<button class="btn btn-success" id="detailCallBtn">
+Call Student
+</button>
+
+<button class="btn btn-success" id="detailWhatsAppBtn">
+WhatsApp
+</button>
+
 </div>
 
 </div>
+
 </div>
 
 
-<!-- STATUS MODAL -->
+<!-- ================= STATUS MODAL ================= -->
+
 <div class="modal-overlay" id="statusModal">
+
 <div class="modal">
 
 <div class="modal-head">
-<div class="modal-title">Update Student Status</div>
-<button class="close-btn" data-close="statusModal">×</button>
+
+<div class="modal-title">
+Update Student Status
 </div>
+
+<button class="close-btn" data-close="statusModal">
+×
+</button>
+
+</div>
+
 
 <div class="modal-body">
 
 <input type="hidden" id="statusDocName">
 
+
 <div style="margin-bottom:13px">
-<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Student</label>
-<input type="text" class="input" id="statusStudentName" readonly>
+
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">
+Student
+</label>
+
+<input
+type="text"
+class="input"
+id="statusStudentName"
+readonly
+>
+
 </div>
 
+
 <div style="margin-bottom:13px">
-<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Status</label>
+
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">
+Status
+</label>
 
 <select class="select" id="newStatus">
+
 <option value="new">New</option>
 <option value="pending">Pending</option>
 <option value="interested">Interested</option>
@@ -489,39 +2315,88 @@ tr:hover td{background:#fafafa}
 <option value="converted">Converted</option>
 <option value="not-interested">Not Interested</option>
 <option value="custom">Custom Status</option>
+
 </select>
+
 </div>
+
 
 <div id="customStatusBox" style="display:none;margin-bottom:13px">
-<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Custom Status</label>
-<input type="text" class="input" id="newCustomStatus" maxlength="80" placeholder="Enter custom status...">
-<div style="font-size:9px;color:#6b7280;margin-top:5px">Example: Call Tomorrow, Waiting for Parents, Fee Issue, Join Next Month</div>
+
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">
+Custom Status
+</label>
+
+<input
+type="text"
+class="input"
+id="newCustomStatus"
+maxlength="80"
+placeholder="Enter custom status..."
+>
+
+<div style="font-size:9px;color:#6b7280;margin-top:5px">
+Example: Call Tomorrow, Waiting for Parents, Fee Issue, Join Next Month
 </div>
+
+</div>
+
 
 <div style="margin-bottom:13px">
-<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Follow-up Date</label>
-<input type="date" class="input" id="newFollowupDate">
+
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">
+Follow-up Date
+</label>
+
+<input
+type="date"
+class="input"
+id="newFollowupDate"
+>
+
 </div>
+
 
 <div>
-<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">Telecaller Remark</label>
-<textarea class="textarea" id="newTelecallerRemark" rows="4" placeholder="Enter remark..."></textarea>
+
+<label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px">
+Telecaller Remark
+</label>
+
+<textarea
+class="textarea"
+id="newTelecallerRemark"
+rows="4"
+placeholder="Enter remark..."
+></textarea>
+
 </div>
 
 </div>
+
 
 <div class="modal-footer">
-<button class="btn btn-light" data-close="statusModal">Cancel</button>
-<button class="btn btn-primary" id="saveStatusBtn">Save Status</button>
+
+<button class="btn btn-light" data-close="statusModal">
+Cancel
+</button>
+
+<button class="btn btn-primary" id="saveStatusBtn">
+Save Status
+</button>
+
 </div>
 
 </div>
+
 </div>
+
 
 <div class="toast-container" id="toastContainer"></div>
 
 
 <script>
+
 /* ============================================================
 AUTH
 ============================================================ */
@@ -529,8 +2404,11 @@ AUTH
 const loggedIn=sessionStorage.getItem("bt_logged_in");
 const userRole=sessionStorage.getItem("bt_user_role");
 
-const telecallerName=sessionStorage.getItem("bt_user_name")||"Telecaller";
-const telecallerMobile=sessionStorage.getItem("bt_user_mobile")||"";
+const telecallerName=
+sessionStorage.getItem("bt_user_name")||"Telecaller";
+
+const telecallerMobile=
+sessionStorage.getItem("bt_user_mobile")||"";
 
 if(loggedIn!=="true"||userRole!=="telecaller"){
 window.location.replace("login.html");
@@ -538,7 +2416,7 @@ window.location.replace("login.html");
 
 
 /* ============================================================
-FIRESTORE CONFIG
+FIREBASE CONFIG
 ============================================================ */
 
 const FIREBASE_PROJECT_ID="jobs-2f152";
@@ -551,38 +2429,41 @@ const FIRESTORE_BASE=
 FIREBASE_PROJECT_ID+
 "/databases/(default)/documents";
 
-const INQUIRY_URL=
-FIRESTORE_BASE+"/studentInquiries";
+const INQUIRY_PATH=
+"projects/"+FIREBASE_PROJECT_ID+
+"/databases/(default)/documents/studentInquiries";
 
-const PAYMENT_SETTINGS_URL=
-FIRESTORE_BASE+"/paymentSettings/telecaller";
+const PAYMENT_PATH=
+"projects/"+FIREBASE_PROJECT_ID+
+"/databases/(default)/documents/paymentSettings/telecaller";
 
-const CONTENT_URL=
-FIRESTORE_BASE+"/telecallerContent";
+const COURSE_PATH=
+"projects/"+FIREBASE_PROJECT_ID+
+"/databases/(default)/documents/courseSettings";
 
 
 /* ============================================================
-SETTINGS
+PAYMENT SETTINGS
+Latest Telecaller Model
 ============================================================ */
 
 let SETTINGS={
-baseSalary:1000,
-demoIncentive:30,
 
+baseSalary:1000,
+
+level1AdmissionIncentive:50,
 level1Min:0,
 level1Max:2,
-level1AdmissionIncentive:50,
-level1NextBaseSalary:800,
 
+level2AdmissionIncentive:75,
 level2Min:3,
 level2Max:5,
-level2AdmissionIncentive:75,
-level2NextBaseSalary:900,
 
-level3Min:6,
-level3Max:null,
 level3AdmissionIncentive:100,
-level3NextBaseSalary:2000
+level3Min:6,
+
+visitReward:0
+
 };
 
 
@@ -593,12 +2474,17 @@ STATE
 let inquiries=[];
 let filteredInquiries=[];
 let currentPage=1;
+
 const PAGE_SIZE=10;
 
 let currentDetailInquiry=null;
+
 let currentContent=[];
+
 let currentDisplay="carousel";
+
 let carouselIndex=0;
+
 let carouselTimer=null;
 
 
@@ -608,17 +2494,40 @@ FIRESTORE HELPERS
 
 function firestoreValue(value){
 
-if(value===null||value===undefined)return null;
+if(value===null||value===undefined){
+return null;
+}
 
 if(typeof value==="number"){
-return {integerValue:String(Math.round(value))};
+
+if(Number.isInteger(value)){
+return{
+integerValue:String(value)
+};
+}
+
+return{
+doubleValue:value
+};
+
 }
 
 if(typeof value==="boolean"){
-return {booleanValue:value};
+return{
+booleanValue:value
+};
 }
 
-return {stringValue:String(value)};
+if(value instanceof Date){
+return{
+timestampValue:value.toISOString()
+};
+}
+
+return{
+stringValue:String(value)
+};
+
 }
 
 
@@ -626,22 +2535,40 @@ function extractFirestoreValue(field){
 
 if(!field)return "";
 
-if(field.stringValue!==undefined)return field.stringValue;
+if(field.stringValue!==undefined){
+return field.stringValue;
+}
 
-if(field.integerValue!==undefined)return Number(field.integerValue);
+if(field.integerValue!==undefined){
+return Number(field.integerValue);
+}
 
-if(field.doubleValue!==undefined)return Number(field.doubleValue);
+if(field.doubleValue!==undefined){
+return Number(field.doubleValue);
+}
 
-if(field.booleanValue!==undefined)return field.booleanValue;
+if(field.booleanValue!==undefined){
+return field.booleanValue;
+}
 
-if(field.timestampValue!==undefined)return field.timestampValue;
+if(field.timestampValue!==undefined){
+return field.timestampValue;
+}
 
 if(field.arrayValue){
-return(field.arrayValue.values||[]).map(extractFirestoreValue);
+
+return(
+field.arrayValue.values||[]
+).map(extractFirestoreValue);
+
 }
 
 if(field.mapValue){
-return firestoreFieldsToObject(field.mapValue.fields||{});
+
+return firestoreFieldsToObject(
+field.mapValue.fields||{}
+);
+
 }
 
 return "";
@@ -660,18 +2587,31 @@ return obj;
 }
 
 
-async function firestoreFetch(url,options={}){
+/* ============================================================
+FIRESTORE REQUEST
+============================================================ */
 
-const separator=url.includes("?")?"&":"?";
+async function firestoreRequest(path,options={}){
 
-const finalUrl=
-url+
-separator+
-"key="+
-encodeURIComponent(FIREBASE_API_KEY);
+let url;
+
+if(path.startsWith("https://")){
+url=new URL(path);
+}else{
+
+url=new URL(
+"https://firestore.googleapis.com/v1/"+path
+);
+
+}
+
+url.searchParams.set(
+"key",
+FIREBASE_API_KEY
+);
 
 const response=await fetch(
-finalUrl,
+url.toString(),
 {
 ...options,
 headers:{
@@ -693,11 +2633,12 @@ data={};
 
 if(!response.ok){
 
-const message=
+const errorMessage=
 data?.error?.message||
-"Firestore request failed.";
+`Firestore request failed (${response.status})`;
 
-throw new Error(message);
+throw new Error(errorMessage);
+
 }
 
 return data;
@@ -705,35 +2646,15 @@ return data;
 
 
 /* ============================================================
-DOCUMENT URL FIX
+DOCUMENT URL
 ============================================================ */
-
-/*
-IMPORTANT:
-
-Firestore returns a document name like:
-
-projects/jobs-2f152/databases/(default)/documents/studentInquiries/ABC123
-
-The old code incorrectly did:
-
-FIRESTORE_BASE + "/" + docName
-
-which produced:
-
-.../documents/projects/jobs-2f152/...
-
-and caused:
-
-"Document name lacks '/' at index..."
-
-This function fixes that permanently.
-*/
 
 function getDocumentUrl(docName){
 
 if(!docName){
-throw new Error("Firestore document path is missing.");
+throw new Error(
+"Firestore document path is missing."
+);
 }
 
 if(docName.startsWith("https://")){
@@ -741,34 +2662,43 @@ return docName;
 }
 
 if(docName.startsWith("projects/")){
-return "https://firestore.googleapis.com/v1/"+docName;
+
+return "https://firestore.googleapis.com/v1/"+
+docName;
+
 }
 
 if(docName.startsWith("/v1/projects/")){
-return "https://firestore.googleapis.com"+docName;
+
+return "https://firestore.googleapis.com"+
+docName;
+
 }
 
 return FIRESTORE_BASE+"/"+docName;
+
 }
 
 
 /* ============================================================
-LOAD INQUIRIES
+LOAD ALL INQUIRIES
 ============================================================ */
 
 async function loadInquiries(){
 
-const tbody=document.getElementById("inquiryBody");
+const container=
+document.getElementById("inquiryBody");
 
-tbody.innerHTML=`
-<tr>
-<td colspan="8">
+container.innerHTML=`
+
 <div class="loading">
+
 <div class="spinner"></div>
+
 Loading inquiries...
+
 </div>
-</td>
-</tr>
+
 `;
 
 try{
@@ -778,26 +2708,40 @@ let pageToken="";
 
 do{
 
-let url=INQUIRY_URL+"?pageSize=300";
+const url=
+INQUIRY_PATH+
+"?pageSize=300"+
+(
+pageToken
+?"&pageToken="+
+encodeURIComponent(pageToken)
+:""
+);
 
-if(pageToken){
-url+="&pageToken="+encodeURIComponent(pageToken);
-}
+const data=
+await firestoreRequest(url);
 
-const data=await firestoreFetch(url);
+allDocs=
+allDocs.concat(
+data.documents||[]
+);
 
-allDocs=allDocs.concat(data.documents||[]);
-
-pageToken=data.nextPageToken||"";
+pageToken=
+data.nextPageToken||"";
 
 }while(pageToken);
 
 
-inquiries=allDocs.map(doc=>{
+inquiries=
+allDocs.map(doc=>{
 
-const obj=firestoreFieldsToObject(doc.fields||{});
+const obj=
+firestoreFieldsToObject(
+doc.fields||{}
+);
 
-obj.__docName=doc.name||"";
+obj.__docName=
+doc.name||"";
 
 return obj;
 
@@ -812,30 +2756,49 @@ new Date(a.createdAt||0)
 
 
 buildFilters();
+
 applyFilters();
+
 updateDashboard();
+
 calculateAndRenderEarnings();
 
 }catch(error){
 
-console.error(error);
+console.error(
+"LOAD INQUIRIES ERROR:",
+error
+);
 
 inquiries=[];
 
-document.getElementById("inquiryBody").innerHTML=`
-<tr>
-<td colspan="8">
+container.innerHTML=`
+
 <div class="empty">
-<div class="empty-icon">⚠</div>
-<div class="empty-title">Unable to load inquiries</div>
-<div class="empty-text">${escapeHtml(error.message)}</div>
+
+<div class="empty-icon">
+⚠
 </div>
-</td>
-</tr>
+
+<div class="empty-title">
+Unable to load inquiries
+</div>
+
+<div class="empty-text">
+${escapeHtml(error.message)}
+</div>
+
+</div>
+
 `;
 
-showToast(error.message,"error");
+showToast(
+error.message,
+"error"
+);
+
 }
+
 }
 
 
@@ -847,30 +2810,36 @@ async function loadPaymentSettings(){
 
 try{
 
-const data=await firestoreFetch(PAYMENT_SETTINGS_URL);
+const data=
+await firestoreRequest(PAYMENT_PATH);
 
-const fields=data.fields||{};
+const fields=
+data.fields||{};
+
 
 const getNumber=(name,fallback)=>{
 
-const value=extractFirestoreValue(fields[name]);
-const num=Number(value);
+const value=
+extractFirestoreValue(
+fields[name]
+);
 
-return Number.isFinite(num)?num:fallback;
+const number=
+Number(value);
+
+return Number.isFinite(number)
+?number
+:fallback;
+
 };
 
 
 SETTINGS.baseSalary=
-getNumber("baseSalary",SETTINGS.baseSalary);
+getNumber(
+"baseSalary",
+SETTINGS.baseSalary
+);
 
-SETTINGS.demoIncentive=
-getNumber("demoIncentive",SETTINGS.demoIncentive);
-
-SETTINGS.level1Min=
-getNumber("level1Min",SETTINGS.level1Min);
-
-SETTINGS.level1Max=
-getNumber("level1Max",SETTINGS.level1Max);
 
 SETTINGS.level1AdmissionIncentive=
 getNumber(
@@ -878,17 +2847,18 @@ getNumber(
 SETTINGS.level1AdmissionIncentive
 );
 
-SETTINGS.level1NextBaseSalary=
+SETTINGS.level1Min=
 getNumber(
-"level1NextBaseSalary",
-SETTINGS.level1NextBaseSalary
+"level1Min",
+SETTINGS.level1Min
 );
 
-SETTINGS.level2Min=
-getNumber("level2Min",SETTINGS.level2Min);
+SETTINGS.level1Max=
+getNumber(
+"level1Max",
+SETTINGS.level1Max
+);
 
-SETTINGS.level2Max=
-getNumber("level2Max",SETTINGS.level2Max);
 
 SETTINGS.level2AdmissionIncentive=
 getNumber(
@@ -896,23 +2866,18 @@ getNumber(
 SETTINGS.level2AdmissionIncentive
 );
 
-SETTINGS.level2NextBaseSalary=
+SETTINGS.level2Min=
 getNumber(
-"level2NextBaseSalary",
-SETTINGS.level2NextBaseSalary
+"level2Min",
+SETTINGS.level2Min
 );
 
-SETTINGS.level3Min=
-getNumber("level3Min",SETTINGS.level3Min);
+SETTINGS.level2Max=
+getNumber(
+"level2Max",
+SETTINGS.level2Max
+);
 
-const level3Max=extractFirestoreValue(fields.level3Max);
-
-SETTINGS.level3Max=
-level3Max===""||
-level3Max===null||
-level3Max===undefined
-?null
-:Number(level3Max);
 
 SETTINGS.level3AdmissionIncentive=
 getNumber(
@@ -920,11 +2885,19 @@ getNumber(
 SETTINGS.level3AdmissionIncentive
 );
 
-SETTINGS.level3NextBaseSalary=
+SETTINGS.level3Min=
 getNumber(
-"level3NextBaseSalary",
-SETTINGS.level3NextBaseSalary
+"level3Min",
+SETTINGS.level3Min
 );
+
+
+SETTINGS.visitReward=
+getNumber(
+"visitReward",
+SETTINGS.visitReward
+);
+
 
 calculateAndRenderEarnings();
 
@@ -936,12 +2909,14 @@ error.message
 );
 
 calculateAndRenderEarnings();
+
 }
+
 }
 
 
 /* ============================================================
-CONTENT
+COURSES
 ============================================================ */
 
 async function loadContent(){
@@ -953,17 +2928,26 @@ let pageToken="";
 
 do{
 
-let url=CONTENT_URL+"?pageSize=300";
+const url=
+COURSE_PATH+
+"?pageSize=300"+
+(
+pageToken
+?"&pageToken="+
+encodeURIComponent(pageToken)
+:""
+);
 
-if(pageToken){
-url+="&pageToken="+encodeURIComponent(pageToken);
-}
+const data=
+await firestoreRequest(url);
 
-const data=await firestoreFetch(url);
+allDocs=
+allDocs.concat(
+data.documents||[]
+);
 
-allDocs=allDocs.concat(data.documents||[]);
-
-pageToken=data.nextPageToken||"";
+pageToken=
+data.nextPageToken||"";
 
 }while(pageToken);
 
@@ -972,32 +2956,44 @@ currentContent=
 allDocs
 .map(doc=>{
 
-const obj=firestoreFieldsToObject(doc.fields||{});
+const obj=
+firestoreFieldsToObject(
+doc.fields||{}
+);
 
-obj.__docName=doc.name||"";
+obj.__docName=
+doc.name||"";
 
 return obj;
 
 })
-.filter(item=>item.active!==false&&item.active!=="false")
+.filter(
+item=>
+item.active!==false&&
+item.active!=="false"
+)
 .sort(
 (a,b)=>
 Number(a.order||9999)-
 Number(b.order||9999)
 );
 
+
 renderContent();
 
 }catch(error){
 
 console.warn(
-"Content could not be loaded:",
+"Course settings could not be loaded:",
 error.message
 );
 
 currentContent=[];
+
 renderContent();
+
 }
+
 }
 
 
@@ -1009,14 +3005,22 @@ function isCurrentMonth(dateString){
 
 if(!dateString)return false;
 
-const date=new Date(dateString);
+const date=
+new Date(dateString);
 
-if(Number.isNaN(date.getTime()))return false;
+if(Number.isNaN(date.getTime())){
+return false;
+}
 
 const now=new Date();
 
-return date.getFullYear()===now.getFullYear()&&
-date.getMonth()===now.getMonth();
+return(
+date.getFullYear()===
+now.getFullYear()&&
+date.getMonth()===
+now.getMonth()
+);
+
 }
 
 
@@ -1025,9 +3029,27 @@ function getPreviousMonthRange(){
 const now=new Date();
 
 return{
-start:new Date(now.getFullYear(),now.getMonth()-1,1),
-end:new Date(now.getFullYear(),now.getMonth(),0,23,59,59,999)
+
+start:
+new Date(
+now.getFullYear(),
+now.getMonth()-1,
+1
+),
+
+end:
+new Date(
+now.getFullYear(),
+now.getMonth(),
+0,
+23,
+59,
+59,
+999
+)
+
 };
+
 }
 
 
@@ -1035,18 +3057,26 @@ function isInPreviousMonth(dateString){
 
 if(!dateString)return false;
 
-const date=new Date(dateString);
+const date=
+new Date(dateString);
 
-if(Number.isNaN(date.getTime()))return false;
+if(Number.isNaN(date.getTime())){
+return false;
+}
 
-const range=getPreviousMonthRange();
+const range=
+getPreviousMonthRange();
 
-return date>=range.start&&date<=range.end;
+return(
+date>=range.start&&
+date<=range.end
+);
+
 }
 
 
 /* ============================================================
-UNIQUE STUDENTS
+MOBILE / UNIQUE
 ============================================================ */
 
 function normalizeMobile(mobile){
@@ -1054,6 +3084,7 @@ function normalizeMobile(mobile){
 return String(mobile||"")
 .replace(/\D/g,"")
 .slice(-10);
+
 }
 
 
@@ -1063,7 +3094,8 @@ const map=new Map();
 
 list.forEach(item=>{
 
-const mobile=normalizeMobile(item.mobile);
+const mobile=
+normalizeMobile(item.mobile);
 
 if(!mobile)return;
 
@@ -1074,11 +3106,12 @@ map.set(mobile,item);
 });
 
 return Array.from(map.values());
+
 }
 
 
 /* ============================================================
-STATUS HELPERS
+STATUS
 ============================================================ */
 
 function normalizeStatus(value){
@@ -1088,43 +3121,90 @@ return String(value||"")
 .trim()
 .replace(/_/g,"-")
 .replace(/\s+/g,"-");
+
+}
+
+
+function getEffectiveRawStatus(item){
+
+return normalizeStatus(
+item.telecallerStatus||
+item.status||
+"new"
+);
+
 }
 
 
 function isDemoCompleted(item){
 
-const status=normalizeStatus(item.status);
-const teleStatus=normalizeStatus(item.telecallerStatus);
+const status=
+getEffectiveRawStatus(item);
 
 return[
-"demo-completed",
-"demo"
-].includes(status)||
-[
-"demo-completed",
-"demo"
-].includes(teleStatus);
+"demo",
+"demo-class",
+"demo-completed"
+].includes(status);
+
+}
+
+
+function isVisited(item){
+
+return getEffectiveRawStatus(item)==="visited";
+
 }
 
 
 function isConverted(item){
 
-return normalizeStatus(item.status)==="converted"||
-normalizeStatus(item.telecallerStatus)==="converted";
+return getEffectiveRawStatus(item)==="converted";
+
 }
 
+
+/* ============================================================
+CURRENT MONTH PERFORMANCE
+============================================================ */
 
 function getCurrentMonthDemoStudents(){
 
 return uniqueByMobile(
 inquiries.filter(item=>{
 
-const date=item.updatedAt||item.createdAt;
+const date=
+item.updatedAt||
+item.createdAt;
 
-return isCurrentMonth(date)&&isDemoCompleted(item);
+return(
+isCurrentMonth(date)&&
+isDemoCompleted(item)
+);
 
 })
 );
+
+}
+
+
+function getCurrentMonthVisitStudents(){
+
+return uniqueByMobile(
+inquiries.filter(item=>{
+
+const date=
+item.updatedAt||
+item.createdAt;
+
+return(
+isCurrentMonth(date)&&
+isVisited(item)
+);
+
+})
+);
+
 }
 
 
@@ -1133,12 +3213,18 @@ function getCurrentMonthConvertedStudents(){
 return uniqueByMobile(
 inquiries.filter(item=>{
 
-const date=item.updatedAt||item.createdAt;
+const date=
+item.updatedAt||
+item.createdAt;
 
-return isCurrentMonth(date)&&isConverted(item);
+return(
+isCurrentMonth(date)&&
+isConverted(item)
+);
 
 })
 );
+
 }
 
 
@@ -1147,12 +3233,18 @@ function getPreviousMonthConvertedStudents(){
 return uniqueByMobile(
 inquiries.filter(item=>{
 
-const date=item.updatedAt||item.createdAt;
+const date=
+item.updatedAt||
+item.createdAt;
 
-return isInPreviousMonth(date)&&isConverted(item);
+return(
+isInPreviousMonth(date)&&
+isConverted(item)
+);
 
 })
 );
+
 }
 
 
@@ -1165,15 +3257,23 @@ function getLevelByCount(count){
 if(count>=SETTINGS.level3Min){
 
 return{
+
 level:3,
+
 name:"Level 3",
-rate:SETTINGS.level3AdmissionIncentive,
-nextBase:SETTINGS.level3NextBaseSalary,
-min:SETTINGS.level3Min,
-max:SETTINGS.level3Max
+
+rate:
+SETTINGS.level3AdmissionIncentive,
+
+min:
+SETTINGS.level3Min,
+
+max:null
+
 };
 
 }
+
 
 if(
 count>=SETTINGS.level2Min&&
@@ -1181,54 +3281,42 @@ count<=SETTINGS.level2Max
 ){
 
 return{
+
 level:2,
+
 name:"Level 2",
-rate:SETTINGS.level2AdmissionIncentive,
-nextBase:SETTINGS.level2NextBaseSalary,
-min:SETTINGS.level2Min,
-max:SETTINGS.level2Max
+
+rate:
+SETTINGS.level2AdmissionIncentive,
+
+min:
+SETTINGS.level2Min,
+
+max:
+SETTINGS.level2Max
+
 };
 
 }
 
+
 return{
+
 level:1,
+
 name:"Level 1",
-rate:SETTINGS.level1AdmissionIncentive,
-nextBase:SETTINGS.level1NextBaseSalary,
-min:SETTINGS.level1Min,
-max:SETTINGS.level1Max
+
+rate:
+SETTINGS.level1AdmissionIncentive,
+
+min:
+SETTINGS.level1Min,
+
+max:
+SETTINGS.level1Max
+
 };
-}
 
-
-function getPreviousMonthLevel(){
-
-const count=getPreviousMonthConvertedStudents().length;
-
-if(count===0){
-return{
-count:0,
-level:null,
-name:"No Previous Data",
-nextBase:SETTINGS.baseSalary
-};
-}
-
-return{
-count,
-...getLevelByCount(count)
-};
-}
-
-
-function getCurrentBaseSalary(){
-
-const previous=getPreviousMonthLevel();
-
-return previous.level?
-previous.nextBase:
-SETTINGS.baseSalary;
 }
 
 
@@ -1241,113 +3329,290 @@ function calculateEarnings(){
 const demoCount=
 getCurrentMonthDemoStudents().length;
 
+const visitCount=
+getCurrentMonthVisitStudents().length;
+
 const convertedCount=
 getCurrentMonthConvertedStudents().length;
 
-const level=getLevelByCount(convertedCount);
+const level=
+getLevelByCount(
+convertedCount
+);
 
-const baseSalary=getCurrentBaseSalary();
 
-const demoReward=
-demoCount*SETTINGS.demoIncentive;
+/*
+Latest payment rule:
+
+Base Salary
++
+Unique Converted Admissions × Active Level Rate
+
+Visit reward is included only when
+Admin sets visitReward > 0.
+*/
+
+const baseSalary=
+SETTINGS.baseSalary;
+
+const visitReward=
+visitCount*
+SETTINGS.visitReward;
 
 const admissionReward=
-convertedCount*level.rate;
+convertedCount*
+level.rate;
+
+const total=
+baseSalary+
+visitReward+
+admissionReward;
+
 
 return{
+
 demoCount,
+
+visitCount,
+
 convertedCount,
+
 level,
+
 baseSalary,
-demoReward,
+
+visitReward,
+
 admissionReward,
-total:
-baseSalary+
-demoReward+
-admissionReward
+
+total
+
 };
+
 }
 
 
+/* ============================================================
+RENDER EARNINGS
+============================================================ */
+
 function calculateAndRenderEarnings(){
 
-const earning=calculateEarnings();
+const earning=
+calculateEarnings();
 
-const previous=getPreviousMonthLevel();
+const previousCount=
+getPreviousMonthConvertedStudents().length;
 
-setText("dashboardTotal",money(earning.total));
-setText("dashBase",money(earning.baseSalary));
-setText("dashDemoReward",money(earning.demoReward));
-setText("dashAdmissionReward",money(earning.admissionReward));
-setText("currentBaseText",money(earning.baseSalary));
+const previous=
+getLevelByCount(
+previousCount
+);
+
+
+setText(
+"dashboardTotal",
+money(earning.total)
+);
+
+setText(
+"dashBase",
+money(earning.baseSalary)
+);
+
+setText(
+"dashDemoReward",
+money(earning.visitReward)
+);
+
+setText(
+"dashAdmissionReward",
+money(earning.admissionReward)
+);
+
+setText(
+"currentBaseText",
+money(earning.baseSalary)
+);
+
 
 setText(
 "previousLevelText",
-previous.level
-?`${previous.name} (${previous.count} admissions)`
+previousCount
+?`${previous.name} (${previousCount} admissions)`
 :"No previous data"
 );
 
-setText("nextBaseText",money(earning.level.nextBase));
 
-setText("statDemo",earning.demoCount);
-setText("statConverted",earning.convertedCount);
-setText("statEarning",money(earning.total));
+setText(
+"nextBaseText",
+money(SETTINGS.baseSalary)
+);
 
-setText("earningPageTotal",money(earning.total));
-setText("earningPageBase",money(earning.baseSalary));
-setText("earningPageDemo",money(earning.demoReward));
-setText("earningPageAdmission",money(earning.admissionReward));
 
-setText("earnDemoCount",earning.demoCount);
-setText("earnDemoRate",money(SETTINGS.demoIncentive));
-setText("earnAdmissionCount",earning.convertedCount);
-setText("earnLevel",earning.level.name);
-setText("earnAdmissionRate",money(earning.level.rate));
+setText(
+"statDemo",
+earning.demoCount
+);
 
-setText("nextMonthSalaryBig",money(earning.level.nextBase));
-setText("salaryCurrentLevel",earning.level.name);
-setText("salaryDefaultBase",money(SETTINGS.baseSalary));
-setText("salaryNextBase",money(earning.level.nextBase));
+setText(
+"statConverted",
+earning.convertedCount
+);
+
+setText(
+"statEarning",
+money(earning.total)
+);
+
+
+setText(
+"earningPageTotal",
+money(earning.total)
+);
+
+setText(
+"earningPageBase",
+money(earning.baseSalary)
+);
+
+setText(
+"earningPageDemo",
+money(earning.visitReward)
+);
+
+setText(
+"earningPageAdmission",
+money(earning.admissionReward)
+);
+
+
+setText(
+"earnDemoCount",
+earning.visitCount
+);
+
+setText(
+"earnDemoRate",
+money(SETTINGS.visitReward)
+);
+
+setText(
+"earnAdmissionCount",
+earning.convertedCount
+);
+
+setText(
+"earnLevel",
+earning.level.name
+);
+
+setText(
+"earnAdmissionRate",
+money(earning.level.rate)
+);
+
+
+setText(
+"nextMonthSalaryBig",
+money(SETTINGS.baseSalary)
+);
+
+setText(
+"salaryCurrentLevel",
+earning.level.name
+);
+
+setText(
+"salaryDefaultBase",
+money(SETTINGS.baseSalary)
+);
+
+setText(
+"salaryNextBase",
+money(SETTINGS.baseSalary)
+);
+
 
 renderLevelCards(
 earning.convertedCount,
 earning.level
 );
+
 }
 
 
-function renderLevelCards(count,currentLevel){
+/* ============================================================
+LEVEL CARDS
+============================================================ */
 
-const container=document.getElementById("levelCards");
+function renderLevelCards(
+count,
+currentLevel
+){
+
+const container=
+document.getElementById(
+"levelCards"
+);
+
 
 const levels=[
+
 {
-level:1,title:"Level 1",
+
+level:1,
+
+title:"Level 1",
+
 min:SETTINGS.level1Min,
+
 max:SETTINGS.level1Max,
-rate:SETTINGS.level1AdmissionIncentive,
-nextBase:SETTINGS.level1NextBaseSalary
+
+rate:
+SETTINGS.level1AdmissionIncentive
+
 },
+
 {
-level:2,title:"Level 2",
+
+level:2,
+
+title:"Level 2",
+
 min:SETTINGS.level2Min,
+
 max:SETTINGS.level2Max,
-rate:SETTINGS.level2AdmissionIncentive,
-nextBase:SETTINGS.level2NextBaseSalary
+
+rate:
+SETTINGS.level2AdmissionIncentive
+
 },
+
 {
-level:3,title:"Level 3",
+
+level:3,
+
+title:"Level 3",
+
 min:SETTINGS.level3Min,
-max:SETTINGS.level3Max,
-rate:SETTINGS.level3AdmissionIncentive,
-nextBase:SETTINGS.level3NextBaseSalary
+
+max:null,
+
+rate:
+SETTINGS.level3AdmissionIncentive
+
 }
+
 ];
 
-container.innerHTML=levels.map(item=>{
 
-const active=item.level===currentLevel.level;
+container.innerHTML=
+levels.map(item=>{
+
+const active=
+item.level===
+currentLevel.level;
 
 const range=
 item.level===3
@@ -1355,68 +3620,122 @@ item.level===3
 :`${item.min}–${item.max} admissions`;
 
 return`
+
 <div class="level-card ${active?"active":""}">
+
 <div class="level-head">
+
 <div>
+
 <div class="level-name">
+
 ${item.title}
-${active?`<span class="level-tag">CURRENT</span>`:""}
+
+${active
+?`<span class="level-tag">CURRENT</span>`
+:""}
+
 </div>
-<div class="level-range">${range}</div>
+
+<div class="level-range">
+${range}
 </div>
-<div class="level-rate">${money(item.rate)}</div>
+
 </div>
-<div style="font-size:10px;color:#6b7280;margin-top:6px">Admission reward per student</div>
-<div style="font-size:10px;color:#6b7280;margin-top:4px">
-Next month base: <strong>${money(item.nextBase)}</strong>
+
+<div class="level-rate">
+${money(item.rate)}
 </div>
+
 </div>
+
+<div style="font-size:10px;color:#6b7280;margin-top:6px">
+Admission reward per student
+</div>
+
+</div>
+
 `;
 
 }).join("");
 
+
 let progressText="";
+
 
 if(currentLevel.level===1){
 
 const remaining=
-Math.max(0,SETTINGS.level2Min-count);
+Math.max(
+0,
+SETTINGS.level2Min-count
+);
 
 progressText=
 remaining>0
 ?`${remaining} more admission${remaining===1?"":"s"} to reach Level 2.`
 :"Level 2 reached.";
 
-}else if(currentLevel.level===2){
+}
+else if(currentLevel.level===2){
 
 const remaining=
-Math.max(0,SETTINGS.level3Min-count);
+Math.max(
+0,
+SETTINGS.level3Min-count
+);
 
 progressText=
 remaining>0
 ?`${remaining} more admission${remaining===1?"":"s"} to reach Level 3.`
 :"Level 3 reached.";
 
-}else{
-progressText="Level 3 active. Highest configured admission level.";
 }
+else{
+
+progressText=
+"Level 3 active. Highest configured admission level.";
+
+}
+
 
 setText(
 "levelProgressText",
 `Current: ${currentLevel.name} • ${count} converted admission${count===1?"":"s"} • ${progressText}`
 );
+
 }
 
 
+/* ============================================================
+DASHBOARD
+============================================================ */
+
 function updateDashboard(){
 
-setText("statInquiries",inquiries.length);
+setText(
+"statInquiries",
+inquiries.length
+);
 
-const earning=calculateEarnings();
+const earning=
+calculateEarnings();
 
-setText("statDemo",earning.demoCount);
-setText("statConverted",earning.convertedCount);
-setText("statEarning",money(earning.total));
+setText(
+"statDemo",
+earning.demoCount
+);
+
+setText(
+"statConverted",
+earning.convertedCount
+);
+
+setText(
+"statEarning",
+money(earning.total)
+);
+
 }
 
 
@@ -1426,23 +3745,41 @@ FILTERS
 
 function buildFilters(){
 
-const courseSelect=document.getElementById("courseFilter");
-const coordinatorSelect=document.getElementById("coordinatorFilter");
+const courseSelect=
+document.getElementById(
+"courseFilter"
+);
+
+const coordinatorSelect=
+document.getElementById(
+"coordinatorFilter"
+);
+
 
 const courses=[
 ...new Set(
-inquiries.map(x=>x.course).filter(Boolean)
+inquiries
+.map(x=>x.course)
+.filter(Boolean)
 )
 ].sort();
+
 
 const coordinators=[
 ...new Set(
-inquiries.map(x=>x.coordinatorName).filter(Boolean)
+inquiries
+.map(x=>x.coordinatorName)
+.filter(Boolean)
 )
 ].sort();
 
-const oldCourse=courseSelect.value;
-const oldCoordinator=coordinatorSelect.value;
+
+const oldCourse=
+courseSelect.value;
+
+const oldCoordinator=
+coordinatorSelect.value;
+
 
 courseSelect.innerHTML=
 `<option value="">All Courses</option>`+
@@ -1451,6 +3788,7 @@ course=>
 `<option value="${escapeAttr(course)}">${escapeHtml(course)}</option>`
 ).join("");
 
+
 coordinatorSelect.innerHTML=
 `<option value="">All Coordinators</option>`+
 coordinators.map(
@@ -1458,31 +3796,58 @@ name=>
 `<option value="${escapeAttr(name)}">${escapeHtml(name)}</option>`
 ).join("");
 
+
 courseSelect.value=
-courses.includes(oldCourse)?oldCourse:"";
+courses.includes(oldCourse)
+?oldCourse
+:"";
+
 
 coordinatorSelect.value=
-coordinators.includes(oldCoordinator)?oldCoordinator:"";
+coordinators.includes(oldCoordinator)
+?oldCoordinator
+:"";
+
 }
 
+
+/* ============================================================
+APPLY FILTERS
+============================================================ */
 
 function applyFilters(){
 
 const search=
-document.getElementById("searchInput").value.toLowerCase().trim();
+document.getElementById(
+"searchInput"
+).value
+.toLowerCase()
+.trim();
+
 
 const status=
-document.getElementById("statusFilter").value;
+document.getElementById(
+"statusFilter"
+).value;
+
 
 const course=
-document.getElementById("courseFilter").value;
+document.getElementById(
+"courseFilter"
+).value;
+
 
 const coordinator=
-document.getElementById("coordinatorFilter").value;
+document.getElementById(
+"coordinatorFilter"
+).value;
 
-filteredInquiries=inquiries.filter(item=>{
+
+filteredInquiries=
+inquiries.filter(item=>{
 
 const text=[
+
 item.studentName,
 item.mobile,
 item.course,
@@ -1491,232 +3856,541 @@ item.remark,
 item.telecallerRemark,
 item.customStatus,
 item.coordinatorName
+
 ]
 .filter(Boolean)
 .join(" ")
 .toLowerCase();
 
-if(search&&!text.includes(search))return false;
 
 if(
-status&&
-normalizeStatus(item.status)!==normalizeStatus(status)
+search&&
+!text.includes(search)
 ){
 return false;
 }
 
-if(course&&item.course!==course)return false;
 
-if(coordinator&&item.coordinatorName!==coordinator)return false;
+if(
+status&&
+getEffectiveRawStatus(item)!==
+normalizeStatus(status)
+){
+return false;
+}
+
+
+if(
+course&&
+item.course!==course
+){
+return false;
+}
+
+
+if(
+coordinator&&
+item.coordinatorName!==coordinator
+){
+return false;
+}
+
 
 return true;
+
 });
 
+
 currentPage=1;
-renderInquiryTable();
+
+renderInquiryCards();
+
 }
 
 
 /* ============================================================
-DISPLAY STATUS
+STATUS DISPLAY
 ============================================================ */
 
 function getEffectiveStatus(item){
 
-const status=normalizeStatus(item.status);
+const status=
+getEffectiveRawStatus(item);
 
-const custom=String(item.customStatus||"").trim();
+const custom=
+String(
+item.customStatus||""
+).trim();
 
-if(status==="custom"&&custom)return custom;
 
-return formatStatus(status||"new");
+if(
+status==="custom"&&
+custom
+){
+
+return custom;
+
+}
+
+
+return formatStatus(
+status||"new"
+);
+
 }
 
 
 function getStatusClass(item){
 
-const status=normalizeStatus(item.status||"new");
+const status=
+getEffectiveRawStatus(item);
 
-if(status==="custom")return"badge-custom";
 
-if(status==="demo-completed"||status==="demo"){
-return"badge-demo-completed";
+if(status==="custom"){
+return"badge-custom";
 }
 
+
+if(
+status==="demo"||
+status==="demo-class"||
+status==="demo-completed"
+){
+
+return"badge-demo-completed";
+
+}
+
+
 return"badge-"+status;
+
 }
 
 
 /* ============================================================
-TABLE
+INQUIRY CARDS
 ============================================================ */
 
-function renderInquiryTable(){
+function renderInquiryCards(){
 
-const tbody=document.getElementById("inquiryBody");
+const container=
+document.getElementById(
+"inquiryBody"
+);
 
-const total=filteredInquiries.length;
+const total=
+filteredInquiries.length;
 
-const totalPages=Math.max(
+const totalPages=
+Math.max(
 1,
 Math.ceil(total/PAGE_SIZE)
 );
+
 
 if(currentPage>totalPages){
 currentPage=totalPages;
 }
 
-const start=(currentPage-1)*PAGE_SIZE;
+
+const start=
+(currentPage-1)*PAGE_SIZE;
+
 
 const pageItems=
-filteredInquiries.slice(start,start+PAGE_SIZE);
+filteredInquiries.slice(
+start,
+start+PAGE_SIZE
+);
+
 
 setText(
 "resultCount",
 `${total} ${total===1?"inquiry":"inquiries"} found`
 );
 
-if(pageItems.length===0){
 
-tbody.innerHTML=`
-<tr>
-<td colspan="8">
+if(!pageItems.length){
+
+container.innerHTML=`
+
 <div class="empty">
-<div class="empty-icon">⌕</div>
-<div class="empty-title">No inquiries found</div>
-<div class="empty-text">Try changing your search or filters.</div>
+
+<div class="empty-icon">
+⌕
 </div>
-</td>
-</tr>
+
+<div class="empty-title">
+No inquiries found
+</div>
+
+<div class="empty-text">
+Try changing your search or filters.
+</div>
+
+</div>
+
 `;
-
-}else{
-
-tbody.innerHTML=
-pageItems.map(renderInquiryRow).join("");
-}
 
 renderPagination(totalPages);
+
+return;
+
 }
 
 
-function renderInquiryRow(item){
+container.innerHTML=`
 
-const statusClass=getStatusClass(item);
-const updated=formatDate(item.updatedAt);
+<div class="inquiry-grid">
+
+${pageItems
+.map(renderInquiryCard)
+.join("")}
+
+</div>
+
+`;
+
+
+renderPagination(totalPages);
+
+}
+
+
+/* ============================================================
+SINGLE INQUIRY CARD
+============================================================ */
+
+function renderInquiryCard(item){
+
+const statusClass=
+getStatusClass(item);
+
+const status=
+getEffectiveStatus(item);
+
+const name=
+item.studentName||"Unknown";
+
+const initial=
+name
+.trim()
+.charAt(0)
+.toUpperCase()||"S";
+
+
+const updated=
+formatDate(item.updatedAt);
+
+
+const followup=
+item.followUpDate||"-";
+
+
+const remark=
+item.telecallerRemark||
+item.remark||
+"";
+
+
+const source=
+item.source||"-";
+
+
+const coordinator=
+item.coordinatorName||"-";
+
+
+const course=
+item.course||"-";
+
 
 return`
-<tr>
 
-<td>
-<div class="student-name">${escapeHtml(item.studentName||"Unknown")}</div>
-<div class="student-mobile">${escapeHtml(item.mobile||"-")}</div>
-</td>
+<div class="student-card">
 
-<td>${escapeHtml(item.course||"-")}</td>
+<div class="student-card-head">
 
-<td>${escapeHtml(item.source||"-")}</td>
+<div class="student-main">
 
-<td>
-<div style="font-size:11px;font-weight:700">${escapeHtml(item.coordinatorName||"-")}</div>
-<div style="font-size:9px;color:#6b7280">${escapeHtml(item.coordinatorMobile||"")}</div>
-</td>
+<div class="student-avatar">
+${escapeHtml(initial)}
+</div>
 
-<td>
+<div class="student-name-wrap">
+
+<div class="student-name">
+${escapeHtml(name)}
+</div>
+
+<div class="student-mobile">
+☎ ${escapeHtml(item.mobile||"-")}
+</div>
+
+</div>
+
+</div>
+
+
 <button
-class="badge ${statusClass}"
+class="badge ${statusClass} status-btn"
 onclick="openStatusModalByDoc('${escapeAttr(item.__docName||"")}')"
-style="border:0"
 title="Click to update status"
 >
-${escapeHtml(getEffectiveStatus(item))}
-</button>
-</td>
 
-<td>${escapeHtml(item.followUpDate||"-")}</td>
+${escapeHtml(status)}
 
-<td>${escapeHtml(updated)}</td>
-
-<td>
-<div class="action-group">
-
-<button class="mini-btn mini-call"
-onclick="callStudent('${escapeAttr(item.mobile||"")}')">
-Call
-</button>
-
-<button class="mini-btn mini-wa"
-onclick="whatsappStudent('${escapeAttr(item.mobile||"")}','${escapeAttr(item.studentName||"")}')">
-WhatsApp
-</button>
-
-<button class="mini-btn mini-view"
-onclick="viewStudent('${escapeAttr(item.__docName||"")}')">
-View
-</button>
-
-<button class="mini-btn mini-delete"
-onclick="deleteStudent('${escapeAttr(item.__docName||"")}','${escapeAttr(item.studentName||"")}')">
-Delete
 </button>
 
 </div>
-</td>
 
-</tr>
+
+<div class="student-tags">
+
+<span class="info-tag blue">
+${escapeHtml(course)}
+</span>
+
+<span class="info-tag green">
+${escapeHtml(source)}
+</span>
+
+${item.coordinatorName
+?`
+<span class="info-tag purple">
+${escapeHtml(coordinator)}
+</span>
+`
+:""}
+
+</div>
+
+
+<div class="info-grid">
+
+<div class="info-box">
+
+<div class="info-label">
+Follow-up
+</div>
+
+<div class="info-value">
+${escapeHtml(followup)}
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<div class="info-label">
+Coordinator
+</div>
+
+<div class="info-value">
+${escapeHtml(coordinator)}
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<div class="info-label">
+Updated
+</div>
+
+<div class="info-value">
+${escapeHtml(updated)}
+</div>
+
+</div>
+
+</div>
+
+
+${remark
+?`
+<div class="student-remark">
+
+<strong>Remark:</strong>
+${escapeHtml(remark)}
+
+</div>
+`
+:""}
+
+
+<div class="card-actions">
+
+<button
+class="card-action action-call"
+onclick="callStudent('${escapeAttr(item.mobile||"")}')"
+>
+☎ Call
+</button>
+
+
+<button
+class="card-action action-whatsapp"
+onclick="whatsappStudent('${escapeAttr(item.mobile||"")}','${escapeAttr(name)}')"
+>
+◉ WhatsApp
+</button>
+
+
+<button
+class="card-action action-view"
+onclick="viewStudent('${escapeAttr(item.__docName||"")}')"
+>
+⌕ View
+</button>
+
+
+<button
+class="card-action action-delete"
+onclick="deleteStudent('${escapeAttr(item.__docName||"")}','${escapeAttr(name)}')"
+>
+✕ Delete
+</button>
+
+</div>
+
+
+<div class="card-footer">
+
+<span>
+Created:
+<strong>${escapeHtml(formatDate(item.createdAt))}</strong>
+</span>
+
+<span>
+ID:
+<strong>${escapeHtml(
+String(item.__docName||"")
+.split("/")
+.pop()
+.slice(0,12)
+)}</strong>
+</span>
+
+</div>
+
+</div>
+
 `;
+
 }
 
+
+/* ============================================================
+PAGINATION
+============================================================ */
 
 function renderPagination(totalPages){
 
-const container=document.getElementById("paginationButtons");
+const container=
+document.getElementById(
+"paginationButtons"
+);
+
 
 setText(
 "pageInfo",
 `Page ${currentPage} of ${totalPages}`
 );
 
+
 if(totalPages<=1){
+
 container.innerHTML="";
+
 return;
+
 }
+
 
 let html="";
 
+
 if(currentPage>1){
+
 html+=`
-<button class="page-btn" onclick="goToPage(${currentPage-1})">‹</button>
+
+<button
+class="page-btn"
+onclick="goToPage(${currentPage-1})"
+>
+‹
+</button>
+
 `;
+
 }
 
-const start=Math.max(1,currentPage-2);
-const end=Math.min(totalPages,currentPage+2);
 
-for(let i=start;i<=end;i++){
+const start=
+Math.max(
+1,
+currentPage-2
+);
+
+
+const end=
+Math.min(
+totalPages,
+currentPage+2
+);
+
+
+for(
+let i=start;
+i<=end;
+i++
+){
 
 html+=`
+
 <button
 class="page-btn ${i===currentPage?"active":""}"
 onclick="goToPage(${i})"
->${i}</button>
+>
+${i}
+</button>
+
 `;
+
 }
+
 
 if(currentPage<totalPages){
+
 html+=`
-<button class="page-btn" onclick="goToPage(${currentPage+1})">›</button>
+
+<button
+class="page-btn"
+onclick="goToPage(${currentPage+1})"
+>
+›
+</button>
+
 `;
+
 }
 
+
 container.innerHTML=html;
+
 }
 
 
 function goToPage(page){
 
-currentPage=Number(page)||1;
-renderInquiryTable();
+currentPage=
+Number(page)||1;
+
+renderInquiryCards();
+
 }
 
 
@@ -1726,10 +4400,23 @@ STATUS MODAL
 
 function toggleCustomStatusBox(){
 
-const status=document.getElementById("newStatus").value;
+const status=
+document.getElementById(
+"newStatus"
+).value;
 
-const box=document.getElementById("customStatusBox");
-const input=document.getElementById("newCustomStatus");
+
+const box=
+document.getElementById(
+"customStatusBox"
+);
+
+
+const input=
+document.getElementById(
+"newCustomStatus"
+);
+
 
 if(status==="custom"){
 
@@ -1743,31 +4430,55 @@ setTimeout(
 }else{
 
 box.style.display="none";
+
 input.value="";
-}
+
 }
 
+}
+
+
+/* ============================================================
+OPEN STATUS MODAL
+============================================================ */
 
 function openStatusModalByDoc(docName){
 
-const item=inquiries.find(
+const item=
+inquiries.find(
 x=>x.__docName===docName
 );
 
+
 if(!item){
-showToast("Student record was not found.","error");
+
+showToast(
+"Student record was not found.",
+"error"
+);
+
 return;
+
 }
 
-document.getElementById("statusDocName").value=docName;
 
-document.getElementById("statusStudentName").value=
+document.getElementById(
+"statusDocName"
+).value=docName;
+
+
+document.getElementById(
+"statusStudentName"
+).value=
 item.studentName||"";
 
+
 const currentStatus=
-normalizeStatus(item.status||"new");
+getEffectiveRawStatus(item);
+
 
 const knownStatuses=[
+
 "new",
 "pending",
 "interested",
@@ -1779,48 +4490,79 @@ const knownStatuses=[
 "converted",
 "not-interested",
 "custom"
+
 ];
 
-document.getElementById("newStatus").value=
+
+document.getElementById(
+"newStatus"
+).value=
 knownStatuses.includes(currentStatus)
 ?currentStatus
 :"custom";
 
-document.getElementById("newFollowupDate").value=
+
+document.getElementById(
+"newFollowupDate"
+).value=
 item.followUpDate||"";
 
-document.getElementById("newTelecallerRemark").value=
+
+document.getElementById(
+"newTelecallerRemark"
+).value=
 item.telecallerRemark||"";
 
-document.getElementById("newCustomStatus").value=
+
+document.getElementById(
+"newCustomStatus"
+).value=
 item.customStatus||"";
+
 
 toggleCustomStatusBox();
 
 showModal("statusModal");
+
 }
 
 
 /* ============================================================
-FIXED SAVE STATUS
+ROBUST SAVE STATUS
 ============================================================ */
 
 async function saveStatus(){
 
 const docName=
-document.getElementById("statusDocName").value;
+document.getElementById(
+"statusDocName"
+).value;
+
 
 let status=
-document.getElementById("newStatus").value;
+document.getElementById(
+"newStatus"
+).value;
+
 
 const followUpDate=
-document.getElementById("newFollowupDate").value;
+document.getElementById(
+"newFollowupDate"
+).value;
+
 
 const remark=
-document.getElementById("newTelecallerRemark").value.trim();
+document.getElementById(
+"newTelecallerRemark"
+).value
+.trim();
+
 
 const customStatus=
-document.getElementById("newCustomStatus").value.trim();
+document.getElementById(
+"newCustomStatus"
+).value
+.trim();
 
 
 if(!docName){
@@ -1831,29 +4573,37 @@ showToast(
 );
 
 return;
+
 }
 
 
-if(status==="custom"&&!customStatus){
+if(
+status==="custom"&&
+!customStatus
+){
 
 showToast(
 "Please enter a custom status.",
 "error"
 );
 
-document.getElementById("newCustomStatus").focus();
-
 return;
+
 }
 
 
 if(status!=="custom"){
-document.getElementById("newCustomStatus").value="";
+document.getElementById(
+"newCustomStatus"
+).value="";
 }
 
 
 const saveBtn=
-document.getElementById("saveStatusBtn");
+document.getElementById(
+"saveStatusBtn"
+);
+
 
 saveBtn.disabled=true;
 saveBtn.textContent="Saving...";
@@ -1861,26 +4611,20 @@ saveBtn.textContent="Saving...";
 
 try{
 
-/*
-IMPORTANT FIX:
-
-docName already contains:
-
-projects/jobs-2f152/databases/(default)/documents/studentInquiries/XXXXX
-
-DO NOT do:
-
-FIRESTORE_BASE + "/" + docName
-
-because that creates an invalid duplicated path.
-*/
-
-const url=getDocumentUrl(docName);
+const url=
+new URL(
+getDocumentUrl(docName)
+);
 
 
 /*
-Only update the fields that belong to status management.
-Other student data remains untouched.
+IMPORTANT:
+
+Each updateMask field is added
+separately using URLSearchParams.
+
+This prevents malformed Firestore
+PATCH URLs.
 */
 
 const fields={
@@ -1911,20 +4655,15 @@ telecallerMobile:
 firestoreValue(telecallerMobile),
 
 updatedAt:{
-timestampValue:new Date().toISOString()
+timestampValue:
+new Date().toISOString()
 }
 
 };
 
 
-/*
-Firestore updateMask.
-
-This tells Firestore exactly which fields
-should be updated.
-*/
-
 const updateFields=[
+
 "status",
 "telecallerStatus",
 "customStatus",
@@ -1933,32 +4672,68 @@ const updateFields=[
 "telecallerName",
 "telecallerMobile",
 "updatedAt"
+
 ];
 
-const updateMask=
-updateFields
-.map(
-field=>
-"updateMask.fieldPaths="+
-encodeURIComponent(field)
-)
-.join("&");
+
+url.searchParams.set(
+"key",
+FIREBASE_API_KEY
+);
 
 
-await firestoreFetch(
-url+"?"+updateMask,
+updateFields.forEach(field=>{
+
+url.searchParams.append(
+"updateMask.fieldPaths",
+field
+);
+
+});
+
+
+const response=
+await fetch(
+url.toString(),
 {
 method:"PATCH",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
 body:JSON.stringify({
-fields
+fields:fields
 })
+
 }
 );
 
 
-/*
-Close modal only after successful Firestore update.
-*/
+const text=
+await response.text();
+
+
+let data={};
+
+try{
+data=
+text?JSON.parse(text):{};
+}catch{
+data={};
+}
+
+
+if(!response.ok){
+
+throw new Error(
+data?.error?.message||
+`Firestore update failed (${response.status})`
+);
+
+}
+
 
 hideModal("statusModal");
 
@@ -1972,8 +4747,9 @@ status==="custom"
 
 
 /*
-Reload data from Firestore so Coordinator
-and Telecaller see the same updated record.
+Reload from Firestore so that
+Coordinator and Telecaller have
+the same latest data.
 */
 
 await loadInquiries();
@@ -1986,17 +4762,24 @@ console.error(
 error
 );
 
+
 showToast(
-"Unable to update status: "+
-(error.message||"Firestore request failed."),
+"Unable to save status: "+
+(error.message||
+"Firestore request failed."),
 "error"
 );
+
 
 }finally{
 
 saveBtn.disabled=false;
-saveBtn.textContent="Save Status";
+
+saveBtn.textContent=
+"Save Status";
+
 }
+
 }
 
 
@@ -2006,21 +4789,53 @@ VIEW STUDENT
 
 function viewStudent(docName){
 
-const item=inquiries.find(
+const item=
+inquiries.find(
 x=>x.__docName===docName
 );
 
+
 if(!item)return;
+
 
 currentDetailInquiry=item;
 
-setText("detailName",item.studentName||"-");
-setText("detailMobile",item.mobile||"-");
-setText("detailCourse",item.course||"-");
-setText("detailSource",item.source||"-");
-setText("detailCoordinator",item.coordinatorName||"-");
-setText("detailCoordinatorMobile",item.coordinatorMobile||"-");
-setText("detailStatus",getEffectiveStatus(item));
+
+setText(
+"detailName",
+item.studentName||"-"
+);
+
+setText(
+"detailMobile",
+item.mobile||"-"
+);
+
+setText(
+"detailCourse",
+item.course||"-"
+);
+
+setText(
+"detailSource",
+item.source||"-"
+);
+
+setText(
+"detailCoordinator",
+item.coordinatorName||"-"
+);
+
+setText(
+"detailCoordinatorMobile",
+item.coordinatorMobile||"-"
+);
+
+setText(
+"detailStatus",
+getEffectiveStatus(item)
+);
+
 
 setText(
 "detailTelecallerStatus",
@@ -2029,42 +4844,52 @@ item.telecallerStatus
 :"-"
 );
 
+
 setText(
 "detailCustomStatus",
 item.customStatus||"-"
 );
+
 
 setText(
 "detailFollowup",
 item.followUpDate||"-"
 );
 
+
 setText(
 "detailCreated",
 formatDate(item.createdAt)
 );
+
 
 setText(
 "detailRemark",
 item.remark||"-"
 );
 
+
 setText(
 "detailTeleRemark",
 item.telecallerRemark||"-"
 );
 
+
 showModal("detailModal");
+
 }
 
 
 /* ============================================================
-CALL / WHATSAPP
+CALL
 ============================================================ */
 
 function callStudent(mobile){
 
-const clean=String(mobile||"").replace(/[^\d+]/g,"");
+const clean=
+String(mobile||"")
+.replace(/[^\d+]/g,"");
+
 
 if(!clean){
 
@@ -2074,15 +4899,28 @@ showToast(
 );
 
 return;
+
 }
 
-window.location.href="tel:"+clean;
+
+window.location.href=
+"tel:"+clean;
+
 }
 
 
-function whatsappStudent(mobile,studentName=""){
+/* ============================================================
+WHATSAPP
+============================================================ */
 
-const clean=normalizeMobile(mobile);
+function whatsappStudent(
+mobile,
+studentName=""
+){
+
+const clean=
+normalizeMobile(mobile);
+
 
 if(!clean){
 
@@ -2092,10 +4930,13 @@ showToast(
 );
 
 return;
+
 }
+
 
 const message=
 `Hello ${studentName||"Student"}, this is ${telecallerName} from BlackTerminal Computer Institute. How can I help you?`;
+
 
 const url=
 "https://wa.me/91"+
@@ -2103,15 +4944,23 @@ clean+
 "?text="+
 encodeURIComponent(message);
 
-window.open(url,"_blank");
+
+window.open(
+url,
+"_blank"
+);
+
 }
 
 
 /* ============================================================
-FIXED DELETE
+DELETE
 ============================================================ */
 
-async function deleteStudent(docName,studentName){
+async function deleteStudent(
+docName,
+studentName
+){
 
 if(!docName){
 
@@ -2121,36 +4970,71 @@ showToast(
 );
 
 return;
+
 }
+
 
 const confirmed=
 window.confirm(
 `Delete inquiry for ${studentName||"this student"}?`
 );
 
+
 if(!confirmed)return;
+
 
 try{
 
-/*
-docName is already the complete Firestore document name.
-*/
+const url=
+new URL(
+getDocumentUrl(docName)
+);
 
-const url=getDocumentUrl(docName);
 
-await firestoreFetch(
-url,
+url.searchParams.set(
+"key",
+FIREBASE_API_KEY
+);
+
+
+const response=
+await fetch(
+url.toString(),
 {
 method:"DELETE"
 }
 );
+
+
+const text=
+await response.text();
+
+
+if(!response.ok){
+
+let data={};
+
+try{
+data=
+text?JSON.parse(text):{};
+}catch{}
+
+throw new Error(
+data?.error?.message||
+`Delete failed (${response.status})`
+);
+
+}
+
 
 showToast(
 "Inquiry deleted successfully.",
 "success"
 );
 
+
 await loadInquiries();
+
 
 }catch(error){
 
@@ -2159,25 +5043,30 @@ console.error(
 error
 );
 
+
 showToast(
 "Unable to delete inquiry: "+
-(error.message||"Firestore request failed."),
+(error.message||
+"Firestore request failed."),
 "error"
 );
+
 }
+
 }
 
 
 /* ============================================================
-CONTENT HELPERS
+COURSE CONTENT
 ============================================================ */
 
 function getContentTitle(item){
 
-return item.title||
-item.courseName||
+return item.courseName||
+item.title||
 item.name||
-"Untitled";
+"Untitled Course";
+
 }
 
 
@@ -2186,6 +5075,7 @@ function getContentDescription(item){
 return item.description||
 item.shortDescription||
 "";
+
 }
 
 
@@ -2195,239 +5085,364 @@ return item.imageUrl||
 item.bannerUrl||
 item.image||
 "";
+
 }
 
 
 function getContentPrice(item){
 
-if(
-item.offerPrice!==undefined&&
-item.offerPrice!==null&&
-item.offerPrice!==""
-){
-return item.offerPrice;
+return item.offerPrice||
+item.price||
+"";
+
 }
 
-return item.price||"";
-}
 
+/* ============================================================
+RENDER CONTENT
+============================================================ */
 
 function renderContent(){
 
-const area=document.getElementById("contentArea");
+const area=
+document.getElementById(
+"contentArea"
+);
+
 
 if(!currentContent.length){
 
 area.innerHTML=`
+
 <div class="card">
+
 <div class="empty">
-<div class="empty-icon">▣</div>
-<div class="empty-title">No courses or offers available</div>
-<div class="empty-text">Admin has not published any active course or offer yet.</div>
+
+<div class="empty-icon">
+▣
 </div>
+
+<div class="empty-title">
+No courses available
 </div>
+
+<div class="empty-text">
+Admin has not published any active course yet.
+</div>
+
+</div>
+
+</div>
+
 `;
 
 return;
+
 }
+
 
 if(currentDisplay==="list"){
+
 renderContentList(area);
+
 return;
+
 }
+
 
 if(currentDisplay==="banner"){
+
 renderContentBanner(area);
+
 return;
+
 }
+
 
 renderContentCarousel(area);
+
 }
 
+
+/* ============================================================
+CONTENT HTML
+============================================================ */
 
 function contentItemHtml(item){
 
-const title=getContentTitle(item);
-const description=getContentDescription(item);
-const image=getContentImage(item);
-const price=getContentPrice(item);
-const originalPrice=item.price||"";
-const duration=item.duration||"";
-const validUntil=item.validUntil||"";
-const type=String(item.type||"course").toLowerCase();
+const title=
+getContentTitle(item);
 
-let priceHtml="";
+const description=
+getContentDescription(item);
 
-if(originalPrice&&price){
+const image=
+getContentImage(item);
 
-if(String(originalPrice)!==String(price)){
+const price=
+getContentPrice(item);
 
-priceHtml=`
-<div class="price-line">
-<span class="old-price">₹${escapeHtml(String(originalPrice))}</span>
-<span class="offer-price">₹${escapeHtml(String(price))}</span>
-</div>
-`;
+const duration=
+item.duration||"";
 
-}else{
 
-priceHtml=`
-<div class="price-line">
-<span class="offer-price">₹${escapeHtml(String(price))}</span>
-</div>
-`;
-}
-
-}else if(price){
-
-priceHtml=`
-<div class="price-line">
-<span class="offer-price">₹${escapeHtml(String(price))}</span>
-</div>
-`;
-}
-
-const imageHtml=image
-?`<img src="${escapeAttr(image)}" alt="${escapeAttr(title)}" onerror="this.style.display='none'">`
+const imageHtml=
+image
+?`
+<img
+src="${escapeAttr(image)}"
+alt="${escapeAttr(title)}"
+onerror="this.style.display='none'"
+>
+`
 :"";
+
 
 return`
 
-<div class="promo-image">${imageHtml}</div>
+<div class="promo-image">
+${imageHtml}
+</div>
 
 <div class="promo-content">
 
 <div class="promo-tag">
-${type==="offer"?"SPECIAL OFFER":"COURSE"}
+COURSE
 </div>
 
 <div class="promo-title">
 ${escapeHtml(title)}
 </div>
 
-${duration?
-`<div style="font-size:10px;color:#d1d5db;margin-top:5px">
+${duration
+?`
+<div style="font-size:10px;color:#d1d5db;margin-top:5px">
 Duration: ${escapeHtml(String(duration))}
-</div>`:""}
+</div>
+`
+:""}
 
 <div class="promo-description">
 ${escapeHtml(description)}
 </div>
 
-${priceHtml}
+${price
+?`
+<div class="price-line">
 
-${validUntil?
-`<div class="validity">
-Valid until: ${escapeHtml(String(validUntil))}
-</div>`:""}
+<span class="offer-price">
+₹${escapeHtml(String(price))}
+</span>
 
 </div>
+`
+:""}
+
+</div>
+
 `;
+
 }
 
+
+/* ============================================================
+BANNER
+============================================================ */
 
 function renderContentBanner(area){
 
 area.innerHTML=`
+
 <div class="banner-list">
+
 ${currentContent.map(
-item=>`
+item=>
+`
 <div class="promo-banner">
 ${contentItemHtml(item)}
 </div>
 `
 ).join("")}
+
 </div>
+
 `;
+
 }
 
+
+/* ============================================================
+CAROUSEL
+============================================================ */
 
 function renderContentCarousel(area){
 
 carouselIndex=0;
 
+
 if(carouselTimer){
-clearInterval(carouselTimer);
+
+clearInterval(
+carouselTimer
+);
+
 }
 
+
 area.innerHTML=`
+
 <div class="carousel">
 
-<div class="carousel-track" id="carouselTrack">
+<div
+class="carousel-track"
+id="carouselTrack"
+>
 
 ${currentContent.map(
-item=>`
+item=>
+`
 <div class="carousel-slide">
+
 <div class="promo-banner">
 ${contentItemHtml(item)}
 </div>
+
 </div>
 `
 ).join("")}
 
 </div>
 
-${currentContent.length>1?`
 
-<button class="carousel-control carousel-prev" id="carouselPrev">‹</button>
-<button class="carousel-control carousel-next" id="carouselNext">›</button>
+${currentContent.length>1
+?`
 
-<div class="carousel-dots" id="carouselDots">
+<button
+class="carousel-control carousel-prev"
+id="carouselPrev"
+>
+‹
+</button>
+
+<button
+class="carousel-control carousel-next"
+id="carouselNext"
+>
+›
+</button>
+
+<div
+class="carousel-dots"
+id="carouselDots"
+>
 
 ${currentContent.map(
 (_,i)=>
-`<button class="carousel-dot ${i===0?"active":""}" onclick="goCarousel(${i})"></button>`
+`
+<button
+class="carousel-dot ${i===0?"active":""}"
+onclick="goCarousel(${i})"
+>
+</button>
+`
 ).join("")}
 
 </div>
-
-`:""}
+`
+:""}
 
 </div>
+
 `;
 
-const next=document.getElementById("carouselNext");
-const prev=document.getElementById("carouselPrev");
+
+const next=
+document.getElementById(
+"carouselNext"
+);
+
+
+const prev=
+document.getElementById(
+"carouselPrev"
+);
+
 
 if(next){
-next.onclick=()=>goCarousel(carouselIndex+1);
+
+next.onclick=
+()=>goCarousel(
+carouselIndex+1
+);
+
 }
 
+
 if(prev){
-prev.onclick=()=>goCarousel(carouselIndex-1);
+
+prev.onclick=
+()=>goCarousel(
+carouselIndex-1
+);
+
 }
+
 
 if(currentContent.length>1){
 
 carouselTimer=
 setInterval(
-()=>goCarousel(carouselIndex+1),
+()=>goCarousel(
+carouselIndex+1
+),
 5000
 );
-}
+
 }
 
+}
+
+
+/* ============================================================
+GO CAROUSEL
+============================================================ */
 
 function goCarousel(index){
 
 if(!currentContent.length)return;
 
+
 if(index<0){
-index=currentContent.length-1;
+
+index=
+currentContent.length-1;
+
 }
 
+
 if(index>=currentContent.length){
+
 index=0;
+
 }
+
 
 carouselIndex=index;
 
-const track=document.getElementById("carouselTrack");
+
+const track=
+document.getElementById(
+"carouselTrack"
+);
+
 
 if(track){
+
 track.style.transform=
 `translateX(-${index*100}%)`;
+
 }
+
 
 document
 .querySelectorAll(".carousel-dot")
@@ -2438,31 +5453,56 @@ dot.classList.toggle(
 i===index
 )
 );
+
 }
 
+
+/* ============================================================
+CONTENT LIST
+============================================================ */
 
 function renderContentList(area){
 
 area.innerHTML=`
+
 <div class="content-list">
 
 ${currentContent.map(item=>{
 
-const title=getContentTitle(item);
-const desc=getContentDescription(item);
-const image=getContentImage(item);
-const price=getContentPrice(item);
-const duration=item.duration||"";
+const title=
+getContentTitle(item);
+
+const desc=
+getContentDescription(item);
+
+const image=
+getContentImage(item);
+
+const price=
+getContentPrice(item);
+
+const duration=
+item.duration||"";
+
 
 return`
 
 <div class="list-item">
 
 <div class="list-thumb">
-${image?
-`<img src="${escapeAttr(image)}" alt="${escapeAttr(title)}" onerror="this.style.display='none'">`
+
+${image
+?`
+<img
+src="${escapeAttr(image)}"
+alt="${escapeAttr(title)}"
+onerror="this.style.display='none'"
+>
+`
 :""}
+
 </div>
+
 
 <div class="list-info">
 
@@ -2470,10 +5510,13 @@ ${image?
 ${escapeHtml(title)}
 </div>
 
-${duration?
-`<div class="list-desc">
+${duration
+?`
+<div class="list-desc">
 Duration: ${escapeHtml(String(duration))}
-</div>`:""}
+</div>
+`
+:""}
 
 <div class="list-desc">
 ${escapeHtml(desc)}
@@ -2481,17 +5524,25 @@ ${escapeHtml(desc)}
 
 </div>
 
+
 <div class="list-price">
-${price?`₹${escapeHtml(String(price))}`:"Contact Admin"}
+
+${price
+?`₹${escapeHtml(String(price))}`
+:"Contact Admin"}
+
 </div>
 
 </div>
+
 `;
 
 }).join("")}
 
 </div>
+
 `;
+
 }
 
 
@@ -2501,19 +5552,29 @@ UI HELPERS
 
 function money(value){
 
-const number=Number(value)||0;
+const number=
+Number(value)||0;
 
-return"₹"+number.toLocaleString("en-IN");
+return"₹"+
+number.toLocaleString(
+"en-IN"
+);
+
 }
 
 
 function setText(id,value){
 
-const element=document.getElementById(id);
+const element=
+document.getElementById(id);
 
 if(element){
-element.textContent=String(value);
+
+element.textContent=
+String(value);
+
 }
+
 }
 
 
@@ -2521,9 +5582,14 @@ function formatStatus(status){
 
 if(!status)return"-";
 
+
 return String(status)
 .replace(/[-_]/g," ")
-.replace(/\b\w/g,c=>c.toUpperCase());
+.replace(
+/\b\w/g,
+c=>c.toUpperCase()
+);
+
 }
 
 
@@ -2531,11 +5597,17 @@ function formatDate(value){
 
 if(!value)return"-";
 
-const date=new Date(value);
+
+const date=
+new Date(value);
+
 
 if(Number.isNaN(date.getTime())){
+
 return String(value);
+
 }
+
 
 return date.toLocaleString(
 "en-IN",
@@ -2547,6 +5619,7 @@ hour:"2-digit",
 minute:"2-digit"
 }
 );
+
 }
 
 
@@ -2558,40 +5631,65 @@ return String(value??"")
 .replace(/>/g,"&gt;")
 .replace(/"/g,"&quot;")
 .replace(/'/g,"&#039;");
+
 }
 
 
 function escapeAttr(value){
 
 return escapeHtml(value);
+
 }
 
 
-function showToast(message,type=""){
+/* ============================================================
+TOAST
+============================================================ */
+
+function showToast(
+message,
+type=""
+){
 
 const container=
-document.getElementById("toastContainer");
+document.getElementById(
+"toastContainer"
+);
+
 
 const toast=
 document.createElement("div");
 
-toast.className=`toast ${type}`;
-toast.textContent=message;
+
+toast.className=
+`toast ${type}`;
+
+
+toast.textContent=
+message;
+
 
 container.appendChild(toast);
+
 
 setTimeout(
 ()=>toast.remove(),
 3500
 );
+
 }
 
+
+/* ============================================================
+MODAL
+============================================================ */
 
 function showModal(id){
 
 document
 .getElementById(id)
 .classList.add("show");
+
 }
 
 
@@ -2600,6 +5698,7 @@ function hideModal(id){
 document
 .getElementById(id)
 .classList.remove("show");
+
 }
 
 
@@ -2619,6 +5718,7 @@ section.id===sectionId
 )
 );
 
+
 document
 .querySelectorAll(".nav-btn")
 .forEach(
@@ -2629,12 +5729,23 @@ btn.dataset.section===sectionId
 )
 );
 
+
 const titles={
-dashboard:"Telecaller Dashboard",
-inquiries:"Student Inquiries",
-courses:"Courses & Offers",
-earnings:"My Earnings"
+
+dashboard:
+"Telecaller Dashboard",
+
+inquiries:
+"Student Inquiries",
+
+courses:
+"Courses & Offers",
+
+earnings:
+"My Earnings"
+
 };
+
 
 setText(
 "pageTitle",
@@ -2642,13 +5753,18 @@ titles[sectionId]||
 "Telecaller Dashboard"
 );
 
+
 document
 .getElementById("sidebar")
 .classList.remove("open");
 
+
 if(sectionId==="courses"){
+
 renderContent();
+
 }
+
 }
 
 
@@ -2659,10 +5775,14 @@ EVENTS
 document
 .querySelectorAll(".nav-btn")
 .forEach(btn=>{
+
 btn.addEventListener(
 "click",
-()=>openSection(btn.dataset.section)
+()=>openSection(
+btn.dataset.section
+)
 );
+
 });
 
 
@@ -2671,9 +5791,11 @@ document
 .addEventListener(
 "click",
 ()=>{
+
 document
 .getElementById("sidebar")
 .classList.toggle("open");
+
 }
 );
 
@@ -2684,17 +5806,35 @@ document
 "click",
 ()=>{
 
-sessionStorage.removeItem("bt_logged_in");
-sessionStorage.removeItem("bt_user_name");
-sessionStorage.removeItem("bt_user_mobile");
-sessionStorage.removeItem("bt_user_role");
-sessionStorage.removeItem("bt_login_time");
+sessionStorage.removeItem(
+"bt_logged_in"
+);
 
-window.location.replace("login.html");
+sessionStorage.removeItem(
+"bt_user_name"
+);
+
+sessionStorage.removeItem(
+"bt_user_mobile"
+);
+
+sessionStorage.removeItem(
+"bt_user_role"
+);
+
+sessionStorage.removeItem(
+"bt_login_time"
+);
+
+window.location.replace(
+"login.html"
+);
 
 }
 );
 
+
+/* SEARCH */
 
 document
 .getElementById("searchInput")
@@ -2704,6 +5844,8 @@ applyFilters
 );
 
 
+/* STATUS FILTER */
+
 document
 .getElementById("statusFilter")
 .addEventListener(
@@ -2711,6 +5853,8 @@ document
 applyFilters
 );
 
+
+/* COURSE FILTER */
 
 document
 .getElementById("courseFilter")
@@ -2720,6 +5864,8 @@ applyFilters
 );
 
 
+/* COORDINATOR FILTER */
+
 document
 .getElementById("coordinatorFilter")
 .addEventListener(
@@ -2728,16 +5874,29 @@ applyFilters
 );
 
 
+/* CLEAR */
+
 document
 .getElementById("clearFiltersBtn")
 .addEventListener(
 "click",
 ()=>{
 
-document.getElementById("searchInput").value="";
-document.getElementById("statusFilter").value="";
-document.getElementById("courseFilter").value="";
-document.getElementById("coordinatorFilter").value="";
+document.getElementById(
+"searchInput"
+).value="";
+
+document.getElementById(
+"statusFilter"
+).value="";
+
+document.getElementById(
+"courseFilter"
+).value="";
+
+document.getElementById(
+"coordinatorFilter"
+).value="";
 
 applyFilters();
 
@@ -2745,23 +5904,53 @@ applyFilters();
 );
 
 
+/* REFRESH INQUIRIES */
+
 document
 .getElementById("refreshBtn")
 .addEventListener(
 "click",
 async()=>{
 
+const button=
+document.getElementById(
+"refreshBtn"
+);
+
+button.disabled=true;
+button.textContent="Loading...";
+
+
+try{
+
 await loadInquiries();
+
 await loadPaymentSettings();
 
 showToast(
-"Data refreshed.",
+"Data refreshed successfully.",
 "success"
 );
+
+}catch(error){
+
+showToast(
+error.message,
+"error"
+);
+
+}finally{
+
+button.disabled=false;
+button.textContent="↻ Refresh";
+
+}
 
 }
 );
 
+
+/* REFRESH COURSES */
 
 document
 .getElementById("refreshContentBtn")
@@ -2772,13 +5961,15 @@ async()=>{
 await loadContent();
 
 showToast(
-"Course and offer information refreshed.",
+"Course information refreshed.",
 "success"
 );
 
 }
 );
 
+
+/* DISPLAY MODE */
 
 document
 .querySelectorAll(".display-btn")
@@ -2788,7 +5979,9 @@ btn.addEventListener(
 "click",
 ()=>{
 
-currentDisplay=btn.dataset.display;
+currentDisplay=
+btn.dataset.display;
+
 
 document
 .querySelectorAll(".display-btn")
@@ -2796,7 +5989,9 @@ document
 x.classList.remove("active")
 );
 
+
 btn.classList.add("active");
+
 
 renderContent();
 
@@ -2806,6 +6001,8 @@ renderContent();
 });
 
 
+/* STATUS */
+
 document
 .getElementById("newStatus")
 .addEventListener(
@@ -2813,6 +6010,8 @@ document
 toggleCustomStatusBox
 );
 
+
+/* SAVE STATUS */
 
 document
 .getElementById("saveStatusBtn")
@@ -2822,17 +6021,23 @@ saveStatus
 );
 
 
+/* CLOSE MODALS */
+
 document
 .querySelectorAll("[data-close]")
 .forEach(btn=>{
 
 btn.addEventListener(
 "click",
-()=>hideModal(btn.dataset.close)
+()=>hideModal(
+btn.dataset.close
+)
 );
 
 });
 
+
+/* DETAIL CALL */
 
 document
 .getElementById("detailCallBtn")
@@ -2841,14 +6046,18 @@ document
 ()=>{
 
 if(currentDetailInquiry){
+
 callStudent(
 currentDetailInquiry.mobile
 );
+
 }
 
 }
 );
 
+
+/* DETAIL WHATSAPP */
 
 document
 .getElementById("detailWhatsAppBtn")
@@ -2869,6 +6078,8 @@ currentDetailInquiry.studentName
 );
 
 
+/* MODAL OUTSIDE CLICK */
+
 document
 .querySelectorAll(".modal-overlay")
 .forEach(overlay=>{
@@ -2878,7 +6089,11 @@ overlay.addEventListener(
 event=>{
 
 if(event.target===overlay){
-overlay.classList.remove("show");
+
+overlay.classList.remove(
+"show"
+);
+
 }
 
 }
@@ -2888,18 +6103,43 @@ overlay.classList.remove("show");
 
 
 /* ============================================================
-USER INFO
+USER INFORMATION
 ============================================================ */
 
-setText("sideUserName",telecallerName);
-setText("topUserName",telecallerName);
-setText("topUserMobile",telecallerMobile||"-");
-setText("heroName",telecallerName);
+setText(
+"sideUserName",
+telecallerName
+);
 
-const avatar=
-telecallerName.trim().charAt(0).toUpperCase()||"T";
+setText(
+"topUserName",
+telecallerName
+);
 
-setText("avatar",avatar);
+setText(
+"topUserMobile",
+telecallerMobile||"-"
+);
+
+setText(
+"heroName",
+telecallerName
+);
+
+
+const avatarLetter=
+telecallerName
+.trim()
+.charAt(0)
+.toUpperCase()||
+"T";
+
+
+setText(
+"avatar",
+avatarLetter
+);
+
 
 setText(
 "todayDate",
@@ -2921,13 +6161,25 @@ INITIAL LOAD
 
 async function initialize(){
 
+try{
+
 await Promise.all([
 loadInquiries(),
 loadPaymentSettings(),
 loadContent()
 ]);
 
+}catch(error){
+
+console.error(
+"INITIALIZATION ERROR:",
+error
+);
+
 }
+
+}
+
 
 initialize();
 
@@ -2942,6 +6194,7 @@ async()=>{
 try{
 
 await loadPaymentSettings();
+
 await loadContent();
 
 }catch(error){
@@ -2977,13 +6230,26 @@ console.warn(error);
 GLOBAL FUNCTIONS
 ============================================================ */
 
-window.goToPage=goToPage;
-window.openStatusModalByDoc=openStatusModalByDoc;
-window.viewStudent=viewStudent;
-window.callStudent=callStudent;
-window.whatsappStudent=whatsappStudent;
-window.deleteStudent=deleteStudent;
-window.goCarousel=goCarousel;
+window.goToPage=
+goToPage;
+
+window.openStatusModalByDoc=
+openStatusModalByDoc;
+
+window.viewStudent=
+viewStudent;
+
+window.callStudent=
+callStudent;
+
+window.whatsappStudent=
+whatsappStudent;
+
+window.deleteStudent=
+deleteStudent;
+
+window.goCarousel=
+goCarousel;
 
 </script>
 

@@ -1,4406 +1,5571 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f6f8fc">
-<title>BlackTerminal | Telecaller</title>
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    -webkit-tap-highlight-color:transparent;
-}
-
-:root{
-    --bg:#f6f8fc;
-    --card:#ffffff;
-    --text:#172033;
-    --muted:#7b8497;
-    --line:#e8ecf3;
-
-    --blue:#2563eb;
-    --cyan:#06b6d4;
-    --green:#10b981;
-    --orange:#f59e0b;
-    --purple:#7c3aed;
-    --pink:#ec4899;
-    --red:#ef4444;
-
-    --shadow:0 8px 30px rgba(15,23,42,.055);
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-    min-height:100vh;
-}
-
-/* ================= APP ================= */
-
-.app{
-    min-height:100vh;
-}
-
-/* ================= DESKTOP SIDEBAR ================= */
-
-.sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    width:238px;
-    background:#111827;
-    color:#fff;
-    padding:20px 14px;
-    z-index:100;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    padding:6px 8px 22px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.brand-logo{
-    width:40px;
-    height:40px;
-    border-radius:12px;
-    background:linear-gradient(135deg,#06b6d4,#7c3aed);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:14px;
-    font-weight:900;
-}
-
-.brand-title{
-    font-size:16px;
-    font-weight:800;
-}
-
-.brand-sub{
-    color:#94a3b8;
-    font-size:10px;
-    margin-top:2px;
-}
-
-.nav{
-    margin-top:22px;
-}
-
-.nav-label{
-    color:#64748b;
-    font-size:9px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    padding:0 11px 9px;
-}
-
-.nav-item{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    padding:12px 12px;
-    margin:4px 0;
-    border-radius:11px;
-    color:#cbd5e1;
-    font-size:12px;
-    cursor:pointer;
-}
-
-.nav-item.active{
-    background:linear-gradient(135deg,#2563eb,#4f46e5);
-    color:#fff;
-}
-
-.nav-icon{
-    width:20px;
-    text-align:center;
-}
-
-.side-profile{
-    position:absolute;
-    left:14px;
-    right:14px;
-    bottom:16px;
-    padding:12px;
-    border-radius:13px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.07);
-}
-
-.side-name{
-    font-size:12px;
-    font-weight:700;
-}
-
-.side-role{
-    color:#94a3b8;
-    font-size:10px;
-    margin-top:3px;
-}
-
-/* ================= MAIN ================= */
-
-.main{
-    margin-left:238px;
-    min-height:100vh;
-}
-
-.topbar{
-    height:68px;
-    background:rgba(255,255,255,.92);
-    border-bottom:1px solid var(--line);
-    backdrop-filter:blur(14px);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 25px;
-    position:sticky;
-    top:0;
-    z-index:80;
-}
-
-.top-title{
-    font-size:19px;
-    font-weight:800;
-}
-
-.top-sub{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:2px;
-}
-
-.profile-chip{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.avatar{
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    color:#fff;
-    background:linear-gradient(135deg,#06b6d4,#7c3aed);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    font-weight:800;
-}
-
-.page{
-    padding:22px 25px 35px;
-    max-width:1450px;
-}
-
-/* ================= WELCOME ================= */
-
-.welcome{
-    margin-bottom:18px;
-}
-
-.welcome h1{
-    font-size:22px;
-    font-weight:850;
-}
-
-.welcome p{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
-}
-
-/* ================= MINI STATS ================= */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-bottom:16px;
-}
-
-.stat{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:15px;
-    box-shadow:var(--shadow);
-}
-
-.stat-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.stat-icon{
-    width:34px;
-    height:34px;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:15px;
-}
-
-.stat-label{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:12px;
-}
-
-.stat-value{
-    font-size:22px;
-    font-weight:850;
-    margin-top:2px;
-}
-
-/* ================= EARNING HERO ================= */
-
-.earning-hero{
-    position:relative;
-    overflow:hidden;
-    color:#fff;
-    border-radius:22px;
-    padding:22px;
-    margin-bottom:16px;
-
-    background:
-        radial-gradient(
-            circle at 90% 10%,
-            rgba(255,255,255,.2),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 5% 100%,
-            rgba(255,255,255,.1),
-            transparent 32%
-        ),
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #5b21b6 58%,
-            #db2777
-        );
-
-    box-shadow:
-        0 16px 40px
-        rgba(79,70,229,.2);
-}
-
-.earning-hero:after{
-    content:"";
-    position:absolute;
-    width:190px;
-    height:190px;
-    border:32px solid rgba(255,255,255,.05);
-    border-radius:50%;
-    right:-70px;
-    bottom:-95px;
-}
-
-.hero-head{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    position:relative;
-    z-index:2;
-}
-
-.hero-label{
-    font-size:11px;
-    color:rgba(255,255,255,.76);
-}
-
-.hero-amount{
-    font-size:34px;
-    line-height:1;
-    font-weight:900;
-    margin-top:5px;
-}
-
-.hero-caption{
-    font-size:10px;
-    color:rgba(255,255,255,.7);
-    margin-top:5px;
-}
-
-.level-pill{
-    height:max-content;
-    padding:8px 12px;
-    border-radius:30px;
-    background:rgba(255,255,255,.14);
-    border:1px solid rgba(255,255,255,.2);
-    backdrop-filter:blur(10px);
-    font-size:11px;
-    font-weight:800;
-    white-space:nowrap;
-}
-
-.hero-divider{
-    height:1px;
-    background:rgba(255,255,255,.15);
-    margin:18px 0;
-}
-
-.earning-breakdown{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    position:relative;
-    z-index:2;
-}
-
-.earning-mini{
-    background:rgba(255,255,255,.1);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:13px;
-    padding:11px;
-}
-
-.earning-mini span{
-    display:block;
-    color:rgba(255,255,255,.68);
-    font-size:9px;
-}
-
-.earning-mini strong{
-    display:block;
-    margin-top:4px;
-    font-size:15px;
-}
-
-/* ================= TARGET ================= */
-
-.target-card{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:19px;
-    margin-bottom:16px;
-    box-shadow:var(--shadow);
-}
-
-.target-head{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.target-title{
-    font-size:15px;
-    font-weight:850;
-}
-
-.target-sub{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:4px;
-}
-
-.target-number{
-    color:var(--purple);
-    font-size:12px;
-    font-weight:800;
-    white-space:nowrap;
-}
-
-.progress{
-    height:10px;
-    background:#eef2f7;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:17px;
-}
-
-.progress-fill{
-    height:100%;
-    width:0;
-    border-radius:20px;
-    background:linear-gradient(90deg,#2563eb,#7c3aed,#ec4899);
-    transition:width .5s ease;
-}
-
-.target-foot{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    margin-top:9px;
-    font-size:10px;
-    color:var(--muted);
-}
-
-.next-target{
-    color:var(--blue);
-    font-weight:700;
-}
-
-/* ================= LEVELS ================= */
-
-.section-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:11px;
-}
-
-.section-title h2{
-    font-size:15px;
-    font-weight:850;
-}
-
-.section-title span{
-    color:var(--muted);
-    font-size:9px;
-}
-
-.level-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-bottom:16px;
-}
-
-.level-card{
-    display:none;
-    background:#fff;
-    border:2px solid var(--line);
-    border-radius:18px;
-    padding:17px;
-    position:relative;
-    overflow:hidden;
-}
-
-.level-card.show{
-    display:block;
-}
-
-.level-card.current{
-    border-color:var(--blue);
-    box-shadow:0 10px 30px rgba(37,99,235,.1);
-}
-
-.level-card.current:after{
-    content:"CURRENT";
-    position:absolute;
-    top:12px;
-    right:-28px;
-    width:100px;
-    padding:4px;
-    text-align:center;
-    transform:rotate(45deg);
-    background:var(--blue);
-    color:#fff;
-    font-size:8px;
-    font-weight:800;
-}
-
-.level-top{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.level-icon{
-    width:38px;
-    height:38px;
-    border-radius:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-size:14px;
-    font-weight:900;
-}
-
-.l1 .level-icon{
-    background:linear-gradient(135deg,#10b981,#34d399);
-}
-
-.l2 .level-icon{
-    background:linear-gradient(135deg,#2563eb,#06b6d4);
-}
-
-.l3 .level-icon{
-    background:linear-gradient(135deg,#7c3aed,#ec4899);
-}
-
-.level-name{
-    font-size:13px;
-    font-weight:850;
-}
-
-.level-target{
-    color:var(--muted);
-    font-size:9px;
-    margin-top:2px;
-}
-
-.level-rate{
-    margin-top:15px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:#f8fafc;
-    padding:11px;
-    border-radius:11px;
-}
-
-.level-rate span{
-    color:var(--muted);
-    font-size:9px;
-}
-
-.level-rate strong{
-    font-size:17px;
-}
-
-/* ================= RULE ================= */
-
-.rules{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-bottom:18px;
-}
-
-.rule{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:15px;
-    padding:13px;
-}
-
-.rule-icon{
-    font-size:17px;
-}
-
-.rule-title{
-    font-size:10px;
-    font-weight:800;
-    margin-top:7px;
-}
-
-.rule-text{
-    color:var(--muted);
-    font-size:9px;
-    line-height:1.5;
-    margin-top:4px;
-}
-
-/* ================= INQUIRIES ================= */
-
-.inquiry-section{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:20px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-}
-
-.inquiry-header{
-    padding:17px;
-    border-bottom:1px solid var(--line);
-}
-
-.inquiry-title-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.inquiry-title{
-    font-size:15px;
-    font-weight:850;
-}
-
-.result{
-    color:var(--muted);
-    font-size:9px;
-}
-
-.filters{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr auto;
-    gap:8px;
-    margin-top:13px;
-}
-
-input,
-select{
-    width:100%;
-    border:1px solid #e0e5ed;
-    background:#fff;
-    color:var(--text);
-    border-radius:10px;
-    padding:10px 11px;
-    outline:none;
-    font-size:10px;
-}
-
-input:focus,
-select:focus{
-    border-color:var(--blue);
-    box-shadow:0 0 0 3px rgba(37,99,235,.07);
-}
-
-.reset{
-    border:0;
-    background:#f1f5f9;
-    color:#475569;
-    border-radius:10px;
-    padding:0 13px;
-    font-size:10px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-/* ================= DESKTOP TABLE ================= */
-
-.table-wrap{
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:850px;
-}
-
-th{
-    padding:11px 14px;
-    background:#f8fafc;
-    color:#64748b;
-    text-align:left;
-    font-size:8px;
-    text-transform:uppercase;
-    letter-spacing:.6px;
-}
-
-td{
-    padding:12px 14px;
-    border-top:1px solid #eef1f5;
-    font-size:10px;
-}
-
-.student{
-    font-weight:750;
-}
-
-.mobile{
-    color:var(--muted);
-    font-size:8px;
-    margin-top:2px;
-}
-
-.status{
-    display:inline-block;
-    border-radius:20px;
-    padding:5px 8px;
-    font-size:8px;
-    font-weight:800;
-}
-
-.status-new{
-    background:#eff6ff;
-    color:#2563eb;
-}
-
-.status-pending{
-    background:#fff7ed;
-    color:#ea580c;
-}
-
-.status-contacted{
-    background:#ecfeff;
-    color:#0891b2;
-}
-
-.status-follow-up{
-    background:#fefce8;
-    color:#ca8a04;
-}
-
-.status-visited{
-    background:#ecfdf5;
-    color:#059669;
-}
-
-.status-converted{
-    background:#f5f3ff;
-    color:#7c3aed;
-}
-
-.status-not-interested{
-    background:#fef2f2;
-    color:#dc2626;
-}
-
-.actions{
-    display:flex;
-    gap:5px;
-}
-
-.action{
-    width:29px;
-    height:29px;
-    border:0;
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-}
-
-.a-call{
-    background:#ecfdf5;
-    color:#059669;
-}
-
-.a-wa{
-    background:#f0fdf4;
-    color:#16a34a;
-}
-
-.a-view{
-    background:#eff6ff;
-    color:#2563eb;
-}
-
-.a-delete{
-    background:#fef2f2;
-    color:#dc2626;
-}
-
-/* ================= MOBILE INQUIRY CARDS ================= */
-
-.mobile-list{
-    display:none;
-}
-
-.inquiry-card{
-    padding:14px;
-    border-top:1px solid var(--line);
-}
-
-.inquiry-card-top{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.card-name{
-    font-size:12px;
-    font-weight:800;
-}
-
-.card-mobile{
-    color:var(--muted);
-    font-size:9px;
-    margin-top:3px;
-}
-
-.card-course{
-    margin-top:9px;
-    font-size:10px;
-    font-weight:700;
-}
-
-.card-meta{
-    color:var(--muted);
-    font-size:9px;
-    margin-top:4px;
-}
-
-.card-bottom{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-    margin-top:11px;
-}
-
-.card-actions{
-    display:flex;
-    gap:6px;
-}
-
-.card-status-select{
-    max-width:145px;
-}
-
-/* ================= EMPTY ================= */
-
-.empty{
-    text-align:center;
-    padding:42px 20px;
-    color:var(--muted);
-}
-
-.empty-icon{
-    font-size:35px;
-    margin-bottom:8px;
-}
-
-.empty-title{
-    font-size:12px;
-    font-weight:700;
-}
-
-.empty-text{
-    font-size:9px;
-    margin-top:4px;
-}
-
-/* ================= MODAL ================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(15,23,42,.55);
-    backdrop-filter:blur(5px);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:18px;
-    z-index:500;
-}
-
-.modal-box{
-    width:100%;
-    max-width:500px;
-    max-height:90vh;
-    overflow:auto;
-    background:#fff;
-    border-radius:20px;
-    padding:18px;
-    box-shadow:0 25px 70px rgba(0,0,0,.22);
-}
-
-.modal-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:15px;
-}
-
-.modal-head h2{
-    font-size:16px;
-}
-
-.close{
-    border:0;
-    background:#f1f5f9;
-    width:32px;
-    height:32px;
-    border-radius:50%;
-    cursor:pointer;
-}
-
-.detail-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-}
-
-.detail{
-    background:#f8fafc;
-    border-radius:11px;
-    padding:11px;
-}
-
-.detail.full{
-    grid-column:1/-1;
-}
-
-.detail small{
-    color:var(--muted);
-    font-size:8px;
-}
-
-.detail strong{
-    display:block;
-    font-size:11px;
-    margin-top:3px;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1050px){
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlackTerminal - Telecaller Dashboard</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    .filters{
-        grid-template-columns:1fr 1fr;
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --primary:#111827;
+      --primary2:#374151;
+      --success:#15803d;
+      --warning:#b45309;
+      --danger:#dc2626;
+      --info:#2563eb;
+      --purple:#7c3aed;
+      --shadow:0 10px 30px rgba(15,23,42,.07);
+      --radius:18px;
     }
 
-    .rules{
-        grid-template-columns:1fr 1fr;
+    body{
+      font-family:Inter,Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
     }
-}
 
-@media(max-width:800px){
+    button,input,select,textarea{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .app{
+      min-height:100vh;
+      display:flex;
+    }
+
+    /* SIDEBAR */
 
     .sidebar{
-        width:68px;
-        padding:15px 8px;
+      width:260px;
+      background:#0b0f19;
+      color:#fff;
+      position:fixed;
+      left:0;
+      top:0;
+      bottom:0;
+      z-index:100;
+      padding:20px 15px;
+      transition:.25s;
     }
 
     .brand{
-        justify-content:center;
-        padding:5px 0 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:8px 10px 24px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      margin-bottom:18px;
     }
 
-    .brand-text,
-    .nav-label,
-    .nav-item span,
-    .side-profile{
-        display:none;
+    .brand-logo{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      background:#fff;
+      color:#111827;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:16px;
     }
 
-    .nav-item{
-        justify-content:center;
-        padding:12px 4px;
+    .brand-text strong{
+      display:block;
+      font-size:16px;
     }
 
-    .main{
-        margin-left:68px;
-    }
-
-    .page{
-        padding:18px;
-    }
-
-    .level-grid{
-        grid-template-columns:1fr;
-    }
-
-    .level-card{
-        padding:15px;
-    }
-}
-
-@media(max-width:600px){
-
-    body{
-        padding-bottom:68px;
-    }
-
-    .sidebar{
-        position:fixed;
-        left:0;
-        right:0;
-        top:auto;
-        bottom:0;
-        width:100%;
-        height:62px;
-        padding:6px 10px;
-        background:#fff;
-        border-top:1px solid var(--line);
-        box-shadow:0 -5px 20px rgba(15,23,42,.08);
-    }
-
-    .brand,
-    .side-profile,
-    .nav-label{
-        display:none;
+    .brand-text span{
+      display:block;
+      font-size:11px;
+      color:#9ca3af;
+      margin-top:3px;
     }
 
     .nav{
-        margin:0;
-        height:100%;
-        display:flex;
-        align-items:center;
-        justify-content:space-around;
+      display:flex;
+      flex-direction:column;
+      gap:7px;
     }
 
-    .nav-item{
-        margin:0;
-        padding:8px 13px;
-        color:#64748b;
-        display:flex;
-        flex-direction:column;
-        gap:2px;
-        border-radius:10px;
-        font-size:8px;
+    .nav-btn{
+      border:0;
+      background:transparent;
+      color:#9ca3af;
+      padding:12px 13px;
+      border-radius:12px;
+      text-align:left;
+      display:flex;
+      align-items:center;
+      gap:11px;
+      width:100%;
+      transition:.2s;
     }
 
-    .nav-item.active{
-        color:#2563eb;
-        background:#eff6ff;
-    }
-
-    .nav-item span{
-        display:block;
-        font-size:8px;
+    .nav-btn:hover,
+    .nav-btn.active{
+      background:#1f2937;
+      color:#fff;
     }
 
     .nav-icon{
-        font-size:17px;
-        height:19px;
+      width:22px;
+      text-align:center;
+      font-size:16px;
     }
 
+    .sidebar-user{
+      position:absolute;
+      left:15px;
+      right:15px;
+      bottom:20px;
+      padding:12px;
+      border-radius:14px;
+      background:#111827;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .sidebar-user .user-name{
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .sidebar-user .user-role{
+      font-size:11px;
+      color:#9ca3af;
+      margin-top:3px;
+    }
+
+    .logout-btn{
+      width:100%;
+      margin-top:10px;
+      border:0;
+      border-radius:9px;
+      background:#dc2626;
+      color:#fff;
+      padding:8px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    /* MAIN */
+
     .main{
-        margin-left:0;
+      margin-left:260px;
+      width:calc(100% - 260px);
+      min-height:100vh;
     }
 
     .topbar{
-        height:60px;
-        padding:0 14px;
+      height:72px;
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 28px;
+      position:sticky;
+      top:0;
+      z-index:50;
     }
 
-    .top-title{
-        font-size:16px;
+    .topbar-left{
+      display:flex;
+      align-items:center;
+      gap:13px;
     }
 
-    .top-sub{
-        display:none;
+    .mobile-menu{
+      display:none;
+      border:0;
+      background:#f3f4f6;
+      width:40px;
+      height:40px;
+      border-radius:10px;
+      font-size:19px;
     }
 
-    .profile-chip{
-        display:none;
+    .page-title{
+      font-size:20px;
+      font-weight:800;
     }
 
-    .page{
-        padding:14px 12px 20px;
+    .page-subtitle{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:2px;
     }
 
-    .welcome{
-        margin-bottom:13px;
+    .top-user{
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
 
-    .welcome h1{
-        font-size:19px;
+    .avatar{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:#111827;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      font-size:13px;
     }
 
-    .welcome p{
-        font-size:10px;
+    .content{
+      padding:24px;
+      max-width:1600px;
+      margin:auto;
     }
 
-    .stats{
-        grid-template-columns:1fr 1fr;
-        gap:8px;
-        margin-bottom:12px;
+    .section{
+      display:none;
     }
 
-    .stat{
-        padding:12px;
-        border-radius:14px;
+    .section.active{
+      display:block;
     }
 
-    .stat-icon{
-        width:30px;
-        height:30px;
-        font-size:13px;
+    /* HERO */
+
+    .hero{
+      background:linear-gradient(135deg,#111827,#1f2937);
+      color:#fff;
+      border-radius:22px;
+      padding:26px;
+      margin-bottom:22px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      right:-80px;
+      top:-80px;
+      border-radius:50%;
+      border:40px solid rgba(255,255,255,.05);
+    }
+
+    .hero h1{
+      font-size:25px;
+      margin-bottom:7px;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero p{
+      color:#d1d5db;
+      font-size:13px;
+      position:relative;
+      z-index:2;
+    }
+
+    .date-badge{
+      display:inline-flex;
+      margin-top:14px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.12);
+      padding:7px 10px;
+      border-radius:9px;
+      font-size:11px;
+      position:relative;
+      z-index:2;
+    }
+
+    /* CARDS */
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:22px;
+    }
+
+    .stat-card{
+      background:#fff;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      border-radius:17px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
     }
 
     .stat-label{
-        font-size:8px;
-        margin-top:9px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
     }
 
     .stat-value{
-        font-size:19px;
+      font-size:25px;
+      font-weight:850;
+      margin-top:9px;
     }
 
-    .earning-hero{
-        padding:18px;
-        border-radius:18px;
+    .stat-small{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:5px;
     }
 
-    .hero-amount{
-        font-size:30px;
+    .stat-icon{
+      position:absolute;
+      right:15px;
+      top:15px;
+      width:38px;
+      height:38px;
+      border-radius:11px;
+      background:#f3f4f6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* EARNING */
+
+    .earning-layout{
+      display:grid;
+      grid-template-columns:1.6fr 1fr;
+      gap:18px;
+      margin-bottom:22px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    .card-title{
+      font-size:16px;
+      font-weight:800;
+      margin-bottom:4px;
+    }
+
+    .card-subtitle{
+      color:var(--muted);
+      font-size:11px;
+      margin-bottom:17px;
+    }
+
+    .earning-total{
+      font-size:38px;
+      font-weight:900;
+      margin:8px 0;
     }
 
     .earning-breakdown{
-        grid-template-columns:1fr 1fr;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:17px;
     }
 
-    .earning-mini:last-child{
-        grid-column:1/-1;
+    .earning-item{
+      border:1px solid var(--border);
+      border-radius:13px;
+      padding:13px;
+      background:#fafafa;
     }
 
-    .target-card{
-        padding:15px;
-        border-radius:17px;
+    .earning-item-label{
+      color:var(--muted);
+      font-size:10px;
+      font-weight:700;
     }
 
-    .target-title{
-        font-size:13px;
+    .earning-item-value{
+      font-size:18px;
+      font-weight:850;
+      margin-top:5px;
     }
 
-    .rules{
-        grid-template-columns:1fr;
+    .level-card{
+      border:1px solid var(--border);
+      border-radius:15px;
+      padding:15px;
+      margin-bottom:10px;
+      background:#fff;
     }
 
-    .filters{
-        grid-template-columns:1fr 1fr;
+    .level-card.active{
+      border:2px solid #111827;
+      background:#f9fafb;
     }
 
-    .filters input{
-        grid-column:1/-1;
+    .level-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
     }
 
-    .reset{
-        min-height:37px;
+    .level-name{
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .level-rate{
+      font-size:17px;
+      font-weight:900;
+    }
+
+    .level-range{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:5px;
+    }
+
+    .level-tag{
+      font-size:9px;
+      padding:4px 7px;
+      border-radius:7px;
+      background:#111827;
+      color:#fff;
+      font-weight:800;
+    }
+
+    .progress{
+      height:8px;
+      background:#e5e7eb;
+      border-radius:20px;
+      overflow:hidden;
+      margin-top:12px;
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:#111827;
+      border-radius:20px;
+      transition:.3s;
+    }
+
+    .next-level-text{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:8px;
+    }
+
+    .salary-box{
+      margin-top:15px;
+      border-radius:14px;
+      padding:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+    }
+
+    .salary-row{
+      display:flex;
+      justify-content:space-between;
+      padding:7px 0;
+      font-size:12px;
+    }
+
+    .salary-row strong{
+      font-size:13px;
+    }
+
+    /* TOOLBAR */
+
+    .toolbar{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:17px;
+      box-shadow:var(--shadow);
+      padding:15px;
+      margin-bottom:18px;
+    }
+
+    .toolbar-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr auto;
+      gap:10px;
+    }
+
+    .input,
+    .select,
+    .textarea{
+      width:100%;
+      border:1px solid #d1d5db;
+      border-radius:10px;
+      padding:10px 12px;
+      outline:none;
+      background:#fff;
+      color:#111827;
+      font-size:12px;
+    }
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus{
+      border-color:#111827;
+      box-shadow:0 0 0 3px rgba(17,24,39,.08);
+    }
+
+    .btn{
+      border:0;
+      border-radius:10px;
+      padding:10px 13px;
+      font-size:12px;
+      font-weight:750;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      transition:.2s;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:#000;
+    }
+
+    .btn-light{
+      background:#f3f4f6;
+      color:#111827;
+    }
+
+    .btn-success{
+      background:#15803d;
+      color:#fff;
+    }
+
+    .btn-danger{
+      background:#dc2626;
+      color:#fff;
+    }
+
+    .btn-info{
+      background:#2563eb;
+      color:#fff;
+    }
+
+    /* TABLE */
+
+    .table-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .table-head{
+      padding:18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .result-count{
+      color:var(--muted);
+      font-size:11px;
     }
 
     .table-wrap{
-        display:none;
+      overflow:auto;
     }
 
-    .mobile-list{
-        display:block;
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:950px;
     }
 
-    .inquiry-section{
-        border-radius:17px;
+    th{
+      text-align:left;
+      font-size:10px;
+      color:#6b7280;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      background:#f9fafb;
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      white-space:nowrap;
     }
 
-    .inquiry-header{
-        padding:14px;
+    td{
+      padding:13px 14px;
+      border-bottom:1px solid #f0f0f0;
+      font-size:12px;
+      vertical-align:middle;
     }
 
-    .section-title span{
-        display:none;
+    tr:hover td{
+      background:#fafafa;
+    }
+
+    .student-name{
+      font-weight:800;
+    }
+
+    .student-mobile{
+      font-size:10px;
+      color:var(--muted);
+      margin-top:3px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:5px 8px;
+      border-radius:8px;
+      font-size:9px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .badge-new{
+      background:#eff6ff;
+      color:#2563eb;
+    }
+
+    .badge-pending{
+      background:#fff7ed;
+      color:#c2410c;
+    }
+
+    .badge-contacted{
+      background:#f3f4f6;
+      color:#374151;
+    }
+
+    .badge-follow-up{
+      background:#faf5ff;
+      color:#7c3aed;
+    }
+
+    .badge-visited{
+      background:#ecfdf5;
+      color:#15803d;
+    }
+
+    .badge-demo{
+      background:#ecfeff;
+      color:#0e7490;
+    }
+
+    .badge-converted{
+      background:#dcfce7;
+      color:#166534;
+    }
+
+    .badge-not-interested{
+      background:#fef2f2;
+      color:#b91c1c;
+    }
+
+    .action-group{
+      display:flex;
+      gap:5px;
+      flex-wrap:wrap;
+    }
+
+    .mini-btn{
+      border:0;
+      border-radius:7px;
+      padding:6px 8px;
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .mini-call{
+      background:#dcfce7;
+      color:#166534;
+    }
+
+    .mini-wa{
+      background:#dcfce7;
+      color:#15803d;
+    }
+
+    .mini-view{
+      background:#eff6ff;
+      color:#2563eb;
+    }
+
+    .mini-delete{
+      background:#fef2f2;
+      color:#dc2626;
+    }
+
+    /* PAGINATION */
+
+    .pagination{
+      padding:14px 18px;
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:6px;
+      border-top:1px solid var(--border);
+    }
+
+    .page-btn{
+      width:32px;
+      height:32px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:#fff;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .page-btn.active{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .page-info{
+      color:var(--muted);
+      font-size:10px;
+      margin-right:auto;
+    }
+
+    /* CONTENT */
+
+    .content-controls{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .display-switch{
+      display:flex;
+      gap:5px;
+      background:#fff;
+      border:1px solid var(--border);
+      padding:4px;
+      border-radius:10px;
+    }
+
+    .display-btn{
+      border:0;
+      background:transparent;
+      border-radius:7px;
+      padding:7px 11px;
+      font-size:10px;
+      font-weight:750;
+    }
+
+    .display-btn.active{
+      background:#111827;
+      color:#fff;
+    }
+
+    /* BANNER */
+
+    .banner-list{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .promo-banner{
+      min-height:190px;
+      border-radius:20px;
+      overflow:hidden;
+      position:relative;
+      background:#111827;
+      color:#fff;
+      display:flex;
+      align-items:stretch;
+      border:1px solid rgba(0,0,0,.05);
+    }
+
+    .promo-image{
+      width:34%;
+      background:#e5e7eb;
+      overflow:hidden;
+    }
+
+    .promo-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .promo-content{
+      padding:25px;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .promo-tag{
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      opacity:.7;
+      font-weight:800;
+      margin-bottom:7px;
+    }
+
+    .promo-title{
+      font-size:24px;
+      font-weight:900;
+    }
+
+    .promo-description{
+      color:#d1d5db;
+      font-size:12px;
+      margin-top:8px;
+      max-width:600px;
+      line-height:1.5;
+    }
+
+    .price-line{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      margin-top:13px;
+    }
+
+    .old-price{
+      text-decoration:line-through;
+      color:#9ca3af;
+      font-size:12px;
+    }
+
+    .offer-price{
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .validity{
+      font-size:9px;
+      color:#d1d5db;
+      margin-top:7px;
+    }
+
+    /* CAROUSEL */
+
+    .carousel{
+      position:relative;
+      overflow:hidden;
+      border-radius:20px;
+    }
+
+    .carousel-track{
+      display:flex;
+      transition:.45s ease;
+    }
+
+    .carousel-slide{
+      min-width:100%;
+    }
+
+    .carousel-control{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:38px;
+      height:38px;
+      border:0;
+      border-radius:50%;
+      background:rgba(0,0,0,.65);
+      color:#fff;
+      z-index:5;
+      font-size:18px;
+    }
+
+    .carousel-prev{
+      left:12px;
+    }
+
+    .carousel-next{
+      right:12px;
+    }
+
+    .carousel-dots{
+      position:absolute;
+      bottom:13px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:5px;
+      z-index:5;
+    }
+
+    .carousel-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      border:0;
+      background:rgba(255,255,255,.5);
+    }
+
+    .carousel-dot.active{
+      background:#fff;
+    }
+
+    /* COURSE GRID */
+
+    .course-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:17px;
+    }
+
+    .course-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:17px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .course-image{
+      height:145px;
+      background:#e5e7eb;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .course-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .course-body{
+      padding:16px;
+    }
+
+    .course-title{
+      font-size:16px;
+      font-weight:850;
+    }
+
+    .course-duration{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:5px;
+    }
+
+    .course-description{
+      color:#6b7280;
+      font-size:11px;
+      line-height:1.5;
+      margin-top:9px;
+      min-height:34px;
+    }
+
+    .course-price{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-top:12px;
+    }
+
+    .course-old{
+      text-decoration:line-through;
+      color:#9ca3af;
+      font-size:11px;
+    }
+
+    .course-current{
+      font-size:20px;
+      font-weight:900;
+    }
+
+    .course-actions{
+      display:flex;
+      gap:7px;
+      margin-top:14px;
+    }
+
+    .course-actions .btn{
+      flex:1;
+    }
+
+    /* LIST */
+
+    .content-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .list-item{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:15px;
+      display:flex;
+      align-items:center;
+      gap:15px;
+      box-shadow:0 5px 18px rgba(15,23,42,.04);
+    }
+
+    .list-thumb{
+      width:80px;
+      height:60px;
+      border-radius:10px;
+      overflow:hidden;
+      background:#e5e7eb;
+      flex-shrink:0;
+    }
+
+    .list-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .list-info{
+      flex:1;
+    }
+
+    .list-title{
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .list-desc{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:4px;
+    }
+
+    .list-price{
+      font-weight:900;
+      font-size:17px;
+      white-space:nowrap;
+    }
+
+    /* EMPTY */
+
+    .empty{
+      padding:45px 20px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .empty-icon{
+      font-size:34px;
+      margin-bottom:9px;
+    }
+
+    .empty-title{
+      font-weight:800;
+      color:#374151;
+      margin-bottom:4px;
+    }
+
+    .empty-text{
+      font-size:11px;
+    }
+
+    /* LOADING */
+
+    .loading{
+      padding:40px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .spinner{
+      width:27px;
+      height:27px;
+      border:3px solid #e5e7eb;
+      border-top-color:#111827;
+      border-radius:50%;
+      animation:spin .8s linear infinite;
+      margin:0 auto 10px;
+    }
+
+    @keyframes spin{
+      to{transform:rotate(360deg);}
+    }
+
+    /* MODAL */
+
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(15,23,42,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:500;
+      padding:20px;
+    }
+
+    .modal-overlay.show{
+      display:flex;
     }
 
     .modal{
-        align-items:flex-end;
-        padding:0;
+      background:#fff;
+      width:100%;
+      max-width:620px;
+      max-height:90vh;
+      overflow:auto;
+      border-radius:20px;
+      box-shadow:0 25px 70px rgba(0,0,0,.2);
     }
 
-    .modal-box{
-        max-height:88vh;
-        border-radius:20px 20px 0 0;
+    .modal-head{
+      padding:18px 20px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      position:sticky;
+      top:0;
+      background:#fff;
+      z-index:2;
     }
 
-}
+    .modal-title{
+      font-size:16px;
+      font-weight:850;
+    }
 
-@media(max-width:380px){
+    .close-btn{
+      width:32px;
+      height:32px;
+      border:0;
+      border-radius:9px;
+      background:#f3f4f6;
+      font-size:18px;
+    }
 
-    .filters{
+    .modal-body{
+      padding:20px;
+    }
+
+    .detail-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .detail-box{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px;
+    }
+
+    .detail-label{
+      color:var(--muted);
+      font-size:9px;
+      text-transform:uppercase;
+      font-weight:800;
+    }
+
+    .detail-value{
+      margin-top:5px;
+      font-size:12px;
+      font-weight:700;
+      word-break:break-word;
+    }
+
+    .modal-footer{
+      padding:15px 20px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+    }
+
+    /* TOAST */
+
+    .toast-container{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      z-index:1000;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .toast{
+      min-width:250px;
+      max-width:360px;
+      background:#111827;
+      color:#fff;
+      padding:12px 14px;
+      border-radius:11px;
+      box-shadow:0 15px 40px rgba(0,0,0,.18);
+      font-size:11px;
+      animation:toastIn .2s ease;
+    }
+
+    .toast.success{
+      background:#15803d;
+    }
+
+    .toast.error{
+      background:#dc2626;
+    }
+
+    @keyframes toastIn{
+      from{
+        transform:translateY(10px);
+        opacity:0;
+      }
+      to{
+        transform:translateY(0);
+        opacity:1;
+      }
+    }
+
+    /* MOBILE */
+
+    @media(max-width:1100px){
+      .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .earning-layout{
         grid-template-columns:1fr;
+      }
+
+      .toolbar-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .course-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
     }
 
-    .filters input{
-        grid-column:auto;
+    @media(max-width:760px){
+      .sidebar{
+        transform:translateX(-100%);
+      }
+
+      .sidebar.open{
+        transform:translateX(0);
+      }
+
+      .main{
+        margin-left:0;
+        width:100%;
+      }
+
+      .mobile-menu{
+        display:block;
+      }
+
+      .topbar{
+        padding:0 15px;
+      }
+
+      .top-user .top-user-info{
+        display:none;
+      }
+
+      .content{
+        padding:15px;
+      }
+
+      .hero{
+        padding:20px;
+      }
+
+      .hero h1{
+        font-size:21px;
+      }
+
+      .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+      }
+
+      .stat-card{
+        padding:14px;
+      }
+
+      .stat-value{
+        font-size:21px;
+      }
+
+      .earning-breakdown{
+        grid-template-columns:1fr;
+      }
+
+      .toolbar-grid{
+        grid-template-columns:1fr;
+      }
+
+      .course-grid{
+        grid-template-columns:1fr;
+      }
+
+      .promo-banner{
+        min-height:330px;
+        flex-direction:column;
+      }
+
+      .promo-image{
+        width:100%;
+        height:150px;
+      }
+
+      .promo-content{
+        padding:18px;
+      }
+
+      .promo-title{
+        font-size:20px;
+      }
+
+      .detail-grid{
+        grid-template-columns:1fr;
+      }
+
+      .list-item{
+        align-items:flex-start;
+      }
+
+      .list-price{
+        font-size:14px;
+      }
     }
 
-    .hero-amount{
-        font-size:27px;
-    }
+    @media(max-width:450px){
+      .stats-grid{
+        grid-template-columns:1fr;
+      }
 
-    .earning-mini strong{
-        font-size:13px;
-    }
-}
+      .topbar{
+        height:65px;
+      }
 
-</style>
+      .page-title{
+        font-size:17px;
+      }
+
+      .page-subtitle{
+        display:none;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-
 <div class="app">
 
-
-<!-- =====================================================
-     SIDEBAR / MOBILE NAV
-===================================================== -->
-
-<aside class="sidebar">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
 
     <div class="brand">
-
-        <div class="brand-logo">
-            BT
-        </div>
-
-        <div class="brand-text">
-
-            <div class="brand-title">
-                BlackTerminal
-            </div>
-
-            <div class="brand-sub">
-                Computer Institute
-            </div>
-
-        </div>
-
+      <div class="brand-logo">BT</div>
+      <div class="brand-text">
+        <strong>BlackTerminal</strong>
+        <span>Telecaller Panel</span>
+      </div>
     </div>
-
 
     <nav class="nav">
 
-        <div class="nav-label">
-            Workspace
-        </div>
+      <button class="nav-btn active" data-section="dashboard">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </button>
 
+      <button class="nav-btn" data-section="inquiries">
+        <span class="nav-icon">☰</span>
+        <span>Student Inquiries</span>
+      </button>
 
-        <div
-            class="nav-item active"
-            onclick="scrollToTop()"
-        >
+      <button class="nav-btn" data-section="courses">
+        <span class="nav-icon">▣</span>
+        <span>Courses & Offers</span>
+      </button>
 
-            <div class="nav-icon">
-                🏠
-            </div>
-
-            <span>
-                Dashboard
-            </span>
-
-        </div>
-
-
-        <div
-            class="nav-item"
-            onclick="scrollToTarget()"
-        >
-
-            <div class="nav-icon">
-                🎯
-            </div>
-
-            <span>
-                Target
-            </span>
-
-        </div>
-
-
-        <div
-            class="nav-item"
-            onclick="scrollToInquiries()"
-        >
-
-            <div class="nav-icon">
-                📞
-            </div>
-
-            <span>
-                Inquiries
-            </span>
-
-        </div>
+      <button class="nav-btn" data-section="earnings">
+        <span class="nav-icon">₹</span>
+        <span>My Earnings</span>
+      </button>
 
     </nav>
 
-
-    <div class="side-profile">
-
-        <div
-            class="side-name"
-            id="sideUserName"
-        >
-            Telecaller
-        </div>
-
-        <div class="side-role">
-            Telecaller
-        </div>
-
+    <div class="sidebar-user">
+      <div class="user-name" id="sideUserName">Telecaller</div>
+      <div class="user-role">Telecaller</div>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
     </div>
 
-</aside>
+  </aside>
 
+  <!-- MAIN -->
+  <main class="main">
 
+    <header class="topbar">
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+      <div class="topbar-left">
 
-<main class="main">
-
-
-<header class="topbar">
-
-    <div>
-
-        <div class="top-title">
-            Telecaller
-        </div>
-
-        <div class="top-sub">
-            BlackTerminal Computer Institute
-        </div>
-
-    </div>
-
-
-    <div class="profile-chip">
-
-        <div
-            class="avatar"
-            id="topAvatar"
-        >
-            T
-        </div>
-
-    </div>
-
-</header>
-
-
-
-<div class="page" id="dashboardTop">
-
-
-<!-- =====================================================
-     WELCOME
-===================================================== -->
-
-<div class="welcome">
-
-    <h1>
-        Hello, <span id="welcomeName">Telecaller</span> 👋
-    </h1>
-
-    <p>
-        Track your admissions, target and monthly earnings.
-    </p>
-
-</div>
-
-
-
-<!-- =====================================================
-     STATS
-===================================================== -->
-
-<div class="stats">
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-
-            <div
-                class="stat-icon"
-                style="
-                background:#eff6ff;
-                color:#2563eb;
-                "
-            >
-                📋
-            </div>
-
-        </div>
-
-        <div class="stat-label">
-            Total Inquiries
-        </div>
-
-        <div
-            class="stat-value"
-            id="totalInquiries"
-        >
-            0
-        </div>
-
-    </div>
-
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-
-            <div
-                class="stat-icon"
-                style="
-                background:#ecfdf5;
-                color:#10b981;
-                "
-            >
-                👣
-            </div>
-
-        </div>
-
-        <div class="stat-label">
-            Visits This Month
-        </div>
-
-        <div
-            class="stat-value"
-            id="visitedCount"
-        >
-            0
-        </div>
-
-    </div>
-
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-
-            <div
-                class="stat-icon"
-                style="
-                background:#f5f3ff;
-                color:#7c3aed;
-                "
-            >
-                🎓
-            </div>
-
-        </div>
-
-        <div class="stat-label">
-            Admissions
-        </div>
-
-        <div
-            class="stat-value"
-            id="convertedCount"
-        >
-            0
-        </div>
-
-    </div>
-
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-
-            <div
-                class="stat-icon"
-                style="
-                background:#ecfdf5;
-                color:#059669;
-                "
-            >
-                💰
-            </div>
-
-        </div>
-
-        <div class="stat-label">
-            Estimated Earnings
-        </div>
-
-        <div
-            class="stat-value"
-            id="estimatedEarning"
-        >
-            ₹1,000
-        </div>
-
-    </div>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     EARNING HERO
-===================================================== -->
-
-<div class="earning-hero">
-
-
-    <div class="hero-head">
-
+        <button class="mobile-menu" id="mobileMenu">☰</button>
 
         <div>
+          <div class="page-title" id="pageTitle">Telecaller Dashboard</div>
+          <div class="page-subtitle">Student management and performance</div>
+        </div>
 
-            <div class="hero-label">
-                CURRENT MONTH ESTIMATED EARNING
+      </div>
+
+      <div class="top-user">
+
+        <div class="top-user-info">
+          <div style="font-size:12px;font-weight:800;" id="topUserName">
+            Telecaller
+          </div>
+          <div style="font-size:10px;color:#6b7280;" id="topUserMobile">
+            -
+          </div>
+        </div>
+
+        <div class="avatar" id="avatar">
+          T
+        </div>
+
+      </div>
+
+    </header>
+
+    <div class="content">
+
+      <!-- ================= DASHBOARD ================= -->
+
+      <section class="section active" id="dashboard">
+
+        <div class="hero">
+
+          <h1>Welcome, <span id="heroName">Telecaller</span></h1>
+
+          <p>
+            Manage student inquiries, demo classes, admissions and your monthly earnings.
+          </p>
+
+          <div class="date-badge" id="todayDate">
+            Loading date...
+          </div>
+
+        </div>
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <div class="stat-icon">☰</div>
+            <div class="stat-label">Total Inquiries</div>
+            <div class="stat-value" id="statInquiries">0</div>
+            <div class="stat-small">Assigned inquiries</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">▶</div>
+            <div class="stat-label">Demo Completed</div>
+            <div class="stat-value" id="statDemo">0</div>
+            <div class="stat-small">Current month</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">✓</div>
+            <div class="stat-label">Converted</div>
+            <div class="stat-value" id="statConverted">0</div>
+            <div class="stat-small">Current month</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">₹</div>
+            <div class="stat-label">Current Earnings</div>
+            <div class="stat-value" id="statEarning">₹0</div>
+            <div class="stat-small">Current month</div>
+          </div>
+
+        </div>
+
+        <div class="earning-layout">
+
+          <div class="card">
+
+            <div class="card-title">
+              Current Month Earnings
             </div>
 
-            <div
-                class="hero-amount"
-                id="heroTotal"
-            >
-                ₹1,000
+            <div class="card-subtitle">
+              Your earnings are calculated automatically from Admin settings.
             </div>
 
-            <div class="hero-caption">
-                Base salary + admission incentive
+            <div class="earning-total" id="dashboardTotal">
+              ₹0
             </div>
 
-        </div>
-
-
-        <div
-            class="level-pill"
-            id="heroLevel"
-        >
-            Level 1
-        </div>
-
-
-    </div>
-
-
-    <div class="hero-divider"></div>
-
-
-    <div class="earning-breakdown">
-
-
-        <div class="earning-mini">
-
-            <span>
-                Base Salary
-            </span>
-
-            <strong id="heroBase">
-                ₹1,000
-            </strong>
-
-        </div>
-
-
-        <div class="earning-mini">
-
-            <span>
-                Admission Incentive
-            </span>
-
-            <strong id="heroAdmission">
-                ₹0
-            </strong>
-
-        </div>
-
-
-        <div class="earning-mini">
-
-            <span>
-                Visit Reward
-            </span>
-
-            <strong>
-                ₹0
-            </strong>
-
-        </div>
-
-
-    </div>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     TARGET
-===================================================== -->
-
-<div
-    class="target-card"
-    id="targetSection"
->
-
-
-    <div class="target-head">
-
-
-        <div>
-
-            <div class="target-title">
-                🎯 Monthly Admission Target
-            </div>
-
-            <div class="target-sub">
-                More admissions unlock a higher earning rate.
-            </div>
-
-        </div>
-
-
-        <div
-            class="target-number"
-            id="targetNumber"
-        >
-            0 / 3
-        </div>
-
-
-    </div>
-
-
-    <div class="progress">
-
-        <div
-            class="progress-fill"
-            id="targetProgress"
-        ></div>
-
-    </div>
-
-
-    <div class="target-foot">
-
-        <span id="targetRange">
-            Level 1 • 0–2 admissions
-        </span>
-
-        <span
-            class="next-target"
-            id="nextTarget"
-        >
-            3 more admissions to Level 2
-        </span>
-
-    </div>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     LEVEL PLAN
-===================================================== -->
-
-<div class="section-title">
-
-    <h2>
-        🚀 Admission Earning Plan
-    </h2>
-
-    <span>
-        Progressive target system
-    </span>
-
-</div>
-
-
-
-<div class="level-grid">
-
-
-    <!-- LEVEL 1 -->
-
-    <div
-        class="level-card l1"
-        id="level1"
-    >
-
-        <div class="level-top">
-
-            <div class="level-icon">
-                1
-            </div>
-
-            <div>
-
-                <div class="level-name">
-                    Starter Level
+            <div class="earning-breakdown">
+
+              <div class="earning-item">
+                <div class="earning-item-label">
+                  BASE SALARY
                 </div>
-
-                <div class="level-target">
-                    0–2 Admissions
+                <div class="earning-item-value" id="dashBase">
+                  ₹0
                 </div>
+              </div>
 
-            </div>
-
-        </div>
-
-
-        <div class="level-rate">
-
-            <span>
-                Reward per Admission
-            </span>
-
-            <strong id="rate1">
-                ₹50
-            </strong>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- LEVEL 2 -->
-
-    <div
-        class="level-card l2"
-        id="level2"
-    >
-
-        <div class="level-top">
-
-            <div class="level-icon">
-                2
-            </div>
-
-            <div>
-
-                <div class="level-name">
-                    Growth Level
+              <div class="earning-item">
+                <div class="earning-item-label">
+                  DEMO REWARD
                 </div>
-
-                <div class="level-target">
-                    3–5 Admissions
+                <div class="earning-item-value" id="dashDemoReward">
+                  ₹0
                 </div>
+              </div>
 
-            </div>
-
-        </div>
-
-
-        <div class="level-rate">
-
-            <span>
-                Reward per Admission
-            </span>
-
-            <strong id="rate2">
-                ₹75
-            </strong>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- LEVEL 3 -->
-
-    <div
-        class="level-card l3"
-        id="level3"
-    >
-
-        <div class="level-top">
-
-            <div class="level-icon">
-                3
-            </div>
-
-            <div>
-
-                <div class="level-name">
-                    Pro Level
+              <div class="earning-item">
+                <div class="earning-item-label">
+                  ADMISSION REWARD
                 </div>
-
-                <div class="level-target">
-                    6+ Admissions
+                <div class="earning-item-value" id="dashAdmissionReward">
+                  ₹0
                 </div>
+              </div>
 
             </div>
 
-        </div>
+            <div class="salary-box">
 
+              <div class="salary-row">
+                <span>Current Base Salary</span>
+                <strong id="currentBaseText">₹0</strong>
+              </div>
 
-        <div class="level-rate">
+              <div class="salary-row">
+                <span>Previous Month Level</span>
+                <strong id="previousLevelText">Not available</strong>
+              </div>
 
-            <span>
-                Reward per Admission
-            </span>
+              <div class="salary-row">
+                <span>Next Month Base Salary</span>
+                <strong id="nextBaseText">₹0</strong>
+              </div>
 
-            <strong id="rate3">
-                ₹100
-            </strong>
-
-        </div>
-
-    </div>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     COUNTING RULES
-===================================================== -->
-
-<div class="section-title">
-
-    <h2>
-        📌 How Performance Is Counted
-    </h2>
-
-</div>
-
-
-
-<div class="rules">
-
-
-    <div class="rule">
-
-        <div class="rule-icon">
-            👣
-        </div>
-
-        <div class="rule-title">
-            Visit Count
-        </div>
-
-        <div class="rule-text">
-            Counted when status is exactly
-            <b>Visited</b>. One unique mobile number
-            is counted once in the current month.
-        </div>
-
-    </div>
-
-
-    <div class="rule">
-
-        <div class="rule-icon">
-            🎓
-        </div>
-
-        <div class="rule-title">
-            Admission Count
-        </div>
-
-        <div class="rule-text">
-            Counted when status is exactly
-            <b>Converted</b>. One unique mobile number
-            is counted once in the current month.
-        </div>
-
-    </div>
-
-
-    <div class="rule">
-
-        <div class="rule-icon">
-            💰
-        </div>
-
-        <div class="rule-title">
-            Reward Rule
-        </div>
-
-        <div class="rule-text">
-            Visits have <b>₹0 reward</b>.
-            Only current-month unique converted
-            admissions generate incentive.
-        </div>
-
-    </div>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     INQUIRIES
-===================================================== -->
-
-<div
-    class="inquiry-section"
-    id="inquirySection"
->
-
-
-    <div class="inquiry-header">
-
-
-        <div class="inquiry-title-row">
-
-            <div class="inquiry-title">
-                📞 Student Inquiries
             </div>
 
-            <div
-                class="result"
-                id="resultText"
-            >
-                Loading...
+          </div>
+
+          <div class="card">
+
+            <div class="card-title">
+              Admission Level
             </div>
+
+            <div class="card-subtitle">
+              Level is automatically determined from current-month converted admissions.
+            </div>
+
+            <div id="levelCards">
+              <!-- Dynamic -->
+            </div>
+
+            <div class="next-level-text" id="levelProgressText">
+              Loading...
+            </div>
+
+          </div>
 
         </div>
 
+      </section>
 
-        <div class="filters">
 
+      <!-- ================= INQUIRIES ================= -->
+
+      <section class="section" id="inquiries">
+
+        <div class="hero">
+
+          <h1>Student Inquiries</h1>
+
+          <p>
+            Search, contact, update status and manage student inquiries.
+          </p>
+
+        </div>
+
+        <div class="toolbar">
+
+          <div class="toolbar-grid">
 
             <input
-                id="searchInput"
-                type="text"
-                placeholder="Search name or mobile..."
-                oninput="applyFilters()"
+              type="text"
+              id="searchInput"
+              class="input"
+              placeholder="Search student name, mobile, course..."
             >
 
-
-            <select
-                id="courseFilter"
-                onchange="applyFilters()"
-            >
-
-                <option value="">
-                    All Courses
-                </option>
-
+            <select id="statusFilter" class="select">
+              <option value="">All Status</option>
+              <option value="new">New</option>
+              <option value="pending">Pending</option>
+              <option value="contacted">Contacted</option>
+              <option value="follow-up">Follow-up</option>
+              <option value="visited">Visited</option>
+              <option value="demo-completed">Demo Completed</option>
+              <option value="converted">Converted</option>
+              <option value="not-interested">Not Interested</option>
             </select>
 
-
-            <select
-                id="statusFilter"
-                onchange="applyFilters()"
-            >
-
-                <option value="">
-                    All Status
-                </option>
-
-                <option value="new">
-                    New
-                </option>
-
-                <option value="pending">
-                    Pending
-                </option>
-
-                <option value="contacted">
-                    Contacted
-                </option>
-
-                <option value="follow-up">
-                    Follow-up
-                </option>
-
-                <option value="visited">
-                    Visited
-                </option>
-
-                <option value="converted">
-                    Converted
-                </option>
-
-                <option value="not-interested">
-                    Not Interested
-                </option>
-
+            <select id="courseFilter" class="select">
+              <option value="">All Courses</option>
             </select>
 
-
-            <select
-                id="coordinatorFilter"
-                onchange="applyFilters()"
-            >
-
-                <option value="">
-                    All Coordinators
-                </option>
-
+            <select id="coordinatorFilter" class="select">
+              <option value="">All Coordinators</option>
             </select>
 
-
-            <button
-                class="reset"
-                onclick="resetFilters()"
-            >
-                Reset
+            <button class="btn btn-primary" id="refreshBtn">
+              ↻ Refresh
             </button>
 
+          </div>
 
         </div>
 
+        <div class="table-card">
 
-    </div>
+          <div class="table-head">
 
+            <div>
+              <div class="card-title">
+                Inquiry List
+              </div>
 
+              <div class="result-count" id="resultCount">
+                0 inquiries found
+              </div>
+            </div>
 
-    <!-- DESKTOP TABLE -->
+            <button class="btn btn-light" id="clearFiltersBtn">
+              Clear Filters
+            </button>
 
-    <div class="table-wrap">
+          </div>
 
-        <table>
+          <div class="table-wrap">
 
-            <thead>
+            <table>
 
+              <thead>
                 <tr>
-
-                    <th>
-                        Student
-                    </th>
-
-                    <th>
-                        Course
-                    </th>
-
-                    <th>
-                        Source
-                    </th>
-
-                    <th>
-                        Coordinator
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                    <th>
-                        Follow-up
-                    </th>
-
-                    <th>
-                        Actions
-                    </th>
-
+                  <th>Student</th>
+                  <th>Course</th>
+                  <th>Source</th>
+                  <th>Coordinator</th>
+                  <th>Status</th>
+                  <th>Follow-up</th>
+                  <th>Updated</th>
+                  <th>Actions</th>
                 </tr>
+              </thead>
 
-            </thead>
+              <tbody id="inquiryBody">
+                <tr>
+                  <td colspan="8">
+                    <div class="loading">
+                      <div class="spinner"></div>
+                      Loading inquiries...
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
 
+            </table>
 
-            <tbody
-                id="inquiryBody"
-            ></tbody>
+          </div>
 
-        </table>
+          <div class="pagination">
 
-    </div>
+            <div class="page-info" id="pageInfo">
+              Page 1
+            </div>
 
+            <div id="paginationButtons"></div>
 
+          </div>
 
-    <!-- MOBILE CARDS -->
+        </div>
 
-    <div
-        class="mobile-list"
-        id="mobileInquiryList"
-    ></div>
-
-
-</div>
-
-
-</div>
-
-</main>
-
-</div>
-
-
-
-<!-- =====================================================
-     DETAIL MODAL
-===================================================== -->
-
-<div
-    class="modal"
-    id="detailModal"
->
+      </section>
 
 
-    <div class="modal-box">
+      <!-- ================= COURSES ================= -->
 
+      <section class="section" id="courses">
 
-        <div class="modal-head">
+        <div class="hero">
 
-            <h2>
-                Student Details
-            </h2>
+          <h1>Courses & Special Offers</h1>
 
-            <button
-                class="close"
-                onclick="closeModal()"
-            >
-                ✕
+          <p>
+            Course prices, offers and promotional information published by Admin.
+          </p>
+
+        </div>
+
+        <div class="content-controls">
+
+          <div>
+            <div class="card-title">
+              Available Information
+            </div>
+
+            <div class="card-subtitle" style="margin:4px 0 0;">
+              Always use the latest price and offer shown here when talking to students.
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center;">
+
+            <button class="btn btn-light" id="refreshContentBtn">
+              ↻ Refresh
             </button>
 
+            <div class="display-switch">
+
+              <button
+                class="display-btn active"
+                data-display="carousel"
+              >
+                Carousel
+              </button>
+
+              <button
+                class="display-btn"
+                data-display="banner"
+              >
+                Banner
+              </button>
+
+              <button
+                class="display-btn"
+                data-display="list"
+              >
+                List
+              </button>
+
+            </div>
+
+          </div>
+
         </div>
 
+        <div id="contentArea">
 
-        <div class="detail-grid">
-
-
-            <div class="detail">
-
-                <small>
-                    Student Name
-                </small>
-
-                <strong id="dName">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail">
-
-                <small>
-                    Mobile
-                </small>
-
-                <strong id="dMobile">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail">
-
-                <small>
-                    Course
-                </small>
-
-                <strong id="dCourse">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail">
-
-                <small>
-                    Status
-                </small>
-
-                <strong id="dStatus">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail">
-
-                <small>
-                    Source
-                </small>
-
-                <strong id="dSource">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail">
-
-                <small>
-                    Coordinator
-                </small>
-
-                <strong id="dCoordinator">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail">
-
-                <small>
-                    Follow-up
-                </small>
-
-                <strong id="dFollowUp">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail">
-
-                <small>
-                    Created
-                </small>
-
-                <strong id="dCreated">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail full">
-
-                <small>
-                    Coordinator Remark
-                </small>
-
-                <strong id="dRemark">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail full">
-
-                <small>
-                    Telecaller Remark
-                </small>
-
-                <strong id="dTeleRemark">
-                    -
-                </strong>
-
-            </div>
-
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading courses and offers...
+          </div>
 
         </div>
+
+      </section>
+
+
+      <!-- ================= EARNINGS ================= -->
+
+      <section class="section" id="earnings">
+
+        <div class="hero">
+
+          <h1>My Earnings</h1>
+
+          <p>
+            Transparent monthly earning calculation based on Admin-controlled rules.
+          </p>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-title">
+            Current Month Payment
+          </div>
+
+          <div class="card-subtitle">
+            Current month earning calculation
+          </div>
+
+          <div class="earning-total" id="earningPageTotal">
+            ₹0
+          </div>
+
+          <div class="earning-breakdown">
+
+            <div class="earning-item">
+              <div class="earning-item-label">
+                BASE SALARY
+              </div>
+              <div class="earning-item-value" id="earningPageBase">
+                ₹0
+              </div>
+            </div>
+
+            <div class="earning-item">
+              <div class="earning-item-label">
+                DEMO CLASSES
+              </div>
+              <div class="earning-item-value" id="earningPageDemo">
+                ₹0
+              </div>
+            </div>
+
+            <div class="earning-item">
+              <div class="earning-item-label">
+                ADMISSIONS
+              </div>
+              <div class="earning-item-value" id="earningPageAdmission">
+                ₹0
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div style="height:16px;"></div>
+
+        <div class="card">
+
+          <div class="card-title">
+            Performance Details
+          </div>
+
+          <div class="card-subtitle">
+            Your current month performance
+          </div>
+
+          <div class="detail-grid">
+
+            <div class="detail-box">
+              <div class="detail-label">Demo Completed</div>
+              <div class="detail-value" id="earnDemoCount">0</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="detail-label">Demo Reward / Student</div>
+              <div class="detail-value" id="earnDemoRate">₹0</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="detail-label">Converted Admissions</div>
+              <div class="detail-value" id="earnAdmissionCount">0</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="detail-label">Current Admission Level</div>
+              <div class="detail-value" id="earnLevel">Level 1</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="detail-label">Admission Reward / Student</div>
+              <div class="detail-value" id="earnAdmissionRate">₹0</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="detail-label">Visit Reward</div>
+              <div class="detail-value">₹0</div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div style="height:16px;"></div>
+
+        <div class="card">
+
+          <div class="card-title">
+            Next Month Base Salary
+          </div>
+
+          <div class="card-subtitle">
+            This is determined from your current month's final admission level.
+          </div>
+
+          <div class="earning-total" id="nextMonthSalaryBig">
+            ₹1,000
+          </div>
+
+          <div class="detail-grid">
+
+            <div class="detail-box">
+              <div class="detail-label">Current Level</div>
+              <div class="detail-value" id="salaryCurrentLevel">Level 1</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="detail-label">Current Default Base</div>
+              <div class="detail-value" id="salaryDefaultBase">₹1,000</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="detail-label">Next Month Base</div>
+              <div class="detail-value" id="salaryNextBase">₹800</div>
+            </div>
+
+            <div class="detail-box">
+              <div class="detail-label">Adjustment Period</div>
+              <div class="detail-value">One Month Only</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
 
     </div>
 
+  </main>
+
 </div>
 
+
+<!-- ================= DETAIL MODAL ================= -->
+
+<div class="modal-overlay" id="detailModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <div class="modal-title">
+        Student Details
+      </div>
+
+      <button class="close-btn" data-close="detailModal">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="detail-grid">
+
+        <div class="detail-box">
+          <div class="detail-label">Student Name</div>
+          <div class="detail-value" id="detailName">-</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Mobile</div>
+          <div class="detail-value" id="detailMobile">-</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Course</div>
+          <div class="detail-value" id="detailCourse">-</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Source</div>
+          <div class="detail-value" id="detailSource">-</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Coordinator</div>
+          <div class="detail-value" id="detailCoordinator">-</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Coordinator Mobile</div>
+          <div class="detail-value" id="detailCoordinatorMobile">-</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Status</div>
+          <div class="detail-value" id="detailStatus">-</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Telecaller Status</div>
+          <div class="detail-value" id="detailTelecallerStatus">-</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Follow-up Date</div>
+          <div class="detail-value" id="detailFollowup">-</div>
+        </div>
+
+        <div class="detail-box">
+          <div class="detail-label">Created At</div>
+          <div class="detail-value" id="detailCreated">-</div>
+        </div>
+
+        <div class="detail-box" style="grid-column:1/-1;">
+          <div class="detail-label">Coordinator Remark</div>
+          <div class="detail-value" id="detailRemark">-</div>
+        </div>
+
+        <div class="detail-box" style="grid-column:1/-1;">
+          <div class="detail-label">Telecaller Remark</div>
+          <div class="detail-value" id="detailTeleRemark">-</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button class="btn btn-light" data-close="detailModal">
+        Close
+      </button>
+
+      <button class="btn btn-success" id="detailCallBtn">
+        Call Student
+      </button>
+
+      <button class="btn btn-success" id="detailWhatsAppBtn">
+        WhatsApp
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= STATUS MODAL ================= -->
+
+<div class="modal-overlay" id="statusModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <div class="modal-title">
+        Update Student Status
+      </div>
+
+      <button class="close-btn" data-close="statusModal">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <input type="hidden" id="statusDocName">
+
+      <div style="margin-bottom:13px;">
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Student
+        </label>
+
+        <input
+          type="text"
+          class="input"
+          id="statusStudentName"
+          readonly
+        >
+      </div>
+
+      <div style="margin-bottom:13px;">
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Status
+        </label>
+
+        <select class="select" id="newStatus">
+
+          <option value="new">New</option>
+          <option value="pending">Pending</option>
+          <option value="contacted">Contacted</option>
+          <option value="follow-up">Follow-up</option>
+          <option value="visited">Visited</option>
+          <option value="demo-completed">Demo Completed</option>
+          <option value="converted">Converted</option>
+          <option value="not-interested">Not Interested</option>
+
+        </select>
+
+      </div>
+
+      <div style="margin-bottom:13px;">
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Follow-up Date
+        </label>
+
+        <input
+          type="date"
+          class="input"
+          id="newFollowupDate"
+        >
+
+      </div>
+
+      <div>
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Telecaller Remark
+        </label>
+
+        <textarea
+          class="textarea"
+          id="newTelecallerRemark"
+          rows="4"
+          placeholder="Enter remark..."
+        ></textarea>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button class="btn btn-light" data-close="statusModal">
+        Cancel
+      </button>
+
+      <button class="btn btn-primary" id="saveStatusBtn">
+        Save Status
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="toast-container" id="toastContainer"></div>
 
 
 <script>
 
-/* =========================================================
-   FIRESTORE CONFIG
-========================================================= */
+  /* ============================================================
+     AUTH / SESSION
+  ============================================================ */
 
-const FIREBASE_PROJECT_ID =
-    "jobs-2f152";
+  const loggedIn = sessionStorage.getItem("bt_logged_in");
+  const userRole = sessionStorage.getItem("bt_user_role");
 
-const FIREBASE_API_KEY =
+  const telecallerName =
+    sessionStorage.getItem("bt_user_name") || "Telecaller";
+
+  const telecallerMobile =
+    sessionStorage.getItem("bt_user_mobile") || "";
+
+  if(
+    loggedIn !== "true" ||
+    userRole !== "telecaller"
+  ){
+    window.location.replace("login.html");
+  }
+
+
+  /* ============================================================
+     FIRESTORE CONFIG
+  ============================================================ */
+
+  const FIREBASE_PROJECT_ID = "jobs-2f152";
+
+  const FIREBASE_API_KEY =
     "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
 
-const FIRESTORE_BASE =
+  const FIRESTORE_BASE =
     "https://firestore.googleapis.com/v1/projects/" +
     FIREBASE_PROJECT_ID +
     "/databases/(default)/documents";
 
-const FIRESTORE_URL =
-    FIRESTORE_BASE +
-    "/studentInquiries";
+  const INQUIRY_URL =
+    FIRESTORE_BASE + "/studentInquiries";
 
-const PAYMENT_SETTINGS_URL =
-    FIRESTORE_BASE +
-    "/paymentSettings/telecaller";
+  const PAYMENT_SETTINGS_URL =
+    FIRESTORE_BASE + "/paymentSettings/telecaller";
 
-
-/* =========================================================
-   SESSION
-========================================================= */
-
-const loggedIn =
-    sessionStorage.getItem("bt_logged_in");
-
-const userRole =
-    sessionStorage.getItem("bt_user_role");
-
-const telecallerName =
-    sessionStorage.getItem("bt_user_name") ||
-    "Telecaller";
-
-const telecallerMobile =
-    sessionStorage.getItem("bt_user_mobile") ||
-    "";
-
-if(
-    loggedIn !== "true" ||
-    userRole !== "telecaller"
-){
-    window.location.replace("login.html");
-}
+  const CONTENT_URL =
+    FIRESTORE_BASE + "/telecallerContent";
 
 
-/* =========================================================
-   EARNING CONFIG
-========================================================= */
+  /* ============================================================
+     DEFAULT SETTINGS
+  ============================================================ */
 
-let BASE_SALARY = 1000;
+  let SETTINGS = {
 
-/*
-    Visits NEVER generate reward.
-*/
+    baseSalary:1000,
 
-const VISIT_REWARD = 0;
+    demoIncentive:30,
 
-/*
-    Admission earning by level.
-*/
+    level1Min:0,
+    level1Max:2,
+    level1AdmissionIncentive:50,
+    level1NextBaseSalary:800,
 
-let LEVEL1_ADMISSION = 50;
-let LEVEL2_ADMISSION = 75;
-let LEVEL3_ADMISSION = 100;
+    level2Min:3,
+    level2Max:5,
+    level2AdmissionIncentive:75,
+    level2NextBaseSalary:900,
 
-/*
-    Admission targets.
-*/
+    level3Min:6,
+    level3Max:null,
+    level3AdmissionIncentive:100,
+    level3NextBaseSalary:2000
 
-const LEVEL2_TARGET = 3;
-const LEVEL3_TARGET = 6;
-
-
-/* =========================================================
-   GLOBAL DATA
-========================================================= */
-
-let inquiries = [];
-let filteredInquiries = [];
+  };
 
 
-/* =========================================================
-   USER UI
-========================================================= */
+  /* ============================================================
+     APP STATE
+  ============================================================ */
 
-document.getElementById(
-    "sideUserName"
-).textContent =
-    telecallerName;
+  let inquiries = [];
+  let filteredInquiries = [];
 
-document.getElementById(
-    "welcomeName"
-).textContent =
-    telecallerName;
+  let currentPage = 1;
 
-document.getElementById(
-    "topAvatar"
-).textContent =
-    telecallerName
-        .trim()
-        .charAt(0)
-        .toUpperCase();
+  const PAGE_SIZE = 10;
+
+  let currentDetailInquiry = null;
+
+  let currentContent = [];
+
+  let currentDisplay = "carousel";
+
+  let carouselIndex = 0;
+
+  let carouselTimer = null;
 
 
-/* =========================================================
-   HELPERS
-========================================================= */
+  /* ============================================================
+     FIRESTORE HELPERS
+  ============================================================ */
 
-function escapeHTML(value){
+  function firestoreValue(value){
 
-    if(
-        value === null ||
-        value === undefined
-    ){
-        return "";
+    if(value === null || value === undefined){
+      return null;
     }
 
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-
-function formatMoney(value){
-
-    return "₹" +
-        Number(value || 0)
-        .toLocaleString("en-IN");
-}
-
-
-function normalizeMobile(value){
-
-    return String(value || "")
-        .replace(/\D/g,"")
-        .slice(-10);
-}
-
-
-function currentMonthKey(){
-
-    const d = new Date();
-
-    return (
-        d.getFullYear() +
-        "-" +
-        String(
-            d.getMonth() + 1
-        ).padStart(2,"0")
-    );
-}
-
-
-function currentMonthKeyFromDate(
-    value
-){
-
-    const d =
-        new Date(value);
-
-    if(
-        isNaN(
-            d.getTime()
-        )
-    ){
-        return "";
+    if(typeof value === "number"){
+      return {
+        integerValue:String(Math.round(value))
+      };
     }
 
-    return (
-        d.getFullYear() +
-        "-" +
-        String(
-            d.getMonth() + 1
-        ).padStart(2,"0")
-    );
-}
+    if(typeof value === "boolean"){
+      return {
+        booleanValue:value
+      };
+    }
+
+    return {
+      stringValue:String(value)
+    };
+  }
 
 
-function firestoreValueToJS(field){
+  function extractFirestoreValue(field){
 
     if(!field){
-        return "";
+      return "";
     }
 
-    if(
-        field.stringValue !== undefined
-    ){
-        return field.stringValue;
+    if(field.stringValue !== undefined){
+      return field.stringValue;
     }
 
-    if(
-        field.integerValue !== undefined
-    ){
-        return Number(
-            field.integerValue
-        );
+    if(field.integerValue !== undefined){
+      return Number(field.integerValue);
     }
 
-    if(
-        field.doubleValue !== undefined
-    ){
-        return Number(
-            field.doubleValue
-        );
+    if(field.doubleValue !== undefined){
+      return Number(field.doubleValue);
     }
 
-    if(
-        field.booleanValue !== undefined
-    ){
-        return field.booleanValue;
+    if(field.booleanValue !== undefined){
+      return field.booleanValue;
     }
 
-    if(
-        field.timestampValue !== undefined
-    ){
-        return field.timestampValue;
+    if(field.timestampValue !== undefined){
+      return field.timestampValue;
+    }
+
+    if(field.arrayValue){
+      return (field.arrayValue.values || [])
+        .map(extractFirestoreValue);
+    }
+
+    if(field.mapValue){
+      return firestoreFieldsToObject(
+        field.mapValue.fields || {}
+      );
     }
 
     return "";
-}
+  }
 
 
-function convertFirestoreDocument(doc){
+  function firestoreFieldsToObject(fields){
 
-    const fields =
-        doc.fields || {};
+    const obj = {};
 
-    const item = {};
+    Object.keys(fields || {}).forEach(key => {
+      obj[key] = extractFirestoreValue(fields[key]);
+    });
 
-    Object.keys(fields).forEach(
-        key => {
+    return obj;
+  }
 
-            item[key] =
-                firestoreValueToJS(
-                    fields[key]
-                );
 
+  async function firestoreFetch(
+    url,
+    options = {}
+  ){
+
+    const separator =
+      url.includes("?") ? "&" : "?";
+
+    const finalUrl =
+      url +
+      separator +
+      "key=" +
+      encodeURIComponent(FIREBASE_API_KEY);
+
+    const response =
+      await fetch(
+        finalUrl,
+        {
+          ...options,
+          headers:{
+            "Content-Type":"application/json",
+            ...(options.headers || {})
+          }
         }
-    );
+      );
 
-    item._id =
-        doc.name
-        ? doc.name.split("/").pop()
-        : "";
+    const text =
+      await response.text();
 
-    return item;
-}
+    let data = {};
 
-
-function toFirestoreValue(value){
-
-    if(
-        typeof value === "number"
-    ){
-        return {
-            integerValue:
-                String(value)
-        };
+    try{
+      data = text ? JSON.parse(text) : {};
+    }catch{
+      data = {};
     }
 
-    if(
-        typeof value === "boolean"
-    ){
-        return {
-            booleanValue:value
-        };
+    if(!response.ok){
+
+      let message =
+        data?.error?.message ||
+        "Firestore request failed.";
+
+      throw new Error(message);
     }
 
-    return {
-        stringValue:
-            String(value ?? "")
-    };
-}
+    return data;
+  }
 
 
-/* =========================================================
-   PAYMENT SETTINGS
-========================================================= */
+  /* ============================================================
+     PAGINATED INQUIRY FETCH
+  ============================================================ */
 
-async function loadPaymentSettings(){
+  async function loadInquiries(){
+
+    const tbody =
+      document.getElementById("inquiryBody");
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8">
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading inquiries...
+          </div>
+        </td>
+      </tr>
+    `;
 
     try{
 
-        const response =
-            await fetch(
-                PAYMENT_SETTINGS_URL +
-                "?key=" +
-                encodeURIComponent(
-                    FIREBASE_API_KEY
-                )
-            );
+      let allDocs = [];
 
-        if(!response.ok){
-            updatePlanUI();
-            updateDashboard();
-            return;
+      let pageToken = "";
+
+      do{
+
+        let url =
+          INQUIRY_URL +
+          "?pageSize=300";
+
+        if(pageToken){
+          url +=
+            "&pageToken=" +
+            encodeURIComponent(pageToken);
         }
 
         const data =
-            await response.json();
+          await firestoreFetch(url);
 
-        const fields =
-            data.fields || {};
+        const docs =
+          data.documents || [];
 
+        allDocs =
+          allDocs.concat(docs);
 
-        if(fields.baseSalary){
+        pageToken =
+          data.nextPageToken || "";
 
-            BASE_SALARY =
-                Number(
-                    firestoreValueToJS(
-                        fields.baseSalary
-                    )
-                ) || 1000;
-
-        }
+      }while(pageToken);
 
 
-        /*
-            Future-compatible fields.
-        */
+      inquiries =
+        allDocs.map(doc => {
 
-        if(
-            fields.level1AdmissionIncentive
-        ){
+          const obj =
+            firestoreFieldsToObject(
+              doc.fields || {}
+            );
 
-            LEVEL1_ADMISSION =
-                Number(
-                    firestoreValueToJS(
-                        fields.level1AdmissionIncentive
-                    )
-                );
+          obj.__docName =
+            doc.name || "";
 
-        }
+          return obj;
 
+        });
 
-        if(
-            fields.level2AdmissionIncentive
-        ){
-
-            LEVEL2_ADMISSION =
-                Number(
-                    firestoreValueToJS(
-                        fields.level2AdmissionIncentive
-                    )
-                );
-
-        }
+      inquiries.sort(
+        (a,b) =>
+          new Date(b.createdAt || 0) -
+          new Date(a.createdAt || 0)
+      );
 
 
-        if(
-            fields.level3AdmissionIncentive
-        ){
+      buildFilters();
 
-            LEVEL3_ADMISSION =
-                Number(
-                    firestoreValueToJS(
-                        fields.level3AdmissionIncentive
-                    )
-                );
+      applyFilters();
 
-        }
+      updateDashboard();
 
-
-        updatePlanUI();
-        updateDashboard();
+      calculateAndRenderEarnings();
 
     }catch(error){
 
-        console.error(
-            "Payment settings:",
-            error
-        );
+      console.error(error);
 
-        updatePlanUI();
-        updateDashboard();
-    }
-}
+      inquiries = [];
 
-
-/* =========================================================
-   LOAD INQUIRIES
-========================================================= */
-
-async function loadInquiries(){
-
-    try{
-
-        let allDocs = [];
-        let pageToken = "";
-
-        do{
-
-            let url =
-                FIRESTORE_URL +
-                "?key=" +
-                encodeURIComponent(
-                    FIREBASE_API_KEY
-                );
-
-            if(pageToken){
-
-                url +=
-                    "&pageToken=" +
-                    encodeURIComponent(
-                        pageToken
-                    );
-
-            }
-
-            const response =
-                await fetch(url);
-
-            if(!response.ok){
-
-                throw new Error(
-                    "Firestore error: " +
-                    response.status
-                );
-            }
-
-            const data =
-                await response.json();
-
-            if(
-                Array.isArray(
-                    data.documents
-                )
-            ){
-
-                allDocs =
-                    allDocs.concat(
-                        data.documents
-                    );
-
-            }
-
-            pageToken =
-                data.nextPageToken || "";
-
-        }while(pageToken);
-
-
-        inquiries =
-            allDocs.map(
-                convertFirestoreDocument
-            );
-
-
-        updateCourseFilter();
-        updateCoordinatorFilter();
-        applyFilters();
-
-    }catch(error){
-
-        console.error(error);
-
-        document.getElementById(
-            "resultText"
-        ).textContent =
-            "Unable to load";
-
-        showEmptyState(
-            "Unable to load inquiries",
-            "Please check your Firestore connection."
-        );
-    }
-}
-
-
-/* =========================================================
-   FILTER OPTIONS
-========================================================= */
-
-function updateCourseFilter(){
-
-    const select =
-        document.getElementById(
-            "courseFilter"
-        );
-
-    const current =
-        select.value;
-
-    const courses =
-        [...new Set(
-            inquiries
-                .map(
-                    x => x.course
-                )
-                .filter(Boolean)
-        )]
-        .sort();
-
-    select.innerHTML =
-        `<option value="">All Courses</option>`;
-
-    courses.forEach(
-        course => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                course;
-
-            option.textContent =
-                course;
-
-            select.appendChild(
-                option
-            );
-        }
-    );
-
-    select.value =
-        current;
-}
-
-
-function updateCoordinatorFilter(){
-
-    const select =
-        document.getElementById(
-            "coordinatorFilter"
-        );
-
-    const current =
-        select.value;
-
-    const names =
-        [...new Set(
-            inquiries
-                .map(
-                    x =>
-                        x.coordinatorName
-                )
-                .filter(Boolean)
-        )]
-        .sort();
-
-    select.innerHTML =
-        `<option value="">All Coordinators</option>`;
-
-    names.forEach(
-        name => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                name;
-
-            option.textContent =
-                name;
-
-            select.appendChild(
-                option
-            );
-        }
-    );
-
-    select.value =
-        current;
-}
-
-
-/* =========================================================
-   FILTERING
-========================================================= */
-
-function applyFilters(){
-
-    const search =
-        document.getElementById(
-            "searchInput"
-        )
-        .value
-        .trim()
-        .toLowerCase();
-
-    const course =
-        document.getElementById(
-            "courseFilter"
-        ).value;
-
-    const status =
-        document.getElementById(
-            "statusFilter"
-        ).value;
-
-    const coordinator =
-        document.getElementById(
-            "coordinatorFilter"
-        ).value;
-
-
-    filteredInquiries =
-        inquiries.filter(
-            item => {
-
-                const name =
-                    String(
-                        item.studentName ||
-                        ""
-                    ).toLowerCase();
-
-                const mobile =
-                    String(
-                        item.mobile ||
-                        ""
-                    );
-
-                const matchesSearch =
-                    !search ||
-                    name.includes(search) ||
-                    mobile.includes(search);
-
-                const matchesCourse =
-                    !course ||
-                    item.course === course;
-
-                const matchesStatus =
-                    !status ||
-                    item.status === status;
-
-                const matchesCoordinator =
-                    !coordinator ||
-                    item.coordinatorName ===
-                    coordinator;
-
-                return (
-                    matchesSearch &&
-                    matchesCourse &&
-                    matchesStatus &&
-                    matchesCoordinator
-                );
-            }
-        );
-
-
-    renderInquiries();
-    updateDashboard();
-}
-
-
-function resetFilters(){
-
-    document.getElementById(
-        "searchInput"
-    ).value = "";
-
-    document.getElementById(
-        "courseFilter"
-    ).value = "";
-
-    document.getElementById(
-        "statusFilter"
-    ).value = "";
-
-    document.getElementById(
-        "coordinatorFilter"
-    ).value = "";
-
-    applyFilters();
-}
-
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
-function showEmptyState(
-    title,
-    message
-){
-
-    const desktop =
-        document.getElementById(
-            "inquiryBody"
-        );
-
-    const mobile =
-        document.getElementById(
-            "mobileInquiryList"
-        );
-
-    desktop.innerHTML = `
+      document.getElementById("inquiryBody").innerHTML = `
         <tr>
-            <td colspan="7">
-                <div class="empty">
-                    <div class="empty-icon">📭</div>
-                    <div class="empty-title">
-                        ${escapeHTML(title)}
-                    </div>
-                    <div class="empty-text">
-                        ${escapeHTML(message)}
-                    </div>
-                </div>
-            </td>
+          <td colspan="8">
+            <div class="empty">
+              <div class="empty-icon">⚠</div>
+              <div class="empty-title">
+                Unable to load inquiries
+              </div>
+              <div class="empty-text">
+                ${escapeHtml(error.message)}
+              </div>
+            </div>
+          </td>
         </tr>
-    `;
+      `;
 
-    mobile.innerHTML = `
-        <div class="empty">
-            <div class="empty-icon">📭</div>
-            <div class="empty-title">
-                ${escapeHTML(title)}
-            </div>
-            <div class="empty-text">
-                ${escapeHTML(message)}
-            </div>
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   STATUS SELECT HTML
-========================================================= */
-
-function statusOptions(
-    item
-){
-
-    const status =
-        item.status || "new";
-
-    const options = [
-        ["new","New"],
-        ["pending","Pending"],
-        ["contacted","Contacted"],
-        ["follow-up","Follow-up"],
-        ["visited","Visited"],
-        ["converted","Converted"],
-        ["not-interested","Not Interested"]
-    ];
-
-    return options.map(
-        option => {
-
-            return `
-                <option
-                    value="${option[0]}"
-                    ${status === option[0] ? "selected" : ""}
-                >
-                    ${option[1]}
-                </option>
-            `;
-        }
-    ).join("");
-}
-
-
-/* =========================================================
-   RENDER INQUIRIES
-========================================================= */
-
-function renderInquiries(){
-
-    document.getElementById(
-        "resultText"
-    ).textContent =
-        `${filteredInquiries.length} ${
-            filteredInquiries.length === 1
-                ? "inquiry"
-                : "inquiries"
-        }`;
-
-
-    if(
-        !filteredInquiries.length
-    ){
-
-        showEmptyState(
-            "No inquiries found",
-            "Try changing your search or filters."
-        );
-
-        return;
+      showToast(
+        error.message,
+        "error"
+      );
     }
+  }
 
 
-    const desktop =
-        document.getElementById(
-            "inquiryBody"
-        );
+  /* ============================================================
+     PAYMENT SETTINGS
+  ============================================================ */
 
-    const mobile =
-        document.getElementById(
-            "mobileInquiryList"
-        );
-
-
-    desktop.innerHTML =
-        filteredInquiries.map(
-            item => {
-
-                const status =
-                    item.status || "new";
-
-                const statusClass =
-                    "status-" +
-                    status.replace(
-                        /\s+/g,
-                        "-"
-                    );
-
-
-                return `
-
-                <tr>
-
-                    <td>
-
-                        <div class="student">
-                            ${escapeHTML(
-                                item.studentName ||
-                                "Unknown"
-                            )}
-                        </div>
-
-                        <div class="mobile">
-                            ${escapeHTML(
-                                item.mobile ||
-                                "—"
-                            )}
-                        </div>
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(
-                            item.course ||
-                            "—"
-                        )}
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(
-                            item.source ||
-                            "—"
-                        )}
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(
-                            item.coordinatorName ||
-                            "—"
-                        )}
-                    </td>
-
-
-                    <td>
-
-                        <select
-                            onchange="
-                                changeStatus(
-                                    '${escapeHTML(item._id)}',
-                                    this.value
-                                )
-                            "
-                        >
-
-                            ${statusOptions(item)}
-
-                        </select>
-
-                        <div style="margin-top:5px">
-
-                            <span
-                                class="
-                                    status
-                                    ${statusClass}
-                                "
-                            >
-                                ${escapeHTML(status)}
-                            </span>
-
-                        </div>
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(
-                            item.followUpDate ||
-                            "—"
-                        )}
-                    </td>
-
-
-                    <td>
-
-                        <div class="actions">
-
-                            <button
-                                class="action a-call"
-                                onclick="
-                                    callStudent(
-                                        '${escapeHTML(
-                                            item.mobile || ""
-                                        )}'
-                                    )
-                                "
-                            >
-                                📞
-                            </button>
-
-
-                            <button
-                                class="action a-wa"
-                                onclick="
-                                    whatsappStudent(
-                                        '${escapeHTML(
-                                            item.mobile || ""
-                                        )}',
-                                        '${escapeHTML(
-                                            item.studentName || ""
-                                        )}'
-                                    )
-                                "
-                            >
-                                💬
-                            </button>
-
-
-                            <button
-                                class="action a-view"
-                                onclick="
-                                    viewStudent(
-                                        '${escapeHTML(
-                                            item._id
-                                        )}'
-                                    )
-                                "
-                            >
-                                👁
-                            </button>
-
-
-                            <button
-                                class="action a-delete"
-                                onclick="
-                                    deleteInquiry(
-                                        '${escapeHTML(
-                                            item._id
-                                        )}'
-                                    )
-                                "
-                            >
-                                🗑
-                            </button>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-                `;
-
-            }
-        ).join("");
-
-
-    mobile.innerHTML =
-        filteredInquiries.map(
-            item => {
-
-                const status =
-                    item.status || "new";
-
-                const statusClass =
-                    "status-" +
-                    status.replace(
-                        /\s+/g,
-                        "-"
-                    );
-
-
-                return `
-
-                <div class="inquiry-card">
-
-
-                    <div class="inquiry-card-top">
-
-                        <div>
-
-                            <div class="card-name">
-                                ${escapeHTML(
-                                    item.studentName ||
-                                    "Unknown"
-                                )}
-                            </div>
-
-                            <div class="card-mobile">
-                                ${escapeHTML(
-                                    item.mobile ||
-                                    "—"
-                                )}
-                            </div>
-
-                        </div>
-
-
-                        <span
-                            class="
-                                status
-                                ${statusClass}
-                            "
-                        >
-                            ${escapeHTML(status)}
-                        </span>
-
-                    </div>
-
-
-                    <div class="card-course">
-                        ${escapeHTML(
-                            item.course ||
-                            "Course not specified"
-                        )}
-                    </div>
-
-
-                    <div class="card-meta">
-                        Source:
-                        ${escapeHTML(
-                            item.source ||
-                            "—"
-                        )}
-                    </div>
-
-
-                    <div class="card-meta">
-                        Coordinator:
-                        ${escapeHTML(
-                            item.coordinatorName ||
-                            "—"
-                        )}
-                    </div>
-
-
-                    <div class="card-bottom">
-
-
-                        <select
-                            class="card-status-select"
-                            onchange="
-                                changeStatus(
-                                    '${escapeHTML(item._id)}',
-                                    this.value
-                                )
-                            "
-                        >
-
-                            ${statusOptions(item)}
-
-                        </select>
-
-
-                        <div class="card-actions">
-
-
-                            <button
-                                class="action a-call"
-                                onclick="
-                                    callStudent(
-                                        '${escapeHTML(
-                                            item.mobile || ""
-                                        )}'
-                                    )
-                                "
-                            >
-                                📞
-                            </button>
-
-
-                            <button
-                                class="action a-wa"
-                                onclick="
-                                    whatsappStudent(
-                                        '${escapeHTML(
-                                            item.mobile || ""
-                                        )}',
-                                        '${escapeHTML(
-                                            item.studentName || ""
-                                        )}'
-                                    )
-                                "
-                            >
-                                💬
-                            </button>
-
-
-                            <button
-                                class="action a-view"
-                                onclick="
-                                    viewStudent(
-                                        '${escapeHTML(
-                                            item._id
-                                        )}'
-                                    )
-                                "
-                            >
-                                👁
-                            </button>
-
-
-                            <button
-                                class="action a-delete"
-                                onclick="
-                                    deleteInquiry(
-                                        '${escapeHTML(
-                                            item._id
-                                        )}'
-                                    )
-                                "
-                            >
-                                🗑
-                            </button>
-
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-                `;
-
-            }
-        ).join("");
-}
-
-
-/* =========================================================
-   PERFORMANCE COUNT
-========================================================= */
-
-function getCurrentMonthPerformance(){
-
-    const month =
-        currentMonthKey();
-
-
-    const currentMonthItems =
-        inquiries.filter(
-            item => {
-
-                return (
-                    item.createdAt &&
-                    currentMonthKeyFromDate(
-                        item.createdAt
-                    ) === month
-                );
-
-            }
-        );
-
-
-    /*
-        VISIT COUNT
-
-        Current status must be:
-        visited
-
-        Duplicate mobile:
-        counted once.
-    */
-
-    const visitedMobiles =
-        new Set();
-
-
-    /*
-        ADMISSION COUNT
-
-        Current status must be:
-        converted
-
-        Duplicate mobile:
-        counted once.
-    */
-
-    const admissionMobiles =
-        new Set();
-
-
-    currentMonthItems.forEach(
-        item => {
-
-            const mobile =
-                normalizeMobile(
-                    item.mobile
-                );
-
-
-            if(!mobile){
-                return;
-            }
-
-
-            if(
-                item.status === "visited"
-            ){
-
-                visitedMobiles.add(
-                    mobile
-                );
-
-            }
-
-
-            if(
-                item.status === "converted"
-            ){
-
-                admissionMobiles.add(
-                    mobile
-                );
-
-            }
-
-        }
-    );
-
-
-    return {
-
-        visited:
-            visitedMobiles.size,
-
-        admissions:
-            admissionMobiles.size
-
-    };
-}
-
-
-/* =========================================================
-   LEVEL
-========================================================= */
-
-function getCurrentLevel(
-    admissions
-){
-
-    if(
-        admissions >=
-        LEVEL3_TARGET
-    ){
-        return 3;
-    }
-
-    if(
-        admissions >=
-        LEVEL2_TARGET
-    ){
-        return 2;
-    }
-
-    return 1;
-}
-
-
-function getAdmissionRate(
-    level
-){
-
-    if(level === 3){
-        return LEVEL3_ADMISSION;
-    }
-
-    if(level === 2){
-        return LEVEL2_ADMISSION;
-    }
-
-    return LEVEL1_ADMISSION;
-}
-
-
-/* =========================================================
-   TARGET UI
-========================================================= */
-
-function updateTargetUI(
-    admissions
-){
-
-    const level =
-        getCurrentLevel(
-            admissions
-        );
-
-
-    document.getElementById(
-        "heroLevel"
-    ).textContent =
-        `Level ${level}`;
-
-
-    let percentage = 0;
-    let targetText = "";
-    let nextText = "";
-    let targetNumber = "";
-
-
-    if(level === 1){
-
-        percentage =
-            Math.min(
-                (
-                    admissions /
-                    LEVEL2_TARGET
-                ) * 100,
-                100
-            );
-
-
-        targetText =
-            "Level 1 • 0–2 admissions";
-
-
-        const remaining =
-            LEVEL2_TARGET -
-            admissions;
-
-
-        nextText =
-            `${remaining} more admission${
-                remaining === 1
-                    ? ""
-                    : "s"
-            } to unlock Level 2.`;
-
-
-        targetNumber =
-            `${admissions} / ${LEVEL2_TARGET}`;
-
-    }
-
-
-    else if(level === 2){
-
-        percentage =
-            Math.min(
-                (
-                    (
-                        admissions -
-                        LEVEL2_TARGET
-                    ) /
-                    (
-                        LEVEL3_TARGET -
-                        LEVEL2_TARGET
-                    )
-                ) * 100,
-                100
-            );
-
-
-        targetText =
-            "Level 2 • 3–5 admissions";
-
-
-        const remaining =
-            LEVEL3_TARGET -
-            admissions;
-
-
-        nextText =
-            `${remaining} more admission${
-                remaining === 1
-                    ? ""
-                    : "s"
-            } to unlock Level 3.`;
-
-
-        targetNumber =
-            `${admissions} / ${LEVEL3_TARGET}`;
-
-    }
-
-
-    else{
-
-        percentage = 100;
-
-        targetText =
-            "Level 3 • 6+ admissions";
-
-        nextText =
-            "🔥 Highest earning level unlocked.";
-
-        targetNumber =
-            `${admissions} admissions`;
-
-    }
-
-
-    document.getElementById(
-        "targetProgress"
-    ).style.width =
-        percentage + "%";
-
-
-    document.getElementById(
-        "targetRange"
-    ).textContent =
-        targetText;
-
-
-    document.getElementById(
-        "nextTarget"
-    ).textContent =
-        nextText;
-
-
-    document.getElementById(
-        "targetNumber"
-    ).textContent =
-        targetNumber;
-
-
-    /*
-        Progressive level visibility.
-    */
-
-    document.getElementById(
-        "level1"
-    ).classList.add(
-        "show"
-    );
-
-
-    document.getElementById(
-        "level2"
-    ).classList.toggle(
-        "show",
-        level >= 2
-    );
-
-
-    document.getElementById(
-        "level3"
-    ).classList.toggle(
-        "show",
-        level >= 3
-    );
-
-
-    document.getElementById(
-        "level1"
-    ).classList.toggle(
-        "current",
-        level === 1
-    );
-
-
-    document.getElementById(
-        "level2"
-    ).classList.toggle(
-        "current",
-        level === 2
-    );
-
-
-    document.getElementById(
-        "level3"
-    ).classList.toggle(
-        "current",
-        level === 3
-    );
-}
-
-
-/* =========================================================
-   PLAN UI
-========================================================= */
-
-function updatePlanUI(){
-
-    document.getElementById(
-        "rate1"
-    ).textContent =
-        formatMoney(
-            LEVEL1_ADMISSION
-        );
-
-
-    document.getElementById(
-        "rate2"
-    ).textContent =
-        formatMoney(
-            LEVEL2_ADMISSION
-        );
-
-
-    document.getElementById(
-        "rate3"
-    ).textContent =
-        formatMoney(
-            LEVEL3_ADMISSION
-        );
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function updateDashboard(){
-
-    const performance =
-        getCurrentMonthPerformance();
-
-
-    const visited =
-        performance.visited;
-
-
-    const admissions =
-        performance.admissions;
-
-
-    const level =
-        getCurrentLevel(
-            admissions
-        );
-
-
-    const rate =
-        getAdmissionRate(
-            level
-        );
-
-
-    /*
-        VISIT REWARD = ZERO
-    */
-
-    const visitReward = 0;
-
-
-    /*
-        ADMISSION EARNING
-    */
-
-    const admissionEarning =
-        admissions *
-        rate;
-
-
-    /*
-        TOTAL
-    */
-
-    const total =
-        Number(BASE_SALARY) +
-        admissionEarning;
-
-
-    document.getElementById(
-        "totalInquiries"
-    ).textContent =
-        inquiries.length;
-
-
-    document.getElementById(
-        "visitedCount"
-    ).textContent =
-        visited;
-
-
-    document.getElementById(
-        "convertedCount"
-    ).textContent =
-        admissions;
-
-
-    document.getElementById(
-        "estimatedEarning"
-    ).textContent =
-        formatMoney(
-            total
-        );
-
-
-    document.getElementById(
-        "heroTotal"
-    ).textContent =
-        formatMoney(
-            total
-        );
-
-
-    document.getElementById(
-        "heroBase"
-    ).textContent =
-        formatMoney(
-            BASE_SALARY
-        );
-
-
-    document.getElementById(
-        "heroAdmission"
-    ).textContent =
-        formatMoney(
-            admissionEarning
-        );
-
-
-    updateTargetUI(
-        admissions
-    );
-}
-
-
-/* =========================================================
-   CHANGE STATUS
-========================================================= */
-
-async function changeStatus(
-    docId,
-    newStatus
-){
-
-    if(!docId){
-        return;
-    }
-
+  async function loadPaymentSettings(){
 
     try{
 
-        const documentUrl =
-            FIRESTORE_URL +
-            "/" +
-            encodeURIComponent(
-                docId
-            ) +
-            "?key=" +
-            encodeURIComponent(
-                FIREBASE_API_KEY
+      const data =
+        await firestoreFetch(
+          PAYMENT_SETTINGS_URL
+        );
+
+      const fields =
+        data.fields || {};
+
+      const getNumber =
+        (name, fallback) => {
+
+          const value =
+            extractFirestoreValue(
+              fields[name]
             );
 
+          const num =
+            Number(value);
 
-        const payload = {
-
-            fields:{
-
-                status:
-                    toFirestoreValue(
-                        newStatus
-                    ),
-
-                telecallerStatus:
-                    toFirestoreValue(
-                        newStatus
-                    ),
-
-                updatedAt:
-                    toFirestoreValue(
-                        new Date()
-                            .toISOString()
-                    ),
-
-                telecallerName:
-                    toFirestoreValue(
-                        telecallerName
-                    ),
-
-                telecallerMobile:
-                    toFirestoreValue(
-                        telecallerMobile
-                    )
-
-            }
-
+          return Number.isFinite(num)
+            ? num
+            : fallback;
         };
 
 
-        const updateMask =
-            "&updateMask.fieldPaths=status" +
-            "&updateMask.fieldPaths=telecallerStatus" +
-            "&updateMask.fieldPaths=updatedAt" +
-            "&updateMask.fieldPaths=telecallerName" +
-            "&updateMask.fieldPaths=telecallerMobile";
+      SETTINGS.baseSalary =
+        getNumber(
+          "baseSalary",
+          SETTINGS.baseSalary
+        );
 
 
-        const response =
-            await fetch(
-                documentUrl +
-                updateMask,
-                {
-                    method:"PATCH",
-                    headers:{
-                        "Content-Type":
-                            "application/json"
-                    },
-                    body:
-                        JSON.stringify(
-                            payload
-                        )
-                }
-            );
+      SETTINGS.demoIncentive =
+        getNumber(
+          "demoIncentive",
+          SETTINGS.demoIncentive
+        );
 
 
-        if(!response.ok){
+      SETTINGS.level1Min =
+        getNumber(
+          "level1Min",
+          SETTINGS.level1Min
+        );
 
-            throw new Error(
-                await response.text()
-            );
-        }
+      SETTINGS.level1Max =
+        getNumber(
+          "level1Max",
+          SETTINGS.level1Max
+        );
 
+      SETTINGS.level1AdmissionIncentive =
+        getNumber(
+          "level1AdmissionIncentive",
+          SETTINGS.level1AdmissionIncentive
+        );
 
-        const item =
-            inquiries.find(
-                x =>
-                    x._id === docId
-            );
-
-
-        if(item){
-
-            item.status =
-                newStatus;
-
-            item.telecallerStatus =
-                newStatus;
-
-            item.updatedAt =
-                new Date()
-                    .toISOString();
-
-            item.telecallerName =
-                telecallerName;
-
-            item.telecallerMobile =
-                telecallerMobile;
-        }
+      SETTINGS.level1NextBaseSalary =
+        getNumber(
+          "level1NextBaseSalary",
+          SETTINGS.level1NextBaseSalary
+        );
 
 
-        applyFilters();
+      SETTINGS.level2Min =
+        getNumber(
+          "level2Min",
+          SETTINGS.level2Min
+        );
 
+      SETTINGS.level2Max =
+        getNumber(
+          "level2Max",
+          SETTINGS.level2Max
+        );
+
+      SETTINGS.level2AdmissionIncentive =
+        getNumber(
+          "level2AdmissionIncentive",
+          SETTINGS.level2AdmissionIncentive
+        );
+
+      SETTINGS.level2NextBaseSalary =
+        getNumber(
+          "level2NextBaseSalary",
+          SETTINGS.level2NextBaseSalary
+        );
+
+
+      SETTINGS.level3Min =
+        getNumber(
+          "level3Min",
+          SETTINGS.level3Min
+        );
+
+      const level3Max =
+        extractFirestoreValue(
+          fields.level3Max
+        );
+
+      SETTINGS.level3Max =
+        level3Max === "" ||
+        level3Max === null ||
+        level3Max === undefined
+          ? null
+          : Number(level3Max);
+
+
+      SETTINGS.level3AdmissionIncentive =
+        getNumber(
+          "level3AdmissionIncentive",
+          SETTINGS.level3AdmissionIncentive
+        );
+
+      SETTINGS.level3NextBaseSalary =
+        getNumber(
+          "level3NextBaseSalary",
+          SETTINGS.level3NextBaseSalary
+        );
+
+
+      calculateAndRenderEarnings();
 
     }catch(error){
 
-        console.error(
-            error
-        );
+      console.warn(
+        "Payment settings could not be loaded:",
+        error.message
+      );
 
-        alert(
-            "Unable to update status."
-        );
-
-        loadInquiries();
+      calculateAndRenderEarnings();
     }
-}
+  }
 
 
-/* =========================================================
-   CALL
-========================================================= */
+  /* ============================================================
+     CONTENT LOAD
+     
+     Expected Admin-created Firestore documents:
+     
+     telecallerContent/course_x
+     telecallerContent/offer_x
+     
+     Fields can include:
+     
+     type
+     title
+     description
+     price
+     offerPrice
+     duration
+     imageUrl
+     validUntil
+     active
+     displayMode
+     order
+     
+  ============================================================ */
 
-function callStudent(
-    mobile
-){
+  async function loadContent(){
 
-    const number =
+    try{
+
+      let allDocs = [];
+
+      let pageToken = "";
+
+      do{
+
+        let url =
+          CONTENT_URL +
+          "?pageSize=300";
+
+        if(pageToken){
+          url +=
+            "&pageToken=" +
+            encodeURIComponent(pageToken);
+        }
+
+        const data =
+          await firestoreFetch(url);
+
+        allDocs =
+          allDocs.concat(
+            data.documents || []
+          );
+
+        pageToken =
+          data.nextPageToken || "";
+
+      }while(pageToken);
+
+
+      currentContent =
+        allDocs
+          .map(doc => {
+
+            const obj =
+              firestoreFieldsToObject(
+                doc.fields || {}
+              );
+
+            obj.__docName =
+              doc.name || "";
+
+            return obj;
+
+          })
+          .filter(item => {
+
+            if(
+              item.active === false ||
+              item.active === "false"
+            ){
+              return false;
+            }
+
+            return true;
+
+          })
+          .sort(
+            (a,b) =>
+              Number(a.order || 9999) -
+              Number(b.order || 9999)
+          );
+
+
+      renderContent();
+
+    }catch(error){
+
+      console.warn(
+        "Content could not be loaded:",
+        error.message
+      );
+
+      currentContent = [];
+
+      renderContent();
+    }
+  }
+
+
+  /* ============================================================
+     MONTH HELPERS
+  ============================================================ */
+
+  function getMonthKey(date = new Date()){
+
+    const y =
+      date.getFullYear();
+
+    const m =
+      String(
+        date.getMonth() + 1
+      ).padStart(2,"0");
+
+    return `${y}-${m}`;
+  }
+
+
+  function isCurrentMonth(dateString){
+
+    if(!dateString){
+      return false;
+    }
+
+    const date =
+      new Date(dateString);
+
+    if(Number.isNaN(date.getTime())){
+      return false;
+    }
+
+    return (
+      date.getFullYear() ===
+      new Date().getFullYear()
+      &&
+      date.getMonth() ===
+      new Date().getMonth()
+    );
+  }
+
+
+  function getPreviousMonthRange(){
+
+    const now = new Date();
+
+    const firstCurrent =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1
+      );
+
+    const firstPrevious =
+      new Date(
+        now.getFullYear(),
+        now.getMonth() - 1,
+        1
+      );
+
+    const lastPrevious =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        0,
+        23,
+        59,
+        59,
+        999
+      );
+
+    return {
+      start:firstPrevious,
+      end:lastPrevious
+    };
+  }
+
+
+  function isInPreviousMonth(dateString){
+
+    if(!dateString){
+      return false;
+    }
+
+    const date =
+      new Date(dateString);
+
+    if(Number.isNaN(date.getTime())){
+      return false;
+    }
+
+    const range =
+      getPreviousMonthRange();
+
+    return (
+      date >= range.start &&
+      date <= range.end
+    );
+  }
+
+
+  /* ============================================================
+     UNIQUE STUDENTS
+  ============================================================ */
+
+  function normalizeMobile(mobile){
+
+    return String(
+      mobile || ""
+    )
+      .replace(/\D/g,"")
+      .slice(-10);
+  }
+
+
+  function uniqueByMobile(list){
+
+    const map =
+      new Map();
+
+    list.forEach(item => {
+
+      const mobile =
         normalizeMobile(
-            mobile
+          item.mobile
         );
 
-    if(!number){
-
-        alert(
-            "Mobile number not available."
-        );
-
+      if(!mobile){
         return;
+      }
+
+      if(!map.has(mobile)){
+        map.set(
+          mobile,
+          item
+        );
+      }
+
+    });
+
+    return Array.from(
+      map.values()
+    );
+  }
+
+
+  /* ============================================================
+     DEMO / CONVERTED COUNTS
+  ============================================================ */
+
+  function isDemoCompleted(item){
+
+    const status =
+      String(
+        item.status || ""
+      ).toLowerCase()
+      .trim();
+
+    const teleStatus =
+      String(
+        item.telecallerStatus || ""
+      ).toLowerCase()
+      .trim();
+
+    return (
+      status === "demo-completed" ||
+      status === "demo completed" ||
+      status === "demo_completed" ||
+      teleStatus === "demo-completed" ||
+      teleStatus === "demo completed" ||
+      teleStatus === "demo_completed"
+    );
+  }
+
+
+  function isConverted(item){
+
+    const status =
+      String(
+        item.status || ""
+      ).toLowerCase()
+      .trim();
+
+    const teleStatus =
+      String(
+        item.telecallerStatus || ""
+      ).toLowerCase()
+      .trim();
+
+    return (
+      status === "converted" ||
+      teleStatus === "converted"
+    );
+  }
+
+
+  function getCurrentMonthDemoStudents(){
+
+    const list =
+      inquiries.filter(item => {
+
+        const date =
+          item.updatedAt ||
+          item.createdAt;
+
+        return (
+          isCurrentMonth(date) &&
+          isDemoCompleted(item)
+        );
+
+      });
+
+    return uniqueByMobile(list);
+  }
+
+
+  function getCurrentMonthConvertedStudents(){
+
+    const list =
+      inquiries.filter(item => {
+
+        const date =
+          item.updatedAt ||
+          item.createdAt;
+
+        return (
+          isCurrentMonth(date) &&
+          isConverted(item)
+        );
+
+      });
+
+    return uniqueByMobile(list);
+  }
+
+
+  /* ============================================================
+     LEVEL CALCULATION
+  ============================================================ */
+
+  function getLevelByCount(count){
+
+    if(
+      count >= SETTINGS.level3Min
+    ){
+      return {
+        level:3,
+        name:"Level 3",
+        rate:SETTINGS.level3AdmissionIncentive,
+        nextBase:SETTINGS.level3NextBaseSalary,
+        min:SETTINGS.level3Min,
+        max:SETTINGS.level3Max
+      };
     }
 
+    if(
+      count >= SETTINGS.level2Min &&
+      count <= SETTINGS.level2Max
+    ){
+      return {
+        level:2,
+        name:"Level 2",
+        rate:SETTINGS.level2AdmissionIncentive,
+        nextBase:SETTINGS.level2NextBaseSalary,
+        min:SETTINGS.level2Min,
+        max:SETTINGS.level2Max
+      };
+    }
+
+    return {
+      level:1,
+      name:"Level 1",
+      rate:SETTINGS.level1AdmissionIncentive,
+      nextBase:SETTINGS.level1NextBaseSalary,
+      min:SETTINGS.level1Min,
+      max:SETTINGS.level1Max
+    };
+  }
+
+
+  /* ============================================================
+     PREVIOUS MONTH LEVEL
+  ============================================================ */
+
+  function getPreviousMonthConvertedStudents(){
+
+    const list =
+      inquiries.filter(item => {
+
+        const date =
+          item.updatedAt ||
+          item.createdAt;
+
+        return (
+          isInPreviousMonth(date) &&
+          isConverted(item)
+        );
+
+      });
+
+    return uniqueByMobile(list);
+  }
+
+
+  function getPreviousMonthLevel(){
+
+    const count =
+      getPreviousMonthConvertedStudents().length;
+
+    if(count === 0){
+
+      return {
+        count:0,
+        level:null,
+        name:"No Previous Data",
+        nextBase:SETTINGS.baseSalary
+      };
+
+    }
+
+    return {
+      count,
+      ...getLevelByCount(count)
+    };
+  }
+
+
+  /* ============================================================
+     CURRENT BASE SALARY
+     
+     Rule:
+     Current month base salary is determined by previous month's
+     final level. The adjustment lasts for one month.
+     
+     If there is no previous-month performance data,
+     default base salary is used.
+  ============================================================ */
+
+  function getCurrentBaseSalary(){
+
+    const previous =
+      getPreviousMonthLevel();
+
+    if(!previous.level){
+      return SETTINGS.baseSalary;
+    }
+
+    return previous.nextBase;
+  }
+
+
+  /* ============================================================
+     EARNINGS
+  ============================================================ */
+
+  function calculateEarnings(){
+
+    const demoStudents =
+      getCurrentMonthDemoStudents();
+
+    const convertedStudents =
+      getCurrentMonthConvertedStudents();
+
+    const demoCount =
+      demoStudents.length;
+
+    const convertedCount =
+      convertedStudents.length;
+
+    const level =
+      getLevelByCount(
+        convertedCount
+      );
+
+    const baseSalary =
+      getCurrentBaseSalary();
+
+    const demoReward =
+      demoCount *
+      SETTINGS.demoIncentive;
+
+    const admissionReward =
+      convertedCount *
+      level.rate;
+
+    const total =
+      baseSalary +
+      demoReward +
+      admissionReward;
+
+    return {
+
+      demoCount,
+
+      convertedCount,
+
+      level,
+
+      baseSalary,
+
+      demoReward,
+
+      admissionReward,
+
+      total
+
+    };
+  }
+
+
+  function calculateAndRenderEarnings(){
+
+    const earning =
+      calculateEarnings();
+
+    const previous =
+      getPreviousMonthLevel();
+
+
+    /* DASHBOARD */
+
+    setText(
+      "dashboardTotal",
+      money(earning.total)
+    );
+
+    setText(
+      "dashBase",
+      money(earning.baseSalary)
+    );
+
+    setText(
+      "dashDemoReward",
+      money(earning.demoReward)
+    );
+
+    setText(
+      "dashAdmissionReward",
+      money(earning.admissionReward)
+    );
+
+    setText(
+      "currentBaseText",
+      money(earning.baseSalary)
+    );
+
+    setText(
+      "previousLevelText",
+      previous.level
+        ? `${previous.name} (${previous.count} admissions)`
+        : "No previous data"
+    );
+
+    setText(
+      "nextBaseText",
+      money(
+        earning.level.nextBase
+      )
+    );
+
+
+    setText(
+      "statDemo",
+      earning.demoCount
+    );
+
+    setText(
+      "statConverted",
+      earning.convertedCount
+    );
+
+    setText(
+      "statEarning",
+      money(earning.total)
+    );
+
+
+    /* EARNING PAGE */
+
+    setText(
+      "earningPageTotal",
+      money(earning.total)
+    );
+
+    setText(
+      "earningPageBase",
+      money(earning.baseSalary)
+    );
+
+    setText(
+      "earningPageDemo",
+      money(earning.demoReward)
+    );
+
+    setText(
+      "earningPageAdmission",
+      money(earning.admissionReward)
+    );
+
+    setText(
+      "earnDemoCount",
+      earning.demoCount
+    );
+
+    setText(
+      "earnDemoRate",
+      money(SETTINGS.demoIncentive)
+    );
+
+    setText(
+      "earnAdmissionCount",
+      earning.convertedCount
+    );
+
+    setText(
+      "earnLevel",
+      earning.level.name
+    );
+
+    setText(
+      "earnAdmissionRate",
+      money(earning.level.rate)
+    );
+
+    setText(
+      "nextMonthSalaryBig",
+      money(earning.level.nextBase)
+    );
+
+    setText(
+      "salaryCurrentLevel",
+      earning.level.name
+    );
+
+    setText(
+      "salaryDefaultBase",
+      money(SETTINGS.baseSalary)
+    );
+
+    setText(
+      "salaryNextBase",
+      money(earning.level.nextBase)
+    );
+
+
+    renderLevelCards(
+      earning.convertedCount,
+      earning.level
+    );
+  }
+
+
+  /* ============================================================
+     LEVEL CARDS
+  ============================================================ */
+
+  function renderLevelCards(
+    count,
+    currentLevel
+  ){
+
+    const container =
+      document.getElementById(
+        "levelCards"
+      );
+
+    const levels = [
+
+      {
+        level:1,
+        title:"Level 1",
+        min:SETTINGS.level1Min,
+        max:SETTINGS.level1Max,
+        rate:SETTINGS.level1AdmissionIncentive,
+        nextBase:SETTINGS.level1NextBaseSalary
+      },
+
+      {
+        level:2,
+        title:"Level 2",
+        min:SETTINGS.level2Min,
+        max:SETTINGS.level2Max,
+        rate:SETTINGS.level2AdmissionIncentive,
+        nextBase:SETTINGS.level2NextBaseSalary
+      },
+
+      {
+        level:3,
+        title:"Level 3",
+        min:SETTINGS.level3Min,
+        max:SETTINGS.level3Max,
+        rate:SETTINGS.level3AdmissionIncentive,
+        nextBase:SETTINGS.level3NextBaseSalary
+      }
+
+    ];
+
+
+    container.innerHTML =
+      levels.map(item => {
+
+        const active =
+          item.level ===
+          currentLevel.level;
+
+        let rangeText = "";
+
+        if(item.level === 3){
+
+          rangeText =
+            `${item.min}+ admissions`;
+
+        }else{
+
+          rangeText =
+            `${item.min}–${item.max} admissions`;
+
+        }
+
+        return `
+
+          <div class="level-card ${active ? "active" : ""}">
+
+            <div class="level-head">
+
+              <div>
+                <div class="level-name">
+                  ${item.title}
+                  ${
+                    active
+                    ? `<span class="level-tag">CURRENT</span>`
+                    : ""
+                  }
+                </div>
+
+                <div class="level-range">
+                  ${rangeText}
+                </div>
+
+              </div>
+
+              <div class="level-rate">
+                ${money(item.rate)}
+              </div>
+
+            </div>
+
+            <div style="font-size:10px;color:#6b7280;margin-top:6px;">
+              Admission reward per student
+            </div>
+
+            <div style="font-size:10px;color:#6b7280;margin-top:4px;">
+              Next month base: <strong>${money(item.nextBase)}</strong>
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+
+    let progressText = "";
+
+    if(currentLevel.level === 1){
+
+      const target =
+        SETTINGS.level2Min;
+
+      const remaining =
+        Math.max(
+          0,
+          target - count
+        );
+
+      progressText =
+        remaining > 0
+          ? `${remaining} more admission${remaining === 1 ? "" : "s"} to reach Level 2.`
+          : "Level 2 reached.";
+
+    }else if(currentLevel.level === 2){
+
+      const target =
+        SETTINGS.level3Min;
+
+      const remaining =
+        Math.max(
+          0,
+          target - count
+        );
+
+      progressText =
+        remaining > 0
+          ? `${remaining} more admission${remaining === 1 ? "" : "s"} to reach Level 3.`
+          : "Level 3 reached.";
+
+    }else{
+
+      progressText =
+        "Level 3 active. Highest configured admission level.";
+
+    }
+
+    setText(
+      "levelProgressText",
+      `Current: ${currentLevel.name} • ${count} converted admission${count === 1 ? "" : "s"} • ${progressText}`
+    );
+  }
+
+
+  /* ============================================================
+     DASHBOARD
+  ============================================================ */
+
+  function updateDashboard(){
+
+    setText(
+      "statInquiries",
+      inquiries.length
+    );
+
+    const earning =
+      calculateEarnings();
+
+    setText(
+      "statDemo",
+      earning.demoCount
+    );
+
+    setText(
+      "statConverted",
+      earning.convertedCount
+    );
+
+    setText(
+      "statEarning",
+      money(earning.total)
+    );
+  }
+
+
+  /* ============================================================
+     FILTERS
+  ============================================================ */
+
+  function buildFilters(){
+
+    const courseSelect =
+      document.getElementById(
+        "courseFilter"
+      );
+
+    const coordinatorSelect =
+      document.getElementById(
+        "coordinatorFilter"
+      );
+
+
+    const courses =
+      [...new Set(
+        inquiries
+          .map(x => x.course)
+          .filter(Boolean)
+      )]
+      .sort();
+
+
+    const coordinators =
+      [...new Set(
+        inquiries
+          .map(x =>
+            x.coordinatorName
+          )
+          .filter(Boolean)
+      )]
+      .sort();
+
+
+    const oldCourse =
+      courseSelect.value;
+
+    const oldCoordinator =
+      coordinatorSelect.value;
+
+
+    courseSelect.innerHTML =
+      `<option value="">All Courses</option>` +
+      courses
+        .map(
+          course =>
+            `<option value="${escapeAttr(course)}">
+              ${escapeHtml(course)}
+            </option>`
+        )
+        .join("");
+
+
+    coordinatorSelect.innerHTML =
+      `<option value="">All Coordinators</option>` +
+      coordinators
+        .map(
+          name =>
+            `<option value="${escapeAttr(name)}">
+              ${escapeHtml(name)}
+            </option>`
+        )
+        .join("");
+
+
+    courseSelect.value =
+      courses.includes(oldCourse)
+        ? oldCourse
+        : "";
+
+    coordinatorSelect.value =
+      coordinators.includes(oldCoordinator)
+        ? oldCoordinator
+        : "";
+  }
+
+
+  function applyFilters(){
+
+    const search =
+      document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const status =
+      document
+        .getElementById("statusFilter")
+        .value;
+
+    const course =
+      document
+        .getElementById("courseFilter")
+        .value;
+
+    const coordinator =
+      document
+        .getElementById("coordinatorFilter")
+        .value;
+
+
+    filteredInquiries =
+      inquiries.filter(item => {
+
+        const text =
+          [
+            item.studentName,
+            item.mobile,
+            item.course,
+            item.source,
+            item.remark,
+            item.telecallerRemark,
+            item.coordinatorName
+          ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+
+
+        if(
+          search &&
+          !text.includes(search)
+        ){
+          return false;
+        }
+
+
+        if(
+          status &&
+          String(
+            item.status || ""
+          ) !== status
+        ){
+          return false;
+        }
+
+
+        if(
+          course &&
+          item.course !== course
+        ){
+          return false;
+        }
+
+
+        if(
+          coordinator &&
+          item.coordinatorName !== coordinator
+        ){
+          return false;
+        }
+
+
+        return true;
+
+      });
+
+
+    currentPage = 1;
+
+    renderInquiryTable();
+  }
+
+
+  /* ============================================================
+     INQUIRY TABLE
+  ============================================================ */
+
+  function renderInquiryTable(){
+
+    const tbody =
+      document.getElementById(
+        "inquiryBody"
+      );
+
+    const total =
+      filteredInquiries.length;
+
+    const totalPages =
+      Math.max(
+        1,
+        Math.ceil(
+          total / PAGE_SIZE
+        )
+      );
+
+
+    if(currentPage > totalPages){
+      currentPage = totalPages;
+    }
+
+
+    const start =
+      (currentPage - 1) *
+      PAGE_SIZE;
+
+    const end =
+      start + PAGE_SIZE;
+
+    const pageItems =
+      filteredInquiries.slice(
+        start,
+        end
+      );
+
+
+    setText(
+      "resultCount",
+      `${total} ${total === 1 ? "inquiry" : "inquiries"} found`
+    );
+
+
+    if(pageItems.length === 0){
+
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8">
+            <div class="empty">
+              <div class="empty-icon">⌕</div>
+              <div class="empty-title">
+                No inquiries found
+              </div>
+              <div class="empty-text">
+                Try changing your search or filters.
+              </div>
+            </div>
+          </td>
+        </tr>
+      `;
+
+    }else{
+
+      tbody.innerHTML =
+        pageItems
+          .map(renderInquiryRow)
+          .join("");
+    }
+
+
+    renderPagination(
+      totalPages
+    );
+  }
+
+
+  function renderInquiryRow(item){
+
+    const status =
+      String(
+        item.status || "new"
+      );
+
+
+    const statusClass =
+      status === "demo-completed"
+        ? "badge-demo"
+        : `badge-${status}`;
+
+
+    const created =
+      formatDate(
+        item.createdAt
+      );
+
+    const updated =
+      formatDate(
+        item.updatedAt
+      );
+
+
+    const docId =
+      encodeURIComponent(
+        item.__docName || ""
+      );
+
+
+    return `
+
+      <tr>
+
+        <td>
+
+          <div class="student-name">
+            ${escapeHtml(
+              item.studentName || "Unknown"
+            )}
+          </div>
+
+          <div class="student-mobile">
+            ${escapeHtml(
+              item.mobile || "-"
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+          ${escapeHtml(
+            item.course || "-"
+          )}
+        </td>
+
+
+        <td>
+          ${escapeHtml(
+            item.source || "-"
+          )}
+        </td>
+
+
+        <td>
+
+          <div style="font-size:11px;font-weight:700;">
+            ${escapeHtml(
+              item.coordinatorName || "-"
+            )}
+          </div>
+
+          <div style="font-size:9px;color:#6b7280;">
+            ${escapeHtml(
+              item.coordinatorMobile || ""
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <button
+            class="badge ${statusClass}"
+            onclick="openStatusModalByDoc('${escapeAttr(item.__docName || "")}')"
+            style="border:0;"
+          >
+            ${escapeHtml(
+              formatStatus(status)
+            )}
+          </button>
+
+        </td>
+
+
+        <td>
+          ${escapeHtml(
+            item.followUpDate || "-"
+          )}
+        </td>
+
+
+        <td>
+          ${escapeHtml(updated)}
+        </td>
+
+
+        <td>
+
+          <div class="action-group">
+
+            <button
+              class="mini-btn mini-call"
+              onclick="callStudent('${escapeAttr(item.mobile || "")}')"
+            >
+              Call
+            </button>
+
+            <button
+              class="mini-btn mini-wa"
+              onclick="whatsappStudent('${escapeAttr(item.mobile || "")}','${escapeAttr(item.studentName || "")}')"
+            >
+              WhatsApp
+            </button>
+
+            <button
+              class="mini-btn mini-view"
+              onclick="viewStudent('${escapeAttr(item.__docName || "")}')"
+            >
+              View
+            </button>
+
+            <button
+              class="mini-btn mini-delete"
+              onclick="deleteStudent('${escapeAttr(item.__docName || "")}','${escapeAttr(item.studentName || "")}')"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+  }
+
+
+  function renderPagination(totalPages){
+
+    const container =
+      document.getElementById(
+        "paginationButtons"
+      );
+
+    const pageInfo =
+      document.getElementById(
+        "pageInfo"
+      );
+
+
+    setText(
+      "pageInfo",
+      `Page ${currentPage} of ${totalPages}`
+    );
+
+
+    let html = "";
+
+
+    if(totalPages <= 1){
+
+      container.innerHTML = "";
+
+      return;
+    }
+
+
+    if(currentPage > 1){
+
+      html += `
+        <button
+          class="page-btn"
+          onclick="goToPage(${currentPage - 1})"
+        >
+          ‹
+        </button>
+      `;
+    }
+
+
+    const start =
+      Math.max(
+        1,
+        currentPage - 2
+      );
+
+    const end =
+      Math.min(
+        totalPages,
+        currentPage + 2
+      );
+
+
+    for(
+      let i = start;
+      i <= end;
+      i++
+    ){
+
+      html += `
+        <button
+          class="page-btn ${i === currentPage ? "active" : ""}"
+          onclick="goToPage(${i})"
+        >
+          ${i}
+        </button>
+      `;
+    }
+
+
+    if(currentPage < totalPages){
+
+      html += `
+        <button
+          class="page-btn"
+          onclick="goToPage(${currentPage + 1})"
+        >
+          ›
+        </button>
+      `;
+    }
+
+
+    container.innerHTML =
+      html;
+  }
+
+
+  function goToPage(page){
+
+    currentPage =
+      Number(page) || 1;
+
+    renderInquiryTable();
+  }
+
+
+  /* ============================================================
+     STATUS MODAL
+  ============================================================ */
+
+  function openStatusModalByDoc(docName){
+
+    const item =
+      inquiries.find(
+        x => x.__docName === docName
+      );
+
+    if(!item){
+      return;
+    }
+
+
+    document.getElementById(
+      "statusDocName"
+    ).value =
+      docName;
+
+
+    document.getElementById(
+      "statusStudentName"
+    ).value =
+      item.studentName || "";
+
+
+    document.getElementById(
+      "newStatus"
+    ).value =
+      item.status || "new";
+
+
+    document.getElementById(
+      "newFollowupDate"
+    ).value =
+      item.followUpDate || "";
+
+
+    document.getElementById(
+      "newTelecallerRemark"
+    ).value =
+      item.telecallerRemark || "";
+
+
+    showModal(
+      "statusModal"
+    );
+  }
+
+
+  async function saveStatus(){
+
+    const docName =
+      document.getElementById(
+        "statusDocName"
+      ).value;
+
+    const status =
+      document.getElementById(
+        "newStatus"
+      ).value;
+
+    const followUpDate =
+      document.getElementById(
+        "newFollowupDate"
+      ).value;
+
+    const remark =
+      document.getElementById(
+        "newTelecallerRemark"
+      ).value
+      .trim();
+
+
+    if(!docName){
+      return;
+    }
+
+
+    const saveBtn =
+      document.getElementById(
+        "saveStatusBtn"
+      );
+
+
+    saveBtn.disabled = true;
+
+    saveBtn.textContent =
+      "Saving...";
+
+
+    try{
+
+      const url =
+        FIRESTORE_BASE +
+        "/" +
+        docName;
+
+
+      const fields = {
+
+        status:
+          firestoreValue(status),
+
+        telecallerStatus:
+          firestoreValue(status),
+
+        telecallerRemark:
+          firestoreValue(remark),
+
+        followUpDate:
+          firestoreValue(followUpDate),
+
+        telecallerName:
+          firestoreValue(
+            telecallerName
+          ),
+
+        telecallerMobile:
+          firestoreValue(
+            telecallerMobile
+          ),
+
+        updatedAt:{
+          timestampValue:
+            new Date().toISOString()
+        }
+
+      };
+
+
+      await firestoreFetch(
+        url,
+        {
+          method:"PATCH",
+          body:JSON.stringify({
+            fields
+          })
+        }
+      );
+
+
+      hideModal(
+        "statusModal"
+      );
+
+
+      showToast(
+        "Student status updated successfully.",
+        "success"
+      );
+
+
+      await loadInquiries();
+
+    }catch(error){
+
+      showToast(
+        error.message,
+        "error"
+      );
+
+    }finally{
+
+      saveBtn.disabled = false;
+
+      saveBtn.textContent =
+        "Save Status";
+    }
+  }
+
+
+  /* ============================================================
+     VIEW STUDENT
+  ============================================================ */
+
+  function viewStudent(docName){
+
+    const item =
+      inquiries.find(
+        x => x.__docName === docName
+      );
+
+    if(!item){
+      return;
+    }
+
+
+    currentDetailInquiry =
+      item;
+
+
+    setText(
+      "detailName",
+      item.studentName || "-"
+    );
+
+    setText(
+      "detailMobile",
+      item.mobile || "-"
+    );
+
+    setText(
+      "detailCourse",
+      item.course || "-"
+    );
+
+    setText(
+      "detailSource",
+      item.source || "-"
+    );
+
+    setText(
+      "detailCoordinator",
+      item.coordinatorName || "-"
+    );
+
+    setText(
+      "detailCoordinatorMobile",
+      item.coordinatorMobile || "-"
+    );
+
+    setText(
+      "detailStatus",
+      formatStatus(
+        item.status || "new"
+      )
+    );
+
+    setText(
+      "detailTelecallerStatus",
+      formatStatus(
+        item.telecallerStatus || "-"
+      )
+    );
+
+    setText(
+      "detailFollowup",
+      item.followUpDate || "-"
+    );
+
+    setText(
+      "detailCreated",
+      formatDate(
+        item.createdAt
+      )
+    );
+
+    setText(
+      "detailRemark",
+      item.remark || "-"
+    );
+
+    setText(
+      "detailTeleRemark",
+      item.telecallerRemark || "-"
+    );
+
+
+    showModal(
+      "detailModal"
+    );
+  }
+
+
+  /* ============================================================
+     CALL / WHATSAPP
+  ============================================================ */
+
+  function callStudent(mobile){
+
+    const clean =
+      String(mobile || "")
+        .replace(/[^\d+]/g,"");
+
+    if(!clean){
+      showToast(
+        "Student mobile number is not available.",
+        "error"
+      );
+      return;
+    }
 
     window.location.href =
-        "tel:" +
-        number;
-}
+      "tel:" + clean;
+  }
 
 
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
-function whatsappStudent(
+  function whatsappStudent(
     mobile,
-    name
-){
+    studentName = ""
+  ){
 
-    const number =
-        normalizeMobile(
-            mobile
-        );
+    const clean =
+      normalizeMobile(
+        mobile
+      );
 
-
-    if(!number){
-
-        alert(
-            "Mobile number not available."
-        );
-
-        return;
+    if(!clean){
+      showToast(
+        "Student mobile number is not available.",
+        "error"
+      );
+      return;
     }
 
 
     const message =
-        `Hello ${name || "Student"}, this is BlackTerminal Computer Institute. We are contacting you regarding your course inquiry.`;
+      `Hello ${studentName || "Student"}, this is ${telecallerName} from BlackTerminal Computer Institute. How can I help you?`;
 
 
     const url =
-        "https://wa.me/91" +
-        number +
-        "?text=" +
-        encodeURIComponent(
-            message
-        );
+      "https://wa.me/91" +
+      clean +
+      "?text=" +
+      encodeURIComponent(
+        message
+      );
 
 
     window.open(
-        url,
-        "_blank"
+      url,
+      "_blank"
     );
-}
+  }
 
 
-/* =========================================================
-   VIEW STUDENT
-========================================================= */
+  /* ============================================================
+     DELETE
+  ============================================================ */
 
-function viewStudent(
-    docId
-){
+  async function deleteStudent(
+    docName,
+    studentName
+  ){
 
-    const item =
-        inquiries.find(
-            x =>
-                x._id ===
-                docId
-        );
-
-
-    if(!item){
-        return;
+    if(!docName){
+      return;
     }
 
 
-    document.getElementById(
-        "dName"
-    ).textContent =
-        item.studentName ||
-        "—";
+    const confirmed =
+      window.confirm(
+        `Delete inquiry for ${studentName || "this student"}?`
+      );
 
 
-    document.getElementById(
-        "dMobile"
-    ).textContent =
-        item.mobile ||
-        "—";
-
-
-    document.getElementById(
-        "dCourse"
-    ).textContent =
-        item.course ||
-        "—";
-
-
-    document.getElementById(
-        "dStatus"
-    ).textContent =
-        item.status ||
-        "—";
-
-
-    document.getElementById(
-        "dSource"
-    ).textContent =
-        item.source ||
-        "—";
-
-
-    document.getElementById(
-        "dCoordinator"
-    ).textContent =
-        item.coordinatorName ||
-        "—";
-
-
-    document.getElementById(
-        "dFollowUp"
-    ).textContent =
-        item.followUpDate ||
-        "—";
-
-
-    document.getElementById(
-        "dCreated"
-    ).textContent =
-        item.createdAt
-        ? new Date(
-            item.createdAt
-        ).toLocaleString(
-            "en-IN"
-        )
-        : "—";
-
-
-    document.getElementById(
-        "dRemark"
-    ).textContent =
-        item.remark ||
-        "—";
-
-
-    document.getElementById(
-        "dTeleRemark"
-    ).textContent =
-        item.telecallerRemark ||
-        "—";
-
-
-    document.getElementById(
-        "detailModal"
-    ).style.display =
-        "flex";
-}
-
-
-function closeModal(){
-
-    document.getElementById(
-        "detailModal"
-    ).style.display =
-        "none";
-}
-
-
-document.getElementById(
-    "detailModal"
-).addEventListener(
-    "click",
-    function(e){
-
-        if(
-            e.target === this
-        ){
-            closeModal();
-        }
-
-    }
-);
-
-
-/* =========================================================
-   DELETE
-========================================================= */
-
-async function deleteInquiry(
-    docId
-){
-
-    if(
-        !confirm(
-            "Are you sure you want to delete this inquiry?"
-        )
-    ){
-        return;
+    if(!confirmed){
+      return;
     }
 
 
     try{
 
-        const url =
-            FIRESTORE_URL +
-            "/" +
-            encodeURIComponent(
-                docId
-            ) +
-            "?key=" +
-            encodeURIComponent(
-                FIREBASE_API_KEY
-            );
+      const url =
+        FIRESTORE_BASE +
+        "/" +
+        docName;
 
 
-        const response =
-            await fetch(
-                url,
-                {
-                    method:"DELETE"
-                }
-            );
-
-
-        if(!response.ok){
-
-            throw new Error(
-                await response.text()
-            );
+      await firestoreFetch(
+        url,
+        {
+          method:"DELETE"
         }
+      );
 
 
-        inquiries =
-            inquiries.filter(
-                x =>
-                    x._id !== docId
-            );
+      showToast(
+        "Inquiry deleted successfully.",
+        "success"
+      );
 
 
-        updateCourseFilter();
-        updateCoordinatorFilter();
-        applyFilters();
-
+      await loadInquiries();
 
     }catch(error){
 
-        console.error(
-            error
-        );
+      showToast(
+        error.message,
+        "error"
+      );
+    }
+  }
 
-        alert(
-            "Unable to delete inquiry."
+
+  /* ============================================================
+     COURSE / OFFER RENDERING
+  ============================================================ */
+
+  function getContentTitle(item){
+
+    return (
+      item.title ||
+      item.courseName ||
+      item.name ||
+      "Untitled"
+    );
+  }
+
+
+  function getContentDescription(item){
+
+    return (
+      item.description ||
+      item.shortDescription ||
+      ""
+    );
+  }
+
+
+  function getContentImage(item){
+
+    return (
+      item.imageUrl ||
+      item.bannerUrl ||
+      item.image ||
+      ""
+    );
+  }
+
+
+  function getContentPrice(item){
+
+    const offer =
+      item.offerPrice;
+
+    if(
+      offer !== undefined &&
+      offer !== null &&
+      offer !== ""
+    ){
+      return offer;
+    }
+
+    return (
+      item.price ||
+      ""
+    );
+  }
+
+
+  function renderContent(){
+
+    const area =
+      document.getElementById(
+        "contentArea"
+      );
+
+
+    if(!currentContent.length){
+
+      area.innerHTML = `
+        <div class="card">
+          <div class="empty">
+            <div class="empty-icon">▣</div>
+            <div class="empty-title">
+              No courses or offers available
+            </div>
+            <div class="empty-text">
+              Admin has not published any active course or offer yet.
+            </div>
+          </div>
+        </div>
+      `;
+
+      return;
+    }
+
+
+    if(currentDisplay === "list"){
+
+      renderContentList(area);
+
+      return;
+    }
+
+
+    if(currentDisplay === "banner"){
+
+      renderContentBanner(area);
+
+      return;
+    }
+
+
+    renderContentCarousel(area);
+  }
+
+
+  function contentItemHtml(
+    item,
+    compact = false
+  ){
+
+    const title =
+      getContentTitle(item);
+
+    const description =
+      getContentDescription(item);
+
+    const image =
+      getContentImage(item);
+
+    const price =
+      getContentPrice(item);
+
+    const originalPrice =
+      item.price || "";
+
+    const duration =
+      item.duration || "";
+
+    const validUntil =
+      item.validUntil || "";
+
+    const type =
+      String(
+        item.type || "course"
+      ).toLowerCase();
+
+
+    let priceHtml = "";
+
+    if(originalPrice && price){
+
+      if(
+        String(originalPrice) !==
+        String(price)
+      ){
+
+        priceHtml = `
+          <div class="price-line">
+            <span class="old-price">
+              ₹${escapeHtml(String(originalPrice))}
+            </span>
+            <span class="offer-price">
+              ₹${escapeHtml(String(price))}
+            </span>
+          </div>
+        `;
+
+      }else{
+
+        priceHtml = `
+          <div class="price-line">
+            <span class="offer-price">
+              ₹${escapeHtml(String(price))}
+            </span>
+          </div>
+        `;
+
+      }
+
+    }else if(price){
+
+      priceHtml = `
+        <div class="price-line">
+          <span class="offer-price">
+            ₹${escapeHtml(String(price))}
+          </span>
+        </div>
+      `;
+    }
+
+
+    const imageHtml =
+      image
+      ? `<img src="${escapeAttr(image)}" alt="${escapeAttr(title)}" onerror="this.style.display='none';">`
+      : "";
+
+
+    return `
+
+      <div class="promo-image">
+        ${imageHtml}
+      </div>
+
+      <div class="promo-content">
+
+        <div class="promo-tag">
+          ${escapeHtml(
+            type === "offer"
+              ? "SPECIAL OFFER"
+              : "COURSE"
+          )}
+        </div>
+
+        <div class="promo-title">
+          ${escapeHtml(title)}
+        </div>
+
+        ${
+          duration
+          ? `
+            <div style="font-size:10px;color:#d1d5db;margin-top:5px;">
+              Duration: ${escapeHtml(String(duration))}
+            </div>
+          `
+          : ""
+        }
+
+        <div class="promo-description">
+          ${escapeHtml(description)}
+        </div>
+
+        ${priceHtml}
+
+        ${
+          validUntil
+          ? `
+            <div class="validity">
+              Valid until: ${escapeHtml(String(validUntil))}
+            </div>
+          `
+          : ""
+        }
+
+      </div>
+
+    `;
+  }
+
+
+  function renderContentBanner(area){
+
+    area.innerHTML = `
+      <div class="banner-list">
+
+        ${
+          currentContent
+            .map(
+              item => `
+                <div class="promo-banner">
+                  ${contentItemHtml(item)}
+                </div>
+              `
+            )
+            .join("")
+        }
+
+      </div>
+    `;
+  }
+
+
+  function renderContentCarousel(area){
+
+    carouselIndex = 0;
+
+    if(carouselTimer){
+      clearInterval(
+        carouselTimer
+      );
+    }
+
+
+    area.innerHTML = `
+
+      <div class="carousel">
+
+        <div
+          class="carousel-track"
+          id="carouselTrack"
+        >
+
+          ${
+            currentContent
+              .map(
+                item => `
+                  <div class="carousel-slide">
+                    <div class="promo-banner">
+                      ${contentItemHtml(item)}
+                    </div>
+                  </div>
+                `
+              )
+              .join("")
+          }
+
+        </div>
+
+        ${
+          currentContent.length > 1
+          ? `
+            <button
+              class="carousel-control carousel-prev"
+              id="carouselPrev"
+            >
+              ‹
+            </button>
+
+            <button
+              class="carousel-control carousel-next"
+              id="carouselNext"
+            >
+              ›
+            </button>
+
+            <div
+              class="carousel-dots"
+              id="carouselDots"
+            >
+              ${
+                currentContent
+                  .map(
+                    (_,i) =>
+                      `
+                        <button
+                          class="carousel-dot ${i === 0 ? "active" : ""}"
+                          onclick="goCarousel(${i})"
+                        ></button>
+                      `
+                  )
+                  .join("")
+              }
+            </div>
+          `
+          : ""
+        }
+
+      </div>
+    `;
+
+
+    const next =
+      document.getElementById(
+        "carouselNext"
+      );
+
+    const prev =
+      document.getElementById(
+        "carouselPrev"
+      );
+
+
+    if(next){
+
+      next.onclick =
+        () =>
+          goCarousel(
+            carouselIndex + 1
+          );
+    }
+
+
+    if(prev){
+
+      prev.onclick =
+        () =>
+          goCarousel(
+            carouselIndex - 1
+          );
+    }
+
+
+    if(currentContent.length > 1){
+
+      carouselTimer =
+        setInterval(
+          () =>
+            goCarousel(
+              carouselIndex + 1
+            ),
+          5000
         );
     }
-}
+  }
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+  function goCarousel(index){
 
-function scrollToTop(){
+    if(!currentContent.length){
+      return;
+    }
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+
+    if(index < 0){
+      index =
+        currentContent.length - 1;
+    }
+
+    if(
+      index >=
+      currentContent.length
+    ){
+      index = 0;
+    }
+
+
+    carouselIndex =
+      index;
+
+
+    const track =
+      document.getElementById(
+        "carouselTrack"
+      );
+
+    if(track){
+
+      track.style.transform =
+        `translateX(-${index * 100}%)`;
+    }
+
+
+    document
+      .querySelectorAll(
+        ".carousel-dot"
+      )
+      .forEach(
+        (dot,i) =>
+          dot.classList.toggle(
+            "active",
+            i === index
+          )
+      );
+  }
+
+
+  function renderContentList(area){
+
+    area.innerHTML = `
+
+      <div class="content-list">
+
+        ${
+          currentContent
+            .map(item => {
+
+              const title =
+                getContentTitle(item);
+
+              const desc =
+                getContentDescription(item);
+
+              const image =
+                getContentImage(item);
+
+              const price =
+                getContentPrice(item);
+
+              const duration =
+                item.duration || "";
+
+
+              return `
+
+                <div class="list-item">
+
+                  <div class="list-thumb">
+
+                    ${
+                      image
+                      ? `
+                        <img
+                          src="${escapeAttr(image)}"
+                          alt="${escapeAttr(title)}"
+                          onerror="this.style.display='none';"
+                        >
+                      `
+                      : ""
+                    }
+
+                  </div>
+
+                  <div class="list-info">
+
+                    <div class="list-title">
+                      ${escapeHtml(title)}
+                    </div>
+
+                    ${
+                      duration
+                      ? `
+                        <div class="list-desc">
+                          Duration: ${escapeHtml(String(duration))}
+                        </div>
+                      `
+                      : ""
+                    }
+
+                    <div class="list-desc">
+                      ${escapeHtml(desc)}
+                    </div>
+
+                  </div>
+
+                  <div class="list-price">
+                    ${
+                      price
+                      ? `₹${escapeHtml(String(price))}`
+                      : "Contact Admin"
+                    }
+                  </div>
+
+                </div>
+
+              `;
+
+            })
+            .join("")
+        }
+
+      </div>
+
+    `;
+  }
+
+
+  /* ============================================================
+     UI HELPERS
+  ============================================================ */
+
+  function money(value){
+
+    const number =
+      Number(value) || 0;
+
+    return (
+      "₹" +
+      number.toLocaleString(
+        "en-IN"
+      )
+    );
+  }
+
+
+  function setText(
+    id,
+    value
+  ){
+
+    const element =
+      document.getElementById(id);
+
+    if(element){
+      element.textContent =
+        String(value);
+    }
+  }
+
+
+  function formatStatus(status){
+
+    if(!status){
+      return "-";
+    }
+
+    return String(status)
+      .replace(/[-_]/g," ")
+      .replace(/\b\w/g,c =>
+        c.toUpperCase()
+      );
+  }
+
+
+  function formatDate(value){
+
+    if(!value){
+      return "-";
+    }
+
+    const date =
+      new Date(value);
+
+    if(
+      Number.isNaN(
+        date.getTime()
+      )
+    ){
+      return String(value);
+    }
+
+    return date.toLocaleString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric",
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+  }
+
+
+  function escapeHtml(value){
+
+    return String(
+      value ?? ""
+    )
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+  }
+
+
+  function escapeAttr(value){
+
+    return escapeHtml(value);
+  }
+
+
+  function showToast(
+    message,
+    type = ""
+  ){
+
+    const container =
+      document.getElementById(
+        "toastContainer"
+      );
+
+    const toast =
+      document.createElement(
+        "div"
+      );
+
+    toast.className =
+      `toast ${type}`;
+
+    toast.textContent =
+      message;
+
+    container.appendChild(
+      toast
+    );
+
+    setTimeout(
+      () => {
+        toast.remove();
+      },
+      3500
+    );
+  }
+
+
+  function showModal(id){
+
+    document
+      .getElementById(id)
+      .classList.add("show");
+  }
+
+
+  function hideModal(id){
+
+    document
+      .getElementById(id)
+      .classList.remove("show");
+  }
+
+
+  /* ============================================================
+     NAVIGATION
+  ============================================================ */
+
+  function openSection(sectionId){
+
+    document
+      .querySelectorAll(".section")
+      .forEach(section => {
+
+        section.classList.toggle(
+          "active",
+          section.id === sectionId
+        );
+
+      });
+
+
+    document
+      .querySelectorAll(".nav-btn")
+      .forEach(btn => {
+
+        btn.classList.toggle(
+          "active",
+          btn.dataset.section === sectionId
+        );
+
+      });
+
+
+    const titles = {
+
+      dashboard:
+        "Telecaller Dashboard",
+
+      inquiries:
+        "Student Inquiries",
+
+      courses:
+        "Courses & Offers",
+
+      earnings:
+        "My Earnings"
+
+    };
+
+
+    setText(
+      "pageTitle",
+      titles[sectionId] ||
+      "Telecaller Dashboard"
+    );
+
+
+    document
+      .getElementById(
+        "sidebar"
+      )
+      .classList.remove(
+        "open"
+      );
+
+
+    if(sectionId === "courses"){
+
+      renderContent();
+
+    }
+
+  }
+
+
+  /* ============================================================
+     EVENTS
+  ============================================================ */
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(btn => {
+
+      btn.addEventListener(
+        "click",
+        () =>
+          openSection(
+            btn.dataset.section
+          )
+      );
+
     });
-}
 
 
-function scrollToTarget(){
+  document
+    .getElementById("mobileMenu")
+    .addEventListener(
+      "click",
+      () => {
 
-    document.getElementById(
-        "targetSection"
-    ).scrollIntoView({
-        behavior:"smooth",
-        block:"center"
+        document
+          .getElementById("sidebar")
+          .classList.toggle(
+            "open"
+          );
+
+      }
+    );
+
+
+  document
+    .getElementById("logoutBtn")
+    .addEventListener(
+      "click",
+      () => {
+
+        sessionStorage.removeItem(
+          "bt_logged_in"
+        );
+
+        sessionStorage.removeItem(
+          "bt_user_name"
+        );
+
+        sessionStorage.removeItem(
+          "bt_user_mobile"
+        );
+
+        sessionStorage.removeItem(
+          "bt_user_role"
+        );
+
+        sessionStorage.removeItem(
+          "bt_login_time"
+        );
+
+        window.location.replace(
+          "login.html"
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById("searchInput")
+    .addEventListener(
+      "input",
+      applyFilters
+    );
+
+
+  document
+    .getElementById("statusFilter")
+    .addEventListener(
+      "change",
+      applyFilters
+    );
+
+
+  document
+    .getElementById("courseFilter")
+    .addEventListener(
+      "change",
+      applyFilters
+    );
+
+
+  document
+    .getElementById("coordinatorFilter")
+    .addEventListener(
+      "change",
+      applyFilters
+    );
+
+
+  document
+    .getElementById("clearFiltersBtn")
+    .addEventListener(
+      "click",
+      () => {
+
+        document.getElementById(
+          "searchInput"
+        ).value = "";
+
+        document.getElementById(
+          "statusFilter"
+        ).value = "";
+
+        document.getElementById(
+          "courseFilter"
+        ).value = "";
+
+        document.getElementById(
+          "coordinatorFilter"
+        ).value = "";
+
+        applyFilters();
+
+      }
+    );
+
+
+  document
+    .getElementById("refreshBtn")
+    .addEventListener(
+      "click",
+      async () => {
+
+        await loadInquiries();
+        await loadPaymentSettings();
+
+        showToast(
+          "Data refreshed.",
+          "success"
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById("refreshContentBtn")
+    .addEventListener(
+      "click",
+      async () => {
+
+        await loadContent();
+
+        showToast(
+          "Course and offer information refreshed.",
+          "success"
+        );
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(".display-btn")
+    .forEach(btn => {
+
+      btn.addEventListener(
+        "click",
+        () => {
+
+          currentDisplay =
+            btn.dataset.display;
+
+          document
+            .querySelectorAll(
+              ".display-btn"
+            )
+            .forEach(x =>
+              x.classList.remove(
+                "active"
+              )
+            );
+
+          btn.classList.add(
+            "active"
+          );
+
+          renderContent();
+
+        }
+      );
+
     });
-}
 
 
-function scrollToInquiries(){
+  document
+    .getElementById("saveStatusBtn")
+    .addEventListener(
+      "click",
+      saveStatus
+    );
 
-    document.getElementById(
-        "inquirySection"
-    ).scrollIntoView({
-        behavior:"smooth",
-        block:"start"
+
+  document
+    .querySelectorAll("[data-close]")
+    .forEach(btn => {
+
+      btn.addEventListener(
+        "click",
+        () =>
+          hideModal(
+            btn.dataset.close
+          )
+      );
+
     });
-}
 
 
-/* =========================================================
-   INITIAL LOAD
-========================================================= */
+  document
+    .getElementById("detailCallBtn")
+    .addEventListener(
+      "click",
+      () => {
 
-async function init(){
+        if(
+          currentDetailInquiry
+        ){
 
-    updatePlanUI();
+          callStudent(
+            currentDetailInquiry.mobile
+          );
 
-    updateDashboard();
+        }
 
-    await loadPaymentSettings();
-
-    await loadInquiries();
-
-    updateDashboard();
-}
-
-
-init();
+      }
+    );
 
 
-/* =========================================================
-   AUTO REFRESH
-========================================================= */
+  document
+    .getElementById("detailWhatsAppBtn")
+    .addEventListener(
+      "click",
+      () => {
 
-setInterval(
-    loadPaymentSettings,
+        if(
+          currentDetailInquiry
+        ){
+
+          whatsappStudent(
+            currentDetailInquiry.mobile,
+            currentDetailInquiry.studentName
+          );
+
+        }
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(".modal-overlay")
+    .forEach(overlay => {
+
+      overlay.addEventListener(
+        "click",
+        event => {
+
+          if(
+            event.target === overlay
+          ){
+
+            overlay.classList.remove(
+              "show"
+            );
+
+          }
+
+        }
+      );
+
+    });
+
+
+  /* ============================================================
+     USER INFO
+  ============================================================ */
+
+  setText(
+    "sideUserName",
+    telecallerName
+  );
+
+  setText(
+    "topUserName",
+    telecallerName
+  );
+
+  setText(
+    "topUserMobile",
+    telecallerMobile || "-"
+  );
+
+  setText(
+    "heroName",
+    telecallerName
+  );
+
+
+  const avatar =
+    telecallerName
+      .trim()
+      .charAt(0)
+      .toUpperCase() || "T";
+
+  setText(
+    "avatar",
+    avatar
+  );
+
+
+  setText(
+    "todayDate",
+    new Date().toLocaleDateString(
+      "en-IN",
+      {
+        weekday:"long",
+        day:"2-digit",
+        month:"long",
+        year:"numeric"
+      }
+    )
+  );
+
+
+  /* ============================================================
+     INITIAL LOAD
+  ============================================================ */
+
+  async function initialize(){
+
+    await Promise.all([
+      loadInquiries(),
+      loadPaymentSettings(),
+      loadContent()
+    ]);
+
+  }
+
+
+  initialize();
+
+
+  /* ============================================================
+     AUTO REFRESH
+     
+     Payment settings/content are refreshed every 60 seconds.
+     Inquiry data is also refreshed every 60 seconds.
+  ============================================================ */
+
+  setInterval(
+    async () => {
+
+      try{
+
+        await loadPaymentSettings();
+        await loadContent();
+
+      }catch(error){
+
+        console.warn(error);
+
+      }
+
+    },
     60000
-);
+  );
 
-setInterval(
-    loadInquiries,
+
+  setInterval(
+    async () => {
+
+      try{
+
+        await loadInquiries();
+
+      }catch(error){
+
+        console.warn(error);
+
+      }
+
+    },
     60000
-);
+  );
+
+
+  /* ============================================================
+     GLOBAL FUNCTIONS
+  ============================================================ */
+
+  window.goToPage =
+    goToPage;
+
+  window.openStatusModalByDoc =
+    openStatusModalByDoc;
+
+  window.viewStudent =
+    viewStudent;
+
+  window.callStudent =
+    callStudent;
+
+  window.whatsappStudent =
+    whatsappStudent;
+
+  window.deleteStudent =
+    deleteStudent;
+
+  window.goCarousel =
+    goCarousel;
 
 </script>
 

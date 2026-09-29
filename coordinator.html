@@ -7,6 +7,7 @@
 <title>Coordinator Panel | BlackTerminal</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -19,6 +20,10 @@ body{
     color:#172033;
 }
 
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
 .sidebar{
     position:fixed;
     left:0;
@@ -29,6 +34,7 @@ body{
     color:#fff;
     padding:24px 16px;
     z-index:1000;
+    transition:.3s;
 }
 
 .logo{
@@ -89,6 +95,10 @@ body{
     width:20px;
     text-align:center;
 }
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main{
     margin-left:250px;
@@ -152,6 +162,10 @@ body{
     cursor:pointer;
 }
 
+/* =========================================================
+   CONTENT
+========================================================= */
+
 .content{
     padding:28px;
 }
@@ -187,9 +201,13 @@ body{
     font-size:13px;
 }
 
+/* =========================================================
+   STATS
+========================================================= */
+
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     gap:16px;
     margin-bottom:25px;
 }
@@ -202,9 +220,10 @@ body{
 }
 
 .stat-label{
-    font-size:12px;
+    font-size:11px;
     color:#8791a2;
     margin-bottom:10px;
+    font-weight:700;
 }
 
 .stat-value{
@@ -217,6 +236,10 @@ body{
     color:#9aa3b2;
     margin-top:5px;
 }
+
+/* =========================================================
+   PAYMENT
+========================================================= */
 
 .payment-box{
     background:#fff;
@@ -302,6 +325,10 @@ body{
     color:#2563eb;
 }
 
+/* =========================================================
+   CARD
+========================================================= */
+
 .card{
     background:#fff;
     border:1px solid #e9edf3;
@@ -309,6 +336,10 @@ body{
     padding:22px;
     margin-bottom:25px;
 }
+
+/* =========================================================
+   FORM
+========================================================= */
 
 .form-grid{
     display:grid;
@@ -353,6 +384,29 @@ body{
     resize:vertical;
 }
 
+.required{
+    color:#dc2626;
+}
+
+.course-info{
+    margin-top:7px;
+    padding:9px 11px;
+    background:#f8fafc;
+    border:1px solid #e7ebf1;
+    border-radius:8px;
+    font-size:10px;
+    color:#64748b;
+    display:none;
+}
+
+.course-info.show{
+    display:block;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
 .btn{
     border:0;
     border-radius:10px;
@@ -377,6 +431,10 @@ body{
     cursor:not-allowed;
 }
 
+/* =========================================================
+   SEARCH
+========================================================= */
+
 .search-box{
     display:flex;
     gap:10px;
@@ -396,6 +454,10 @@ body{
 .search-box input{
     flex:1;
 }
+
+/* =========================================================
+   INQUIRY
+========================================================= */
 
 .inquiry-list{
     display:flex;
@@ -427,6 +489,13 @@ body{
     margin-top:4px;
 }
 
+.course-price{
+    font-size:12px;
+    font-weight:800;
+    color:#047857;
+    margin-top:5px;
+}
+
 .inquiry-meta{
     display:flex;
     flex-wrap:wrap;
@@ -448,6 +517,28 @@ body{
     color:#2563eb;
 }
 
+.badge-pending{
+    background:#fff7ed;
+    color:#c2410c;
+}
+
+.badge-contacted{
+    background:#f3e8ff;
+    color:#7e22ce;
+}
+
+.badge-demo,
+.badge-demo-class{
+    background:#ecfeff;
+    color:#0e7490;
+}
+
+.badge-follow,
+.badge-follow-up{
+    background:#f4edff;
+    color:#7c3aed;
+}
+
 .badge-visited{
     background:#fff5dc;
     color:#a16207;
@@ -458,9 +549,61 @@ body{
     color:#16803d;
 }
 
-.badge-follow{
-    background:#f4edff;
+.badge-not-interested{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.badge-closed{
+    background:#f1f5f9;
+    color:#475569;
+}
+
+.status-box{
+    margin-top:14px;
+    padding:12px;
+    background:#f8fafc;
+    border:1px solid #e9edf3;
+    border-radius:10px;
+}
+
+.status-row{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.status-title{
+    font-size:10px;
+    color:#8a94a6;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.status-value{
+    margin-top:4px;
+    font-size:12px;
+    font-weight:800;
+    color:#111827;
+}
+
+.followup{
+    font-size:11px;
     color:#7c3aed;
+    font-weight:700;
+}
+
+.telecaller-remark{
+    margin-top:10px;
+    padding:10px;
+    border-radius:8px;
+    background:#fff;
+    border:1px solid #e8ebf1;
+    color:#5f6b7d;
+    font-size:11px;
+    line-height:1.5;
 }
 
 .inquiry-bottom{
@@ -498,12 +641,46 @@ body{
     background:#f5f7fa;
 }
 
+/* =========================================================
+   STATUS LEGEND
+========================================================= */
+
+.status-legend{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-top:10px;
+    margin-bottom:18px;
+}
+
+.legend-title{
+    width:100%;
+    font-size:10px;
+    color:#8a94a6;
+    font-weight:700;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
 .empty{
     text-align:center;
     padding:35px 15px;
     color:#9aa3b2;
     font-size:13px;
 }
+
+.loading{
+    text-align:center;
+    padding:25px;
+    color:#8b95a5;
+    font-size:13px;
+}
+
+/* =========================================================
+   ALERT
+========================================================= */
 
 .alert{
     position:fixed;
@@ -535,12 +712,13 @@ body{
     background:#c62828;
 }
 
-.loading{
-    text-align:center;
-    padding:25px;
-    color:#8b95a5;
-    font-size:13px;
+.alert.info{
+    background:#2563eb;
 }
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer{
     text-align:center;
@@ -549,22 +727,26 @@ body{
     font-size:11px;
 }
 
-@media(max-width:1000px){
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1100px){
 
     .stats{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:repeat(3,1fr);
     }
 
     .payment-grid{
         grid-template-columns:repeat(2,1fr);
     }
+
 }
 
 @media(max-width:760px){
 
     .sidebar{
         transform:translateX(-100%);
-        transition:.3s;
     }
 
     .sidebar.open{
@@ -620,6 +802,7 @@ body{
     .search-box{
         flex-direction:column;
     }
+
 }
 
 @media(max-width:450px){
@@ -635,13 +818,17 @@ body{
     .actions{
         flex-wrap:wrap;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
 
 <aside class="sidebar" id="sidebar">
 
@@ -652,37 +839,76 @@ body{
         </div>
 
         <div>
-            <h2>BlackTerminal</h2>
-            <small>Computer Institute</small>
+
+            <h2>
+                BlackTerminal
+            </h2>
+
+            <small>
+                Computer Institute
+            </small>
+
         </div>
 
     </div>
 
+
     <nav class="menu">
 
-        <a href="coordinator.html" class="active">
-            <span class="menu-icon">🏠</span>
+        <a href="#dashboard"
+           class="active">
+
+            <span class="menu-icon">
+                🏠
+            </span>
+
             Dashboard
+
         </a>
+
 
         <a href="#newInquiry">
-            <span class="menu-icon">➕</span>
+
+            <span class="menu-icon">
+                ➕
+            </span>
+
             New Inquiry
+
         </a>
+
 
         <a href="#inquiries">
-            <span class="menu-icon">📋</span>
+
+            <span class="menu-icon">
+                📋
+            </span>
+
             My Inquiries
+
         </a>
+
 
         <a href="#payment">
-            <span class="menu-icon">💰</span>
+
+            <span class="menu-icon">
+                💰
+            </span>
+
             My Payment
+
         </a>
 
-        <a href="javascript:void(0)" onclick="logout()">
-            <span class="menu-icon">🚪</span>
+
+        <a href="javascript:void(0)"
+           onclick="logout()">
+
+            <span class="menu-icon">
+                🚪
+            </span>
+
             Logout
+
         </a>
 
     </nav>
@@ -690,7 +916,9 @@ body{
 </aside>
 
 
-<!-- MAIN -->
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main class="main">
 
@@ -702,8 +930,11 @@ body{
 
             <div class="mobile-menu"
                  onclick="toggleSidebar()">
+
                 ☰
+
             </div>
+
 
             <div class="top-title">
 
@@ -712,7 +943,7 @@ body{
                 </h1>
 
                 <p>
-                    Student inquiry and performance management
+                    Student inquiry and Telecaller status tracking
                 </p>
 
             </div>
@@ -722,9 +953,13 @@ body{
 
         <div class="profile">
 
-            <div class="avatar" id="avatar">
+            <div class="avatar"
+                 id="avatar">
+
                 C
+
             </div>
+
 
             <div class="profile-info">
 
@@ -743,7 +978,13 @@ body{
     </header>
 
 
-    <section class="content">
+    <!-- =====================================================
+         CONTENT
+    ====================================================== -->
+
+    <section class="content"
+             id="dashboard">
+
 
         <!-- WELCOME -->
 
@@ -754,13 +995,15 @@ body{
             </h2>
 
             <p>
-                Bring genuine students, track their progress and earn based on actual visits and admissions.
+                Send student inquiries to the Telecaller and track every update from one place.
             </p>
 
         </div>
 
 
-        <!-- DASHBOARD STATS -->
+        <!-- =================================================
+             STATS
+        ================================================== -->
 
         <div class="stats">
 
@@ -776,7 +1019,7 @@ body{
                 </div>
 
                 <div class="stat-sub">
-                    Your submitted inquiries
+                    Your submitted students
                 </div>
 
             </div>
@@ -785,7 +1028,25 @@ body{
             <div class="stat">
 
                 <div class="stat-label">
-                    VISITED STUDENTS
+                    DEMO CLASSES
+                </div>
+
+                <div class="stat-value"
+                     id="demoCount">
+                    0
+                </div>
+
+                <div class="stat-sub">
+                    Telecaller demo status
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    VISITED
                 </div>
 
                 <div class="stat-value"
@@ -794,7 +1055,7 @@ body{
                 </div>
 
                 <div class="stat-sub">
-                    Genuine institute visits
+                    Students who visited
                 </div>
 
             </div>
@@ -838,7 +1099,9 @@ body{
         </div>
 
 
-        <!-- PAYMENT -->
+        <!-- =================================================
+             PAYMENT
+        ================================================== -->
 
         <div class="payment-box"
              id="payment">
@@ -936,20 +1199,28 @@ body{
 
             <div class="payment-rule">
 
-                <strong>Payment Rule:</strong>
+                <strong>
+                    Payment Rule:
+                </strong>
 
                 Raw inquiries do not generate incentive.
 
                 <br>
 
-                <strong>Visited Student:</strong>
+                <strong>
+                    Visited Student:
+                </strong>
+
                 <span id="ruleVisitAmount">
                     ₹0
                 </span>
 
                 &nbsp; | &nbsp;
 
-                <strong>Admission:</strong>
+                <strong>
+                    Admission:
+                </strong>
+
                 <span id="ruleAdmissionAmount">
                     ₹0
                 </span>
@@ -957,7 +1228,9 @@ body{
                 <br>
 
                 Base salary and incentive amounts are
-                <strong>controlled by the Admin Panel</strong>.
+                <strong>
+                    controlled by the Admin Panel
+                </strong>.
 
                 Duplicate mobile numbers are not counted twice
                 for the same incentive category.
@@ -975,7 +1248,9 @@ body{
         </div>
 
 
-        <!-- NEW INQUIRY -->
+        <!-- =================================================
+             NEW INQUIRY
+        ================================================== -->
 
         <div class="card"
              id="newInquiry">
@@ -983,11 +1258,11 @@ body{
             <div class="section-title">
 
                 <h3>
-                    ➕ Add New Student Inquiry
+                    ➕ Send Student to Telecaller
                 </h3>
 
                 <span>
-                    Submit genuine student leads
+                    Select course and send
                 </span>
 
             </div>
@@ -997,18 +1272,23 @@ body{
 
                 <div class="form-grid">
 
+
+                    <!-- LEFT -->
+
                     <div>
 
                         <div class="form-group">
 
                             <label>
-                                Student Name *
+                                Student Name
+                                <span class="required">*</span>
                             </label>
 
                             <input
                                 type="text"
                                 id="studentName"
                                 placeholder="Enter student name"
+                                autocomplete="off"
                                 required
                             >
 
@@ -1018,7 +1298,8 @@ body{
                         <div class="form-group">
 
                             <label>
-                                Mobile Number *
+                                Mobile Number
+                                <span class="required">*</span>
                             </label>
 
                             <input
@@ -1027,103 +1308,40 @@ body{
                                 maxlength="10"
                                 inputmode="numeric"
                                 placeholder="10 digit mobile number"
+                                autocomplete="off"
                                 required
                             >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Course *
-                            </label>
-
-                            <select id="course"
-                                    required>
-
-                                <option value="">
-                                    Select Course
-                                </option>
-
-                                <option value="PGDCA">
-                                    PGDCA
-                                </option>
-
-                                <option value="Advanced PGDCA">
-                                    Advanced PGDCA
-                                </option>
-
-                                <option value="C Language">
-                                    C Language
-                                </option>
-
-                                <option value="Java">
-                                    Java
-                                </option>
-
-                                <option value="Python">
-                                    Python
-                                </option>
-
-                                <option value="Tally">
-                                    Tally
-                                </option>
-
-                                <option value="Spoken English">
-                                    Spoken English
-                                </option>
-
-                                <option value="Other">
-                                    Other
-                                </option>
-
-                            </select>
 
                         </div>
 
                     </div>
 
 
+                    <!-- RIGHT -->
+
                     <div>
 
                         <div class="form-group">
 
                             <label>
-                                Lead Source
+                                Select Course
+                                <span class="required">*</span>
                             </label>
 
-                            <select id="source">
+                            <select id="course"
+                                    required>
 
                                 <option value="">
-                                    Select Source
-                                </option>
-
-                                <option value="Personal Contact">
-                                    Personal Contact
-                                </option>
-
-                                <option value="WhatsApp">
-                                    WhatsApp
-                                </option>
-
-                                <option value="Facebook">
-                                    Facebook
-                                </option>
-
-                                <option value="Instagram">
-                                    Instagram
-                                </option>
-
-                                <option value="Reference">
-                                    Student Reference
-                                </option>
-
-                                <option value="Other">
-                                    Other
+                                    Loading courses...
                                 </option>
 
                             </select>
+
+
+                            <div class="course-info"
+                                 id="courseInfo">
+
+                            </div>
 
                         </div>
 
@@ -1136,7 +1354,7 @@ body{
 
                             <textarea
                                 id="remark"
-                                placeholder="Student requirement, preferred course, timing, etc."
+                                placeholder="Optional note for Telecaller"
                             ></textarea>
 
                         </div>
@@ -1151,7 +1369,7 @@ body{
                     class="btn btn-primary"
                     id="submitBtn">
 
-                    Send Inquiry
+                    Send Inquiry to Telecaller
 
                 </button>
 
@@ -1160,7 +1378,9 @@ body{
         </div>
 
 
-        <!-- MY INQUIRIES -->
+        <!-- =================================================
+             MY INQUIRIES
+        ================================================== -->
 
         <div class="card"
              id="inquiries">
@@ -1168,22 +1388,63 @@ body{
             <div class="section-title">
 
                 <h3>
-                    📋 My Recent Inquiries
+                    📋 My Student Inquiries
                 </h3>
 
                 <span>
-                    Latest student leads
+                    Telecaller updates appear here automatically
                 </span>
 
             </div>
 
+
+            <!-- STATUS LEGEND -->
+
+            <div class="status-legend">
+
+                <div class="legend-title">
+                    Telecaller Status
+                </div>
+
+                <span class="badge badge-new">
+                    New
+                </span>
+
+                <span class="badge badge-contacted">
+                    Contacted
+                </span>
+
+                <span class="badge badge-demo-class">
+                    Demo Class
+                </span>
+
+                <span class="badge badge-follow-up">
+                    Follow Up
+                </span>
+
+                <span class="badge badge-visited">
+                    Visited
+                </span>
+
+                <span class="badge badge-converted">
+                    Converted
+                </span>
+
+                <span class="badge badge-not-interested">
+                    Not Interested
+                </span>
+
+            </div>
+
+
+            <!-- SEARCH -->
 
             <div class="search-box">
 
                 <input
                     type="text"
                     id="searchInput"
-                    placeholder="Search student name or mobile..."
+                    placeholder="Search student name, mobile or course..."
                     oninput="renderInquiries()"
                 >
 
@@ -1204,8 +1465,12 @@ body{
                         Contacted
                     </option>
 
-                    <option value="interested">
-                        Interested
+                    <option value="demo-class">
+                        Demo Class
+                    </option>
+
+                    <option value="follow-up">
+                        Follow Up
                     </option>
 
                     <option value="visited">
@@ -1216,8 +1481,8 @@ body{
                         Converted
                     </option>
 
-                    <option value="closed">
-                        Closed
+                    <option value="not-interested">
+                        Not Interested
                     </option>
 
                 </select>
@@ -1225,7 +1490,8 @@ body{
             </div>
 
 
-            <div id="inquiryList">
+            <div id="inquiryList"
+                 class="inquiry-list">
 
                 <div class="loading">
                     Loading inquiries...
@@ -1235,6 +1501,8 @@ body{
 
         </div>
 
+
+        <!-- FOOTER -->
 
         <div class="footer">
 
@@ -1258,14 +1526,15 @@ body{
 <script type="module">
 
 /* =========================================================
-   FIREBASE CONFIGURATION
+   FIREBASE / FIRESTORE CONFIG
 ========================================================= */
 
 const FIREBASE_PROJECT_ID =
     "jobs-2f152";
 
+
 const FIREBASE_API_KEY =
-    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytd2b_m";
+    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
 
 
 const FIRESTORE_BASE =
@@ -1274,34 +1543,31 @@ const FIRESTORE_BASE =
     "/databases/(default)/documents";
 
 
+/* =========================================================
+   COLLECTIONS
+========================================================= */
+
 const INQUIRY_URL =
     FIRESTORE_BASE +
     "/studentInquiries";
 
-
-/*
-   ADMIN PAYMENT SETTINGS
-
-   Collection:
-   paymentSettings
-
-   Document:
-   coordinator
-
-   Fields:
-
-   baseSalary
-   visitIncentive
-   admissionIncentive
-*/
 
 const PAYMENT_SETTINGS_URL =
     FIRESTORE_BASE +
     "/paymentSettings/coordinator";
 
 
+/*
+    Admin controlled course collection
+*/
+
+const COURSE_SETTINGS_URL =
+    FIRESTORE_BASE +
+    "/courseSettings";
+
+
 /* =========================================================
-   DEFAULT VALUES
+   DEFAULT PAYMENT
 ========================================================= */
 
 let BASE_SALARY = 1000;
@@ -1319,6 +1585,7 @@ const loggedIn =
     sessionStorage.getItem(
         "bt_logged_in"
     );
+
 
 const role =
     sessionStorage.getItem(
@@ -1338,7 +1605,7 @@ if(
 
 
 /* =========================================================
-   COORDINATOR INFORMATION
+   COORDINATOR DETAILS
 ========================================================= */
 
 const coordinatorName =
@@ -1356,13 +1623,17 @@ const coordinatorMobile =
 
 
 document
-    .getElementById("topName")
+    .getElementById(
+        "topName"
+    )
     .textContent =
     coordinatorName;
 
 
 document
-    .getElementById("welcomeName")
+    .getElementById(
+        "welcomeName"
+    )
     .textContent =
     "Welcome, " +
     coordinatorName +
@@ -1370,7 +1641,9 @@ document
 
 
 document
-    .getElementById("avatar")
+    .getElementById(
+        "avatar"
+    )
     .textContent =
     coordinatorName
         .trim()
@@ -1379,13 +1652,17 @@ document
 
 
 document
-    .getElementById("year")
+    .getElementById(
+        "year"
+    )
     .textContent =
     new Date().getFullYear();
 
 
 document
-    .getElementById("paymentMonth")
+    .getElementById(
+        "paymentMonth"
+    )
     .textContent =
     new Date().toLocaleString(
         "en-IN",
@@ -1397,10 +1674,12 @@ document
 
 
 /* =========================================================
-   APPLICATION STATE
+   STATE
 ========================================================= */
 
 let inquiries = [];
+
+let courses = [];
 
 
 /* =========================================================
@@ -1439,7 +1718,7 @@ function showAlert(
 
 
 /* =========================================================
-   CURRENCY FORMAT
+   RUPEE
 ========================================================= */
 
 function formatRupee(
@@ -1461,7 +1740,7 @@ function formatRupee(
 
 
 /* =========================================================
-   HTML ESCAPE
+   ESCAPE HTML
 ========================================================= */
 
 function escapeHtml(
@@ -1496,7 +1775,7 @@ function escapeHtml(
 
 
 /* =========================================================
-   FIRESTORE VALUE CONVERTER
+   FIRESTORE VALUE
 ========================================================= */
 
 function toFirestoreValue(
@@ -1547,7 +1826,7 @@ function toFirestoreValue(
 
 
 /* =========================================================
-   FIRESTORE DOCUMENT CONVERTER
+   FIRESTORE DOCUMENT TO OBJECT
 ========================================================= */
 
 function documentToObject(
@@ -1560,11 +1839,12 @@ function documentToObject(
 
     const obj = {
 
-        id:doc.name
-            ? doc.name
-                .split("/")
-                .pop()
-            : ""
+        id:
+            doc.name
+                ? doc.name
+                    .split("/")
+                    .pop()
+                : ""
 
     };
 
@@ -1595,6 +1875,18 @@ function documentToObject(
                     obj[key] =
                         Number(
                             field.integerValue
+                        );
+
+                }
+
+                else if(
+                    field.doubleValue !==
+                    undefined
+                ){
+
+                    obj[key] =
+                        Number(
+                            field.doubleValue
                         );
 
                 }
@@ -1639,7 +1931,114 @@ function documentToObject(
 
 
 /* =========================================================
-   LOAD PAYMENT SETTINGS FROM ADMIN
+   LOAD ALL DOCUMENTS WITH PAGINATION
+========================================================= */
+
+async function loadAllDocuments(
+    baseUrl
+){
+
+    let allDocuments = [];
+
+    let pageToken = "";
+
+
+    do{
+
+        let url =
+            baseUrl +
+            "?key=" +
+            encodeURIComponent(
+                FIREBASE_API_KEY
+            ) +
+            "&pageSize=300";
+
+
+        if(pageToken){
+
+            url +=
+                "&pageToken=" +
+                encodeURIComponent(
+                    pageToken
+                );
+
+        }
+
+
+        const response =
+            await fetch(
+                url
+            );
+
+
+        if(
+            !response.ok
+        ){
+
+            let message =
+                "Firestore request failed.";
+
+
+            try{
+
+                const errorData =
+                    await response.json();
+
+
+                if(
+                    errorData?.error?.message
+                ){
+
+                    message =
+                        errorData.error.message;
+
+                }
+
+            }catch(e){}
+
+
+            throw new Error(
+                message
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            Array.isArray(
+                data.documents
+            )
+        ){
+
+            allDocuments =
+                allDocuments.concat(
+                    data.documents.map(
+                        documentToObject
+                    )
+                );
+
+        }
+
+
+        pageToken =
+            data.nextPageToken ||
+            "";
+
+    }
+    while(pageToken);
+
+
+    return allDocuments;
+
+}
+
+
+/* =========================================================
+   LOAD PAYMENT SETTINGS
 ========================================================= */
 
 async function loadPaymentSettings(){
@@ -1656,13 +2055,20 @@ async function loadPaymentSettings(){
             await fetch(
                 PAYMENT_SETTINGS_URL +
                 "?key=" +
-                FIREBASE_API_KEY
+                encodeURIComponent(
+                    FIREBASE_API_KEY
+                )
             );
 
 
         if(
-            !response.ok
+            response.status === 404
         ){
+
+            updatePaymentLabels();
+
+            calculateDashboard();
+
 
             statusBox.textContent =
                 "Admin payment settings not found. Default values are being used.";
@@ -1673,11 +2079,18 @@ async function loadPaymentSettings(){
             statusBox.style.color =
                 "#a16207";
 
-            updatePaymentLabels();
-
-            calculateDashboard();
-
             return;
+
+        }
+
+
+        if(
+            !response.ok
+        ){
+
+            throw new Error(
+                "Unable to load payment settings."
+            );
 
         }
 
@@ -1693,60 +2106,48 @@ async function loadPaymentSettings(){
 
 
         if(
-            Number.isFinite(
-                Number(
-                    settings.baseSalary
-                )
-            )
-            &&
-            Number(
-                settings.baseSalary
-            ) >= 0
+            settings.baseSalary !==
+            undefined
         ){
 
             BASE_SALARY =
-                Number(
-                    settings.baseSalary
+                Math.max(
+                    0,
+                    Number(
+                        settings.baseSalary
+                    ) || 0
                 );
 
         }
 
 
         if(
-            Number.isFinite(
-                Number(
-                    settings.visitIncentive
-                )
-            )
-            &&
-            Number(
-                settings.visitIncentive
-            ) >= 0
+            settings.visitIncentive !==
+            undefined
         ){
 
             VISIT_INCENTIVE =
-                Number(
-                    settings.visitIncentive
+                Math.max(
+                    0,
+                    Number(
+                        settings.visitIncentive
+                    ) || 0
                 );
 
         }
 
 
         if(
-            Number.isFinite(
-                Number(
-                    settings.admissionIncentive
-                )
-            )
-            &&
-            Number(
-                settings.admissionIncentive
-            ) >= 0
+            settings.admissionIncentive !==
+            undefined
         ){
 
             ADMISSION_INCENTIVE =
-                Number(
-                    settings.admissionIncentive
+                Math.max(
+                    0,
+                    Number(
+                        settings.admissionIncentive
+                    ) || 0
                 );
 
         }
@@ -1767,11 +2168,9 @@ async function loadPaymentSettings(){
             "#16803d";
 
     }
-
     catch(error){
 
         console.error(
-            "Payment settings error:",
             error
         );
 
@@ -1796,7 +2195,7 @@ async function loadPaymentSettings(){
 
 
 /* =========================================================
-   UPDATE PAYMENT UI
+   PAYMENT UI
 ========================================================= */
 
 function updatePaymentLabels(){
@@ -1834,49 +2233,327 @@ function updatePaymentLabels(){
 
 
 /* =========================================================
+   LOAD COURSES FROM ADMIN
+========================================================= */
+
+async function loadCourses(){
+
+    const courseSelect =
+        document.getElementById(
+            "course"
+        );
+
+
+    courseSelect.innerHTML = `
+        <option value="">
+            Loading courses...
+        </option>
+    `;
+
+
+    try{
+
+        courses =
+            await loadAllDocuments(
+                COURSE_SETTINGS_URL
+            );
+
+
+        courses =
+            courses
+                .filter(
+                    course =>
+                        course.active !== false
+                )
+                .sort(
+                    (a,b)=>
+                        String(
+                            a.courseName ||
+                            ""
+                        ).localeCompare(
+                            String(
+                                b.courseName ||
+                                ""
+                            )
+                        )
+                );
+
+
+        courseSelect.innerHTML = `
+
+            <option value="">
+                Select Course
+            </option>
+
+        `;
+
+
+        if(
+            !courses.length
+        ){
+
+            courseSelect.innerHTML += `
+
+                <option value="">
+                    No active courses available
+                </option>
+
+            `;
+
+
+            return;
+
+        }
+
+
+        courses.forEach(
+            course=>{
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    course.courseName ||
+                    "";
+
+
+                option.textContent =
+                    course.courseName +
+                    " - " +
+                    formatRupee(
+                        course.price || 0
+                    );
+
+
+                option.dataset.price =
+                    course.price || 0;
+
+
+                option.dataset.duration =
+                    course.duration ||
+                    "";
+
+
+                courseSelect.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        /*
+         * Fallback course list
+         */
+
+        courseSelect.innerHTML = `
+
+            <option value="">
+                Select Course
+            </option>
+
+            <option value="PGDCA">
+                PGDCA
+            </option>
+
+            <option value="Advanced PGDCA">
+                Advanced PGDCA
+            </option>
+
+            <option value="C Language">
+                C Language
+            </option>
+
+            <option value="Java">
+                Java
+            </option>
+
+            <option value="Python">
+                Python
+            </option>
+
+            <option value="Tally">
+                Tally
+            </option>
+
+            <option value="Spoken English">
+                Spoken English
+            </option>
+
+        `;
+
+
+        showAlert(
+            "Course settings could not be loaded. Default course options are shown.",
+            "info"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   COURSE CHANGE
+========================================================= */
+
+document
+    .getElementById(
+        "course"
+    )
+    .addEventListener(
+        "change",
+        function(){
+
+            const option =
+                this.options[
+                    this.selectedIndex
+                ];
+
+
+            const info =
+                document.getElementById(
+                    "courseInfo"
+                );
+
+
+            if(
+                !this.value
+            ){
+
+                info.classList.remove(
+                    "show"
+                );
+
+                info.innerHTML =
+                    "";
+
+                return;
+
+            }
+
+
+            const price =
+                Number(
+                    option.dataset.price ||
+                    0
+                );
+
+
+            const duration =
+                option.dataset.duration ||
+                "";
+
+
+            info.innerHTML =
+                "Course Price: " +
+                "<strong>" +
+                formatRupee(
+                    price
+                ) +
+                "</strong>" +
+                (
+                    duration
+                        ? " · Duration: " +
+                          escapeHtml(
+                              duration
+                          )
+                        : ""
+                );
+
+
+            info.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   MOBILE NUMBER INPUT
+========================================================= */
+
+document
+    .getElementById(
+        "mobile"
+    )
+    .addEventListener(
+        "input",
+        function(){
+
+            this.value =
+                this.value
+                    .replace(
+                        /\D/g,
+                        ""
+                    )
+                    .slice(
+                        0,
+                        10
+                    );
+
+        }
+    );
+
+
+/* =========================================================
    LOAD INQUIRIES
 ========================================================= */
 
 async function loadInquiries(){
 
+    const list =
+        document.getElementById(
+            "inquiryList"
+        );
+
+
+    list.innerHTML = `
+
+        <div class="loading">
+            Loading inquiries...
+        </div>
+
+    `;
+
+
     try{
 
-        const response =
-            await fetch(
-                INQUIRY_URL +
-                "?key=" +
-                FIREBASE_API_KEY
+        inquiries =
+            await loadAllDocuments(
+                INQUIRY_URL
             );
 
 
-        if(
-            !response.ok
-        ){
-
-            const errorText =
-                await response.text();
-
-            console.error(
-                errorText
+        const myMobile =
+            String(
+                coordinatorMobile
+            )
+            .replace(
+                /\D/g,
+                ""
             );
 
-            throw new Error(
-                "Unable to load inquiries"
-            );
 
-        }
-
-
-        const data =
-            await response.json();
-
+        /*
+         * Only this Coordinator's
+         * inquiries are shown.
+         */
 
         inquiries =
-            (data.documents || [])
-            .map(
-                documentToObject
-            )
-            .filter(
+            inquiries.filter(
                 item=>{
 
                     const itemMobile =
@@ -1890,19 +2567,9 @@ async function loadInquiries(){
                         );
 
 
-                    const currentMobile =
-                        String(
-                            coordinatorMobile
-                        )
-                        .replace(
-                            /\D/g,
-                            ""
-                        );
-
-
                     return (
                         itemMobile ===
-                        currentMobile
+                        myMobile
                     );
 
                 }
@@ -1912,10 +2579,14 @@ async function loadInquiries(){
         inquiries.sort(
             (a,b)=>
                 new Date(
-                    b.createdAt || 0
+                    b.updatedAt ||
+                    b.createdAt ||
+                    0
                 ) -
                 new Date(
-                    a.createdAt || 0
+                    a.updatedAt ||
+                    a.createdAt ||
+                    0
                 )
         );
 
@@ -1925,7 +2596,6 @@ async function loadInquiries(){
         calculateDashboard();
 
     }
-
     catch(error){
 
         console.error(
@@ -1933,23 +2603,21 @@ async function loadInquiries(){
         );
 
 
-        document
-            .getElementById(
-                "inquiryList"
-            )
-            .innerHTML = `
+        list.innerHTML = `
 
-                <div class="empty">
+            <div class="empty">
 
-                    Unable to load inquiries.
+                Unable to load inquiries.
 
-                    <br><br>
+                <br><br>
 
-                    Please check your Firestore connection and rules.
+                ${escapeHtml(
+                    error.message
+                )}
 
-                </div>
+            </div>
 
-            `;
+        `;
 
 
         showAlert(
@@ -1963,7 +2631,50 @@ async function loadInquiries(){
 
 
 /* =========================================================
-   SUBMIT NEW INQUIRY
+   DUPLICATE CHECK
+========================================================= */
+
+function isDuplicateMobile(
+    mobile
+){
+
+    const clean =
+        String(
+            mobile
+        )
+        .replace(
+            /\D/g,
+            ""
+        );
+
+
+    return inquiries.some(
+        item=>{
+
+            const existing =
+                String(
+                    item.mobile ||
+                    ""
+                )
+                .replace(
+                    /\D/g,
+                    ""
+                );
+
+
+            return (
+                existing ===
+                clean
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SEND INQUIRY
 ========================================================= */
 
 document
@@ -2006,14 +2717,6 @@ document
                     .value;
 
 
-            const source =
-                document
-                    .getElementById(
-                        "source"
-                    )
-                    .value;
-
-
             const remark =
                 document
                     .getElementById(
@@ -2023,12 +2726,14 @@ document
                     .trim();
 
 
+            /* VALIDATION */
+
             if(
                 !studentName
             ){
 
                 showAlert(
-                    "Please enter the student name.",
+                    "Please enter student name.",
                     "error"
                 );
 
@@ -2067,40 +2772,14 @@ document
             }
 
 
-            /*
-             * Prevent duplicate mobile
-             */
-
-            const duplicate =
-                inquiries.some(
-                    item=>{
-
-                        const existing =
-                            String(
-                                item.mobile ||
-                                ""
-                            )
-                            .replace(
-                                /\D/g,
-                                ""
-                            );
-
-
-                        return (
-                            existing ===
-                            mobile
-                        );
-
-                    }
-                );
-
-
             if(
-                duplicate
+                isDuplicateMobile(
+                    mobile
+                )
             ){
 
                 showAlert(
-                    "This mobile number already exists in your inquiry list.",
+                    "This mobile number is already in your inquiry list.",
                     "error"
                 );
 
@@ -2119,13 +2798,57 @@ document
                 true;
 
             submitBtn.textContent =
-                "Saving...";
+                "Sending to Telecaller...";
 
 
             const now =
                 new Date()
                     .toISOString();
 
+
+            /*
+             * Get selected course information
+             */
+
+            const selectedCourse =
+                courses.find(
+                    item =>
+                        String(
+                            item.courseName
+                        ) ===
+                        String(
+                            course
+                        )
+                );
+
+
+            const coursePrice =
+                selectedCourse
+                    ? Number(
+                        selectedCourse.price ||
+                        0
+                    )
+                    : 0;
+
+
+            const courseDuration =
+                selectedCourse
+                    ? String(
+                        selectedCourse.duration ||
+                        ""
+                    )
+                    : "";
+
+
+            /*
+             * IMPORTANT:
+             *
+             * status = new
+             *
+             * telecallerStatus = pending
+             *
+             * Telecaller can update these later.
+             */
 
             const fields = {
 
@@ -2144,9 +2867,19 @@ document
                         course
                     ),
 
+                coursePrice:
+                    toFirestoreValue(
+                        coursePrice
+                    ),
+
+                courseDuration:
+                    toFirestoreValue(
+                        courseDuration
+                    ),
+
                 source:
                     toFirestoreValue(
-                        source
+                        "Coordinator"
                     ),
 
                 remark:
@@ -2164,6 +2897,10 @@ document
                         coordinatorMobile
                     ),
 
+                /*
+                 * Initial status
+                 */
+
                 status:
                     toFirestoreValue(
                         "new"
@@ -2179,9 +2916,29 @@ document
                         ""
                     ),
 
+                telecallerName:
+                    toFirestoreValue(
+                        ""
+                    ),
+
+                telecallerMobile:
+                    toFirestoreValue(
+                        ""
+                    ),
+
                 followUpDate:
                     toFirestoreValue(
                         ""
+                    ),
+
+                demoClassDate:
+                    toFirestoreValue(
+                        ""
+                    ),
+
+                demoClassAmount:
+                    toFirestoreValue(
+                        0
                     ),
 
                 createdAt:
@@ -2203,7 +2960,9 @@ document
                     await fetch(
                         INQUIRY_URL +
                         "?key=" +
-                        FIREBASE_API_KEY,
+                        encodeURIComponent(
+                            FIREBASE_API_KEY
+                        ),
                         {
 
                             method:
@@ -2227,25 +2986,46 @@ document
                     !response.ok
                 ){
 
-                    const errorText =
-                        await response.text();
+                    let message =
+                        "Unable to send inquiry.";
 
-                    console.error(
-                        errorText
-                    );
+
+                    try{
+
+                        const errorData =
+                            await response.json();
+
+
+                        if(
+                            errorData?.error?.message
+                        ){
+
+                            message =
+                                errorData
+                                    .error
+                                    .message;
+
+                        }
+
+                    }catch(e){}
+
 
                     throw new Error(
-                        "Save failed"
+                        message
                     );
 
                 }
 
 
                 showAlert(
-                    "Student inquiry submitted successfully.",
+                    "Student sent to Telecaller successfully.",
                     "success"
                 );
 
+
+                /*
+                 * Reset form
+                 */
 
                 document
                     .getElementById(
@@ -2254,30 +3034,69 @@ document
                     .reset();
 
 
+                document
+                    .getElementById(
+                        "courseInfo"
+                    )
+                    .classList.remove(
+                        "show"
+                    );
+
+
+                document
+                    .getElementById(
+                        "courseInfo"
+                    )
+                    .innerHTML =
+                    "";
+
+
+                /*
+                 * Refresh data
+                 */
+
                 await loadInquiries();
 
-            }
 
+                /*
+                 * Scroll to inquiry list
+                 */
+
+                setTimeout(
+                    ()=>{
+                        document
+                            .getElementById(
+                                "inquiries"
+                            )
+                            .scrollIntoView({
+                                behavior:"smooth"
+                            });
+                    },
+                    300
+                );
+
+            }
             catch(error){
 
                 console.error(
                     error
                 );
 
+
                 showAlert(
-                    "Unable to save inquiry. Please check Firestore rules.",
+                    error.message ||
+                    "Unable to send inquiry.",
                     "error"
                 );
 
             }
-
             finally{
 
                 submitBtn.disabled =
                     false;
 
                 submitBtn.textContent =
-                    "Send Inquiry";
+                    "Send Inquiry to Telecaller";
 
             }
 
@@ -2286,7 +3105,238 @@ document
 
 
 /* =========================================================
-   CURRENT MONTH CHECK
+   STATUS NORMALIZER
+========================================================= */
+
+function normalizeStatus(
+    value
+){
+
+    let status =
+        String(
+            value ||
+            "new"
+        )
+        .toLowerCase()
+        .trim();
+
+
+    /*
+     * Different possible Telecaller
+     * spellings are normalized.
+     */
+
+    if(
+        status ===
+        "demo"
+    ){
+
+        return "demo-class";
+
+    }
+
+
+    if(
+        status ===
+        "demo class"
+    ){
+
+        return "demo-class";
+
+    }
+
+
+    if(
+        status ===
+        "followup"
+    ){
+
+        return "follow-up";
+
+    }
+
+
+    if(
+        status ===
+        "follow up"
+    ){
+
+        return "follow-up";
+
+    }
+
+
+    if(
+        status ===
+        "not interested"
+    ){
+
+        return "not-interested";
+
+    }
+
+
+    return status;
+
+}
+
+
+/* =========================================================
+   STATUS LABEL
+========================================================= */
+
+function statusLabel(
+    status
+){
+
+    const normalized =
+        normalizeStatus(
+            status
+        );
+
+
+    const labels = {
+
+        new:
+            "New",
+
+        pending:
+            "Pending",
+
+        contacted:
+            "Contacted",
+
+        "demo-class":
+            "Demo Class",
+
+        "follow-up":
+            "Follow Up",
+
+        visited:
+            "Visited",
+
+        converted:
+            "Converted",
+
+        "not-interested":
+            "Not Interested",
+
+        closed:
+            "Closed"
+
+    };
+
+
+    return (
+        labels[
+            normalized
+        ] ||
+        normalized
+            .replaceAll(
+                "-",
+                " "
+            )
+            .replace(
+                /\b\w/g,
+                x =>
+                    x.toUpperCase()
+            )
+    );
+
+}
+
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
+
+function statusClass(
+    status
+){
+
+    const normalized =
+        normalizeStatus(
+            status
+        );
+
+
+    const classes = {
+
+        new:
+            "badge-new",
+
+        pending:
+            "badge-pending",
+
+        contacted:
+            "badge-contacted",
+
+        "demo-class":
+            "badge-demo-class",
+
+        "follow-up":
+            "badge-follow-up",
+
+        visited:
+            "badge-visited",
+
+        converted:
+            "badge-converted",
+
+        "not-interested":
+            "badge-not-interested",
+
+        closed:
+            "badge-closed"
+
+    };
+
+
+    return (
+        classes[
+            normalized
+        ] ||
+        "badge"
+    );
+
+}
+
+
+/* =========================================================
+   GET EFFECTIVE STATUS
+========================================================= */
+
+function getStatus(
+    item
+){
+
+    /*
+     * telecallerStatus is the main status
+     * if available.
+     *
+     * status is used as fallback.
+     */
+
+    if(
+        item.telecallerStatus
+    ){
+
+        return normalizeStatus(
+            item.telecallerStatus
+        );
+
+    }
+
+
+    return normalizeStatus(
+        item.status
+    );
+
+}
+
+
+/* =========================================================
+   CURRENT MONTH
 ========================================================= */
 
 function isCurrentMonth(
@@ -2313,7 +3363,6 @@ function isCurrentMonth(
 
 
     return (
-
         date.getFullYear() ===
         now.getFullYear()
 
@@ -2321,14 +3370,13 @@ function isCurrentMonth(
 
         date.getMonth() ===
         now.getMonth()
-
     );
 
 }
 
 
 /* =========================================================
-   UNIQUE MOBILE SET
+   UNIQUE MOBILE
 ========================================================= */
 
 function uniqueMobileSet(
@@ -2375,25 +3423,6 @@ function uniqueMobileSet(
 
 
 /* =========================================================
-   GET CURRENT STATUS
-========================================================= */
-
-function getStatus(
-    item
-){
-
-    return String(
-        item.status ||
-        item.telecallerStatus ||
-        "new"
-    )
-    .toLowerCase()
-    .trim();
-
-}
-
-
-/* =========================================================
    PAYMENT CALCULATION
 ========================================================= */
 
@@ -2408,10 +3437,6 @@ function calculatePayment(){
         );
 
 
-    /*
-     * Visit incentive
-     */
-
     const visited =
         currentMonth.filter(
             item =>
@@ -2420,10 +3445,6 @@ function calculatePayment(){
         );
 
 
-    /*
-     * Admission incentive
-     */
-
     const converted =
         currentMonth.filter(
             item =>
@@ -2431,10 +3452,6 @@ function calculatePayment(){
                 "converted"
         );
 
-
-    /*
-     * Remove duplicate numbers
-     */
 
     const visitedSet =
         uniqueMobileSet(
@@ -2456,10 +3473,6 @@ function calculatePayment(){
         convertedSet.size;
 
 
-    /*
-     * Admin controlled rates
-     */
-
     const visitAmount =
         visitedCount *
         VISIT_INCENTIVE;
@@ -2475,10 +3488,6 @@ function calculatePayment(){
         visitAmount +
         admissionAmount;
 
-
-    /*
-     * Update UI
-     */
 
     document
         .getElementById(
@@ -2553,6 +3562,54 @@ function calculatePayment(){
             total
         );
 
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function calculateDashboard(){
+
+    const demoCount =
+        inquiries.filter(
+            item =>
+                getStatus(item) ===
+                "demo-class"
+        ).length;
+
+
+    const visitedCount =
+        inquiries.filter(
+            item =>
+                getStatus(item) ===
+                "visited"
+        ).length;
+
+
+    const convertedCount =
+        inquiries.filter(
+            item =>
+                getStatus(item) ===
+                "converted"
+        ).length;
+
+
+    document
+        .getElementById(
+            "totalInquiries"
+        )
+        .textContent =
+        inquiries.length;
+
+
+    document
+        .getElementById(
+            "demoCount"
+        )
+        .textContent =
+        demoCount;
+
 
     document
         .getElementById(
@@ -2569,120 +3626,8 @@ function calculatePayment(){
         .textContent =
         convertedCount;
 
-}
-
-
-/* =========================================================
-   DASHBOARD CALCULATION
-========================================================= */
-
-function calculateDashboard(){
-
-    document
-        .getElementById(
-            "totalInquiries"
-        )
-        .textContent =
-        inquiries.length;
-
 
     calculatePayment();
-
-}
-
-
-/* =========================================================
-   STATUS LABEL
-========================================================= */
-
-function statusLabel(
-    status
-){
-
-    const labels = {
-
-        new:"New",
-
-        contacted:"Contacted",
-
-        interested:"Interested",
-
-        visited:"Visited",
-
-        converted:"Converted",
-
-        closed:"Closed",
-
-        pending:"Pending",
-
-        "follow-up":"Follow-up"
-
-    };
-
-
-    return (
-        labels[status] ||
-        status
-            .charAt(0)
-            .toUpperCase() +
-        status.slice(1)
-    );
-
-}
-
-
-/* =========================================================
-   STATUS CLASS
-========================================================= */
-
-function statusClass(
-    status
-){
-
-    if(
-        status ===
-        "converted"
-    ){
-
-        return "badge-converted";
-
-    }
-
-
-    if(
-        status ===
-        "visited"
-    ){
-
-        return "badge-visited";
-
-    }
-
-
-    if(
-        status ===
-        "follow-up"
-        ||
-        status ===
-        "interested"
-    ){
-
-        return "badge-follow";
-
-    }
-
-
-    if(
-        status ===
-        "new"
-    ){
-
-        return "badge-new";
-
-    }
-
-
-    return "";
 
 }
 
@@ -2734,7 +3679,16 @@ function(){
                     String(
                         item.mobile ||
                         ""
-                    );
+                    )
+                    .toLowerCase();
+
+
+                const course =
+                    String(
+                        item.course ||
+                        ""
+                    )
+                    .toLowerCase();
 
 
                 const status =
@@ -2751,6 +3705,10 @@ function(){
                     )
                     ||
                     mobile.includes(
+                        search
+                    )
+                    ||
+                    course.includes(
                         search
                     );
 
@@ -2777,7 +3735,9 @@ function(){
         list.innerHTML = `
 
             <div class="empty">
+
                 No inquiries found.
+
             </div>
 
         `;
@@ -2789,7 +3749,7 @@ function(){
 
     list.innerHTML =
         data.map(
-            item=>{
+            item => {
 
                 const status =
                     getStatus(
@@ -2817,6 +3777,26 @@ function(){
                     "—";
 
 
+                const updated =
+                    item.updatedAt
+                    ?
+                    new Date(
+                        item.updatedAt
+                    )
+                    .toLocaleString(
+                        "en-IN",
+                        {
+                            day:"2-digit",
+                            month:"short",
+                            year:"numeric",
+                            hour:"2-digit",
+                            minute:"2-digit"
+                        }
+                    )
+                    :
+                    "—";
+
+
                 const mobile =
                     String(
                         item.mobile ||
@@ -2828,9 +3808,28 @@ function(){
                     );
 
 
+                const price =
+                    Number(
+                        item.coursePrice ||
+                        0
+                    );
+
+
+                const followUp =
+                    item.followUpDate ||
+                    "";
+
+
+                const demoDate =
+                    item.demoClassDate ||
+                    "";
+
+
                 return `
 
                     <div class="inquiry">
+
+                        <!-- STUDENT -->
 
                         <div class="inquiry-top">
 
@@ -2839,10 +3838,12 @@ function(){
                                 <div class="student-name">
 
                                     ${escapeHtml(
-                                        item.studentName
+                                        item.studentName ||
+                                        "Student"
                                     )}
 
                                 </div>
+
 
                                 <div class="mobile">
 
@@ -2853,15 +3854,51 @@ function(){
 
                                 </div>
 
+
+                                ${
+                                    price > 0
+                                    ?
+                                    `
+                                    <div class="course-price">
+
+                                        ${escapeHtml(
+                                            item.course ||
+                                            "-"
+                                        )}
+
+                                        ·
+
+                                        ${formatRupee(
+                                            price
+                                        )}
+
+                                    </div>
+                                    `
+                                    :
+                                    `
+                                    <div class="course-price">
+
+                                        ${escapeHtml(
+                                            item.course ||
+                                            "-"
+                                        )}
+
+                                    </div>
+                                    `
+                                }
+
                             </div>
 
                         </div>
 
 
+                        <!-- BASIC DATA -->
+
                         <div class="inquiry-meta">
 
                             <span class="badge">
 
+                                Course:
                                 ${escapeHtml(
                                     item.course ||
                                     "—"
@@ -2870,11 +3907,30 @@ function(){
                             </span>
 
 
+                            ${
+                                item.courseDuration
+                                ?
+                                `
+                                <span class="badge">
+
+                                    Duration:
+                                    ${escapeHtml(
+                                        item.courseDuration
+                                    )}
+
+                                </span>
+                                `
+                                :
+                                ""
+                            }
+
+
                             <span class="badge">
 
+                                Source:
                                 ${escapeHtml(
                                     item.source ||
-                                    "Direct"
+                                    "Coordinator"
                                 )}
 
                             </span>
@@ -2886,6 +3942,7 @@ function(){
                                 )
                             }">
 
+                                Status:
                                 ${statusLabel(
                                     status
                                 )}
@@ -2895,65 +3952,164 @@ function(){
                         </div>
 
 
+                        <!-- TELECALLER STATUS -->
+
+                        <div class="status-box">
+
+                            <div class="status-row">
+
+                                <div>
+
+                                    <div class="status-title">
+                                        Telecaller Status
+                                    </div>
+
+                                    <div class="status-value">
+
+                                        ${statusLabel(
+                                            status
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+
+                                ${
+                                    followUp
+                                    ?
+                                    `
+                                    <div class="followup">
+
+                                        Follow Up:
+                                        ${escapeHtml(
+                                            followUp
+                                        )}
+
+                                    </div>
+                                    `
+                                    :
+                                    ""
+                                }
+
+                            </div>
+
+
+                            ${
+                                demoDate
+                                ?
+                                `
+                                <div style="
+                                    margin-top:8px;
+                                    font-size:11px;
+                                    color:#0e7490;
+                                    font-weight:700;
+                                ">
+
+                                    Demo Class:
+                                    ${escapeHtml(
+                                        demoDate
+                                    )}
+
+                                </div>
+                                `
+                                :
+                                ""
+                            }
+
+
+                            ${
+                                item.telecallerName
+                                ?
+                                `
+                                <div style="
+                                    margin-top:8px;
+                                    font-size:10px;
+                                    color:#8a94a6;
+                                ">
+
+                                    Updated by:
+                                    ${escapeHtml(
+                                        item.telecallerName
+                                    )}
+
+                                </div>
+                                `
+                                :
+                                ""
+                            }
+
+
+                            ${
+                                item.telecallerRemark
+                                ?
+                                `
+                                <div class="telecaller-remark">
+
+                                    <strong>
+                                        Telecaller Remark:
+                                    </strong>
+
+                                    ${escapeHtml(
+                                        item.telecallerRemark
+                                    )}
+
+                                </div>
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
+
+                        <!-- COORDINATOR REMARK -->
+
                         ${
                             item.remark
                             ?
                             `
-
                             <div style="
                                 margin-top:10px;
+                                padding:10px;
+                                background:#f8fafc;
+                                border-radius:9px;
                                 font-size:11px;
-                                color:#707a8c;
+                                color:#687386;
                             ">
+
+                                <strong>
+                                    Coordinator Note:
+                                </strong>
 
                                 ${escapeHtml(
                                     item.remark
                                 )}
 
                             </div>
-
                             `
                             :
                             ""
                         }
 
 
-                        ${
-                            item.telecallerRemark
-                            ?
-                            `
-
-                            <div style="
-                                margin-top:8px;
-                                padding:9px;
-                                background:#f7f8fa;
-                                border-radius:8px;
-                                font-size:11px;
-                                color:#677185;
-                            ">
-
-                                <strong>
-                                    Telecaller:
-                                </strong>
-
-                                ${escapeHtml(
-                                    item.telecallerRemark
-                                )}
-
-                            </div>
-
-                            `
-                            :
-                            ""
-                        }
-
+                        <!-- FOOTER -->
 
                         <div class="inquiry-bottom">
 
                             <div class="inquiry-date">
 
-                                Added:
-                                ${created}
+                                Sent:
+                                ${escapeHtml(
+                                    created
+                                )}
+
+                                <br>
+
+                                Last Update:
+                                ${escapeHtml(
+                                    updated
+                                )}
 
                             </div>
 
@@ -2962,7 +4118,9 @@ function(){
 
                                 <a
                                     class="action"
-                                    href="tel:${mobile}"
+                                    href="tel:${escapeHtml(
+                                        mobile
+                                    )}"
                                 >
                                     📞 Call
                                 </a>
@@ -2970,7 +4128,9 @@ function(){
 
                                 <a
                                     class="action"
-                                    href="https://wa.me/91${mobile}"
+                                    href="https://wa.me/91${escapeHtml(
+                                        mobile
+                                    )}"
                                     target="_blank"
                                     rel="noopener"
                                 >
@@ -3045,24 +4205,77 @@ function(){
 
 
 /* =========================================================
-   INITIALIZE
+   AUTO REFRESH
 ========================================================= */
 
-loadPaymentSettings();
+/*
+ * Telecaller status changes are refreshed every 30 seconds.
+ *
+ * Example:
+ *
+ * Coordinator sends:
+ * New
+ *
+ * Telecaller changes:
+ * Contacted
+ *
+ * Then:
+ * Demo Class
+ *
+ * Then:
+ * Follow Up
+ *
+ * Then:
+ * Visited
+ *
+ * Then:
+ * Converted
+ *
+ * Coordinator page will automatically show
+ * the latest Firestore data.
+ */
 
-loadInquiries();
+setInterval(
+    async ()=>{
+
+        try{
+
+            await loadInquiries();
+
+        }
+        catch(error){
+
+            console.error(
+                error
+            );
+
+        }
+
+    },
+    30000
+);
 
 
 /*
- * Check Admin payment settings every minute.
- * This allows updated rates to appear
- * without editing the Coordinator code.
+ * Refresh Admin payment settings
+ * every 60 seconds.
  */
 
 setInterval(
     loadPaymentSettings,
     60000
 );
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+loadPaymentSettings();
+
+loadCourses();
+
+loadInquiries();
 
 </script>
 

@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Staff Payment Control | BlackTerminal</title>
+<title>BlackTerminal - Admin Control Center</title>
 
 <style>
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter,Arial,sans-serif;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-    background:#f4f6fa;
-    color:#172033;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+  min-height:100vh;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  display:flex;
+  min-height:100vh;
 }
 
 /* =========================
@@ -29,74 +40,86 @@ body{
 ========================= */
 
 .sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    width:250px;
-    height:100vh;
-    background:#101522;
-    color:#fff;
-    padding:24px 16px;
-    z-index:1000;
+  width:255px;
+  background:#111827;
+  color:#fff;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  z-index:1000;
+  padding:22px 15px;
+  overflow-y:auto;
+  transition:.25s;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:10px 8px 25px;
-    border-bottom:1px solid rgba(255,255,255,.08);
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:4px 8px 23px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:20px;
 }
 
-.logo-box{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    background:#fff;
-    color:#101522;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:900;
+.brand-logo{
+  width:43px;
+  height:43px;
+  border-radius:12px;
+  background:#fff;
+  color:#111827;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:18px;
 }
 
-.logo h2{
-    font-size:17px;
+.brand-text h2{
+  font-size:17px;
 }
 
-.logo small{
-    display:block;
-    color:#8d98aa;
-    font-size:11px;
-    margin-top:3px;
+.brand-text span{
+  display:block;
+  color:#9ca3af;
+  font-size:10px;
+  margin-top:3px;
 }
 
-.menu{
-    margin-top:25px;
+.nav-title{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:#6b7280;
+  margin:19px 10px 8px;
 }
 
-.menu a{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    color:#aeb7c7;
-    text-decoration:none;
-    padding:13px 14px;
-    border-radius:10px;
-    margin-bottom:7px;
-    font-size:14px;
-    transition:.2s;
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:#d1d5db;
+  text-decoration:none;
+  padding:11px 12px;
+  border-radius:10px;
+  margin-bottom:4px;
+  font-size:13px;
 }
 
-.menu a:hover,
-.menu a.active{
-    background:#1e2636;
-    color:#fff;
+.nav-item:hover{
+  background:rgba(255,255,255,.06);
+  color:#fff;
 }
 
-.menu-icon{
-    width:20px;
-    text-align:center;
+.nav-item.active{
+  background:#fff;
+  color:#111827;
+  font-weight:700;
+}
+
+.nav-icon{
+  width:20px;
+  text-align:center;
 }
 
 /* =========================
@@ -104,70 +127,59 @@ body{
 ========================= */
 
 .main{
-    margin-left:250px;
-    min-height:100vh;
+  margin-left:255px;
+  width:calc(100% - 255px);
+  min-height:100vh;
 }
-
-/* =========================
-   TOPBAR
-========================= */
 
 .topbar{
-    height:72px;
-    background:#fff;
-    border-bottom:1px solid #e7ebf1;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 28px;
-    position:sticky;
-    top:0;
-    z-index:900;
+  height:72px;
+  background:#fff;
+  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:500;
 }
 
-.top-title h1{
-    font-size:20px;
+.page-title h1{
+  font-size:21px;
+  color:#111827;
 }
 
-.top-title p{
-    color:#8a94a6;
-    font-size:12px;
-    margin-top:3px;
+.page-title p{
+  color:#6b7280;
+  font-size:11px;
+  margin-top:3px;
 }
 
-.admin-profile{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.admin-badge{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  color:#374151;
 }
 
-.avatar{
-    width:40px;
-    height:40px;
-    background:#111827;
-    color:#fff;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-}
-
-.profile-text strong{
-    display:block;
-    font-size:13px;
-}
-
-.profile-text span{
-    display:block;
-    color:#8a94a6;
-    font-size:11px;
+.admin-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#16a34a;
 }
 
 .mobile-menu{
-    display:none;
-    font-size:24px;
-    cursor:pointer;
+  display:none;
+  border:0;
+  background:#111827;
+  color:#fff;
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  font-size:19px;
 }
 
 /* =========================
@@ -175,770 +187,999 @@ body{
 ========================= */
 
 .content{
-    padding:28px;
-    max-width:1450px;
-    margin:auto;
+  padding:25px;
+  max-width:1600px;
+  margin:auto;
 }
-
-/* =========================
-   HERO
-========================= */
 
 .hero{
-    background:
-        radial-gradient(
-            circle at 90% 20%,
-            rgba(124,58,237,.28),
-            transparent 28%
-        ),
-        linear-gradient(
-            135deg,
-            #111827,
-            #273248
-        );
-
-    color:#fff;
-
-    padding:28px;
-
-    border-radius:18px;
-
-    margin-bottom:25px;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.hero:after{
-    content:"";
-
-    position:absolute;
-
-    width:230px;
-    height:230px;
-
-    border-radius:50%;
-
-    border:35px solid rgba(255,255,255,.04);
-
-    right:-80px;
-    top:-100px;
+  background:linear-gradient(135deg,#111827,#1f2937);
+  color:#fff;
+  border-radius:18px;
+  padding:27px;
+  margin-bottom:22px;
 }
 
 .hero h2{
-    font-size:24px;
-    margin-bottom:8px;
+  font-size:24px;
+  margin-bottom:7px;
 }
 
 .hero p{
-    color:#c8cfdb;
-    font-size:13px;
-    max-width:760px;
-    line-height:1.6;
+  color:#cbd5e1;
+  max-width:850px;
+  font-size:12px;
+  line-height:1.6;
 }
 
 /* =========================
-   STATUS
+   MAIN TABS
 ========================= */
 
-.status{
-    padding:13px 15px;
-    border-radius:11px;
-    font-size:12px;
-    margin-bottom:20px;
-    display:none;
+.main-tabs{
+  display:flex;
+  gap:6px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  padding:6px;
+  border-radius:13px;
+  width:max-content;
+  margin-bottom:20px;
+  flex-wrap:wrap;
 }
 
-.status.show{
-    display:block;
+.main-tab{
+  border:0;
+  background:transparent;
+  color:#6b7280;
+  padding:11px 17px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:700;
 }
 
-.status.success{
-    background:#eaf8ef;
-    color:#16803d;
-    border:1px solid #ccebd7;
-}
-
-.status.error{
-    background:#fff0f0;
-    color:#c62828;
-    border:1px solid #f2c8c8;
-}
-
-.status.info{
-    background:#eef5ff;
-    color:#2563eb;
-    border:1px solid #d6e5ff;
+.main-tab.active{
+  background:#111827;
+  color:#fff;
 }
 
 /* =========================
-   STAFF TABS
+   PANELS
 ========================= */
 
-.staff-tabs{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-    margin-bottom:25px;
+.panel{
+  display:none;
 }
 
-.staff-tab{
-    background:#fff;
-    border:1px solid #e7ebf1;
-    border-radius:15px;
-    padding:18px;
-    cursor:pointer;
-    transition:.2s;
+.panel.active{
+  display:block;
 }
 
-.staff-tab:hover{
-    border-color:#cfd7e3;
+/* =========================
+   CARDS
+========================= */
+
+.card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 3px 14px rgba(15,23,42,.035);
 }
 
-.staff-tab.active{
-    border-color:#111827;
-    box-shadow:0 6px 20px rgba(17,24,39,.07);
+.card-header{
+  padding:18px 20px;
+  border-bottom:1px solid #eef0f3;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
 }
 
-.staff-tab-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
+.card-header h3{
+  font-size:16px;
+  color:#111827;
 }
 
-.staff-tab-title{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.card-header p{
+  color:#6b7280;
+  font-size:11px;
+  margin-top:4px;
 }
 
-.staff-icon{
-    width:40px;
-    height:40px;
-    border-radius:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#f0f3f8;
-    font-size:18px;
+.card-body{
+  padding:20px;
 }
 
-.staff-tab.active .staff-icon{
-    background:#111827;
-    color:#fff;
+/* =========================
+   PAYMENT GRID
+========================= */
+
+.settings-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 380px;
+  gap:20px;
+  align-items:start;
 }
 
-.staff-tab h3{
-    font-size:15px;
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
 }
 
-.staff-tab p{
-    margin-top:3px;
-    color:#8a94a6;
-    font-size:10px;
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 
-.tab-arrow{
-    color:#9aa3b2;
-    font-size:16px;
+.field.full{
+  grid-column:1/-1;
 }
 
-.staff-tab.active .tab-arrow{
-    color:#111827;
+.field label{
+  font-size:11px;
+  font-weight:800;
+  color:#374151;
+}
+
+.field small{
+  color:#9ca3af;
+  font-size:10px;
+  line-height:1.4;
+}
+
+.field input,
+.field select{
+  width:100%;
+  height:44px;
+  border:1px solid #d8dee8;
+  border-radius:10px;
+  padding:0 12px;
+  outline:none;
+  background:#fff;
+  color:#111827;
+  font-size:13px;
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:#111827;
+  box-shadow:0 0 0 3px rgba(17,24,39,.06);
+}
+
+.money-wrap{
+  position:relative;
+}
+
+.money-prefix{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#6b7280;
+  font-weight:800;
+  pointer-events:none;
+}
+
+.money-wrap input{
+  padding-left:29px;
+}
+
+.section-title{
+  grid-column:1/-1;
+  font-size:12px;
+  font-weight:900;
+  color:#111827;
+  padding-bottom:9px;
+  border-bottom:1px solid #eef0f3;
+  margin-top:4px;
+}
+
+.actions{
+  margin-top:20px;
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  height:42px;
+  border:0;
+  border-radius:9px;
+  padding:0 17px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.btn-primary{
+  background:#111827;
+  color:#fff;
+}
+
+.btn-primary:hover{
+  background:#000;
+}
+
+.btn-secondary{
+  background:#f3f4f6;
+  color:#374151;
+}
+
+.btn-danger{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.btn-success{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
 }
 
 /* =========================
    SUMMARY
 ========================= */
 
-.summary{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-    margin-bottom:25px;
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:11px;
 }
 
-.summary-card{
-    background:#fff;
-    border:1px solid #e7ebf1;
-    border-radius:15px;
-    padding:20px;
+.summary-box{
+  background:#fafbfc;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:14px;
 }
 
 .summary-label{
-    font-size:11px;
-    color:#8993a4;
-    margin-bottom:10px;
+  color:#6b7280;
+  text-transform:uppercase;
+  font-size:9px;
+  letter-spacing:.7px;
+  font-weight:800;
 }
 
 .summary-value{
-    font-size:26px;
-    font-weight:800;
+  color:#111827;
+  font-size:21px;
+  font-weight:900;
+  margin-top:5px;
 }
 
 .summary-sub{
-    margin-top:6px;
-    font-size:11px;
-    color:#9ba4b2;
+  color:#9ca3af;
+  font-size:10px;
+  margin-top:3px;
 }
 
-/* =========================
-   TELECALLER LEVEL SUMMARY
-========================= */
-
-.tele-level-summary{
-    display:none;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin:-10px 0 25px;
+.level-list{
+  display:grid;
+  gap:9px;
+  margin-top:14px;
 }
 
-.tele-level-summary.show{
-    display:grid;
+.level-card{
+  padding:13px;
+  border:1px solid #e5e7eb;
+  border-radius:11px;
+  background:#fafafa;
 }
 
-.level-mini{
-    background:#fff;
-    border:1px solid #e7ebf1;
-    border-radius:15px;
-    padding:16px;
-    position:relative;
-    overflow:hidden;
+.level-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-.level-mini.level-one{
-    border-top:4px solid #10b981;
+.level-name{
+  font-size:11px;
+  font-weight:900;
 }
 
-.level-mini.level-two{
-    border-top:4px solid #2563eb;
+.level-rate{
+  font-size:17px;
+  font-weight:900;
 }
 
-.level-mini.level-three{
-    border-top:4px solid #7c3aed;
+.level-range{
+  color:#6b7280;
+  font-size:10px;
+  margin-top:4px;
 }
-
-.level-mini-title{
-    font-size:11px;
-    font-weight:800;
-    color:#687386;
-}
-
-.level-mini-value{
-    font-size:23px;
-    font-weight:900;
-    margin-top:7px;
-}
-
-.level-mini-sub{
-    color:#929bab;
-    font-size:9px;
-    margin-top:4px;
-}
-
-/* =========================
-   MAIN CARD
-========================= */
-
-.card{
-    background:#fff;
-    border:1px solid #e7ebf1;
-    border-radius:18px;
-    padding:24px;
-    margin-bottom:25px;
-}
-
-.card-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:20px;
-    gap:15px;
-}
-
-.card-header h3{
-    font-size:18px;
-}
-
-.card-header p{
-    color:#8a94a6;
-    font-size:11px;
-    margin-top:4px;
-}
-
-/* =========================
-   FORM
-========================= */
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.form-grid.telecaller-grid{
-    grid-template-columns:repeat(4,1fr);
-}
-
-.form-group label{
-    display:block;
-    font-size:12px;
-    font-weight:700;
-    color:#4d586b;
-    margin-bottom:8px;
-}
-
-.input-wrap{
-    position:relative;
-}
-
-.currency{
-    position:absolute;
-    left:13px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#778194;
-    font-weight:700;
-    font-size:13px;
-}
-
-.form-group input{
-    width:100%;
-    border:1px solid #dce2ea;
-    border-radius:10px;
-    padding:13px 13px 13px 31px;
-    font-size:14px;
-    outline:none;
-    transition:.2s;
-}
-
-.form-group input:focus{
-    border-color:#111827;
-    box-shadow:
-        0 0 0 3px
-        rgba(17,24,39,.06);
-}
-
-.help{
-    margin-top:7px;
-    font-size:10px;
-    color:#98a1af;
-    line-height:1.5;
-}
-
-/* =========================
-   LEVEL INPUT CARDS
-========================= */
-
-.level-input-card{
-    border-radius:14px;
-    padding:16px;
-    border:1px solid #e4e8ef;
-}
-
-.level-input-card.level1{
-    background:linear-gradient(
-        145deg,
-        #f0fdf4,
-        #ffffff
-    );
-    border-color:#bbf7d0;
-}
-
-.level-input-card.level2{
-    background:linear-gradient(
-        145deg,
-        #eff6ff,
-        #ffffff
-    );
-    border-color:#bfdbfe;
-}
-
-.level-input-card.level3{
-    background:linear-gradient(
-        145deg,
-        #f5f3ff,
-        #ffffff
-    );
-    border-color:#ddd6fe;
-}
-
-.level-input-header{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    margin-bottom:13px;
-}
-
-.level-badge{
-    width:30px;
-    height:30px;
-    border-radius:9px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-size:11px;
-    font-weight:900;
-}
-
-.level1 .level-badge{
-    background:#10b981;
-}
-
-.level2 .level-badge{
-    background:#2563eb;
-}
-
-.level3 .level-badge{
-    background:#7c3aed;
-}
-
-.level-input-title{
-    font-size:12px;
-    font-weight:850;
-}
-
-.level-input-target{
-    font-size:9px;
-    color:#8b95a5;
-    margin-top:2px;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.button-row{
-    display:flex;
-    gap:10px;
-    margin-top:22px;
-}
-
-.btn{
-    border:0;
-    border-radius:10px;
-    padding:12px 20px;
-    font-size:13px;
-    font-weight:700;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.btn-primary{
-    background:#111827;
-    color:#fff;
-}
-
-.btn-primary:hover{
-    background:#273248;
-}
-
-.btn-secondary{
-    background:#f0f2f6;
-    color:#394457;
-}
-
-.btn-secondary:hover{
-    background:#e5e8ee;
-}
-
-.btn:disabled{
-    opacity:.5;
-    cursor:not-allowed;
-}
-
-/* =========================
-   PAYMENT RULE
-========================= */
 
 .rule-box{
-    background:#f8f9fc;
-    border:1px solid #e6eaf0;
-    border-radius:14px;
-    padding:18px;
-    margin-top:20px;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:14px;
+  margin-top:14px;
 }
 
-.rule-title{
-    font-size:13px;
-    font-weight:800;
-    margin-bottom:12px;
+.rule-box h4{
+  font-size:11px;
+  margin-bottom:8px;
 }
 
-.rule-list{
-    display:grid;
-    gap:9px;
+.rule-box ul{
+  padding-left:16px;
 }
 
-.rule-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:10px 12px;
-    background:#fff;
-    border:1px solid #edf0f4;
-    border-radius:9px;
-    font-size:12px;
-}
-
-.rule-item span:first-child{
-    color:#667185;
-}
-
-.rule-item strong{
-    color:#111827;
+.rule-box li{
+  color:#6b7280;
+  font-size:10px;
+  margin:5px 0;
+  line-height:1.45;
 }
 
 /* =========================
-   INFORMATION
+   COURSE MANAGEMENT
 ========================= */
 
-.info-box{
-    padding:16px;
-    background:#eef5ff;
-    border:1px solid #d7e5ff;
-    color:#315b96;
-    border-radius:12px;
-    font-size:12px;
-    line-height:1.7;
+.course-layout{
+  display:grid;
+  grid-template-columns:340px minmax(0,1fr);
+  gap:20px;
+  align-items:start;
+}
+
+.course-form{
+  position:sticky;
+  top:92px;
+}
+
+.course-list{
+  display:grid;
+  gap:10px;
+}
+
+.course-row{
+  border:1px solid #e5e7eb;
+  border-radius:13px;
+  padding:15px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px;
+  align-items:center;
+  background:#fff;
+}
+
+.course-name{
+  font-weight:800;
+  font-size:14px;
+  color:#111827;
+}
+
+.course-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:7px;
+}
+
+.course-chip{
+  font-size:10px;
+  padding:5px 8px;
+  border-radius:7px;
+  background:#f3f4f6;
+  color:#4b5563;
+}
+
+.course-chip.price{
+  background:#ecfdf5;
+  color:#047857;
+  font-weight:800;
+}
+
+.course-chip.inactive{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.course-actions{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.course-actions button{
+  height:34px;
+  border:0;
+  border-radius:8px;
+  padding:0 10px;
+  font-size:10px;
+  font-weight:800;
 }
 
 /* =========================
-   TELECALLER INFO
+   DEMO SETTINGS
 ========================= */
 
-.tele-info{
-    display:none;
-    background:
-        linear-gradient(
-            135deg,
-            #f5f3ff,
-            #eff6ff
-        );
-    border:1px solid #ddd6fe;
-    border-radius:15px;
-    padding:17px;
-    margin-top:20px;
+.demo-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
 }
 
-.tele-info.show{
-    display:block;
+.demo-info{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:18px;
 }
 
-.tele-info-title{
-    font-size:13px;
-    font-weight:850;
-    margin-bottom:8px;
+.demo-info h4{
+  font-size:14px;
+  margin-bottom:8px;
 }
 
-.tele-info-text{
-    color:#687386;
-    font-size:10px;
-    line-height:1.7;
+.demo-info p{
+  color:#6b7280;
+  font-size:11px;
+  line-height:1.6;
+}
+
+.demo-amount{
+  font-size:30px;
+  font-weight:900;
+  margin-top:15px;
+  color:#111827;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:11px;
+  margin-bottom:18px;
+}
+
+.stat-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:13px;
+  padding:14px;
+}
+
+.stat-title{
+  color:#6b7280;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  font-weight:800;
+}
+
+.stat-value{
+  color:#111827;
+  font-size:23px;
+  font-weight:900;
+  margin-top:5px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-card{
+  overflow:hidden;
+}
+
+.table-toolbar{
+  padding:15px 17px;
+  border-bottom:1px solid #eef0f3;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.search-input{
+  flex:1;
+  min-width:220px;
+  height:39px;
+  border:1px solid #d8dee8;
+  border-radius:9px;
+  padding:0 11px;
+  outline:none;
+  font-size:12px;
+}
+
+.filter-select{
+  height:39px;
+  border:1px solid #d8dee8;
+  border-radius:9px;
+  padding:0 10px;
+  background:#fff;
+  font-size:11px;
+  outline:none;
+}
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:1050px;
+  border-collapse:collapse;
+}
+
+thead th{
+  background:#f8fafc;
+  color:#6b7280;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  padding:12px 10px;
+  text-align:left;
+  border-bottom:1px solid #e5e7eb;
+  white-space:nowrap;
+}
+
+tbody td{
+  padding:12px 10px;
+  border-bottom:1px solid #f0f2f5;
+  font-size:11px;
+  color:#374151;
+  vertical-align:middle;
+}
+
+tbody tr:hover{
+  background:#fafafa;
+}
+
+.student-name{
+  color:#111827;
+  font-weight:800;
+}
+
+.student-mobile{
+  color:#6b7280;
+  margin-top:3px;
+  font-size:10px;
+}
+
+.status-pill{
+  display:inline-flex;
+  padding:5px 8px;
+  border-radius:7px;
+  font-size:9px;
+  font-weight:800;
+  text-transform:capitalize;
+  white-space:nowrap;
+}
+
+.status-new{
+  background:#eff6ff;
+  color:#1d4ed8;
+}
+
+.status-pending{
+  background:#fff7ed;
+  color:#c2410c;
+}
+
+.status-contacted{
+  background:#f3e8ff;
+  color:#7e22ce;
+}
+
+.status-follow-up{
+  background:#fef9c3;
+  color:#854d0e;
+}
+
+.status-visited{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.status-converted{
+  background:#d1fae5;
+  color:#047857;
+}
+
+.status-not-interested{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.action-mini{
+  display:flex;
+  gap:5px;
+}
+
+.action-mini button{
+  width:30px;
+  height:30px;
+  border:0;
+  border-radius:7px;
+  background:#f3f4f6;
+  font-size:12px;
+}
+
+.empty{
+  text-align:center;
+  padding:45px 15px;
+  color:#9ca3af;
+  font-size:12px;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination{
+  padding:13px 17px;
+  border-top:1px solid #eef0f3;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.pagination-info{
+  color:#6b7280;
+  font-size:10px;
+}
+
+.pagination-buttons{
+  display:flex;
+  gap:6px;
+}
+
+.pagination-buttons button{
+  height:32px;
+  min-width:34px;
+  border:1px solid #dfe3e9;
+  border-radius:7px;
+  background:#fff;
+  font-size:10px;
+  font-weight:700;
+}
+
+.pagination-buttons button.active{
+  background:#111827;
+  color:#fff;
+  border-color:#111827;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.6);
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  background:#fff;
+  width:100%;
+  max-width:650px;
+  max-height:90vh;
+  overflow-y:auto;
+  border-radius:17px;
+}
+
+.modal-header{
+  padding:18px;
+  border-bottom:1px solid #eef0f3;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.modal-header h3{
+  font-size:16px;
+}
+
+.close-modal{
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:8px;
+  background:#f3f4f6;
+}
+
+.modal-body{
+  padding:18px;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.detail-item{
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  padding:11px;
+}
+
+.detail-label{
+  color:#9ca3af;
+  font-size:9px;
+  text-transform:uppercase;
+  font-weight:800;
+}
+
+.detail-value{
+  color:#111827;
+  font-size:12px;
+  font-weight:700;
+  margin-top:4px;
+  word-break:break-word;
+}
+
+/* =========================
+   STATUS TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:3000;
+  min-width:260px;
+  max-width:390px;
+  padding:13px 15px;
+  border-radius:11px;
+  color:#fff;
+  font-size:11px;
+  font-weight:700;
+  box-shadow:0 12px 35px rgba(0,0,0,.2);
+  opacity:0;
+  transform:translateY(100px);
+  transition:.3s;
+  pointer-events:none;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.toast.success{
+  background:#166534;
+}
+
+.toast.error{
+  background:#b91c1c;
+}
+
+.toast.info{
+  background:#1d4ed8;
 }
 
 /* =========================
    LOADING
 ========================= */
 
-.loading{
-    text-align:center;
-    padding:20px;
-    color:#8b95a5;
-    font-size:12px;
+.loader{
+  width:14px;
+  height:14px;
+  border:2px solid rgba(255,255,255,.3);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  display:inline-block;
+  vertical-align:middle;
+  margin-right:6px;
 }
 
-/* =========================
-   FOOTER
-========================= */
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
 
-.footer{
-    text-align:center;
-    padding:20px;
-    color:#9aa3b2;
-    font-size:11px;
+.hidden{
+  display:none!important;
 }
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:1150px){
+@media(max-width:1100px){
 
-    .form-grid.telecaller-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
+  .settings-grid{
+    grid-template-columns:1fr;
+  }
 
-}
+  .stats-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
 
-@media(max-width:1000px){
+  .course-layout{
+    grid-template-columns:1fr;
+  }
 
-    .summary{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .form-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .tele-level-summary{
-        grid-template-columns:1fr 1fr;
-    }
+  .course-form{
+    position:static;
+  }
 
 }
 
 @media(max-width:760px){
 
-    .sidebar{
-        transform:translateX(-100%);
-        transition:.3s;
-    }
+  .sidebar{
+    transform:translateX(-100%);
+  }
 
-    .sidebar.open{
-        transform:translateX(0);
-    }
+  .sidebar.open{
+    transform:translateX(0);
+  }
 
-    .main{
-        margin-left:0;
-    }
+  .main{
+    margin-left:0;
+    width:100%;
+  }
 
-    .mobile-menu{
-        display:block;
-    }
+  .mobile-menu{
+    display:block;
+  }
 
-    .profile-text{
-        display:none;
-    }
+  .topbar{
+    padding:0 15px;
+  }
 
-    .topbar{
-        padding:0 17px;
-    }
+  .page-title{
+    display:none;
+  }
 
-    .content{
-        padding:17px;
-    }
+  .admin-badge{
+    display:none;
+  }
 
-    .staff-tabs{
-        grid-template-columns:1fr;
-    }
+  .content{
+    padding:15px;
+  }
 
-    .summary{
-        grid-template-columns:1fr;
-    }
+  .hero{
+    padding:20px;
+  }
 
-    .form-grid,
-    .form-grid.telecaller-grid{
-        grid-template-columns:1fr;
-    }
+  .hero h2{
+    font-size:20px;
+  }
 
-    .tele-level-summary{
-        grid-template-columns:1fr;
-    }
+  .main-tabs{
+    width:100%;
+  }
 
-    .hero h2{
-        font-size:20px;
-    }
+  .main-tab{
+    flex:1;
+    padding:10px 7px;
+  }
 
-    .card{
-        padding:18px;
-    }
+  .form-grid{
+    grid-template-columns:1fr;
+  }
 
-    .button-row{
-        flex-direction:column;
-    }
+  .field.full{
+    grid-column:auto;
+  }
 
-    .btn{
-        width:100%;
-    }
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .demo-box{
+    grid-template-columns:1fr;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
 
 }
 
+@media(max-width:430px){
+
+  .stats-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .actions .btn{
+    width:100%;
+  }
+
+  .course-row{
+    grid-template-columns:1fr;
+  }
+
+  .course-actions{
+    width:100%;
+  }
+
+  .course-actions button{
+    flex:1;
+  }
+
+}
 </style>
-
 </head>
-
 
 <body>
 
+<div class="app">
 
 <!-- =====================================================
      SIDEBAR
 ===================================================== -->
 
-<aside class="sidebar"
-       id="sidebar">
+<aside class="sidebar" id="sidebar">
 
-    <div class="logo">
+  <div class="brand">
+    <div class="brand-logo">BT</div>
 
-        <div class="logo-box">
-            BT
-        </div>
-
-        <div>
-
-            <h2>
-                BlackTerminal
-            </h2>
-
-            <small>
-                Admin Panel
-            </small>
-
-        </div>
-
+    <div class="brand-text">
+      <h2>BlackTerminal</h2>
+      <span>Computer Institute</span>
     </div>
+  </div>
 
+  <div class="nav-title">Management</div>
 
-    <nav class="menu">
+  <a href="admin.html" class="nav-item">
+    <span class="nav-icon">⌂</span>
+    Dashboard
+  </a>
 
-        <a href="admin.html">
+  <a href="admin-students.html" class="nav-item">
+    <span class="nav-icon">◉</span>
+    Students
+  </a>
 
-            <span class="menu-icon">
-                🏠
-            </span>
+  <a href="admin-payment.html" class="nav-item active">
+    <span class="nav-icon">₹</span>
+    Payment Control
+  </a>
 
-            Admin Dashboard
+  <div class="nav-title">Staff</div>
 
-        </a>
+  <a href="coordinator.html" class="nav-item">
+    <span class="nav-icon">C</span>
+    Coordinator
+  </a>
 
+  <a href="telecaller.html" class="nav-item">
+    <span class="nav-icon">T</span>
+    Telecaller
+  </a>
 
-        <a href="#"
-           class="active">
+  <div class="nav-title">System</div>
 
-            <span class="menu-icon">
-                💰
-            </span>
-
-            Staff Payment Control
-
-        </a>
-
-
-        <a href="admin.html#staff">
-
-            <span class="menu-icon">
-                👥
-            </span>
-
-            Staff Management
-
-        </a>
-
-
-        <a href="admin.html#inquiries">
-
-            <span class="menu-icon">
-                📋
-            </span>
-
-            Student Inquiries
-
-        </a>
-
-    </nav>
+  <a href="admin-settings.html" class="nav-item">
+    <span class="nav-icon">⚙</span>
+    Settings
+  </a>
 
 </aside>
 
@@ -949,975 +1190,1280 @@ body{
 
 <main class="main">
 
-
 <header class="topbar">
 
-    <div style="
-        display:flex;
-        align-items:center;
-        gap:15px;
-    ">
+  <button
+    class="mobile-menu"
+    id="mobileMenu">
+    ☰
+  </button>
 
-        <div class="mobile-menu"
-             onclick="toggleSidebar()">
+  <div class="page-title">
+    <h1>Admin Control Center</h1>
+    <p>Payment, courses, demo classes and telecaller management</p>
+  </div>
 
-            ☰
-
-        </div>
-
-
-        <div class="top-title">
-
-            <h1>
-                Staff Payment Control
-            </h1>
-
-            <p>
-                Manage staff salary and performance-based incentives
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="admin-profile">
-
-        <div class="avatar">
-            A
-        </div>
-
-        <div class="profile-text">
-
-            <strong>
-                Administrator
-            </strong>
-
-            <span>
-                Admin
-            </span>
-
-        </div>
-
-    </div>
+  <div class="admin-badge">
+    <span class="admin-dot"></span>
+    Admin Control
+  </div>
 
 </header>
 
 
 <section class="content">
 
-
-<!-- =====================================================
-     HERO
-===================================================== -->
+<!-- HERO -->
 
 <div class="hero">
 
-    <h2>
-        Staff Payment Management
-    </h2>
+  <h2>BlackTerminal Admin Control Center</h2>
 
-    <p>
-        Configure salary and incentive rates separately for Coordinators
-        and Telecallers. Telecaller admission incentives can be managed
-        independently for Level 1, Level 2 and Level 3.
-    </p>
+  <p>
+    Manage staff payment rules, Telecaller admission levels,
+    course pricing, demo class charges and Telecaller student
+    inquiries from one centralized control panel.
+  </p>
 
 </div>
 
 
 <!-- =====================================================
-     STATUS
+     MAIN TABS
 ===================================================== -->
 
-<div class="status"
-     id="statusBox">
-</div>
+<div class="main-tabs">
 
+  <button
+    class="main-tab active"
+    onclick="openMainPanel('payment',this)">
+    Payment Control
+  </button>
 
-<!-- =====================================================
-     STAFF TABS
-===================================================== -->
+  <button
+    class="main-tab"
+    onclick="openMainPanel('courses',this)">
+    Courses & Pricing
+  </button>
 
-<div class="staff-tabs">
+  <button
+    class="main-tab"
+    onclick="openMainPanel('demo',this)">
+    Demo Class
+  </button>
 
-
-    <div class="staff-tab active"
-         id="coordinatorTab"
-         onclick="switchStaff('coordinator')">
-
-        <div class="staff-tab-top">
-
-            <div class="staff-tab-title">
-
-                <div class="staff-icon">
-                    👨‍💼
-                </div>
-
-                <div>
-
-                    <h3>
-                        Coordinator
-                    </h3>
-
-                    <p>
-                        Coordinator salary and incentive settings
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="tab-arrow">
-                →
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="staff-tab"
-         id="telecallerTab"
-         onclick="switchStaff('telecaller')">
-
-        <div class="staff-tab-top">
-
-            <div class="staff-tab-title">
-
-                <div class="staff-icon">
-                    📞
-                </div>
-
-                <div>
-
-                    <h3>
-                        Telecaller
-                    </h3>
-
-                    <p>
-                        Three-level admission earning system
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="tab-arrow">
-                →
-            </div>
-
-        </div>
-
-    </div>
-
+  <button
+    class="main-tab"
+    onclick="openMainPanel('telecallerData',this)">
+    Telecaller Data
+  </button>
 
 </div>
 
 
 <!-- =====================================================
-     SUMMARY
+     PAYMENT PANEL
 ===================================================== -->
 
-<div class="summary">
+<div
+  class="panel active"
+  id="paymentPanel">
 
+  <div class="main-tabs" style="margin-bottom:18px;">
 
-    <div class="summary-card">
+    <button
+      class="main-tab active"
+      id="coordinatorPaymentTab"
+      onclick="switchPaymentRole('coordinator',this)">
+      Coordinator
+    </button>
 
-        <div class="summary-label">
-            CURRENT BASE SALARY
-        </div>
+    <button
+      class="main-tab"
+      id="telecallerPaymentTab"
+      onclick="switchPaymentRole('telecaller',this)">
+      Telecaller
+    </button>
 
-        <div class="summary-value"
-             id="summaryBase">
+  </div>
 
-            ₹0
 
-        </div>
+  <!-- COORDINATOR -->
 
-        <div class="summary-sub">
-            Monthly fixed salary
-        </div>
+  <div id="coordinatorPaymentPanel">
 
-    </div>
+    <div class="settings-grid">
 
+      <div class="card">
 
-    <div class="summary-card"
-         id="summarySecondCard">
+        <div class="card-header">
 
-        <div class="summary-label"
-             id="summarySecondLabel">
-
-            CURRENT VISIT INCENTIVE
-
-        </div>
-
-        <div class="summary-value"
-             id="summaryVisit">
-
-            ₹0
-
-        </div>
-
-        <div class="summary-sub"
-             id="summarySecondSub">
-
-            Per unique visited student
-
-        </div>
-
-    </div>
-
-
-    <div class="summary-card">
-
-        <div class="summary-label"
-             id="summaryThirdLabel">
-
-            CURRENT ADMISSION INCENTIVE
-
-        </div>
-
-        <div class="summary-value"
-             id="summaryAdmission">
-
-            ₹0
-
-        </div>
-
-        <div class="summary-sub"
-             id="summaryThirdSub">
-
-            Per unique converted student
-
-        </div>
-
-    </div>
-
-
-</div>
-
-
-<!-- =====================================================
-     TELECALLER LEVEL QUICK VIEW
-===================================================== -->
-
-<div class="tele-level-summary"
-     id="teleLevelSummary">
-
-
-    <div class="level-mini level-one">
-
-        <div class="level-mini-title">
-            LEVEL 1
-        </div>
-
-        <div class="level-mini-value"
-             id="quickLevel1">
-
-            ₹50
-
-        </div>
-
-        <div class="level-mini-sub">
-            0–2 Admissions
-        </div>
-
-    </div>
-
-
-    <div class="level-mini level-two">
-
-        <div class="level-mini-title">
-            LEVEL 2
-        </div>
-
-        <div class="level-mini-value"
-             id="quickLevel2">
-
-            ₹75
-
-        </div>
-
-        <div class="level-mini-sub">
-            3–5 Admissions
-        </div>
-
-    </div>
-
-
-    <div class="level-mini level-three">
-
-        <div class="level-mini-title">
-            LEVEL 3
-        </div>
-
-        <div class="level-mini-value"
-             id="quickLevel3">
-
-            ₹100
-
-        </div>
-
-        <div class="level-mini-sub">
-            6+ Admissions
-        </div>
-
-    </div>
-
-
-</div>
-
-
-<!-- =====================================================
-     PAYMENT SETTINGS CARD
-===================================================== -->
-
-<div class="card">
-
-    <div class="card-header">
-
-        <div>
-
-            <h3 id="settingsTitle">
-                Coordinator Payment Settings
-            </h3>
-
-            <p id="settingsDescription">
-                Update the active Coordinator payment structure.
-            </p>
-
-        </div>
-
-        <span
-            style="
-                font-size:11px;
-                color:#8a94a6;
-                text-align:right;
-            "
-            id="lastUpdated">
-
-            Not loaded
-
-        </span>
-
-    </div>
-
-
-    <form id="paymentForm">
-
-
-        <!-- =============================================
-             COORDINATOR FORM
-        ============================================== -->
-
-        <div
-            class="form-grid"
-            id="coordinatorForm"
-        >
-
-
-            <!-- BASE -->
-
-            <div class="form-group">
-
-                <label>
-                    Monthly Base Salary
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="currency">
-                        ₹
-                    </span>
-
-                    <input
-                        type="number"
-                        id="baseSalary"
-                        min="0"
-                        step="1"
-                        placeholder="1000"
-                        required
-                    >
-
-                </div>
-
-                <div class="help">
-                    Fixed monthly amount paid to the Coordinator.
-                </div>
-
-            </div>
-
-
-            <!-- VISIT -->
-
-            <div class="form-group">
-
-                <label>
-                    Visited Student Incentive
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="currency">
-                        ₹
-                    </span>
-
-                    <input
-                        type="number"
-                        id="visitIncentive"
-                        min="0"
-                        step="1"
-                        placeholder="50"
-                        required
-                    >
-
-                </div>
-
-                <div class="help">
-                    Amount paid for each unique student marked as Visited.
-                </div>
-
-            </div>
-
-
-            <!-- ADMISSION -->
-
-            <div class="form-group">
-
-                <label>
-                    Admission Incentive
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="currency">
-                        ₹
-                    </span>
-
-                    <input
-                        type="number"
-                        id="admissionIncentive"
-                        min="0"
-                        step="1"
-                        placeholder="50"
-                        required
-                    >
-
-                </div>
-
-                <div class="help">
-                    Amount paid for each unique student marked as Converted.
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- =============================================
-             TELECALLER FORM
-        ============================================== -->
-
-        <div
-            class="form-grid telecaller-grid"
-            id="telecallerForm"
-            style="display:none;"
-        >
-
-
-            <!-- BASE SALARY -->
-
-            <div class="form-group">
-
-                <label>
-                    Monthly Base Salary
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="currency">
-                        ₹
-                    </span>
-
-                    <input
-                        type="number"
-                        id="teleBaseSalary"
-                        min="0"
-                        step="1"
-                        placeholder="1000"
-                    >
-
-                </div>
-
-                <div class="help">
-                    Fixed monthly Telecaller salary.
-                </div>
-
-            </div>
-
-
-            <!-- LEVEL 1 -->
-
-            <div
-                class="level-input-card level1"
-            >
-
-                <div class="level-input-header">
-
-                    <div class="level-badge">
-                        1
-                    </div>
-
-                    <div>
-
-                        <div class="level-input-title">
-                            Level 1 Admission
-                        </div>
-
-                        <div class="level-input-target">
-                            0–2 Admissions
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="input-wrap">
-
-                    <span class="currency">
-                        ₹
-                    </span>
-
-                    <input
-                        type="number"
-                        id="level1Admission"
-                        min="0"
-                        step="1"
-                        placeholder="50"
-                    >
-
-                </div>
-
-                <div class="help">
-                    Reward for each unique Converted admission at Level 1.
-                </div>
-
-            </div>
-
-
-            <!-- LEVEL 2 -->
-
-            <div
-                class="level-input-card level2"
-            >
-
-                <div class="level-input-header">
-
-                    <div class="level-badge">
-                        2
-                    </div>
-
-                    <div>
-
-                        <div class="level-input-title">
-                            Level 2 Admission
-                        </div>
-
-                        <div class="level-input-target">
-                            3–5 Admissions
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="input-wrap">
-
-                    <span class="currency">
-                        ₹
-                    </span>
-
-                    <input
-                        type="number"
-                        id="level2Admission"
-                        min="0"
-                        step="1"
-                        placeholder="75"
-                    >
-
-                </div>
-
-                <div class="help">
-                    Reward for each unique Converted admission at Level 2.
-                </div>
-
-            </div>
-
-
-            <!-- LEVEL 3 -->
-
-            <div
-                class="level-input-card level3"
-            >
-
-                <div class="level-input-header">
-
-                    <div class="level-badge">
-                        3
-                    </div>
-
-                    <div>
-
-                        <div class="level-input-title">
-                            Level 3 Admission
-                        </div>
-
-                        <div class="level-input-target">
-                            6+ Admissions
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="input-wrap">
-
-                    <span class="currency">
-                        ₹
-                    </span>
-
-                    <input
-                        type="number"
-                        id="level3Admission"
-                        min="0"
-                        step="1"
-                        placeholder="100"
-                    >
-
-                </div>
-
-                <div class="help">
-                    Reward for each unique Converted admission at Level 3.
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- =============================================
-             BUTTONS
-        ============================================== -->
-
-        <div class="button-row">
-
-            <button
-                type="submit"
-                class="btn btn-primary"
-                id="saveBtn">
-
-                Save Payment Settings
-
-            </button>
-
-
-            <button
-                type="button"
-                class="btn btn-secondary"
-                onclick="loadCurrentStaffSettings()">
-
-                Reset / Reload
-
-            </button>
-
-        </div>
-
-
-    </form>
-
-
-    <!-- =============================================
-         COORDINATOR RULE
-    ============================================== -->
-
-    <div
-        class="rule-box"
-        id="coordinatorRule"
-    >
-
-        <div class="rule-title">
-            Active Coordinator Payment Structure
-        </div>
-
-
-        <div class="rule-list">
-
-
-            <div class="rule-item">
-
-                <span>
-                    Monthly Base Salary
-                </span>
-
-                <strong id="ruleBase">
-                    ₹0
-                </strong>
-
-            </div>
-
-
-            <div class="rule-item">
-
-                <span>
-                    Visited Student
-                </span>
-
-                <strong id="ruleVisit">
-                    ₹0
-                </strong>
-
-            </div>
-
-
-            <div class="rule-item">
-
-                <span>
-                    Admission / Converted Student
-                </span>
-
-                <strong id="ruleAdmission">
-                    ₹0
-                </strong>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-    <!-- =============================================
-         TELECALLER RULE
-    ============================================== -->
-
-    <div
-        class="rule-box"
-        id="telecallerRule"
-        style="display:none;"
-    >
-
-        <div class="rule-title">
-            Active Telecaller Admission Earning Structure
-        </div>
-
-
-        <div class="rule-list">
-
-
-            <div class="rule-item">
-
-                <span>
-                    Monthly Base Salary
-                </span>
-
-                <strong id="teleRuleBase">
-                    ₹0
-                </strong>
-
-            </div>
-
-
-            <div class="rule-item">
-
-                <span>
-                    Level 1 · 0–2 Admissions
-                </span>
-
-                <strong id="teleRuleLevel1">
-                    ₹0
-                </strong>
-
-            </div>
-
-
-            <div class="rule-item">
-
-                <span>
-                    Level 2 · 3–5 Admissions
-                </span>
-
-                <strong id="teleRuleLevel2">
-                    ₹0
-                </strong>
-
-            </div>
-
-
-            <div class="rule-item">
-
-                <span>
-                    Level 3 · 6+ Admissions
-                </span>
-
-                <strong id="teleRuleLevel3">
-                    ₹0
-                </strong>
-
-            </div>
-
-
-            <div class="rule-item">
-
-                <span>
-                    Visit Reward
-                </span>
-
-                <strong>
-                    ₹0
-                </strong>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-    <!-- =============================================
-         TELECALLER INFO
-    ============================================== -->
-
-    <div
-        class="tele-info"
-        id="teleInfo"
-    >
-
-        <div class="tele-info-title">
-            🎯 Telecaller Target System
-        </div>
-
-        <div class="tele-info-text">
-
-            <b>Level 1:</b>
-            0–2 unique admissions.
-            Each converted admission receives the Level 1 rate.
-
-            <br>
-
-            <b>Level 2:</b>
-            3–5 unique admissions.
-            Each converted admission receives the Level 2 rate.
-
-            <br>
-
-            <b>Level 3:</b>
-            6+ unique admissions.
-            Each converted admission receives the Level 3 rate.
-
-            <br><br>
-
-            Visits do not generate incentive.
-            Only unique current-month Converted admissions are used
-            for Telecaller admission earning.
-
-            <br>
-
-            The Telecaller page automatically reads these rates from
-            the Admin payment settings.
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     GENERAL INFORMATION
-===================================================== -->
-
-<div class="card">
-
-    <div class="card-header">
-
-        <div>
-
-            <h3>
-                Payment Rules
-            </h3>
+          <div>
+            <h3>Coordinator Payment Settings</h3>
 
             <p>
-                Current system calculation rules
+              Configure coordinator salary and incentives.
             </p>
+          </div>
 
         </div>
 
+
+        <div class="card-body">
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label>
+                Monthly Base Salary
+              </label>
+
+              <div class="money-wrap">
+
+                <span class="money-prefix">₹</span>
+
+                <input
+                  id="coordinatorBaseSalary"
+                  class="money"
+                  type="number"
+                  min="0"
+                  value="1000">
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Visited Student Incentive
+              </label>
+
+              <div class="money-wrap">
+
+                <span class="money-prefix">₹</span>
+
+                <input
+                  id="coordinatorVisitIncentive"
+                  type="number"
+                  min="0"
+                  value="50">
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Admission Incentive
+              </label>
+
+              <div class="money-wrap">
+
+                <span class="money-prefix">₹</span>
+
+                <input
+                  id="coordinatorAdmissionIncentive"
+                  type="number"
+                  min="0"
+                  value="50">
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="actions">
+
+            <button
+              class="btn btn-secondary"
+              onclick="loadPaymentSettings()">
+              Reload
+            </button>
+
+            <button
+              class="btn btn-primary"
+              id="saveCoordinatorBtn"
+              onclick="saveCoordinatorSettings()">
+              Save Coordinator Settings
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <div>
+            <h3>Coordinator Summary</h3>
+            <p>Current configured values</p>
+          </div>
+
+        </div>
+
+        <div class="card-body">
+
+          <div class="summary-grid">
+
+            <div class="summary-box">
+              <div class="summary-label">
+                Base Salary
+              </div>
+
+              <div
+                class="summary-value"
+                id="coordinatorSummaryBase">
+                ₹1,000
+              </div>
+
+              <div class="summary-sub">
+                Monthly
+              </div>
+            </div>
+
+
+            <div class="summary-box">
+              <div class="summary-label">
+                Visit Incentive
+              </div>
+
+              <div
+                class="summary-value"
+                id="coordinatorSummaryVisit">
+                ₹50
+              </div>
+
+              <div class="summary-sub">
+                Per unique visit
+              </div>
+            </div>
+
+
+            <div class="summary-box">
+              <div class="summary-label">
+                Admission
+              </div>
+
+              <div
+                class="summary-value"
+                id="coordinatorSummaryAdmission">
+                ₹50
+              </div>
+
+              <div class="summary-sub">
+                Per unique admission
+              </div>
+            </div>
+
+          </div>
+
+          <div class="rule-box">
+
+            <h4>Coordinator Rules</h4>
+
+            <ul>
+              <li>Base salary is monthly.</li>
+              <li>Visit incentive is controlled by Admin.</li>
+              <li>Admission incentive is controlled by Admin.</li>
+              <li>Duplicate mobile numbers should not be counted twice.</li>
+              <li>Coordinator page should read these values dynamically.</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
+  </div>
 
-    <div class="info-box">
 
-        <strong>
-            Coordinator:
-        </strong>
+  <!-- TELECALLER -->
 
-        <br>
+  <div
+    id="telecallerPaymentPanel"
+    class="hidden">
 
-        Total Payable =
-        Base Salary
-        +
-        (Unique Visited Students × Visit Incentive)
-        +
-        (Unique Converted Students × Admission Incentive)
+    <div class="settings-grid">
 
-        <br><br>
+      <div class="card">
 
-        <strong>
-            Telecaller:
-        </strong>
+        <div class="card-header">
 
-        <br>
+          <div>
+            <h3>Telecaller Payment Settings</h3>
 
-        Total Payable =
-        Base Salary
-        +
-        (Unique Converted Admissions × Active Level Admission Rate)
+            <p>
+              Dynamically control salary, levels and admission incentives.
+            </p>
+          </div>
 
-        <br><br>
+        </div>
 
-        Telecaller visits have
-        <strong>₹0 reward</strong>.
 
-        <br>
+        <div class="card-body">
 
-        Duplicate mobile numbers are counted only once
-        within the same incentive category.
+          <div class="form-grid">
 
-        <br>
+            <div class="section-title">
+              Basic Payment
+            </div>
 
-        Only current-month performance is used.
 
-        <br>
+            <div class="field">
 
-        Raw inquiries do not generate incentive.
+              <label>
+                Monthly Base Salary
+              </label>
+
+              <div class="money-wrap">
+
+                <span class="money-prefix">₹</span>
+
+                <input
+                  id="telecallerBaseSalary"
+                  type="number"
+                  min="0"
+                  value="1000">
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Visit Reward
+              </label>
+
+              <div class="money-wrap">
+
+                <span class="money-prefix">₹</span>
+
+                <input
+                  id="telecallerVisitReward"
+                  type="number"
+                  min="0"
+                  value="0">
+
+              </div>
+
+              <small>
+                Keep ₹0 if Telecaller visits should not generate incentive.
+              </small>
+
+            </div>
+
+
+            <div class="section-title">
+              Level 1 — Lower Earning
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Level 1 Minimum Admissions
+              </label>
+
+              <input
+                id="level1Min"
+                type="number"
+                min="0"
+                value="0">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Level 1 Maximum Admissions
+              </label>
+
+              <input
+                id="level1Max"
+                type="number"
+                min="0"
+                value="2">
+
+            </div>
+
+
+            <div class="field full">
+
+              <label>
+                Level 1 Admission Incentive
+              </label>
+
+              <div class="money-wrap">
+
+                <span class="money-prefix">₹</span>
+
+                <input
+                  id="level1AdmissionIncentive"
+                  type="number"
+                  min="0"
+                  value="50">
+
+              </div>
+
+            </div>
+
+
+            <div class="section-title">
+              Level 2 — Medium Earning
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Level 2 Minimum Admissions
+              </label>
+
+              <input
+                id="level2Min"
+                type="number"
+                min="0"
+                value="3">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Level 2 Maximum Admissions
+              </label>
+
+              <input
+                id="level2Max"
+                type="number"
+                min="0"
+                value="5">
+
+            </div>
+
+
+            <div class="field full">
+
+              <label>
+                Level 2 Admission Incentive
+              </label>
+
+              <div class="money-wrap">
+
+                <span class="money-prefix">₹</span>
+
+                <input
+                  id="level2AdmissionIncentive"
+                  type="number"
+                  min="0"
+                  value="75">
+
+              </div>
+
+            </div>
+
+
+            <div class="section-title">
+              Level 3 — Higher Earning
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Level 3 Minimum Admissions
+              </label>
+
+              <input
+                id="level3Min"
+                type="number"
+                min="0"
+                value="6">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Level 3 Maximum
+              </label>
+
+              <input
+                type="text"
+                value="No maximum"
+                disabled>
+
+            </div>
+
+
+            <div class="field full">
+
+              <label>
+                Level 3 Admission Incentive
+              </label>
+
+              <div class="money-wrap">
+
+                <span class="money-prefix">₹</span>
+
+                <input
+                  id="level3AdmissionIncentive"
+                  type="number"
+                  min="0"
+                  value="100">
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="actions">
+
+            <button
+              class="btn btn-secondary"
+              onclick="loadPaymentSettings()">
+              Reload
+            </button>
+
+            <button
+              class="btn btn-primary"
+              id="saveTelecallerBtn"
+              onclick="saveTelecallerSettings()">
+              Save Telecaller Settings
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <div>
+            <h3>Telecaller Summary</h3>
+            <p>Current level configuration</p>
+          </div>
+
+        </div>
+
+
+        <div class="card-body">
+
+          <div class="summary-grid">
+
+            <div class="summary-box">
+
+              <div class="summary-label">
+                Base Salary
+              </div>
+
+              <div
+                class="summary-value"
+                id="telecallerSummaryBase">
+                ₹1,000
+              </div>
+
+              <div class="summary-sub">
+                Monthly
+              </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+              <div class="summary-label">
+                Visit Reward
+              </div>
+
+              <div
+                class="summary-value"
+                id="telecallerSummaryVisit">
+                ₹0
+              </div>
+
+              <div class="summary-sub">
+                Per eligible visit
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="level-list">
+
+            <div class="level-card">
+
+              <div class="level-top">
+
+                <div class="level-name">
+                  LEVEL 1
+                </div>
+
+                <div
+                  class="level-rate"
+                  id="summaryLevel1Rate">
+                  ₹50
+                </div>
+
+              </div>
+
+              <div
+                class="level-range"
+                id="summaryLevel1Range">
+                0 - 2 admissions
+              </div>
+
+            </div>
+
+
+            <div class="level-card">
+
+              <div class="level-top">
+
+                <div class="level-name">
+                  LEVEL 2
+                </div>
+
+                <div
+                  class="level-rate"
+                  id="summaryLevel2Rate">
+                  ₹75
+                </div>
+
+              </div>
+
+              <div
+                class="level-range"
+                id="summaryLevel2Range">
+                3 - 5 admissions
+              </div>
+
+            </div>
+
+
+            <div class="level-card">
+
+              <div class="level-top">
+
+                <div class="level-name">
+                  LEVEL 3
+                </div>
+
+                <div
+                  class="level-rate"
+                  id="summaryLevel3Rate">
+                  ₹100
+                </div>
+
+              </div>
+
+              <div
+                class="level-range"
+                id="summaryLevel3Range">
+                6+ admissions
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="rule-box">
+
+            <h4>Telecaller Rules</h4>
+
+            <ul>
+              <li>Current month converted admissions determine active level.</li>
+              <li>Unique mobile numbers are counted once.</li>
+              <li>Active level incentive is applied to converted admissions.</li>
+              <li>Level thresholds are controlled by Admin.</li>
+              <li>Visit Reward can be set to ₹0.</li>
+              <li>Course prices and demo fee are controlled separately from Courses & Demo tabs.</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
+
+  </div>
 
 </div>
 
 
-<div class="footer">
+<!-- =====================================================
+     COURSE PANEL
+===================================================== -->
 
-    © <span id="year"></span>
-    BlackTerminal Computer Institute · Staff Payment Control
+<div
+  class="panel"
+  id="coursesPanel">
+
+  <div class="course-layout">
+
+
+    <!-- COURSE FORM -->
+
+    <div class="card course-form">
+
+      <div class="card-header">
+
+        <div>
+          <h3 id="courseFormTitle">
+            Add Course
+          </h3>
+
+          <p>
+            Manage courses and Telecaller pricing.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="form-grid">
+
+          <div class="field full">
+
+            <label>
+              Course Name
+            </label>
+
+            <input
+              id="courseName"
+              type="text"
+              placeholder="Example: PGDCA">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Course Price
+            </label>
+
+            <div class="money-wrap">
+
+              <span class="money-prefix">₹</span>
+
+              <input
+                id="coursePrice"
+                type="number"
+                min="0"
+                placeholder="6000">
+
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Duration
+            </label>
+
+            <input
+              id="courseDuration"
+              type="text"
+              placeholder="12 Months">
+
+          </div>
+
+
+          <div class="field full">
+
+            <label>
+              Course Status
+            </label>
+
+            <select id="courseActive">
+
+              <option value="true">
+                Active
+              </option>
+
+              <option value="false">
+                Inactive
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="btn btn-secondary"
+            onclick="resetCourseForm()">
+            Clear
+          </button>
+
+          <button
+            class="btn btn-primary"
+            id="saveCourseBtn"
+            onclick="saveCourse()">
+            Add Course
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- COURSE LIST -->
+
+    <div class="card">
+
+      <div class="card-header">
+
+        <div>
+          <h3>Courses & Pricing</h3>
+
+          <p>
+            These prices can be displayed dynamically on the Telecaller page.
+          </p>
+        </div>
+
+        <button
+          class="btn btn-secondary"
+          onclick="loadCourses()">
+          Refresh
+        </button>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div
+          id="courseList"
+          class="course-list">
+
+          <div class="empty">
+            Loading courses...
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     DEMO PANEL
+===================================================== -->
+
+<div
+  class="panel"
+  id="demoPanel">
+
+  <div class="card">
+
+    <div class="card-header">
+
+      <div>
+        <h3>Demo Class Settings</h3>
+
+        <p>
+          Configure the amount associated with student demo classes.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="card-body">
+
+      <div class="demo-box">
+
+        <div class="demo-info">
+
+          <h4>
+            Demo Class Amount
+          </h4>
+
+          <p>
+            This amount is stored separately so the Telecaller page
+            can display the current Demo Class charge dynamically.
+          </p>
+
+          <div
+            class="demo-amount"
+            id="demoAmountPreview">
+            ₹0
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div class="field">
+
+            <label>
+              Demo Class Amount
+            </label>
+
+            <div class="money-wrap">
+
+              <span class="money-prefix">₹</span>
+
+              <input
+                id="demoClassAmount"
+                type="number"
+                min="0"
+                value="0">
+
+            </div>
+
+            <small>
+              Set the amount you want to charge/record for a demo class.
+            </small>
+
+          </div>
+
+
+          <div class="actions">
+
+            <button
+              class="btn btn-secondary"
+              onclick="loadDemoSettings()">
+              Reload
+            </button>
+
+            <button
+              class="btn btn-primary"
+              id="saveDemoBtn"
+              onclick="saveDemoSettings()">
+              Save Demo Class Amount
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     TELECALLER DATA PANEL
+===================================================== -->
+
+<div
+  class="panel"
+  id="telecallerDataPanel">
+
+
+  <!-- STATS -->
+
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <div class="stat-title">
+        Total Inquiries
+      </div>
+
+      <div
+        class="stat-value"
+        id="statTotal">
+        0
+      </div>
+    </div>
+
+
+    <div class="stat-card">
+      <div class="stat-title">
+        New
+      </div>
+
+      <div
+        class="stat-value"
+        id="statNew">
+        0
+      </div>
+    </div>
+
+
+    <div class="stat-card">
+      <div class="stat-title">
+        Contacted
+      </div>
+
+      <div
+        class="stat-value"
+        id="statContacted">
+        0
+      </div>
+    </div>
+
+
+    <div class="stat-card">
+      <div class="stat-title">
+        Follow Up
+      </div>
+
+      <div
+        class="stat-value"
+        id="statFollowUp">
+        0
+      </div>
+    </div>
+
+
+    <div class="stat-card">
+      <div class="stat-title">
+        Visited
+      </div>
+
+      <div
+        class="stat-value"
+        id="statVisited">
+        0
+      </div>
+    </div>
+
+
+    <div class="stat-card">
+      <div class="stat-title">
+        Converted
+      </div>
+
+      <div
+        class="stat-value"
+        id="statConverted">
+        0
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- TABLE -->
+
+  <div class="card table-card">
+
+    <div class="card-header">
+
+      <div>
+        <h3>Telecaller Student / Inquiry Data</h3>
+
+        <p>
+          All inquiry data submitted through the Telecaller workflow.
+        </p>
+      </div>
+
+      <button
+        class="btn btn-secondary"
+        onclick="loadInquiries()">
+        Refresh Data
+      </button>
+
+    </div>
+
+
+    <div class="table-toolbar">
+
+      <input
+        id="inquirySearch"
+        class="search-input"
+        type="search"
+        placeholder="Search student name, mobile, course, coordinator...">
+
+      <select
+        id="inquiryStatusFilter"
+        class="filter-select">
+
+        <option value="">
+          All Status
+        </option>
+
+        <option value="new">
+          New
+        </option>
+
+        <option value="pending">
+          Pending
+        </option>
+
+        <option value="contacted">
+          Contacted
+        </option>
+
+        <option value="follow-up">
+          Follow Up
+        </option>
+
+        <option value="visited">
+          Visited
+        </option>
+
+        <option value="converted">
+          Converted
+        </option>
+
+        <option value="not-interested">
+          Not Interested
+        </option>
+
+      </select>
+
+
+      <select
+        id="inquiryCourseFilter"
+        class="filter-select">
+
+        <option value="">
+          All Courses
+        </option>
+
+      </select>
+
+
+      <select
+        id="inquiryCoordinatorFilter"
+        class="filter-select">
+
+        <option value="">
+          All Coordinators
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Student
+            </th>
+
+            <th>
+              Course
+            </th>
+
+            <th>
+              Source
+            </th>
+
+            <th>
+              Coordinator
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Telecaller Status
+            </th>
+
+            <th>
+              Follow Up
+            </th>
+
+            <th>
+              Created
+            </th>
+
+            <th>
+              Action
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="inquiryTableBody">
+
+          <tr>
+            <td
+              colspan="9"
+              class="empty">
+              Loading data...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div class="pagination">
+
+      <div
+        class="pagination-info"
+        id="paginationInfo">
+        0 inquiries
+      </div>
+
+      <div
+        class="pagination-buttons"
+        id="paginationButtons">
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
@@ -1926,1588 +2472,3715 @@ body{
 
 </main>
 
+</div>
+
+
+<!-- =====================================================
+     STUDENT DETAIL MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="studentModal">
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h3>
+        Student Inquiry Details
+      </h3>
+
+      <button
+        class="close-modal"
+        onclick="closeStudentModal()">
+        ✕
+      </button>
+
+    </div>
+
+
+    <div
+      class="modal-body"
+      id="studentModalBody">
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
 
 <script>
 
 /* =========================================================
-   FIREBASE CONFIGURATION
+   FIREBASE CONFIG
 ========================================================= */
 
 const FIREBASE_PROJECT_ID =
-    "jobs-2f152";
-
+  "jobs-2f152";
 
 const FIREBASE_API_KEY =
-    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
-
+  "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
 
 const FIRESTORE_BASE =
-    "https://firestore.googleapis.com/v1/projects/" +
-    FIREBASE_PROJECT_ID +
-    "/databases/(default)/documents";
+  "https://firestore.googleapis.com/v1/projects/" +
+  FIREBASE_PROJECT_ID +
+  "/databases/(default)/documents";
 
-
-/* =========================================================
-   PAYMENT DOCUMENTS
-========================================================= */
 
 const PAYMENT_URLS = {
 
-    coordinator:
-        FIRESTORE_BASE +
-        "/paymentSettings/coordinator",
+  coordinator:
+    FIRESTORE_BASE +
+    "/paymentSettings/coordinator",
 
-    telecaller:
-        FIRESTORE_BASE +
-        "/paymentSettings/telecaller"
+  telecaller:
+    FIRESTORE_BASE +
+    "/paymentSettings/telecaller",
+
+  demo:
+    FIRESTORE_BASE +
+    "/paymentSettings/demo"
+
+};
+
+
+const COURSE_URL =
+  FIRESTORE_BASE +
+  "/courseSettings";
+
+
+const INQUIRY_URL =
+  FIRESTORE_BASE +
+  "/studentInquiries";
+
+
+/* =========================================================
+   DEFAULT SETTINGS
+========================================================= */
+
+const DEFAULT_COORDINATOR = {
+
+  baseSalary:1000,
+
+  visitIncentive:50,
+
+  admissionIncentive:50
+
+};
+
+
+const DEFAULT_TELECALLER = {
+
+  baseSalary:1000,
+
+  level1AdmissionIncentive:50,
+
+  level2AdmissionIncentive:75,
+
+  level3AdmissionIncentive:100,
+
+  level1Min:0,
+
+  level1Max:2,
+
+  level2Min:3,
+
+  level2Max:5,
+
+  level3Min:6,
+
+  visitReward:0
+
+};
+
+
+const DEFAULT_DEMO = {
+
+  demoClassAmount:0
 
 };
 
 
 /* =========================================================
-   DEFAULT VALUES
+   STATE
 ========================================================= */
 
-const DEFAULT_BASE =
-    1000;
+let coordinatorSettings =
+  {...DEFAULT_COORDINATOR};
 
-const DEFAULT_VISIT =
-    50;
+let telecallerSettings =
+  {...DEFAULT_TELECALLER};
 
-const DEFAULT_ADMISSION =
-    50;
+let demoSettings =
+  {...DEFAULT_DEMO};
 
+let courses = [];
 
-/*
-    Telecaller defaults
-*/
+let editingCourseId = null;
 
-const DEFAULT_LEVEL1 =
-    50;
+let inquiries = [];
 
-const DEFAULT_LEVEL2 =
-    75;
+let filteredInquiries = [];
 
-const DEFAULT_LEVEL3 =
-    100;
+let currentInquiryPage = 1;
+
+const INQUIRIES_PER_PAGE = 15;
 
 
 /* =========================================================
-   CURRENT ROLE
+   BASIC FIRESTORE HELPERS
 ========================================================= */
 
-let currentStaff =
-    "coordinator";
+function intValue(value){
 
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const paymentForm =
-    document.getElementById(
-        "paymentForm"
-    );
-
-
-const saveBtn =
-    document.getElementById(
-        "saveBtn"
-    );
-
-
-const statusBox =
-    document.getElementById(
-        "statusBox"
-    );
-
-
-/* =========================================================
-   FORMAT RUPEE
-========================================================= */
-
-function formatRupee(
-    amount
-){
-
-    return new Intl.NumberFormat(
-        "en-IN",
-        {
-            style:"currency",
-            currency:"INR",
-            maximumFractionDigits:0
-        }
-    ).format(
-        Number(amount) || 0
-    );
+  return {
+    integerValue:String(
+      Math.round(
+        Number(value) || 0
+      )
+    )
+  };
 
 }
 
 
-/* =========================================================
-   FIRESTORE DOCUMENT CONVERTER
-========================================================= */
+function stringValue(value){
 
-function documentToObject(
-    doc
-){
+  return {
+    stringValue:String(
+      value ?? ""
+    )
+  };
 
-    const fields =
-        doc.fields || {};
-
-    const result = {};
+}
 
 
-    Object.keys(fields)
-        .forEach(
-            key=>{
+function boolValue(value){
 
-                const field =
-                    fields[key];
+  return {
+    booleanValue:Boolean(value)
+  };
 
-
-                if(
-                    field.integerValue !==
-                    undefined
-                ){
-
-                    result[key] =
-                        Number(
-                            field.integerValue
-                        );
-
-                }
-
-                else if(
-                    field.doubleValue !==
-                    undefined
-                ){
-
-                    result[key] =
-                        Number(
-                            field.doubleValue
-                        );
-
-                }
-
-                else if(
-                    field.stringValue !==
-                    undefined
-                ){
-
-                    result[key] =
-                        field.stringValue;
-
-                }
-
-                else if(
-                    field.timestampValue !==
-                    undefined
-                ){
-
-                    result[key] =
-                        field.timestampValue;
-
-                }
-
-            }
-        );
+}
 
 
+function timestampValue(){
+
+  return {
+    timestampValue:
+      new Date().toISOString()
+  };
+
+}
+
+
+function parseValue(value){
+
+  if(!value){
+    return null;
+  }
+
+  if(value.integerValue !== undefined){
+    return Number(
+      value.integerValue
+    );
+  }
+
+  if(value.doubleValue !== undefined){
+    return Number(
+      value.doubleValue
+    );
+  }
+
+  if(value.stringValue !== undefined){
+    return value.stringValue;
+  }
+
+  if(value.booleanValue !== undefined){
+    return value.booleanValue;
+  }
+
+  if(value.timestampValue !== undefined){
+    return value.timestampValue;
+  }
+
+  return null;
+
+}
+
+
+function documentToObject(doc){
+
+  const result = {};
+
+  if(!doc || !doc.fields){
     return result;
+  }
 
-}
+  Object.keys(doc.fields)
+    .forEach(key => {
 
-
-/* =========================================================
-   FIRESTORE INTEGER VALUE
-========================================================= */
-
-function integerValue(
-    value
-){
-
-    return {
-
-        integerValue:
-            String(
-                Math.round(
-                    Number(value) || 0
-                )
-            )
-
-    };
-
-}
-
-
-/* =========================================================
-   FIRESTORE STRING VALUE
-========================================================= */
-
-function stringValue(
-    value
-){
-
-    return {
-
-        stringValue:
-            String(
-                value || ""
-            )
-
-    };
-
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-function showStatus(
-    message,
-    type="info"
-){
-
-    statusBox.textContent =
-        message;
-
-    statusBox.className =
-        "status show " +
-        type;
-
-}
-
-
-/* =========================================================
-   ROLE NAME
-========================================================= */
-
-function getStaffName(){
-
-    return currentStaff ===
-        "coordinator"
-        ? "Coordinator"
-        : "Telecaller";
-
-}
-
-
-/* =========================================================
-   UPDATE ROLE TEXT
-========================================================= */
-
-function updateRoleText(){
-
-    const name =
-        getStaffName();
-
-
-    document
-        .getElementById(
-            "settingsTitle"
-        )
-        .textContent =
-        name +
-        " Payment Settings";
-
-
-    document
-        .getElementById(
-            "settingsDescription"
-        )
-        .textContent =
-        currentStaff ===
-        "telecaller"
-
-        ?
-
-        "Manage Telecaller base salary and three-level admission incentives."
-
-        :
-
-        "Update the active Coordinator payment structure.";
-
-}
-
-
-/* =========================================================
-   UPDATE FORM VISIBILITY
-========================================================= */
-
-function updateFormVisibility(){
-
-    const coordinator =
-        currentStaff ===
-        "coordinator";
-
-
-    document
-        .getElementById(
-            "coordinatorForm"
-        )
-        .style.display =
-        coordinator
-            ? "grid"
-            : "none";
-
-
-    document
-        .getElementById(
-            "telecallerForm"
-        )
-        .style.display =
-        coordinator
-            ? "none"
-            : "grid";
-
-
-    document
-        .getElementById(
-            "coordinatorRule"
-        )
-        .style.display =
-        coordinator
-            ? "block"
-            : "none";
-
-
-    document
-        .getElementById(
-            "telecallerRule"
-        )
-        .style.display =
-        coordinator
-            ? "none"
-            : "block";
-
-
-    document
-        .getElementById(
-            "teleInfo"
-        )
-        .classList.toggle(
-            "show",
-            !coordinator
+      result[key] =
+        parseValue(
+          doc.fields[key]
         );
 
+    });
 
-    document
-        .getElementById(
-            "teleLevelSummary"
-        )
-        .classList.toggle(
-            "show",
-            !coordinator
-        );
+  if(doc.name){
 
+    const parts =
+      doc.name.split("/");
 
-    /*
-        Summary labels
-    */
+    result._id =
+      parts[parts.length - 1];
 
-    if(coordinator){
+  }
 
-        document
-            .getElementById(
-                "summarySecondLabel"
-            )
-            .textContent =
-            "CURRENT VISIT INCENTIVE";
-
-
-        document
-            .getElementById(
-                "summarySecondSub"
-            )
-            .textContent =
-            "Per unique visited student";
-
-
-        document
-            .getElementById(
-                "summaryThirdLabel"
-            )
-            .textContent =
-            "CURRENT ADMISSION INCENTIVE";
-
-
-        document
-            .getElementById(
-                "summaryThirdSub"
-            )
-            .textContent =
-            "Per unique converted student";
-
-    }
-
-    else{
-
-        document
-            .getElementById(
-                "summarySecondLabel"
-            )
-            .textContent =
-            "LEVEL 1 ADMISSION";
-
-
-        document
-            .getElementById(
-                "summarySecondSub"
-            )
-            .textContent =
-            "0–2 admissions";
-
-
-        document
-            .getElementById(
-                "summaryThirdLabel"
-            )
-            .textContent =
-            "LEVEL 2 ADMISSION";
-
-
-        document
-            .getElementById(
-                "summaryThirdSub"
-            )
-            .textContent =
-            "3–5 admissions";
-
-    }
+  return result;
 
 }
 
 
 /* =========================================================
-   UPDATE UI
+   TOAST
 ========================================================= */
 
-function updateUI(
-    settings
+let toastTimer = null;
+
+function showToast(
+  message,
+  type="info"
 ){
 
-    if(
-        currentStaff ===
-        "coordinator"
-    ){
-
-        const base =
-            Number(
-                settings.baseSalary
-            ) || 0;
-
-
-        const visit =
-            Number(
-                settings.visitIncentive
-            ) || 0;
-
-
-        const admission =
-            Number(
-                settings.admissionIncentive
-            ) || 0;
-
-
-        document
-            .getElementById(
-                "baseSalary"
-            )
-            .value =
-            base;
-
-
-        document
-            .getElementById(
-                "visitIncentive"
-            )
-            .value =
-            visit;
-
-
-        document
-            .getElementById(
-                "admissionIncentive"
-            )
-            .value =
-            admission;
-
-
-        document
-            .getElementById(
-                "summaryBase"
-            )
-            .textContent =
-            formatRupee(base);
-
-
-        document
-            .getElementById(
-                "summaryVisit"
-            )
-            .textContent =
-            formatRupee(visit);
-
-
-        document
-            .getElementById(
-                "summaryAdmission"
-            )
-            .textContent =
-            formatRupee(admission);
-
-
-        document
-            .getElementById(
-                "ruleBase"
-            )
-            .textContent =
-            formatRupee(base);
-
-
-        document
-            .getElementById(
-                "ruleVisit"
-            )
-            .textContent =
-            formatRupee(visit);
-
-
-        document
-            .getElementById(
-                "ruleAdmission"
-            )
-            .textContent =
-            formatRupee(admission);
-
-    }
-
-    else{
-
-        const base =
-            Number(
-                settings.baseSalary
-            ) || 0;
-
-
-        const level1 =
-            Number(
-                settings.level1AdmissionIncentive
-            );
-
-
-        const level2 =
-            Number(
-                settings.level2AdmissionIncentive
-            );
-
-
-        const level3 =
-            Number(
-                settings.level3AdmissionIncentive
-            );
-
-
-        const safeLevel1 =
-            Number.isFinite(level1)
-                ? level1
-                : DEFAULT_LEVEL1;
-
-
-        const safeLevel2 =
-            Number.isFinite(level2)
-                ? level2
-                : DEFAULT_LEVEL2;
-
-
-        const safeLevel3 =
-            Number.isFinite(level3)
-                ? level3
-                : DEFAULT_LEVEL3;
-
-
-        /*
-            Telecaller form
-        */
-
-        document
-            .getElementById(
-                "teleBaseSalary"
-            )
-            .value =
-            base;
-
-
-        document
-            .getElementById(
-                "level1Admission"
-            )
-            .value =
-            safeLevel1;
-
-
-        document
-            .getElementById(
-                "level2Admission"
-            )
-            .value =
-            safeLevel2;
-
-
-        document
-            .getElementById(
-                "level3Admission"
-            )
-            .value =
-            safeLevel3;
-
-
-        /*
-            Summary
-        */
-
-        document
-            .getElementById(
-                "summaryBase"
-            )
-            .textContent =
-            formatRupee(base);
-
-
-        document
-            .getElementById(
-                "summaryVisit"
-            )
-            .textContent =
-            formatRupee(
-                safeLevel1
-            );
-
-
-        document
-            .getElementById(
-                "summaryAdmission"
-            )
-            .textContent =
-            formatRupee(
-                safeLevel2
-            );
-
-
-        /*
-            Quick Level Cards
-        */
-
-        document
-            .getElementById(
-                "quickLevel1"
-            )
-            .textContent =
-            formatRupee(
-                safeLevel1
-            );
-
-
-        document
-            .getElementById(
-                "quickLevel2"
-            )
-            .textContent =
-            formatRupee(
-                safeLevel2
-            );
-
-
-        document
-            .getElementById(
-                "quickLevel3"
-            )
-            .textContent =
-            formatRupee(
-                safeLevel3
-            );
-
-
-        /*
-            Telecaller rule
-        */
-
-        document
-            .getElementById(
-                "teleRuleBase"
-            )
-            .textContent =
-            formatRupee(base);
-
-
-        document
-            .getElementById(
-                "teleRuleLevel1"
-            )
-            .textContent =
-            formatRupee(
-                safeLevel1
-            );
-
-
-        document
-            .getElementById(
-                "teleRuleLevel2"
-            )
-            .textContent =
-            formatRupee(
-                safeLevel2
-            );
-
-
-        document
-            .getElementById(
-                "teleRuleLevel3"
-            )
-            .textContent =
-            formatRupee(
-                safeLevel3
-            );
-
-    }
-
-}
-
-
-/* =========================================================
-   SWITCH STAFF
-========================================================= */
-
-window.switchStaff =
-async function(
-    staff
-){
-
-    if(
-        staff !== "coordinator" &&
-        staff !== "telecaller"
-    ){
-
-        return;
-
-    }
-
-
-    currentStaff =
-        staff;
-
-
-    document
-        .getElementById(
-            "coordinatorTab"
-        )
-        .classList.toggle(
-            "active",
-            staff ===
-            "coordinator"
-        );
-
-
-    document
-        .getElementById(
-            "telecallerTab"
-        )
-        .classList.toggle(
-            "active",
-            staff ===
-            "telecaller"
-        );
-
-
-    updateRoleText();
-
-    updateFormVisibility();
-
-    await loadCurrentStaffSettings();
-
-};
-
-
-/* =========================================================
-   LOAD SETTINGS
-========================================================= */
-
-window.loadCurrentStaffSettings =
-async function(){
-
-    const staffName =
-        getStaffName();
-
-
-    showStatus(
-        "Loading " +
-        staffName +
-        " payment settings...",
-        "info"
+  const toast =
+    document.getElementById(
+      "toast"
     );
 
+  toast.textContent =
+    message;
+
+  toast.className =
+    "toast show " +
+    type;
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3500
+    );
+
+}
+
+
+/* =========================================================
+   MAIN PANEL
+========================================================= */
+
+function openMainPanel(
+  panel,
+  button
+){
+
+  document
+    .querySelectorAll(".panel")
+    .forEach(item => {
+
+      item.classList.remove(
+        "active"
+      );
+
+    });
+
+
+  document
+    .querySelectorAll(".main-tabs > .main-tab")
+    .forEach(item => {
+
+      item.classList.remove(
+        "active"
+      );
+
+    });
+
+
+  document
+    .getElementById(
+      panel + "Panel"
+    )
+    .classList.add(
+      "active"
+    );
+
+
+  button.classList.add(
+    "active"
+  );
+
+
+  if(panel === "courses"){
+
+    loadCourses();
+
+  }
+
+  if(panel === "demo"){
+
+    loadDemoSettings();
+
+  }
+
+  if(panel === "telecallerData"){
+
+    loadInquiries();
+
+  }
+
+}
+
+
+/* =========================================================
+   PAYMENT ROLE TAB
+========================================================= */
+
+function switchPaymentRole(
+  role,
+  button
+){
+
+  document
+    .querySelectorAll(
+      "#paymentPanel .main-tabs .main-tab"
+    )
+    .forEach(item => {
+
+      item.classList.remove(
+        "active"
+      );
+
+    });
+
+
+  button.classList.add(
+    "active"
+  );
+
+
+  if(role === "coordinator"){
+
+    document
+      .getElementById(
+        "coordinatorPaymentPanel"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+    document
+      .getElementById(
+        "telecallerPaymentPanel"
+      )
+      .classList.add(
+        "hidden"
+      );
+
+  }else{
+
+    document
+      .getElementById(
+        "coordinatorPaymentPanel"
+      )
+      .classList.add(
+        "hidden"
+      );
+
+    document
+      .getElementById(
+        "telecallerPaymentPanel"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+}
+
+
+/* =========================================================
+   GET DOCUMENT
+========================================================= */
+
+async function getDocument(
+  url
+){
+
+  const response =
+    await fetch(
+      url +
+      "?key=" +
+      encodeURIComponent(
+        FIREBASE_API_KEY
+      )
+    );
+
+
+  if(response.status === 404){
+
+    return null;
+
+  }
+
+
+  if(!response.ok){
+
+    let message =
+      "Firestore request failed.";
 
     try{
 
-        const response =
-            await fetch(
-                PAYMENT_URLS[
-                    currentStaff
-                ] +
-                "?key=" +
-                encodeURIComponent(
-                    FIREBASE_API_KEY
-                )
-            );
+      const data =
+        await response.json();
+
+      if(
+        data &&
+        data.error &&
+        data.error.message
+      ){
+
+        message =
+          data.error.message;
+
+      }
+
+    }catch(e){}
+
+    throw new Error(
+      message
+    );
+
+  }
 
 
-        /*
-            Document does not exist.
-        */
+  return await response.json();
 
-        if(
-            response.status ===
-            404
-        ){
-
-            if(
-                currentStaff ===
-                "coordinator"
-            ){
-
-                updateUI({
-
-                    baseSalary:
-                        DEFAULT_BASE,
-
-                    visitIncentive:
-                        DEFAULT_VISIT,
-
-                    admissionIncentive:
-                        DEFAULT_ADMISSION
-
-                });
-
-            }
-
-            else{
-
-                updateUI({
-
-                    baseSalary:
-                        DEFAULT_BASE,
-
-                    level1AdmissionIncentive:
-                        DEFAULT_LEVEL1,
-
-                    level2AdmissionIncentive:
-                        DEFAULT_LEVEL2,
-
-                    level3AdmissionIncentive:
-                        DEFAULT_LEVEL3
-
-                });
-
-            }
-
-
-            document
-                .getElementById(
-                    "lastUpdated"
-                )
-                .textContent =
-                "Not created yet";
-
-
-            showStatus(
-                staffName +
-                " settings are not created yet. Default values are shown.",
-                "info"
-            );
-
-
-            return;
-
-        }
-
-
-        if(
-            !response.ok
-        ){
-
-            const errorText =
-                await response.text();
-
-            console.error(
-                errorText
-            );
-
-            throw new Error(
-                "Unable to load settings"
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        const settings =
-            documentToObject(
-                data
-            );
-
-
-        updateUI(
-            settings
-        );
-
-
-        if(
-            settings.updatedAt
-        ){
-
-            const date =
-                new Date(
-                    settings.updatedAt
-                );
-
-
-            document
-                .getElementById(
-                    "lastUpdated"
-                )
-                .textContent =
-                "Updated " +
-                date.toLocaleString(
-                    "en-IN"
-                );
-
-        }
-
-        else{
-
-            document
-                .getElementById(
-                    "lastUpdated"
-                )
-                .textContent =
-                "Active settings";
-
-        }
-
-
-        showStatus(
-            staffName +
-            " payment settings loaded successfully.",
-            "success"
-        );
-
-    }
-
-    catch(error){
-
-        console.error(
-            error
-        );
-
-
-        showStatus(
-            "Unable to load " +
-            staffName +
-            " payment settings. Please check Firestore access.",
-            "error"
-        );
-
-    }
-
-};
+}
 
 
 /* =========================================================
-   SAVE SETTINGS
+   PAYMENT SETTINGS LOAD
 ========================================================= */
 
-paymentForm.addEventListener(
-    "submit",
-    async function(event){
+async function loadPaymentSettings(){
 
-        event.preventDefault();
+  try{
 
+    const [
+      coordinatorDoc,
+      telecallerDoc
+    ] = await Promise.all([
 
-        const staffName =
-            getStaffName();
+      getDocument(
+        PAYMENT_URLS.coordinator
+      ),
 
+      getDocument(
+        PAYMENT_URLS.telecaller
+      )
 
-        let payloadFields = {};
+    ]);
 
 
-        /*
-        =====================================================
-        COORDINATOR
-        =====================================================
-        */
+    if(coordinatorDoc){
 
-        if(
-            currentStaff ===
-            "coordinator"
-        ){
-
-            const base =
-                Number(
-                    document
-                        .getElementById(
-                            "baseSalary"
-                        )
-                        .value
-                );
-
-
-            const visit =
-                Number(
-                    document
-                        .getElementById(
-                            "visitIncentive"
-                        )
-                        .value
-                );
-
-
-            const admission =
-                Number(
-                    document
-                        .getElementById(
-                            "admissionIncentive"
-                        )
-                        .value
-                );
-
-
-            if(
-                !Number.isFinite(base) ||
-                base < 0
-            ){
-
-                showStatus(
-                    "Please enter a valid Base Salary.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            if(
-                !Number.isFinite(visit) ||
-                visit < 0
-            ){
-
-                showStatus(
-                    "Please enter a valid Visit Incentive.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            if(
-                !Number.isFinite(admission) ||
-                admission < 0
-            ){
-
-                showStatus(
-                    "Please enter a valid Admission Incentive.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            const confirmed =
-                confirm(
-                    "Save Coordinator payment settings?\n\n" +
-
-                    "Base Salary: " +
-                    formatRupee(base) +
-
-                    "\nVisited Student: " +
-                    formatRupee(visit) +
-
-                    "\nAdmission: " +
-                    formatRupee(admission)
-                );
-
-
-            if(!confirmed){
-                return;
-            }
-
-
-            payloadFields = {
-
-                baseSalary:
-                    integerValue(
-                        base
-                    ),
-
-                visitIncentive:
-                    integerValue(
-                        visit
-                    ),
-
-                admissionIncentive:
-                    integerValue(
-                        admission
-                    )
-
-            };
-
-        }
-
-
-        /*
-        =====================================================
-        TELECALLER
-        =====================================================
-        */
-
-        else{
-
-            const base =
-                Number(
-                    document
-                        .getElementById(
-                            "teleBaseSalary"
-                        )
-                        .value
-                );
-
-
-            const level1 =
-                Number(
-                    document
-                        .getElementById(
-                            "level1Admission"
-                        )
-                        .value
-                );
-
-
-            const level2 =
-                Number(
-                    document
-                        .getElementById(
-                            "level2Admission"
-                        )
-                        .value
-                );
-
-
-            const level3 =
-                Number(
-                    document
-                        .getElementById(
-                            "level3Admission"
-                        )
-                        .value
-                );
-
-
-            if(
-                !Number.isFinite(base) ||
-                base < 0
-            ){
-
-                showStatus(
-                    "Please enter a valid Telecaller Base Salary.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            if(
-                !Number.isFinite(level1) ||
-                level1 < 0
-            ){
-
-                showStatus(
-                    "Please enter a valid Level 1 Admission Incentive.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            if(
-                !Number.isFinite(level2) ||
-                level2 < 0
-            ){
-
-                showStatus(
-                    "Please enter a valid Level 2 Admission Incentive.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            if(
-                !Number.isFinite(level3) ||
-                level3 < 0
-            ){
-
-                showStatus(
-                    "Please enter a valid Level 3 Admission Incentive.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            const confirmed =
-                confirm(
-                    "Save Telecaller payment settings?\n\n" +
-
-                    "Base Salary: " +
-                    formatRupee(base) +
-
-                    "\nLevel 1 Admission: " +
-                    formatRupee(level1) +
-
-                    "\nLevel 2 Admission: " +
-                    formatRupee(level2) +
-
-                    "\nLevel 3 Admission: " +
-                    formatRupee(level3) +
-
-                    "\nVisit Reward: ₹0"
-                );
-
-
-            if(!confirmed){
-                return;
-            }
-
-
-            payloadFields = {
-
-                baseSalary:
-                    integerValue(
-                        base
-                    ),
-
-                level1AdmissionIncentive:
-                    integerValue(
-                        level1
-                    ),
-
-                level2AdmissionIncentive:
-                    integerValue(
-                        level2
-                    ),
-
-                level3AdmissionIncentive:
-                    integerValue(
-                        level3
-                    )
-
-            };
-
-        }
-
-
-        /* =================================================
-           SAVE
-        ================================================= */
-
-        saveBtn.disabled =
-            true;
-
-        saveBtn.textContent =
-            "Saving...";
-
-
-        showStatus(
-            "Saving " +
-            staffName +
-            " payment settings...",
-            "info"
+      const data =
+        documentToObject(
+          coordinatorDoc
         );
 
+      coordinatorSettings = {
 
-        const updatedAt =
-            new Date()
-                .toISOString();
+        baseSalary:
+          Number(
+            data.baseSalary ??
+            DEFAULT_COORDINATOR.baseSalary
+          ),
 
+        visitIncentive:
+          Number(
+            data.visitIncentive ??
+            DEFAULT_COORDINATOR.visitIncentive
+          ),
 
-        payloadFields.updatedAt = {
+        admissionIncentive:
+          Number(
+            data.admissionIncentive ??
+            DEFAULT_COORDINATOR.admissionIncentive
+          )
 
-            timestampValue:
-                updatedAt
+      };
 
-        };
+    }else{
 
-
-        const payload = {
-
-            fields:
-                payloadFields
-
-        };
-
-
-        try{
-
-            const response =
-                await fetch(
-                    PAYMENT_URLS[
-                        currentStaff
-                    ] +
-                    "?key=" +
-                    encodeURIComponent(
-                        FIREBASE_API_KEY
-                    ),
-                    {
-
-                        method:
-                            "PATCH",
-
-                        headers:{
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify(
-                                payload
-                            )
-
-                    }
-                );
-
-
-            if(
-                !response.ok
-            ){
-
-                const errorText =
-                    await response.text();
-
-                console.error(
-                    errorText
-                );
-
-                throw new Error(
-                    "Save failed"
-                );
-
-            }
-
-
-            /*
-                Update local UI
-            */
-
-            if(
-                currentStaff ===
-                "coordinator"
-            ){
-
-                updateUI({
-
-                    baseSalary:
-                        Number(
-                            document
-                                .getElementById(
-                                    "baseSalary"
-                                )
-                                .value
-                        ),
-
-                    visitIncentive:
-                        Number(
-                            document
-                                .getElementById(
-                                    "visitIncentive"
-                                )
-                                .value
-                        ),
-
-                    admissionIncentive:
-                        Number(
-                            document
-                                .getElementById(
-                                    "admissionIncentive"
-                                )
-                                .value
-                        ),
-
-                    updatedAt:
-                        updatedAt
-
-                });
-
-            }
-
-            else{
-
-                updateUI({
-
-                    baseSalary:
-                        Number(
-                            document
-                                .getElementById(
-                                    "teleBaseSalary"
-                                )
-                                .value
-                        ),
-
-                    level1AdmissionIncentive:
-                        Number(
-                            document
-                                .getElementById(
-                                    "level1Admission"
-                                )
-                                .value
-                        ),
-
-                    level2AdmissionIncentive:
-                        Number(
-                            document
-                                .getElementById(
-                                    "level2Admission"
-                                )
-                                .value
-                        ),
-
-                    level3AdmissionIncentive:
-                        Number(
-                            document
-                                .getElementById(
-                                    "level3Admission"
-                                )
-                                .value
-                        ),
-
-                    updatedAt:
-                        updatedAt
-
-                });
-
-            }
-
-
-            document
-                .getElementById(
-                    "lastUpdated"
-                )
-                .textContent =
-                "Updated " +
-                new Date(
-                    updatedAt
-                ).toLocaleString(
-                    "en-IN"
-                );
-
-
-            showStatus(
-                staffName +
-                " payment settings saved successfully.",
-                "success"
-            );
-
-        }
-
-        catch(error){
-
-            console.error(
-                error
-            );
-
-
-            showStatus(
-                "Unable to save " +
-                staffName +
-                " payment settings. Please check Firestore rules.",
-                "error"
-            );
-
-        }
-
-        finally{
-
-            saveBtn.disabled =
-                false;
-
-            saveBtn.textContent =
-                "Save Payment Settings";
-
-        }
+      coordinatorSettings =
+        {...DEFAULT_COORDINATOR};
 
     }
-);
+
+
+    if(telecallerDoc){
+
+      const data =
+        documentToObject(
+          telecallerDoc
+        );
+
+      telecallerSettings = {
+
+        baseSalary:
+          Number(
+            data.baseSalary ??
+            DEFAULT_TELECALLER.baseSalary
+          ),
+
+        level1AdmissionIncentive:
+          Number(
+            data.level1AdmissionIncentive ??
+            DEFAULT_TELECALLER.level1AdmissionIncentive
+          ),
+
+        level2AdmissionIncentive:
+          Number(
+            data.level2AdmissionIncentive ??
+            DEFAULT_TELECALLER.level2AdmissionIncentive
+          ),
+
+        level3AdmissionIncentive:
+          Number(
+            data.level3AdmissionIncentive ??
+            DEFAULT_TELECALLER.level3AdmissionIncentive
+          ),
+
+        level1Min:
+          Number(
+            data.level1Min ??
+            DEFAULT_TELECALLER.level1Min
+          ),
+
+        level1Max:
+          Number(
+            data.level1Max ??
+            DEFAULT_TELECALLER.level1Max
+          ),
+
+        level2Min:
+          Number(
+            data.level2Min ??
+            DEFAULT_TELECALLER.level2Min
+          ),
+
+        level2Max:
+          Number(
+            data.level2Max ??
+            DEFAULT_TELECALLER.level2Max
+          ),
+
+        level3Min:
+          Number(
+            data.level3Min ??
+            DEFAULT_TELECALLER.level3Min
+          ),
+
+        visitReward:
+          Number(
+            data.visitReward ??
+            DEFAULT_TELECALLER.visitReward
+          )
+
+      };
+
+    }else{
+
+      telecallerSettings =
+        {...DEFAULT_TELECALLER};
+
+    }
+
+
+    fillPaymentForms();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Payment settings could not be loaded: " +
+      error.message,
+      "error"
+    );
+
+    fillPaymentForms();
+
+  }
+
+}
 
 
 /* =========================================================
-   MOBILE SIDEBAR
+   FILL PAYMENT FORMS
 ========================================================= */
 
-window.toggleSidebar =
-function(){
+function fillPaymentForms(){
 
-    document
-        .getElementById(
-            "sidebar"
+  document.getElementById(
+    "coordinatorBaseSalary"
+  ).value =
+    coordinatorSettings.baseSalary;
+
+  document.getElementById(
+    "coordinatorVisitIncentive"
+  ).value =
+    coordinatorSettings.visitIncentive;
+
+  document.getElementById(
+    "coordinatorAdmissionIncentive"
+  ).value =
+    coordinatorSettings.admissionIncentive;
+
+
+  document.getElementById(
+    "telecallerBaseSalary"
+  ).value =
+    telecallerSettings.baseSalary;
+
+  document.getElementById(
+    "telecallerVisitReward"
+  ).value =
+    telecallerSettings.visitReward;
+
+  document.getElementById(
+    "level1AdmissionIncentive"
+  ).value =
+    telecallerSettings.level1AdmissionIncentive;
+
+  document.getElementById(
+    "level2AdmissionIncentive"
+  ).value =
+    telecallerSettings.level2AdmissionIncentive;
+
+  document.getElementById(
+    "level3AdmissionIncentive"
+  ).value =
+    telecallerSettings.level3AdmissionIncentive;
+
+  document.getElementById(
+    "level1Min"
+  ).value =
+    telecallerSettings.level1Min;
+
+  document.getElementById(
+    "level1Max"
+  ).value =
+    telecallerSettings.level1Max;
+
+  document.getElementById(
+    "level2Min"
+  ).value =
+    telecallerSettings.level2Min;
+
+  document.getElementById(
+    "level2Max"
+  ).value =
+    telecallerSettings.level2Max;
+
+  document.getElementById(
+    "level3Min"
+  ).value =
+    telecallerSettings.level3Min;
+
+
+  updatePaymentPreview();
+
+}
+
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+function money(value){
+
+  return "₹" +
+    Number(value || 0)
+      .toLocaleString(
+        "en-IN"
+      );
+
+}
+
+
+/* =========================================================
+   PAYMENT PREVIEW
+========================================================= */
+
+function updatePaymentPreview(){
+
+  document.getElementById(
+    "coordinatorSummaryBase"
+  ).textContent =
+    money(
+      document.getElementById(
+        "coordinatorBaseSalary"
+      ).value
+    );
+
+
+  document.getElementById(
+    "coordinatorSummaryVisit"
+  ).textContent =
+    money(
+      document.getElementById(
+        "coordinatorVisitIncentive"
+      ).value
+    );
+
+
+  document.getElementById(
+    "coordinatorSummaryAdmission"
+  ).textContent =
+    money(
+      document.getElementById(
+        "coordinatorAdmissionIncentive"
+      ).value
+    );
+
+
+  document.getElementById(
+    "telecallerSummaryBase"
+  ).textContent =
+    money(
+      document.getElementById(
+        "telecallerBaseSalary"
+      ).value
+    );
+
+
+  document.getElementById(
+    "telecallerSummaryVisit"
+  ).textContent =
+    money(
+      document.getElementById(
+        "telecallerVisitReward"
+      ).value
+    );
+
+
+  document.getElementById(
+    "summaryLevel1Rate"
+  ).textContent =
+    money(
+      document.getElementById(
+        "level1AdmissionIncentive"
+      ).value
+    );
+
+
+  document.getElementById(
+    "summaryLevel1Range"
+  ).textContent =
+    document.getElementById(
+      "level1Min"
+    ).value +
+    " - " +
+    document.getElementById(
+      "level1Max"
+    ).value +
+    " admissions";
+
+
+  document.getElementById(
+    "summaryLevel2Rate"
+  ).textContent =
+    money(
+      document.getElementById(
+        "level2AdmissionIncentive"
+      ).value
+    );
+
+
+  document.getElementById(
+    "summaryLevel2Range"
+  ).textContent =
+    document.getElementById(
+      "level2Min"
+    ).value +
+    " - " +
+    document.getElementById(
+      "level2Max"
+    ).value +
+    " admissions";
+
+
+  document.getElementById(
+    "summaryLevel3Rate"
+  ).textContent =
+    money(
+      document.getElementById(
+        "level3AdmissionIncentive"
+      ).value
+    );
+
+
+  document.getElementById(
+    "summaryLevel3Range"
+  ).textContent =
+    document.getElementById(
+      "level3Min"
+    ).value +
+    "+ admissions";
+
+}
+
+
+/* =========================================================
+   SAVE COORDINATOR
+========================================================= */
+
+async function saveCoordinatorSettings(){
+
+  const baseSalary =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "coordinatorBaseSalary"
+          ).value
+        ) || 0
+      )
+    );
+
+  const visitIncentive =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "coordinatorVisitIncentive"
+          ).value
+        ) || 0
+      )
+    );
+
+  const admissionIncentive =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "coordinatorAdmissionIncentive"
+          ).value
+        ) || 0
+      )
+    );
+
+
+  const button =
+    document.getElementById(
+      "saveCoordinatorBtn"
+    );
+
+  button.disabled = true;
+
+  button.innerHTML =
+    '<span class="loader"></span>Saving...';
+
+
+  try{
+
+    const payload = {
+
+      fields:{
+
+        baseSalary:
+          intValue(baseSalary),
+
+        visitIncentive:
+          intValue(visitIncentive),
+
+        admissionIncentive:
+          intValue(admissionIncentive),
+
+        updatedAt:
+          timestampValue()
+
+      }
+
+    };
+
+
+    const response =
+      await fetch(
+
+        PAYMENT_URLS.coordinator +
+        "?key=" +
+        encodeURIComponent(
+          FIREBASE_API_KEY
+        ),
+
+        {
+
+          method:"PATCH",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        await getErrorMessage(
+          response,
+          "Coordinator settings save failed."
         )
-        .classList.toggle(
-            "open"
-        );
+      );
 
-};
+    }
+
+
+    coordinatorSettings = {
+
+      baseSalary,
+
+      visitIncentive,
+
+      admissionIncentive
+
+    };
+
+
+    showToast(
+      "Coordinator settings saved successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Save Coordinator Settings";
+
+  }
+
+}
 
 
 /* =========================================================
-   YEAR
+   SAVE TELECALLER
+========================================================= */
+
+async function saveTelecallerSettings(){
+
+  const baseSalary =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "telecallerBaseSalary"
+          ).value
+        ) || 0
+      )
+    );
+
+
+  const visitReward =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "telecallerVisitReward"
+          ).value
+        ) || 0
+      )
+    );
+
+
+  const level1Min =
+    Math.round(
+      Number(
+        document.getElementById(
+          "level1Min"
+        ).value
+      )
+    );
+
+  const level1Max =
+    Math.round(
+      Number(
+        document.getElementById(
+          "level1Max"
+        ).value
+      )
+    );
+
+  const level2Min =
+    Math.round(
+      Number(
+        document.getElementById(
+          "level2Min"
+        ).value
+      )
+    );
+
+  const level2Max =
+    Math.round(
+      Number(
+        document.getElementById(
+          "level2Max"
+        ).value
+      )
+    );
+
+  const level3Min =
+    Math.round(
+      Number(
+        document.getElementById(
+          "level3Min"
+        ).value
+      )
+    );
+
+
+  if(
+    level1Min < 0 ||
+    level1Max < 0 ||
+    level2Min < 0 ||
+    level2Max < 0 ||
+    level3Min < 0
+  ){
+
+    showToast(
+      "Admission thresholds cannot be negative.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(level1Min > level1Max){
+
+    showToast(
+      "Level 1 minimum cannot exceed maximum.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(level2Min <= level1Max){
+
+    showToast(
+      "Level 2 minimum must be greater than Level 1 maximum.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(level2Min > level2Max){
+
+    showToast(
+      "Level 2 minimum cannot exceed maximum.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(level3Min <= level2Max){
+
+    showToast(
+      "Level 3 minimum must be greater than Level 2 maximum.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const level1AdmissionIncentive =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "level1AdmissionIncentive"
+          ).value
+        ) || 0
+      )
+    );
+
+
+  const level2AdmissionIncentive =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "level2AdmissionIncentive"
+          ).value
+        ) || 0
+      )
+    );
+
+
+  const level3AdmissionIncentive =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "level3AdmissionIncentive"
+          ).value
+        ) || 0
+      )
+    );
+
+
+  const button =
+    document.getElementById(
+      "saveTelecallerBtn"
+    );
+
+  button.disabled = true;
+
+  button.innerHTML =
+    '<span class="loader"></span>Saving...';
+
+
+  try{
+
+    const payload = {
+
+      fields:{
+
+        baseSalary:
+          intValue(baseSalary),
+
+        level1AdmissionIncentive:
+          intValue(
+            level1AdmissionIncentive
+          ),
+
+        level2AdmissionIncentive:
+          intValue(
+            level2AdmissionIncentive
+          ),
+
+        level3AdmissionIncentive:
+          intValue(
+            level3AdmissionIncentive
+          ),
+
+        level1Min:
+          intValue(level1Min),
+
+        level1Max:
+          intValue(level1Max),
+
+        level2Min:
+          intValue(level2Min),
+
+        level2Max:
+          intValue(level2Max),
+
+        level3Min:
+          intValue(level3Min),
+
+        visitReward:
+          intValue(visitReward),
+
+        updatedAt:
+          timestampValue()
+
+      }
+
+    };
+
+
+    const response =
+      await fetch(
+
+        PAYMENT_URLS.telecaller +
+        "?key=" +
+        encodeURIComponent(
+          FIREBASE_API_KEY
+        ),
+
+        {
+
+          method:"PATCH",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        await getErrorMessage(
+          response,
+          "Telecaller settings save failed."
+        )
+      );
+
+    }
+
+
+    telecallerSettings = {
+
+      baseSalary,
+
+      level1AdmissionIncentive,
+
+      level2AdmissionIncentive,
+
+      level3AdmissionIncentive,
+
+      level1Min,
+
+      level1Max,
+
+      level2Min,
+
+      level2Max,
+
+      level3Min,
+
+      visitReward
+
+    };
+
+
+    showToast(
+      "Telecaller settings saved successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Save Telecaller Settings";
+
+  }
+
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
+
+async function getErrorMessage(
+  response,
+  fallback
+){
+
+  try{
+
+    const data =
+      await response.json();
+
+    if(
+      data &&
+      data.error &&
+      data.error.message
+    ){
+
+      return data.error.message;
+
+    }
+
+  }catch(e){}
+
+  return fallback;
+
+}
+
+
+/* =========================================================
+   DEMO SETTINGS
+========================================================= */
+
+async function loadDemoSettings(){
+
+  try{
+
+    const doc =
+      await getDocument(
+        PAYMENT_URLS.demo
+      );
+
+
+    if(doc){
+
+      const data =
+        documentToObject(
+          doc
+        );
+
+      demoSettings = {
+
+        demoClassAmount:
+          Number(
+            data.demoClassAmount ??
+            DEFAULT_DEMO.demoClassAmount
+          )
+
+      };
+
+    }else{
+
+      demoSettings =
+        {...DEFAULT_DEMO};
+
+    }
+
+
+    document.getElementById(
+      "demoClassAmount"
+    ).value =
+      demoSettings.demoClassAmount;
+
+
+    updateDemoPreview();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Demo settings could not be loaded: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   DEMO PREVIEW
+========================================================= */
+
+function updateDemoPreview(){
+
+  document.getElementById(
+    "demoAmountPreview"
+  ).textContent =
+    money(
+      document.getElementById(
+        "demoClassAmount"
+      ).value
+    );
+
+}
+
+
+/* =========================================================
+   SAVE DEMO
+========================================================= */
+
+async function saveDemoSettings(){
+
+  const demoClassAmount =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "demoClassAmount"
+          ).value
+        ) || 0
+      )
+    );
+
+
+  const button =
+    document.getElementById(
+      "saveDemoBtn"
+    );
+
+  button.disabled = true;
+
+  button.innerHTML =
+    '<span class="loader"></span>Saving...';
+
+
+  try{
+
+    const payload = {
+
+      fields:{
+
+        demoClassAmount:
+          intValue(
+            demoClassAmount
+          ),
+
+        updatedAt:
+          timestampValue()
+
+      }
+
+    };
+
+
+    const response =
+      await fetch(
+
+        PAYMENT_URLS.demo +
+        "?key=" +
+        encodeURIComponent(
+          FIREBASE_API_KEY
+        ),
+
+        {
+
+          method:"PATCH",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        await getErrorMessage(
+          response,
+          "Demo settings save failed."
+        )
+      );
+
+    }
+
+
+    demoSettings = {
+
+      demoClassAmount
+
+    };
+
+
+    updateDemoPreview();
+
+
+    showToast(
+      "Demo class amount saved successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Save Demo Class Amount";
+
+  }
+
+}
+
+
+/* =========================================================
+   COURSE LIST
+========================================================= */
+
+async function loadCourses(){
+
+  const list =
+    document.getElementById(
+      "courseList"
+    );
+
+  list.innerHTML =
+    '<div class="empty">Loading courses...</div>';
+
+
+  try{
+
+    courses =
+      await listAllDocuments(
+        COURSE_URL
+      );
+
+
+    renderCourses();
+
+    populateCourseFilter();
+
+  }catch(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      '<div class="empty">Unable to load courses.</div>';
+
+    showToast(
+      "Course loading failed: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   FIRESTORE PAGINATION
+========================================================= */
+
+async function listAllDocuments(
+  baseUrl
+){
+
+  let all = [];
+
+  let pageToken = "";
+
+  do{
+
+    let url =
+      baseUrl +
+      "?key=" +
+      encodeURIComponent(
+        FIREBASE_API_KEY
+      ) +
+      "&pageSize=300";
+
+
+    if(pageToken){
+
+      url +=
+        "&pageToken=" +
+        encodeURIComponent(
+          pageToken
+        );
+
+    }
+
+
+    const response =
+      await fetch(url);
+
+
+    if(!response.ok){
+
+      throw new Error(
+        await getErrorMessage(
+          response,
+          "Unable to load Firestore collection."
+        )
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      data &&
+      Array.isArray(
+        data.documents
+      )
+    ){
+
+      all =
+        all.concat(
+          data.documents.map(
+            documentToObject
+          )
+        );
+
+    }
+
+
+    pageToken =
+      data.nextPageToken ||
+      "";
+
+  }while(pageToken);
+
+
+  return all;
+
+}
+
+
+/* =========================================================
+   COURSE RENDER
+========================================================= */
+
+function renderCourses(){
+
+  const list =
+    document.getElementById(
+      "courseList"
+    );
+
+
+  if(!courses.length){
+
+    list.innerHTML =
+      '<div class="empty">No courses added yet.</div>';
+
+    return;
+
+  }
+
+
+  courses.sort(
+    (a,b) =>
+      String(
+        a.courseName || ""
+      ).localeCompare(
+        String(
+          b.courseName || ""
+        )
+      )
+  );
+
+
+  list.innerHTML =
+    courses.map(
+      course => {
+
+        const active =
+          course.active !== false;
+
+        return `
+
+          <div class="course-row">
+
+            <div>
+
+              <div class="course-name">
+                ${escapeHtml(
+                  course.courseName ||
+                  "Unnamed Course"
+                )}
+              </div>
+
+              <div class="course-meta">
+
+                <span class="course-chip price">
+                  ${money(
+                    course.price || 0
+                  )}
+                </span>
+
+                <span class="course-chip">
+                  ${escapeHtml(
+                    course.duration ||
+                    "Not specified"
+                  )}
+                </span>
+
+                <span class="course-chip ${
+                  active
+                    ? ""
+                    : "inactive"
+                }">
+                  ${
+                    active
+                      ? "Active"
+                      : "Inactive"
+                  }
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="course-actions">
+
+              <button
+                style="background:#f3f4f6;color:#374151;"
+                onclick="editCourse('${escapeJs(
+                  course._id
+                )}')">
+                Edit
+              </button>
+
+              <button
+                style="background:#fee2e2;color:#b91c1c;"
+                onclick="deleteCourse('${escapeJs(
+                  course._id
+                )}')">
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
+}
+
+
+function escapeJs(value){
+
+  return String(
+    value ?? ""
+  )
+  .replaceAll("\\","\\\\")
+  .replaceAll("'","\\'");
+
+}
+
+
+/* =========================================================
+   COURSE SAVE
+========================================================= */
+
+async function saveCourse(){
+
+  const courseName =
+    document.getElementById(
+      "courseName"
+    ).value.trim();
+
+
+  const price =
+    Math.max(
+      0,
+      Math.round(
+        Number(
+          document.getElementById(
+            "coursePrice"
+          ).value
+        ) || 0
+      )
+    );
+
+
+  const duration =
+    document.getElementById(
+      "courseDuration"
+    ).value.trim();
+
+
+  const active =
+    document.getElementById(
+      "courseActive"
+    ).value === "true";
+
+
+  if(!courseName){
+
+    showToast(
+      "Please enter course name.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!duration){
+
+    showToast(
+      "Please enter course duration.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "saveCourseBtn"
+    );
+
+  button.disabled = true;
+
+  button.innerHTML =
+    '<span class="loader"></span>Saving...';
+
+
+  try{
+
+    const fields = {
+
+      courseName:
+        stringValue(
+          courseName
+        ),
+
+      price:
+        intValue(price),
+
+      duration:
+        stringValue(
+          duration
+        ),
+
+      active:
+        boolValue(active),
+
+      updatedAt:
+        timestampValue()
+
+    };
+
+
+    let response;
+
+
+    if(editingCourseId){
+
+      response =
+        await fetch(
+
+          COURSE_URL +
+          "/" +
+          encodeURIComponent(
+            editingCourseId
+          ) +
+          "?key=" +
+          encodeURIComponent(
+            FIREBASE_API_KEY
+          ),
+
+          {
+
+            method:"PATCH",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+                fields
+              })
+
+          }
+
+        );
+
+    }else{
+
+      response =
+        await fetch(
+
+          COURSE_URL +
+          "?key=" +
+          encodeURIComponent(
+            FIREBASE_API_KEY
+          ),
+
+          {
+
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+                fields
+              })
+
+          }
+
+        );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        await getErrorMessage(
+          response,
+          "Course save failed."
+        )
+      );
+
+    }
+
+
+    showToast(
+      editingCourseId
+        ? "Course updated successfully."
+        : "Course added successfully.",
+      "success"
+    );
+
+
+    resetCourseForm();
+
+    await loadCourses();
+
+  }catch(error){
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      editingCourseId
+        ? "Update Course"
+        : "Add Course";
+
+  }
+
+}
+
+
+/* =========================================================
+   EDIT COURSE
+========================================================= */
+
+function editCourse(
+  id
+){
+
+  const course =
+    courses.find(
+      item =>
+        item._id === id
+    );
+
+
+  if(!course){
+
+    showToast(
+      "Course not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  editingCourseId =
+    id;
+
+
+  document.getElementById(
+    "courseFormTitle"
+  ).textContent =
+    "Edit Course";
+
+
+  document.getElementById(
+    "courseName"
+  ).value =
+    course.courseName || "";
+
+
+  document.getElementById(
+    "coursePrice"
+  ).value =
+    Number(
+      course.price || 0
+    );
+
+
+  document.getElementById(
+    "courseDuration"
+  ).value =
+    course.duration || "";
+
+
+  document.getElementById(
+    "courseActive"
+  ).value =
+    course.active === false
+      ? "false"
+      : "true";
+
+
+  document.getElementById(
+    "saveCourseBtn"
+  ).textContent =
+    "Update Course";
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   RESET COURSE
+========================================================= */
+
+function resetCourseForm(){
+
+  editingCourseId =
+    null;
+
+
+  document.getElementById(
+    "courseFormTitle"
+  ).textContent =
+    "Add Course";
+
+
+  document.getElementById(
+    "courseName"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "coursePrice"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "courseDuration"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "courseActive"
+  ).value =
+    "true";
+
+
+  document.getElementById(
+    "saveCourseBtn"
+  ).textContent =
+    "Add Course";
+
+}
+
+
+/* =========================================================
+   DELETE COURSE
+========================================================= */
+
+async function deleteCourse(
+  id
+){
+
+  const course =
+    courses.find(
+      item =>
+        item._id === id
+    );
+
+
+  if(!course){
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "Delete course \"" +
+      course.courseName +
+      "\"?"
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        COURSE_URL +
+        "/" +
+        encodeURIComponent(
+          id
+        ) +
+        "?key=" +
+        encodeURIComponent(
+          FIREBASE_API_KEY
+        ),
+
+        {
+          method:"DELETE"
+        }
+
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        await getErrorMessage(
+          response,
+          "Course delete failed."
+        )
+      );
+
+    }
+
+
+    showToast(
+      "Course deleted successfully.",
+      "success"
+    );
+
+
+    await loadCourses();
+
+  }catch(error){
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   COURSE FILTER
+========================================================= */
+
+function populateCourseFilter(){
+
+  const select =
+    document.getElementById(
+      "inquiryCourseFilter"
+    );
+
+
+  const current =
+    select.value;
+
+
+  const names =
+    [...new Set(
+      courses
+        .map(
+          course =>
+            String(
+              course.courseName || ""
+            ).trim()
+        )
+        .filter(Boolean)
+    )]
+    .sort();
+
+
+  select.innerHTML =
+    '<option value="">All Courses</option>' +
+    names.map(
+      name =>
+        `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`
+    ).join("");
+
+
+  select.value =
+    current;
+
+}
+
+
+/* =========================================================
+   TELECALLER INQUIRIES
+========================================================= */
+
+async function loadInquiries(){
+
+  const body =
+    document.getElementById(
+      "inquiryTableBody"
+    );
+
+
+  body.innerHTML =
+    `
+      <tr>
+        <td colspan="9" class="empty">
+          Loading Telecaller data...
+        </td>
+      </tr>
+    `;
+
+
+  try{
+
+    inquiries =
+      await listAllDocuments(
+        INQUIRY_URL
+      );
+
+
+    inquiries.sort(
+      (a,b) => {
+
+        const da =
+          new Date(
+            a.createdAt || 0
+          ).getTime();
+
+        const db =
+          new Date(
+            b.createdAt || 0
+          ).getTime();
+
+        return db - da;
+
+      }
+    );
+
+
+    populateInquiryFilters();
+
+    updateInquiryStats();
+
+    applyInquiryFilters();
+
+  }catch(error){
+
+    console.error(error);
+
+    body.innerHTML =
+      `
+        <tr>
+          <td colspan="9" class="empty">
+            Unable to load Telecaller data.
+          </td>
+        </tr>
+      `;
+
+
+    showToast(
+      "Telecaller data loading failed: " +
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   FILTER OPTIONS
+========================================================= */
+
+function populateInquiryFilters(){
+
+  const courseSelect =
+    document.getElementById(
+      "inquiryCourseFilter"
+    );
+
+
+  const coordinatorSelect =
+    document.getElementById(
+      "inquiryCoordinatorFilter"
+    );
+
+
+  const currentCourse =
+    courseSelect.value;
+
+
+  const currentCoordinator =
+    coordinatorSelect.value;
+
+
+  const courseNames =
+    [...new Set(
+      inquiries
+        .map(
+          item =>
+            String(
+              item.course || ""
+            ).trim()
+        )
+        .filter(Boolean)
+    )]
+    .sort();
+
+
+  const coordinators =
+    [...new Set(
+      inquiries
+        .map(
+          item =>
+            String(
+              item.coordinatorName || ""
+            ).trim()
+        )
+        .filter(Boolean)
+    )]
+    .sort();
+
+
+  courseSelect.innerHTML =
+    '<option value="">All Courses</option>' +
+    courseNames
+      .map(
+        name =>
+          `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`
+      )
+      .join("");
+
+
+  coordinatorSelect.innerHTML =
+    '<option value="">All Coordinators</option>' +
+    coordinators
+      .map(
+        name =>
+          `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`
+      )
+      .join("");
+
+
+  courseSelect.value =
+    currentCourse;
+
+  coordinatorSelect.value =
+    currentCoordinator;
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateInquiryStats(){
+
+  const countStatus =
+    status =>
+
+      inquiries.filter(
+        item =>
+          String(
+            item.status || ""
+          ).toLowerCase() ===
+          status
+      ).length;
+
+
+  document.getElementById(
+    "statTotal"
+  ).textContent =
+    inquiries.length;
+
+
+  document.getElementById(
+    "statNew"
+  ).textContent =
+    countStatus("new");
+
+
+  document.getElementById(
+    "statContacted"
+  ).textContent =
+    countStatus("contacted");
+
+
+  document.getElementById(
+    "statFollowUp"
+  ).textContent =
+    countStatus("follow-up");
+
+
+  document.getElementById(
+    "statVisited"
+  ).textContent =
+    countStatus("visited");
+
+
+  document.getElementById(
+    "statConverted"
+  ).textContent =
+    countStatus("converted");
+
+}
+
+
+/* =========================================================
+   APPLY FILTERS
+========================================================= */
+
+function applyInquiryFilters(){
+
+  const search =
+    document.getElementById(
+      "inquirySearch"
+    ).value
+      .trim()
+      .toLowerCase();
+
+
+  const status =
+    document.getElementById(
+      "inquiryStatusFilter"
+    ).value
+      .toLowerCase();
+
+
+  const course =
+    document.getElementById(
+      "inquiryCourseFilter"
+    ).value
+      .toLowerCase();
+
+
+  const coordinator =
+    document.getElementById(
+      "inquiryCoordinatorFilter"
+    ).value
+      .toLowerCase();
+
+
+  filteredInquiries =
+    inquiries.filter(
+      item => {
+
+        const haystack = [
+
+          item.studentName,
+
+          item.mobile,
+
+          item.course,
+
+          item.source,
+
+          item.remark,
+
+          item.coordinatorName,
+
+          item.coordinatorMobile,
+
+          item.telecallerName,
+
+          item.telecallerMobile,
+
+          item.telecallerRemark
+
+        ]
+        .map(
+          value =>
+            String(
+              value || ""
+            ).toLowerCase()
+        )
+        .join(" ");
+
+
+        if(
+          search &&
+          !haystack.includes(
+            search
+          )
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          status &&
+          String(
+            item.status || ""
+          ).toLowerCase() !==
+          status
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          course &&
+          String(
+            item.course || ""
+          ).toLowerCase() !==
+          course
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          coordinator &&
+          String(
+            item.coordinatorName || ""
+          ).toLowerCase() !==
+          coordinator
+        ){
+
+          return false;
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  currentInquiryPage =
+    1;
+
+
+  renderInquiryTable();
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderInquiryTable(){
+
+  const body =
+    document.getElementById(
+      "inquiryTableBody"
+    );
+
+
+  const total =
+    filteredInquiries.length;
+
+
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(
+        total /
+        INQUIRIES_PER_PAGE
+      )
+    );
+
+
+  if(
+    currentInquiryPage >
+    totalPages
+  ){
+
+    currentInquiryPage =
+      totalPages;
+
+  }
+
+
+  const start =
+    (
+      currentInquiryPage -
+      1
+    ) *
+    INQUIRIES_PER_PAGE;
+
+
+  const end =
+    start +
+    INQUIRIES_PER_PAGE;
+
+
+  const pageItems =
+    filteredInquiries.slice(
+      start,
+      end
+    );
+
+
+  if(!pageItems.length){
+
+    body.innerHTML =
+      `
+        <tr>
+          <td colspan="9" class="empty">
+            No inquiry data found.
+          </td>
+        </tr>
+      `;
+
+  }else{
+
+    body.innerHTML =
+      pageItems
+        .map(
+          renderInquiryRow
+        )
+        .join("");
+
+  }
+
+
+  document.getElementById(
+    "paginationInfo"
+  ).textContent =
+    total === 0
+      ? "0 inquiries"
+      :
+        (
+          (start + 1) +
+          " - " +
+          Math.min(
+            end,
+            total
+          ) +
+          " of " +
+          total +
+          " inquiries"
+        );
+
+
+  renderPagination(
+    totalPages
+  );
+
+}
+
+
+/* =========================================================
+   RENDER ROW
+========================================================= */
+
+function renderInquiryRow(
+  item
+){
+
+  const status =
+    String(
+      item.status ||
+      "new"
+    ).toLowerCase();
+
+
+  const telecallerStatus =
+    String(
+      item.telecallerStatus ||
+      "pending"
+    ).toLowerCase();
+
+
+  const coordinator =
+    item.coordinatorName ||
+    "-";
+
+
+  const created =
+    formatDate(
+      item.createdAt
+    );
+
+
+  const followUp =
+    item.followUpDate ||
+    "-";
+
+
+  const phone =
+    String(
+      item.mobile || ""
+    ).replace(
+      /\D/g,
+      ""
+    );
+
+
+  return `
+
+    <tr>
+
+      <td>
+
+        <div class="student-name">
+          ${escapeHtml(
+            item.studentName ||
+            "Unknown Student"
+          )}
+        </div>
+
+        <div class="student-mobile">
+          ${escapeHtml(
+            item.mobile ||
+            "-"
+          )}
+        </div>
+
+      </td>
+
+
+      <td>
+        ${escapeHtml(
+          item.course ||
+          "-"
+        )}
+      </td>
+
+
+      <td>
+        ${escapeHtml(
+          item.source ||
+          "-"
+        )}
+      </td>
+
+
+      <td>
+        ${escapeHtml(
+          coordinator
+        )}
+      </td>
+
+
+      <td>
+
+        <span class="status-pill status-${escapeHtml(
+          status
+            .replaceAll(" ","-")
+        )}">
+
+          ${escapeHtml(
+            status
+          )}
+
+        </span>
+
+      </td>
+
+
+      <td>
+
+        <span class="status-pill status-${escapeHtml(
+          telecallerStatus
+            .replaceAll(" ","-")
+        )}">
+
+          ${escapeHtml(
+            telecallerStatus
+          )}
+
+        </span>
+
+      </td>
+
+
+      <td>
+        ${escapeHtml(
+          followUp
+        )}
+      </td>
+
+
+      <td>
+        ${escapeHtml(
+          created
+        )}
+      </td>
+
+
+      <td>
+
+        <div class="action-mini">
+
+          <button
+            title="View"
+            onclick="viewInquiry('${escapeJs(
+              item._id
+            )}')">
+            👁
+          </button>
+
+          ${
+            phone
+              ?
+              `
+                <button
+                  title="Call"
+                  onclick="callStudent('${escapeJs(
+                    phone
+                  )}')">
+                  ☎
+                </button>
+              `
+              :
+              ""
+          }
+
+          ${
+            phone
+              ?
+              `
+                <button
+                  title="WhatsApp"
+                  onclick="whatsappStudent('${escapeJs(
+                    phone
+                  )}')">
+                  W
+                </button>
+              `
+              :
+              ""
+          }
+
+        </div>
+
+      </td>
+
+    </tr>
+
+  `;
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(
+  value
+){
+
+  if(!value){
+
+    return "-";
+
+  }
+
+
+  const date =
+    new Date(
+      value
+    );
+
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return String(
+      value
+    );
+
+  }
+
+
+  return date.toLocaleString(
+    "en-IN",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPagination(
+  totalPages
+){
+
+  const container =
+    document.getElementById(
+      "paginationButtons"
+    );
+
+
+  container.innerHTML =
+    "";
+
+
+  if(totalPages <= 1){
+
+    return;
+
+  }
+
+
+  const previous =
+    document.createElement(
+      "button"
+    );
+
+  previous.textContent =
+    "‹";
+
+  previous.disabled =
+    currentInquiryPage === 1;
+
+  previous.onclick =
+    () => {
+
+      if(
+        currentInquiryPage >
+        1
+      ){
+
+        currentInquiryPage--;
+
+        renderInquiryTable();
+
+      }
+
+    };
+
+
+  container.appendChild(
+    previous
+  );
+
+
+  let start =
+    Math.max(
+      1,
+      currentInquiryPage - 2
+    );
+
+
+  let end =
+    Math.min(
+      totalPages,
+      start + 4
+    );
+
+
+  if(
+    end - start <
+    4
+  ){
+
+    start =
+      Math.max(
+        1,
+        end - 4
+      );
+
+  }
+
+
+  for(
+    let i = start;
+    i <= end;
+    i++
+  ){
+
+    const button =
+      document.createElement(
+        "button"
+      );
+
+    button.textContent =
+      i;
+
+
+    if(
+      i ===
+      currentInquiryPage
+    ){
+
+      button.classList.add(
+        "active"
+      );
+
+    }
+
+
+    button.onclick =
+      () => {
+
+        currentInquiryPage =
+          i;
+
+        renderInquiryTable();
+
+      };
+
+
+    container.appendChild(
+      button
+    );
+
+  }
+
+
+  const next =
+    document.createElement(
+      "button"
+    );
+
+  next.textContent =
+    "›";
+
+  next.disabled =
+    currentInquiryPage ===
+    totalPages;
+
+  next.onclick =
+    () => {
+
+      if(
+        currentInquiryPage <
+        totalPages
+      ){
+
+        currentInquiryPage++;
+
+        renderInquiryTable();
+
+      }
+
+    };
+
+
+  container.appendChild(
+    next
+  );
+
+}
+
+
+/* =========================================================
+   VIEW INQUIRY
+========================================================= */
+
+function viewInquiry(
+  id
+){
+
+  const item =
+    inquiries.find(
+      inquiry =>
+        inquiry._id === id
+    );
+
+
+  if(!item){
+
+    showToast(
+      "Inquiry not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const body =
+    document.getElementById(
+      "studentModalBody"
+    );
+
+
+  body.innerHTML = `
+
+    <div class="detail-grid">
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Student Name
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.studentName ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Mobile
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.mobile ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Course
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.course ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Source
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.source ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Status
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.status ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Telecaller Status
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.telecallerStatus ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Coordinator
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.coordinatorName ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Coordinator Mobile
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.coordinatorMobile ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Telecaller
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.telecallerName ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Telecaller Mobile
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.telecallerMobile ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Follow Up Date
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.followUpDate ||
+            "-"
+          )}
+        </div>
+      </div>
+
+
+      <div class="detail-item">
+        <div class="detail-label">
+          Created At
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            formatDate(
+              item.createdAt
+            )
+          )}
+        </div>
+      </div>
+
+
+      <div
+        class="detail-item"
+        style="grid-column:1/-1;">
+
+        <div class="detail-label">
+          Coordinator Remark
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.remark ||
+            "-"
+          )}
+        </div>
+
+      </div>
+
+
+      <div
+        class="detail-item"
+        style="grid-column:1/-1;">
+
+        <div class="detail-label">
+          Telecaller Remark
+        </div>
+
+        <div class="detail-value">
+          ${escapeHtml(
+            item.telecallerRemark ||
+            "-"
+          )}
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById(
+      "studentModal"
+    )
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeStudentModal(){
+
+  document
+    .getElementById(
+      "studentModal"
+    )
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+document
+  .getElementById(
+    "studentModal"
+  )
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target.id ===
+        "studentModal"
+      ){
+
+        closeStudentModal();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   CALL
+========================================================= */
+
+function callStudent(
+  phone
+){
+
+  if(!phone){
+
+    return;
+
+  }
+
+
+  window.location.href =
+    "tel:" +
+    phone;
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function whatsappStudent(
+  phone
+){
+
+  if(!phone){
+
+    return;
+
+  }
+
+
+  const clean =
+    String(
+      phone
+    ).replace(
+      /\D/g,
+      ""
+    );
+
+
+  let number =
+    clean;
+
+
+  if(
+    number.length ===
+    10
+  ){
+
+    number =
+      "91" +
+      number;
+
+  }
+
+
+  window.open(
+    "https://wa.me/" +
+    number,
+    "_blank"
+  );
+
+}
+
+
+/* =========================================================
+   SEARCH / FILTER EVENTS
 ========================================================= */
 
 document
-    .getElementById(
-        "year"
-    )
-    .textContent =
-    new Date().getFullYear();
+  .getElementById(
+    "inquirySearch"
+  )
+  .addEventListener(
+    "input",
+    applyInquiryFilters
+  );
+
+
+document
+  .getElementById(
+    "inquiryStatusFilter"
+  )
+  .addEventListener(
+    "change",
+    applyInquiryFilters
+  );
+
+
+document
+  .getElementById(
+    "inquiryCourseFilter"
+  )
+  .addEventListener(
+    "change",
+    applyInquiryFilters
+  );
+
+
+document
+  .getElementById(
+    "inquiryCoordinatorFilter"
+  )
+  .addEventListener(
+    "change",
+    applyInquiryFilters
+  );
+
+
+/* =========================================================
+   LIVE PAYMENT PREVIEW
+========================================================= */
+
+document
+  .querySelectorAll(
+    "#paymentPanel input"
+  )
+  .forEach(
+    input => {
+
+      input.addEventListener(
+        "input",
+        updatePaymentPreview
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   LIVE DEMO PREVIEW
+========================================================= */
+
+document
+  .getElementById(
+    "demoClassAmount"
+  )
+  .addEventListener(
+    "input",
+    updateDemoPreview
+  );
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+document
+  .getElementById(
+    "mobileMenu"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "sidebar"
+        )
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
 
 
 /* =========================================================
    INITIAL LOAD
 ========================================================= */
 
-updateRoleText();
+updatePaymentPreview();
 
-updateFormVisibility();
+updateDemoPreview();
 
-loadCurrentStaffSettings();
+loadPaymentSettings();
 
+loadDemoSettings();
+
+loadCourses();
 
 </script>
 
 </body>
-
 </html>

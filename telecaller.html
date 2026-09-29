@@ -455,6 +455,28 @@
       font-weight:800;
     }
 
+    .progress{
+      height:8px;
+      background:#e5e7eb;
+      border-radius:20px;
+      overflow:hidden;
+      margin-top:12px;
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:#111827;
+      border-radius:20px;
+      transition:.3s;
+    }
+
+    .next-level-text{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:8px;
+    }
+
     .salary-box{
       margin-top:15px;
       border-radius:14px;
@@ -666,7 +688,8 @@
       color:#15803d;
     }
 
-    .badge-demo-completed{
+    .badge-demo-completed,
+    .badge-demo{
       background:#ecfeff;
       color:#0e7490;
     }
@@ -679,11 +702,6 @@
     .badge-not-interested{
       background:#fef2f2;
       color:#b91c1c;
-    }
-
-    .badge-closed{
-      background:#f3f4f6;
-      color:#374151;
     }
 
     .badge-custom{
@@ -1212,17 +1230,6 @@
       gap:8px;
     }
 
-    /* CUSTOM STATUS */
-
-    #customStatusBox{
-      display:none;
-      margin-bottom:13px;
-    }
-
-    #customStatusBox.show{
-      display:block;
-    }
-
     /* TOAST */
 
     .toast-container{
@@ -1404,7 +1411,6 @@
 
 <div class="app">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
 
     <div class="brand">
@@ -1447,7 +1453,6 @@
 
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
 
     <header class="topbar">
@@ -1484,7 +1489,7 @@
 
     <div class="content">
 
-      <!-- DASHBOARD -->
+      <!-- ================= DASHBOARD ================= -->
 
       <section class="section active" id="dashboard">
 
@@ -1612,7 +1617,8 @@
               Level is automatically determined from current-month converted admissions.
             </div>
 
-            <div id="levelCards"></div>
+            <div id="levelCards">
+            </div>
 
             <div class="next-level-text" id="levelProgressText">
               Loading...
@@ -1625,7 +1631,7 @@
       </section>
 
 
-      <!-- INQUIRIES -->
+      <!-- ================= INQUIRIES ================= -->
 
       <section class="section" id="inquiries">
 
@@ -1654,17 +1660,49 @@
 
               <option value="">All Status</option>
 
-              <option value="new">New</option>
-              <option value="pending">Pending</option>
-              <option value="interested">Interested</option>
-              <option value="contacted">Contacted</option>
-              <option value="delay">Delay</option>
-              <option value="follow-up">Follow-up</option>
-              <option value="visited">Visited</option>
-              <option value="demo-completed">Demo Completed</option>
-              <option value="converted">Converted</option>
-              <option value="not-interested">Not Interested</option>
-              <option value="closed">Closed</option>
+              <option value="new">
+                New
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="interested">
+                Interested
+              </option>
+
+              <option value="contacted">
+                Contacted
+              </option>
+
+              <option value="delay">
+                Delay
+              </option>
+
+              <option value="follow-up">
+                Follow-up
+              </option>
+
+              <option value="visited">
+                Visited
+              </option>
+
+              <option value="demo-completed">
+                Demo Completed
+              </option>
+
+              <option value="converted">
+                Converted
+              </option>
+
+              <option value="not-interested">
+                Not Interested
+              </option>
+
+              <option value="custom">
+                Custom Status
+              </option>
 
             </select>
 
@@ -1758,7 +1796,7 @@
       </section>
 
 
-      <!-- COURSES -->
+      <!-- ================= COURSES ================= -->
 
       <section class="section" id="courses">
 
@@ -1836,7 +1874,7 @@
       </section>
 
 
-      <!-- EARNINGS -->
+      <!-- ================= EARNINGS ================= -->
 
       <section class="section" id="earnings">
 
@@ -1870,27 +1908,34 @@
               <div class="earning-item-label">
                 BASE SALARY
               </div>
+
               <div class="earning-item-value" id="earningPageBase">
                 ₹0
               </div>
             </div>
 
             <div class="earning-item">
+
               <div class="earning-item-label">
                 DEMO CLASSES
               </div>
+
               <div class="earning-item-value" id="earningPageDemo">
                 ₹0
               </div>
+
             </div>
 
             <div class="earning-item">
+
               <div class="earning-item-label">
                 ADMISSIONS
               </div>
+
               <div class="earning-item-value" id="earningPageAdmission">
                 ₹0
               </div>
+
             </div>
 
           </div>
@@ -1996,7 +2041,7 @@
 </div>
 
 
-<!-- DETAIL MODAL -->
+<!-- ================= DETAIL MODAL ================= -->
 
 <div class="modal-overlay" id="detailModal">
 
@@ -2059,6 +2104,11 @@
         </div>
 
         <div class="detail-box">
+          <div class="detail-label">Custom Status</div>
+          <div class="detail-value" id="detailCustomStatus">-</div>
+        </div>
+
+        <div class="detail-box">
           <div class="detail-label">Follow-up Date</div>
           <div class="detail-value" id="detailFollowup">-</div>
         </div>
@@ -2103,7 +2153,7 @@
 </div>
 
 
-<!-- STATUS MODAL -->
+<!-- ================= STATUS MODAL ================= -->
 
 <div class="modal-overlay" id="statusModal">
 
@@ -2140,7 +2190,6 @@
 
       </div>
 
-
       <div style="margin-bottom:13px;">
 
         <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
@@ -2149,7 +2198,9 @@
 
         <select class="select" id="newStatus">
 
-          <option value="new">New</option>
+          <option value="new">
+            New
+          </option>
 
           <option value="pending">
             Pending
@@ -2187,10 +2238,6 @@
             Not Interested
           </option>
 
-          <option value="closed">
-            Closed
-          </option>
-
           <option value="custom">
             Custom Status
           </option>
@@ -2202,7 +2249,10 @@
 
       <!-- CUSTOM STATUS -->
 
-      <div id="customStatusBox">
+      <div
+        id="customStatusBox"
+        style="display:none;margin-bottom:13px;"
+      >
 
         <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
           Custom Status
@@ -2211,10 +2261,14 @@
         <input
           type="text"
           class="input"
-          id="customStatusInput"
-          placeholder="Example: Call Tomorrow, Waiting for Parent, Thinking..."
-          maxlength="60"
+          id="newCustomStatus"
+          maxlength="80"
+          placeholder="Enter custom status..."
         >
+
+        <div style="font-size:9px;color:#6b7280;margin-top:5px;">
+          Example: Call Tomorrow, Waiting for Parents, Fee Issue, Join Next Month
+        </div>
 
       </div>
 
@@ -2277,30 +2331,20 @@
      AUTH / SESSION
   ============================================================ */
 
-  const loggedIn =
-    sessionStorage.getItem("bt_logged_in");
-
-  const userRole =
-    sessionStorage.getItem("bt_user_role");
+  const loggedIn = sessionStorage.getItem("bt_logged_in");
+  const userRole = sessionStorage.getItem("bt_user_role");
 
   const telecallerName =
-    sessionStorage.getItem("bt_user_name") ||
-    "Telecaller";
+    sessionStorage.getItem("bt_user_name") || "Telecaller";
 
   const telecallerMobile =
-    sessionStorage.getItem("bt_user_mobile") ||
-    "";
-
+    sessionStorage.getItem("bt_user_mobile") || "";
 
   if(
     loggedIn !== "true" ||
     userRole !== "telecaller"
   ){
-
-    window.location.replace(
-      "login.html"
-    );
-
+    window.location.replace("login.html");
   }
 
 
@@ -2308,8 +2352,7 @@
      FIRESTORE CONFIG
   ============================================================ */
 
-  const FIREBASE_PROJECT_ID =
-    "jobs-2f152";
+  const FIREBASE_PROJECT_ID = "jobs-2f152";
 
   const FIREBASE_API_KEY =
     "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
@@ -2320,58 +2363,13 @@
     "/databases/(default)/documents";
 
   const INQUIRY_URL =
-    FIRESTORE_BASE +
-    "/studentInquiries";
+    FIRESTORE_BASE + "/studentInquiries";
 
   const PAYMENT_SETTINGS_URL =
-    FIRESTORE_BASE +
-    "/paymentSettings/telecaller";
+    FIRESTORE_BASE + "/paymentSettings/telecaller";
 
   const CONTENT_URL =
-    FIRESTORE_BASE +
-    "/telecallerContent";
-
-
-  /* ============================================================
-     IMPORTANT FIRESTORE DOCUMENT URL FIX
-     
-     Firestore returns document names like:
-     
-     projects/jobs-2f152/databases/(default)/documents/studentInquiries/ABC
-     
-     This is already a complete Firestore resource path.
-     
-     We must NOT append it to FIRESTORE_BASE again.
-  ============================================================ */
-
-  function getFirestoreDocumentUrl(docName){
-
-    if(!docName){
-      throw new Error(
-        "Firestore document name is missing."
-      );
-    }
-
-    const name =
-      String(docName);
-
-    if(
-      name.startsWith("projects/")
-    ){
-
-      return (
-        "https://firestore.googleapis.com/v1/" +
-        name
-      );
-
-    }
-
-    return (
-      FIRESTORE_BASE +
-      "/" +
-      name
-    );
-  }
+    FIRESTORE_BASE + "/telecallerContent";
 
 
   /* ============================================================
@@ -2407,7 +2405,6 @@
   ============================================================ */
 
   let inquiries = [];
-
   let filteredInquiries = [];
 
   let currentPage = 1;
@@ -2431,43 +2428,25 @@
 
   function firestoreValue(value){
 
-    if(
-      value === null ||
-      value === undefined
-    ){
-
+    if(value === null || value === undefined){
       return null;
-
     }
 
-    if(
-      typeof value === "number"
-    ){
-
+    if(typeof value === "number"){
       return {
-        integerValue:
-          String(
-            Math.round(value)
-          )
+        integerValue:String(Math.round(value))
       };
-
     }
 
-    if(
-      typeof value === "boolean"
-    ){
-
+    if(typeof value === "boolean"){
       return {
         booleanValue:value
       };
-
     }
 
     return {
-      stringValue:
-        String(value)
+      stringValue:String(value)
     };
-
   }
 
 
@@ -2477,71 +2456,38 @@
       return "";
     }
 
-    if(
-      field.stringValue !== undefined
-    ){
-
+    if(field.stringValue !== undefined){
       return field.stringValue;
-
     }
 
-    if(
-      field.integerValue !== undefined
-    ){
-
-      return Number(
-        field.integerValue
-      );
-
+    if(field.integerValue !== undefined){
+      return Number(field.integerValue);
     }
 
-    if(
-      field.doubleValue !== undefined
-    ){
-
-      return Number(
-        field.doubleValue
-      );
-
+    if(field.doubleValue !== undefined){
+      return Number(field.doubleValue);
     }
 
-    if(
-      field.booleanValue !== undefined
-    ){
-
+    if(field.booleanValue !== undefined){
       return field.booleanValue;
-
     }
 
-    if(
-      field.timestampValue !== undefined
-    ){
-
+    if(field.timestampValue !== undefined){
       return field.timestampValue;
-
     }
 
     if(field.arrayValue){
-
-      return (
-        field.arrayValue.values || []
-      )
-      .map(
-        extractFirestoreValue
-      );
-
+      return (field.arrayValue.values || [])
+        .map(extractFirestoreValue);
     }
 
     if(field.mapValue){
-
       return firestoreFieldsToObject(
         field.mapValue.fields || {}
       );
-
     }
 
     return "";
-
   }
 
 
@@ -2549,20 +2495,11 @@
 
     const obj = {};
 
-    Object.keys(
-      fields || {}
-    )
-    .forEach(key => {
-
-      obj[key] =
-        extractFirestoreValue(
-          fields[key]
-        );
-
+    Object.keys(fields || {}).forEach(key => {
+      obj[key] = extractFirestoreValue(fields[key]);
     });
 
     return obj;
-
   }
 
 
@@ -2572,71 +2509,47 @@
   ){
 
     const separator =
-      url.includes("?")
-        ? "&"
-        : "?";
+      url.includes("?") ? "&" : "?";
 
     const finalUrl =
       url +
       separator +
       "key=" +
-      encodeURIComponent(
-        FIREBASE_API_KEY
-      );
-
+      encodeURIComponent(FIREBASE_API_KEY);
 
     const response =
       await fetch(
         finalUrl,
         {
           ...options,
-
           headers:{
-            "Content-Type":
-              "application/json",
-
+            "Content-Type":"application/json",
             ...(options.headers || {})
           }
-
         }
       );
-
 
     const text =
       await response.text();
 
     let data = {};
 
-
     try{
-
-      data =
-        text
-          ? JSON.parse(text)
-          : {};
-
+      data = text ? JSON.parse(text) : {};
     }catch{
-
       data = {};
-
     }
-
 
     if(!response.ok){
 
-      const message =
+      let message =
         data?.error?.message ||
         "Firestore request failed.";
 
-      throw new Error(
-        message
-      );
-
+      throw new Error(message);
     }
 
-
     return data;
-
   }
 
 
@@ -2647,31 +2560,18 @@
   async function loadInquiries(){
 
     const tbody =
-      document.getElementById(
-        "inquiryBody"
-      );
-
+      document.getElementById("inquiryBody");
 
     tbody.innerHTML = `
-
       <tr>
-
         <td colspan="8">
-
           <div class="loading">
-
             <div class="spinner"></div>
-
             Loading inquiries...
-
           </div>
-
         </td>
-
       </tr>
-
     `;
-
 
     try{
 
@@ -2679,44 +2579,29 @@
 
       let pageToken = "";
 
-
       do{
 
         let url =
           INQUIRY_URL +
           "?pageSize=300";
 
-
         if(pageToken){
-
           url +=
             "&pageToken=" +
-            encodeURIComponent(
-              pageToken
-            );
-
+            encodeURIComponent(pageToken);
         }
 
-
         const data =
-          await firestoreFetch(
-            url
-          );
-
+          await firestoreFetch(url);
 
         const docs =
           data.documents || [];
 
-
         allDocs =
-          allDocs.concat(
-            docs
-          );
-
+          allDocs.concat(docs);
 
         pageToken =
           data.nextPageToken || "";
-
 
       }while(pageToken);
 
@@ -2729,24 +2614,17 @@
               doc.fields || {}
             );
 
-
           obj.__docName =
             doc.name || "";
-
 
           return obj;
 
         });
 
-
       inquiries.sort(
         (a,b) =>
-          new Date(
-            b.createdAt || 0
-          ) -
-          new Date(
-            a.createdAt || 0
-          )
+          new Date(b.createdAt || 0) -
+          new Date(a.createdAt || 0)
       );
 
 
@@ -2758,54 +2636,33 @@
 
       calculateAndRenderEarnings();
 
-
     }catch(error){
 
       console.error(error);
 
       inquiries = [];
 
-
-      document.getElementById(
-        "inquiryBody"
-      ).innerHTML = `
-
+      document.getElementById("inquiryBody").innerHTML = `
         <tr>
-
           <td colspan="8">
-
             <div class="empty">
-
-              <div class="empty-icon">
-                ⚠
-              </div>
-
+              <div class="empty-icon">⚠</div>
               <div class="empty-title">
                 Unable to load inquiries
               </div>
-
               <div class="empty-text">
-                ${escapeHtml(
-                  error.message
-                )}
+                ${escapeHtml(error.message)}
               </div>
-
             </div>
-
           </td>
-
         </tr>
-
       `;
-
 
       showToast(
         error.message,
         "error"
       );
-
     }
-
   }
 
 
@@ -2822,31 +2679,23 @@
           PAYMENT_SETTINGS_URL
         );
 
-
       const fields =
         data.fields || {};
 
-
       const getNumber =
-        (
-          name,
-          fallback
-        ) => {
+        (name, fallback) => {
 
           const value =
             extractFirestoreValue(
               fields[name]
             );
 
-
           const num =
             Number(value);
-
 
           return Number.isFinite(num)
             ? num
             : fallback;
-
         };
 
 
@@ -2870,20 +2719,17 @@
           SETTINGS.level1Min
         );
 
-
       SETTINGS.level1Max =
         getNumber(
           "level1Max",
           SETTINGS.level1Max
         );
 
-
       SETTINGS.level1AdmissionIncentive =
         getNumber(
           "level1AdmissionIncentive",
           SETTINGS.level1AdmissionIncentive
         );
-
 
       SETTINGS.level1NextBaseSalary =
         getNumber(
@@ -2898,20 +2744,17 @@
           SETTINGS.level2Min
         );
 
-
       SETTINGS.level2Max =
         getNumber(
           "level2Max",
           SETTINGS.level2Max
         );
 
-
       SETTINGS.level2AdmissionIncentive =
         getNumber(
           "level2AdmissionIncentive",
           SETTINGS.level2AdmissionIncentive
         );
-
 
       SETTINGS.level2NextBaseSalary =
         getNumber(
@@ -2926,12 +2769,10 @@
           SETTINGS.level3Min
         );
 
-
       const level3Max =
         extractFirestoreValue(
           fields.level3Max
         );
-
 
       SETTINGS.level3Max =
         level3Max === "" ||
@@ -2947,7 +2788,6 @@
           SETTINGS.level3AdmissionIncentive
         );
 
-
       SETTINGS.level3NextBaseSalary =
         getNumber(
           "level3NextBaseSalary",
@@ -2957,7 +2797,6 @@
 
       calculateAndRenderEarnings();
 
-
     }catch(error){
 
       console.warn(
@@ -2965,11 +2804,8 @@
         error.message
       );
 
-
       calculateAndRenderEarnings();
-
     }
-
   }
 
 
@@ -2985,47 +2821,34 @@
 
       let pageToken = "";
 
-
       do{
 
         let url =
           CONTENT_URL +
           "?pageSize=300";
 
-
         if(pageToken){
-
           url +=
             "&pageToken=" +
-            encodeURIComponent(
-              pageToken
-            );
-
+            encodeURIComponent(pageToken);
         }
 
-
         const data =
-          await firestoreFetch(
-            url
-          );
-
+          await firestoreFetch(url);
 
         allDocs =
           allDocs.concat(
             data.documents || []
           );
 
-
         pageToken =
           data.nextPageToken || "";
-
 
       }while(pageToken);
 
 
       currentContent =
         allDocs
-
           .map(doc => {
 
             const obj =
@@ -3033,30 +2856,24 @@
                 doc.fields || {}
               );
 
-
             obj.__docName =
               doc.name || "";
-
 
             return obj;
 
           })
-
           .filter(item => {
 
             if(
               item.active === false ||
               item.active === "false"
             ){
-
               return false;
-
             }
 
             return true;
 
           })
-
           .sort(
             (a,b) =>
               Number(a.order || 9999) -
@@ -3066,7 +2883,6 @@
 
       renderContent();
 
-
     }catch(error){
 
       console.warn(
@@ -3074,13 +2890,10 @@
         error.message
       );
 
-
       currentContent = [];
 
       renderContent();
-
     }
-
   }
 
 
@@ -3088,9 +2901,7 @@
      MONTH HELPERS
   ============================================================ */
 
-  function getMonthKey(
-    date = new Date()
-  ){
+  function getMonthKey(date = new Date()){
 
     const y =
       date.getFullYear();
@@ -3098,42 +2909,24 @@
     const m =
       String(
         date.getMonth() + 1
-      )
-      .padStart(
-        2,
-        "0"
-      );
+      ).padStart(2,"0");
 
     return `${y}-${m}`;
-
   }
 
 
-  function isCurrentMonth(
-    dateString
-  ){
+  function isCurrentMonth(dateString){
 
     if(!dateString){
       return false;
     }
 
-
     const date =
-      new Date(
-        dateString
-      );
+      new Date(dateString);
 
-
-    if(
-      Number.isNaN(
-        date.getTime()
-      )
-    ){
-
+    if(Number.isNaN(date.getTime())){
       return false;
-
     }
-
 
     return (
       date.getFullYear() ===
@@ -3142,15 +2935,12 @@
       date.getMonth() ===
       new Date().getMonth()
     );
-
   }
 
 
   function getPreviousMonthRange(){
 
-    const now =
-      new Date();
-
+    const now = new Date();
 
     const firstCurrent =
       new Date(
@@ -3159,14 +2949,12 @@
         1
       );
 
-
     const firstPrevious =
       new Date(
         now.getFullYear(),
         now.getMonth() - 1,
         1
       );
-
 
     const lastPrevious =
       new Date(
@@ -3179,53 +2967,33 @@
         999
       );
 
-
     return {
-
       start:firstPrevious,
-
       end:lastPrevious
-
     };
-
   }
 
 
-  function isInPreviousMonth(
-    dateString
-  ){
+  function isInPreviousMonth(dateString){
 
     if(!dateString){
       return false;
     }
 
-
     const date =
-      new Date(
-        dateString
-      );
+      new Date(dateString);
 
-
-    if(
-      Number.isNaN(
-        date.getTime()
-      )
-    ){
-
+    if(Number.isNaN(date.getTime())){
       return false;
-
     }
-
 
     const range =
       getPreviousMonthRange();
-
 
     return (
       date >= range.start &&
       date <= range.end
     );
-
   }
 
 
@@ -3233,29 +3001,20 @@
      UNIQUE STUDENTS
   ============================================================ */
 
-  function normalizeMobile(
-    mobile
-  ){
+  function normalizeMobile(mobile){
 
     return String(
       mobile || ""
     )
-      .replace(
-        /\D/g,
-        ""
-      )
+      .replace(/\D/g,"")
       .slice(-10);
-
   }
 
 
-  function uniqueByMobile(
-    list
-  ){
+  function uniqueByMobile(list){
 
     const map =
       new Map();
-
 
     list.forEach(item => {
 
@@ -3264,28 +3023,22 @@
           item.mobile
         );
 
-
       if(!mobile){
         return;
       }
 
-
       if(!map.has(mobile)){
-
         map.set(
           mobile,
           item
         );
-
       }
 
     });
 
-
     return Array.from(
       map.values()
     );
-
   }
 
 
@@ -3293,98 +3046,49 @@
      DEMO / CONVERTED COUNTS
   ============================================================ */
 
-  function getEffectiveStatus(
-    item
-  ){
-
-    const tele =
-      String(
-        item.telecallerStatus || ""
-      )
-      .trim();
-
-
-    if(tele){
-      return tele;
-    }
-
-
-    return String(
-      item.status || "new"
-    )
-    .trim();
-
-  }
-
-
-  function normalizeStatus(
-    status
-  ){
-
-    return String(
-      status || ""
-    )
-      .toLowerCase()
-      .trim()
-      .replace(
-        /_/g,
-        "-"
-      )
-      .replace(
-        /\s+/g,
-        "-"
-      );
-
-  }
-
-
-  function isDemoCompleted(
-    item
-  ){
+  function isDemoCompleted(item){
 
     const status =
-      normalizeStatus(
-        item.status
-      );
-
+      String(
+        item.status || ""
+      ).toLowerCase()
+      .trim();
 
     const teleStatus =
-      normalizeStatus(
-        item.telecallerStatus
-      );
-
+      String(
+        item.telecallerStatus || ""
+      ).toLowerCase()
+      .trim();
 
     return (
       status === "demo-completed" ||
-      status === "demo" ||
+      status === "demo completed" ||
+      status === "demo_completed" ||
       teleStatus === "demo-completed" ||
-      teleStatus === "demo"
+      teleStatus === "demo completed" ||
+      teleStatus === "demo_completed"
     );
-
   }
 
 
-  function isConverted(
-    item
-  ){
+  function isConverted(item){
 
     const status =
-      normalizeStatus(
-        item.status
-      );
-
+      String(
+        item.status || ""
+      ).toLowerCase()
+      .trim();
 
     const teleStatus =
-      normalizeStatus(
-        item.telecallerStatus
-      );
-
+      String(
+        item.telecallerStatus || ""
+      ).toLowerCase()
+      .trim();
 
     return (
       status === "converted" ||
       teleStatus === "converted"
     );
-
   }
 
 
@@ -3397,7 +3101,6 @@
           item.updatedAt ||
           item.createdAt;
 
-
         return (
           isCurrentMonth(date) &&
           isDemoCompleted(item)
@@ -3405,11 +3108,7 @@
 
       });
 
-
-    return uniqueByMobile(
-      list
-    );
-
+    return uniqueByMobile(list);
   }
 
 
@@ -3422,7 +3121,6 @@
           item.updatedAt ||
           item.createdAt;
 
-
         return (
           isCurrentMonth(date) &&
           isConverted(item)
@@ -3430,11 +3128,7 @@
 
       });
 
-
-    return uniqueByMobile(
-      list
-    );
-
+    return uniqueByMobile(list);
   }
 
 
@@ -3442,86 +3136,43 @@
      LEVEL CALCULATION
   ============================================================ */
 
-  function getLevelByCount(
-    count
-  ){
+  function getLevelByCount(count){
 
     if(
-      count >=
-      SETTINGS.level3Min
+      count >= SETTINGS.level3Min
     ){
-
       return {
-
         level:3,
-
         name:"Level 3",
-
-        rate:
-          SETTINGS.level3AdmissionIncentive,
-
-        nextBase:
-          SETTINGS.level3NextBaseSalary,
-
-        min:
-          SETTINGS.level3Min,
-
-        max:
-          SETTINGS.level3Max
-
+        rate:SETTINGS.level3AdmissionIncentive,
+        nextBase:SETTINGS.level3NextBaseSalary,
+        min:SETTINGS.level3Min,
+        max:SETTINGS.level3Max
       };
-
     }
-
 
     if(
       count >= SETTINGS.level2Min &&
       count <= SETTINGS.level2Max
     ){
-
       return {
-
         level:2,
-
         name:"Level 2",
-
-        rate:
-          SETTINGS.level2AdmissionIncentive,
-
-        nextBase:
-          SETTINGS.level2NextBaseSalary,
-
-        min:
-          SETTINGS.level2Min,
-
-        max:
-          SETTINGS.level2Max
-
+        rate:SETTINGS.level2AdmissionIncentive,
+        nextBase:SETTINGS.level2NextBaseSalary,
+        min:SETTINGS.level2Min,
+        max:SETTINGS.level2Max
       };
-
     }
 
-
     return {
-
       level:1,
-
       name:"Level 1",
-
-      rate:
-        SETTINGS.level1AdmissionIncentive,
-
-      nextBase:
-        SETTINGS.level1NextBaseSalary,
-
-      min:
-        SETTINGS.level1Min,
-
-      max:
-        SETTINGS.level1Max
-
+      rate:SETTINGS.level1AdmissionIncentive,
+      nextBase:SETTINGS.level1NextBaseSalary,
+      min:SETTINGS.level1Min,
+      max:SETTINGS.level1Max
     };
-
   }
 
 
@@ -3538,7 +3189,6 @@
           item.updatedAt ||
           item.createdAt;
 
-
         return (
           isInPreviousMonth(date) &&
           isConverted(item)
@@ -3546,71 +3196,43 @@
 
       });
 
-
-    return uniqueByMobile(
-      list
-    );
-
+    return uniqueByMobile(list);
   }
 
 
   function getPreviousMonthLevel(){
 
     const count =
-      getPreviousMonthConvertedStudents()
-        .length;
-
+      getPreviousMonthConvertedStudents().length;
 
     if(count === 0){
 
       return {
-
         count:0,
-
         level:null,
-
         name:"No Previous Data",
-
-        nextBase:
-          SETTINGS.baseSalary
-
+        nextBase:SETTINGS.baseSalary
       };
 
     }
 
-
     return {
-
       count,
-
-      ...getLevelByCount(
-        count
-      )
-
+      ...getLevelByCount(count)
     };
-
   }
 
-
-  /* ============================================================
-     CURRENT BASE SALARY
-  ============================================================ */
 
   function getCurrentBaseSalary(){
 
     const previous =
       getPreviousMonthLevel();
 
-
     if(!previous.level){
-
       return SETTINGS.baseSalary;
-
     }
 
-
     return previous.nextBase;
-
   }
 
 
@@ -3623,44 +3245,35 @@
     const demoStudents =
       getCurrentMonthDemoStudents();
 
-
     const convertedStudents =
       getCurrentMonthConvertedStudents();
-
 
     const demoCount =
       demoStudents.length;
 
-
     const convertedCount =
       convertedStudents.length;
-
 
     const level =
       getLevelByCount(
         convertedCount
       );
 
-
     const baseSalary =
       getCurrentBaseSalary();
-
 
     const demoReward =
       demoCount *
       SETTINGS.demoIncentive;
 
-
     const admissionReward =
       convertedCount *
       level.rate;
-
 
     const total =
       baseSalary +
       demoReward +
       admissionReward;
-
 
     return {
 
@@ -3679,7 +3292,6 @@
       total
 
     };
-
   }
 
 
@@ -3688,60 +3300,41 @@
     const earning =
       calculateEarnings();
 
-
     const previous =
       getPreviousMonthLevel();
 
 
     setText(
       "dashboardTotal",
-      money(
-        earning.total
-      )
+      money(earning.total)
     );
-
 
     setText(
       "dashBase",
-      money(
-        earning.baseSalary
-      )
+      money(earning.baseSalary)
     );
-
 
     setText(
       "dashDemoReward",
-      money(
-        earning.demoReward
-      )
+      money(earning.demoReward)
     );
-
 
     setText(
       "dashAdmissionReward",
-      money(
-        earning.admissionReward
-      )
+      money(earning.admissionReward)
     );
-
 
     setText(
       "currentBaseText",
-      money(
-        earning.baseSalary
-      )
+      money(earning.baseSalary)
     );
-
 
     setText(
       "previousLevelText",
-
       previous.level
         ? `${previous.name} (${previous.count} admissions)`
         : "No previous data"
-
     );
-
 
     setText(
       "nextBaseText",
@@ -3750,134 +3343,92 @@
       )
     );
 
-
     setText(
       "statDemo",
       earning.demoCount
     );
-
 
     setText(
       "statConverted",
       earning.convertedCount
     );
 
-
     setText(
       "statEarning",
-      money(
-        earning.total
-      )
+      money(earning.total)
     );
-
 
     setText(
       "earningPageTotal",
-      money(
-        earning.total
-      )
+      money(earning.total)
     );
-
 
     setText(
       "earningPageBase",
-      money(
-        earning.baseSalary
-      )
+      money(earning.baseSalary)
     );
-
 
     setText(
       "earningPageDemo",
-      money(
-        earning.demoReward
-      )
+      money(earning.demoReward)
     );
-
 
     setText(
       "earningPageAdmission",
-      money(
-        earning.admissionReward
-      )
+      money(earning.admissionReward)
     );
-
 
     setText(
       "earnDemoCount",
       earning.demoCount
     );
 
-
     setText(
       "earnDemoRate",
-      money(
-        SETTINGS.demoIncentive
-      )
+      money(SETTINGS.demoIncentive)
     );
-
 
     setText(
       "earnAdmissionCount",
       earning.convertedCount
     );
 
-
     setText(
       "earnLevel",
       earning.level.name
     );
 
-
     setText(
       "earnAdmissionRate",
-      money(
-        earning.level.rate
-      )
+      money(earning.level.rate)
     );
-
 
     setText(
       "nextMonthSalaryBig",
-      money(
-        earning.level.nextBase
-      )
+      money(earning.level.nextBase)
     );
-
 
     setText(
       "salaryCurrentLevel",
       earning.level.name
     );
 
-
     setText(
       "salaryDefaultBase",
-      money(
-        SETTINGS.baseSalary
-      )
+      money(SETTINGS.baseSalary)
     );
-
 
     setText(
       "salaryNextBase",
-      money(
-        earning.level.nextBase
-      )
+      money(earning.level.nextBase)
     );
-
 
     renderLevelCards(
       earning.convertedCount,
       earning.level
     );
-
   }
 
-
-  /* ============================================================
-     LEVEL CARDS
-  ============================================================ */
 
   function renderLevelCards(
     count,
@@ -3888,7 +3439,6 @@
       document.getElementById(
         "levelCards"
       );
-
 
     const levels = [
 
@@ -3929,9 +3479,7 @@
           item.level ===
           currentLevel.level;
 
-
         let rangeText = "";
-
 
         if(item.level === 3){
 
@@ -3945,12 +3493,9 @@
 
         }
 
-
         return `
 
-          <div class="level-card ${
-            active ? "active" : ""
-          }">
+          <div class="level-card ${active ? "active" : ""}">
 
             <div class="level-head">
 
@@ -3962,11 +3507,7 @@
 
                   ${
                     active
-                    ? `
-                      <span class="level-tag">
-                        CURRENT
-                      </span>
-                    `
+                    ? `<span class="level-tag">CURRENT</span>`
                     : ""
                   }
 
@@ -3989,72 +3530,49 @@
             </div>
 
             <div style="font-size:10px;color:#6b7280;margin-top:4px;">
-              Next month base:
-              <strong>
-                ${money(item.nextBase)}
-              </strong>
+              Next month base: <strong>${money(item.nextBase)}</strong>
             </div>
 
           </div>
 
         `;
 
-      })
-      .join("");
+      }).join("");
 
 
     let progressText = "";
 
-
-    if(
-      currentLevel.level === 1
-    ){
+    if(currentLevel.level === 1){
 
       const target =
         SETTINGS.level2Min;
 
-
       const remaining =
         Math.max(
           0,
           target - count
         );
 
-
       progressText =
         remaining > 0
-          ? `${remaining} more admission${
-              remaining === 1
-                ? ""
-                : "s"
-            } to reach Level 2.`
+          ? `${remaining} more admission${remaining === 1 ? "" : "s"} to reach Level 2.`
           : "Level 2 reached.";
 
-
-    }else if(
-      currentLevel.level === 2
-    ){
+    }else if(currentLevel.level === 2){
 
       const target =
         SETTINGS.level3Min;
 
-
       const remaining =
         Math.max(
           0,
           target - count
         );
 
-
       progressText =
         remaining > 0
-          ? `${remaining} more admission${
-              remaining === 1
-                ? ""
-                : "s"
-            } to reach Level 3.`
+          ? `${remaining} more admission${remaining === 1 ? "" : "s"} to reach Level 3.`
           : "Level 3 reached.";
-
 
     }else{
 
@@ -4063,16 +3581,10 @@
 
     }
 
-
     setText(
       "levelProgressText",
-
-      `Current: ${currentLevel.name} • ${count} converted admission${
-        count === 1 ? "" : "s"
-      } • ${progressText}`
-
+      `Current: ${currentLevel.name} • ${count} converted admission${count === 1 ? "" : "s"} • ${progressText}`
     );
-
   }
 
 
@@ -4087,30 +3599,23 @@
       inquiries.length
     );
 
-
     const earning =
       calculateEarnings();
-
 
     setText(
       "statDemo",
       earning.demoCount
     );
 
-
     setText(
       "statConverted",
       earning.convertedCount
     );
 
-
     setText(
       "statEarning",
-      money(
-        earning.total
-      )
+      money(earning.total)
     );
-
   }
 
 
@@ -4125,7 +3630,6 @@
         "courseFilter"
       );
 
-
     const coordinatorSelect =
       document.getElementById(
         "coordinatorFilter"
@@ -4133,45 +3637,34 @@
 
 
     const courses =
-      [
-        ...new Set(
-          inquiries
-            .map(
-              x => x.course
-            )
-            .filter(Boolean)
-        )
-      ]
+      [...new Set(
+        inquiries
+          .map(x => x.course)
+          .filter(Boolean)
+      )]
       .sort();
 
 
     const coordinators =
-      [
-        ...new Set(
-          inquiries
-            .map(
-              x =>
-                x.coordinatorName
-            )
-            .filter(Boolean)
-        )
-      ]
+      [...new Set(
+        inquiries
+          .map(x =>
+            x.coordinatorName
+          )
+          .filter(Boolean)
+      )]
       .sort();
 
 
     const oldCourse =
       courseSelect.value;
 
-
     const oldCoordinator =
       coordinatorSelect.value;
 
 
     courseSelect.innerHTML =
-      `<option value="">
-        All Courses
-      </option>` +
-
+      `<option value="">All Courses</option>` +
       courses
         .map(
           course =>
@@ -4183,10 +3676,7 @@
 
 
     coordinatorSelect.innerHTML =
-      `<option value="">
-        All Coordinators
-      </option>` +
-
+      `<option value="">All Coordinators</option>` +
       coordinators
         .map(
           name =>
@@ -4198,20 +3688,14 @@
 
 
     courseSelect.value =
-      courses.includes(
-        oldCourse
-      )
+      courses.includes(oldCourse)
         ? oldCourse
         : "";
 
-
     coordinatorSelect.value =
-      coordinators.includes(
-        oldCoordinator
-      )
+      coordinators.includes(oldCoordinator)
         ? oldCoordinator
         : "";
-
   }
 
 
@@ -4219,35 +3703,24 @@
 
     const search =
       document
-        .getElementById(
-          "searchInput"
-        )
+        .getElementById("searchInput")
         .value
         .toLowerCase()
         .trim();
 
-
     const status =
       document
-        .getElementById(
-          "statusFilter"
-        )
+        .getElementById("statusFilter")
         .value;
-
 
     const course =
       document
-        .getElementById(
-          "courseFilter"
-        )
+        .getElementById("courseFilter")
         .value;
-
 
     const coordinator =
       document
-        .getElementById(
-          "coordinatorFilter"
-        )
+        .getElementById("coordinatorFilter")
         .value;
 
 
@@ -4262,9 +3735,8 @@
             item.source,
             item.remark,
             item.telecallerRemark,
-            item.coordinatorName,
-            item.status,
-            item.telecallerStatus
+            item.customStatus,
+            item.coordinatorName
           ]
           .filter(Boolean)
           .join(" ")
@@ -4275,31 +3747,17 @@
           search &&
           !text.includes(search)
         ){
-
           return false;
-
         }
 
 
-        if(status){
-
-          const effective =
-            normalizeStatus(
-              getEffectiveStatus(
-                item
-              )
-            );
-
-
-          if(
-            effective !==
-            normalizeStatus(status)
-          ){
-
-            return false;
-
-          }
-
+        if(
+          status &&
+          String(
+            item.status || ""
+          ) !== status
+        ){
+          return false;
         }
 
 
@@ -4307,20 +3765,15 @@
           course &&
           item.course !== course
         ){
-
           return false;
-
         }
 
 
         if(
           coordinator &&
-          item.coordinatorName !==
-          coordinator
+          item.coordinatorName !== coordinator
         ){
-
           return false;
-
         }
 
 
@@ -4332,57 +3785,58 @@
     currentPage = 1;
 
     renderInquiryTable();
-
   }
 
 
   /* ============================================================
-     STATUS BADGE CLASS
+     STATUS DISPLAY HELPERS
   ============================================================ */
 
-  function getStatusClass(
-    status
-  ){
+  function getEffectiveStatus(item){
 
-    const normalized =
-      normalizeStatus(
-        status
-      );
+    const status =
+      String(
+        item.status || ""
+      )
+      .toLowerCase()
+      .trim();
 
-
-    const known = [
-
-      "new",
-      "pending",
-      "interested",
-      "contacted",
-      "delay",
-      "follow-up",
-      "visited",
-      "demo-completed",
-      "converted",
-      "not-interested",
-      "closed"
-
-    ];
-
+    const custom =
+      String(
+        item.customStatus || ""
+      ).trim();
 
     if(
-      known.includes(
-        normalized
-      )
+      status === "custom" &&
+      custom
     ){
-
-      return (
-        "badge-" +
-        normalized
-      );
-
+      return custom;
     }
 
+    return formatStatus(
+      status || "new"
+    );
+  }
 
-    return "badge-custom";
 
+  function getStatusClass(item){
+
+    const status =
+      String(
+        item.status || "new"
+      )
+      .toLowerCase()
+      .trim();
+
+    if(status === "custom"){
+      return "badge-custom";
+    }
+
+    if(status === "demo-completed"){
+      return "badge-demo-completed";
+    }
+
+    return `badge-${status}`;
   }
 
 
@@ -4397,43 +3851,29 @@
         "inquiryBody"
       );
 
-
     const total =
       filteredInquiries.length;
-
 
     const totalPages =
       Math.max(
         1,
         Math.ceil(
-          total /
-          PAGE_SIZE
+          total / PAGE_SIZE
         )
       );
 
 
-    if(
-      currentPage >
-      totalPages
-    ){
-
-      currentPage =
-        totalPages;
-
+    if(currentPage > totalPages){
+      currentPage = totalPages;
     }
 
 
     const start =
-      (
-        currentPage - 1
-      ) *
+      (currentPage - 1) *
       PAGE_SIZE;
-
 
     const end =
-      start +
-      PAGE_SIZE;
-
+      start + PAGE_SIZE;
 
     const pageItems =
       filteredInquiries.slice(
@@ -4444,24 +3884,14 @@
 
     setText(
       "resultCount",
-
-      `${total} ${
-        total === 1
-          ? "inquiry"
-          : "inquiries"
-      } found`
-
+      `${total} ${total === 1 ? "inquiry" : "inquiries"} found`
     );
 
 
-    if(
-      pageItems.length === 0
-    ){
+    if(pageItems.length === 0){
 
       tbody.innerHTML = `
-
         <tr>
-
           <td colspan="8">
 
             <div class="empty">
@@ -4481,52 +3911,40 @@
             </div>
 
           </td>
-
         </tr>
-
       `;
 
     }else{
 
       tbody.innerHTML =
         pageItems
-          .map(
-            renderInquiryRow
-          )
+          .map(renderInquiryRow)
           .join("");
-
     }
 
 
     renderPagination(
       totalPages
     );
-
   }
 
 
-  function renderInquiryRow(
-    item
-  ){
+  function renderInquiryRow(item){
 
     const status =
-      getEffectiveStatus(
-        item
-      ) ||
-      "new";
+      String(
+        item.status || "new"
+      );
 
 
     const statusClass =
-      getStatusClass(
-        status
-      );
+      getStatusClass(item);
 
 
     const created =
       formatDate(
         item.createdAt
       );
-
 
     const updated =
       formatDate(
@@ -4541,64 +3959,46 @@
         <td>
 
           <div class="student-name">
-
             ${escapeHtml(
-              item.studentName ||
-              "Unknown"
+              item.studentName || "Unknown"
             )}
-
           </div>
 
           <div class="student-mobile">
-
             ${escapeHtml(
-              item.mobile ||
-              "-"
+              item.mobile || "-"
             )}
-
           </div>
 
         </td>
 
 
         <td>
-
           ${escapeHtml(
-            item.course ||
-            "-"
+            item.course || "-"
           )}
-
         </td>
 
 
         <td>
-
           ${escapeHtml(
-            item.source ||
-            "-"
+            item.source || "-"
           )}
-
         </td>
 
 
         <td>
 
           <div style="font-size:11px;font-weight:700;">
-
             ${escapeHtml(
-              item.coordinatorName ||
-              "-"
+              item.coordinatorName || "-"
             )}
-
           </div>
 
           <div style="font-size:9px;color:#6b7280;">
-
             ${escapeHtml(
-              item.coordinatorMobile ||
-              ""
+              item.coordinatorMobile || ""
             )}
-
           </div>
 
         </td>
@@ -4607,44 +4007,28 @@
         <td>
 
           <button
-
             class="badge ${statusClass}"
-
-            onclick="openStatusModalByDoc('${escapeAttr(
-              item.__docName || ""
-            )}')"
-
+            onclick="openStatusModalByDoc('${escapeAttr(item.__docName || "")}')"
             style="border:0;"
-
+            title="Click to update status"
           >
-
             ${escapeHtml(
-              formatStatus(
-                status
-              )
+              getEffectiveStatus(item)
             )}
-
           </button>
 
         </td>
 
 
         <td>
-
           ${escapeHtml(
-            item.followUpDate ||
-            "-"
+            item.followUpDate || "-"
           )}
-
         </td>
 
 
         <td>
-
-          ${escapeHtml(
-            updated
-          )}
-
+          ${escapeHtml(updated)}
         </td>
 
 
@@ -4654,49 +4038,28 @@
 
             <button
               class="mini-btn mini-call"
-              onclick="callStudent('${escapeAttr(
-                item.mobile || ""
-              )}')"
+              onclick="callStudent('${escapeAttr(item.mobile || "")}')"
             >
               Call
             </button>
 
-
             <button
               class="mini-btn mini-wa"
-              onclick="whatsappStudent(
-                '${escapeAttr(
-                  item.mobile || ""
-                )}',
-                '${escapeAttr(
-                  item.studentName || ""
-                )}'
-              )"
+              onclick="whatsappStudent('${escapeAttr(item.mobile || "")}','${escapeAttr(item.studentName || "")}')"
             >
               WhatsApp
             </button>
 
-
             <button
               class="mini-btn mini-view"
-              onclick="viewStudent('${escapeAttr(
-                item.__docName || ""
-              )}')"
+              onclick="viewStudent('${escapeAttr(item.__docName || "")}')"
             >
               View
             </button>
 
-
             <button
               class="mini-btn mini-delete"
-              onclick="deleteStudent(
-                '${escapeAttr(
-                  item.__docName || ""
-                )}',
-                '${escapeAttr(
-                  item.studentName || ""
-                )}'
-              )"
+              onclick="deleteStudent('${escapeAttr(item.__docName || "")}','${escapeAttr(item.studentName || "")}')"
             >
               Delete
             </button>
@@ -4708,13 +4071,10 @@
       </tr>
 
     `;
-
   }
 
 
-  function renderPagination(
-    totalPages
-  ){
+  function renderPagination(totalPages){
 
     const container =
       document.getElementById(
@@ -4724,48 +4084,31 @@
 
     setText(
       "pageInfo",
-
-      `Page ${
-        currentPage
-      } of ${
-        totalPages
-      }`
-
+      `Page ${currentPage} of ${totalPages}`
     );
 
 
     let html = "";
 
 
-    if(
-      totalPages <= 1
-    ){
+    if(totalPages <= 1){
 
-      container.innerHTML =
-        "";
+      container.innerHTML = "";
 
       return;
-
     }
 
 
-    if(
-      currentPage > 1
-    ){
+    if(currentPage > 1){
 
       html += `
-
         <button
           class="page-btn"
-          onclick="goToPage(${
-            currentPage - 1
-          })"
+          onclick="goToPage(${currentPage - 1})"
         >
           ‹
         </button>
-
       `;
-
     }
 
 
@@ -4774,7 +4117,6 @@
         1,
         currentPage - 2
       );
-
 
     const end =
       Math.min(
@@ -4790,61 +4132,40 @@
     ){
 
       html += `
-
         <button
-          class="page-btn ${
-            i === currentPage
-              ? "active"
-              : ""
-          }"
+          class="page-btn ${i === currentPage ? "active" : ""}"
           onclick="goToPage(${i})"
         >
           ${i}
         </button>
-
       `;
-
     }
 
 
-    if(
-      currentPage <
-      totalPages
-    ){
+    if(currentPage < totalPages){
 
       html += `
-
         <button
           class="page-btn"
-          onclick="goToPage(${
-            currentPage + 1
-          })"
+          onclick="goToPage(${currentPage + 1})"
         >
           ›
         </button>
-
       `;
-
     }
 
 
     container.innerHTML =
       html;
-
   }
 
 
-  function goToPage(
-    page
-  ){
+  function goToPage(page){
 
     currentPage =
-      Number(page) ||
-      1;
-
+      Number(page) || 1;
 
     renderInquiryTable();
-
   }
 
 
@@ -4852,27 +4173,52 @@
      STATUS MODAL
   ============================================================ */
 
-  function openStatusModalByDoc(
-    docName
-  ){
+  function toggleCustomStatusBox(){
+
+    const status =
+      document.getElementById(
+        "newStatus"
+      ).value;
+
+    const box =
+      document.getElementById(
+        "customStatusBox"
+      );
+
+    const input =
+      document.getElementById(
+        "newCustomStatus"
+      );
+
+    if(status === "custom"){
+
+      box.style.display =
+        "block";
+
+      setTimeout(
+        () => input.focus(),
+        50
+      );
+
+    }else{
+
+      box.style.display =
+        "none";
+
+      input.value = "";
+    }
+  }
+
+
+  function openStatusModalByDoc(docName){
 
     const item =
       inquiries.find(
-        x =>
-          x.__docName ===
-          docName
+        x => x.__docName === docName
       );
-
 
     if(!item){
-
-      showToast(
-        "Student record not found.",
-        "error"
-      );
-
       return;
-
     }
 
 
@@ -4885,24 +4231,18 @@
     document.getElementById(
       "statusStudentName"
     ).value =
-      item.studentName ||
-      "";
+      item.studentName || "";
 
 
     const currentStatus =
-      getEffectiveStatus(
-        item
-      );
+      String(
+        item.status || "new"
+      )
+      .toLowerCase()
+      .trim();
 
 
-    const normalized =
-      normalizeStatus(
-        currentStatus
-      );
-
-
-    const standardStatuses = [
-
+    const knownStatuses = [
       "new",
       "pending",
       "interested",
@@ -4913,90 +4253,49 @@
       "demo-completed",
       "converted",
       "not-interested",
-      "closed"
-
+      "custom"
     ];
 
 
-    const statusSelect =
-      document.getElementById(
-        "newStatus"
-      );
-
-
-    const customBox =
-      document.getElementById(
-        "customStatusBox"
-      );
-
-
-    const customInput =
-      document.getElementById(
-        "customStatusInput"
-      );
-
-
-    if(
-      standardStatuses.includes(
-        normalized
+    document.getElementById(
+      "newStatus"
+    ).value =
+      knownStatuses.includes(
+        currentStatus
       )
-    ){
-
-      statusSelect.value =
-        normalized;
-
-
-      customBox.classList.remove(
-        "show"
-      );
-
-
-      customInput.value =
-        "";
-
-    }else{
-
-      statusSelect.value =
-        "custom";
-
-
-      customBox.classList.add(
-        "show"
-      );
-
-
-      customInput.value =
-        currentStatus || "";
-
-    }
+      ? currentStatus
+      : "custom";
 
 
     document.getElementById(
       "newFollowupDate"
     ).value =
-      item.followUpDate ||
-      "";
+      item.followUpDate || "";
 
 
     document.getElementById(
       "newTelecallerRemark"
     ).value =
-      item.telecallerRemark ||
-      "";
+      item.telecallerRemark || "";
+
+
+    document.getElementById(
+      "newCustomStatus"
+    ).value =
+      item.customStatus || "";
+
+
+    toggleCustomStatusBox();
 
 
     showModal(
       "statusModal"
     );
-
   }
 
 
   /* ============================================================
      SAVE STATUS
-     
-     IMPORTANT FIX:
-     Uses the full Firestore document resource path correctly.
   ============================================================ */
 
   async function saveStatus(){
@@ -5006,18 +4305,15 @@
         "statusDocName"
       ).value;
 
-
     let status =
       document.getElementById(
         "newStatus"
       ).value;
 
-
     const followUpDate =
       document.getElementById(
         "newFollowupDate"
       ).value;
-
 
     const remark =
       document.getElementById(
@@ -5025,46 +4321,50 @@
       ).value
       .trim();
 
-
-    /* CUSTOM STATUS */
-
-    if(
-      status === "custom"
-    ){
-
-      const customStatus =
-        document.getElementById(
-          "customStatusInput"
-        ).value
-        .trim();
-
-
-      if(!customStatus){
-
-        showToast(
-          "Please enter a custom status.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      status =
-        customStatus;
-
-    }
+    const customStatus =
+      document.getElementById(
+        "newCustomStatus"
+      ).value
+      .trim();
 
 
     if(!docName){
+      return;
+    }
+
+
+    /*
+      Custom status must have text.
+    */
+
+    if(
+      status === "custom" &&
+      !customStatus
+    ){
 
       showToast(
-        "Student document not found.",
+        "Please enter a custom status.",
         "error"
       );
 
+      document.getElementById(
+        "newCustomStatus"
+      ).focus();
+
       return;
+    }
+
+
+    /*
+      For non-custom status,
+      customStatus will be empty.
+    */
+
+    if(status !== "custom"){
+
+      document.getElementById(
+        "newCustomStatus"
+      ).value = "";
 
     }
 
@@ -5075,9 +4375,7 @@
       );
 
 
-    saveBtn.disabled =
-      true;
-
+    saveBtn.disabled = true;
 
     saveBtn.textContent =
       "Saving...";
@@ -5085,43 +4383,32 @@
 
     try{
 
-      /*
-        FIXED DOCUMENT URL
-
-        If docName is:
-        projects/jobs-2f152/databases/(default)/documents/studentInquiries/ABC
-
-        the final URL becomes:
-        https://firestore.googleapis.com/v1/projects/jobs-2f152/...
-      */
-
       const url =
-        getFirestoreDocumentUrl(
-          docName
-        );
+        FIRESTORE_BASE +
+        "/" +
+        docName;
 
 
       const fields = {
 
         status:
-          firestoreValue(
-            status
-          ),
+          firestoreValue(status),
 
         telecallerStatus:
+          firestoreValue(status),
+
+        customStatus:
           firestoreValue(
-            status
+            status === "custom"
+              ? customStatus
+              : ""
           ),
 
         telecallerRemark:
-          firestoreValue(
-            remark
-          ),
+          firestoreValue(remark),
 
         followUpDate:
-          firestoreValue(
-            followUpDate
-          ),
+          firestoreValue(followUpDate),
 
         telecallerName:
           firestoreValue(
@@ -5145,12 +4432,9 @@
         url,
         {
           method:"PATCH",
-
-          body:
-            JSON.stringify({
-              fields
-            })
-
+          body:JSON.stringify({
+            fields
+          })
         }
       );
 
@@ -5161,40 +4445,29 @@
 
 
       showToast(
-        "Student status updated successfully.",
+        status === "custom"
+          ? `Custom status "${customStatus}" saved successfully.`
+          : `Student status changed to "${formatStatus(status)}".`,
         "success"
       );
 
 
       await loadInquiries();
 
-
     }catch(error){
 
-      console.error(
-        "Status update error:",
-        error
-      );
-
-
       showToast(
-        error.message ||
-        "Unable to update student status.",
+        error.message,
         "error"
       );
 
-
     }finally{
 
-      saveBtn.disabled =
-        false;
-
+      saveBtn.disabled = false;
 
       saveBtn.textContent =
         "Save Status";
-
     }
-
   }
 
 
@@ -5202,17 +4475,12 @@
      VIEW STUDENT
   ============================================================ */
 
-  function viewStudent(
-    docName
-  ){
+  function viewStudent(docName){
 
     const item =
       inquiries.find(
-        x =>
-          x.__docName ===
-          docName
+        x => x.__docName === docName
       );
-
 
     if(!item){
       return;
@@ -5225,69 +4493,60 @@
 
     setText(
       "detailName",
-      item.studentName ||
-      "-"
+      item.studentName || "-"
     );
-
 
     setText(
       "detailMobile",
-      item.mobile ||
-      "-"
+      item.mobile || "-"
     );
-
 
     setText(
       "detailCourse",
-      item.course ||
-      "-"
+      item.course || "-"
     );
-
 
     setText(
       "detailSource",
-      item.source ||
-      "-"
+      item.source || "-"
     );
-
 
     setText(
       "detailCoordinator",
-      item.coordinatorName ||
-      "-"
+      item.coordinatorName || "-"
     );
-
 
     setText(
       "detailCoordinatorMobile",
-      item.coordinatorMobile ||
-      "-"
+      item.coordinatorMobile || "-"
     );
 
 
     setText(
       "detailStatus",
-      formatStatus(
-        getEffectiveStatus(
-          item
-        )
-      )
+      getEffectiveStatus(item)
     );
 
 
     setText(
       "detailTelecallerStatus",
-      formatStatus(
-        item.telecallerStatus ||
-        "-"
-      )
+      item.telecallerStatus
+        ? formatStatus(
+            item.telecallerStatus
+          )
+        : "-"
+    );
+
+
+    setText(
+      "detailCustomStatus",
+      item.customStatus || "-"
     );
 
 
     setText(
       "detailFollowup",
-      item.followUpDate ||
-      "-"
+      item.followUpDate || "-"
     );
 
 
@@ -5301,22 +4560,19 @@
 
     setText(
       "detailRemark",
-      item.remark ||
-      "-"
+      item.remark || "-"
     );
 
 
     setText(
       "detailTeleRemark",
-      item.telecallerRemark ||
-      "-"
+      item.telecallerRemark || "-"
     );
 
 
     showModal(
       "detailModal"
     );
-
   }
 
 
@@ -5324,19 +4580,11 @@
      CALL / WHATSAPP
   ============================================================ */
 
-  function callStudent(
-    mobile
-  ){
+  function callStudent(mobile){
 
     const clean =
-      String(
-        mobile || ""
-      )
-      .replace(
-        /[^\d+]/g,
-        ""
-      );
-
+      String(mobile || "")
+        .replace(/[^\d+]/g,"");
 
     if(!clean){
 
@@ -5346,14 +4594,10 @@
       );
 
       return;
-
     }
 
-
     window.location.href =
-      "tel:" +
-      clean;
-
+      "tel:" + clean;
   }
 
 
@@ -5367,7 +4611,6 @@
         mobile
       );
 
-
     if(!clean){
 
       showToast(
@@ -5376,17 +4619,11 @@
       );
 
       return;
-
     }
 
 
     const message =
-      `Hello ${
-        studentName ||
-        "Student"
-      }, this is ${
-        telecallerName
-      } from BlackTerminal Computer Institute. How can I help you?`;
+      `Hello ${studentName || "Student"}, this is ${telecallerName} from BlackTerminal Computer Institute. How can I help you?`;
 
 
     const url =
@@ -5402,14 +4639,11 @@
       url,
       "_blank"
     );
-
   }
 
 
   /* ============================================================
      DELETE
-     
-     Uses same Firestore document URL fix.
   ============================================================ */
 
   async function deleteStudent(
@@ -5424,10 +4658,7 @@
 
     const confirmed =
       window.confirm(
-        `Delete inquiry for ${
-          studentName ||
-          "this student"
-        }?`
+        `Delete inquiry for ${studentName || "this student"}?`
       );
 
 
@@ -5439,9 +4670,9 @@
     try{
 
       const url =
-        getFirestoreDocumentUrl(
-          docName
-        );
+        FIRESTORE_BASE +
+        "/" +
+        docName;
 
 
       await firestoreFetch(
@@ -5460,16 +4691,13 @@
 
       await loadInquiries();
 
-
     }catch(error){
 
       showToast(
         error.message,
         "error"
       );
-
     }
-
   }
 
 
@@ -5477,9 +4705,7 @@
      COURSE / OFFER RENDERING
   ============================================================ */
 
-  function getContentTitle(
-    item
-  ){
+  function getContentTitle(item){
 
     return (
       item.title ||
@@ -5487,26 +4713,20 @@
       item.name ||
       "Untitled"
     );
-
   }
 
 
-  function getContentDescription(
-    item
-  ){
+  function getContentDescription(item){
 
     return (
       item.description ||
       item.shortDescription ||
       ""
     );
-
   }
 
 
-  function getContentImage(
-    item
-  ){
+  function getContentImage(item){
 
     return (
       item.imageUrl ||
@@ -5514,34 +4734,26 @@
       item.image ||
       ""
     );
-
   }
 
 
-  function getContentPrice(
-    item
-  ){
+  function getContentPrice(item){
 
     const offer =
       item.offerPrice;
-
 
     if(
       offer !== undefined &&
       offer !== null &&
       offer !== ""
     ){
-
       return offer;
-
     }
-
 
     return (
       item.price ||
       ""
     );
-
   }
 
 
@@ -5553,12 +4765,9 @@
       );
 
 
-    if(
-      !currentContent.length
-    ){
+    if(!currentContent.length){
 
       area.innerHTML = `
-
         <div class="card">
 
           <div class="empty">
@@ -5578,158 +4787,97 @@
           </div>
 
         </div>
-
       `;
 
       return;
-
     }
 
 
-    if(
-      currentDisplay ===
-      "list"
-    ){
+    if(currentDisplay === "list"){
 
-      renderContentList(
-        area
-      );
+      renderContentList(area);
 
       return;
-
     }
 
 
-    if(
-      currentDisplay ===
-      "banner"
-    ){
+    if(currentDisplay === "banner"){
 
-      renderContentBanner(
-        area
-      );
+      renderContentBanner(area);
 
       return;
-
     }
 
 
-    renderContentCarousel(
-      area
-    );
-
+    renderContentCarousel(area);
   }
 
 
   function contentItemHtml(
-    item
+    item,
+    compact = false
   ){
 
     const title =
-      getContentTitle(
-        item
-      );
-
+      getContentTitle(item);
 
     const description =
-      getContentDescription(
-        item
-      );
-
+      getContentDescription(item);
 
     const image =
-      getContentImage(
-        item
-      );
-
+      getContentImage(item);
 
     const price =
-      getContentPrice(
-        item
-      );
-
+      getContentPrice(item);
 
     const originalPrice =
-      item.price ||
-      "";
-
+      item.price || "";
 
     const duration =
-      item.duration ||
-      "";
-
+      item.duration || "";
 
     const validUntil =
-      item.validUntil ||
-      "";
-
+      item.validUntil || "";
 
     const type =
       String(
-        item.type ||
-        "course"
-      )
-      .toLowerCase();
+        item.type || "course"
+      ).toLowerCase();
 
 
-    let priceHtml =
-      "";
+    let priceHtml = "";
 
-
-    if(
-      originalPrice &&
-      price
-    ){
+    if(originalPrice && price){
 
       if(
-        String(
-          originalPrice
-        ) !==
-        String(
-          price
-        )
+        String(originalPrice) !==
+        String(price)
       ){
 
         priceHtml = `
-
           <div class="price-line">
 
             <span class="old-price">
-              ₹${escapeHtml(
-                String(
-                  originalPrice
-                )
-              )}
+              ₹${escapeHtml(String(originalPrice))}
             </span>
 
             <span class="offer-price">
-              ₹${escapeHtml(
-                String(
-                  price
-                )
-              )}
+              ₹${escapeHtml(String(price))}
             </span>
 
           </div>
-
         `;
 
       }else{
 
         priceHtml = `
-
           <div class="price-line">
 
             <span class="offer-price">
-              ₹${escapeHtml(
-                String(
-                  price
-                )
-              )}
+              ₹${escapeHtml(String(price))}
             </span>
 
           </div>
-
         `;
 
       }
@@ -5737,33 +4885,20 @@
     }else if(price){
 
       priceHtml = `
-
         <div class="price-line">
 
           <span class="offer-price">
-            ₹${escapeHtml(
-              String(
-                price
-              )
-            )}
+            ₹${escapeHtml(String(price))}
           </span>
 
         </div>
-
       `;
-
     }
 
 
     const imageHtml =
       image
-      ? `
-        <img
-          src="${escapeAttr(image)}"
-          alt="${escapeAttr(title)}"
-          onerror="this.style.display='none';"
-        >
-      `
+      ? `<img src="${escapeAttr(image)}" alt="${escapeAttr(title)}" onerror="this.style.display='none';">`
       : "";
 
 
@@ -5786,34 +4921,21 @@
         </div>
 
         <div class="promo-title">
-
-          ${escapeHtml(
-            title
-          )}
-
+          ${escapeHtml(title)}
         </div>
 
         ${
           duration
           ? `
             <div style="font-size:10px;color:#d1d5db;margin-top:5px;">
-              Duration:
-              ${escapeHtml(
-                String(
-                  duration
-                )
-              )}
+              Duration: ${escapeHtml(String(duration))}
             </div>
           `
           : ""
         }
 
         <div class="promo-description">
-
-          ${escapeHtml(
-            description
-          )}
-
+          ${escapeHtml(description)}
         </div>
 
         ${priceHtml}
@@ -5822,12 +4944,7 @@
           validUntil
           ? `
             <div class="validity">
-              Valid until:
-              ${escapeHtml(
-                String(
-                  validUntil
-                )
-              )}
+              Valid until: ${escapeHtml(String(validUntil))}
             </div>
           `
           : ""
@@ -5836,13 +4953,10 @@
       </div>
 
     `;
-
   }
 
 
-  function renderContentBanner(
-    area
-  ){
+  function renderContentBanner(area){
 
     area.innerHTML = `
 
@@ -5852,15 +4966,9 @@
           currentContent
             .map(
               item => `
-
                 <div class="promo-banner">
-
-                  ${contentItemHtml(
-                    item
-                  )}
-
+                  ${contentItemHtml(item)}
                 </div>
-
               `
             )
             .join("")
@@ -5869,24 +4977,17 @@
       </div>
 
     `;
-
   }
 
 
-  function renderContentCarousel(
-    area
-  ){
+  function renderContentCarousel(area){
 
-    carouselIndex =
-      0;
-
+    carouselIndex = 0;
 
     if(carouselTimer){
-
       clearInterval(
         carouselTimer
       );
-
     }
 
 
@@ -5903,19 +5004,13 @@
             currentContent
               .map(
                 item => `
-
                   <div class="carousel-slide">
 
                     <div class="promo-banner">
-
-                      ${contentItemHtml(
-                        item
-                      )}
-
+                      ${contentItemHtml(item)}
                     </div>
 
                   </div>
-
                 `
               )
               .join("")
@@ -5923,12 +5018,9 @@
 
         </div>
 
-
         ${
           currentContent.length > 1
-
           ? `
-
             <button
               class="carousel-control carousel-prev"
               id="carouselPrev"
@@ -5936,14 +5028,12 @@
               ‹
             </button>
 
-
             <button
               class="carousel-control carousel-next"
               id="carouselNext"
             >
               ›
             </button>
-
 
             <div
               class="carousel-dots"
@@ -5953,28 +5043,20 @@
               ${
                 currentContent
                   .map(
-                    (_,i) => `
-
-                      <button
-                        class="carousel-dot ${
-                          i === 0
-                            ? "active"
-                            : ""
-                        }"
-                        onclick="goCarousel(${i})"
-                      ></button>
-
-                    `
+                    (_,i) =>
+                      `
+                        <button
+                          class="carousel-dot ${i === 0 ? "active" : ""}"
+                          onclick="goCarousel(${i})"
+                        ></button>
+                      `
                   )
                   .join("")
               }
 
             </div>
-
           `
-
           : ""
-
         }
 
       </div>
@@ -5987,7 +5069,6 @@
         "carouselNext"
       );
 
-
     const prev =
       document.getElementById(
         "carouselPrev"
@@ -5999,10 +5080,8 @@
       next.onclick =
         () =>
           goCarousel(
-            carouselIndex +
-            1
+            carouselIndex + 1
           );
-
     }
 
 
@@ -6011,62 +5090,42 @@
       prev.onclick =
         () =>
           goCarousel(
-            carouselIndex -
-            1
+            carouselIndex - 1
           );
-
     }
 
 
-    if(
-      currentContent.length >
-      1
-    ){
+    if(currentContent.length > 1){
 
       carouselTimer =
         setInterval(
           () =>
             goCarousel(
-              carouselIndex +
-              1
+              carouselIndex + 1
             ),
           5000
         );
-
     }
-
   }
 
 
-  function goCarousel(
-    index
-  ){
+  function goCarousel(index){
 
-    if(
-      !currentContent.length
-    ){
-
+    if(!currentContent.length){
       return;
-
     }
 
 
     if(index < 0){
-
       index =
-        currentContent.length -
-        1;
-
+        currentContent.length - 1;
     }
-
 
     if(
       index >=
       currentContent.length
     ){
-
       index = 0;
-
     }
 
 
@@ -6079,14 +5138,10 @@
         "carouselTrack"
       );
 
-
     if(track){
 
       track.style.transform =
-        `translateX(-${
-          index * 100
-        }%)`;
-
+        `translateX(-${index * 100}%)`;
     }
 
 
@@ -6101,13 +5156,10 @@
             i === index
           )
       );
-
   }
 
 
-  function renderContentList(
-    area
-  ){
+  function renderContentList(area){
 
     area.innerHTML = `
 
@@ -6115,130 +5167,87 @@
 
         ${
           currentContent
-            .map(
-              item => {
+            .map(item => {
 
-                const title =
-                  getContentTitle(
-                    item
-                  );
+              const title =
+                getContentTitle(item);
 
+              const desc =
+                getContentDescription(item);
 
-                const desc =
-                  getContentDescription(
-                    item
-                  );
+              const image =
+                getContentImage(item);
 
+              const price =
+                getContentPrice(item);
 
-                const image =
-                  getContentImage(
-                    item
-                  );
+              const duration =
+                item.duration || "";
 
 
-                const price =
-                  getContentPrice(
-                    item
-                  );
+              return `
 
+                <div class="list-item">
 
-                const duration =
-                  item.duration ||
-                  "";
+                  <div class="list-thumb">
 
+                    ${
+                      image
+                      ? `
+                        <img
+                          src="${escapeAttr(image)}"
+                          alt="${escapeAttr(title)}"
+                          onerror="this.style.display='none';"
+                        >
+                      `
+                      : ""
+                    }
 
-                return `
+                  </div>
 
-                  <div class="list-item">
+                  <div class="list-info">
 
-                    <div class="list-thumb">
-
-                      ${
-                        image
-                        ? `
-
-                          <img
-                            src="${escapeAttr(image)}"
-                            alt="${escapeAttr(title)}"
-                            onerror="this.style.display='none';"
-                          >
-
-                        `
-                        : ""
-                      }
-
+                    <div class="list-title">
+                      ${escapeHtml(title)}
                     </div>
 
+                    ${
+                      duration
+                      ? `
+                        <div class="list-desc">
+                          Duration: ${escapeHtml(String(duration))}
+                        </div>
+                      `
+                      : ""
+                    }
 
-                    <div class="list-info">
-
-                      <div class="list-title">
-
-                        ${escapeHtml(
-                          title
-                        )}
-
-                      </div>
-
-
-                      ${
-                        duration
-                        ? `
-
-                          <div class="list-desc">
-
-                            Duration:
-                            ${escapeHtml(
-                              String(
-                                duration
-                              )
-                            )}
-
-                          </div>
-
-                        `
-                        : ""
-                      }
-
-
-                      <div class="list-desc">
-
-                        ${escapeHtml(
-                          desc
-                        )}
-
-                      </div>
-
-                    </div>
-
-
-                    <div class="list-price">
-
-                      ${
-                        price
-                        ? `₹${escapeHtml(
-                            String(
-                              price
-                            )
-                          )}`
-                        : "Contact Admin"
-                      }
-
+                    <div class="list-desc">
+                      ${escapeHtml(desc)}
                     </div>
 
                   </div>
 
-                `;
+                  <div class="list-price">
 
-              }
-            )
+                    ${
+                      price
+                      ? `₹${escapeHtml(String(price))}`
+                      : "Contact Admin"
+                    }
+
+                  </div>
+
+                </div>
+
+              `;
+
+            })
             .join("")
         }
 
       </div>
 
     `;
-
   }
 
 
@@ -6246,14 +5255,10 @@
      UI HELPERS
   ============================================================ */
 
-  function money(
-    value
-  ){
+  function money(value){
 
     const number =
-      Number(value) ||
-      0;
-
+      Number(value) || 0;
 
     return (
       "₹" +
@@ -6261,7 +5266,6 @@
         "en-IN"
       )
     );
-
   }
 
 
@@ -6271,71 +5275,45 @@
   ){
 
     const element =
-      document.getElementById(
-        id
-      );
-
+      document.getElementById(id);
 
     if(element){
-
       element.textContent =
         String(value);
-
     }
-
   }
 
 
-  function formatStatus(
-    status
-  ){
+  function formatStatus(status){
 
     if(!status){
       return "-";
     }
 
-
     return String(status)
-      .replace(
-        /[-_]/g,
-        " "
-      )
-      .replace(
-        /\b\w/g,
-        c =>
-          c.toUpperCase()
+      .replace(/[-_]/g," ")
+      .replace(/\b\w/g,c =>
+        c.toUpperCase()
       );
-
   }
 
 
-  function formatDate(
-    value
-  ){
+  function formatDate(value){
 
     if(!value){
       return "-";
     }
 
-
     const date =
-      new Date(
-        value
-      );
-
+      new Date(value);
 
     if(
       Number.isNaN(
         date.getTime()
       )
     ){
-
-      return String(
-        value
-      );
-
+      return String(value);
     }
-
 
     return date.toLocaleString(
       "en-IN",
@@ -6347,49 +5325,25 @@
         minute:"2-digit"
       }
     );
-
   }
 
 
-  function escapeHtml(
-    value
-  ){
+  function escapeHtml(value){
 
     return String(
       value ?? ""
     )
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
   }
 
 
-  function escapeAttr(
-    value
-  ){
+  function escapeAttr(value){
 
-    return escapeHtml(
-      value
-    );
-
+    return escapeHtml(value);
   }
 
 
@@ -6403,65 +5357,43 @@
         "toastContainer"
       );
 
-
     const toast =
       document.createElement(
         "div"
       );
 
-
     toast.className =
       `toast ${type}`;
 
-
     toast.textContent =
       message;
-
 
     container.appendChild(
       toast
     );
 
-
     setTimeout(
       () => {
-
         toast.remove();
-
       },
       3500
     );
-
   }
 
 
-  function showModal(
-    id
-  ){
+  function showModal(id){
 
     document
-      .getElementById(
-        id
-      )
-      .classList.add(
-        "show"
-      );
-
+      .getElementById(id)
+      .classList.add("show");
   }
 
 
-  function hideModal(
-    id
-  ){
+  function hideModal(id){
 
     document
-      .getElementById(
-        id
-      )
-      .classList.remove(
-        "show"
-      );
-
+      .getElementById(id)
+      .classList.remove("show");
   }
 
 
@@ -6469,42 +5401,30 @@
      NAVIGATION
   ============================================================ */
 
-  function openSection(
-    sectionId
-  ){
+  function openSection(sectionId){
 
     document
-      .querySelectorAll(
-        ".section"
-      )
-      .forEach(
-        section => {
+      .querySelectorAll(".section")
+      .forEach(section => {
 
-          section.classList.toggle(
-            "active",
-            section.id ===
-            sectionId
-          );
+        section.classList.toggle(
+          "active",
+          section.id === sectionId
+        );
 
-        }
-      );
+      });
 
 
     document
-      .querySelectorAll(
-        ".nav-btn"
-      )
-      .forEach(
-        btn => {
+      .querySelectorAll(".nav-btn")
+      .forEach(btn => {
 
-          btn.classList.toggle(
-            "active",
-            btn.dataset.section ===
-            sectionId
-          );
+        btn.classList.toggle(
+          "active",
+          btn.dataset.section === sectionId
+        );
 
-        }
-      );
+      });
 
 
     const titles = {
@@ -6526,10 +5446,8 @@
 
     setText(
       "pageTitle",
-
       titles[sectionId] ||
       "Telecaller Dashboard"
-
     );
 
 
@@ -6542,10 +5460,7 @@
       );
 
 
-    if(
-      sectionId ===
-      "courses"
-    ){
+    if(sectionId === "courses"){
 
       renderContent();
 
@@ -6559,36 +5474,28 @@
   ============================================================ */
 
   document
-    .querySelectorAll(
-      ".nav-btn"
-    )
-    .forEach(
-      btn => {
+    .querySelectorAll(".nav-btn")
+    .forEach(btn => {
 
-        btn.addEventListener(
-          "click",
-          () =>
-            openSection(
-              btn.dataset.section
-            )
-        );
+      btn.addEventListener(
+        "click",
+        () =>
+          openSection(
+            btn.dataset.section
+          )
+      );
 
-      }
-    );
+    });
 
 
   document
-    .getElementById(
-      "mobileMenu"
-    )
+    .getElementById("mobileMenu")
     .addEventListener(
       "click",
       () => {
 
         document
-          .getElementById(
-            "sidebar"
-          )
+          .getElementById("sidebar")
           .classList.toggle(
             "open"
           );
@@ -6598,9 +5505,7 @@
 
 
   document
-    .getElementById(
-      "logoutBtn"
-    )
+    .getElementById("logoutBtn")
     .addEventListener(
       "click",
       () => {
@@ -6625,7 +5530,6 @@
           "bt_login_time"
         );
 
-
         window.location.replace(
           "login.html"
         );
@@ -6635,9 +5539,7 @@
 
 
   document
-    .getElementById(
-      "searchInput"
-    )
+    .getElementById("searchInput")
     .addEventListener(
       "input",
       applyFilters
@@ -6645,9 +5547,7 @@
 
 
   document
-    .getElementById(
-      "statusFilter"
-    )
+    .getElementById("statusFilter")
     .addEventListener(
       "change",
       applyFilters
@@ -6655,9 +5555,7 @@
 
 
   document
-    .getElementById(
-      "courseFilter"
-    )
+    .getElementById("courseFilter")
     .addEventListener(
       "change",
       applyFilters
@@ -6665,76 +5563,15 @@
 
 
   document
-    .getElementById(
-      "coordinatorFilter"
-    )
+    .getElementById("coordinatorFilter")
     .addEventListener(
       "change",
       applyFilters
     );
 
 
-  /* CUSTOM STATUS TOGGLE */
-
   document
-    .getElementById(
-      "newStatus"
-    )
-    .addEventListener(
-      "change",
-      () => {
-
-        const value =
-          document.getElementById(
-            "newStatus"
-          ).value;
-
-
-        const box =
-          document.getElementById(
-            "customStatusBox"
-          );
-
-
-        const input =
-          document.getElementById(
-            "customStatusInput"
-          );
-
-
-        if(
-          value === "custom"
-        ){
-
-          box.classList.add(
-            "show"
-          );
-
-          setTimeout(
-            () =>
-              input.focus(),
-            50
-          );
-
-        }else{
-
-          box.classList.remove(
-            "show"
-          );
-
-          input.value =
-            "";
-
-        }
-
-      }
-    );
-
-
-  document
-    .getElementById(
-      "clearFiltersBtn"
-    )
+    .getElementById("clearFiltersBtn")
     .addEventListener(
       "click",
       () => {
@@ -6743,21 +5580,17 @@
           "searchInput"
         ).value = "";
 
-
         document.getElementById(
           "statusFilter"
         ).value = "";
-
 
         document.getElementById(
           "courseFilter"
         ).value = "";
 
-
         document.getElementById(
           "coordinatorFilter"
         ).value = "";
-
 
         applyFilters();
 
@@ -6766,9 +5599,7 @@
 
 
   document
-    .getElementById(
-      "refreshBtn"
-    )
+    .getElementById("refreshBtn")
     .addEventListener(
       "click",
       async () => {
@@ -6776,7 +5607,6 @@
         await loadInquiries();
 
         await loadPaymentSettings();
-
 
         showToast(
           "Data refreshed.",
@@ -6788,15 +5618,12 @@
 
 
   document
-    .getElementById(
-      "refreshContentBtn"
-    )
+    .getElementById("refreshContentBtn")
     .addEventListener(
       "click",
       async () => {
 
         await loadContent();
-
 
         showToast(
           "Course and offer information refreshed.",
@@ -6808,50 +5635,52 @@
 
 
   document
-    .querySelectorAll(
-      ".display-btn"
-    )
-    .forEach(
-      btn => {
+    .querySelectorAll(".display-btn")
+    .forEach(btn => {
 
-        btn.addEventListener(
-          "click",
-          () => {
+      btn.addEventListener(
+        "click",
+        () => {
 
-            currentDisplay =
-              btn.dataset.display;
+          currentDisplay =
+            btn.dataset.display;
 
-
-            document
-              .querySelectorAll(
-                ".display-btn"
+          document
+            .querySelectorAll(
+              ".display-btn"
+            )
+            .forEach(x =>
+              x.classList.remove(
+                "active"
               )
-              .forEach(
-                x =>
-                  x.classList.remove(
-                    "active"
-                  )
-              );
-
-
-            btn.classList.add(
-              "active"
             );
 
+          btn.classList.add(
+            "active"
+          );
 
-            renderContent();
+          renderContent();
 
-          }
-        );
+        }
+      );
 
-      }
+    });
+
+
+  /* STATUS CHANGE EVENT */
+
+  document
+    .getElementById("newStatus")
+    .addEventListener(
+      "change",
+      toggleCustomStatusBox
     );
 
 
+  /* SAVE STATUS */
+
   document
-    .getElementById(
-      "saveStatusBtn"
-    )
+    .getElementById("saveStatusBtn")
     .addEventListener(
       "click",
       saveStatus
@@ -6859,28 +5688,22 @@
 
 
   document
-    .querySelectorAll(
-      "[data-close]"
-    )
-    .forEach(
-      btn => {
+    .querySelectorAll("[data-close]")
+    .forEach(btn => {
 
-        btn.addEventListener(
-          "click",
-          () =>
-            hideModal(
-              btn.dataset.close
-            )
-        );
+      btn.addEventListener(
+        "click",
+        () =>
+          hideModal(
+            btn.dataset.close
+          )
+      );
 
-      }
-    );
+    });
 
 
   document
-    .getElementById(
-      "detailCallBtn"
-    )
+    .getElementById("detailCallBtn")
     .addEventListener(
       "click",
       () => {
@@ -6900,9 +5723,7 @@
 
 
   document
-    .getElementById(
-      "detailWhatsAppBtn"
-    )
+    .getElementById("detailWhatsAppBtn")
     .addEventListener(
       "click",
       () => {
@@ -6923,32 +5744,27 @@
 
 
   document
-    .querySelectorAll(
-      ".modal-overlay"
-    )
-    .forEach(
-      overlay => {
+    .querySelectorAll(".modal-overlay")
+    .forEach(overlay => {
 
-        overlay.addEventListener(
-          "click",
-          event => {
+      overlay.addEventListener(
+        "click",
+        event => {
 
-            if(
-              event.target ===
-              overlay
-            ){
+          if(
+            event.target === overlay
+          ){
 
-              overlay.classList.remove(
-                "show"
-              );
-
-            }
+            overlay.classList.remove(
+              "show"
+            );
 
           }
-        );
 
-      }
-    );
+        }
+      );
+
+    });
 
 
   /* ============================================================
@@ -6960,19 +5776,15 @@
     telecallerName
   );
 
-
   setText(
     "topUserName",
     telecallerName
   );
 
-
   setText(
     "topUserMobile",
-    telecallerMobile ||
-    "-"
+    telecallerMobile || "-"
   );
-
 
   setText(
     "heroName",
@@ -6984,9 +5796,7 @@
     telecallerName
       .trim()
       .charAt(0)
-      .toUpperCase() ||
-    "T";
-
+      .toUpperCase() || "T";
 
   setText(
     "avatar",
@@ -6996,7 +5806,6 @@
 
   setText(
     "todayDate",
-
     new Date().toLocaleDateString(
       "en-IN",
       {
@@ -7006,7 +5815,6 @@
         year:"numeric"
       }
     )
-
   );
 
 
@@ -7017,13 +5825,9 @@
   async function initialize(){
 
     await Promise.all([
-
       loadInquiries(),
-
       loadPaymentSettings(),
-
       loadContent()
-
     ]);
 
   }
@@ -7047,9 +5851,7 @@
 
       }catch(error){
 
-        console.warn(
-          error
-        );
+        console.warn(error);
 
       }
 
@@ -7067,9 +5869,7 @@
 
       }catch(error){
 
-        console.warn(
-          error
-        );
+        console.warn(error);
 
       }
 

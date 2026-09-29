@@ -1,10789 +1,3466 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#1a73e8">
-<title>BlackTerminal - Telecaller v4.0</title>
-
-<style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0
-}
-
-:root{
---bg:#f6f8fc;
---card:#ffffff;
---text:#202124;
---muted:#6b7280;
---border:#e4e7ec;
---blue:#1a73e8;
---blue2:#4285f4;
---green:#188038;
---green2:#34a853;
---yellow:#f9ab00;
---red:#d93025;
---purple:#7c3aed;
---purple2:#9333ea;
---orange:#f97316;
---cyan:#0891b2;
---pink:#db2777;
---shadow:0 4px 16px rgba(60,64,67,.10);
---shadow2:0 12px 35px rgba(60,64,67,.16);
---radius:18px
-}
-
-html{
-scroll-behavior:smooth
-}
-
-body{
-font-family:Inter,Arial,Helvetica,sans-serif;
-background:
-radial-gradient(circle at 10% 10%,rgba(66,133,244,.05),transparent 28%),
-radial-gradient(circle at 90% 20%,rgba(124,58,237,.05),transparent 25%),
-var(--bg);
-color:var(--text);
-min-height:100vh
-}
-
-button,input,select,textarea{
-font:inherit
-}
-
-button{
-cursor:pointer
-}
-
-button:disabled{
-opacity:.6;
-cursor:not-allowed
-}
-
-a{
-text-decoration:none;
-color:inherit
-}
-
-.app{
-min-height:100vh;
-display:flex
-}
-
-/* ================= SIDEBAR ================= */
-
-.sidebar{
-width:260px;
-background:#fff;
-border-right:1px solid var(--border);
-position:fixed;
-left:0;
-top:0;
-bottom:0;
-z-index:100;
-padding:16px 13px;
-transition:.25s;
-box-shadow:2px 0 15px rgba(0,0,0,.03)
-}
-
-.brand{
-display:flex;
-align-items:center;
-gap:11px;
-padding:8px 10px 19px;
-border-bottom:1px solid #eee;
-margin-bottom:15px
-}
-
-.brand-logo{
-width:43px;
-height:43px;
-border-radius:14px;
-background:linear-gradient(135deg,#4285f4,#7c3aed,#db2777);
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:900;
-font-size:14px;
-box-shadow:0 7px 18px rgba(66,133,244,.28)
-}
-
-.brand-text strong{
-display:block;
-font-size:16px
-}
-
-.brand-text span{
-display:block;
-font-size:9px;
-color:#777;
-margin-top:3px
-}
-
-.version-badge{
-display:inline-flex;
-margin-top:5px;
-font-size:8px;
-font-weight:800;
-padding:3px 6px;
-border-radius:5px;
-background:#e8f0fe;
-color:#1967d2
-}
-
-.nav{
-display:flex;
-flex-direction:column;
-gap:5px
-}
-
-.nav-btn{
-border:0;
-background:transparent;
-color:#5f6368;
-padding:11px 12px;
-border-radius:12px;
-text-align:left;
-display:flex;
-align-items:center;
-gap:11px;
-width:100%;
-font-size:12px;
-font-weight:700;
-transition:.2s
-}
-
-.nav-btn:hover{
-background:#f1f5ff;
-color:#1a73e8;
-transform:translateX(2px)
-}
-
-.nav-btn.active{
-background:linear-gradient(90deg,#e8f0fe,#f1edff);
-color:#1967d2;
-box-shadow:inset 3px 0 #1a73e8
-}
-
-.nav-icon{
-width:24px;
-height:24px;
-border-radius:8px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:14px;
-background:#f5f6f8
-}
-
-.nav-btn.active .nav-icon{
-background:#dbe8ff
-}
-
-.sidebar-user{
-position:absolute;
-left:13px;
-right:13px;
-bottom:15px;
-padding:12px;
-border-radius:14px;
-background:linear-gradient(135deg,#f8f9fa,#f3f6ff);
-border:1px solid var(--border)
-}
-
-.user-name{
-font-size:12px;
-font-weight:800;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis
-}
-
-.user-role{
-font-size:9px;
-color:#777;
-margin-top:3px
-}
-
-.logout-btn{
-width:100%;
-margin-top:9px;
-border:0;
-border-radius:9px;
-background:#fce8e6;
-color:#c5221f;
-padding:8px;
-font-size:10px;
-font-weight:800
-}
-
-/* ================= MAIN ================= */
-
-.main{
-margin-left:260px;
-width:calc(100% - 260px);
-min-height:100vh
-}
-
-.topbar{
-height:70px;
-background:rgba(255,255,255,.94);
-border-bottom:1px solid var(--border);
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 27px;
-position:sticky;
-top:0;
-z-index:50;
-backdrop-filter:blur(12px)
-}
-
-.topbar-left{
-display:flex;
-align-items:center;
-gap:12px
-}
-
-.mobile-menu{
-display:none;
-border:0;
-background:#f1f3f4;
-width:39px;
-height:39px;
-border-radius:10px
-}
-
-.page-title{
-font-size:19px;
-font-weight:800
-}
-
-.page-subtitle{
-color:#777;
-font-size:10px;
-margin-top:2px
-}
-
-.top-user{
-display:flex;
-align-items:center;
-gap:10px
-}
-
-.avatar{
-width:39px;
-height:39px;
-border-radius:50%;
-background:linear-gradient(135deg,#1a73e8,#8b5cf6,#db2777);
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:900;
-box-shadow:0 4px 12px rgba(26,115,232,.20)
-}
-
-.content{
-padding:23px;
-max-width:1650px;
-margin:auto
-}
-
-.section{
-display:none
-}
-
-.section.active{
-display:block
-}
-
-/* ================= HERO ================= */
-
-.hero{
-border-radius:23px;
-padding:25px;
-margin-bottom:20px;
-position:relative;
-overflow:hidden;
-color:#fff;
-background:
-linear-gradient(135deg,#1a73e8 0%,#5b5df0 48%,#9333ea 100%);
-box-shadow:0 10px 30px rgba(66,133,244,.18)
-}
-
-.hero:before{
-content:"";
-position:absolute;
-width:280px;
-height:280px;
-right:-100px;
-top:-130px;
-border-radius:50%;
-border:50px solid rgba(255,255,255,.08)
-}
-
-.hero:after{
-content:"";
-position:absolute;
-width:160px;
-height:160px;
-right:120px;
-bottom:-110px;
-border-radius:50%;
-background:rgba(255,255,255,.06)
-}
-
-.hero h1{
-font-size:25px;
-margin-bottom:7px;
-position:relative;
-z-index:2
-}
-
-.hero p{
-color:#e8efff;
-font-size:12px;
-position:relative;
-z-index:2
-}
-
-.date-badge{
-display:inline-flex;
-margin-top:13px;
-background:rgba(255,255,255,.12);
-border:1px solid rgba(255,255,255,.18);
-padding:7px 10px;
-border-radius:9px;
-font-size:10px;
-position:relative;
-z-index:2
-}
-
-/* ================= STATS ================= */
-
-.stats-grid{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:13px;
-margin-bottom:19px
-}
-
-.stat-card{
-background:#fff;
-border:1px solid var(--border);
-box-shadow:var(--shadow);
-border-radius:17px;
-padding:16px;
-position:relative;
-overflow:hidden;
-transition:.2s
-}
-
-.stat-card:hover{
-transform:translateY(-2px);
-box-shadow:var(--shadow2)
-}
-
-.stat-card:after{
-content:"";
-position:absolute;
-height:3px;
-left:0;
-right:0;
-bottom:0;
-background:var(--card-color,#1a73e8)
-}
-
-.stat-label{
-color:#70757a;
-font-size:9px;
-font-weight:800
-}
-
-.stat-value{
-font-size:24px;
-font-weight:900;
-margin-top:8px
-}
-
-.stat-small{
-color:#8a8f98;
-font-size:9px;
-margin-top:4px
-}
-
-.stat-icon{
-position:absolute;
-right:13px;
-top:13px;
-width:35px;
-height:35px;
-border-radius:10px;
-background:var(--icon-bg,#f1f3f4);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:16px
-}
-
-.stat-blue{
---card-color:#1a73e8;
---icon-bg:#e8f0fe
-}
-
-.stat-red{
---card-color:#d93025;
---icon-bg:#fce8e6
-}
-
-.stat-yellow{
---card-color:#f9ab00;
---icon-bg:#fef7e0
-}
-
-.stat-green{
---card-color:#188038;
---icon-bg:#e6f4ea
-}
-
-.stat-purple{
---card-color:#7c3aed;
---icon-bg:#f3e8ff
-}
-
-/* ================= CARDS ================= */
-
-.card{
-background:#fff;
-border:1px solid var(--border);
-border-radius:18px;
-box-shadow:var(--shadow);
-padding:19px;
-transition:.2s
-}
-
-.card:hover{
-box-shadow:0 7px 23px rgba(60,64,67,.12)
-}
-
-.card-title{
-font-size:15px;
-font-weight:850;
-margin-bottom:4px
-}
-
-.card-subtitle{
-color:#777;
-font-size:10px;
-margin-bottom:15px
-}
-
-/* ================= ACTION ================= */
-
-.action-grid{
-display:grid;
-grid-template-columns:1.4fr 1fr;
-gap:17px;
-margin-bottom:20px
-}
-
-.action-list{
-display:flex;
-flex-direction:column;
-gap:9px
-}
-
-.action-item{
-display:flex;
-align-items:center;
-gap:10px;
-padding:11px;
-border:1px solid #edf0f3;
-border-radius:13px;
-background:#fff;
-transition:.2s
-}
-
-.action-item:hover{
-background:#fafcff;
-border-color:#dbe5ff
-}
-
-.action-dot{
-width:35px;
-height:35px;
-border-radius:11px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:15px;
-flex-shrink:0
-}
-
-.action-dot.red{
-background:#fce8e6;
-color:#d93025
-}
-
-.action-dot.yellow{
-background:#fef7e0;
-color:#b06000
-}
-
-.action-dot.blue{
-background:#e8f0fe;
-color:#1967d2
-}
-
-.action-dot.green{
-background:#e6f4ea;
-color:#188038
-}
-
-.action-dot.purple{
-background:#f3e8ff;
-color:#7c3aed
-}
-
-.action-info{
-flex:1
-}
-
-.action-title{
-font-size:11px;
-font-weight:800
-}
-
-.action-desc{
-font-size:9px;
-color:#777;
-margin-top:3px
-}
-
-.action-number{
-font-size:19px;
-font-weight:900
-}
-
-/* ================= NEXT ================= */
-
-.next-action{
-border-radius:15px;
-padding:15px;
-background:linear-gradient(135deg,#f8fbff,#f5f3ff);
-border:1px solid #dbe5ff
-}
-
-.next-label{
-font-size:9px;
-font-weight:900;
-text-transform:uppercase;
-letter-spacing:.6px;
-color:#5f6368
-}
-
-.next-title{
-font-size:17px;
-font-weight:900;
-margin-top:5px
-}
-
-.next-description{
-font-size:10px;
-color:#666;
-margin-top:4px;
-line-height:1.5
-}
-
-.next-buttons{
-display:flex;
-gap:7px;
-flex-wrap:wrap;
-margin-top:12px
-}
-
-/* ================= BUTTONS ================= */
-
-.btn{
-border:0;
-border-radius:9px;
-padding:9px 12px;
-font-size:10px;
-font-weight:800;
-display:inline-flex;
-align-items:center;
-justify-content:center;
-gap:6px;
-transition:.15s
-}
-
-.btn:hover{
-transform:translateY(-1px);
-filter:brightness(.97)
-}
-
-.btn-primary{
-background:#1a73e8;
-color:#fff
-}
-
-.btn-light{
-background:#f1f3f4;
-color:#3c4043
-}
-
-.btn-success{
-background:#188038;
-color:#fff
-}
-
-.btn-danger{
-background:#d93025;
-color:#fff
-}
-
-.btn-purple{
-background:#7c3aed;
-color:#fff
-}
-
-.btn-orange{
-background:#f97316;
-color:#fff
-}
-
-.btn-cyan{
-background:#0891b2;
-color:#fff
-}
-
-/* ================= FORM ================= */
-
-.toolbar{
-background:#fff;
-border:1px solid var(--border);
-border-radius:17px;
-box-shadow:var(--shadow);
-padding:14px;
-margin-bottom:17px
-}
-
-.toolbar-grid{
-display:grid;
-grid-template-columns:2fr 1fr 1fr 1fr 1fr auto;
-gap:8px
-}
-
-.input,
-.select,
-.textarea{
-width:100%;
-border:1px solid #dadce0;
-border-radius:9px;
-padding:9px 11px;
-outline:none;
-background:#fff;
-color:#202124;
-font-size:11px
-}
-
-.input:focus,
-.select:focus,
-.textarea:focus{
-border-color:#1a73e8;
-box-shadow:0 0 0 3px rgba(26,115,232,.10)
-}
-
-.textarea{
-resize:vertical
-}
-
-/* ================= TABLE ================= */
-
-.table-card{
-background:#fff;
-border:1px solid var(--border);
-border-radius:18px;
-box-shadow:var(--shadow);
-overflow:hidden
-}
-
-.table-head{
-padding:17px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
-border-bottom:1px solid var(--border)
-}
-
-.result-count{
-color:#777;
-font-size:10px
-}
-
-.table-wrap{
-overflow:auto
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-min-width:1200px
-}
-
-th{
-text-align:left;
-font-size:9px;
-color:#777;
-text-transform:uppercase;
-letter-spacing:.4px;
-background:#f8f9fa;
-padding:11px 13px;
-border-bottom:1px solid var(--border);
-white-space:nowrap
-}
-
-td{
-padding:12px 13px;
-border-bottom:1px solid #f0f0f0;
-font-size:11px;
-vertical-align:middle
-}
-
-tr:hover td{
-background:#fafcff
-}
-
-.student-name{
-font-weight:800
-}
-
-.student-mobile{
-font-size:9px;
-color:#777;
-margin-top:3px
-}
-
-/* ================= BADGES ================= */
-
-.badge{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-padding:5px 8px;
-border-radius:8px;
-font-size:8px;
-font-weight:900;
-white-space:nowrap
-}
-
-.badge-new{
-background:#e8f0fe;
-color:#1967d2
-}
-
-.badge-pending{
-background:#fef7e0;
-color:#b06000
-}
-
-.badge-interested{
-background:#e6f4ea;
-color:#188038
-}
-
-.badge-contacted{
-background:#f1f3f4;
-color:#5f6368
-}
-
-.badge-delay{
-background:#fff3e0;
-color:#e65100
-}
-
-.badge-follow-up{
-background:#f3e8ff;
-color:#7c3aed
-}
-
-.badge-visited{
-background:#e6f4ea;
-color:#188038
-}
-
-.badge-demo-completed{
-background:#e0f7fa;
-color:#00838f
-}
-
-.badge-converted{
-background:#dcfce7;
-color:#166534
-}
-
-.badge-not-interested{
-background:#fce8e6;
-color:#c5221f
-}
-
-.badge-custom{
-background:#f3e8ff;
-color:#7e22ce
-}
-
-.priority{
-display:inline-flex;
-align-items:center;
-gap:4px;
-font-size:8px;
-font-weight:900
-}
-
-.priority-high{
-color:#d93025
-}
-
-.priority-medium{
-color:#b06000
-}
-
-.priority-low{
-color:#188038
-}
-
-.next-cell{
-max-width:180px
-}
-
-.next-action-mini{
-font-size:9px;
-font-weight:900;
-color:#1967d2
-}
-
-.next-time{
-font-size:8px;
-color:#777;
-margin-top:3px
-}
-
-.action-group{
-display:flex;
-gap:4px;
-flex-wrap:wrap
-}
-
-.mini-btn{
-border:0;
-border-radius:7px;
-padding:6px 7px;
-font-size:9px;
-font-weight:800;
-transition:.15s
-}
-
-.mini-btn:hover{
-transform:translateY(-1px)
-}
-
-.mini-call,
-.mini-wa{
-background:#e6f4ea;
-color:#188038
-}
-
-.mini-view{
-background:#e8f0fe;
-color:#1967d2
-}
-
-.mini-guide{
-background:#f3e8ff;
-color:#7c3aed
-}
-
-.mini-delete{
-background:#fce8e6;
-color:#d93025
-}
-
-.mini-edit{
-background:#fff3e0;
-color:#e65100
-}
-
-/* ================= PAGINATION ================= */
-
-.pagination{
-padding:13px 17px;
-display:flex;
-justify-content:flex-end;
-align-items:center;
-gap:5px;
-border-top:1px solid var(--border)
-}
-
-.page-btn{
-width:31px;
-height:31px;
-border:1px solid var(--border);
-border-radius:8px;
-background:#fff;
-font-size:10px;
-font-weight:800
-}
-
-.page-btn.active{
-background:#1a73e8;
-color:#fff;
-border-color:#1a73e8
-}
-
-.page-info{
-color:#777;
-font-size:9px;
-margin-right:auto
-}
-
-/* ================= FOLLOWUPS ================= */
-
-.followup-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:13px
-}
-
-.followup-card{
-border:1px solid var(--border);
-border-radius:15px;
-padding:14px;
-background:#fff;
-box-shadow:var(--shadow);
-transition:.2s
-}
-
-.followup-card:hover{
-transform:translateY(-2px)
-}
-
-.followup-head{
-display:flex;
-justify-content:space-between;
-gap:10px
-}
-
-.followup-name{
-font-size:12px;
-font-weight:850
-}
-
-.followup-course{
-font-size:9px;
-color:#777;
-margin-top:3px
-}
-
-.followup-date{
-font-size:9px;
-font-weight:800;
-color:#1967d2
-}
-
-.followup-actions{
-display:flex;
-gap:5px;
-margin-top:12px;
-flex-wrap:wrap
-}
-
-/* ================= EARNINGS ================= */
-
-.earning-layout{
-display:grid;
-grid-template-columns:1.6fr 1fr;
-gap:17px;
-margin-bottom:20px
-}
-
-.earning-total{
-font-size:38px;
-font-weight:900;
-margin:8px 0
-}
-
-.earning-breakdown{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:9px;
-margin-top:15px
-}
-
-.earning-item{
-border:1px solid var(--border);
-border-radius:12px;
-padding:12px;
-background:#fafafa
-}
-
-.earning-item-label{
-color:#777;
-font-size:9px;
-font-weight:800
-}
-
-.earning-item-value{
-font-size:17px;
-font-weight:900;
-margin-top:5px
-}
-
-.salary-box{
-margin-top:14px;
-border-radius:13px;
-padding:13px;
-background:#f8f9fa;
-border:1px solid var(--border)
-}
-
-.salary-row{
-display:flex;
-justify-content:space-between;
-padding:6px 0;
-font-size:11px
-}
-
-.salary-row strong{
-font-size:12px
-}
-
-.level-card{
-border:1px solid var(--border);
-border-radius:14px;
-padding:14px;
-margin-bottom:9px;
-background:#fff
-}
-
-.level-card.active{
-border:2px solid #1a73e8;
-background:#f8fbff
-}
-
-.level-head{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px
-}
-
-.level-name{
-font-weight:850;
-font-size:12px
-}
-
-.level-rate{
-font-size:16px;
-font-weight:900
-}
-
-.level-range{
-color:#777;
-font-size:9px;
-margin-top:4px
-}
-
-.level-tag{
-font-size:8px;
-padding:3px 6px;
-border-radius:6px;
-background:#1a73e8;
-color:#fff;
-font-weight:900
-}
-
-.next-level-text{
-color:#777;
-font-size:9px;
-margin-top:8px
-}
-
-/* ================= CONTENT ================= */
-
-.content-controls{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:12px;
-margin-bottom:17px;
-flex-wrap:wrap
-}
-
-.display-switch{
-display:flex;
-gap:4px;
-background:#fff;
-border:1px solid var(--border);
-padding:4px;
-border-radius:9px
-}
-
-.display-btn{
-border:0;
-background:transparent;
-border-radius:7px;
-padding:6px 10px;
-font-size:9px;
-font-weight:800
-}
-
-.display-btn.active{
-background:#1a73e8;
-color:#fff
-}
-
-.banner-list{
-display:flex;
-flex-direction:column;
-gap:14px
-}
-
-.promo-banner{
-min-height:180px;
-border-radius:18px;
-overflow:hidden;
-background:linear-gradient(135deg,#1a73e8,#7c3aed);
-color:#fff;
-display:flex;
-box-shadow:var(--shadow)
-}
-
-.promo-image{
-width:34%;
-background:#eee;
-overflow:hidden
-}
-
-.promo-image img{
-width:100%;
-height:100%;
-object-fit:cover
-}
-
-.promo-content{
-padding:22px;
-flex:1;
-display:flex;
-flex-direction:column;
-justify-content:center
-}
-
-.promo-tag{
-font-size:8px;
-text-transform:uppercase;
-letter-spacing:1px;
-opacity:.75;
-font-weight:900;
-margin-bottom:6px
-}
-
-.promo-title{
-font-size:22px;
-font-weight:900
-}
-
-.promo-description{
-color:#e5e7eb;
-font-size:10px;
-margin-top:7px;
-line-height:1.5
-}
-
-.price-line{
-display:flex;
-align-items:center;
-gap:8px;
-margin-top:11px
-}
-
-.old-price{
-text-decoration:line-through;
-color:#d1d5db;
-font-size:11px
-}
-
-.offer-price{
-font-size:20px;
-font-weight:900
-}
-
-.validity{
-font-size:8px;
-color:#ddd;
-margin-top:6px
-}
-
-.carousel{
-position:relative;
-overflow:hidden;
-border-radius:18px
-}
-
-.carousel-track{
-display:flex;
-transition:.45s ease
-}
-
-.carousel-slide{
-min-width:100%
-}
-
-.carousel-control{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-width:37px;
-height:37px;
-border:0;
-border-radius:50%;
-background:rgba(0,0,0,.45);
-color:#fff;
-z-index:5;
-font-size:18px
-}
-
-.carousel-prev{
-left:10px
-}
-
-.carousel-next{
-right:10px
-}
-
-.carousel-dots{
-position:absolute;
-bottom:11px;
-left:50%;
-transform:translateX(-50%);
-display:flex;
-gap:5px;
-z-index:5
-}
-
-.carousel-dot{
-width:7px;
-height:7px;
-border-radius:50%;
-border:0;
-background:rgba(255,255,255,.5)
-}
-
-.carousel-dot.active{
-background:#fff
-}
-
-.content-list{
-display:flex;
-flex-direction:column;
-gap:9px
-}
-
-.list-item{
-background:#fff;
-border:1px solid var(--border);
-border-radius:14px;
-padding:13px;
-display:flex;
-align-items:center;
-gap:13px;
-box-shadow:var(--shadow)
-}
-
-.list-thumb{
-width:78px;
-height:58px;
-border-radius:9px;
-overflow:hidden;
-background:#eee;
-flex-shrink:0
-}
-
-.list-thumb img{
-width:100%;
-height:100%;
-object-fit:cover
-}
-
-.list-info{
-flex:1
-}
-
-.list-title{
-font-size:13px;
-font-weight:850
-}
-
-.list-desc{
-color:#777;
-font-size:9px;
-margin-top:3px
-}
-
-.list-price{
-font-weight:900;
-font-size:15px;
-white-space:nowrap
-}
-
-/* ================= CALENDAR ================= */
-
-.calendar-day{
-min-height:76px;
-border:1px solid #eee;
-border-radius:10px;
-padding:7px;
-background:#fff;
-cursor:pointer;
-transition:.15s
-}
-
-.calendar-day:hover{
-border-color:#8ab4f8;
-background:#f8fbff
-}
-
-.calendar-day.today{
-border-color:#8ab4f8;
-background:#f8fbff
-}
-
-/* ================= EMPTY ================= */
-
-.empty{
-padding:42px 20px;
-text-align:center;
-color:#777
-}
-
-.empty-icon{
-font-size:32px;
-margin-bottom:8px
-}
-
-.empty-title{
-font-weight:850;
-color:#444;
-margin-bottom:4px
-}
-
-.empty-text{
-font-size:10px
-}
-
-.loading{
-padding:38px;
-text-align:center;
-color:#777;
-font-size:11px
-}
-
-.spinner{
-width:26px;
-height:26px;
-border:3px solid #e5e7eb;
-border-top-color:#1a73e8;
-border-radius:50%;
-animation:spin .8s linear infinite;
-margin:0 auto 9px
-}
-
-@keyframes spin{
-to{
-transform:rotate(360deg)
-}
-}
-
-/* ================= MODAL ================= */
-
-.modal-overlay{
-position:fixed;
-inset:0;
-background:rgba(32,33,36,.48);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:500;
-padding:17px
-}
-
-.modal-overlay.show{
-display:flex
-}
-
-.modal{
-background:#fff;
-width:100%;
-max-width:720px;
-max-height:92vh;
-overflow:auto;
-border-radius:20px;
-box-shadow:var(--shadow2)
-}
-
-.modal-head{
-padding:17px 19px;
-border-bottom:1px solid var(--border);
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-background:#fff;
-z-index:2
-}
-
-.modal-title{
-font-size:15px;
-font-weight:900
-}
-
-.close-btn{
-width:31px;
-height:31px;
-border:0;
-border-radius:8px;
-background:#f1f3f4;
-font-size:18px
-}
-
-.modal-body{
-padding:19px
-}
-
-.detail-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px
-}
-
-.detail-box{
-border:1px solid var(--border);
-border-radius:11px;
-padding:11px;
-background:#fff
-}
-
-.detail-label{
-color:#777;
-font-size:8px;
-text-transform:uppercase;
-font-weight:900
-}
-
-.detail-value{
-margin-top:5px;
-font-size:11px;
-font-weight:750;
-word-break:break-word
-}
-
-.modal-footer{
-padding:13px 19px;
-border-top:1px solid var(--border);
-display:flex;
-justify-content:flex-end;
-gap:7px;
-flex-wrap:wrap
-}
-
-/* ================= GUIDE ================= */
-
-.guide-top{
-background:linear-gradient(135deg,#e8f0fe,#f3e8ff);
-border-radius:15px;
-padding:15px;
-margin-bottom:13px
-}
-
-.guide-status{
-font-size:9px;
-font-weight:900;
-text-transform:uppercase;
-color:#5f6368
-}
-
-.guide-action{
-font-size:20px;
-font-weight:900;
-margin-top:4px
-}
-
-.guide-why{
-font-size:10px;
-color:#666;
-margin-top:4px;
-line-height:1.5
-}
-
-.script-box{
-border:1px solid #dbe5ff;
-background:#f8fbff;
-border-radius:13px;
-padding:13px;
-margin-top:11px
-}
-
-.script-title{
-font-size:10px;
-font-weight:900;
-color:#1967d2;
-margin-bottom:7px
-}
-
-.script-text{
-font-size:11px;
-line-height:1.6;
-color:#333;
-white-space:pre-wrap
-}
-
-.template-tabs{
-display:flex;
-gap:5px;
-overflow:auto;
-padding-bottom:5px;
-margin-top:12px
-}
-
-.template-tab{
-border:1px solid var(--border);
-background:#fff;
-border-radius:8px;
-padding:6px 8px;
-font-size:9px;
-font-weight:800;
-white-space:nowrap
-}
-
-.template-tab.active{
-background:#1a73e8;
-color:#fff;
-border-color:#1a73e8
-}
-
-.template-box{
-border:1px solid #e5e7eb;
-border-radius:12px;
-padding:12px;
-margin-top:8px;
-background:#fafafa
-}
-
-.template-text{
-font-size:10px;
-line-height:1.6;
-white-space:pre-wrap;
-color:#333
-}
-
-/* ================= TIMELINE ================= */
-
-.timeline{
-margin-top:15px;
-border-left:2px solid #dbe5ff;
-padding-left:16px
-}
-
-.timeline-item{
-position:relative;
-padding-bottom:15px
-}
-
-.timeline-item:before{
-content:"";
-position:absolute;
-left:-22px;
-top:2px;
-width:10px;
-height:10px;
-border-radius:50%;
-background:#1a73e8;
-border:2px solid #fff;
-box-shadow:0 0 0 1px #b8cdfc
-}
-
-.timeline-title{
-font-size:10px;
-font-weight:900
-}
-
-.timeline-meta{
-font-size:8px;
-color:#777;
-margin-top:3px
-}
-
-/* ================= TOAST ================= */
-
-.toast-container{
-position:fixed;
-right:18px;
-bottom:18px;
-z-index:1000;
-display:flex;
-flex-direction:column;
-gap:7px
-}
-
-.toast{
-min-width:250px;
-max-width:370px;
-background:#202124;
-color:#fff;
-padding:12px 14px;
-border-radius:11px;
-box-shadow:var(--shadow2);
-font-size:10px;
-line-height:1.4
-}
-
-.toast.success{
-background:#188038
-}
-
-.toast.error{
-background:#d93025
-}
-
-.toast.info{
-background:#1a73e8
-}
-
-.toast.warning{
-background:#b06000
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:1250px){
-
-.stats-grid{
-grid-template-columns:repeat(3,1fr)
-}
-
-.toolbar-grid{
-grid-template-columns:2fr 1fr 1fr
-}
-
-.action-grid{
-grid-template-columns:1fr
-}
-
-}
-
-@media(max-width:850px){
-
-.stats-grid{
-grid-template-columns:repeat(2,1fr)
-}
-
-.earning-layout{
-grid-template-columns:1fr
-}
-
-.followup-grid{
-grid-template-columns:1fr 1fr
-}
-
-}
-
-@media(max-width:760px){
-
-.sidebar{
-transform:translateX(-100%);
-box-shadow:var(--shadow2)
-}
-
-.sidebar.open{
-transform:translateX(0)
-}
-
-.main{
-margin-left:0;
-width:100%
-}
-
-.mobile-menu{
-display:block
-}
-
-.topbar{
-padding:0 14px
-}
-
-.content{
-padding:14px
-}
-
-.hero{
-padding:19px
-}
-
-.hero h1{
-font-size:21px
-}
-
-.toolbar-grid{
-grid-template-columns:1fr
-}
-
-.stats-grid{
-grid-template-columns:1fr 1fr
-}
-
-.followup-grid{
-grid-template-columns:1fr
-}
-
-.promo-banner{
-min-height:320px;
-flex-direction:column
-}
-
-.promo-image{
-width:100%;
-height:145px
-}
-
-.promo-content{
-padding:18px
-}
-
-.detail-grid{
-grid-template-columns:1fr
-}
-
-.earning-breakdown{
-grid-template-columns:1fr
-}
-
-.next-action{
-margin-top:10px
-}
-
-}
-
-@media(max-width:450px){
-
-.stats-grid{
-grid-template-columns:1fr
-}
-
-.topbar{
-height:64px
-}
-
-.page-title{
-font-size:16px
-}
-
-.page-subtitle{
-display:none
-}
-
-.top-user-info{
-display:none!important
-}
-
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlackTerminal - Telecaller Dashboard</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --primary:#111827;
+      --primary2:#374151;
+      --success:#15803d;
+      --warning:#b45309;
+      --danger:#dc2626;
+      --info:#2563eb;
+      --purple:#7c3aed;
+      --shadow:0 10px 30px rgba(15,23,42,.07);
+      --radius:18px;
+    }
+
+    body{
+      font-family:Inter,Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    button,input,select,textarea{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .app{
+      min-height:100vh;
+      display:flex;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar{
+      width:260px;
+      background:#0b0f19;
+      color:#fff;
+      position:fixed;
+      left:0;
+      top:0;
+      bottom:0;
+      z-index:100;
+      padding:20px 15px;
+      transition:.25s;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:8px 10px 24px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      margin-bottom:18px;
+    }
+
+    .brand-logo{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      background:#fff;
+      color:#111827;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:16px;
+    }
+
+    .brand-text strong{
+      display:block;
+      font-size:16px;
+    }
+
+    .brand-text span{
+      display:block;
+      font-size:11px;
+      color:#9ca3af;
+      margin-top:3px;
+    }
+
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .nav-btn{
+      border:0;
+      background:transparent;
+      color:#9ca3af;
+      padding:12px 13px;
+      border-radius:12px;
+      text-align:left;
+      display:flex;
+      align-items:center;
+      gap:11px;
+      width:100%;
+      transition:.2s;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active{
+      background:#1f2937;
+      color:#fff;
+    }
+
+    .nav-icon{
+      width:22px;
+      text-align:center;
+      font-size:16px;
+    }
+
+    .sidebar-user{
+      position:absolute;
+      left:15px;
+      right:15px;
+      bottom:20px;
+      padding:12px;
+      border-radius:14px;
+      background:#111827;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .sidebar-user .user-name{
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .sidebar-user .user-role{
+      font-size:11px;
+      color:#9ca3af;
+      margin-top:3px;
+    }
+
+    .logout-btn{
+      width:100%;
+      margin-top:10px;
+      border:0;
+      border-radius:9px;
+      background:#dc2626;
+      color:#fff;
+      padding:8px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    /* MAIN */
+
+    .main{
+      margin-left:260px;
+      width:calc(100% - 260px);
+      min-height:100vh;
+    }
+
+    .topbar{
+      height:72px;
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 28px;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+
+    .topbar-left{
+      display:flex;
+      align-items:center;
+      gap:13px;
+    }
+
+    .mobile-menu{
+      display:none;
+      border:0;
+      background:#f3f4f6;
+      width:40px;
+      height:40px;
+      border-radius:10px;
+      font-size:19px;
+    }
+
+    .page-title{
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .page-subtitle{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:2px;
+    }
+
+    .top-user{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .avatar{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:#111827;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .content{
+      padding:24px;
+      max-width:1600px;
+      margin:auto;
+    }
+
+    .section{
+      display:none;
+    }
+
+    .section.active{
+      display:block;
+    }
+
+    /* HERO */
+
+    .hero{
+      background:linear-gradient(135deg,#111827,#1f2937);
+      color:#fff;
+      border-radius:22px;
+      padding:26px;
+      margin-bottom:22px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      right:-80px;
+      top:-80px;
+      border-radius:50%;
+      border:40px solid rgba(255,255,255,.05);
+    }
+
+    .hero h1{
+      font-size:25px;
+      margin-bottom:7px;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero p{
+      color:#d1d5db;
+      font-size:13px;
+      position:relative;
+      z-index:2;
+    }
+
+    .date-badge{
+      display:inline-flex;
+      margin-top:14px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.12);
+      padding:7px 10px;
+      border-radius:9px;
+      font-size:11px;
+      position:relative;
+      z-index:2;
+    }
+
+    /* CARDS */
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:22px;
+    }
+
+    .stat-card{
+      background:#fff;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      border-radius:17px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .stat-label{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
+    }
+
+    .stat-value{
+      font-size:25px;
+      font-weight:850;
+      margin-top:9px;
+    }
+
+    .stat-small{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:5px;
+    }
+
+    .stat-icon{
+      position:absolute;
+      right:15px;
+      top:15px;
+      width:38px;
+      height:38px;
+      border-radius:11px;
+      background:#f3f4f6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* EARNING */
+
+    .earning-layout{
+      display:grid;
+      grid-template-columns:1.6fr 1fr;
+      gap:18px;
+      margin-bottom:22px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    .card-title{
+      font-size:16px;
+      font-weight:800;
+      margin-bottom:4px;
+    }
+
+    .card-subtitle{
+      color:var(--muted);
+      font-size:11px;
+      margin-bottom:17px;
+    }
+
+    .earning-total{
+      font-size:38px;
+      font-weight:900;
+      margin:8px 0;
+    }
+
+    .earning-breakdown{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:17px;
+    }
+
+    .earning-item{
+      border:1px solid var(--border);
+      border-radius:13px;
+      padding:13px;
+      background:#fafafa;
+    }
+
+    .earning-item-label{
+      color:var(--muted);
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .earning-item-value{
+      font-size:18px;
+      font-weight:850;
+      margin-top:5px;
+    }
+
+    .level-card{
+      border:1px solid var(--border);
+      border-radius:15px;
+      padding:15px;
+      margin-bottom:10px;
+      background:#fff;
+    }
+
+    .level-card.active{
+      border:2px solid #111827;
+      background:#f9fafb;
+    }
+
+    .level-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+
+    .level-name{
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .level-rate{
+      font-size:17px;
+      font-weight:900;
+    }
+
+    .level-range{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:5px;
+    }
+
+    .level-tag{
+      font-size:9px;
+      padding:4px 7px;
+      border-radius:7px;
+      background:#111827;
+      color:#fff;
+      font-weight:800;
+    }
+
+    .progress{
+      height:8px;
+      background:#e5e7eb;
+      border-radius:20px;
+      overflow:hidden;
+      margin-top:12px;
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:#111827;
+      border-radius:20px;
+      transition:.3s;
+    }
+
+    .next-level-text{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:8px;
+    }
+
+    .salary-box{
+      margin-top:15px;
+      border-radius:14px;
+      padding:14px;
+      background:#f8fafc;
+      border:1px solid var(--border);
+    }
+
+    .salary-row{
+      display:flex;
+      justify-content:space-between;
+      padding:7px 0;
+      font-size:12px;
+    }
+
+    .salary-row strong{
+      font-size:13px;
+    }
+
+    /* TOOLBAR */
+
+    .toolbar{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:17px;
+      box-shadow:var(--shadow);
+      padding:15px;
+      margin-bottom:18px;
+    }
+
+    .toolbar-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr auto;
+      gap:10px;
+    }
+
+    .input,
+    .select,
+    .textarea{
+      width:100%;
+      border:1px solid #d1d5db;
+      border-radius:10px;
+      padding:10px 12px;
+      outline:none;
+      background:#fff;
+      color:#111827;
+      font-size:12px;
+    }
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus{
+      border-color:#111827;
+      box-shadow:0 0 0 3px rgba(17,24,39,.08);
+    }
+
+    .btn{
+      border:0;
+      border-radius:10px;
+      padding:10px 13px;
+      font-size:12px;
+      font-weight:750;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      transition:.2s;
+    }
+
+    .btn-primary{
+      background:#111827;
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:#000;
+    }
+
+    .btn-light{
+      background:#f3f4f6;
+      color:#111827;
+    }
+
+    .btn-success{
+      background:#15803d;
+      color:#fff;
+    }
+
+    .btn-danger{
+      background:#dc2626;
+      color:#fff;
+    }
+
+    .btn-info{
+      background:#2563eb;
+      color:#fff;
+    }
+
+    /* TABLE */
+
+    .table-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .table-head{
+      padding:18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .result-count{
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .table-wrap{
+      overflow:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:950px;
+    }
+
+    th{
+      text-align:left;
+      font-size:10px;
+      color:#6b7280;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      background:#f9fafb;
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      white-space:nowrap;
+    }
+
+    td{
+      padding:13px 14px;
+      border-bottom:1px solid #f0f0f0;
+      font-size:12px;
+      vertical-align:middle;
+    }
+
+    tr:hover td{
+      background:#fafafa;
+    }
+
+    .student-name{
+      font-weight:800;
+    }
+
+    .student-mobile{
+      font-size:10px;
+      color:var(--muted);
+      margin-top:3px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:5px 8px;
+      border-radius:8px;
+      font-size:9px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .badge-new{
+      background:#eff6ff;
+      color:#2563eb;
+    }
+
+    .badge-pending{
+      background:#fff7ed;
+      color:#c2410c;
+    }
+
+    .badge-interested{
+      background:#ecfdf5;
+      color:#15803d;
+    }
+
+    .badge-contacted{
+      background:#f3f4f6;
+      color:#374151;
+    }
+
+    .badge-delay{
+      background:#fff7ed;
+      color:#b45309;
+    }
+
+    .badge-follow-up{
+      background:#faf5ff;
+      color:#7c3aed;
+    }
+
+    .badge-visited{
+      background:#ecfdf5;
+      color:#15803d;
+    }
+
+    .badge-demo-completed,
+    .badge-demo{
+      background:#ecfeff;
+      color:#0e7490;
+    }
+
+    .badge-converted{
+      background:#dcfce7;
+      color:#166534;
+    }
+
+    .badge-not-interested{
+      background:#fef2f2;
+      color:#b91c1c;
+    }
+
+    .badge-custom{
+      background:#f3e8ff;
+      color:#7e22ce;
+    }
+
+    .action-group{
+      display:flex;
+      gap:5px;
+      flex-wrap:wrap;
+    }
+
+    .mini-btn{
+      border:0;
+      border-radius:7px;
+      padding:6px 8px;
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .mini-call{
+      background:#dcfce7;
+      color:#166534;
+    }
+
+    .mini-wa{
+      background:#dcfce7;
+      color:#15803d;
+    }
+
+    .mini-view{
+      background:#eff6ff;
+      color:#2563eb;
+    }
+
+    .mini-delete{
+      background:#fef2f2;
+      color:#dc2626;
+    }
+
+    /* PAGINATION */
+
+    .pagination{
+      padding:14px 18px;
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:6px;
+      border-top:1px solid var(--border);
+    }
+
+    .page-btn{
+      width:32px;
+      height:32px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:#fff;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .page-btn.active{
+      background:#111827;
+      color:#fff;
+      border-color:#111827;
+    }
+
+    .page-info{
+      color:var(--muted);
+      font-size:10px;
+      margin-right:auto;
+    }
+
+    /* CONTENT */
+
+    .content-controls{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .display-switch{
+      display:flex;
+      gap:5px;
+      background:#fff;
+      border:1px solid var(--border);
+      padding:4px;
+      border-radius:10px;
+    }
+
+    .display-btn{
+      border:0;
+      background:transparent;
+      border-radius:7px;
+      padding:7px 11px;
+      font-size:10px;
+      font-weight:750;
+    }
+
+    .display-btn.active{
+      background:#111827;
+      color:#fff;
+    }
+
+    /* BANNER */
+
+    .banner-list{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .promo-banner{
+      min-height:190px;
+      border-radius:20px;
+      overflow:hidden;
+      position:relative;
+      background:#111827;
+      color:#fff;
+      display:flex;
+      align-items:stretch;
+      border:1px solid rgba(0,0,0,.05);
+    }
+
+    .promo-image{
+      width:34%;
+      background:#e5e7eb;
+      overflow:hidden;
+    }
+
+    .promo-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .promo-content{
+      padding:25px;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .promo-tag{
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      opacity:.7;
+      font-weight:800;
+      margin-bottom:7px;
+    }
+
+    .promo-title{
+      font-size:24px;
+      font-weight:900;
+    }
+
+    .promo-description{
+      color:#d1d5db;
+      font-size:12px;
+      margin-top:8px;
+      max-width:600px;
+      line-height:1.5;
+    }
+
+    .price-line{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      margin-top:13px;
+    }
+
+    .old-price{
+      text-decoration:line-through;
+      color:#9ca3af;
+      font-size:12px;
+    }
+
+    .offer-price{
+      font-size:22px;
+      font-weight:900;
+    }
+
+    .validity{
+      font-size:9px;
+      color:#d1d5db;
+      margin-top:7px;
+    }
+
+    /* CAROUSEL */
+
+    .carousel{
+      position:relative;
+      overflow:hidden;
+      border-radius:20px;
+    }
+
+    .carousel-track{
+      display:flex;
+      transition:.45s ease;
+    }
+
+    .carousel-slide{
+      min-width:100%;
+    }
+
+    .carousel-control{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:38px;
+      height:38px;
+      border:0;
+      border-radius:50%;
+      background:rgba(0,0,0,.65);
+      color:#fff;
+      z-index:5;
+      font-size:18px;
+    }
+
+    .carousel-prev{
+      left:12px;
+    }
+
+    .carousel-next{
+      right:12px;
+    }
+
+    .carousel-dots{
+      position:absolute;
+      bottom:13px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:5px;
+      z-index:5;
+    }
+
+    .carousel-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      border:0;
+      background:rgba(255,255,255,.5);
+    }
+
+    .carousel-dot.active{
+      background:#fff;
+    }
+
+    /* COURSE GRID */
+
+    .course-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:17px;
+    }
+
+    .course-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:17px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .course-image{
+      height:145px;
+      background:#e5e7eb;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .course-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .course-body{
+      padding:16px;
+    }
+
+    .course-title{
+      font-size:16px;
+      font-weight:850;
+    }
+
+    .course-duration{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:5px;
+    }
+
+    .course-description{
+      color:#6b7280;
+      font-size:11px;
+      line-height:1.5;
+      margin-top:9px;
+      min-height:34px;
+    }
+
+    .course-price{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-top:12px;
+    }
+
+    .course-old{
+      text-decoration:line-through;
+      color:#9ca3af;
+      font-size:11px;
+    }
+
+    .course-current{
+      font-size:20px;
+      font-weight:900;
+    }
+
+    .course-actions{
+      display:flex;
+      gap:7px;
+      margin-top:14px;
+    }
+
+    .course-actions .btn{
+      flex:1;
+    }
+
+    /* LIST */
+
+    .content-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .list-item{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:15px;
+      display:flex;
+      align-items:center;
+      gap:15px;
+      box-shadow:0 5px 18px rgba(15,23,42,.04);
+    }
+
+    .list-thumb{
+      width:80px;
+      height:60px;
+      border-radius:10px;
+      overflow:hidden;
+      background:#e5e7eb;
+      flex-shrink:0;
+    }
+
+    .list-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .list-info{
+      flex:1;
+    }
+
+    .list-title{
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .list-desc{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:4px;
+    }
+
+    .list-price{
+      font-weight:900;
+      font-size:17px;
+      white-space:nowrap;
+    }
+
+    /* EMPTY */
+
+    .empty{
+      padding:45px 20px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .empty-icon{
+      font-size:34px;
+      margin-bottom:9px;
+    }
+
+    .empty-title{
+      font-weight:800;
+      color:#374151;
+      margin-bottom:4px;
+    }
+
+    .empty-text{
+      font-size:11px;
+    }
+
+    /* LOADING */
+
+    .loading{
+      padding:40px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .spinner{
+      width:27px;
+      height:27px;
+      border:3px solid #e5e7eb;
+      border-top-color:#111827;
+      border-radius:50%;
+      animation:spin .8s linear infinite;
+      margin:0 auto 10px;
+    }
+
+    @keyframes spin{
+      to{transform:rotate(360deg);}
+    }
+
+    /* MODAL */
+
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(15,23,42,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:500;
+      padding:20px;
+    }
+
+    .modal-overlay.show{
+      display:flex;
+    }
+
+    .modal{
+      background:#fff;
+      width:100%;
+      max-width:620px;
+      max-height:90vh;
+      overflow:auto;
+      border-radius:20px;
+      box-shadow:0 25px 70px rgba(0,0,0,.2);
+    }
+
+    .modal-head{
+      padding:18px 20px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      position:sticky;
+      top:0;
+      background:#fff;
+      z-index:2;
+    }
+
+    .modal-title{
+      font-size:16px;
+      font-weight:850;
+    }
+
+    .close-btn{
+      width:32px;
+      height:32px;
+      border:0;
+      border-radius:9px;
+      background:#f3f4f6;
+      font-size:18px;
+    }
+
+    .modal-body{
+      padding:20px;
+    }
+
+    .detail-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .detail-box{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px;
+    }
+
+    .detail-label{
+      color:var(--muted);
+      font-size:9px;
+      text-transform:uppercase;
+      font-weight:800;
+    }
+
+    .detail-value{
+      margin-top:5px;
+      font-size:12px;
+      font-weight:700;
+      word-break:break-word;
+    }
+
+    .modal-footer{
+      padding:15px 20px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+    }
+
+    /* TOAST */
+
+    .toast-container{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      z-index:1000;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .toast{
+      min-width:250px;
+      max-width:360px;
+      background:#111827;
+      color:#fff;
+      padding:12px 14px;
+      border-radius:11px;
+      box-shadow:0 15px 40px rgba(0,0,0,.18);
+      font-size:11px;
+      animation:toastIn .2s ease;
+    }
+
+    .toast.success{
+      background:#15803d;
+    }
+
+    .toast.error{
+      background:#dc2626;
+    }
+
+    @keyframes toastIn{
+      from{
+        transform:translateY(10px);
+        opacity:0;
+      }
+      to{
+        transform:translateY(0);
+        opacity:1;
+      }
+    }
+
+    /* MOBILE */
+
+    @media(max-width:1100px){
+      .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .earning-layout{
+        grid-template-columns:1fr;
+      }
+
+      .toolbar-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .course-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:760px){
+      .sidebar{
+        transform:translateX(-100%);
+      }
+
+      .sidebar.open{
+        transform:translateX(0);
+      }
+
+      .main{
+        margin-left:0;
+        width:100%;
+      }
+
+      .mobile-menu{
+        display:block;
+      }
+
+      .topbar{
+        padding:0 15px;
+      }
+
+      .top-user .top-user-info{
+        display:none;
+      }
+
+      .content{
+        padding:15px;
+      }
+
+      .hero{
+        padding:20px;
+      }
+
+      .hero h1{
+        font-size:21px;
+      }
+
+      .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+      }
+
+      .stat-card{
+        padding:14px;
+      }
+
+      .stat-value{
+        font-size:21px;
+      }
+
+      .earning-breakdown{
+        grid-template-columns:1fr;
+      }
+
+      .toolbar-grid{
+        grid-template-columns:1fr;
+      }
+
+      .course-grid{
+        grid-template-columns:1fr;
+      }
+
+      .promo-banner{
+        min-height:330px;
+        flex-direction:column;
+      }
+
+      .promo-image{
+        width:100%;
+        height:150px;
+      }
+
+      .promo-content{
+        padding:18px;
+      }
+
+      .promo-title{
+        font-size:20px;
+      }
+
+      .detail-grid{
+        grid-template-columns:1fr;
+      }
+
+      .list-item{
+        align-items:flex-start;
+      }
+
+      .list-price{
+        font-size:14px;
+      }
+    }
+
+    @media(max-width:450px){
+      .stats-grid{
+        grid-template-columns:1fr;
+      }
+
+      .topbar{
+        height:65px;
+      }
+
+      .page-title{
+        font-size:17px;
+      }
+
+      .page-subtitle{
+        display:none;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="app">
 
-<!-- ============================================================
-SIDEBAR
-============================================================ -->
+  <aside class="sidebar" id="sidebar">
 
-<aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo">BT</div>
+      <div class="brand-text">
+        <strong>BlackTerminal</strong>
+        <span>Telecaller Panel</span>
+      </div>
+    </div>
 
-<div class="brand">
+    <nav class="nav">
 
-<div class="brand-logo">
-BT
-</div>
-
-<div class="brand-text">
-
-<strong>
-BlackTerminal
-</strong>
-
-<span>
-Telecaller Management
-</span>
-
-<div class="version-badge">
-v4.0
-</div>
-
-</div>
-
-</div>
-
-
-<nav class="nav">
-
-<button class="nav-btn active" data-section="dashboard">
-<span class="nav-icon">⌂</span>
-<span>Dashboard</span>
-</button>
-
-<button class="nav-btn" data-section="inquiries">
-<span class="nav-icon">☰</span>
-<span>Student Inquiries</span>
-</button>
-
-<button class="nav-btn" data-section="followups">
-<span class="nav-icon">◷</span>
-<span>Follow-ups</span>
-</button>
-
-<button class="nav-btn" data-section="calendar">
-<span class="nav-icon">▣</span>
-<span>Action Calendar</span>
-</button>
-
-<button class="nav-btn" data-section="courses">
-<span class="nav-icon">▤</span>
-<span>Courses & Offers</span>
-</button>
-
-<button class="nav-btn" data-section="earnings">
-<span class="nav-icon">₹</span>
-<span>My Earnings</span>
-</button>
-
-</nav>
-
-
-<div class="sidebar-user">
-
-<div class="user-name" id="sideUserName">
-Telecaller
-</div>
-
-<div class="user-role">
-Telecaller
-</div>
-
-<button class="logout-btn" id="logoutBtn">
-Logout
-</button>
-
-</div>
-
-</aside>
-
-
-<!-- ============================================================
-MAIN
-============================================================ -->
-
-<main class="main">
-
-<header class="topbar">
-
-<div class="topbar-left">
-
-<button class="mobile-menu" id="mobileMenu">
-☰
-</button>
-
-<div>
-
-<div class="page-title" id="pageTitle">
-Telecaller Dashboard
-</div>
-
-<div class="page-subtitle">
-Student follow-up and admission management
-</div>
-
-</div>
-
-</div>
-
-
-<div class="top-user">
-
-<div class="top-user-info">
-
-<div style="font-size:11px;font-weight:800" id="topUserName">
-Telecaller
-</div>
-
-<div style="font-size:9px;color:#777" id="topUserMobile">
--
-</div>
-
-</div>
-
-<div class="avatar" id="avatar">
-T
-</div>
-
-</div>
-
-</header>
-
-
-<div class="content">
-
-<!-- ============================================================
-DASHBOARD
-============================================================ -->
-
-<section class="section active" id="dashboard">
-
-<div class="hero">
-
-<h1>
-Welcome, <span id="heroName">Telecaller</span>
-</h1>
-
-<p>
-Your complete workspace for calls, follow-ups, demos and admissions.
-</p>
-
-<div class="date-badge" id="todayDate">
-Loading date...
-</div>
-
-</div>
-
-
-<div class="stats-grid">
-
-<div class="stat-card stat-blue">
-
-<div class="stat-icon">
-☰
-</div>
-
-<div class="stat-label">
-TOTAL INQUIRIES
-</div>
-
-<div class="stat-value" id="statInquiries">
-0
-</div>
-
-<div class="stat-small">
-All available inquiries
-</div>
-
-</div>
-
-
-<div class="stat-card stat-red">
-
-<div class="stat-icon">
-!
-</div>
-
-<div class="stat-label">
-OVERDUE
-</div>
-
-<div class="stat-value" id="statOverdue">
-0
-</div>
-
-<div class="stat-small">
-Action required
-</div>
-
-</div>
-
-
-<div class="stat-card stat-yellow">
-
-<div class="stat-icon">
-◷
-</div>
-
-<div class="stat-label">
-TODAY FOLLOW-UPS
-</div>
-
-<div class="stat-value" id="statTodayFollowups">
-0
-</div>
-
-<div class="stat-small">
-Scheduled for today
-</div>
-
-</div>
-
-
-<div class="stat-card stat-green">
-
-<div class="stat-icon">
-✓
-</div>
-
-<div class="stat-label">
-CONVERTED
-</div>
-
-<div class="stat-value" id="statConverted">
-0
-</div>
-
-<div class="stat-small">
-Current month
-</div>
-
-</div>
-
-
-<div class="stat-card stat-purple">
-
-<div class="stat-icon">
-₹
-</div>
-
-<div class="stat-label">
-MY EARNINGS
-</div>
-
-<div class="stat-value" id="statEarning">
-₹0
-</div>
-
-<div class="stat-small">
-Current month
-</div>
-
-</div>
-
-</div>
-
-
-<div class="action-grid">
-
-<div class="card">
-
-<div class="card-title">
-Today's Action Plan
-</div>
-
-<div class="card-subtitle">
-Start with the most important student action.
-</div>
-
-
-<div class="action-list">
-
-<div class="action-item">
-
-<div class="action-dot red">
-!
-</div>
-
-<div class="action-info">
-
-<div class="action-title">
-Overdue Follow-ups
-</div>
-
-<div class="action-desc">
-Students whose follow-up date has passed.
-</div>
-
-</div>
-
-<div class="action-number" id="actionOverdue">
-0
-</div>
-
-</div>
-
-
-<div class="action-item">
-
-<div class="action-dot yellow">
-◷
-</div>
-
-<div class="action-info">
-
-<div class="action-title">
-Today's Follow-ups
-</div>
-
-<div class="action-desc">
-Students who should be contacted today.
-</div>
-
-</div>
-
-<div class="action-number" id="actionToday">
-0
-</div>
-
-</div>
-
-
-<div class="action-item">
-
-<div class="action-dot blue">
-▶
-</div>
-
-<div class="action-info">
-
-<div class="action-title">
-Demo / Admission Actions
-</div>
-
-<div class="action-desc">
-Students ready for the next stage.
-</div>
-
-</div>
-
-<div class="action-number" id="actionDemo">
-0
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-title">
-Recommended Next Action
-</div>
-
-<div class="card-subtitle">
-The system selects the next student automatically.
-</div>
-
-<div class="next-action" id="dashboardNextAction">
-
-<div class="next-label">
-NEXT ACTION
-</div>
-
-<div class="next-title">
-Loading...
-</div>
-
-<div class="next-description">
-Loading student data...
-</div>
-
-<div class="next-buttons">
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-flex-wrap:wrap
-">
-
-<div>
-
-<div class="card-title">
-Priority Student Actions
-</div>
-
-<div class="card-subtitle">
-Students requiring attention first.
-</div>
-
-</div>
-
-<button class="btn btn-light" id="dashboardRefreshBtn">
-↻ Refresh
-</button>
-
-</div>
-
-
-<div id="priorityStudentList">
-
-<div class="loading">
-<div class="spinner"></div>
-Loading actions...
-</div>
-
-</div>
-
-</div>
-
-
-<div style="height:18px"></div>
-
-
-<div class="earning-layout">
-
-<div class="card">
-
-<div class="card-title">
-Current Month Earnings
-</div>
-
-<div class="card-subtitle">
-Calculated from Admin-controlled payment settings.
-</div>
-
-<div class="earning-total" id="dashboardTotal">
-₹0
-</div>
-
-
-<div class="earning-breakdown">
-
-<div class="earning-item">
-
-<div class="earning-item-label">
-BASE SALARY
-</div>
-
-<div class="earning-item-value" id="dashBase">
-₹0
-</div>
-
-</div>
-
-
-<div class="earning-item">
-
-<div class="earning-item-label">
-VISIT REWARD
-</div>
-
-<div class="earning-item-value" id="dashVisitReward">
-₹0
-</div>
-
-</div>
-
-
-<div class="earning-item">
-
-<div class="earning-item-label">
-ADMISSION REWARD
-</div>
-
-<div class="earning-item-value" id="dashAdmissionReward">
-₹0
-</div>
-
-</div>
-
-</div>
-
-
-<div class="salary-box">
-
-<div class="salary-row">
-
-<span>
-Current Base Salary
-</span>
-
-<strong id="currentBaseText">
-₹0
-</strong>
-
-</div>
-
-
-<div class="salary-row">
-
-<span>
-Previous Month Level
-</span>
-
-<strong id="previousLevelText">
-Not available
-</strong>
-
-</div>
-
-
-<div class="salary-row">
-
-<span>
-Next Month Base Salary
-</span>
-
-<strong id="nextBaseText">
-₹0
-</strong>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-title">
-Admission Level
-</div>
-
-<div class="card-subtitle">
-Current month admission performance.
-</div>
-
-<div id="levelCards">
-</div>
-
-<div class="next-level-text" id="levelProgressText">
-Loading...
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ============================================================
-INQUIRIES
-============================================================ -->
-
-<section class="section" id="inquiries">
-
-<div class="hero">
-
-<h1>
-Student Inquiries
-</h1>
-
-<p>
-Search, call, WhatsApp, guide and update every student.
-</p>
-
-</div>
-
-
-<div class="toolbar">
-
-<div class="toolbar-grid">
-
-<input
-type="text"
-id="searchInput"
-class="input"
-placeholder="Search name, mobile, course..."
->
-
-<select id="statusFilter" class="select">
-
-<option value="">
-All Status
-</option>
-
-<option value="new">
-New
-</option>
-
-<option value="pending">
-Pending
-</option>
-
-<option value="interested">
-Interested
-</option>
-
-<option value="contacted">
-Contacted
-</option>
-
-<option value="delay">
-Delay
-</option>
-
-<option value="follow-up">
-Follow-up
-</option>
-
-<option value="visited">
-Visited
-</option>
-
-<option value="demo-completed">
-Demo Completed
-</option>
-
-<option value="converted">
-Converted
-</option>
-
-<option value="not-interested">
-Not Interested
-</option>
-
-<option value="custom">
-Custom Status
-</option>
-
-</select>
+      <button class="nav-btn active" data-section="dashboard">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </button>
 
+      <button class="nav-btn" data-section="inquiries">
+        <span class="nav-icon">☰</span>
+        <span>Student Inquiries</span>
+      </button>
 
-<select id="priorityFilter" class="select">
+      <button class="nav-btn" data-section="courses">
+        <span class="nav-icon">▣</span>
+        <span>Courses & Offers</span>
+      </button>
 
-<option value="">
-All Priority
-</option>
+      <button class="nav-btn" data-section="earnings">
+        <span class="nav-icon">₹</span>
+        <span>My Earnings</span>
+      </button>
 
-<option value="high">
-High Priority
-</option>
+    </nav>
 
-<option value="medium">
-Medium Priority
-</option>
+    <div class="sidebar-user">
+      <div class="user-name" id="sideUserName">Telecaller</div>
+      <div class="user-role">Telecaller</div>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
+    </div>
 
-<option value="low">
-Low Priority
-</option>
+  </aside>
 
-</select>
+  <main class="main">
 
+    <header class="topbar">
 
-<select id="courseFilter" class="select">
+      <div class="topbar-left">
 
-<option value="">
-All Courses
-</option>
+        <button class="mobile-menu" id="mobileMenu">☰</button>
 
-</select>
+        <div>
+          <div class="page-title" id="pageTitle">Telecaller Dashboard</div>
+          <div class="page-subtitle">Student management and performance</div>
+        </div>
 
+      </div>
 
-<select id="coordinatorFilter" class="select">
+      <div class="top-user">
 
-<option value="">
-All Coordinators
-</option>
+        <div class="top-user-info">
+          <div style="font-size:12px;font-weight:800;" id="topUserName">
+            Telecaller
+          </div>
+          <div style="font-size:10px;color:#6b7280;" id="topUserMobile">
+            -
+          </div>
+        </div>
 
-</select>
+        <div class="avatar" id="avatar">
+          T
+        </div>
 
+      </div>
 
-<button class="btn btn-primary" id="refreshBtn">
-↻ Refresh
-</button>
+    </header>
 
-</div>
-
-</div>
-
-
-<div class="table-card">
-
-<div class="table-head">
-
-<div>
-
-<div class="card-title">
-Inquiry List
-</div>
-
-<div class="result-count" id="resultCount">
-0 inquiries found
-</div>
-
-</div>
-
-
-<div style="
-display:flex;
-gap:6px;
-flex-wrap:wrap
-">
-
-<button class="btn btn-light" id="exportBtn">
-Export CSV
-</button>
-
-<button class="btn btn-light" id="clearFiltersBtn">
-Clear Filters
-</button>
-
-</div>
-
-</div>
-
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>
-Student
-</th>
+    <div class="content">
 
-<th>
-Course
-</th>
+      <!-- ================= DASHBOARD ================= -->
 
-<th>
-Priority
-</th>
+      <section class="section active" id="dashboard">
 
-<th>
-Status
-</th>
+        <div class="hero">
 
-<th>
-Next Action
-</th>
+          <h1>Welcome, <span id="heroName">Telecaller</span></h1>
 
-<th>
-Follow-up
-</th>
+          <p>
+            Manage student inquiries, demo classes, admissions and your monthly earnings.
+          </p>
 
-<th>
-Coordinator
-</th>
+          <div class="date-badge" id="todayDate">
+            Loading date...
+          </div>
 
-<th>
-Actions
-</th>
+        </div>
 
-</tr>
+        <div class="stats-grid">
 
-</thead>
+          <div class="stat-card">
+            <div class="stat-icon">☰</div>
+            <div class="stat-label">Total Inquiries</div>
+            <div class="stat-value" id="statInquiries">0</div>
+            <div class="stat-small">Assigned inquiries</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">▶</div>
+            <div class="stat-label">Demo Completed</div>
+            <div class="stat-value" id="statDemo">0</div>
+            <div class="stat-small">Current month</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">✓</div>
+            <div class="stat-label">Converted</div>
+            <div class="stat-value" id="statConverted">0</div>
+            <div class="stat-small">Current month</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">₹</div>
+            <div class="stat-label">Current Earnings</div>
+            <div class="stat-value" id="statEarning">₹0</div>
+            <div class="stat-small">Current month</div>
+          </div>
 
+        </div>
 
-<tbody id="inquiryBody">
+        <div class="earning-layout">
 
-<tr>
+          <div class="card">
 
-<td colspan="8">
+            <div class="card-title">
+              Current Month Earnings
+            </div>
 
-<div class="loading">
+            <div class="card-subtitle">
+              Your earnings are calculated automatically from Admin settings.
+            </div>
 
-<div class="spinner"></div>
+            <div class="earning-total" id="dashboardTotal">
+              ₹0
+            </div>
 
-Loading inquiries...
+            <div class="earning-breakdown">
 
-</div>
-
-</td>
-
-</tr>
+              <div class="earning-item">
+                <div class="earning-item-label">
+                  BASE SALARY
+                </div>
+                <div class="earning-item-value" id="dashBase">
+                  ₹0
+                </div>
+              </div>
 
-</tbody>
+              <div class="earning-item">
+                <div class="earning-item-label">
+                  DEMO REWARD
+                </div>
+                <div class="earning-item-value" id="dashDemoReward">
+                  ₹0
+                </div>
+              </div>
 
-</table>
+              <div class="earning-item">
+                <div class="earning-item-label">
+                  ADMISSION REWARD
+                </div>
+                <div class="earning-item-value" id="dashAdmissionReward">
+                  ₹0
+                </div>
+              </div>
 
-</div>
+            </div>
 
+            <div class="salary-box">
 
-<div class="pagination">
+              <div class="salary-row">
+                <span>Current Base Salary</span>
+                <strong id="currentBaseText">₹0</strong>
+              </div>
 
-<div class="page-info" id="pageInfo">
-Page 1
-</div>
+              <div class="salary-row">
+                <span>Previous Month Level</span>
+                <strong id="previousLevelText">Not available</strong>
+              </div>
 
-<div id="paginationButtons">
-</div>
+              <div class="salary-row">
+                <span>Next Month Base Salary</span>
+                <strong id="nextBaseText">₹0</strong>
+              </div>
 
-</div>
+            </div>
 
-</div>
+          </div>
 
-</section>
+          <div class="card">
 
+            <div class="card-title">
+              Admission Level
+            </div>
 
-<!-- ============================================================
-FOLLOWUPS
-============================================================ -->
+            <div class="card-subtitle">
+              Level is automatically determined from current-month converted admissions.
+            </div>
 
-<section class="section" id="followups">
+            <div id="levelCards">
+            </div>
 
-<div class="hero">
+            <div class="next-level-text" id="levelProgressText">
+              Loading...
+            </div>
 
-<h1>
-Follow-up Center
-</h1>
+          </div>
 
-<p>
-Today, overdue and upcoming student actions.
-</p>
+        </div>
 
-</div>
+      </section>
 
 
-<div class="content-controls">
+      <!-- ================= INQUIRIES ================= -->
 
-<div>
+      <section class="section" id="inquiries">
 
-<div class="card-title">
-Follow-up Management
-</div>
+        <div class="hero">
 
-<div class="card-subtitle" style="margin:4px 0 0">
-Use the recommended action for every student.
-</div>
+          <h1>Student Inquiries</h1>
 
-</div>
+          <p>
+            Search, contact, update status and manage student inquiries.
+          </p>
 
-<button class="btn btn-primary" id="refreshFollowupBtn">
-↻ Refresh
-</button>
+        </div>
 
-</div>
+        <div class="toolbar">
 
+          <div class="toolbar-grid">
 
-<div class="followup-grid" id="followupGrid">
+            <input
+              type="text"
+              id="searchInput"
+              class="input"
+              placeholder="Search student name, mobile, course..."
+            >
 
-<div class="loading">
-<div class="spinner"></div>
-Loading follow-ups...
-</div>
+            <select id="statusFilter" class="select">
 
-</div>
+              <option value="">All Status</option>
 
-</section>
+              <option value="new">
+                New
+              </option>
 
+              <option value="pending">
+                Pending
+              </option>
 
-<!-- ============================================================
-CALENDAR
-============================================================ -->
+              <option value="interested">
+                Interested
+              </option>
 
-<section class="section" id="calendar">
+              <option value="contacted">
+                Contacted
+              </option>
 
-<div class="hero">
+              <option value="delay">
+                Delay
+              </option>
 
-<h1>
-Action Calendar
-</h1>
+              <option value="follow-up">
+                Follow-up
+              </option>
 
-<p>
-See follow-ups and recommended actions by date.
-</p>
+              <option value="visited">
+                Visited
+              </option>
 
-</div>
+              <option value="demo-completed">
+                Demo Completed
+              </option>
 
+              <option value="converted">
+                Converted
+              </option>
 
-<div class="card">
+              <option value="not-interested">
+                Not Interested
+              </option>
 
-<div style="
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px
-">
+              <option value="custom">
+                Custom Status
+              </option>
 
-<button class="btn btn-light" id="prevMonthBtn">
-‹ Previous
-</button>
+            </select>
 
-<div style="
-font-weight:900;
-font-size:15px
-" id="calendarTitle">
-Month
-</div>
+            <select id="courseFilter" class="select">
+              <option value="">All Courses</option>
+            </select>
 
-<button class="btn btn-light" id="nextMonthBtn">
-Next ›
-</button>
+            <select id="coordinatorFilter" class="select">
+              <option value="">All Coordinators</option>
+            </select>
 
-</div>
+            <button class="btn btn-primary" id="refreshBtn">
+              ↻ Refresh
+            </button>
 
+          </div>
 
-<div id="calendarArea" style="margin-top:17px">
-</div>
+        </div>
 
-</div>
+        <div class="table-card">
 
-</section>
+          <div class="table-head">
 
+            <div>
+              <div class="card-title">
+                Inquiry List
+              </div>
 
-<!-- ============================================================
-COURSES
-============================================================ -->
+              <div class="result-count" id="resultCount">
+                0 inquiries found
+              </div>
+            </div>
 
-<section class="section" id="courses">
+            <button class="btn btn-light" id="clearFiltersBtn">
+              Clear Filters
+            </button>
 
-<div class="hero">
+          </div>
 
-<h1>
-Courses & Special Offers
-</h1>
+          <div class="table-wrap">
 
-<p>
-Latest course prices and promotional information.
-</p>
+            <table>
 
-</div>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Course</th>
+                  <th>Source</th>
+                  <th>Coordinator</th>
+                  <th>Status</th>
+                  <th>Follow-up</th>
+                  <th>Updated</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
 
+              <tbody id="inquiryBody">
 
-<div class="content-controls">
+                <tr>
+                  <td colspan="8">
 
-<div>
+                    <div class="loading">
 
-<div class="card-title">
-Available Information
-</div>
+                      <div class="spinner"></div>
 
-<div class="card-subtitle" style="margin:4px 0 0">
-Use the latest information when speaking with students.
-</div>
+                      Loading inquiries...
 
-</div>
+                    </div>
 
+                  </td>
+                </tr>
 
-<div style="
-display:flex;
-gap:7px;
-align-items:center
-">
+              </tbody>
 
-<button class="btn btn-light" id="refreshContentBtn">
-↻ Refresh
-</button>
+            </table>
 
-<div class="display-switch">
+          </div>
 
-<button class="display-btn active" data-display="carousel">
-Carousel
-</button>
+          <div class="pagination">
 
-<button class="display-btn" data-display="banner">
-Banner
-</button>
+            <div class="page-info" id="pageInfo">
+              Page 1
+            </div>
 
-<button class="display-btn" data-display="list">
-List
-</button>
+            <div id="paginationButtons"></div>
 
-</div>
+          </div>
 
-</div>
+        </div>
 
-</div>
+      </section>
 
 
-<div id="contentArea">
+      <!-- ================= COURSES ================= -->
 
-<div class="loading">
+      <section class="section" id="courses">
 
-<div class="spinner"></div>
+        <div class="hero">
 
-Loading courses and offers...
+          <h1>Courses & Special Offers</h1>
 
-</div>
+          <p>
+            Course prices, offers and promotional information published by Admin.
+          </p>
 
-</div>
+        </div>
 
-</section>
+        <div class="content-controls">
 
+          <div>
 
-<!-- ============================================================
-EARNINGS
-============================================================ -->
+            <div class="card-title">
+              Available Information
+            </div>
 
-<section class="section" id="earnings">
+            <div class="card-subtitle" style="margin:4px 0 0;">
+              Always use the latest price and offer shown here when talking to students.
+            </div>
 
-<div class="hero">
+          </div>
 
-<h1>
-My Earnings
-</h1>
+          <div style="display:flex;gap:8px;align-items:center;">
 
-<p>
-Monthly performance and incentive calculation.
-</p>
+            <button class="btn btn-light" id="refreshContentBtn">
+              ↻ Refresh
+            </button>
 
-</div>
+            <div class="display-switch">
 
+              <button
+                class="display-btn active"
+                data-display="carousel"
+              >
+                Carousel
+              </button>
 
-<div class="card">
+              <button
+                class="display-btn"
+                data-display="banner"
+              >
+                Banner
+              </button>
 
-<div class="card-title">
-Current Month Payment
-</div>
+              <button
+                class="display-btn"
+                data-display="list"
+              >
+                List
+              </button>
 
-<div class="card-subtitle">
-Current month earning calculation.
-</div>
+            </div>
 
-<div class="earning-total" id="earningPageTotal">
-₹0
-</div>
+          </div>
 
+        </div>
 
-<div class="earning-breakdown">
+        <div id="contentArea">
 
-<div class="earning-item">
+          <div class="loading">
 
-<div class="earning-item-label">
-BASE SALARY
-</div>
+            <div class="spinner"></div>
 
-<div class="earning-item-value" id="earningPageBase">
-₹0
-</div>
+            Loading courses and offers...
 
-</div>
+          </div>
 
+        </div>
 
-<div class="earning-item">
+      </section>
 
-<div class="earning-item-label">
-VISIT REWARD
-</div>
 
-<div class="earning-item-value" id="earningPageVisit">
-₹0
-</div>
+      <!-- ================= EARNINGS ================= -->
 
-</div>
+      <section class="section" id="earnings">
 
+        <div class="hero">
 
-<div class="earning-item">
+          <h1>My Earnings</h1>
 
-<div class="earning-item-label">
-ADMISSIONS
-</div>
+          <p>
+            Transparent monthly earning calculation based on Admin-controlled rules.
+          </p>
 
-<div class="earning-item-value" id="earningPageAdmission">
-₹0
-</div>
+        </div>
 
-</div>
+        <div class="card">
 
-</div>
+          <div class="card-title">
+            Current Month Payment
+          </div>
 
-</div>
+          <div class="card-subtitle">
+            Current month earning calculation
+          </div>
 
+          <div class="earning-total" id="earningPageTotal">
+            ₹0
+          </div>
 
-<div style="height:15px"></div>
+          <div class="earning-breakdown">
 
+            <div class="earning-item">
+              <div class="earning-item-label">
+                BASE SALARY
+              </div>
 
-<div class="card">
+              <div class="earning-item-value" id="earningPageBase">
+                ₹0
+              </div>
+            </div>
 
-<div class="card-title">
-Performance Details
-</div>
+            <div class="earning-item">
 
-<div class="card-subtitle">
-Current month performance.
-</div>
+              <div class="earning-item-label">
+                DEMO CLASSES
+              </div>
 
+              <div class="earning-item-value" id="earningPageDemo">
+                ₹0
+              </div>
 
-<div class="detail-grid">
+            </div>
 
-<div class="detail-box">
-<div class="detail-label">
-Visited Students
-</div>
-<div class="detail-value" id="earnVisitCount">
-0
-</div>
-</div>
+            <div class="earning-item">
 
+              <div class="earning-item-label">
+                ADMISSIONS
+              </div>
 
-<div class="detail-box">
-<div class="detail-label">
-Visit Reward
-</div>
-<div class="detail-value" id="earnVisitRate">
-₹0
-</div>
-</div>
+              <div class="earning-item-value" id="earningPageAdmission">
+                ₹0
+              </div>
 
+            </div>
 
-<div class="detail-box">
-<div class="detail-label">
-Converted Admissions
-</div>
-<div class="detail-value" id="earnAdmissionCount">
-0
-</div>
-</div>
+          </div>
 
+        </div>
 
-<div class="detail-box">
-<div class="detail-label">
-Current Admission Level
-</div>
-<div class="detail-value" id="earnLevel">
-Level 1
-</div>
-</div>
+        <div style="height:16px;"></div>
 
+        <div class="card">
 
-<div class="detail-box">
-<div class="detail-label">
-Admission Reward / Student
-</div>
-<div class="detail-value" id="earnAdmissionRate">
-₹0
-</div>
-</div>
+          <div class="card-title">
+            Performance Details
+          </div>
 
+          <div class="card-subtitle">
+            Your current month performance
+          </div>
 
-<div class="detail-box">
-<div class="detail-label">
-Current Base Salary
-</div>
-<div class="detail-value" id="earnCurrentBase">
-₹0
-</div>
-</div>
+          <div class="detail-grid">
 
-</div>
+            <div class="detail-box">
+              <div class="detail-label">Demo Completed</div>
+              <div class="detail-value" id="earnDemoCount">0</div>
+            </div>
 
-</div>
+            <div class="detail-box">
+              <div class="detail-label">Demo Reward / Student</div>
+              <div class="detail-value" id="earnDemoRate">₹0</div>
+            </div>
 
+            <div class="detail-box">
+              <div class="detail-label">Converted Admissions</div>
+              <div class="detail-value" id="earnAdmissionCount">0</div>
+            </div>
 
-<div style="height:15px"></div>
+            <div class="detail-box">
+              <div class="detail-label">Current Admission Level</div>
+              <div class="detail-value" id="earnLevel">Level 1</div>
+            </div>
 
+            <div class="detail-box">
+              <div class="detail-label">Admission Reward / Student</div>
+              <div class="detail-value" id="earnAdmissionRate">₹0</div>
+            </div>
 
-<div class="card">
+            <div class="detail-box">
+              <div class="detail-label">Visit Reward</div>
+              <div class="detail-value">₹0</div>
+            </div>
 
-<div class="card-title">
-Next Month Base Salary
-</div>
+          </div>
 
-<div class="card-subtitle">
-Determined from current month admission level.
-</div>
+        </div>
 
-<div class="earning-total" id="nextMonthSalaryBig">
-₹1,000
-</div>
+        <div style="height:16px;"></div>
 
+        <div class="card">
 
-<div class="detail-grid">
+          <div class="card-title">
+            Next Month Base Salary
+          </div>
 
-<div class="detail-box">
-<div class="detail-label">
-Current Level
-</div>
-<div class="detail-value" id="salaryCurrentLevel">
-Level 1
-</div>
-</div>
+          <div class="card-subtitle">
+            This is determined from your current month's final admission level.
+          </div>
 
+          <div class="earning-total" id="nextMonthSalaryBig">
+            ₹1,000
+          </div>
 
-<div class="detail-box">
-<div class="detail-label">
-Default Base
-</div>
-<div class="detail-value" id="salaryDefaultBase">
-₹1,000
-</div>
-</div>
+          <div class="detail-grid">
 
+            <div class="detail-box">
+              <div class="detail-label">Current Level</div>
+              <div class="detail-value" id="salaryCurrentLevel">Level 1</div>
+            </div>
 
-<div class="detail-box">
-<div class="detail-label">
-Next Month Base
-</div>
-<div class="detail-value" id="salaryNextBase">
-₹1,000
-</div>
-</div>
+            <div class="detail-box">
+              <div class="detail-label">Current Default Base</div>
+              <div class="detail-value" id="salaryDefaultBase">₹1,000</div>
+            </div>
 
+            <div class="detail-box">
+              <div class="detail-label">Next Month Base</div>
+              <div class="detail-value" id="salaryNextBase">₹800</div>
+            </div>
 
-<div class="detail-box">
-<div class="detail-label">
-Calculation
-</div>
-<div class="detail-value">
-Based on current month level
-</div>
-</div>
+            <div class="detail-box">
+              <div class="detail-label">Adjustment Period</div>
+              <div class="detail-value">One Month Only</div>
+            </div>
 
-</div>
+          </div>
 
-</div>
+        </div>
 
-</section>
+      </section>
 
-</div>
+    </div>
 
-</main>
+  </main>
 
 </div>
 
 
-<!-- ============================================================
-STUDENT PROFILE MODAL
-============================================================ -->
+<!-- ================= DETAIL MODAL ================= -->
 
 <div class="modal-overlay" id="detailModal">
 
-<div class="modal">
+  <div class="modal">
 
-<div class="modal-head">
+    <div class="modal-head">
 
-<div class="modal-title">
-Student Profile
-</div>
-
-<button class="close-btn" data-close="detailModal">
-×
-</button>
-
-</div>
-
-
-<div class="modal-body">
-
-<div id="profileContent">
-
-<div class="detail-grid">
-
-<div class="detail-box">
-<div class="detail-label">
-Student Name
-</div>
-<div class="detail-value" id="detailName">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Mobile
-</div>
-<div class="detail-value" id="detailMobile">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Course
-</div>
-<div class="detail-value" id="detailCourse">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Course Fee
-</div>
-<div class="detail-value" id="detailFee">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Duration
-</div>
-<div class="detail-value" id="detailDuration">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Priority
-</div>
-<div class="detail-value" id="detailPriority">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Status
-</div>
-<div class="detail-value" id="detailStatus">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Next Action
-</div>
-<div class="detail-value" id="detailNextAction">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Follow-up Date
-</div>
-<div class="detail-value" id="detailFollowup">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Follow-up Time
-</div>
-<div class="detail-value" id="detailFollowupTime">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Demo Date
-</div>
-<div class="detail-value" id="detailDemoDate">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Demo Time
-</div>
-<div class="detail-value" id="detailDemoTime">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Coordinator
-</div>
-<div class="detail-value" id="detailCoordinator">
--
-</div>
-</div>
-
-
-<div class="detail-box">
-<div class="detail-label">
-Telecaller
-</div>
-<div class="detail-value" id="detailTelecaller">
--
-</div>
-</div>
-
-
-<div class="detail-box" style="grid-column:1/-1">
-
-<div class="detail-label">
-Coordinator Remark
-</div>
-
-<div class="detail-value" id="detailRemark">
--
-</div>
-
-</div>
-
-
-<div class="detail-box" style="grid-column:1/-1">
-
-<div class="detail-label">
-Telecaller Remark
-</div>
-
-<div class="detail-value" id="detailTeleRemark">
--
-</div>
-
-</div>
-
-</div>
-
-
-<div style="margin-top:18px">
-
-<div class="card-title">
-Student Journey
-</div>
-
-<div class="timeline" id="studentTimeline">
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="modal-footer">
-
-<button class="btn btn-light" data-close="detailModal">
-Close
-</button>
-
-<button class="btn btn-purple" id="detailGuideBtn">
-Guided Action
-</button>
-
-<button class="btn btn-success" id="detailCallBtn">
-Call
-</button>
-
-<button class="btn btn-success" id="detailWhatsAppBtn">
-WhatsApp
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- ============================================================
-GUIDE MODAL
-============================================================ -->
-
-<div class="modal-overlay" id="guideModal">
-
-<div class="modal">
-
-<div class="modal-head">
-
-<div class="modal-title">
-Telecaller Guided Action
-</div>
-
-<button class="close-btn" data-close="guideModal">
-×
-</button>
-
-</div>
-
-
-<div class="modal-body">
-
-<div class="guide-top">
-
-<div class="guide-status">
-Recommended Next Step
-</div>
-
-<div class="guide-action" id="guideAction">
-Call Student
-</div>
-
-<div class="guide-why" id="guideWhy">
--
-</div>
-
-</div>
+      <div class="modal-title">
+        Student Details
+      </div>
 
+      <button class="close-btn" data-close="detailModal">
+        ×
+      </button>
 
-<div class="script-box">
+    </div>
 
-<div class="script-title">
-CALL SCRIPT
-</div>
+    <div class="modal-body">
 
-<div class="script-text" id="guideScript">
--
-</div>
+      <div class="detail-grid">
 
-</div>
+        <div class="detail-box">
+          <div class="detail-label">Student Name</div>
+          <div class="detail-value" id="detailName">-</div>
+        </div>
 
+        <div class="detail-box">
+          <div class="detail-label">Mobile</div>
+          <div class="detail-value" id="detailMobile">-</div>
+        </div>
 
-<div style="margin-top:16px">
+        <div class="detail-box">
+          <div class="detail-label">Course</div>
+          <div class="detail-value" id="detailCourse">-</div>
+        </div>
 
-<div class="card-title">
-WhatsApp Templates
-</div>
+        <div class="detail-box">
+          <div class="detail-label">Source</div>
+          <div class="detail-value" id="detailSource">-</div>
+        </div>
 
-<div class="card-subtitle">
-Select a template. Student details are inserted automatically.
-</div>
+        <div class="detail-box">
+          <div class="detail-label">Coordinator</div>
+          <div class="detail-value" id="detailCoordinator">-</div>
+        </div>
 
+        <div class="detail-box">
+          <div class="detail-label">Coordinator Mobile</div>
+          <div class="detail-value" id="detailCoordinatorMobile">-</div>
+        </div>
 
-<div class="template-tabs" id="templateTabs">
-</div>
+        <div class="detail-box">
+          <div class="detail-label">Status</div>
+          <div class="detail-value" id="detailStatus">-</div>
+        </div>
 
+        <div class="detail-box">
+          <div class="detail-label">Telecaller Status</div>
+          <div class="detail-value" id="detailTelecallerStatus">-</div>
+        </div>
 
-<div class="template-box">
+        <div class="detail-box">
+          <div class="detail-label">Custom Status</div>
+          <div class="detail-value" id="detailCustomStatus">-</div>
+        </div>
 
-<div class="template-text" id="templateText">
--
-</div>
+        <div class="detail-box">
+          <div class="detail-label">Follow-up Date</div>
+          <div class="detail-value" id="detailFollowup">-</div>
+        </div>
 
-</div>
+        <div class="detail-box">
+          <div class="detail-label">Created At</div>
+          <div class="detail-value" id="detailCreated">-</div>
+        </div>
 
-</div>
+        <div class="detail-box" style="grid-column:1/-1;">
+          <div class="detail-label">Coordinator Remark</div>
+          <div class="detail-value" id="detailRemark">-</div>
+        </div>
 
-</div>
+        <div class="detail-box" style="grid-column:1/-1;">
+          <div class="detail-label">Telecaller Remark</div>
+          <div class="detail-value" id="detailTeleRemark">-</div>
+        </div>
 
+      </div>
 
-<div class="modal-footer">
+    </div>
 
-<button class="btn btn-light" data-close="guideModal">
-Close
-</button>
+    <div class="modal-footer">
 
-<button class="btn btn-light" id="copyTemplateBtn">
-Copy Message
-</button>
+      <button class="btn btn-light" data-close="detailModal">
+        Close
+      </button>
 
-<button class="btn btn-success" id="guideWhatsAppBtn">
-Open WhatsApp
-</button>
+      <button class="btn btn-success" id="detailCallBtn">
+        Call Student
+      </button>
 
-<button class="btn btn-primary" id="guideCallBtn">
-Call Student
-</button>
+      <button class="btn btn-success" id="detailWhatsAppBtn">
+        WhatsApp
+      </button>
 
-</div>
+    </div>
 
-</div>
+  </div>
 
 </div>
 
 
-<!-- ============================================================
-STATUS UPDATE MODAL
-============================================================ -->
+<!-- ================= STATUS MODAL ================= -->
 
 <div class="modal-overlay" id="statusModal">
 
-<div class="modal">
+  <div class="modal">
 
-<div class="modal-head">
+    <div class="modal-head">
 
-<div class="modal-title">
-Update Student
-</div>
+      <div class="modal-title">
+        Update Student Status
+      </div>
 
-<button class="close-btn" data-close="statusModal">
-×
-</button>
+      <button class="close-btn" data-close="statusModal">
+        ×
+      </button>
 
-</div>
+    </div>
 
+    <div class="modal-body">
 
-<div class="modal-body">
+      <input type="hidden" id="statusDocName">
 
-<input
-type="hidden"
-id="statusDocName"
->
+      <div style="margin-bottom:13px;">
 
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Student
+        </label>
 
-<div style="margin-bottom:12px">
+        <input
+          type="text"
+          class="input"
+          id="statusStudentName"
+          readonly
+        >
 
-<label style="
-font-size:10px;
-font-weight:900;
-display:block;
-margin-bottom:5px
-">
-Student
-</label>
+      </div>
 
-<input
-type="text"
-class="input"
-id="statusStudentName"
-readonly
->
+      <div style="margin-bottom:13px;">
 
-</div>
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Status
+        </label>
 
+        <select class="select" id="newStatus">
 
-<div class="detail-grid">
+          <option value="new">
+            New
+          </option>
 
-<div>
+          <option value="pending">
+            Pending
+          </option>
 
-<label style="
-font-size:10px;
-font-weight:900;
-display:block;
-margin-bottom:5px
-">
-Status
-</label>
+          <option value="interested">
+            Interested
+          </option>
 
-<select class="select" id="newStatus">
+          <option value="contacted">
+            Contacted
+          </option>
 
-<option value="new">
-New
-</option>
+          <option value="delay">
+            Delay
+          </option>
 
-<option value="pending">
-Pending
-</option>
+          <option value="follow-up">
+            Follow-up
+          </option>
 
-<option value="interested">
-Interested
-</option>
+          <option value="visited">
+            Visited
+          </option>
 
-<option value="contacted">
-Contacted
-</option>
+          <option value="demo-completed">
+            Demo Completed
+          </option>
 
-<option value="delay">
-Delay
-</option>
+          <option value="converted">
+            Converted
+          </option>
 
-<option value="follow-up">
-Follow-up
-</option>
+          <option value="not-interested">
+            Not Interested
+          </option>
 
-<option value="visited">
-Visited
-</option>
+          <option value="custom">
+            Custom Status
+          </option>
 
-<option value="demo-completed">
-Demo Completed
-</option>
+        </select>
 
-<option value="converted">
-Converted
-</option>
-
-<option value="not-interested">
-Not Interested
-</option>
-
-<option value="custom">
-Custom Status
-</option>
-
-</select>
-
-</div>
+      </div>
 
 
-<div>
+      <!-- CUSTOM STATUS -->
 
-<label style="
-font-size:10px;
-font-weight:900;
-display:block;
-margin-bottom:5px
-">
-Priority
-</label>
+      <div
+        id="customStatusBox"
+        style="display:none;margin-bottom:13px;"
+      >
 
-<select class="select" id="newPriority">
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Custom Status
+        </label>
 
-<option value="medium">
-Medium
-</option>
+        <input
+          type="text"
+          class="input"
+          id="newCustomStatus"
+          maxlength="80"
+          placeholder="Enter custom status..."
+        >
 
-<option value="high">
-High
-</option>
+        <div style="font-size:9px;color:#6b7280;margin-top:5px;">
+          Example: Call Tomorrow, Waiting for Parents, Fee Issue, Join Next Month
+        </div>
 
-<option value="low">
-Low
-</option>
-
-</select>
-
-</div>
+      </div>
 
 
-<div>
+      <div style="margin-bottom:13px;">
 
-<label style="
-font-size:10px;
-font-weight:900;
-display:block;
-margin-bottom:5px
-">
-Follow-up Date
-</label>
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Follow-up Date
+        </label>
 
-<input
-type="date"
-class="input"
-id="newFollowupDate"
->
+        <input
+          type="date"
+          class="input"
+          id="newFollowupDate"
+        >
 
-</div>
+      </div>
 
 
-<div>
+      <div>
 
-<label style="
-font-size:10px;
-font-weight:900;
-display:block;
-margin-bottom:5px
-">
-Follow-up Time
-</label>
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Telecaller Remark
+        </label>
 
-<input
-type="time"
-class="input"
-id="newFollowupTime"
->
+        <textarea
+          class="textarea"
+          id="newTelecallerRemark"
+          rows="4"
+          placeholder="Enter remark..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button class="btn btn-light" data-close="statusModal">
+        Cancel
+      </button>
+
+      <button class="btn btn-primary" id="saveStatusBtn">
+        Save Status
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
 
-<div>
-
-<label style="
-font-size:10px;
-font-weight:900;
-display:block;
-margin-bottom:5px
-">
-Demo Date
-</label>
-
-<input
-type="date"
-class="input"
-id="newDemoDate"
->
-
-</div>
-
-
-<div>
-
-<label style="
-font-size:10px;
-font-weight:900;
-display:block;
-margin-bottom:5px
-">
-Demo Time
-</label>
-
-<input
-type="time"
-class="input"
-id="newDemoTime"
->
-
-</div>
-
-</div>
-
-
-<div id="customStatusBox" style="
-display:none;
-margin-top:12px
-">
-
-<label style="
-font-size:10px;
-font-weight:900;
-display:block;
-margin-bottom:5px
-">
-Custom Status
-</label>
-
-<input
-type="text"
-class="input"
-id="newCustomStatus"
-maxlength="80"
-placeholder="Enter custom status..."
->
-
-</div>
-
-
-<div style="margin-top:12px">
-
-<label style="
-font-size:10px;
-font-weight:900;
-display:block;
-margin-bottom:5px
-">
-Telecaller Remark
-</label>
-
-<textarea
-class="textarea"
-id="newTelecallerRemark"
-rows="4"
-placeholder="Enter call/follow-up remark..."
-></textarea>
-
-</div>
-
-
-<div id="saveStatusInfo" style="
-display:none;
-margin-top:10px;
-padding:9px;
-border-radius:9px;
-background:#f8f9fa;
-font-size:9px;
-color:#777
-">
-Saving changes to Firestore...
-</div>
-
-</div>
-
-
-<div class="modal-footer">
-
-<button class="btn btn-light" data-close="statusModal">
-Cancel
-</button>
-
-<button class="btn btn-primary" id="saveStatusBtn">
-Save Update
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="toast-container" id="toastContainer">
-</div>
+<div class="toast-container" id="toastContainer"></div>
 
 
 <script>
 
-/* ============================================================
-AUTH
-============================================================ */
+  /* ============================================================
+     AUTH / SESSION
+  ============================================================ */
 
-const loggedIn =
-sessionStorage.getItem("bt_logged_in");
+  const loggedIn = sessionStorage.getItem("bt_logged_in");
+  const userRole = sessionStorage.getItem("bt_user_role");
 
-const userRole =
-sessionStorage.getItem("bt_user_role");
+  const telecallerName =
+    sessionStorage.getItem("bt_user_name") || "Telecaller";
 
-const telecallerName =
-sessionStorage.getItem("bt_user_name") ||
-"Telecaller";
+  const telecallerMobile =
+    sessionStorage.getItem("bt_user_mobile") || "";
 
-const telecallerMobile =
-sessionStorage.getItem("bt_user_mobile") ||
-"";
+  if(
+    loggedIn !== "true" ||
+    userRole !== "telecaller"
+  ){
+    window.location.replace("login.html");
+  }
 
 
-if(
-loggedIn !== "true" ||
-String(userRole || "").toLowerCase() !== "telecaller"
-){
+  /* ============================================================
+     FIRESTORE CONFIG
+  ============================================================ */
 
-window.location.replace("login.html");
+  const FIREBASE_PROJECT_ID = "jobs-2f152";
 
-}
+  const FIREBASE_API_KEY =
+    "AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
 
+  const FIRESTORE_BASE =
+    "https://firestore.googleapis.com/v1/projects/" +
+    FIREBASE_PROJECT_ID +
+    "/databases/(default)/documents";
 
-/* ============================================================
-FIREBASE / FIRESTORE
-============================================================ */
+  const INQUIRY_URL =
+    FIRESTORE_BASE + "/studentInquiries";
 
-const FIREBASE_PROJECT_ID =
-"jobs-2f152";
+  const PAYMENT_SETTINGS_URL =
+    FIRESTORE_BASE + "/paymentSettings/telecaller";
 
-const FIREBASE_API_KEY =
-"AIzaSyAypdjozhoYM7oAKTOyxW75L4wFytdb2_m";
+  const CONTENT_URL =
+    FIRESTORE_BASE + "/telecallerContent";
 
-const FIRESTORE_BASE =
-"https://firestore.googleapis.com/v1/projects/" +
-FIREBASE_PROJECT_ID +
-"/databases/(default)/documents";
 
-const INQUIRY_URL =
-FIRESTORE_BASE +
-"/studentInquiries";
+  /* ============================================================
+     DEFAULT SETTINGS
+  ============================================================ */
 
-const PAYMENT_SETTINGS_URL =
-FIRESTORE_BASE +
-"/paymentSettings/telecaller";
+  let SETTINGS = {
 
-const CONTENT_URL =
-FIRESTORE_BASE +
-"/telecallerContent";
+    baseSalary:1000,
 
+    demoIncentive:30,
 
-/* ============================================================
-DEFAULT SETTINGS
-============================================================ */
+    level1Min:0,
+    level1Max:2,
+    level1AdmissionIncentive:50,
+    level1NextBaseSalary:800,
 
-let SETTINGS = {
+    level2Min:3,
+    level2Max:5,
+    level2AdmissionIncentive:75,
+    level2NextBaseSalary:900,
 
-baseSalary:1000,
+    level3Min:6,
+    level3Max:null,
+    level3AdmissionIncentive:100,
+    level3NextBaseSalary:2000
 
-level1Min:0,
-level1Max:2,
-level1AdmissionIncentive:50,
+  };
 
-level2Min:3,
-level2Max:5,
-level2AdmissionIncentive:75,
 
-level3Min:6,
-level3Max:null,
-level3AdmissionIncentive:100,
+  /* ============================================================
+     APP STATE
+  ============================================================ */
 
-visitReward:0
+  let inquiries = [];
+  let filteredInquiries = [];
 
-};
+  let currentPage = 1;
 
+  const PAGE_SIZE = 10;
 
-/* ============================================================
-STATE
-============================================================ */
+  let currentDetailInquiry = null;
 
-let inquiries = [];
-let filteredInquiries = [];
+  let currentContent = [];
 
-let currentPage = 1;
+  let currentDisplay = "carousel";
 
-const PAGE_SIZE = 10;
+  let carouselIndex = 0;
 
-let currentDetailInquiry = null;
-let currentGuideInquiry = null;
+  let carouselTimer = null;
 
-let currentContent = [];
 
-let currentDisplay = "carousel";
+  /* ============================================================
+     FIRESTORE HELPERS
+  ============================================================ */
 
-let carouselIndex = 0;
-let carouselTimer = null;
+  function firestoreValue(value){
 
-let calendarDate = new Date();
+    if(value === null || value === undefined){
+      return null;
+    }
 
-let activeTemplate = "initial";
+    if(typeof value === "number"){
+      return {
+        integerValue:String(Math.round(value))
+      };
+    }
 
+    if(typeof value === "boolean"){
+      return {
+        booleanValue:value
+      };
+    }
 
-/* ============================================================
-FIRESTORE VALUE HELPERS
-============================================================ */
+    return {
+      stringValue:String(value)
+    };
+  }
 
-function firestoreValue(value){
 
-if(
-value === null ||
-value === undefined
-){
-return null;
-}
+  function extractFirestoreValue(field){
 
-if(
-typeof value === "number" &&
-Number.isFinite(value)
-){
+    if(!field){
+      return "";
+    }
 
-if(
-Number.isInteger(value)
-){
+    if(field.stringValue !== undefined){
+      return field.stringValue;
+    }
 
-return {
-integerValue:String(value)
-};
+    if(field.integerValue !== undefined){
+      return Number(field.integerValue);
+    }
 
-}
+    if(field.doubleValue !== undefined){
+      return Number(field.doubleValue);
+    }
 
-return {
-doubleValue:value
-};
+    if(field.booleanValue !== undefined){
+      return field.booleanValue;
+    }
 
-}
+    if(field.timestampValue !== undefined){
+      return field.timestampValue;
+    }
 
-if(typeof value === "boolean"){
+    if(field.arrayValue){
+      return (field.arrayValue.values || [])
+        .map(extractFirestoreValue);
+    }
 
-return {
-booleanValue:value
-};
+    if(field.mapValue){
+      return firestoreFieldsToObject(
+        field.mapValue.fields || {}
+      );
+    }
 
-}
+    return "";
+  }
 
-return {
-stringValue:String(value)
-};
 
-}
+  function firestoreFieldsToObject(fields){
 
+    const obj = {};
 
-function firestoreFieldsToObject(fields){
+    Object.keys(fields || {}).forEach(key => {
+      obj[key] = extractFirestoreValue(fields[key]);
+    });
 
-const obj = {};
+    return obj;
+  }
 
-Object.keys(fields || {}).forEach(key=>{
 
-obj[key] =
-extractFirestoreValue(
-fields[key]
-);
+  async function firestoreFetch(
+    url,
+    options = {}
+  ){
 
-});
+    const separator =
+      url.includes("?") ? "&" : "?";
 
-return obj;
+    const finalUrl =
+      url +
+      separator +
+      "key=" +
+      encodeURIComponent(FIREBASE_API_KEY);
 
-}
+    const response =
+      await fetch(
+        finalUrl,
+        {
+          ...options,
+          headers:{
+            "Content-Type":"application/json",
+            ...(options.headers || {})
+          }
+        }
+      );
 
+    const text =
+      await response.text();
 
-function extractFirestoreValue(field){
+    let data = {};
 
-if(!field){
-return "";
-}
+    try{
+      data = text ? JSON.parse(text) : {};
+    }catch{
+      data = {};
+    }
 
-if(
-field.stringValue !== undefined
-){
-return field.stringValue;
-}
+    if(!response.ok){
 
-if(
-field.integerValue !== undefined
-){
-return Number(field.integerValue);
-}
+      let message =
+        data?.error?.message ||
+        "Firestore request failed.";
 
-if(
-field.doubleValue !== undefined
-){
-return Number(field.doubleValue);
-}
+      throw new Error(message);
+    }
 
-if(
-field.booleanValue !== undefined
-){
-return field.booleanValue;
-}
+    return data;
+  }
 
-if(
-field.timestampValue !== undefined
-){
-return field.timestampValue;
-}
 
-if(field.arrayValue){
+  /* ============================================================
+     PAGINATED INQUIRY FETCH
+  ============================================================ */
 
-return(
-field.arrayValue.values || []
-).map(
-extractFirestoreValue
-);
+  async function loadInquiries(){
 
-}
+    const tbody =
+      document.getElementById("inquiryBody");
 
-if(field.mapValue){
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8">
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading inquiries...
+          </div>
+        </td>
+      </tr>
+    `;
 
-return firestoreFieldsToObject(
-field.mapValue.fields || {}
-);
+    try{
 
-}
+      let allDocs = [];
 
-return "";
+      let pageToken = "";
 
-}
+      do{
 
+        let url =
+          INQUIRY_URL +
+          "?pageSize=300";
 
-/* ============================================================
-FIRESTORE REQUEST
-============================================================ */
+        if(pageToken){
+          url +=
+            "&pageToken=" +
+            encodeURIComponent(pageToken);
+        }
 
-async function firestoreFetch(
-url,
-options = {}
-){
+        const data =
+          await firestoreFetch(url);
 
-const separator =
-url.includes("?")
-? "&"
-: "?";
+        const docs =
+          data.documents || [];
 
-const finalUrl =
-url +
-separator +
-"key=" +
-encodeURIComponent(
-FIREBASE_API_KEY
-);
+        allDocs =
+          allDocs.concat(docs);
 
-const response =
-await fetch(
-finalUrl,
-{
-...options,
-headers:{
-"Content-Type":
-"application/json",
-...(options.headers || {})
-}
-}
-);
+        pageToken =
+          data.nextPageToken || "";
 
-const text =
-await response.text();
+      }while(pageToken);
 
-let data = {};
 
-try{
+      inquiries =
+        allDocs.map(doc => {
 
-data =
-text
-? JSON.parse(text)
-: {};
+          const obj =
+            firestoreFieldsToObject(
+              doc.fields || {}
+            );
 
-}catch{
+          obj.__docName =
+            doc.name || "";
 
-data = {};
+          return obj;
 
-}
+        });
 
-if(!response.ok){
+      inquiries.sort(
+        (a,b) =>
+          new Date(b.createdAt || 0) -
+          new Date(a.createdAt || 0)
+      );
 
-const message =
-data?.error?.message ||
-`Firestore request failed (${response.status})`;
 
-throw new Error(message);
+      buildFilters();
 
-}
+      applyFilters();
 
-return data;
+      updateDashboard();
 
-}
+      calculateAndRenderEarnings();
 
+    }catch(error){
 
-/* ============================================================
-DIRECT DOCUMENT UPDATE
-IMPORTANT FIX
-============================================================ */
+      console.error(error);
 
-async function updateFirestoreDocument(
-docName,
-fields
-){
+      inquiries = [];
 
-if(!docName){
+      document.getElementById("inquiryBody").innerHTML = `
+        <tr>
+          <td colspan="8">
+            <div class="empty">
+              <div class="empty-icon">⚠</div>
+              <div class="empty-title">
+                Unable to load inquiries
+              </div>
+              <div class="empty-text">
+                ${escapeHtml(error.message)}
+              </div>
+            </div>
+          </td>
+        </tr>
+      `;
 
-throw new Error(
-"Firestore document path is missing."
-);
+      showToast(
+        error.message,
+        "error"
+      );
+    }
+  }
 
-}
 
+  /* ============================================================
+     PAYMENT SETTINGS
+  ============================================================ */
 
-let documentUrl = "";
+  async function loadPaymentSettings(){
 
-if(
-docName.startsWith(
-"https://"
-)
-){
+    try{
 
-documentUrl = docName;
+      const data =
+        await firestoreFetch(
+          PAYMENT_SETTINGS_URL
+        );
 
-}else if(
-docName.startsWith(
-"projects/"
-)
-){
+      const fields =
+        data.fields || {};
 
-documentUrl =
-"https://firestore.googleapis.com/v1/" +
-docName;
+      const getNumber =
+        (name, fallback) => {
 
-}else if(
-docName.startsWith(
-"/v1/projects/"
-)
-){
+          const value =
+            extractFirestoreValue(
+              fields[name]
+            );
 
-documentUrl =
-"https://firestore.googleapis.com" +
-docName;
+          const num =
+            Number(value);
 
-}else{
+          return Number.isFinite(num)
+            ? num
+            : fallback;
+        };
 
-documentUrl =
-FIRESTORE_BASE +
-"/" +
-docName;
 
-}
+      SETTINGS.baseSalary =
+        getNumber(
+          "baseSalary",
+          SETTINGS.baseSalary
+        );
 
 
-/*
-Use URLSearchParams here.
+      SETTINGS.demoIncentive =
+        getNumber(
+          "demoIncentive",
+          SETTINGS.demoIncentive
+        );
 
-This avoids the common problem where
-multiple updateMask.fieldPaths values
-get incorrectly appended.
-*/
 
-const params =
-new URLSearchParams();
+      SETTINGS.level1Min =
+        getNumber(
+          "level1Min",
+          SETTINGS.level1Min
+        );
 
-Object.keys(fields).forEach(
-field=>{
-params.append(
-"updateMask.fieldPaths",
-field
-);
-});
+      SETTINGS.level1Max =
+        getNumber(
+          "level1Max",
+          SETTINGS.level1Max
+        );
 
-params.set(
-"key",
-FIREBASE_API_KEY
-);
+      SETTINGS.level1AdmissionIncentive =
+        getNumber(
+          "level1AdmissionIncentive",
+          SETTINGS.level1AdmissionIncentive
+        );
 
+      SETTINGS.level1NextBaseSalary =
+        getNumber(
+          "level1NextBaseSalary",
+          SETTINGS.level1NextBaseSalary
+        );
 
-const finalUrl =
-documentUrl +
-"?" +
-params.toString();
 
+      SETTINGS.level2Min =
+        getNumber(
+          "level2Min",
+          SETTINGS.level2Min
+        );
 
-const response =
-await fetch(
-finalUrl,
-{
-method:"PATCH",
-headers:{
-"Content-Type":
-"application/json"
-},
-body:JSON.stringify({
-fields:fields
-})
-}
-);
+      SETTINGS.level2Max =
+        getNumber(
+          "level2Max",
+          SETTINGS.level2Max
+        );
 
+      SETTINGS.level2AdmissionIncentive =
+        getNumber(
+          "level2AdmissionIncentive",
+          SETTINGS.level2AdmissionIncentive
+        );
 
-const text =
-await response.text();
+      SETTINGS.level2NextBaseSalary =
+        getNumber(
+          "level2NextBaseSalary",
+          SETTINGS.level2NextBaseSalary
+        );
 
-let data = {};
 
-try{
+      SETTINGS.level3Min =
+        getNumber(
+          "level3Min",
+          SETTINGS.level3Min
+        );
 
-data =
-text
-?JSON.parse(text)
-:{};
+      const level3Max =
+        extractFirestoreValue(
+          fields.level3Max
+        );
 
-}catch{
+      SETTINGS.level3Max =
+        level3Max === "" ||
+        level3Max === null ||
+        level3Max === undefined
+          ? null
+          : Number(level3Max);
 
-data = {};
 
-}
+      SETTINGS.level3AdmissionIncentive =
+        getNumber(
+          "level3AdmissionIncentive",
+          SETTINGS.level3AdmissionIncentive
+        );
 
+      SETTINGS.level3NextBaseSalary =
+        getNumber(
+          "level3NextBaseSalary",
+          SETTINGS.level3NextBaseSalary
+        );
 
-if(!response.ok){
 
-throw new Error(
-data?.error?.message ||
-`Firestore update failed (${response.status})`
-);
+      calculateAndRenderEarnings();
 
-}
+    }catch(error){
 
-return data;
+      console.warn(
+        "Payment settings could not be loaded:",
+        error.message
+      );
 
-}
+      calculateAndRenderEarnings();
+    }
+  }
 
 
-/* ============================================================
-DOCUMENT DELETE
-============================================================ */
+  /* ============================================================
+     CONTENT LOAD
+  ============================================================ */
 
-async function deleteFirestoreDocument(
-docName
-){
+  async function loadContent(){
 
-let documentUrl = "";
+    try{
 
-if(
-docName.startsWith("https://")
-){
+      let allDocs = [];
 
-documentUrl = docName;
+      let pageToken = "";
 
-}else if(
-docName.startsWith("projects/")
-){
+      do{
 
-documentUrl =
-"https://firestore.googleapis.com/v1/" +
-docName;
+        let url =
+          CONTENT_URL +
+          "?pageSize=300";
 
-}else{
+        if(pageToken){
+          url +=
+            "&pageToken=" +
+            encodeURIComponent(pageToken);
+        }
 
-documentUrl =
-FIRESTORE_BASE +
-"/" +
-docName;
+        const data =
+          await firestoreFetch(url);
 
-}
+        allDocs =
+          allDocs.concat(
+            data.documents || []
+          );
 
+        pageToken =
+          data.nextPageToken || "";
 
-const separator =
-documentUrl.includes("?")
-? "&"
-: "?";
+      }while(pageToken);
 
 
-const response =
-await fetch(
-documentUrl +
-separator +
-"key=" +
-encodeURIComponent(
-FIREBASE_API_KEY
-),
-{
-method:"DELETE"
-}
-);
+      currentContent =
+        allDocs
+          .map(doc => {
 
+            const obj =
+              firestoreFieldsToObject(
+                doc.fields || {}
+              );
 
-const text =
-await response.text();
+            obj.__docName =
+              doc.name || "";
 
-let data = {};
+            return obj;
 
-try{
+          })
+          .filter(item => {
 
-data =
-text
-?JSON.parse(text)
-:{};
+            if(
+              item.active === false ||
+              item.active === "false"
+            ){
+              return false;
+            }
 
-}catch{
+            return true;
 
-data = {};
+          })
+          .sort(
+            (a,b) =>
+              Number(a.order || 9999) -
+              Number(b.order || 9999)
+          );
 
-}
 
+      renderContent();
 
-if(!response.ok){
+    }catch(error){
 
-throw new Error(
-data?.error?.message ||
-`Delete failed (${response.status})`
-);
+      console.warn(
+        "Content could not be loaded:",
+        error.message
+      );
 
-}
+      currentContent = [];
 
-return data;
+      renderContent();
+    }
+  }
 
-}
 
+  /* ============================================================
+     MONTH HELPERS
+  ============================================================ */
 
-/* ============================================================
-DATE HELPERS
-============================================================ */
+  function getMonthKey(date = new Date()){
 
-function localDateString(date){
+    const y =
+      date.getFullYear();
 
-if(!(date instanceof Date)){
-date = new Date(date);
-}
+    const m =
+      String(
+        date.getMonth() + 1
+      ).padStart(2,"0");
 
-const y =
-date.getFullYear();
+    return `${y}-${m}`;
+  }
 
-const m =
-String(
-date.getMonth()+1
-).padStart(2,"0");
 
-const d =
-String(
-date.getDate()
-).padStart(2,"0");
+  function isCurrentMonth(dateString){
 
-return `${y}-${m}-${d}`;
+    if(!dateString){
+      return false;
+    }
 
-}
+    const date =
+      new Date(dateString);
 
+    if(Number.isNaN(date.getTime())){
+      return false;
+    }
 
-function todayString(){
+    return (
+      date.getFullYear() ===
+      new Date().getFullYear()
+      &&
+      date.getMonth() ===
+      new Date().getMonth()
+    );
+  }
 
-return localDateString(
-new Date()
-);
 
-}
+  function getPreviousMonthRange(){
 
+    const now = new Date();
 
-function isCurrentMonth(value){
+    const firstCurrent =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1
+      );
 
-if(!value){
-return false;
-}
+    const firstPrevious =
+      new Date(
+        now.getFullYear(),
+        now.getMonth() - 1,
+        1
+      );
 
-const date =
-new Date(value);
+    const lastPrevious =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        0,
+        23,
+        59,
+        59,
+        999
+      );
 
-if(
-Number.isNaN(
-date.getTime()
-)
-){
-return false;
-}
+    return {
+      start:firstPrevious,
+      end:lastPrevious
+    };
+  }
 
-const now =
-new Date();
 
-return(
-date.getFullYear() ===
-now.getFullYear() &&
-date.getMonth() ===
-now.getMonth()
-);
+  function isInPreviousMonth(dateString){
 
-}
+    if(!dateString){
+      return false;
+    }
 
+    const date =
+      new Date(dateString);
 
-function getPreviousMonthRange(){
+    if(Number.isNaN(date.getTime())){
+      return false;
+    }
 
-const now =
-new Date();
+    const range =
+      getPreviousMonthRange();
 
-return{
+    return (
+      date >= range.start &&
+      date <= range.end
+    );
+  }
 
-start:
-new Date(
-now.getFullYear(),
-now.getMonth()-1,
-1
-),
 
-end:
-new Date(
-now.getFullYear(),
-now.getMonth(),
-0,
-23,
-59,
-59,
-999
-)
+  /* ============================================================
+     UNIQUE STUDENTS
+  ============================================================ */
 
-};
+  function normalizeMobile(mobile){
 
-}
+    return String(
+      mobile || ""
+    )
+      .replace(/\D/g,"")
+      .slice(-10);
+  }
 
 
-function isInPreviousMonth(value){
+  function uniqueByMobile(list){
 
-if(!value){
-return false;
-}
+    const map =
+      new Map();
 
-const date =
-new Date(value);
+    list.forEach(item => {
 
-if(
-Number.isNaN(
-date.getTime()
-)
-){
-return false;
-}
+      const mobile =
+        normalizeMobile(
+          item.mobile
+        );
 
-const range =
-getPreviousMonthRange();
+      if(!mobile){
+        return;
+      }
 
-return(
-date >= range.start &&
-date <= range.end
-);
+      if(!map.has(mobile)){
+        map.set(
+          mobile,
+          item
+        );
+      }
 
-}
+    });
 
+    return Array.from(
+      map.values()
+    );
+  }
 
-/* ============================================================
-MOBILE HELPERS
-============================================================ */
 
-function normalizeMobile(
-mobile
-){
+  /* ============================================================
+     DEMO / CONVERTED COUNTS
+  ============================================================ */
 
-return String(
-mobile || ""
-)
-.replace(/\D/g,"")
-.slice(-10);
+  function isDemoCompleted(item){
 
-}
+    const status =
+      String(
+        item.status || ""
+      ).toLowerCase()
+      .trim();
 
+    const teleStatus =
+      String(
+        item.telecallerStatus || ""
+      ).toLowerCase()
+      .trim();
 
-function uniqueByMobile(
-list
-){
+    return (
+      status === "demo-completed" ||
+      status === "demo completed" ||
+      status === "demo_completed" ||
+      teleStatus === "demo-completed" ||
+      teleStatus === "demo completed" ||
+      teleStatus === "demo_completed"
+    );
+  }
 
-const map =
-new Map();
 
-list.forEach(item=>{
+  function isConverted(item){
 
-const mobile =
-normalizeMobile(
-item.mobile
-);
+    const status =
+      String(
+        item.status || ""
+      ).toLowerCase()
+      .trim();
 
-if(!mobile){
-return;
-}
+    const teleStatus =
+      String(
+        item.telecallerStatus || ""
+      ).toLowerCase()
+      .trim();
 
-if(!map.has(mobile)){
+    return (
+      status === "converted" ||
+      teleStatus === "converted"
+    );
+  }
 
-map.set(
-mobile,
-item
-);
 
-}
+  function getCurrentMonthDemoStudents(){
 
-});
+    const list =
+      inquiries.filter(item => {
 
-return Array.from(
-map.values()
-);
+        const date =
+          item.updatedAt ||
+          item.createdAt;
 
-}
+        return (
+          isCurrentMonth(date) &&
+          isDemoCompleted(item)
+        );
 
+      });
 
-/* ============================================================
-STATUS HELPERS
-============================================================ */
+    return uniqueByMobile(list);
+  }
 
-function normalizeStatus(
-value
-){
 
-return String(
-value || ""
-)
-.toLowerCase()
-.trim()
-.replace(/_/g,"-")
-.replace(/\s+/g,"-");
+  function getCurrentMonthConvertedStudents(){
 
-}
+    const list =
+      inquiries.filter(item => {
 
+        const date =
+          item.updatedAt ||
+          item.createdAt;
 
-function getStoredStatus(
-item
-){
+        return (
+          isCurrentMonth(date) &&
+          isConverted(item)
+        );
 
-return normalizeStatus(
-item.telecallerStatus ||
-item.status ||
-"new"
-);
+      });
 
-}
+    return uniqueByMobile(list);
+  }
 
 
-function isConverted(
-item
-){
+  /* ============================================================
+     LEVEL CALCULATION
+  ============================================================ */
 
-return (
-normalizeStatus(item.telecallerStatus) ===
-"converted" ||
-normalizeStatus(item.status) ===
-"converted"
-);
+  function getLevelByCount(count){
 
-}
+    if(
+      count >= SETTINGS.level3Min
+    ){
+      return {
+        level:3,
+        name:"Level 3",
+        rate:SETTINGS.level3AdmissionIncentive,
+        nextBase:SETTINGS.level3NextBaseSalary,
+        min:SETTINGS.level3Min,
+        max:SETTINGS.level3Max
+      };
+    }
 
+    if(
+      count >= SETTINGS.level2Min &&
+      count <= SETTINGS.level2Max
+    ){
+      return {
+        level:2,
+        name:"Level 2",
+        rate:SETTINGS.level2AdmissionIncentive,
+        nextBase:SETTINGS.level2NextBaseSalary,
+        min:SETTINGS.level2Min,
+        max:SETTINGS.level2Max
+      };
+    }
 
-function isVisited(
-item
-){
+    return {
+      level:1,
+      name:"Level 1",
+      rate:SETTINGS.level1AdmissionIncentive,
+      nextBase:SETTINGS.level1NextBaseSalary,
+      min:SETTINGS.level1Min,
+      max:SETTINGS.level1Max
+    };
+  }
 
-return (
-normalizeStatus(item.telecallerStatus) ===
-"visited" ||
-normalizeStatus(item.status) ===
-"visited"
-);
 
-}
+  /* ============================================================
+     PREVIOUS MONTH LEVEL
+  ============================================================ */
 
+  function getPreviousMonthConvertedStudents(){
 
-function isDemoCompleted(
-item
-){
+    const list =
+      inquiries.filter(item => {
 
-return(
-[
-"demo-completed",
-"demo"
-].includes(
-normalizeStatus(
-item.telecallerStatus
-)
-) ||
-[
-"demo-completed",
-"demo"
-].includes(
-normalizeStatus(
-item.status
-)
-)
-);
+        const date =
+          item.updatedAt ||
+          item.createdAt;
 
-}
+        return (
+          isInPreviousMonth(date) &&
+          isConverted(item)
+        );
 
+      });
 
-function getEffectiveStatus(
-item
-){
+    return uniqueByMobile(list);
+  }
 
-const status =
-getStoredStatus(item);
 
-if(
-status === "custom" &&
-item.customStatus
-){
+  function getPreviousMonthLevel(){
 
-return item.customStatus;
+    const count =
+      getPreviousMonthConvertedStudents().length;
 
-}
+    if(count === 0){
 
-return formatStatus(
-status || "new"
-);
+      return {
+        count:0,
+        level:null,
+        name:"No Previous Data",
+        nextBase:SETTINGS.baseSalary
+      };
 
-}
+    }
 
+    return {
+      count,
+      ...getLevelByCount(count)
+    };
+  }
 
-/* ============================================================
-MONTHLY PERFORMANCE
-============================================================ */
 
-function getCurrentMonthConvertedStudents(){
+  function getCurrentBaseSalary(){
 
-return uniqueByMobile(
+    const previous =
+      getPreviousMonthLevel();
 
-inquiries.filter(item=>{
+    if(!previous.level){
+      return SETTINGS.baseSalary;
+    }
 
-const date =
-item.updatedAt ||
-item.createdAt;
+    return previous.nextBase;
+  }
 
-return(
-isCurrentMonth(date) &&
-isConverted(item)
-);
 
-})
+  /* ============================================================
+     EARNINGS
+  ============================================================ */
 
-);
+  function calculateEarnings(){
 
-}
+    const demoStudents =
+      getCurrentMonthDemoStudents();
 
+    const convertedStudents =
+      getCurrentMonthConvertedStudents();
 
-function getCurrentMonthVisitedStudents(){
+    const demoCount =
+      demoStudents.length;
 
-return uniqueByMobile(
+    const convertedCount =
+      convertedStudents.length;
 
-inquiries.filter(item=>{
+    const level =
+      getLevelByCount(
+        convertedCount
+      );
 
-const date =
-item.updatedAt ||
-item.createdAt;
+    const baseSalary =
+      getCurrentBaseSalary();
 
-return(
-isCurrentMonth(date) &&
-isVisited(item)
-);
+    const demoReward =
+      demoCount *
+      SETTINGS.demoIncentive;
 
-})
+    const admissionReward =
+      convertedCount *
+      level.rate;
 
-);
+    const total =
+      baseSalary +
+      demoReward +
+      admissionReward;
 
-}
+    return {
 
+      demoCount,
 
-function getPreviousMonthConvertedStudents(){
+      convertedCount,
 
-return uniqueByMobile(
+      level,
 
-inquiries.filter(item=>{
+      baseSalary,
 
-const date =
-item.updatedAt ||
-item.createdAt;
+      demoReward,
 
-return(
-isInPreviousMonth(date) &&
-isConverted(item)
-);
+      admissionReward,
 
-})
+      total
 
-);
+    };
+  }
 
-}
 
+  function calculateAndRenderEarnings(){
 
-/* ============================================================
-LEVEL CALCULATION
-============================================================ */
+    const earning =
+      calculateEarnings();
 
-function getLevelByCount(
-count
-){
+    const previous =
+      getPreviousMonthLevel();
 
-if(
-count >= SETTINGS.level3Min
-){
 
-return{
+    setText(
+      "dashboardTotal",
+      money(earning.total)
+    );
 
-level:3,
-name:"Level 3",
-rate:
-SETTINGS.level3AdmissionIncentive,
-min:
-SETTINGS.level3Min,
-max:
-SETTINGS.level3Max,
-nextBase:
-SETTINGS.baseSalary
+    setText(
+      "dashBase",
+      money(earning.baseSalary)
+    );
 
-};
+    setText(
+      "dashDemoReward",
+      money(earning.demoReward)
+    );
 
-}
+    setText(
+      "dashAdmissionReward",
+      money(earning.admissionReward)
+    );
 
+    setText(
+      "currentBaseText",
+      money(earning.baseSalary)
+    );
 
-if(
-count >= SETTINGS.level2Min &&
-count <= SETTINGS.level2Max
-){
+    setText(
+      "previousLevelText",
+      previous.level
+        ? `${previous.name} (${previous.count} admissions)`
+        : "No previous data"
+    );
 
-return{
+    setText(
+      "nextBaseText",
+      money(
+        earning.level.nextBase
+      )
+    );
 
-level:2,
-name:"Level 2",
-rate:
-SETTINGS.level2AdmissionIncentive,
-min:
-SETTINGS.level2Min,
-max:
-SETTINGS.level2Max,
-nextBase:
-SETTINGS.baseSalary
+    setText(
+      "statDemo",
+      earning.demoCount
+    );
 
-};
+    setText(
+      "statConverted",
+      earning.convertedCount
+    );
 
-}
+    setText(
+      "statEarning",
+      money(earning.total)
+    );
 
+    setText(
+      "earningPageTotal",
+      money(earning.total)
+    );
 
-return{
+    setText(
+      "earningPageBase",
+      money(earning.baseSalary)
+    );
 
-level:1,
-name:"Level 1",
-rate:
-SETTINGS.level1AdmissionIncentive,
-min:
-SETTINGS.level1Min,
-max:
-SETTINGS.level1Max,
-nextBase:
-SETTINGS.baseSalary
+    setText(
+      "earningPageDemo",
+      money(earning.demoReward)
+    );
 
-};
+    setText(
+      "earningPageAdmission",
+      money(earning.admissionReward)
+    );
 
-}
+    setText(
+      "earnDemoCount",
+      earning.demoCount
+    );
 
+    setText(
+      "earnDemoRate",
+      money(SETTINGS.demoIncentive)
+    );
 
-function getPreviousMonthLevel(){
+    setText(
+      "earnAdmissionCount",
+      earning.convertedCount
+    );
 
-const count =
-getPreviousMonthConvertedStudents()
-.length;
+    setText(
+      "earnLevel",
+      earning.level.name
+    );
 
-if(count === 0){
+    setText(
+      "earnAdmissionRate",
+      money(earning.level.rate)
+    );
 
-return{
+    setText(
+      "nextMonthSalaryBig",
+      money(earning.level.nextBase)
+    );
 
-count:0,
-level:null,
-name:"No Previous Data",
-nextBase:
-SETTINGS.baseSalary
+    setText(
+      "salaryCurrentLevel",
+      earning.level.name
+    );
 
-};
+    setText(
+      "salaryDefaultBase",
+      money(SETTINGS.baseSalary)
+    );
 
-}
+    setText(
+      "salaryNextBase",
+      money(earning.level.nextBase)
+    );
 
-const level =
-getLevelByCount(count);
+    renderLevelCards(
+      earning.convertedCount,
+      earning.level
+    );
+  }
 
-return{
 
-count,
-...level
+  function renderLevelCards(
+    count,
+    currentLevel
+  ){
 
-};
+    const container =
+      document.getElementById(
+        "levelCards"
+      );
 
-}
+    const levels = [
 
+      {
+        level:1,
+        title:"Level 1",
+        min:SETTINGS.level1Min,
+        max:SETTINGS.level1Max,
+        rate:SETTINGS.level1AdmissionIncentive,
+        nextBase:SETTINGS.level1NextBaseSalary
+      },
 
-function getCurrentBaseSalary(){
+      {
+        level:2,
+        title:"Level 2",
+        min:SETTINGS.level2Min,
+        max:SETTINGS.level2Max,
+        rate:SETTINGS.level2AdmissionIncentive,
+        nextBase:SETTINGS.level2NextBaseSalary
+      },
 
-/*
-Base salary is controlled by Admin.
-If your Admin panel later adds
-dynamic next-base fields, they can
-be integrated here.
-*/
-
-return SETTINGS.baseSalary;
-
-}
-
-
-/* ============================================================
-EARNINGS
-============================================================ */
-
-function calculateEarnings(){
-
-const convertedStudents =
-getCurrentMonthConvertedStudents();
-
-const visitedStudents =
-getCurrentMonthVisitedStudents();
-
-const convertedCount =
-convertedStudents.length;
-
-const visitedCount =
-visitedStudents.length;
-
-const level =
-getLevelByCount(
-convertedCount
-);
-
-const baseSalary =
-getCurrentBaseSalary();
-
-const visitReward =
-visitedCount *
-SETTINGS.visitReward;
-
-const admissionReward =
-convertedCount *
-level.rate;
-
-return{
-
-visitedCount,
-convertedCount,
-
-level,
-
-baseSalary,
-
-visitReward,
-
-admissionReward,
-
-total:
-baseSalary +
-visitReward +
-admissionReward
-
-};
-
-}
-
-
-/* ============================================================
-RENDER EARNINGS
-============================================================ */
-
-function calculateAndRenderEarnings(){
-
-const earning =
-calculateEarnings();
-
-const previous =
-getPreviousMonthLevel();
-
-
-setText(
-"dashboardTotal",
-money(
-earning.total
-)
-);
-
-setText(
-"dashBase",
-money(
-earning.baseSalary
-)
-);
-
-setText(
-"dashVisitReward",
-money(
-earning.visitReward
-)
-);
-
-setText(
-"dashAdmissionReward",
-money(
-earning.admissionReward
-)
-);
-
-setText(
-"currentBaseText",
-money(
-earning.baseSalary
-)
-);
-
-setText(
-"previousLevelText",
-previous.level
-? `${previous.name} (${previous.count} admissions)`
-: "No previous data"
-);
-
-setText(
-"nextBaseText",
-money(
-earning.level.nextBase
-)
-);
-
-
-setText(
-"statConverted",
-earning.convertedCount
-);
-
-setText(
-"statEarning",
-money(
-earning.total
-)
-);
-
-
-setText(
-"earningPageTotal",
-money(
-earning.total
-)
-);
-
-setText(
-"earningPageBase",
-money(
-earning.baseSalary
-)
-);
-
-setText(
-"earningPageVisit",
-money(
-earning.visitReward
-)
-);
-
-setText(
-"earningPageAdmission",
-money(
-earning.admissionReward
-)
-);
-
-
-setText(
-"earnVisitCount",
-earning.visitedCount
-);
-
-setText(
-"earnVisitRate",
-money(
-SETTINGS.visitReward
-)
-);
-
-setText(
-"earnAdmissionCount",
-earning.convertedCount
-);
-
-setText(
-"earnLevel",
-earning.level.name
-);
-
-setText(
-"earnAdmissionRate",
-money(
-earning.level.rate
-)
-);
-
-setText(
-"earnCurrentBase",
-money(
-earning.baseSalary
-)
-);
-
-
-setText(
-"nextMonthSalaryBig",
-money(
-earning.level.nextBase
-)
-);
-
-setText(
-"salaryCurrentLevel",
-earning.level.name
-);
-
-setText(
-"salaryDefaultBase",
-money(
-SETTINGS.baseSalary
-);
-
-setText(
-"salaryNextBase",
-money(
-earning.level.nextBase
-)
-);
-
-renderLevelCards(
-earning.convertedCount,
-earning.level
-);
-
-}
-
-
-/* ============================================================
-LEVEL CARDS
-============================================================ */
-
-function renderLevelCards(
-count,
-currentLevel
-){
-
-const container =
-document.getElementById(
-"levelCards"
-);
-
-if(!container){
-return;
-}
-
-const levels = [
-
-{
-level:1,
-title:"Level 1",
-min:SETTINGS.level1Min,
-max:SETTINGS.level1Max,
-rate:SETTINGS.level1AdmissionIncentive
-},
-
-{
-level:2,
-title:"Level 2",
-min:SETTINGS.level2Min,
-max:SETTINGS.level2Max,
-rate:SETTINGS.level2AdmissionIncentive
-},
-
-{
-level:3,
-title:"Level 3",
-min:SETTINGS.level3Min,
-max:SETTINGS.level3Max,
-rate:SETTINGS.level3AdmissionIncentive
-}
-
-];
-
-
-container.innerHTML =
-levels.map(item=>{
-
-const active =
-item.level ===
-currentLevel.level;
-
-const range =
-item.level === 3
-? `${item.min}+ admissions`
-: `${item.min}–${item.max} admissions`;
-
-return`
-
-<div class="level-card ${
-active ? "active" : ""
-}">
-
-<div class="level-head">
-
-<div>
-
-<div class="level-name">
-
-${item.title}
-
-${
-active
-? `<span class="level-tag">CURRENT</span>`
-: ""
-}
-
-</div>
-
-<div class="level-range">
-${range}
-</div>
-
-</div>
-
-<div class="level-rate">
-${money(item.rate)}
-</div>
-
-</div>
-
-<div style="
-font-size:9px;
-color:#777;
-margin-top:6px
-">
-Admission reward per student
-</div>
-
-<div style="
-font-size:9px;
-color:#777;
-margin-top:4px
-">
-Admin configured incentive
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-
-let progressText = "";
-
-if(
-currentLevel.level === 1
-){
-
-const remaining =
-Math.max(
-0,
-SETTINGS.level2Min -
-count
-);
-
-progressText =
-remaining > 0
-? `${remaining} more admission${remaining===1?"":"s"} to reach Level 2.`
-: "Level 2 reached.";
-
-}else if(
-currentLevel.level === 2
-){
-
-const remaining =
-Math.max(
-0,
-SETTINGS.level3Min -
-count
-);
-
-progressText =
-remaining > 0
-? `${remaining} more admission${remaining===1?"":"s"} to reach Level 3.`
-: "Level 3 reached.";
-
-}else{
-
-progressText =
-"Level 3 active. Highest configured admission level.";
-
-}
-
-
-setText(
-"levelProgressText",
-`Current: ${currentLevel.name} • ${count} converted admission${count===1?"":"s"} • ${progressText}`
-);
-
-}
-
-
-/* ============================================================
-FOLLOW-UP
-============================================================ */
-
-function getFollowupDateTime(
-item
-){
-
-const date =
-item.followUpDate;
-
-const time =
-item.followUpTime ||
-"10:00";
-
-if(!date){
-return null;
-}
-
-const result =
-new Date(
-`${date}T${time}`
-);
-
-if(
-Number.isNaN(
-result.getTime()
-)
-){
-return null;
-}
-
-return result;
-
-}
-
-
-function isFollowupOverdue(
-item
-){
-
-const date =
-getFollowupDateTime(item);
-
-if(!date){
-return false;
-}
-
-if(isConverted(item)){
-return false;
-}
-
-return(
-date.getTime() <
-Date.now()
-);
-
-}
-
-
-function isFollowupToday(
-item
-){
-
-return(
-item.followUpDate ===
-todayString()
-);
-
-}
-
-
-function getPriority(
-item
-){
-
-const p =
-String(
-item.priority || "medium"
-)
-.toLowerCase();
-
-return[
-"high",
-"medium",
-"low"
-].includes(p)
-?p
-:"medium";
-
-}
-
-
-/* ============================================================
-GUIDANCE ENGINE
-============================================================ */
-
-function getGuidance(
-item
-){
-
-const status =
-getStoredStatus(item);
-
-const followup =
-item.followUpDate ||
-"";
-
-
-if(isConverted(item)){
-
-return{
-
-action:"Admission Completed",
-
-why:"Student is already marked as converted.",
-
-script:
-`Thank you ${item.studentName || "Student"} for choosing BlackTerminal Computer Institute. We are happy to have you with us.`,
-
-template:"thankyou",
-priority:"done"
-
-};
-
-}
-
-
-if(status === "demo-completed"){
-
-return{
-
-action:"Admission Follow-up",
-
-why:"The student has completed the demo. Discuss admission, fee and joining date.",
-
-script:
-`Hello ${item.studentName || "Student"}, how was your demo class? I wanted to check if you would like to proceed with your ${item.course || "course"} admission.`,
-
-template:"admission",
-priority:"high"
-
-};
-
-}
-
-
-if(status === "visited"){
-
-return{
-
-action:"Admission Follow-up",
-
-why:"The student has visited the institute. Follow up about admission.",
-
-script:
-`Hello ${item.studentName || "Student"}, thank you for visiting BlackTerminal Computer Institute. I wanted to check if you have decided about joining the ${item.course || "course"} course.`,
-
-template:"admission",
-priority:"high"
-
-};
-
-}
-
-
-if(status === "interested"){
-
-return{
-
-action:"Invite for Demo",
-
-why:"The student is interested. The next recommended step is a demo class.",
-
-script:
-`Hello ${item.studentName || "Student"}, since you are interested in ${item.course || "the course"}, we can arrange a demo class so you can understand our teaching method and course structure.`,
-
-template:"demo",
-priority:"high"
-
-};
-
-}
-
-
-if(status === "contacted"){
-
-return{
-
-action:"Interest Follow-up",
-
-why:"The student has already been contacted. Move the conversation toward a demo.",
-
-script:
-`Hello ${item.studentName || "Student"}, this is ${telecallerName} from BlackTerminal Computer Institute. I wanted to follow up regarding your ${item.course || "course"} enquiry. Would you like to attend a demo class?`,
-
-template:"followup",
-priority:"medium"
-
-};
-
-}
-
-
-if(
-status === "follow-up" ||
-status === "followup" ||
-status === "delay"
-){
-
-return{
-
-action:"Follow-up Call",
-
-why:
-followup
-? `Follow-up is scheduled for ${followup}.`
-: "A follow-up is required.",
-
-script:
-`Hello ${item.studentName || "Student"}, this is ${telecallerName} from BlackTerminal Computer Institute. I am following up regarding your ${item.course || "course"} enquiry. Is this a convenient time to discuss it?`,
-
-template:"followup",
-priority:"medium"
-
-};
-
-}
-
-
-if(status === "not-interested"){
-
-return{
-
-action:"Respectful Reconnect",
-
-why:"The student is currently not interested. Avoid pressure and reconnect only when appropriate.",
-
-script:
-`Hello ${item.studentName || "Student"}, this is ${telecallerName} from BlackTerminal Computer Institute. I just wanted to check if your plans regarding the ${item.course || "course"} have changed. If you need any information, I will be happy to help.`,
-
-template:"reconnect",
-priority:"low"
-
-};
-
-}
-
-
-if(status === "pending"){
-
-return{
-
-action:"Pending Lead Call",
-
-why:"The enquiry is pending. Contact the student and understand the reason for the delay.",
-
-script:
-`Hello ${item.studentName || "Student"}, this is ${telecallerName} from BlackTerminal Computer Institute. I am following up regarding your ${item.course || "course"} enquiry. May I know when would be a convenient time to discuss it?`,
-
-template:"followup",
-priority:"medium"
-
-};
-
-}
-
-
-return{
-
-action:"First Contact",
-
-why:"This is a new enquiry. The recommended first action is to call the student.",
-
-script:
-`Hello ${item.studentName || "Student"}, my name is ${telecallerName} from BlackTerminal Computer Institute. You recently enquired about our ${item.course || "course"}. May I know if you are still interested?`,
-
-template:"initial",
-priority:"high"
-
-};
-
-}
-
-
-/* ============================================================
-TEMPLATES
-============================================================ */
-
-function replaceTemplate(
-text,
-item
-){
-
-return String(text || "")
-
-.replace(
-/\[Student Name\]/g,
-item.studentName || "Student"
-)
-
-.replace(
-/\[Telecaller Name\]/g,
-telecallerName
-)
-
-.replace(
-/\[Course Name\]/g,
-item.course || "course"
-)
-
-.replace(
-/\[Course Fee\]/g,
-item.coursePrice
-? `₹${item.coursePrice}`
-: "course fee"
-)
-
-.replace(
-/\[Duration\]/g,
-item.courseDuration ||
-"course duration"
-)
-
-.replace(
-/\[Demo Date\]/g,
-item.demoClassDate ||
-"[Demo Date]"
-)
-
-.replace(
-/\[Demo Time\]/g,
-item.demoClassTime ||
-"[Demo Time]"
-)
-
-.replace(
-/\[Institute Name\]/g,
-"BlackTerminal Computer Institute"
-);
-
-}
-
-
-function getTemplates(){
-
-return{
-
-initial:
-`Hello [Student Name],
-
-My name is [Telecaller Name] from BlackTerminal Computer Institute.
-
-You recently enquired about our [Course Name] course.
-
-I would be happy to share the course details, fees and class schedule with you.
-
-Please let me know a convenient time to discuss.
-
-Thank you.
-BlackTerminal Computer Institute`,
-
-followup:
-`Hello [Student Name],
-
-This is [Telecaller Name] from BlackTerminal Computer Institute.
-
-I am following up regarding your [Course Name] enquiry.
-
-Please let me know if you would like to continue the course discussion or schedule a demo class.
-
-Thank you.`,
-
-demo:
-`Hello [Student Name],
-
-This is [Telecaller Name] from BlackTerminal Computer Institute.
-
-We would like to invite you for a [Course Name] demo class.
-
-Demo Date: [Demo Date]
-Time: [Demo Time]
-
-You can attend the demo and understand our teaching method, course structure and classes.
-
-Please confirm your availability.
-
-Regards,
-[Telecaller Name]
-BlackTerminal Computer Institute`,
-
-demoReminder:
-`Hello [Student Name],
-
-Reminder from BlackTerminal Computer Institute.
-
-Your [Course Name] demo class is scheduled for:
-
-Date: [Demo Date]
-Time: [Demo Time]
-
-Please arrive a few minutes early.
-
-Regards,
-[Telecaller Name]`,
-
-admission:
-`Hello [Student Name],
-
-This is [Telecaller Name] from BlackTerminal Computer Institute.
-
-Thank you for your interest in [Course Name].
-
-I wanted to follow up regarding your admission.
-
-If you need any information about fees, duration, classes or joining process, please let me know.
-
-Regards,
-[Telecaller Name]
-BlackTerminal Computer Institute`,
-
-visit:
-`Hello [Student Name],
-
-Thank you for visiting BlackTerminal Computer Institute.
-
-I hope you found the [Course Name] course information useful.
-
-Please let me know if you would like to proceed with admission or if you have any questions.
-
-Regards,
-[Telecaller Name]`,
-
-reconnect:
-`Hello [Student Name],
-
-This is [Telecaller Name] from BlackTerminal Computer Institute.
-
-I am just checking whether your plans regarding the [Course Name] course have changed.
-
-If you need any updated information, I will be happy to help.
-
-Regards,
-[Telecaller Name]`,
-
-thankyou:
-`Hello [Student Name],
-
-Thank you for choosing BlackTerminal Computer Institute.
-
-We are happy to have you with us.
-
-Regards,
-[Telecaller Name]`
-
-};
-
-}
-
-
-/* ============================================================
-LOAD INQUIRIES
-============================================================ */
-
-async function loadInquiries(){
-
-const tbody =
-document.getElementById(
-"inquiryBody"
-);
-
-tbody.innerHTML = `
-
-<tr>
-
-<td colspan="8">
-
-<div class="loading">
-
-<div class="spinner"></div>
-
-Loading inquiries...
-
-</div>
-
-</td>
-
-</tr>
-
-`;
-
-
-try{
-
-let allDocs = [];
-
-let pageToken = "";
-
-do{
-
-let url =
-INQUIRY_URL +
-"?pageSize=300";
-
-if(pageToken){
-
-url +=
-"&pageToken=" +
-encodeURIComponent(
-pageToken
-);
-
-}
-
-const data =
-await firestoreFetch(
-url
-);
-
-allDocs =
-allDocs.concat(
-data.documents || []
-);
-
-pageToken =
-data.nextPageToken || "";
-
-}while(pageToken);
-
-
-inquiries =
-allDocs.map(
-doc=>{
-
-const obj =
-firestoreFieldsToObject(
-doc.fields || {}
-);
-
-obj.__docName =
-doc.name || "";
-
-return obj;
-
-}
-);
-
-
-inquiries.sort(
-(a,b)=>
-new Date(
-b.updatedAt ||
-b.createdAt ||
-0
-) -
-new Date(
-a.updatedAt ||
-a.createdAt ||
-0
-)
-);
-
-
-buildFilters();
-
-applyFilters();
-
-updateAllDashboard();
-
-renderFollowups();
-
-renderCalendar();
-
-
-}catch(error){
-
-console.error(
-"LOAD INQUIRIES ERROR:",
-error
-);
-
-inquiries = [];
-
-tbody.innerHTML = `
-
-<tr>
-
-<td colspan="8">
-
-<div class="empty">
-
-<div class="empty-icon">
-⚠
-</div>
-
-<div class="empty-title">
-Unable to load inquiries
-</div>
-
-<div class="empty-text">
-${escapeHtml(
-error.message
-)}
-</div>
-
-</div>
-
-</td>
-
-</tr>
-
-`;
-
-showToast(
-error.message,
-"error"
-);
-
-}
-
-}
-
-
-/* ============================================================
-LOAD PAYMENT SETTINGS
-============================================================ */
-
-async function loadPaymentSettings(){
-
-try{
-
-const data =
-await firestoreFetch(
-PAYMENT_SETTINGS_URL
-);
-
-const fields =
-data.fields || {};
-
-
-function getNumber(
-name,
-fallback
-){
-
-const value =
-extractFirestoreValue(
-fields[name]
-);
-
-const number =
-Number(value);
-
-return Number.isFinite(number)
-? number
-: fallback;
-
-}
-
-
-SETTINGS.baseSalary =
-getNumber(
-"baseSalary",
-SETTINGS.baseSalary
-);
-
-
-SETTINGS.level1Min =
-getNumber(
-"level1Min",
-SETTINGS.level1Min
-);
-
-SETTINGS.level1Max =
-getNumber(
-"level1Max",
-SETTINGS.level1Max
-);
-
-SETTINGS.level1AdmissionIncentive =
-getNumber(
-"level1AdmissionIncentive",
-SETTINGS.level1AdmissionIncentive
-);
-
-
-SETTINGS.level2Min =
-getNumber(
-"level2Min",
-SETTINGS.level2Min
-);
-
-SETTINGS.level2Max =
-getNumber(
-"level2Max",
-SETTINGS.level2Max
-);
-
-SETTINGS.level2AdmissionIncentive =
-getNumber(
-"level2AdmissionIncentive",
-SETTINGS.level2AdmissionIncentive
-);
-
-
-SETTINGS.level3Min =
-getNumber(
-"level3Min",
-SETTINGS.level3Min
-);
-
-const level3Max =
-extractFirestoreValue(
-fields.level3Max
-);
-
-SETTINGS.level3Max =
-level3Max === "" ||
-level3Max === null ||
-level3Max === undefined
-? null
-: Number(level3Max);
-
-
-SETTINGS.level3AdmissionIncentive =
-getNumber(
-"level3AdmissionIncentive",
-SETTINGS.level3AdmissionIncentive
-);
-
-
-SETTINGS.visitReward =
-getNumber(
-"visitReward",
-SETTINGS.visitReward
-);
-
-
-calculateAndRenderEarnings();
-
-
-}catch(error){
-
-console.warn(
-"Payment settings unavailable:",
-error.message
-);
-
-calculateAndRenderEarnings();
-
-}
-
-}
-
-
-/* ============================================================
-LOAD CONTENT
-============================================================ */
-
-async function loadContent(){
-
-try{
-
-let allDocs = [];
-
-let pageToken = "";
-
-do{
-
-let url =
-CONTENT_URL +
-"?pageSize=300";
-
-if(pageToken){
-
-url +=
-"&pageToken=" +
-encodeURIComponent(
-pageToken
-);
-
-}
-
-const data =
-await firestoreFetch(
-url
-);
-
-allDocs =
-allDocs.concat(
-data.documents || []
-);
-
-pageToken =
-data.nextPageToken || "";
-
-}while(pageToken);
-
-
-currentContent =
-allDocs
-.map(
-doc=>{
-
-const obj =
-firestoreFieldsToObject(
-doc.fields || {}
-);
-
-obj.__docName =
-doc.name || "";
-
-return obj;
-
-}
-)
-.filter(
-item=>
-item.active !== false &&
-item.active !== "false"
-)
-.sort(
-(a,b)=>
-Number(
-a.order || 9999
-) -
-Number(
-b.order || 9999
-)
-);
-
-
-renderContent();
-
-
-}catch(error){
-
-console.warn(
-"CONTENT LOAD ERROR:",
-error.message
-);
-
-currentContent = [];
-
-renderContent();
-
-}
-
-}
-
-
-/* ============================================================
-FILTERS
-============================================================ */
-
-function buildFilters(){
-
-const courseSelect =
-document.getElementById(
-"courseFilter"
-);
-
-const coordinatorSelect =
-document.getElementById(
-"coordinatorFilter"
-);
-
-
-const courses =
-[
-...new Set(
-inquiries
-.map(
-x=>x.course
-)
-.filter(Boolean)
-)
-]
-.sort();
-
-
-const coordinators =
-[
-...new Set(
-inquiries
-.map(
-x=>x.coordinatorName
-)
-.filter(Boolean)
-)
-]
-.sort();
-
-
-const oldCourse =
-courseSelect.value;
-
-const oldCoordinator =
-coordinatorSelect.value;
-
-
-courseSelect.innerHTML =
-`<option value="">All Courses</option>` +
-courses.map(
-course=>
-`<option value="${escapeAttr(course)}">${escapeHtml(course)}</option>`
-)
-.join("");
-
-
-coordinatorSelect.innerHTML =
-`<option value="">All Coordinators</option>` +
-coordinators.map(
-name=>
-`<option value="${escapeAttr(name)}">${escapeHtml(name)}</option>`
-)
-.join("");
-
-
-courseSelect.value =
-courses.includes(oldCourse)
-? oldCourse
-: "";
-
-
-coordinatorSelect.value =
-coordinators.includes(
-oldCoordinator
-)
-? oldCoordinator
-: "";
-
-}
-
-
-/* ============================================================
-APPLY FILTERS
-============================================================ */
-
-function applyFilters(){
-
-const search =
-document
-.getElementById(
-"searchInput"
-)
-.value
-.toLowerCase()
-.trim();
-
-
-const status =
-document.getElementById(
-"statusFilter"
-).value;
-
-
-const priority =
-document.getElementById(
-"priorityFilter"
-).value;
-
-
-const course =
-document.getElementById(
-"courseFilter"
-).value;
-
-
-const coordinator =
-document.getElementById(
-"coordinatorFilter"
-).value;
-
-
-filteredInquiries =
-inquiries.filter(
-item=>{
-
-const text = [
-
-item.studentName,
-item.mobile,
-item.course,
-item.source,
-item.remark,
-item.telecallerRemark,
-item.customStatus,
-item.coordinatorName
-
-]
-.filter(Boolean)
-.join(" ")
-.toLowerCase();
-
-
-if(
-search &&
-!text.includes(search)
-){
-
-return false;
-
-}
-
-
-if(
-status &&
-getStoredStatus(item) !==
-normalizeStatus(status)
-){
-
-return false;
-
-}
-
-
-if(
-priority &&
-getPriority(item) !==
-priority
-){
-
-return false;
-
-}
-
-
-if(
-course &&
-item.course !==
-course
-){
-
-return false;
-
-}
-
-
-if(
-coordinator &&
-item.coordinatorName !==
-coordinator
-){
-
-return false;
-
-}
-
-
-return true;
-
-}
-);
-
-
-currentPage = 1;
-
-renderInquiryTable();
-
-}
-
-
-/* ============================================================
-STATUS CLASS
-============================================================ */
-
-function getStatusClass(
-item
-){
-
-const status =
-getStoredStatus(item);
-
-if(
-status === "custom"
-){
-
-return "badge-custom";
-
-}
-
-if(
-status === "demo" ||
-status === "demo-completed"
-){
-
-return "badge-demo-completed";
-
-}
-
-const allowed = [
-"new",
-"pending",
-"interested",
-"contacted",
-"delay",
-"follow-up",
-"visited",
-"converted",
-"not-interested"
-];
-
-return allowed.includes(status)
-? `badge-${status}`
-: "badge-custom";
-
-}
-
-
-/* ============================================================
-TABLE
-============================================================ */
-
-function renderInquiryTable(){
-
-const tbody =
-document.getElementById(
-"inquiryBody"
-);
-
-const total =
-filteredInquiries.length;
-
-const totalPages =
-Math.max(
-1,
-Math.ceil(
-total /
-PAGE_SIZE
-)
-);
-
-
-if(
-currentPage >
-totalPages
-){
-
-currentPage =
-totalPages;
-
-}
-
-
-const start =
-(currentPage - 1) *
-PAGE_SIZE;
-
-
-const pageItems =
-filteredInquiries.slice(
-start,
-start + PAGE_SIZE
-);
-
-
-setText(
-"resultCount",
-`${total} ${total===1?"inquiry":"inquiries"} found`
-);
-
-
-if(
-!pageItems.length
-){
-
-tbody.innerHTML = `
-
-<tr>
-
-<td colspan="8">
-
-<div class="empty">
-
-<div class="empty-icon">
-⌕
-</div>
-
-<div class="empty-title">
-No inquiries found
-</div>
-
-<div class="empty-text">
-Try changing your filters.
-</div>
-
-</div>
-
-</td>
-
-</tr>
-
-`;
-
-}else{
-
-tbody.innerHTML =
-pageItems
-.map(
-renderInquiryRow
-)
-.join("");
-
-}
-
-
-renderPagination(
-totalPages
-);
-
-}
-
-
-function renderInquiryRow(
-item
-){
-
-const statusClass =
-getStatusClass(item);
-
-const info =
-getNextActionInfo(item);
-
-const priority =
-getPriority(item);
-
-
-return`
-
-<tr>
-
-<td>
-
-<div class="student-name">
-${escapeHtml(
-item.studentName ||
-"Unknown"
-)}
-</div>
-
-<div class="student-mobile">
-${escapeHtml(
-item.mobile || "-"
-)}
-</div>
-
-</td>
-
-
-<td>
-${escapeHtml(
-item.course || "-"
-)}
-</td>
-
-
-<td>
-
-<div class="
-priority priority-${priority}
-">
-
-${
-priority === "high"
-? "🔴"
-: priority === "medium"
-? "🟡"
-: "🟢"
-}
-
-${formatStatus(priority)}
-
-</div>
-
-</td>
-
-
-<td>
-
-<button
-class="badge ${statusClass}"
-onclick="openStatusModalByDoc('${escapeAttr(item.__docName || "")}')"
-style="border:0"
->
-
-${escapeHtml(
-getEffectiveStatus(item)
-)}
-
-</button>
-
-</td>
-
-
-<td class="next-cell">
-
-<div class="next-action-mini">
-${escapeHtml(
-info.action
-)}
-</div>
-
-<div class="next-time">
-${escapeHtml(
-info.time
-)}
-</div>
-
-</td>
-
-
-<td>
-
-${escapeHtml(
-item.followUpDate || "-"
-)}
-
-${
-item.followUpTime
-? `
-<div style="
-font-size:8px;
-color:#777
-">
-${escapeHtml(
-formatTime(
-item.followUpTime
-)
-)}
-</div>
-`
-: ""
-}
-
-</td>
-
-
-<td>
-
-<div style="
-font-size:10px;
-font-weight:800
-">
-
-${escapeHtml(
-item.coordinatorName || "-"
-)}
-
-</div>
-
-</td>
-
-
-<td>
-
-<div class="action-group">
-
-<button
-class="mini-btn mini-call"
-onclick="callStudent('${escapeAttr(item.mobile || "")}')"
->
-Call
-</button>
-
-<button
-class="mini-btn mini-wa"
-onclick="whatsappStudent('${escapeAttr(item.mobile || "")}','${escapeAttr(item.studentName || "")}','${escapeAttr(item.course || "")}')"
->
-WhatsApp
-</button>
-
-<button
-class="mini-btn mini-guide"
-onclick="openGuideByDoc('${escapeAttr(item.__docName || "")}')"
->
-Guide
-</button>
-
-<button
-class="mini-btn mini-view"
-onclick="viewStudent('${escapeAttr(item.__docName || "")}')"
->
-View
-</button>
-
-<button
-class="mini-btn mini-edit"
-onclick="openStatusModalByDoc('${escapeAttr(item.__docName || "")}')"
->
-Edit
-</button>
-
-<button
-class="mini-btn mini-delete"
-onclick="deleteStudent('${escapeAttr(item.__docName || "")}','${escapeAttr(item.studentName || "")}')"
->
-Delete
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`;
-
-}
-
-
-/* ============================================================
-NEXT ACTION
-============================================================ */
-
-function getNextActionInfo(
-item
-){
-
-const guidance =
-getGuidance(item);
-
-const action =
-guidance.action;
-
-const followup =
-getFollowupDateTime(item);
-
-
-if(
-isFollowupOverdue(item)
-){
-
-return{
-
-action:"Overdue Follow-up",
-time:"Action required now",
-className:"red"
-
-};
-
-}
-
-
-if(
-isFollowupToday(item)
-){
-
-return{
-
-action,
-time:
-item.followUpTime
-? `Today • ${formatTime(item.followUpTime)}`
-: "Today",
-className:"yellow"
-
-};
-
-}
-
-
-if(followup){
-
-return{
-
-action,
-time:
-formatDateTime(followup),
-className:"blue"
-
-};
-
-}
-
-
-if(
-action === "First Contact"
-){
-
-return{
-
-action,
-time:"Contact as soon as possible",
-className:"blue"
-
-};
-
-}
-
-
-return{
-
-action,
-time:"Recommended next step",
-className:"blue"
-
-};
-
-}
-
-
-/* ============================================================
-PAGINATION
-============================================================ */
-
-function renderPagination(
-totalPages
-){
-
-const container =
-document.getElementById(
-"paginationButtons"
-);
-
-setText(
-"pageInfo",
-`Page ${currentPage} of ${totalPages}`
-);
-
-
-if(
-totalPages <= 1
-){
-
-container.innerHTML = "";
-
-return;
-
-}
-
-
-let html = "";
-
-
-if(
-currentPage > 1
-){
-
-html += `
-
-<button
-class="page-btn"
-onclick="goToPage(${currentPage-1})"
->
-‹
-</button>
-
-`;
-
-}
-
-
-const start =
-Math.max(
-1,
-currentPage - 2
-);
-
-const end =
-Math.min(
-totalPages,
-currentPage + 2
-);
-
-
-for(
-let i = start;
-i <= end;
-i++
-){
-
-html += `
-
-<button
-class="page-btn ${
-i === currentPage
-? "active"
-: ""
-}"
-onclick="goToPage(${i})"
->
-${i}
-</button>
-
-`;
-
-}
-
-
-if(
-currentPage < totalPages
-){
-
-html += `
-
-<button
-class="page-btn"
-onclick="goToPage(${currentPage+1})"
->
-›
-</button>
-
-`;
-
-}
-
-
-container.innerHTML =
-html;
-
-}
-
-
-function goToPage(
-page
-){
-
-currentPage =
-Number(page) || 1;
-
-renderInquiryTable();
-
-}
-
-
-/* ============================================================
-STATUS MODAL
-============================================================ */
-
-function toggleCustomStatusBox(){
-
-const status =
-document.getElementById(
-"newStatus"
-).value;
-
-const box =
-document.getElementById(
-"customStatusBox"
-);
-
-box.style.display =
-status === "custom"
-? "block"
-: "none";
-
-}
-
-
-/* ============================================================
-OPEN STATUS MODAL
-============================================================ */
-
-function openStatusModalByDoc(
-docName
-){
-
-const item =
-inquiries.find(
-x=>
-x.__docName ===
-docName
-);
-
-
-if(!item){
-
-showToast(
-"Student record not found.",
-"error"
-);
-
-return;
-
-}
-
-
-document.getElementById(
-"statusDocName"
-).value =
-docName;
-
-
-document.getElementById(
-"statusStudentName"
-).value =
-item.studentName || "";
-
-
-const currentStatus =
-getStoredStatus(item);
-
-
-const knownStatuses = [
-
-"new",
-"pending",
-"interested",
-"contacted",
-"delay",
-"follow-up",
-"visited",
-"demo-completed",
-"converted",
-"not-interested",
-"custom"
-
-];
-
-
-document.getElementById(
-"newStatus"
-).value =
-knownStatuses.includes(
-currentStatus
-)
-? currentStatus
-: "custom";
-
-
-document.getElementById(
-"newPriority"
-).value =
-getPriority(item);
-
-
-document.getElementById(
-"newFollowupDate"
-).value =
-item.followUpDate || "";
-
-
-document.getElementById(
-"newFollowupTime"
-).value =
-item.followUpTime || "";
-
-
-document.getElementById(
-"newDemoDate"
-).value =
-item.demoClassDate || "";
-
-
-document.getElementById(
-"newDemoTime"
-).value =
-item.demoClassTime || "";
-
-
-document.getElementById(
-"newTelecallerRemark"
-).value =
-item.telecallerRemark || "";
-
-
-document.getElementById(
-"newCustomStatus"
-).value =
-item.customStatus || "";
-
-
-toggleCustomStatusBox();
-
-showModal(
-"statusModal"
-);
-
-}
-
-
-/* ============================================================
-SAVE STATUS - FIXED
-============================================================ */
-
-async function saveStatus(){
-
-const docName =
-document.getElementById(
-"statusDocName"
-).value;
-
-
-let status =
-document.getElementById(
-"newStatus"
-).value;
-
-
-const priority =
-document.getElementById(
-"newPriority"
-).value;
-
-
-const followUpDate =
-document.getElementById(
-"newFollowupDate"
-).value;
-
-
-const followUpTime =
-document.getElementById(
-"newFollowupTime"
-).value;
-
-
-const demoClassDate =
-document.getElementById(
-"newDemoDate"
-).value;
-
-
-const demoClassTime =
-document.getElementById(
-"newDemoTime"
-).value;
-
-
-const remark =
-document.getElementById(
-"newTelecallerRemark"
-).value
-.trim();
-
-
-const customStatus =
-document.getElementById(
-"newCustomStatus"
-).value
-.trim();
-
-
-if(!docName){
-
-showToast(
-"Student document was not found.",
-"error"
-);
-
-return;
-
-}
-
-
-if(
-status === "custom" &&
-!customStatus
-){
-
-showToast(
-"Please enter a custom status.",
-"error"
-);
-
-return;
-
-}
-
-
-const saveBtn =
-document.getElementById(
-"saveStatusBtn"
-);
-
-const infoBox =
-document.getElementById(
-"saveStatusInfo"
-);
-
-
-saveBtn.disabled = true;
-
-saveBtn.textContent =
-"Saving...";
-
-infoBox.style.display =
-"block";
-
-
-try{
-
-/*
-Important:
-
-Both status and telecallerStatus
-are updated.
-
-This keeps compatibility with
-your Coordinator page and
-Telecaller page.
-*/
-
-const fields = {
-
-status:
-firestoreValue(
-status
-),
-
-telecallerStatus:
-firestoreValue(
-status
-),
-
-customStatus:
-firestoreValue(
-status === "custom"
-? customStatus
-: ""
-),
-
-priority:
-firestoreValue(
-priority
-),
-
-telecallerRemark:
-firestoreValue(
-remark
-),
-
-followUpDate:
-firestoreValue(
-followUpDate
-),
-
-followUpTime:
-firestoreValue(
-followUpTime
-),
-
-demoClassDate:
-firestoreValue(
-demoClassDate
-),
-
-demoClassTime:
-firestoreValue(
-demoClassTime
-),
-
-telecallerName:
-firestoreValue(
-telecallerName
-),
-
-telecallerMobile:
-firestoreValue(
-telecallerMobile
-),
-
-updatedAt:{
-timestampValue:
-new Date().toISOString()
-}
-
-};
-
-
-/*
-This is the important part.
-
-updateFirestoreDocument()
-creates proper updateMask
-parameters and sends PATCH.
-*/
-
-await updateFirestoreDocument(
-docName,
-fields
-);
-
-
-hideModal(
-"statusModal"
-);
-
-
-showToast(
-"Student update saved successfully.",
-"success"
-);
-
-
-/*
-Immediately reload from Firestore.
-
-So the UI shows the actual
-saved server data.
-*/
-
-await loadInquiries();
-
-
-}catch(error){
-
-console.error(
-"SAVE STATUS ERROR:",
-error
-);
-
-showToast(
-"Unable to save update: " +
-error.message,
-"error"
-);
-
-}finally{
-
-saveBtn.disabled = false;
-
-saveBtn.textContent =
-"Save Update";
-
-infoBox.style.display =
-"none";
-
-}
-
-}
-
-
-/* ============================================================
-VIEW STUDENT
-============================================================ */
-
-function viewStudent(
-docName
-){
-
-const item =
-inquiries.find(
-x=>
-x.__docName ===
-docName
-);
-
-
-if(!item){
-return;
-}
-
-
-currentDetailInquiry =
-item;
-
-
-setText(
-"detailName",
-item.studentName || "-"
-);
-
-setText(
-"detailMobile",
-item.mobile || "-"
-);
-
-setText(
-"detailCourse",
-item.course || "-"
-);
-
-setText(
-"detailFee",
-item.coursePrice
-? money(item.coursePrice)
-: "-"
-);
-
-setText(
-"detailDuration",
-item.courseDuration || "-"
-);
-
-setText(
-"detailPriority",
-formatStatus(
-getPriority(item)
-)
-);
-
-setText(
-"detailStatus",
-getEffectiveStatus(item)
-);
-
-setText(
-"detailNextAction",
-getGuidance(item).action
-);
-
-setText(
-"detailFollowup",
-item.followUpDate || "-"
-);
-
-setText(
-"detailFollowupTime",
-item.followUpTime
-? formatTime(
-item.followUpTime
-)
-: "-"
-);
-
-setText(
-"detailDemoDate",
-item.demoClassDate || "-"
-);
-
-setText(
-"detailDemoTime",
-item.demoClassTime
-? formatTime(
-item.demoClassTime
-)
-: "-"
-);
-
-setText(
-"detailCoordinator",
-item.coordinatorName || "-"
-);
-
-setText(
-"detailTelecaller",
-item.telecallerName ||
-telecallerName
-);
-
-setText(
-"detailRemark",
-item.remark || "-"
-);
-
-setText(
-"detailTeleRemark",
-item.telecallerRemark || "-"
-);
-
-
-renderTimeline(item);
-
-showModal(
-"detailModal"
-);
-
-}
-
-
-/* ============================================================
-TIMELINE
-============================================================ */
-
-function renderTimeline(
-item
-){
-
-const container =
-document.getElementById(
-"studentTimeline"
-);
-
-const items = [];
-
-
-if(item.createdAt){
-
-items.push({
-title:"Inquiry Created",
-date:item.createdAt
-});
-
-}
-
-
-if(item.updatedAt){
-
-items.push({
-title:
-`Current Status: ${getEffectiveStatus(item)}`,
-date:item.updatedAt
-});
-
-}
-
-
-if(item.followUpDate){
-
-items.push({
-title:"Follow-up Scheduled",
-date:
-`${item.followUpDate} ${item.followUpTime || ""}`
-});
-
-}
-
-
-if(item.demoClassDate){
-
-items.push({
-title:"Demo Scheduled",
-date:
-`${item.demoClassDate} ${item.demoClassTime || ""}`
-});
-
-}
-
-
-if(isDemoCompleted(item)){
-
-items.push({
-title:"Demo Completed",
-date:item.updatedAt || ""
-});
-
-}
-
-
-if(isConverted(item)){
-
-items.push({
-title:"Admission Converted",
-date:item.updatedAt || ""
-});
-
-}
-
-
-if(!items.length){
-
-container.innerHTML =
-`<div style="
-font-size:10px;
-color:#777
-">
-No activity available.
-</div>`;
-
-return;
-
-}
-
-
-container.innerHTML =
-items.map(
-x=>`
-
-<div class="timeline-item">
-
-<div class="timeline-title">
-${escapeHtml(
-x.title
-)}
-</div>
-
-<div class="timeline-meta">
-${escapeHtml(
-formatDate(x.date)
-)}
-</div>
-
-</div>
-
-`
-)
-.join("");
-
-}
-
-
-/* ============================================================
-GUIDE
-============================================================ */
-
-function openGuideByDoc(
-docName
-){
-
-const item =
-inquiries.find(
-x=>
-x.__docName ===
-docName
-);
-
-
-if(!item){
-
-showToast(
-"Student record not found.",
-"error"
-);
-
-return;
-
-}
-
-
-openGuide(item);
-
-}
-
-
-function openGuide(
-item
-){
-
-currentGuideInquiry =
-item;
-
-
-const guidance =
-getGuidance(item);
-
-
-setText(
-"guideAction",
-guidance.action
-);
-
-setText(
-"guideWhy",
-guidance.why
-);
-
-setText(
-"guideScript",
-guidance.script
-);
-
-
-const templates =
-getTemplates();
-
-
-const templateNames = {
-
-initial:"Initial Contact",
-followup:"Follow-up",
-demo:"Demo Invitation",
-demoReminder:"Demo Reminder",
-admission:"Admission",
-visit:"Visit",
-reconnect:"Reconnect",
-thankyou:"Thank You"
-
-};
-
-
-const tabs =
-document.getElementById(
-"templateTabs"
-);
-
-
-tabs.innerHTML =
-Object.keys(templates)
-.map(
-key=>`
-
-<button
-class="template-tab ${
-key === guidance.template
-? "active"
-: ""
-}"
-data-template="${key}"
->
-${templateNames[key]}
-</button>
-
-`
-)
-.join("");
-
-
-activeTemplate =
-templates[guidance.template]
-? guidance.template
-: "initial";
-
-
-renderTemplateText();
-
-
-tabs
-.querySelectorAll(
-".template-tab"
-)
-.forEach(btn=>{
-
-btn.addEventListener(
-"click",
-()=>{
-
-activeTemplate =
-btn.dataset.template;
-
-
-tabs
-.querySelectorAll(
-".template-tab"
-)
-.forEach(x=>
-x.classList.remove(
-"active"
-)
-);
-
-
-btn.classList.add(
-"active"
-);
-
-
-renderTemplateText();
-
-}
-);
-
-});
-
-
-showModal(
-"guideModal"
-);
-
-}
-
-
-function renderTemplateText(){
-
-if(!currentGuideInquiry){
-return;
-}
-
-
-const templates =
-getTemplates();
-
-
-setText(
-"templateText",
-replaceTemplate(
-templates[activeTemplate] ||
-templates.initial,
-currentGuideInquiry
-)
-);
-
-}
-
-
-/* ============================================================
-CALL
-============================================================ */
-
-function callStudent(
-mobile
-){
-
-const clean =
-String(
-mobile || ""
-)
-.replace(
-/[^\d+]/g,
-""
-);
-
-
-if(!clean){
-
-showToast(
-"Student mobile number is not available.",
-"error"
-);
-
-return;
-
-}
-
-
-window.location.href =
-"tel:" +
-clean;
-
-}
-
-
-/* ============================================================
-WHATSAPP
-============================================================ */
-
-function openWhatsAppForGuide(){
-
-if(!currentGuideInquiry){
-return;
-}
-
-
-const clean =
-normalizeMobile(
-currentGuideInquiry.mobile
-);
-
-
-if(!clean){
-
-showToast(
-"Student mobile number is not available.",
-"error"
-);
-
-return;
-
-}
-
-
-const templates =
-getTemplates();
-
-
-const message =
-replaceTemplate(
-templates[
-activeTemplate
-] ||
-templates.initial,
-currentGuideInquiry
-);
-
-
-const url =
-"https://wa.me/91" +
-clean +
-"?text=" +
-encodeURIComponent(
-message
-);
-
-
-window.open(
-url,
-"_blank"
-);
-
-}
-
-
-function whatsappStudent(
-mobile,
-studentName = "",
-course = ""
-){
-
-const clean =
-normalizeMobile(
-mobile
-);
-
-
-if(!clean){
-
-showToast(
-"Student mobile number is not available.",
-"error"
-);
-
-return;
-
-}
-
-
-const item = {
-
-studentName:
-studentName || "Student",
-
-mobile:clean,
-
-course:
-course || "course",
-
-coursePrice:"",
-
-courseDuration:""
-
-};
-
-
-const templates =
-getTemplates();
-
-
-const message =
-replaceTemplate(
-templates.initial,
-item
-);
-
-
-const url =
-"https://wa.me/91" +
-clean +
-"?text=" +
-encodeURIComponent(
-message
-);
-
-
-window.open(
-url,
-"_blank"
-);
-
-}
-
-
-/* ============================================================
-COPY
-============================================================ */
-
-function copyCurrentTemplate(){
-
-if(!currentGuideInquiry){
-return;
-}
-
-
-const templates =
-getTemplates();
-
-
-const message =
-replaceTemplate(
-templates[
-activeTemplate
-] ||
-templates.initial,
-currentGuideInquiry
-);
-
-
-if(
-navigator.clipboard &&
-navigator.clipboard.writeText
-){
-
-navigator.clipboard
-.writeText(message)
-.then(
-()=>{
-showToast(
-"WhatsApp message copied.",
-"success"
-);
-}
-)
-.catch(
-()=>{
-fallbackCopy(
-message
-);
-}
-);
-
-}else{
-
-fallbackCopy(
-message
-);
-
-}
-
-}
-
-
-function fallbackCopy(
-text
-){
-
-const area =
-document.createElement(
-"textarea"
-);
-
-area.value = text;
-
-document.body.appendChild(
-area
-);
-
-area.select();
-
-document.execCommand(
-"copy"
-);
-
-area.remove();
-
-showToast(
-"WhatsApp message copied.",
-"success"
-);
-
-}
-
-
-/* ============================================================
-DELETE
-============================================================ */
-
-async function deleteStudent(
-docName,
-studentName
-){
-
-if(!docName){
-
-showToast(
-"Student document was not found.",
-"error"
-);
-
-return;
-
-}
-
-
-const confirmed =
-window.confirm(
-`Delete inquiry for ${studentName || "this student"}?`
-);
-
-
-if(!confirmed){
-return;
-}
-
-
-try{
-
-await deleteFirestoreDocument(
-docName
-);
-
-
-showToast(
-"Inquiry deleted successfully.",
-"success"
-);
-
-
-await loadInquiries();
-
-
-}catch(error){
-
-console.error(
-"DELETE ERROR:",
-error
-);
-
-showToast(
-"Unable to delete inquiry: " +
-error.message,
-"error"
-);
-
-}
-
-}
-
-
-/* ============================================================
-DASHBOARD
-============================================================ */
-
-function getOverdueItems(){
-
-return inquiries.filter(
-item=>
-isFollowupOverdue(item)
-);
-
-}
-
-
-function getTodayFollowups(){
-
-return inquiries.filter(
-item=>
-isFollowupToday(item) &&
-!isConverted(item)
-);
-
-}
-
-
-function getDemoActionItems(){
-
-return inquiries.filter(
-item=>{
-
-const status =
-getStoredStatus(item);
-
-return[
-"interested",
-"demo-completed",
-"visited"
-].includes(
-status
-) &&
-!isConverted(item);
-
-}
-);
-
-}
-
-
-function updateAllDashboard(){
-
-const overdue =
-getOverdueItems();
-
-const today =
-getTodayFollowups();
-
-const demo =
-getDemoActionItems();
-
-
-setText(
-"statInquiries",
-inquiries.length
-);
-
-setText(
-"statOverdue",
-overdue.length
-);
-
-setText(
-"statTodayFollowups",
-today.length
-);
-
-setText(
-"actionOverdue",
-overdue.length
-);
-
-setText(
-"actionToday",
-today.length
-);
-
-setText(
-"actionDemo",
-demo.length
-);
-
-
-calculateAndRenderEarnings();
-
-renderDashboardNextAction();
-
-renderPriorityStudents();
-
-}
-
-
-/* ============================================================
-DASHBOARD NEXT ACTION
-============================================================ */
-
-function renderDashboardNextAction(){
-
-const container =
-document.getElementById(
-"dashboardNextAction"
-);
-
-
-const candidates = [
-
-...getOverdueItems(),
-
-...getTodayFollowups(),
-
-...getDemoActionItems(),
-
-...inquiries
-
-];
-
-
-const item =
-candidates.find(
-x=>!isConverted(x)
-);
-
-
-if(!item){
-
-container.innerHTML = `
-
-<div class="next-label">
-ALL CLEAR
-</div>
-
-<div class="next-title">
-No urgent action
-</div>
-
-<div class="next-description">
-There are no pending follow-up actions right now.
-</div>
-
-`;
-
-return;
-
-}
-
-
-const info =
-getNextActionInfo(item);
-
-
-container.innerHTML = `
-
-<div class="next-label">
-NEXT ACTION
-</div>
-
-<div class="next-title">
-${escapeHtml(
-info.action
-)}
-</div>
-
-<div class="next-description">
-
-${escapeHtml(
-item.studentName || "Student"
-)}
-
- • 
-
-${escapeHtml(
-item.course || "Course"
-)}
-
-<br>
-
-${escapeHtml(
-info.time
-)}
-
-</div>
-
-<div class="next-buttons">
-
-<button
-class="btn btn-primary"
-onclick="openGuideByDoc('${escapeAttr(item.__docName)}')"
->
-Guided Action
-</button>
-
-<button
-class="btn btn-success"
-onclick="callStudent('${escapeAttr(item.mobile || "")}')"
->
-Call
-</button>
-
-<button
-class="btn btn-light"
-onclick="whatsappStudent('${escapeAttr(item.mobile || "")}','${escapeAttr(item.studentName || "")}','${escapeAttr(item.course || "")}')"
->
-WhatsApp
-</button>
-
-</div>
-
-`;
-
-}
-
-
-/* ============================================================
-PRIORITY STUDENTS
-============================================================ */
-
-function renderPriorityStudents(){
-
-const container =
-document.getElementById(
-"priorityStudentList"
-);
-
-
-let list = [
-
-...getOverdueItems(),
-
-...getTodayFollowups(),
-
-...getDemoActionItems()
-
-];
-
-
-const used =
-new Set();
-
-
-list =
-list.filter(
-item=>{
-
-if(
-used.has(
-item.__docName
-)
-){
-
-return false;
-
-}
-
-
-used.add(
-item.__docName
-);
-
-return true;
-
-}
-);
-
-
-list =
-list.slice(
-0,
-8
-);
-
-
-if(!list.length){
-
-container.innerHTML = `
-
-<div class="empty">
-
-<div class="empty-icon">
-✓
-</div>
-
-<div class="empty-title">
-No urgent actions
-</div>
-
-<div class="empty-text">
-You are up to date with your follow-ups.
-</div>
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-container.innerHTML =
-list.map(
-item=>{
-
-const info =
-getNextActionInfo(item);
-
-
-return`
-
-<div class="action-item">
-
-<div class="
-action-dot ${
-info.className
-}
-">
-
-${
-info.className === "red"
-? "!"
-: info.className === "yellow"
-? "◷"
-: "▶"
-}
-
-</div>
-
-
-<div class="action-info">
-
-<div class="action-title">
-${escapeHtml(
-item.studentName || "Student"
-)}
-</div>
-
-<div class="action-desc">
-
-${escapeHtml(
-item.course || "-"
-)}
-
- • 
-
-${escapeHtml(
-info.action
-)}
-
- • 
-
-${escapeHtml(
-info.time
-)}
-
-</div>
-
-</div>
-
-
-<div style="
-display:flex;
-gap:5px
-">
-
-<button
-class="mini-btn mini-guide"
-onclick="openGuideByDoc('${escapeAttr(item.__docName)}')"
->
-Guide
-</button>
-
-<button
-class="mini-btn mini-call"
-onclick="callStudent('${escapeAttr(item.mobile || "")}')"
->
-Call
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}
-)
-.join("");
-
-}
-
-
-/* ============================================================
-FOLLOW-UP CENTER
-============================================================ */
-
-function renderFollowups(){
-
-const container =
-document.getElementById(
-"followupGrid"
-);
-
-
-const list = [
-
-...getOverdueItems(),
-
-...getTodayFollowups()
-
-];
-
-
-if(!list.length){
-
-container.innerHTML = `
-
-<div class="card" style="grid-column:1/-1">
-
-<div class="empty">
-
-<div class="empty-icon">
-✓
-</div>
-
-<div class="empty-title">
-No follow-ups requiring attention
-</div>
-
-<div class="empty-text">
-You are currently up to date.
-</div>
-
-</div>
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-container.innerHTML =
-list.map(
-item=>{
-
-const info =
-getNextActionInfo(item);
-
-
-return`
-
-<div class="followup-card">
-
-<div class="followup-head">
-
-<div>
-
-<div class="followup-name">
-${escapeHtml(
-item.studentName || "Student"
-)}
-</div>
-
-<div class="followup-course">
-${escapeHtml(
-item.course || "-"
-)}
-</div>
-
-</div>
-
-
-<div class="followup-date">
-${escapeHtml(
-info.time
-)}
-</div>
-
-</div>
-
-
-<div style="
-margin-top:11px
-">
-
-<span class="badge ${
-info.className === "red"
-? "badge-not-interested"
-: "badge-pending"
-}">
-
-${escapeHtml(
-info.action
-)}
-
-</span>
-
-</div>
-
-
-<div style="
-font-size:9px;
-color:#777;
-margin-top:9px
-">
-
-${escapeHtml(
-item.telecallerRemark ||
-item.remark ||
-"No previous remark."
-)}
-
-</div>
-
-
-<div class="followup-actions">
-
-<button
-class="btn btn-primary"
-onclick="openGuideByDoc('${escapeAttr(item.__docName)}')"
->
-Guided Action
-</button>
-
-<button
-class="btn btn-success"
-onclick="callStudent('${escapeAttr(item.mobile || "")}')"
->
-Call
-</button>
-
-<button
-class="btn btn-light"
-onclick="whatsappStudent('${escapeAttr(item.mobile || "")}','${escapeAttr(item.studentName || "")}','${escapeAttr(item.course || "")}')"
->
-WhatsApp
-</button>
-
-<button
-class="btn btn-light"
-onclick="openStatusModalByDoc('${escapeAttr(item.__docName)}')"
->
-Update
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}
-)
-.join("");
-
-}
-
-
-/* ============================================================
-CALENDAR
-============================================================ */
-
-function renderCalendar(){
-
-const area =
-document.getElementById(
-"calendarArea"
-);
-
-
-const year =
-calendarDate.getFullYear();
-
-const month =
-calendarDate.getMonth();
-
-
-const monthName =
-calendarDate.toLocaleDateString(
-"en-IN",
-{
-month:"long",
-year:"numeric"
-}
-);
-
-
-setText(
-"calendarTitle",
-monthName
-);
-
-
-const firstDay =
-new Date(
-year,
-month,
-1
-).getDay();
-
-
-const days =
-new Date(
-year,
-month + 1,
-0
-).getDate();
-
-
-let html = `
-
-<div style="
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:5px;
-">
-
-${
-[
-"Sun",
-"Mon",
-"Tue",
-"Wed",
-"Thu",
-"Fri",
-"Sat"
-]
-.map(
-day=>`
-
-<div style="
-text-align:center;
-font-size:9px;
-font-weight:900;
-color:#777;
-padding:7px 0;
-">
-${day}
-</div>
-
-`
-)
-.join("")
-}
-`;
-
-
-for(
-let i = 0;
-i < firstDay;
-i++
-){
-
-html += `<div></div>`;
-
-}
-
-
-for(
-let day = 1;
-day <= days;
-day++
-){
-
-const date =
-new Date(
-year,
-month,
-day
-);
-
-
-const dateString =
-localDateString(
-date
-);
-
-
-const students =
-inquiries.filter(
-item=>
-item.followUpDate ===
-dateString
-);
-
-
-const isToday =
-dateString ===
-todayString();
-
-
-html += `
-
-<div
-class="calendar-day ${
-isToday ? "today" : ""
-}"
-onclick="showCalendarDay('${dateString}')"
->
-
-<div style="
-font-size:10px;
-font-weight:900;
-color:${
-isToday
-? "#1a73e8"
-: "#444"
-};
-">
-${day}
-</div>
-
-
-${
-students.length
-? `
-
-<div style="
-margin-top:7px;
-font-size:8px;
-font-weight:900;
-color:#7c3aed;
-">
-
-${students.length}
-action${students.length === 1 ? "" : "s"}
-
-</div>
-
-<div style="
-font-size:8px;
-color:#777;
-margin-top:2px;
-">
-
-${escapeHtml(
-students
-.slice(0,2)
-.map(
-x=>
-x.studentName ||
-"Student"
-)
-.join(", ")
-)}
-
-</div>
-
-`
-: ""
-}
-
-</div>
-
-`;
-
-}
-
-
-html += `</div>`;
-
-area.innerHTML =
-html;
-
-}
-
-
-function showCalendarDay(
-dateString
-){
-
-const students =
-inquiries.filter(
-item=>
-item.followUpDate ===
-dateString
-);
-
-
-if(!students.length){
-
-showToast(
-"No follow-ups scheduled for this date.",
-"info"
-);
-
-return;
-
-}
-
-
-openSection(
-"followups"
-);
-
-
-const container =
-document.getElementById(
-"followupGrid"
-);
-
-
-container.innerHTML =
-students
-.map(
-item=>{
-
-const info =
-getNextActionInfo(item);
-
-
-return`
-
-<div class="followup-card">
-
-<div class="followup-name">
-${escapeHtml(
-item.studentName || "Student"
-)}
-</div>
-
-<div class="followup-course">
-${escapeHtml(
-item.course || "-"
-)}
-</div>
-
-
-<div style="
-margin-top:10px
-">
-
-<span class="badge badge-follow-up">
-${escapeHtml(
-info.action
-)}
-</span>
-
-</div>
-
-
-<div style="
-font-size:9px;
-color:#777;
-margin-top:8px
-">
-
-${
-item.followUpTime
-? escapeHtml(
-formatTime(
-item.followUpTime
-)
-)
-: "Scheduled"
-}
-
-</div>
-
-
-<div class="followup-actions">
-
-<button
-class="btn btn-primary"
-onclick="openGuideByDoc('${escapeAttr(item.__docName)}')"
->
-Guided Action
-</button>
-
-<button
-class="btn btn-success"
-onclick="callStudent('${escapeAttr(item.mobile || "")}')"
->
-Call
-</button>
-
-<button
-class="btn btn-light"
-onclick="openStatusModalByDoc('${escapeAttr(item.__docName)}')"
->
-Update
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}
-)
-.join("");
-
-}
-
-
-/* ============================================================
-CONTENT
-============================================================ */
-
-function getContentTitle(
-item
-){
-
-return(
-item.title ||
-item.courseName ||
-item.name ||
-"Untitled"
-);
-
-}
-
-
-function getContentDescription(
-item
-){
-
-return(
-item.description ||
-item.shortDescription ||
-""
-);
-
-}
-
-
-function getContentImage(
-item
-){
-
-return(
-item.imageUrl ||
-item.bannerUrl ||
-item.image ||
-""
-);
-
-}
-
-
-function getContentPrice(
-item
-){
-
-if(
-item.offerPrice !== undefined &&
-item.offerPrice !== null &&
-item.offerPrice !== ""
-){
-
-return item.offerPrice;
-
-}
-
-return item.price || "";
-
-}
-
-
-function renderContent(){
-
-const area =
-document.getElementById(
-"contentArea"
-);
-
-
-if(!currentContent.length){
-
-area.innerHTML = `
-
-<div class="card">
-
-<div class="empty">
-
-<div class="empty-icon">
-▣
-</div>
-
-<div class="empty-title">
-No courses or offers available
-</div>
-
-<div class="empty-text">
-Admin has not published active content yet.
-</div>
-
-</div>
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-if(
-currentDisplay === "list"
-){
-
-renderContentList(
-area
-);
-
-return;
-
-}
-
-
-if(
-currentDisplay === "banner"
-){
-
-renderContentBanner(
-area
-);
-
-return;
-
-}
-
-
-renderContentCarousel(
-area
-);
-
-}
-
-
-function contentItemHtml(
-item
-){
-
-const title =
-getContentTitle(item);
-
-const description =
-getContentDescription(item);
-
-const image =
-getContentImage(item);
-
-const price =
-getContentPrice(item);
-
-const originalPrice =
-item.price || "";
-
-const duration =
-item.duration || "";
-
-const validUntil =
-item.validUntil || "";
-
-const type =
-String(
-item.type || "course"
-)
-.toLowerCase();
-
-
-let priceHtml = "";
-
-
-if(
-originalPrice &&
-price
-){
-
-if(
-String(originalPrice) !==
-String(price)
-){
-
-priceHtml = `
-
-<div class="price-line">
-
-<span class="old-price">
-₹${escapeHtml(
-String(originalPrice)
-)}
-</span>
-
-<span class="offer-price">
-₹${escapeHtml(
-String(price)
-)}
-</span>
-
-</div>
-
-`;
-
-}else{
-
-priceHtml = `
-
-<div class="price-line">
-
-<span class="offer-price">
-₹${escapeHtml(
-String(price)
-)}
-</span>
-
-</div>
-
-`;
-
-}
-
-}else if(price){
-
-priceHtml = `
-
-<div class="price-line">
-
-<span class="offer-price">
-₹${escapeHtml(
-String(price)
-)}
-</span>
-
-</div>
-
-`;
-
-}
-
-
-const imageHtml =
-image
-? `
-
-<img
-src="${escapeAttr(image)}"
-alt="${escapeAttr(title)}"
-onerror="this.style.display='none'"
->
-
-`
-: "";
-
-
-return`
-
-<div class="promo-image">
-${imageHtml}
-</div>
-
-
-<div class="promo-content">
-
-<div class="promo-tag">
-${
-type === "offer"
-? "SPECIAL OFFER"
-: "COURSE"
-}
-</div>
-
-
-<div class="promo-title">
-${escapeHtml(title)}
-</div>
-
-
-${
-duration
-? `
-
-<div style="
-font-size:9px;
-color:#ddd;
-margin-top:5px
-">
-
-Duration:
-${escapeHtml(
-String(duration)
-)}
-
-</div>
-
-`
-: ""
-}
-
-
-<div class="promo-description">
-${escapeHtml(
-description
-)}
-</div>
-
-
-${priceHtml}
-
-
-${
-validUntil
-? `
-
-<div class="validity">
-Valid until:
-${escapeHtml(
-String(validUntil)
-)}
-</div>
-
-`
-: ""
-}
-
-</div>
-
-`;
-
-}
-
-
-function renderContentBanner(
-area
-){
-
-area.innerHTML = `
-
-<div class="banner-list">
-
-${
-currentContent
-.map(
-item=>`
-
-<div class="promo-banner">
-
-${contentItemHtml(item)}
-
-</div>
-
-`
-)
-.join("")
-}
-
-</div>
-
-`;
-
-}
-
-
-function renderContentCarousel(
-area
-){
-
-carouselIndex = 0;
-
-
-if(carouselTimer){
-
-clearInterval(
-carouselTimer
-);
-
-}
-
-
-area.innerHTML = `
-
-<div class="carousel">
-
-<div
-class="carousel-track"
-id="carouselTrack"
->
-
-${
-currentContent
-.map(
-item=>`
-
-<div class="carousel-slide">
-
-<div class="promo-banner">
-
-${contentItemHtml(item)}
-
-</div>
-
-</div>
-
-`
-)
-.join("")
-}
-
-</div>
-
-
-${
-currentContent.length > 1
-? `
-
-<button
-class="carousel-control carousel-prev"
-id="carouselPrev"
->
-‹
-</button>
-
-<button
-class="carousel-control carousel-next"
-id="carouselNext"
->
-›
-</button>
-
-<div
-class="carousel-dots"
-id="carouselDots"
->
-
-${
-currentContent
-.map(
-(_,i)=>
-`
-
-<button
-class="carousel-dot ${
-i === 0
-? "active"
-: ""
-}"
-onclick="goCarousel(${i})"
-></button>
-
-`
-)
-.join("")
-}
-
-</div>
-
-`
-: ""
-}
-
-</div>
-
-`;
-
-
-const next =
-document.getElementById(
-"carouselNext"
-);
-
-const prev =
-document.getElementById(
-"carouselPrev"
-);
-
-
-if(next){
-
-next.onclick =
-()=>goCarousel(
-carouselIndex + 1
-);
-
-}
-
-
-if(prev){
-
-prev.onclick =
-()=>goCarousel(
-carouselIndex - 1
-);
-
-}
-
-
-if(
-currentContent.length > 1
-){
-
-carouselTimer =
-setInterval(
-()=>goCarousel(
-carouselIndex + 1
-),
-5000
-);
-
-}
-
-}
-
-
-function goCarousel(
-index
-){
-
-if(
-!currentContent.length
-){
-return;
-}
-
-
-if(index < 0){
-
-index =
-currentContent.length - 1;
-
-}
-
-
-if(
-index >= currentContent.length
-){
-
-index = 0;
-
-}
-
-
-carouselIndex =
-index;
-
-
-const track =
-document.getElementById(
-"carouselTrack"
-);
-
-
-if(track){
-
-track.style.transform =
-`translateX(-${index * 100}%)`;
-
-}
-
-
-document
-.querySelectorAll(
-".carousel-dot"
-)
-.forEach(
-(dot,i)=>
-dot.classList.toggle(
-"active",
-i === index
-)
-);
-
-}
-
-
-function renderContentList(
-area
-){
-
-area.innerHTML = `
-
-<div class="content-list">
-
-${
-currentContent
-.map(
-item=>{
-
-const title =
-getContentTitle(item);
-
-const desc =
-getContentDescription(item);
-
-const image =
-getContentImage(item);
-
-const price =
-getContentPrice(item);
-
-const duration =
-item.duration || "";
-
-
-return`
-
-<div class="list-item">
-
-<div class="list-thumb">
-
-${
-image
-? `
-
-<img
-src="${escapeAttr(image)}"
-alt="${escapeAttr(title)}"
-onerror="this.style.display='none'"
->
-
-`
-: ""
-}
-
-</div>
-
-
-<div class="list-info">
-
-<div class="list-title">
-${escapeHtml(title)}
-</div>
-
-
-${
-duration
-? `
-
-<div class="list-desc">
-Duration:
-${escapeHtml(
-String(duration)
-)}
-</div>
-
-`
-: ""
-}
-
-
-<div class="list-desc">
-${escapeHtml(desc)}
-</div>
-
-</div>
-
-
-<div class="list-price">
-
-${
-price
-? `₹${escapeHtml(
-String(price)
-)}`
-: "Contact Admin"
-}
-
-</div>
-
-</div>
-
-`;
-
-}
-)
-.join("")
-}
-
-</div>
-
-`;
-
-}
-
-
-/* ============================================================
-CSV
-============================================================ */
-
-function exportCSV(){
-
-if(
-!filteredInquiries.length
-){
-
-showToast(
-"No data available for export.",
-"error"
-);
-
-return;
-
-}
-
-
-const headers = [
-
-"Student Name",
-"Mobile",
-"Course",
-"Priority",
-"Status",
-"Next Action",
-"Follow-up Date",
-"Follow-up Time",
-"Demo Date",
-"Demo Time",
-"Coordinator",
-"Telecaller",
-"Telecaller Remark"
-
-];
-
-
-const rows =
-filteredInquiries.map(
-item=>{
-
-const info =
-getNextActionInfo(item);
-
-
-return[
-
-item.studentName || "",
-
-item.mobile || "",
-
-item.course || "",
-
-getPriority(item),
-
-getEffectiveStatus(item),
-
-info.action,
-
-item.followUpDate || "",
-
-item.followUpTime || "",
-
-item.demoClassDate || "",
-
-item.demoClassTime || "",
-
-item.coordinatorName || "",
-
-item.telecallerName || "",
-
-item.telecallerRemark || ""
-
-];
-
-}
-);
-
-
-const csv = [
-
-headers,
-...rows
-
-]
-.map(
-row=>
-row
-.map(
-value=>
-`"${String(value).replace(
-/"/g,
-'""'
-)}"`
-)
-.join(",")
-)
-.join("\n");
-
-
-const blob =
-new Blob(
-[
-"\ufeff" +
-csv
-],
-{
-type:
-"text/csv;charset=utf-8;"
-}
-);
-
-
-const url =
-URL.createObjectURL(
-blob
-);
-
-
-const a =
-document.createElement(
-"a"
-);
-
-a.href = url;
-
-a.download =
-`BlackTerminal_Telecaller_${todayString()}.csv`;
-
-
-document.body.appendChild(
-a
-);
-
-a.click();
-
-a.remove();
-
-URL.revokeObjectURL(
-url
-);
-
-
-showToast(
-"CSV exported successfully.",
-"success"
-);
-
-}
-
-
-/* ============================================================
-UI HELPERS
-============================================================ */
-
-function money(
-value
-){
-
-const number =
-Number(value) || 0;
-
-return(
-"₹" +
-number.toLocaleString(
-"en-IN"
-)
-);
-
-}
-
-
-function setText(
-id,
-value
-){
-
-const element =
-document.getElementById(id);
-
-if(element){
-
-element.textContent =
-String(value);
-
-}
-
-}
-
-
-function formatStatus(
-status
-){
-
-if(!status){
-return "-";
-}
-
-return String(status)
-.replace(
-/[-_]/g,
-" "
-)
-.replace(
-/\b\w/g,
-c=>c.toUpperCase()
-);
-
-}
-
-
-function formatTime(
-value
-){
-
-if(!value){
-return "-";
-}
-
-const parts =
-String(value)
-.split(":");
-
-
-if(
-parts.length < 2
-){
-
-return value;
-
-}
-
-
-let h =
-Number(parts[0]);
-
-const m =
-parts[1];
-
-const suffix =
-h >= 12
-? "PM"
-: "AM";
-
-
-h =
-h % 12 || 12;
-
-
-return `${h}:${m} ${suffix}`;
-
-}
-
-
-function formatDateTime(
-value
-){
-
-if(!value){
-return "-";
-}
-
-
-const date =
-value instanceof Date
-? value
-: new Date(value);
-
-
-if(
-Number.isNaN(
-date.getTime()
-)
-){
-
-return String(value);
-
-}
-
-
-return date.toLocaleString(
-"en-IN",
-{
-day:"2-digit",
-month:"short",
-year:"numeric",
-hour:"2-digit",
-minute:"2-digit"
-}
-);
-
-}
-
-
-function formatDate(
-value
-){
-
-if(!value){
-return "-";
-}
-
-
-const date =
-new Date(value);
-
-
-if(
-Number.isNaN(
-date.getTime()
-)
-){
-
-return String(value);
-
-}
-
-
-return date.toLocaleString(
-"en-IN",
-{
-day:"2-digit",
-month:"short",
-year:"numeric",
-hour:"2-digit",
-minute:"2-digit"
-}
-);
-
-}
-
-
-function escapeHtml(
-value
-){
-
-return String(
-value ?? ""
-)
-.replace(
-/&/g,
-"&amp;"
-)
-.replace(
-/</g,
-"&lt;"
-)
-.replace(
-/>/g,
-"&gt;"
-)
-.replace(
-/"/g,
-"&quot;"
-)
-.replace(
-/'/g,
-"&#039;"
-);
-
-}
-
-
-function escapeAttr(
-value
-){
-
-return escapeHtml(
-value
-);
-
-}
-
-
-/* ============================================================
-TOAST
-============================================================ */
-
-function showToast(
-message,
-type = ""
-){
-
-const container =
-document.getElementById(
-"toastContainer"
-);
-
-
-const toast =
-document.createElement(
-"div"
-);
-
-
-toast.className =
-`toast ${type}`;
-
-
-toast.textContent =
-message;
-
-
-container.appendChild(
-toast
-);
-
-
-setTimeout(
-()=>toast.remove(),
-4000
-);
-
-}
-
-
-/* ============================================================
-MODAL
-============================================================ */
-
-function showModal(
-id
-){
-
-const modal =
-document.getElementById(
-id
-);
-
-if(modal){
-
-modal.classList.add(
-"show"
-);
-
-}
-
-}
-
-
-function hideModal(
-id
-){
-
-const modal =
-document.getElementById(
-id
-);
-
-if(modal){
-
-modal.classList.remove(
-"show"
-);
-
-}
-
-}
-
-
-/* ============================================================
-NAVIGATION
-============================================================ */
-
-function openSection(
-sectionId
-){
-
-document
-.querySelectorAll(
-".section"
-)
-.forEach(
-section=>
-section.classList.toggle(
-"active",
-section.id ===
-sectionId
-)
-);
-
-
-document
-.querySelectorAll(
-".nav-btn"
-)
-.forEach(
-btn=>
-btn.classList.toggle(
-"active",
-btn.dataset.section ===
-sectionId
-)
-);
-
-
-const titles = {
-
-dashboard:
-"Telecaller Dashboard",
-
-inquiries:
-"Student Inquiries",
-
-followups:
-"Follow-up Center",
-
-calendar:
-"Action Calendar",
-
-courses:
-"Courses & Offers",
-
-earnings:
-"My Earnings"
-
-};
-
-
-setText(
-"pageTitle",
-titles[sectionId] ||
-"Telecaller Dashboard"
-);
-
-
-document
-.getElementById(
-"sidebar"
-)
-.classList.remove(
-"open"
-);
-
-
-if(
-sectionId === "followups"
-){
-
-renderFollowups();
-
-}
-
-
-if(
-sectionId === "calendar"
-){
-
-renderCalendar();
-
-}
-
-
-if(
-sectionId === "courses"
-){
-
-renderContent();
-
-}
-
-}
-
-
-/* ============================================================
-EVENTS
-============================================================ */
-
-document
-.querySelectorAll(
-".nav-btn"
-)
-.forEach(
-btn=>{
-
-btn.addEventListener(
-"click",
-()=>openSection(
-btn.dataset.section
-)
-);
-
-}
-);
-
-
-document
-.getElementById(
-"mobileMenu"
-)
-.addEventListener(
-"click",
-()=>{
-
-document
-.getElementById(
-"sidebar"
-)
-.classList.toggle(
-"open"
-);
-
-}
-);
-
-
-document
-.getElementById(
-"logoutBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-sessionStorage.removeItem(
-"bt_logged_in"
-);
-
-sessionStorage.removeItem(
-"bt_user_name"
-);
-
-sessionStorage.removeItem(
-"bt_user_mobile"
-);
-
-sessionStorage.removeItem(
-"bt_user_role"
-);
-
-sessionStorage.removeItem(
-"bt_login_time"
-);
-
-window.location.replace(
-"login.html"
-);
-
-}
-);
-
-
-/* SEARCH */
-
-document
-.getElementById(
-"searchInput"
-)
-.addEventListener(
-"input",
-applyFilters
-);
-
-
-document
-.getElementById(
-"statusFilter"
-)
-.addEventListener(
-"change",
-applyFilters
-);
-
-
-document
-.getElementById(
-"priorityFilter"
-)
-.addEventListener(
-"change",
-applyFilters
-);
-
-
-document
-.getElementById(
-"courseFilter"
-)
-.addEventListener(
-"change",
-applyFilters
-);
-
-
-document
-.getElementById(
-"coordinatorFilter"
-)
-.addEventListener(
-"change",
-applyFilters
-);
-
-
-/* CLEAR FILTER */
-
-document
-.getElementById(
-"clearFiltersBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-document
-.getElementById(
-"searchInput"
-)
-.value = "";
-
-document
-.getElementById(
-"statusFilter"
-)
-.value = "";
-
-document
-.getElementById(
-"priorityFilter"
-)
-.value = "";
-
-document
-.getElementById(
-"courseFilter"
-)
-.value = "";
-
-document
-.getElementById(
-"coordinatorFilter"
-)
-.value = "";
-
-applyFilters();
-
-}
-);
-
-
-/* REFRESH */
-
-document
-.getElementById(
-"refreshBtn"
-)
-.addEventListener(
-"click",
-async()=>{
-
-await loadInquiries();
-
-await loadPaymentSettings();
-
-showToast(
-"Data refreshed successfully.",
-"success"
-);
-
-}
-);
-
-
-document
-.getElementById(
-"dashboardRefreshBtn"
-)
-.addEventListener(
-"click",
-async()=>{
-
-await loadInquiries();
-
-showToast(
-"Dashboard refreshed.",
-"success"
-);
-
-}
-);
-
-
-document
-.getElementById(
-"refreshFollowupBtn"
-)
-.addEventListener(
-"click",
-async()=>{
-
-await loadInquiries();
-
-showToast(
-"Follow-ups refreshed.",
-"success"
-);
-
-}
-);
-
-
-/* EXPORT */
-
-document
-.getElementById(
-"exportBtn"
-)
-.addEventListener(
-"click",
-exportCSV
-);
-
-
-/* CONTENT */
-
-document
-.getElementById(
-"refreshContentBtn"
-)
-.addEventListener(
-"click",
-async()=>{
-
-await loadContent();
-
-showToast(
-"Course information refreshed.",
-"success"
-);
-
-}
-);
-
-
-document
-.querySelectorAll(
-".display-btn"
-)
-.forEach(
-btn=>{
-
-btn.addEventListener(
-"click",
-()=>{
-
-currentDisplay =
-btn.dataset.display;
-
-
-document
-.querySelectorAll(
-".display-btn"
-)
-.forEach(
-x=>
-x.classList.remove(
-"active"
-)
-);
-
-
-btn.classList.add(
-"active"
-);
-
-
-renderContent();
-
-}
-);
-
-}
-);
-
-
-/* STATUS */
-
-document
-.getElementById(
-"newStatus"
-)
-.addEventListener(
-"change",
-toggleCustomStatusBox
-);
-
-
-document
-.getElementById(
-"saveStatusBtn"
-)
-.addEventListener(
-"click",
-saveStatus
-);
-
-
-/* CLOSE MODALS */
-
-document
-.querySelectorAll(
-"[data-close]"
-)
-.forEach(
-btn=>{
-
-btn.addEventListener(
-"click",
-()=>hideModal(
-btn.dataset.close
-)
-);
-
-}
-);
-
-
-/* DETAIL CALL */
-
-document
-.getElementById(
-"detailCallBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-if(
-currentDetailInquiry
-){
-
-callStudent(
-currentDetailInquiry.mobile
-);
-
-}
-
-}
-);
-
-
-/* DETAIL WHATSAPP */
-
-document
-.getElementById(
-"detailWhatsAppBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-if(
-currentDetailInquiry
-){
-
-openGuide(
-currentDetailInquiry
-);
-
-}
-
-}
-);
-
-
-/* DETAIL GUIDE */
-
-document
-.getElementById(
-"detailGuideBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-if(
-currentDetailInquiry
-){
-
-hideModal(
-"detailModal"
-);
-
-openGuide(
-currentDetailInquiry
-);
-
-}
-
-}
-);
-
-
-/* GUIDE CALL */
-
-document
-.getElementById(
-"guideCallBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-if(
-currentGuideInquiry
-){
-
-callStudent(
-currentGuideInquiry.mobile
-);
-
-}
-
-}
-);
-
-
-/* GUIDE WHATSAPP */
-
-document
-.getElementById(
-"guideWhatsAppBtn"
-)
-.addEventListener(
-"click",
-openWhatsAppForGuide
-);
-
-
-/* COPY */
-
-document
-.getElementById(
-"copyTemplateBtn"
-)
-.addEventListener(
-"click",
-copyCurrentTemplate
-);
-
-
-/* CLICK OUTSIDE MODAL */
-
-document
-.querySelectorAll(
-".modal-overlay"
-)
-.forEach(
-overlay=>{
-
-overlay.addEventListener(
-"click",
-event=>{
-
-if(
-event.target ===
-overlay
-){
-
-overlay.classList.remove(
-"show"
-);
-
-}
-
-}
-);
-
-}
-);
-
-
-/* CALENDAR */
-
-document
-.getElementById(
-"prevMonthBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-calendarDate =
-new Date(
-calendarDate.getFullYear(),
-calendarDate.getMonth() - 1,
-1
-);
-
-renderCalendar();
-
-}
-);
-
-
-document
-.getElementById(
-"nextMonthBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-calendarDate =
-new Date(
-calendarDate.getFullYear(),
-calendarDate.getMonth() + 1,
-1
-);
-
-renderCalendar();
-
-}
-);
-
-
-/* ============================================================
-USER INFO
-============================================================ */
-
-setText(
-"sideUserName",
-telecallerName
-);
-
-setText(
-"topUserName",
-telecallerName
-);
-
-setText(
-"topUserMobile",
-telecallerMobile || "-"
-);
-
-setText(
-"heroName",
-telecallerName
-);
-
-
-const avatar =
-telecallerName
-.trim()
-.charAt(0)
-.toUpperCase() ||
-"T";
-
-
-setText(
-"avatar",
-avatar
-);
-
-
-setText(
-"todayDate",
-new Date()
-.toLocaleDateString(
-"en-IN",
-{
-weekday:"long",
-day:"2-digit",
-month:"long",
-year:"numeric"
-}
-)
-);
-
-
-/* ============================================================
-INITIALIZE
-============================================================ */
-
-async function initialize(){
-
-try{
-
-await loadInquiries();
-
-}catch(error){
-
-console.error(
-"Initial inquiry load:",
-error
-);
-
-}
-
-
-try{
-
-await loadPaymentSettings();
-
-}catch(error){
-
-console.error(
-"Initial payment load:",
-error
-);
-
-}
-
-
-try{
-
-await loadContent();
-
-}catch(error){
-
-console.error(
-"Initial content load:",
-error
-);
-
-}
-
-}
-
-
-initialize();
-
-
-/* ============================================================
-AUTO REFRESH
-============================================================ */
-
-setInterval(
-async()=>{
-
-try{
-
-await loadInquiries();
-
-}catch(error){
-
-console.warn(
-"Auto inquiry refresh:",
-error
-);
-
-}
-
-},
-60000
-);
-
-
-setInterval(
-async()=>{
-
-try{
-
-await loadPaymentSettings();
-
-}catch(error){
-
-console.warn(
-"Auto payment refresh:",
-error
-);
-
-}
-
-
-try{
-
-await loadContent();
-
-}catch(error){
-
-console.warn(
-"Auto content refresh:",
-error
-);
-
-}
-
-},
-60000
-);
-
-
-/* ============================================================
-GLOBAL FUNCTIONS
-============================================================ */
-
-window.goToPage =
-goToPage;
-
-window.openStatusModalByDoc =
-openStatusModalByDoc;
-
-window.viewStudent =
-viewStudent;
-
-window.callStudent =
-callStudent;
-
-window.whatsappStudent =
-whatsappStudent;
-
-window.deleteStudent =
-deleteStudent;
-
-window.goCarousel =
-goCarousel;
-
-window.openGuideByDoc =
-openGuideByDoc;
-
-window.showCalendarDay =
-showCalendarDay;
-
-</script>
-
-</body>
-</html>
+      {
+        level:3,
+        title:"Level 3",
+        

@@ -663,9 +663,19 @@
       color:#c2410c;
     }
 
+    .badge-interested{
+      background:#ecfdf5;
+      color:#15803d;
+    }
+
     .badge-contacted{
       background:#f3f4f6;
       color:#374151;
+    }
+
+    .badge-delay{
+      background:#fff7ed;
+      color:#b45309;
     }
 
     .badge-follow-up{
@@ -678,6 +688,7 @@
       color:#15803d;
     }
 
+    .badge-demo-completed,
     .badge-demo{
       background:#ecfeff;
       color:#0e7490;
@@ -691,6 +702,11 @@
     .badge-not-interested{
       background:#fef2f2;
       color:#b91c1c;
+    }
+
+    .badge-custom{
+      background:#f3e8ff;
+      color:#7e22ce;
     }
 
     .action-group{
@@ -1395,7 +1411,6 @@
 
 <div class="app">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
 
     <div class="brand">
@@ -1438,7 +1453,6 @@
 
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
 
     <header class="topbar">
@@ -1604,7 +1618,6 @@
             </div>
 
             <div id="levelCards">
-              <!-- Dynamic -->
             </div>
 
             <div class="next-level-text" id="levelProgressText">
@@ -1644,15 +1657,53 @@
             >
 
             <select id="statusFilter" class="select">
+
               <option value="">All Status</option>
-              <option value="new">New</option>
-              <option value="pending">Pending</option>
-              <option value="contacted">Contacted</option>
-              <option value="follow-up">Follow-up</option>
-              <option value="visited">Visited</option>
-              <option value="demo-completed">Demo Completed</option>
-              <option value="converted">Converted</option>
-              <option value="not-interested">Not Interested</option>
+
+              <option value="new">
+                New
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="interested">
+                Interested
+              </option>
+
+              <option value="contacted">
+                Contacted
+              </option>
+
+              <option value="delay">
+                Delay
+              </option>
+
+              <option value="follow-up">
+                Follow-up
+              </option>
+
+              <option value="visited">
+                Visited
+              </option>
+
+              <option value="demo-completed">
+                Demo Completed
+              </option>
+
+              <option value="converted">
+                Converted
+              </option>
+
+              <option value="not-interested">
+                Not Interested
+              </option>
+
+              <option value="custom">
+                Custom Status
+              </option>
+
             </select>
 
             <select id="courseFilter" class="select">
@@ -1709,14 +1760,21 @@
               </thead>
 
               <tbody id="inquiryBody">
+
                 <tr>
                   <td colspan="8">
+
                     <div class="loading">
+
                       <div class="spinner"></div>
+
                       Loading inquiries...
+
                     </div>
+
                   </td>
                 </tr>
+
               </tbody>
 
             </table>
@@ -1755,6 +1813,7 @@
         <div class="content-controls">
 
           <div>
+
             <div class="card-title">
               Available Information
             </div>
@@ -1762,6 +1821,7 @@
             <div class="card-subtitle" style="margin:4px 0 0;">
               Always use the latest price and offer shown here when talking to students.
             </div>
+
           </div>
 
           <div style="display:flex;gap:8px;align-items:center;">
@@ -1802,8 +1862,11 @@
         <div id="contentArea">
 
           <div class="loading">
+
             <div class="spinner"></div>
+
             Loading courses and offers...
+
           </div>
 
         </div>
@@ -1845,27 +1908,34 @@
               <div class="earning-item-label">
                 BASE SALARY
               </div>
+
               <div class="earning-item-value" id="earningPageBase">
                 ₹0
               </div>
             </div>
 
             <div class="earning-item">
+
               <div class="earning-item-label">
                 DEMO CLASSES
               </div>
+
               <div class="earning-item-value" id="earningPageDemo">
                 ₹0
               </div>
+
             </div>
 
             <div class="earning-item">
+
               <div class="earning-item-label">
                 ADMISSIONS
               </div>
+
               <div class="earning-item-value" id="earningPageAdmission">
                 ₹0
               </div>
+
             </div>
 
           </div>
@@ -2034,6 +2104,11 @@
         </div>
 
         <div class="detail-box">
+          <div class="detail-label">Custom Status</div>
+          <div class="detail-value" id="detailCustomStatus">-</div>
+        </div>
+
+        <div class="detail-box">
           <div class="detail-label">Follow-up Date</div>
           <div class="detail-value" id="detailFollowup">-</div>
         </div>
@@ -2101,6 +2176,7 @@
       <input type="hidden" id="statusDocName">
 
       <div style="margin-bottom:13px;">
+
         <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
           Student
         </label>
@@ -2111,29 +2187,94 @@
           id="statusStudentName"
           readonly
         >
+
       </div>
 
       <div style="margin-bottom:13px;">
+
         <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
           Status
         </label>
 
         <select class="select" id="newStatus">
 
-          <option value="new">New</option>
-          <option value="pending">Pending</option>
-          <option value="contacted">Contacted</option>
-          <option value="follow-up">Follow-up</option>
-          <option value="visited">Visited</option>
-          <option value="demo-completed">Demo Completed</option>
-          <option value="converted">Converted</option>
-          <option value="not-interested">Not Interested</option>
+          <option value="new">
+            New
+          </option>
+
+          <option value="pending">
+            Pending
+          </option>
+
+          <option value="interested">
+            Interested
+          </option>
+
+          <option value="contacted">
+            Contacted
+          </option>
+
+          <option value="delay">
+            Delay
+          </option>
+
+          <option value="follow-up">
+            Follow-up
+          </option>
+
+          <option value="visited">
+            Visited
+          </option>
+
+          <option value="demo-completed">
+            Demo Completed
+          </option>
+
+          <option value="converted">
+            Converted
+          </option>
+
+          <option value="not-interested">
+            Not Interested
+          </option>
+
+          <option value="custom">
+            Custom Status
+          </option>
 
         </select>
 
       </div>
 
+
+      <!-- CUSTOM STATUS -->
+
+      <div
+        id="customStatusBox"
+        style="display:none;margin-bottom:13px;"
+      >
+
+        <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
+          Custom Status
+        </label>
+
+        <input
+          type="text"
+          class="input"
+          id="newCustomStatus"
+          maxlength="80"
+          placeholder="Enter custom status..."
+        >
+
+        <div style="font-size:9px;color:#6b7280;margin-top:5px;">
+          Example: Call Tomorrow, Waiting for Parents, Fee Issue, Join Next Month
+        </div>
+
+      </div>
+
+
       <div style="margin-bottom:13px;">
+
         <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
           Follow-up Date
         </label>
@@ -2146,7 +2287,9 @@
 
       </div>
 
+
       <div>
+
         <label style="font-size:11px;font-weight:800;display:block;margin-bottom:6px;">
           Telecaller Remark
         </label>
@@ -2157,6 +2300,7 @@
           rows="4"
           placeholder="Enter remark..."
         ></textarea>
+
       </div>
 
     </div>
@@ -2667,26 +2811,6 @@
 
   /* ============================================================
      CONTENT LOAD
-     
-     Expected Admin-created Firestore documents:
-     
-     telecallerContent/course_x
-     telecallerContent/offer_x
-     
-     Fields can include:
-     
-     type
-     title
-     description
-     price
-     offerPrice
-     duration
-     imageUrl
-     validUntil
-     active
-     displayMode
-     order
-     
   ============================================================ */
 
   async function loadContent(){
@@ -3099,17 +3223,6 @@
   }
 
 
-  /* ============================================================
-     CURRENT BASE SALARY
-     
-     Rule:
-     Current month base salary is determined by previous month's
-     final level. The adjustment lasts for one month.
-     
-     If there is no previous-month performance data,
-     default base salary is used.
-  ============================================================ */
-
   function getCurrentBaseSalary(){
 
     const previous =
@@ -3191,8 +3304,6 @@
       getPreviousMonthLevel();
 
 
-    /* DASHBOARD */
-
     setText(
       "dashboardTotal",
       money(earning.total)
@@ -3232,7 +3343,6 @@
       )
     );
 
-
     setText(
       "statDemo",
       earning.demoCount
@@ -3247,9 +3357,6 @@
       "statEarning",
       money(earning.total)
     );
-
-
-    /* EARNING PAGE */
 
     setText(
       "earningPageTotal",
@@ -3316,17 +3423,12 @@
       money(earning.level.nextBase)
     );
 
-
     renderLevelCards(
       earning.convertedCount,
       earning.level
     );
   }
 
-
-  /* ============================================================
-     LEVEL CARDS
-  ============================================================ */
 
   function renderLevelCards(
     count,
@@ -3398,13 +3500,17 @@
             <div class="level-head">
 
               <div>
+
                 <div class="level-name">
+
                   ${item.title}
+
                   ${
                     active
                     ? `<span class="level-tag">CURRENT</span>`
                     : ""
                   }
+
                 </div>
 
                 <div class="level-range">
@@ -3629,6 +3735,7 @@
             item.source,
             item.remark,
             item.telecallerRemark,
+            item.customStatus,
             item.coordinatorName
           ]
           .filter(Boolean)
@@ -3678,6 +3785,58 @@
     currentPage = 1;
 
     renderInquiryTable();
+  }
+
+
+  /* ============================================================
+     STATUS DISPLAY HELPERS
+  ============================================================ */
+
+  function getEffectiveStatus(item){
+
+    const status =
+      String(
+        item.status || ""
+      )
+      .toLowerCase()
+      .trim();
+
+    const custom =
+      String(
+        item.customStatus || ""
+      ).trim();
+
+    if(
+      status === "custom" &&
+      custom
+    ){
+      return custom;
+    }
+
+    return formatStatus(
+      status || "new"
+    );
+  }
+
+
+  function getStatusClass(item){
+
+    const status =
+      String(
+        item.status || "new"
+      )
+      .toLowerCase()
+      .trim();
+
+    if(status === "custom"){
+      return "badge-custom";
+    }
+
+    if(status === "demo-completed"){
+      return "badge-demo-completed";
+    }
+
+    return `badge-${status}`;
   }
 
 
@@ -3734,15 +3893,23 @@
       tbody.innerHTML = `
         <tr>
           <td colspan="8">
+
             <div class="empty">
-              <div class="empty-icon">⌕</div>
+
+              <div class="empty-icon">
+                ⌕
+              </div>
+
               <div class="empty-title">
                 No inquiries found
               </div>
+
               <div class="empty-text">
                 Try changing your search or filters.
               </div>
+
             </div>
+
           </td>
         </tr>
       `;
@@ -3771,9 +3938,7 @@
 
 
     const statusClass =
-      status === "demo-completed"
-        ? "badge-demo"
-        : `badge-${status}`;
+      getStatusClass(item);
 
 
     const created =
@@ -3784,12 +3949,6 @@
     const updated =
       formatDate(
         item.updatedAt
-      );
-
-
-    const docId =
-      encodeURIComponent(
-        item.__docName || ""
       );
 
 
@@ -3851,9 +4010,10 @@
             class="badge ${statusClass}"
             onclick="openStatusModalByDoc('${escapeAttr(item.__docName || "")}')"
             style="border:0;"
+            title="Click to update status"
           >
             ${escapeHtml(
-              formatStatus(status)
+              getEffectiveStatus(item)
             )}
           </button>
 
@@ -3919,11 +4079,6 @@
     const container =
       document.getElementById(
         "paginationButtons"
-      );
-
-    const pageInfo =
-      document.getElementById(
-        "pageInfo"
       );
 
 
@@ -4018,6 +4173,43 @@
      STATUS MODAL
   ============================================================ */
 
+  function toggleCustomStatusBox(){
+
+    const status =
+      document.getElementById(
+        "newStatus"
+      ).value;
+
+    const box =
+      document.getElementById(
+        "customStatusBox"
+      );
+
+    const input =
+      document.getElementById(
+        "newCustomStatus"
+      );
+
+    if(status === "custom"){
+
+      box.style.display =
+        "block";
+
+      setTimeout(
+        () => input.focus(),
+        50
+      );
+
+    }else{
+
+      box.style.display =
+        "none";
+
+      input.value = "";
+    }
+  }
+
+
   function openStatusModalByDoc(docName){
 
     const item =
@@ -4042,10 +4234,37 @@
       item.studentName || "";
 
 
+    const currentStatus =
+      String(
+        item.status || "new"
+      )
+      .toLowerCase()
+      .trim();
+
+
+    const knownStatuses = [
+      "new",
+      "pending",
+      "interested",
+      "contacted",
+      "delay",
+      "follow-up",
+      "visited",
+      "demo-completed",
+      "converted",
+      "not-interested",
+      "custom"
+    ];
+
+
     document.getElementById(
       "newStatus"
     ).value =
-      item.status || "new";
+      knownStatuses.includes(
+        currentStatus
+      )
+      ? currentStatus
+      : "custom";
 
 
     document.getElementById(
@@ -4060,11 +4279,24 @@
       item.telecallerRemark || "";
 
 
+    document.getElementById(
+      "newCustomStatus"
+    ).value =
+      item.customStatus || "";
+
+
+    toggleCustomStatusBox();
+
+
     showModal(
       "statusModal"
     );
   }
 
+
+  /* ============================================================
+     SAVE STATUS
+  ============================================================ */
 
   async function saveStatus(){
 
@@ -4073,7 +4305,7 @@
         "statusDocName"
       ).value;
 
-    const status =
+    let status =
       document.getElementById(
         "newStatus"
       ).value;
@@ -4089,9 +4321,51 @@
       ).value
       .trim();
 
+    const customStatus =
+      document.getElementById(
+        "newCustomStatus"
+      ).value
+      .trim();
+
 
     if(!docName){
       return;
+    }
+
+
+    /*
+      Custom status must have text.
+    */
+
+    if(
+      status === "custom" &&
+      !customStatus
+    ){
+
+      showToast(
+        "Please enter a custom status.",
+        "error"
+      );
+
+      document.getElementById(
+        "newCustomStatus"
+      ).focus();
+
+      return;
+    }
+
+
+    /*
+      For non-custom status,
+      customStatus will be empty.
+    */
+
+    if(status !== "custom"){
+
+      document.getElementById(
+        "newCustomStatus"
+      ).value = "";
+
     }
 
 
@@ -4122,6 +4396,13 @@
 
         telecallerStatus:
           firestoreValue(status),
+
+        customStatus:
+          firestoreValue(
+            status === "custom"
+              ? customStatus
+              : ""
+          ),
 
         telecallerRemark:
           firestoreValue(remark),
@@ -4164,7 +4445,9 @@
 
 
       showToast(
-        "Student status updated successfully.",
+        status === "custom"
+          ? `Custom status "${customStatus}" saved successfully.`
+          : `Student status changed to "${formatStatus(status)}".`,
         "success"
       );
 
@@ -4238,24 +4521,34 @@
       item.coordinatorMobile || "-"
     );
 
+
     setText(
       "detailStatus",
-      formatStatus(
-        item.status || "new"
-      )
+      getEffectiveStatus(item)
     );
+
 
     setText(
       "detailTelecallerStatus",
-      formatStatus(
-        item.telecallerStatus || "-"
-      )
+      item.telecallerStatus
+        ? formatStatus(
+            item.telecallerStatus
+          )
+        : "-"
     );
+
+
+    setText(
+      "detailCustomStatus",
+      item.customStatus || "-"
+    );
+
 
     setText(
       "detailFollowup",
       item.followUpDate || "-"
     );
+
 
     setText(
       "detailCreated",
@@ -4264,10 +4557,12 @@
       )
     );
 
+
     setText(
       "detailRemark",
       item.remark || "-"
     );
+
 
     setText(
       "detailTeleRemark",
@@ -4292,10 +4587,12 @@
         .replace(/[^\d+]/g,"");
 
     if(!clean){
+
       showToast(
         "Student mobile number is not available.",
         "error"
       );
+
       return;
     }
 
@@ -4315,10 +4612,12 @@
       );
 
     if(!clean){
+
       showToast(
         "Student mobile number is not available.",
         "error"
       );
+
       return;
     }
 
@@ -4470,15 +4769,23 @@
 
       area.innerHTML = `
         <div class="card">
+
           <div class="empty">
-            <div class="empty-icon">▣</div>
+
+            <div class="empty-icon">
+              ▣
+            </div>
+
             <div class="empty-title">
               No courses or offers available
             </div>
+
             <div class="empty-text">
               Admin has not published any active course or offer yet.
             </div>
+
           </div>
+
         </div>
       `;
 
@@ -4549,12 +4856,15 @@
 
         priceHtml = `
           <div class="price-line">
+
             <span class="old-price">
               ₹${escapeHtml(String(originalPrice))}
             </span>
+
             <span class="offer-price">
               ₹${escapeHtml(String(price))}
             </span>
+
           </div>
         `;
 
@@ -4562,9 +4872,11 @@
 
         priceHtml = `
           <div class="price-line">
+
             <span class="offer-price">
               ₹${escapeHtml(String(price))}
             </span>
+
           </div>
         `;
 
@@ -4574,9 +4886,11 @@
 
       priceHtml = `
         <div class="price-line">
+
           <span class="offer-price">
             ₹${escapeHtml(String(price))}
           </span>
+
         </div>
       `;
     }
@@ -4597,11 +4911,13 @@
       <div class="promo-content">
 
         <div class="promo-tag">
+
           ${escapeHtml(
             type === "offer"
               ? "SPECIAL OFFER"
               : "COURSE"
           )}
+
         </div>
 
         <div class="promo-title">
@@ -4643,6 +4959,7 @@
   function renderContentBanner(area){
 
     area.innerHTML = `
+
       <div class="banner-list">
 
         ${
@@ -4658,6 +4975,7 @@
         }
 
       </div>
+
     `;
   }
 
@@ -4687,9 +5005,11 @@
               .map(
                 item => `
                   <div class="carousel-slide">
+
                     <div class="promo-banner">
                       ${contentItemHtml(item)}
                     </div>
+
                   </div>
                 `
               )
@@ -4719,6 +5039,7 @@
               class="carousel-dots"
               id="carouselDots"
             >
+
               ${
                 currentContent
                   .map(
@@ -4732,12 +5053,14 @@
                   )
                   .join("")
               }
+
             </div>
           `
           : ""
         }
 
       </div>
+
     `;
 
 
@@ -4905,11 +5228,13 @@
                   </div>
 
                   <div class="list-price">
+
                     ${
                       price
                       ? `₹${escapeHtml(String(price))}`
                       : "Contact Admin"
                     }
+
                   </div>
 
                 </div>
@@ -5280,6 +5605,7 @@
       async () => {
 
         await loadInquiries();
+
         await loadPaymentSettings();
 
         showToast(
@@ -5340,6 +5666,18 @@
 
     });
 
+
+  /* STATUS CHANGE EVENT */
+
+  document
+    .getElementById("newStatus")
+    .addEventListener(
+      "change",
+      toggleCustomStatusBox
+    );
+
+
+  /* SAVE STATUS */
 
   document
     .getElementById("saveStatusBtn")
@@ -5500,9 +5838,6 @@
 
   /* ============================================================
      AUTO REFRESH
-     
-     Payment settings/content are refreshed every 60 seconds.
-     Inquiry data is also refreshed every 60 seconds.
   ============================================================ */
 
   setInterval(
@@ -5511,6 +5846,7 @@
       try{
 
         await loadPaymentSettings();
+
         await loadContent();
 
       }catch(error){
